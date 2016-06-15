@@ -229,4 +229,4 @@ Congratulations! You learned that NiFi can be installed on virtual machine or di
 
 ## Further Reading
 
-- For more information on NiFi Configuration, view [System Administrator's Guide](http://docs.hortonworks.com/HDPDocuments/HDF1/HDF-1.2/bk_AdminGuide/content/index.html)
+- For more information on NiFi Configuration, view [System Administrator's Guide](http://docs.hortonworks.com/HDPDocuments/HDF1/HDF-1.2.0.1/bk_AdminGuide/content/index.html)
