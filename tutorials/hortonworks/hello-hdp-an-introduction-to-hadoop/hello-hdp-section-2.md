@@ -282,7 +282,7 @@ Hive is an SQL like query language that enables those analysts familiar with SQL
 
 *   Understanding Apache Hive
 *   Understanding Apache Tez
-*   Understanding Ambari Hiver User Views on Hortonworks Sandbox
+*   Understanding Ambari Hive User Views on Hortonworks Sandbox
 
 ### [4.3 Apache Hive](https://hive.apache.org/)**™**
 
