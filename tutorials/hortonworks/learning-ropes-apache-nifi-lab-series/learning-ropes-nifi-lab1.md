@@ -80,7 +80,7 @@ Your dataflow will extract the following XML Attributes from the transit data li
 | speedKmHr  | float64  | Vehicle speed (km/h)  |
 | dirTag  | float64  | Direction of travel  |
 
-After extracting, filtering and converting the data, your new file, which contains transit location data will be stored in the Input Directory listed in Table 2. We will learn how to satisfy the conditions in Table 2 with RouteOnAttribute, AttributesToJSON and PutFile processors.
+After extracting, filtering and converting the data, your new file, which contains transit location data will be stored in the Output Directory listed in Table 2. We will learn how to satisfy the conditions in Table 2 with RouteOnAttribute, AttributesToJSON and PutFile processors.
 
 **Table 2: Other DataFlow Requirements**
 
