@@ -93,7 +93,7 @@ A feature we will configure before we run our hive queries is to set the hive ex
 
 ### Step 2.2: Define a Hive Table <a id="define-a-hive-table"></a>
 
-Now that you are familiar with the Hive View, let’s create and load tables for the geolocation and trucks data. In this section we will learn how to use the Ambari Hive View to create two tables: geolocation and trucking using the Hive View Upload Table tab.  The Upload Table tab provides the following key options: choose input file type, storage options (i.e. Apache ORC) and set first row as header.   Here is a visual representation of the table and load creation process accomplish in the next few steps.:
+Now that you are familiar with the Hive View, let’s create and load tables for the geolocation and trucks data. In this section we will learn how to use the Ambari Hive View to create two tables: geolocation and trucking using the Hive View Upload Table tab.  The Upload Table tab provides the following key options: choose input file type, storage options (i.e. Apache ORC) and set first row as header.   Here is a visual representation of the table and load creation process accomplished in the next few steps.:
 
 ![create_tables_architecture](/assets/hello-hdp/create_tables_architecture_lab2.png)
 
