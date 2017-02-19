@@ -211,7 +211,7 @@ The following Hive command can be used to LOAD data into existing table from  th
 LOAD DATA INPATH '/user/maria_dev/data/trucks.csv' OVERWRITE INTO TABLE trucks;
 ~~~
 
-If you would run the above commands and navigate to the `/user/maria_dev/data` folder.  You would of notice the folder is empty! The **LOAD DATA INPATH** command moved the trucks.csv file from the **/user/maria_dev/data** folder to the **/apps/hive/warehouse/trucks_stage folder**.
+If you would run the above commands and navigate to the `/user/maria_dev/data` folder.  You would notice the folder is empty! The **LOAD DATA INPATH** command moved the trucks.csv file from the **/user/maria_dev/data** folder to the **/apps/hive/warehouse/trucks_stage folder**.
 
 #### 2.2.10 Beeline - Command Shell
 
