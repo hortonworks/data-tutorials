@@ -124,7 +124,7 @@ Before reviewing what is happening behind the covers in the Upload Progress letâ
 
 #### 2.2.2: Define an ORC Table in Hive Create table using Apache ORC file format
 
-Introducing [Apache ORC](https://orc.apache.org/) is a fast columnar storage file format for Hadoop workloads.
+[Apache ORC](https://orc.apache.org/) is a fast columnar storage file format for Hadoop workloads.
 
 The Optimized Row Columnar ([new Apache ORC project](http://hortonworks.com/blog/apache-orc-launches-as-a-top-level-project/)) file format provides a highly efficient way to store Hive data. It was designed to overcome limitations of the other Hive file formats. Using ORC files improves performance when Hive is reading, writing, and processing data.
 
