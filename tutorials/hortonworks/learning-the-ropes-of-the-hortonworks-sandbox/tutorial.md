@@ -108,6 +108,8 @@ Append the port number :8888 to your host address, open your browser, and access
 
 Click on `Launch Dashboard` to go to Ambari with a [Hello HDP tutorial](http://hortonworks.com/hadoop-tutorial/hello-world-an-introduction-to-hadoop-hcatalog-hive-and-pig/#section_1) and `Quick Links` to view some services of HDP environment.
 
+`Launch Dashboard` opens the Ambari user interface and an additional tutorial window.  You should login to Ambari using the username and password based on the tutorials you are following in the tutorial window.  Most of the tutorials login to Ambari using `raj_ops/raj_ops` or `maria_dev/maria_dev`.
+
 ### 1.4 Multiple Ways to Execute Terminal Commands <a id="ways-execute-terminal-command"></a>
 
 > **Note:** For all methods below, the login credential instructions will be the same to access the Sandbox through the terminal.
