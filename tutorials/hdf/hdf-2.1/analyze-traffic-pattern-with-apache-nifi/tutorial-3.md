@@ -49,7 +49,7 @@ If you want to see the NiFi flow in action within minutes, refer to **Approach 1
 5\. Run the following shell script, so NiFi has Vehicle Location input source data:
 
 ~~~bash
-./auto_scripts/docker-scripts/init_nifi_src_data.sh
+./auto_scripts/init_nifi_in_src_data.sh
 ~~~
 
 6\. Hit the **start** button ![start_button_nifi_iot](assets/tutorial-1-build-a-simple-nifi-dataflow/start_button_nifi_iot.png). to activate the dataflow.
@@ -177,36 +177,7 @@ If you would like to read more about configuring and connecting processors, refe
 
 ### 2.1 GetFile
 
-1\. If you have not yet downloaded the input data set, click here [trafficLocs_data_for_simulator.zip](assets/trafficLocs_data_for_simulator.zip).
-
-### NiFi on Sandbox (Option 1)
-
-If **NiFi is on Sandbox**, SSH into the shell. Else move to the next section:
-
-~~~bash
-ssh root@sandbox.hortonworks.com -p 2222
-~~~
-
-Let's create a new `/tmp/nifi/input` directory, modify permissions for nifi directory that way NiFi can write to output, then send the zip file to the sandbox with the command:
-
-~~~bash
-mkdir -p /tmp/nifi/input
-chmod -R 777 /tmp/nifi
-exit
-scp -P 2222 ~/Downloads/trafficLocs_data_for_simulator.zip root@sandbox.hortonworks.com:/tmp/nifi/input
-~~~
-
-### NiFi on Local Machine (Option 2)
-
-If **NiFi is on local machine**, create a new folder named `/tmp/nifi/input` in the `/` directory with the command:
-
-~~~bash
-mkdir -p /tmp/nifi/input
-chmod -R 777 /tmp/nifi
-cp ~/Downloads/trafficLocs_data_for_simulator.zip /tmp/nifi/input
-~~~
-
-Right click on the **GetFile** processor and click **configure** from dropdown menu
+1\. Right click on the **GetFile** processor and click **configure** from dropdown menu
 
 ![configure_processor_nifi_iot](assets/tutorial-1-build-a-simple-nifi-dataflow/configure_processor_nifi_iot.png)
 
