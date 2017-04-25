@@ -17,13 +17,15 @@ The Azure cloud infrastructure has become a common place for users to deploy vir
 
 ## Outline
 
-- [Find Hortonworks Sandbox on Azure Marketplace](#find-hortonworks-sandbox-on-azure-marketplace)
-- [Creating the Sandbox](#creating-the-sandbox)
-- [Set a Static IP](#set-a-static-ip)
-- [Configure SSH Tunneling](#configure-ssh-tunneling)
-- [Splash Screen](#splash-screen)
-- [Summary](#summary)
-- [Further Reading](#further-reading)
+-   [Find Hortonworks Sandbox on Azure Marketplace](#find-hortonworks-sandbox-on-azure-marketplace)
+-   [Creating the Sandbox](#creating-the-sandbox)
+-   [Set a Static IP](#set-a-static-ip)
+-   [Configure SSH Tunneling](#configure-ssh-tunneling)
+    -   [Using SSH](#using-ssh)
+    -   [Using PuTTY](#using-putty)
+-   [Splash Screen](#splash-screen)
+-   [Summary](#summary)
+-   [Further Reading](#further-reading)
 
 ## Find Hortonworks Sandbox on Azure Marketplace
 
@@ -91,6 +93,8 @@ Clicking on the IP address will bring up the IP configuration panel.  Select **S
 
 SSH tunneling allows us a way to port forward securely, without actually opening the machine's ports for the entire world to access.  Follow these steps to access the endpoints of your Azure deployment from your computer.
 
+### Using SSH
+
 Use your favorite editor and edit your `~/.ssh/config` file.  For example:
 ```
 vi ~/.ssh/config
@@ -101,10 +105,10 @@ Enter the following configuration, replacing the **HostName** IP with the public
 > Note: Spacing and capitalization is important.
 
 ```
-Host azureSandbox
+Host azureSandbox (or any other host alias)
   Port 22
-  User azure
-  HostName 52.175.207.131
+  User <your-specified-azure-username-here>
+  HostName <your-azure-public-ip-here>
   LocalForward 8080 127.0.0.1:8080
   LocalForward 8888 127.0.0.1:8888
   LocalForward 9995 127.0.0.1:9995
@@ -115,13 +119,46 @@ Host azureSandbox
   LocalForward 2222 127.0.0.1:2222
 ```
 
-Save and close the file.  Now SSH into the Azure machine by using the **Host** alias we just configured, which will connect us automatically using the IP address we specified in the config file.  You'll be asked for a password, which is the one you set during initial configuration on Azure.
+Save and close the file.  Now SSH into the Azure machine by using the **Host** alias we just created, by using the command below.  This will connect automatically using the IP address specified in the config file.
 
 ```
 ssh azureSandbox
 ```
 
+You'll be asked for a password, which is the one you set during initial configuration on Azure.
+
 That's it!  Keep this SSH connection open for the duration of your interaction with the sandbox on Azure.
+
+### Using PuTTY
+
+Open PuTTY.  A window titled "**PuTTY Configuration**" will open.  In the left sidebar, navigate to "**Connection > SSH > Tunnels**" as shown in the picture below.
+
+![Putty Tunnels](assets/putty-tunnels.jpg)
+
+We want to add a forwarded port.  In the "**Source port**" field, enter `8080`.  In the "**Destination**" field, enter `127.0.0.1:8080`.  Click on "**Add**" to add this port forward.  Do the same for the following common sandbox ports, plus any custom ones you would like.
+
+```
+8080 -> 127.0.0.1:8080
+8888 -> 127.0.0.1:8888
+9995 -> 127.0.0.1:9995
+9996 -> 127.0.0.1:9996
+8886 -> 127.0.0.1:8886
+10500 -> 127.0.0.1:10500
+4200 -> 127.0.0.1:4200
+2222 -> 127.0.0.1:2222
+```
+
+Next, in the left sidebar, navigate to "**Session**" as shown in the picture below.
+
+![Putty Session](assets/putty-session.jpg)
+
+In the "**Host Name (or IP address)**" field, enter the Azure IP address from the previous section.  Make sure that the port is set to `22`.  Finally, click on "**Open**".
+
+A login window opens.
+
+![Putty Tunnels](assets/putty-login.jpg)
+
+Enter the user name you specified during Azure deployment (in our case, we used the login `azure`).  You'll be asked for a password, which is also the password you specified during deployment.
 
 ## Splash Screen
 
@@ -132,6 +169,8 @@ Now that you've port forwarded by following the tutorial linked above, you can e
 Fill out the form and hit **Submit** to access the sandbox.
 
 ![The sandbox splash page.](assets/sandbox-splash.jpg)
+
+That's it!  Keep this SSH connection open for the duration of your interaction with the sandbox on Azure.
 
 ## Summary
 

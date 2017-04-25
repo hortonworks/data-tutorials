@@ -2,7 +2,7 @@
 <template encoding-version="1.0">
   <description>The DataFlow simulates data based on NextBus XML Live Feed into the system. Then NiFi extracts key attributes from the XML content of the FlowFiles. The last phase of the DataFlow filters attributes to guarantee there will always be a specific set of attributes that are routed to the remaining processors. The remaining attributes are constructed as JSON format for the FlowFile, then stored into the local file system. </description>
   <groupId>824d153f-0157-1000-8e8b-7cfa42869f81</groupId>
-  <name>Lab1-NiFi-Learn-Ropes</name>
+  <name>tutorial-1-build-a-simple-nifi-dataflow</name>
   <snippet>
     <connections>
       <id>86c63594-dad3-43e3-0000-000000000000</id>

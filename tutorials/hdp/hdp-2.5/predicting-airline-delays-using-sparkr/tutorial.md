@@ -70,7 +70,7 @@ Type the following lines on RStudio console:
 
 ```
 if (nchar(Sys.getenv("SPARK_HOME")) < 1) {
-  Sys.setenv(SPARK_HOME = "/usr/hdp/current/spark")
+  Sys.setenv(SPARK_HOME = "/usr/hdp/current/spark-client")
 }
 library(SparkR, lib.loc = c(file.path(Sys.getenv("SPARK_HOME"), "R", "lib")))
 sc <- sparkR.init(master = "local[*]", sparkEnvir = list(spark.driver.memory="2g"),sparkPackages="com.databricks:spark-csv_2.10:1.4.0")

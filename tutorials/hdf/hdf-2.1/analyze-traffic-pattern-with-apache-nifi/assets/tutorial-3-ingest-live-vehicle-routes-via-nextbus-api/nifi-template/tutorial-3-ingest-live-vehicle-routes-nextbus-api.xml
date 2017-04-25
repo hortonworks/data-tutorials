@@ -8,7 +8,7 @@ Filter Key Attributes Values To JSON File
 
 Geo Enrich Data with Neighborhoods Nearby Transit Vehicles</description>
   <groupId>824d153f-0157-1000-8e8b-7cfa42869f81</groupId>
-  <name>Lab3-NiFi-Learn-Ropes</name>
+  <name>tutorial-3-ingest-live-vehicle-routes-nextbus-api</name>
   <snippet>
     <connections>
       <id>86c63594-dad3-43e3-0000-000000000000</id>

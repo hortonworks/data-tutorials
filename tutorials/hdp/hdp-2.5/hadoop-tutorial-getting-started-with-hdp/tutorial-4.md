@@ -49,7 +49,7 @@ Pig scripts are **translated into a series of MapReduce jobs** that are **run on
 Next, you will use Pig to compute the risk factor of each driver. **Before we can run the Pig code**, the _table must already exist in Hive_ to satisfy one of the _requirements for the HCatStorer() class_. The Pig code expects the following structure for a table named **riskfactor**. Execute the following DDL command:
 
 ~~~
-CREATE TABLE riskfactor (driverid string,events bigint,totmiles double,riskfactor float)
+CREATE TABLE riskfactor (driverid string,events bigint,totmiles bigint,riskfactor float)
 STORED AS ORC;
 ~~~
 
