@@ -1,8 +1,8 @@
 ---
 title: Fast analytics in the cloud with Hive LLAP
-id:
+tutorial-id: 410
 platform: hdp-2.6.0
-components: [ambari, hive]
+tags: [ambari, hive, tableau]
 ---
 
 # Fast analytics in the cloud with Hive LLAP
@@ -17,7 +17,8 @@ Hadoop has always been associated with BigData, yet the perception is it’s onl
 
 -   Must have an [Amazon Web Services(AWS)](https://aws.amazon.com/) account
 -   Must have installed [Hortonworks ODBC Driver for Apache Hive](http://hortonworks.com/downloads/#addons)
--   Must have installed [Tableau](https://www.tableau.com/). For this tutorial, we're using Tableau version 10.2.0.
+-   Must have installed [Tableau](https://www.tableau.com/). For this tutorial, we're using Tableau version 10.2
+-   [Download the SSL Certificate](http://docs.hortonworks.com/HDPDocuments/HDCloudAWS/HDCloudAWS-1.14.1/bk_hdcloud-aws/content/hive-jdbc/index.html#download-ssl-certificate) from the Protected Gateway
 
 ## Outline
 
@@ -79,6 +80,8 @@ msck repair table flights;
 ![open CloudURL](assets/hiveview3.png)
 
 ## Create data model on Tableau
+
+Read [documentation](http://docs.hortonworks.com/HDPDocuments/HDCloudAWS/HDCloudAWS-1.14.1/bk_hdcloud-aws/content/hive-jdbc/index.html#example-tableau) for details on connecting using Tableau.
 
 We'll need to know the master's node IP address so we can connect to it via Tableau. Capture the IP address from Ambari:
 
