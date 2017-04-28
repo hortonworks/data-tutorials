@@ -436,6 +436,8 @@ After the commands complete let's go to the Hive view. Head over to [http://sand
 Execute the following command to create a table for the tweets
 
 ~~~
+ADD JAR /usr/hdp/2.6.0.3-8/hive2/lib/json-serde-1.3.9-SNAPSHOT-jar-with-dependencies.jar;
+
 CREATE EXTERNAL TABLE IF NOT EXISTS tweets_text(
   tweet_id bigint,
   created_unixtime bigint,
@@ -520,8 +522,6 @@ FROM tweets_text;
 ![create tweets simple view](assets/images/create_tweets_simple_view_sentiment_analysis.png)
 
 ~~~sql
-ADD JAR /usr/hdp/2.6.0.3-8/hive2/lib/json-serde-1.3.9-SNAPSHOT-jar-with-dependencies.jar;
-
 CREATE VIEW IF NOT EXISTS tweets_clean AS
 SELECT
   t.tweet_id,
