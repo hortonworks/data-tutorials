@@ -433,7 +433,7 @@ After the commands complete let's go to the Hive view. Head over to [http://sand
 
 Enter **Hive View 2.0**. Execute the following command to create a table for the tweets
 
-~~~
+~~~sql
 ADD JAR /usr/hdp/2.6.0.3-8/hive2/lib/json-serde-1.3.9-SNAPSHOT-jar-with-dependencies.jar;
 
 CREATE EXTERNAL TABLE IF NOT EXISTS tweets_text(
@@ -448,7 +448,7 @@ ROW FORMAT SERDE 'org.openx.data.jsonserde.JsonSerDe'
 LOCATION '/tmp/tweets_staging';
 ~~~
 
-![create_table_json](assets/images/create_table_json.png)
+![create_table_json](assets/images/create_table_tweets_text_json.png)
 
 Now we're going to need to do some data analysis.
 
