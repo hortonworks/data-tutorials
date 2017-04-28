@@ -407,7 +407,6 @@ cp json-serde/target/json-serde-1.3.9-SNAPSHOT-jar-with-dependencies.jar /usr/hd
 cp json-serde/target/json-serde-1.3.9-SNAPSHOT-jar-with-dependencies.jar /usr/hdp/2.6.0.3-8/hive2/lib
 ~~~
 
-![copy_jars](assets/images/copy_jars.png)
 
 **DO NOT** forget to Restart Hive from Ambari,
 
@@ -428,12 +427,11 @@ Next, you'll need to SSH into the sandbox again and run the following two comman
 	sudo -u hdfs hdfs dfs -chmod -R 777 /tmp/tweets_staging
 ~~~
 
-![change permission of tweets staging](assets/images/change_permissions_tweets_staging_sentiment_analysis.png)
 
 After the commands complete let's go to the Hive view. Head over to [http://sandbox.hortonworks.com:8080](http://sandbox.hortonworks.com:8080/). Login into Ambari. Refer to [Learning the Ropes of the Hortonworks Sandbox](https://hortonworks.com/hadoop-tutorial/learning-the-ropes-of-the-hortonworks-sandbox/) if you need assistance with logging into Ambari.
 > **Note:** login credentials are `maria_dev/maria_dev` (Virtualbox), else `azure/azure` (Azure). Use the dropdown menu at the top to get to the Hive view.
 
-Execute the following command to create a table for the tweets
+Enter **Hive View 2.0**. Execute the following command to create a table for the tweets
 
 ~~~
 ADD JAR /usr/hdp/2.6.0.3-8/hive2/lib/json-serde-1.3.9-SNAPSHOT-jar-with-dependencies.jar;
@@ -468,9 +466,10 @@ After doing so, you'll need to run the following command on the Sandbox:
 sudo -u hdfs hdfs dfs -chmod -R 777 /tmp/data/tables
 ~~~
 
-![modify permissions tables folder](assets/images/modify_permissions_tables_dir_sentiment_analysis.png)
 
-Finally, run the following two commands:
+Finally, run the following two commands in **Hive View 2.0**:
+
+The first table created is **dictionary** and the dataset loaded into the table is located in this path: `/tmp/data/tables/dictionary`.
 
 ~~~sql
 CREATE EXTERNAL TABLE if not exists dictionary (
@@ -486,7 +485,7 @@ STORED AS TEXTFILE
 LOCATION '/tmp/data/tables/dictionary';
 ~~~
 
-![create dictionary table](assets/images/create_dictionary_table_sentiment_analysis.png)
+The second table created is **time_zone_map** and the dataset loaded into the table is located in this path: `/tmp/data/tables/time_zone_map`.
 
 ~~~sql
 CREATE EXTERNAL TABLE if not exists time_zone_map (
@@ -499,15 +498,10 @@ STORED AS TEXTFILE
 LOCATION '/tmp/data/tables/time_zone_map';
 ~~~
 
-![create time zone map table](assets/images/create_time_zone_map_table_sentiment_analysis.png)
-
-This will create two tables from that data which we will use to analyze the tweet sentiment. They should appear in the **database explorer** as shown below.
-
-> **Note** Refresh page if explorer doesn't appear automatically.
-
-![Data Table Folders](assets/images/32_hive_table_db_explorer.png)
 
 Next we'll need to create two table views from our tweets which will simplify the columns the data we have access to.
+
+**tweets_simple** view:
 
 ~~~sql
 CREATE VIEW IF NOT EXISTS tweets_simple AS
@@ -519,7 +513,7 @@ SELECT
 FROM tweets_text;
 ~~~
 
-![create tweets simple view](assets/images/create_tweets_simple_view_sentiment_analysis.png)
+**tweets_clean** view:
 
 ~~~sql
 CREATE VIEW IF NOT EXISTS tweets_clean AS
@@ -531,13 +525,19 @@ SELECT
  FROM tweets_simple t LEFT OUTER JOIN time_zone_map m ON t.time_zone = m.time_zone;
 ~~~
 
-![add_jar](assets/images/add_jar.png)
 
-After running the above commands you should be able run `SELECT * FROM tweets_clean LIMIT 100;` which should yield results:
+After running the above commands you should be able to run:
 
-![Data Table Folders](assets/images/view_tweets_clean_data_sentiment_analysis.png)
+~~~sql
+ADD JAR /usr/hdp/2.6.0.3-8/hive2/lib/json-serde-1.3.9-SNAPSHOT-jar-with-dependencies.jar;
+SELECT * FROM tweets_clean LIMIT 100;
+~~~
+
+![load_tweets_clean_data](assets/images/load_tweets_clean_data.png)
 
 Now that we've cleaned our data we can get around to computing the sentiment. Use the following Hive commands to create some views that will allow us to do that.
+
+**l1** view, **l2** view, **l3** view:
 
 ~~~sql
 -- Compute sentiment
@@ -552,14 +552,17 @@ create view IF NOT EXISTS l3 as select
       when  'negative' then -1
       when 'positive' then 1
       else 0 end as polarity
- from l2 left outer join dictionary d on l2.word = d.word;
+from l2 l2 left outer join dictionary d on l2.word = d.word;
 ~~~
 
-![compute sentiment](assets/images/compute_sentiment_sentiment_analysis.png)
 
 Now that we were able to compute some sentiment values we can assign whether a tweet was **positive**, **neutral**, or **negative**. Use this next Hive command to do that.
 
+**tweets_sentiment** table:
+
 ~~~sql
+ADD JAR /usr/hdp/2.6.0.3-8/hive2/lib/json-serde-1.3.9-SNAPSHOT-jar-with-dependencies.jar;
+
 create table IF NOT EXISTS tweets_sentiment stored as orc as select
   tweet_id,
   case
@@ -569,11 +572,16 @@ create table IF NOT EXISTS tweets_sentiment stored as orc as select
 from l3 group by tweet_id;
 ~~~
 
-![compute sentiment values](assets/images/compute_sentiment_values_sentiment_analysis.png)
+>Note: We will need to specify the location of the json-serde library JAR file since this table references another table that works with json data.
+
 
 Lastly, to make our analysis somewhat easier we are going to turn those 'positive', 'negative', and 'neutral' values into numerical values using the next Hive command
 
+**tweetsbi** table:
+
 ~~~sql
+ADD JAR /usr/hdp/2.6.0.3-8/hive2/lib/json-serde-1.3.9-SNAPSHOT-jar-with-dependencies.jar;
+
 CREATE TABLE IF NOT EXISTS tweetsbi
 STORED AS ORC
 AS SELECT
@@ -586,11 +594,21 @@ AS SELECT
 FROM tweets_clean t LEFT OUTER JOIN tweets_sentiment s on t.tweet_id = s.tweet_id;
 ~~~
 
-![Hive Sentiment Analysis Results](assets/images/transform_values_numerically_sentiment_analysis.png)
+Load the tweetsbi data:
+
+~~~
+ADD JAR /usr/hdp/2.6.0.3-8/hive2/lib/json-serde-1.3.9-SNAPSHOT-jar-with-dependencies.jar;
+SELECT * FROM tweetsbi LIMIT 100;
+~~~
 
 This command should yield our final results table as shown below.
 
-![Hive Sentiment Analysis Results](assets/images/view_tweetsbi_data_sentiment_analysis.png)
+![Hive Sentiment Analysis Results tweetsbi data](assets/images/load_tweetsbi_data.png)
+
+Now we have created all of our hive tables and views. They should appear in the **TABLES** tab where you can see all tables and views in your current database:as shown below:
+
+![](assets/images/hive_tables_in_database_view.png)
+
 
 **Try the new Hive Visualization tab!**
 
@@ -612,7 +630,7 @@ Use the **Notebook** dropdown menu at the top of the screen and click **+ Create
 After creating the note, open it up to the blank Notebook screen and type the following command.
 
 ~~~sql
-%hive
+%jdbc(hive)
 select * from tweetsbi LIMIT 300
 ~~~
 
@@ -636,7 +654,7 @@ Scroll down to the next note and create run the following query, and set up the 
 > **Note** Before running Hive queries, restart the Spark Interpreter since Spark jobs take up cluster resources. Click the **Interpreter** tab located near Zeppelin logo at the top of the page, under **Spark** click on the button that says **restart**.
 
 ~~~sql
-%hive
+%jdbc(hive)
 select * from tweetsbi where country != "null" LIMIT 500
 ~~~
 
@@ -656,7 +674,7 @@ Run the following query and make
 - **COUNT** for **lang** in **values**
 
 ~~~sql
-%hive
+%jdbc(hive)
 select lang, time_zone from tweets_text LIMIT 1000
 ~~~
 
@@ -671,7 +689,7 @@ If you have not seen from our earlier analysis in Hive
 Using this we can now look at individual countries and see the sentiment distributions of each.
 
 ~~~sql
-%hive
+%jdbc(hive)
 select sentiment, count(country), country from tweetsbi group by sentiment, country having country != "null"
 ~~~
 
