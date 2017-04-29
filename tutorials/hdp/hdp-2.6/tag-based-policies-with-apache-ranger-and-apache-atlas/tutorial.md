@@ -1,7 +1,7 @@
 ---
 title: Tag Based Policies with Apache Ranger and Apache Atlas
 tutorial-id: 660
-platform: hdp-2.5.0
+platform: hdp-2.6.0
 tags: [atlas, ranger]
 ---
 
@@ -15,7 +15,7 @@ This tutorial walks through an example of tagging data in Atlas and building a s
 
 ## Prerequisites
 
--   [Download Hortonworks 2.5 Sandbox](https://hortonworks.com/downloads/#sandbox)
+-   [Download Hortonworks 2.6 Sandbox](https://hortonworks.com/downloads/#sandbox)
 -   Complete the [Learning the Ropes of the Hortonworks Sandbox tutorial,](https://hortonworks.com/hadoop-tutorial/learning-the-ropes-of-the-hortonworks-sandbox/) you will need it for logging into Ambari.
 
 ## Outline
