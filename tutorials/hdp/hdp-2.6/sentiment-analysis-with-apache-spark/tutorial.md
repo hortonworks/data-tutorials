@@ -63,7 +63,7 @@ hdfs dfs -put /tmp/tweets/* /tmp/tweets_staging
 
 ### Load into Spark
 
-Let's load the tweets into Spark. Spark makes it easy to load JSON-formatted data into a dataframe. To run these code blocks, you should download [this]() Zeppelin notebook and run it on the HDP Sandbox.
+Let's load the tweets into Spark. Spark makes it easy to load JSON-formatted data into a dataframe. To run these code blocks, you should download [this](https://raw.githubusercontent.com/hortonworks/data-tutorials/af43922eb7188230a85eeee5337bec201c7ce4fb/tutorials/hdp/hdp-2.6/sentiment-analysis-with-apache-spark/assets/SentimentAnalysisZeppelin.json) Zeppelin notebook and run it on the HDP Sandbox.
 
 
 ```
@@ -401,3 +401,5 @@ You’ve now seen how to build a sentiment analysis model. The techniques you’
 
 - [NLP and Sentiment Analysis Using HDP and ITC Infotech Radar](https://hortonworks.com/hadoop-tutorial/nlp-sentiment-analysis-retailers-using-hdp-itc-infotech-radar/)
 - [Analyzing Social Media and Customer Sentiment with Apache Nifi and HDP Search](https://hortonworks.com/hadoop-tutorial/how-to-refine-and-visualize-sentiment-data/)
+
+Tutorial By Greg Womack (Twitter: @gregw134)

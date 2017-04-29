@@ -178,4 +178,6 @@ You'll then be able to see a sentiment score for each tweet, where 1 indicates h
 
 ## Summary
 
-In this series of tutorials you've now seen how to ingest data using Nifi, how to build a machine learning model using Spark and Zeppelin, and how to deploy models into production using Spark Streaming. You've also learned how to use Kafka, and how to compile code using SBT and deploy it to a cluster. Now that you're ready to build sophisticated Spark programs, you may be interested in this guide about debugging Spark jobs from an IDE.
+In this series of tutorials you've now seen how to ingest data using Nifi, how to build a machine learning model using Spark and Zeppelin, and how to deploy models into production using Spark Streaming. You've also learned how to use Kafka, and how to compile code using SBT and deploy it to a cluster. Now that you're ready to build sophisticated Spark programs, you may be interested in [this](https://hortonworks.com/hadoop-tutorial/setting-spark-development-environment-scala/) guide about debugging Spark jobs from an IDE.
+
+Tutorial By Greg Womack (Twitter: @gregw134)
