@@ -401,3 +401,5 @@ You’ve now seen how to build a sentiment analysis model. The techniques you’
 
 - [NLP and Sentiment Analysis Using HDP and ITC Infotech Radar](https://hortonworks.com/hadoop-tutorial/nlp-sentiment-analysis-retailers-using-hdp-itc-infotech-radar/)
 - [Analyzing Social Media and Customer Sentiment with Apache Nifi and HDP Search](https://hortonworks.com/hadoop-tutorial/how-to-refine-and-visualize-sentiment-data/)
+
+Tutorial By Greg Womack (Twitter: @gregw134)
