@@ -44,9 +44,9 @@ There are two phases you will go through in deploying IoT Weather Station Data A
 
 1\. Connect the Sense HAT's 40 female pins to the Raspberry Pi's 40 male pins.
 
-![raspberry-pi-pins](/assets/tutorial2/raspberry-pi-pins.jpg)
+![raspberry-pi-pins](assets/tutorial2/raspberry-pi-pins.jpg)
 
-![sense-hat-pins](/assets/tutorial2/sense-hat-pins.jpg)
+![sense-hat-pins](assets/tutorial2/sense-hat-pins.jpg)
 
 ![iot-device-pins-connected](assets/tutorial2/iot-device-pins-connected.jpg)
 
