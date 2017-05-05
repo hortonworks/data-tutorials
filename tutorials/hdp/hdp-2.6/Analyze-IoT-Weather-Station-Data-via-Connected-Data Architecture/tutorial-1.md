@@ -30,6 +30,7 @@ In the concepts tutorial, the goal is to give you information on the background 
 
 The Raspberry Pi (R-Pi) 3 is a microprocessor or computer with an open-source platform commonly used for beginners learning to code to practitioners building Internet of Things (IoT) related Applications. This embedded device has a 1.2 GHz ARMv8 CPU, 1GB of memory, integrated Wi-Fi and Bluetooth. The R-Pi comes with various General Purpose Input Output (GPIO) pins, input/output ports for connecting the device to external peripherals, such as sensors, keyboards, mouses and other peripherals. As can be seen in Figure 1, the R-Pi is connected to the internet via Ethernet port, a monitor via HDMI port, keyboard and mouse via USB port and powered by 12V power supply. This device has the capability to run various operating systems, such as Linux. Additionally, it can run an instance of Apache NiFi and for embedded devices that have a limited amount of memory, we can run Apache MiNiFi.
 
+
 ![raspberry_pi](assets/tutorial2/Raspberry-Pi-3-Flat-Top.jpg)
 
 ## Internet of Things on R-Pi
