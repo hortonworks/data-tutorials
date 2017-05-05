@@ -1,6 +1,6 @@
 MiNiFi Config Version: 2
 Flow Controller:
-  name: SensorWeatherDataEdgeOffice
+  name: SensorWeatherDataEdgeHome
   comment: ''
 Core Properties:
   flow controller graceful shutdown period: 10 sec
@@ -41,47 +41,47 @@ Security Properties:
     algorithm: PBEWITHMD5AND256BITAES-CBC-OPENSSL
     provider: BC
 Processors:
-- id: bb3789f8-015a-1000-0000-000000000000
+- id: da8182bb-015b-1000-0000-000000000000
   name: ExecuteProcess
   class: org.apache.nifi.processors.standard.ExecuteProcess
   max concurrent tasks: 1
   scheduling strategy: TIMER_DRIVEN
-  scheduling period: 1 sec
+  scheduling period: 0 sec
   penalization period: 30 sec
   yield period: 1 sec
   run duration nanos: 0
   auto-terminated relationships list: []
   Properties:
     Argument Delimiter: ' '
-    Batch Duration: 5 sec
-    Command: sh
-    Command Arguments: /home/pi/sensor_readings.sh
+    Batch Duration:
+    Command: python
+    Command Arguments: /home/pi/MiniWeatherStation.py
     Redirect Error Stream: 'false'
 Process Groups: []
 Input Ports: []
 Output Ports: []
 Funnels: []
 Connections:
-- id: b76bd734-015b-1000-0000-000000000000
-  name: ExecuteProcess/success/479b7c3d-0159-1000-b6b3-478c0588a810
-  source id: bb3789f8-015a-1000-0000-000000000000
+- id: da82ace2-015b-1000-0000-000000000000
+  name: ExecuteProcess/success/479b7c3d-0159-1000-963e-01eca4014873
+  source id: da8182bb-015b-1000-0000-000000000000
   source relationship names:
   - success
-  destination id: 479b7c3d-0159-1000-b6b3-478c0588a810
+  destination id: 479b7c3d-0159-1000-963e-01eca4014873
   max work queue size: 10000
   max work queue data size: 1 GB
   flowfile expiration: 0 sec
   queue prioritizer class: ''
 Remote Process Groups:
-- id: bb39ea97-015a-1000-0000-000000000000
+- id: da821681-015b-1000-0000-000000000000
   name: ''
-  url: http://10.11.4.120:19090/nifi/
+  url: http://192.168.2.3:19090/nifi/
   comment: ''
   timeout: 30 sec
   yield period: 10 sec
   transport protocol: RAW
   Input Ports:
-  - id: 479b7c3d-0159-1000-b6b3-478c0588a810
+  - id: 479b7c3d-0159-1000-963e-01eca4014873
     name: IngestSensorReadings
     comment: ''
     max concurrent tasks: 1
