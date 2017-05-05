@@ -30,7 +30,7 @@ In the concepts tutorial, the goal is to give you information on the background 
 
 The Raspberry Pi (R-Pi) 3 is a microprocessor or computer with an open-source platform commonly used for beginners learning to code to practitioners building Internet of Things (IoT) related Applications. This embedded device has a 1.2 GHz ARMv8 CPU, 1GB of memory, integrated Wi-Fi and Bluetooth. The R-Pi comes with various General Purpose Input Output (GPIO) pins, input/output ports for connecting the device to external peripherals, such as sensors, keyboards, mouses and other peripherals. As can be seen in Figure 1, the R-Pi is connected to the internet via Ethernet port, a monitor via HDMI port, keyboard and mouse via USB port and powered by 12V power supply. This device has the capability to run various operating systems, such as Linux. Additionally, it can run an instance of Apache NiFi and for embedded devices that have a limited amount of memory, we can run Apache MiNiFi.
 
-![raspberry_pi](assets/tutorial0/Raspberry-Pi-3-Flat-Top.jpg)
+![raspberry_pi](assets/tutorial2/Raspberry-Pi-3-Flat-Top.jpg)
 
 ## Internet of Things on R-Pi
 
@@ -38,7 +38,7 @@ The R-Pi is not just a platform for building IoT projects, it is a super platfor
 
 ## Sense HAT Functionality
 
-![sense-hat-pins](assets/tutorial0/sense-hat-pins.jpg)
+![sense-hat-pins](assets/tutorial2/sense-hat-pins.jpg)
 
 ### What exactly does the Sense HAT Sensor Measure?
 
@@ -56,7 +56,7 @@ I2C makes it possible to have multiple devices in connection with the R-Pi, each
 
 Docker is a an open source platform for developers and sysadmins to develop, ship, and run applications. Docker provides faster delivery of applications, allows users to deploy and scale easily, which results in easier maintenance. This platform includes a [Docker Engine](https://docs.docker.com/engine/), which is a lightweight and powerful open source containerization technology. This technology incorporates work flow for building and containerizing your applications. Docker containerization incorporates Docker images and containers. Docker images contain applications or services that can easily deploy an application into a testing, staging and production environment known as containers. For instance, with one Docker image, you can deploy multiple containers of that Docker image instance. Containers are a way to package and run an application, such as a framework: Hadoop, Spark, NiFi in an isolated environment. Containers are different from virtual machine because they do not need the extra layer of a hypervisor, instead they run directly on the host machine's kernel. Users are able to share their docker images and containers through the Docker Hub.
 
-![docker_architecture](assets/tutorial1/docker_architecture.svg)
+![docker_architecture](assets/tutorial1/docker_architecture.png)
 
 In the docker architecture above, Docker registry are services used for storing Docker images, such as Docker Hub. Docker Host is the computer Docker runs on. Diving deeper into the host, you can see the Docker Daemon, which is used to create and manage Docker objects, such as images, containers, networks and volumes. The user or client is able to interact with Docker daemon via Client Docker CLI. Additionally, the CLI are scripts or direct commands entered by the user. The Docker daemon is a long-running program also known as a server. The CLI utilizes Docker's REST API to interact with the Docker daemon. As you can observe, the Docker Engine is a client-server application comprised of Client Docker CLI, REST API and Docker daemon.
 
