@@ -74,7 +74,7 @@ Cut-Paste [DDL](assets/hiveview-ddl.sql) into the Hive Query Editor and execute:
 Cut-Paste the following command into the Hive Query Editor to reload all the partitions from S3. We now have some data to play with:
 
 ```sql
-msck repair table flights;
+msck repair table hwxdemo.flights;
 ```
 
 ![open CloudURL](assets/hiveview3.png)

@@ -326,7 +326,7 @@ hiveContext.sql("load data inpath 'risk_factor_spark' into table finalresults")
 
 ~~~scala
 %spark
-hiveContext.sql("create table riskfactor as select * from finalresults")
+hiveContext.sql("create table riskfactor as select * from finalresults").toDF()
 ~~~
 
 ![create_table_riskfactor_spark](assets/create_table_riskfactor_spark.png)
@@ -414,7 +414,7 @@ risk_factor_spark.write.format("orc").save("risk_factor_spark")
 
 hiveContext.sql("load data inpath 'risk_factor_spark' into table finalresults")
 
-hiveContext.sql("create table riskfactor as select * from finalresults")
+hiveContext.sql("create table riskfactor as select * from finalresults").toDF()
 ~~~
 
 ## Summary <a id="summary-lab4"></a>

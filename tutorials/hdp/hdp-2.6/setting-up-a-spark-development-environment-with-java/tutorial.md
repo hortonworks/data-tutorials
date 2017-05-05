@@ -154,9 +154,11 @@ public class Main {
 As before, click Run -> Run to run the file. This should run the Spark job and print the frequency of each word that appears in Shakespeare.
 
 Notice we've set this line:
-``
+
+~~~
 conf.setMaster("local")
-``
+~~~
+
 This tells Spark to run locally using this computer, rather than in distributed mode. To run Spark against multiple machines, we would need to change this value to YARN. We'll see how to do this later.
 
 We've now seen how to deploy an application directly in an IDE. This is a good way to quickly build and test an application, but it is somewhat unrealistic since Spark is only running on a single machine. In production use Spark will usually process data stored on a distributed file system like HDFS (or perhaps S3 or Azure Blog Storage if running in the cloud). Spark is also usually run in clustered mode (ie, distributed across many machines).

@@ -13,7 +13,7 @@ The Hortonworks Sandbox is delivered as a virtual machine.  A virtual machine is
 
 ## Outline
 
-The Hortonworks Sandbox can be installed in a myriad of virtualization platforms.  Jump to the tutorial for the platform that you prefer.
+The Hortonworks Sandbox can be installed in a myriad of virtualization platforms.  Jump to the tutorial for the platform that you prefer.  This documentation applies to both HDP and HDF sandboxes.
 
 1.  **Deploying Hortonworks Sandbox on VirtualBox**
 2.  **Deploying Hortonworks Sandbox on VMWare**
