@@ -9,7 +9,7 @@ tags: [sandbox, deploy, install, docker]
 
 ## Introduction
 
-This tutorial walks through installing the Hortonworks Sandbox onto Docker on your computer.
+This tutorial walks through the general approach for installing the Hortonworks Sandbox (HDP or HDF) onto Docker on your computer.
 
 
 ## Prerequisites

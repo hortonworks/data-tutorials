@@ -9,7 +9,7 @@ tags: [sandbox, deploy, install, virtualbox]
 
 ## Introduction
 
-This tutorial walks through installing the Hortonworks Sandbox onto Virtualbox on your computer.
+This tutorial walks through the general approach for installing the Hortonworks Sandbox (HDP or HDF) onto VirtualBox on your computer.
 
 ## Prerequisites
 

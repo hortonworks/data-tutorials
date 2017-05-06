@@ -9,7 +9,7 @@ tags: [sandbox, deploy, install, vmware]
 
 ## Introduction
 
-This tutorial walks through installing the Hortonworks Sandbox onto VMware on your computer.
+This tutorial walks through the general approach for installing the Hortonworks Sandbox (HDP or HDF) onto VMware on your computer.
 
 ## Prerequisites
 
