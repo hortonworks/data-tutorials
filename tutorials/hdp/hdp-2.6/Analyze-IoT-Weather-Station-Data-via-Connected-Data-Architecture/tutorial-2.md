@@ -91,6 +91,18 @@ After successfully SSHing into the Raspberry Pi, your console will look similar:
 
 ![successful_ssh_to_rpi](assets/tutorial2/successful_ssh_to_rpi.png)
 
+### 2.1 Install the Sense HAT Software
+
+1\. Download and install the Sense HAT Software.
+
+~~~bash
+sudo apt-get update
+sudo apt-get install sense-hat
+sudo pip3 install pillow
+~~~
+
+Now you have the software needed to program the Sense HAT, you will utilize it in the next tutorial.
+
 ### Step 3: Install MiNiFi Java Agent onto Raspberry Pi
 
 1\. In Raspbian's OS terminal, download Java 8 and JDK1.8 using the following command:
@@ -137,12 +149,11 @@ Example of the above docker load command:
 docker load < HDF_2.1.2_docker_image_04_05_2017_13_12_03.tar.gz
 ~~~
 
-You'll need the script to deploy an HDF Sandbox Container off of the HDF Sandbox Docker image, Download start HDF Sandbox script here: [start_sandbox-hdf.sh](assets/auto-scripts/start_sandbox-hdf.sh)
+You'll need the script to deploy an HDF Sandbox Container off of the HDF Sandbox Docker image, Download start HDF Sandbox script here: [start_sandbox-hdf.sh](assets/auto_scripts/start_sandbox-hdf.sh)
 
 1\. run the start_sandbox-hdf.sh script below:
 
 ~~~bash
-wget https://raw.githubusercontent.com/hortonworks/data-tutorials/master/tutorials/hdp/hdp-2.6/Analyze-IoT-Weather-Station-Data-via-Connected-Data%20Architecture/assets/auto-scripts/start_sandbox-hdf.sh
 ./start_sandboxh-hdf.sh
 ~~~
 
@@ -153,7 +164,7 @@ Your Docker HDF Sandbox will deploy as a Container and Start up too. You are now
 1\. Turn on your HDF Sandbox using the script:
 
 ~~~bash
-wget https://raw.githubusercontent.com/hortonworks/data-tutorials/master/tutorials/hdf/hdf-2.1/analyze-traffic-pattern-with-apache-nifi/assets/auto_scripts/docker-scripts/docker_sandbox_hdf.sh
+wget https://raw.githubusercontent.com/james94/data-tutorials/master/tutorials/hdf/hdf-2.1/analyze-traffic-pattern-with-apache-nifi/assets/auto_scripts/docker-scripts/docker_sandbox_hdf.sh
 ./docker_sandbox_hdf.sh
 ~~~
 
@@ -179,17 +190,9 @@ nifi.remote.input.host = <internal ip address>
 nifi.remote.input.socket.port = 17000
 ~~~
 
-> Note: laptop `<internal ip addr>` can be found with the command: `ifconfig | grep inet`
+> Note: laptop <internal ip addr> was printed as output earlier when you were learning how to SSH into Raspberry Pi. `ifconfig | grep inet`.
 
-Open your local machine terminal, type the command:
-
-~~~bash
-ifconfig | grep inet
-~~~
-
-![laptop_internal_ip_addr](assets/tutorial2/laptop_internal_ip_addr.png)
-
-The updates to Advanced NiFi-Properties in Ambari should look similar as below:
+The updates to Advanced NiFi-Properties should look similar as below:
 
 ![advanced_nifi_properties](assets/tutorial2/nifi_properties_sitetosite.png)
 
@@ -326,22 +329,16 @@ docker network inspect bridge
 
 > Note: the internal ip address for HDP and HDF Sandbox. You will need these IP addresses in order for each sandbox to be reach each other.
 
-2\. SSH into HDF Sandbox Container. Add HDP's ip address mapped to its hostname into HDF's hosts file using the following command:
+2\. Add HDP's ip address mapped to its hostname into HDF's hosts file using the following command:
 
 ~~~bash
-echo '{hdp-ip-address} sandbox.hortonworks.com' | sudo tee -a /etc/hosts
+echo '{hdp-ip-address} sandbox.hortonworks.com' | sudo tee -a /private/etc/hosts
 ~~~
 
-3\. SSH into HDP Sandbox Container. 
+3\. Add HDF's ip address mapped to its hostname into HDP's hosts file using the following command:
 
 ~~~bash
-ssh root@localhost -p 2222
-~~~
-
-Add HDF's ip address mapped to its hostname into HDP's hosts file using the following command:
-
-~~~bash
-echo '{hdf-ip-address} sandbox-hdf.hortonworks.com' | sudo tee -a /etc/hosts
+echo '{hdf-ip-address} sandbox-hdf.hortonworks.com' | sudo tee -a /private/etc/hosts
 ~~~
 
 > Note: the two commands were tested on a mac. So, the paths may be different depending on your OS.
@@ -356,11 +353,11 @@ localhost:19090/nifi
 
 2\. At the top right corner, go to **Global Menu -> Controller Settings -> Controller Services -> Plus Button**
 
-3\. Look for the **HBase Client Service** in the list of controller services, then add it.
+3\. Look for the **HBaseClient Service** in the list of controller services, then add it.
 
 ![hbase_controller_service](assets/tutorial2/hbase_controller_service.png)
 
-4\. Configure the HBaseClient Service and add to the Properties tab under **Hadoop Configuration Files**, the file path:
+4\. Configure the HBaseClient Service and add to the property tab under **Hadoop Configuration Files**, the file path:
 
 ~~~bash
 /etc/hbase/hbase-site.xml
