@@ -15,11 +15,9 @@ In this tutorial, we will introduce core concepts of Apache Spark Streaming and 
 
 This tutorial is a part of series of hands-on tutorials to get you started with HDP using Hortonworks Sandbox. Please ensure you complete the prerequisites before proceeding with this tutorial.
 
--   Downloaded and Installed latest [Hortonworks Sandbox](https://hortonworks.com/products/hortonworks-sandbox/#install)
+-   Downloaded and installed latest [Hortonworks Sandbox](https://hortonworks.com/products/hortonworks-sandbox/#install)
 
-**Note**: if you are attending a Meetup/Crash Course your speaker/instructor may have additional instructions regarding the Sandbox VM image.
-
--   [Learning the Ropes of the Hortonworks Sandbox](https://hortonworks.com/hadoop-tutorial/learning-the-ropes-of-the-hortonworks-sandbox/)
+-   Reviewed [Learning the Ropes of the Hortonworks Sandbox](https://hortonworks.com/hadoop-tutorial/learning-the-ropes-of-the-hortonworks-sandbox/)
 
 ## Outline
 
