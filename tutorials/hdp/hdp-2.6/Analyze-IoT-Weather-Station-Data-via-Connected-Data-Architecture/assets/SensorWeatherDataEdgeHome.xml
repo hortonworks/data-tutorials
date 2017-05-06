@@ -5,13 +5,13 @@
   <name>SensorWeatherDataEdgeHome</name>
   <snippet>
     <connections>
-      <id>4a11e2eb-015b-1000-0000-000000000000</id>
+      <id>da82ace2-015b-1000-0000-000000000000</id>
       <parentGroupId>7c84501d-d10c-407c-0000-000000000000</parentGroupId>
       <backPressureDataSizeThreshold>1 GB</backPressureDataSizeThreshold>
       <backPressureObjectThreshold>10000</backPressureObjectThreshold>
       <destination>
-        <groupId>4a0e4ed7-015b-1000-0000-000000000000</groupId>
-        <id>479b7c3d-0159-1000-8208-3482b0e00b0e</id>
+        <groupId>da821681-015b-1000-0000-000000000000</groupId>
+        <id>479b7c3d-0159-1000-963e-01eca4014873</id>
         <type>REMOTE_INPUT_PORT</type>
       </destination>
       <flowFileExpiration>0 sec</flowFileExpiration>
@@ -20,17 +20,17 @@
       <selectedRelationships>success</selectedRelationships>
       <source>
         <groupId>7c84501d-d10c-407c-0000-000000000000</groupId>
-        <id>fce786b3-015a-1000-0000-000000000000</id>
+        <id>da8182bb-015b-1000-0000-000000000000</id>
         <type>PROCESSOR</type>
       </source>
       <zIndex>0</zIndex>
     </connections>
     <processors>
-      <id>fce786b3-015a-1000-0000-000000000000</id>
+      <id>da8182bb-015b-1000-0000-000000000000</id>
       <parentGroupId>7c84501d-d10c-407c-0000-000000000000</parentGroupId>
       <position>
         <x>0.0</x>
-        <y>30.668659293875862</y>
+        <y>22.0</y>
       </position>
       <config>
         <bulletinLevel>WARN</bulletinLevel>
@@ -74,15 +74,14 @@
         <properties>
           <entry>
             <key>Command</key>
-            <value>sh</value>
+            <value>python</value>
           </entry>
           <entry>
             <key>Command Arguments</key>
-            <value>/home/pi/sensor_readings.sh</value>
+            <value>/home/pi/WeatherStation.py</value>
           </entry>
           <entry>
             <key>Batch Duration</key>
-            <value>5 sec</value>
           </entry>
           <entry>
             <key>Redirect Error Stream</key>
@@ -94,7 +93,7 @@
           </entry>
         </properties>
         <runDurationMillis>0</runDurationMillis>
-        <schedulingPeriod>5 sec</schedulingPeriod>
+        <schedulingPeriod>0 sec</schedulingPeriod>
         <schedulingStrategy>TIMER_DRIVEN</schedulingStrategy>
         <yieldDuration>1 sec</yieldDuration>
       </config>
@@ -107,10 +106,10 @@
       <type>org.apache.nifi.processors.standard.ExecuteProcess</type>
     </processors>
     <remoteProcessGroups>
-      <id>4a0e4ed7-015b-1000-0000-000000000000</id>
+      <id>da821681-015b-1000-0000-000000000000</id>
       <parentGroupId>7c84501d-d10c-407c-0000-000000000000</parentGroupId>
       <position>
-        <x>635.6849682705251</x>
+        <x>675.0</x>
         <y>0.0</y>
       </position>
       <communicationsTimeout>30 sec</communicationsTimeout>
@@ -120,7 +119,7 @@
           <concurrentlySchedulableTaskCount>1</concurrentlySchedulableTaskCount>
           <connected>true</connected>
           <exists>true</exists>
-          <id>479b7c3d-0159-1000-8208-3482b0e00b0e</id>
+          <id>479b7c3d-0159-1000-963e-01eca4014873</id>
           <name>IngestSensorReadings</name>
           <targetRunning>true</targetRunning>
           <transmitting>true</transmitting>
@@ -129,11 +128,11 @@
       </contents>
       <proxyHost></proxyHost>
       <proxyUser></proxyUser>
-      <targetUri>http://192.168.2.4:19090/nifi/</targetUri>
-      <targetUris>http://192.168.2.4:19090/nifi/</targetUris>
+      <targetUri>http://192.168.2.3:19090/nifi/</targetUri>
+      <targetUris>http://192.168.2.3:19090/nifi/</targetUris>
       <transportProtocol>RAW</transportProtocol>
       <yieldDuration>10 sec</yieldDuration>
     </remoteProcessGroups>
   </snippet>
-  <timestamp>04/07/2017 20:23:13 UTC</timestamp>
+  <timestamp>05/05/2017 21:27:56 UTC</timestamp>
 </template>
