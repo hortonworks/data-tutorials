@@ -20,6 +20,7 @@ You'll make an IoT Weather Station with a Raspberry Pi and Sense HAT. Additional
 -   Step 2: SSH into the Raspberry Pi
 -   Step 3: Install MiNiFi Java Agent onto Raspberry Pi
     - 3.1: Install OS Dependencies
+    
 ### Steps for Deploying MiNiFi, HDF, HDP Connected Data Architecture
 -   Step 4: Start HDF Sandbox
     - 4.1: Configure NiFi to Receive Data
