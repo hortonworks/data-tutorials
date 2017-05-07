@@ -29,12 +29,7 @@ By the end of this tutorial series, you will acquire the fundamental knowledge t
 
 ## Bill of Materials:
 
-- [Raspberry Pi 3](https://www.sparkfun.com/products/13825)
-- [32GB micro SD Card with Adapter](https://www.amazon.com/SanDisk-microSDHC-Standard-Packaging-SDSQUNC-032G-GN6MA/dp/B010Q57T02/ref=sr_1_3?s=pc&ie=UTF8&qid=1483984848&sr=1-3&keywords=micro+SD+card+with+adapter)
-- [Raspberry Pi Sense HAT - AstroPi](https://www.amazon.com/Raspberry-Pi-Sense-HAT-AstroPi/dp/B014HDG74S)
-- [Ethernet Cable](https://smile.amazon.com/Mediabridge-Ethernet-Cable-Feet-Networking/dp/B003O973OA/ref=sr_1_7?s=pc&ie=UTF8&qid=1483566869&sr=1-7&keywords=Ethernet+Cable)
-- [Raspberry Pi Micro Usb Power Supply](https://smile.amazon.com/CanaKit-Raspberry-Supply-Adapter-Charger/dp/B00GF9T3I0/ref=sr_1_2?s=pc&ie=UTF8&qid=1483566848&sr=1-2&keywords=Raspberry+Pi+Micro+Usb+Power+Supply)
-- [Makerfocus 140pcs Breadboard Board Jumper Cable Wire Kit w Box](https://smile.amazon.com/Makerfocus-140pcs-Breadboard-Board-Jumper/dp/B01M36HQWN/ref=sr_1_1?ie=UTF8&qid=1483566729&sr=8-1&keywords=Makerfocus+140pcs+Breadboard+Board+Jumper+Cable+Wire+Kit+w+Boxe+wire+kit)
+- [IoT Weather Station Electronics List](http://a.co/8FNMlUu)
 
 ## Tutorial Series Overview
 
