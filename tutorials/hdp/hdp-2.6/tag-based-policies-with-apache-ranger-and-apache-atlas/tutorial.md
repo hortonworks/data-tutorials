@@ -51,7 +51,7 @@ Select the **Ranger Audit** tab. Turn ON Ranger's Audit to Solr feature by click
 
 ![enable_audit_to_solr](assets/activate_ranger_audit_to_solr.png)
 
-Now restart the Ranger service for the configuration to take effect. Click on **Service Actions**, **Restart All**, **Confirm Restart All**. We need this configuration updated, so we can use Ranger Audit.
+Now restart the Ranger and all other services affected for the configuration to take effect. Click on **Actions**, **Restart All Required**, **Confirm Restart All**. We need these configurations updated for the services, so we can use Tag Based Policies with Atlas and Ranger.
 
 ### 1.3 Start Kafka Service <a id="start-kafka"></a>
 
@@ -73,7 +73,7 @@ Now start other required services as well. Ranger Tagsync is stopped by default 
 
 Let's start HBase, Ambari Infra and Atlas.
 
-### 1.4 Restart Hive Service <a id="restart-hive"
+### 1.4 Restart Hive Service <a id="restart-hive">
 
 From within the Hive service, click on `Service Actions -> Restart`
 
@@ -129,7 +129,7 @@ You can give any access to the users as per their roles in the organization.
 
 Let’s create a hive table employee from Ambari `Hive View 2.0`.
 
-Go back to Ambari and then to Hive View 2.0 from 9 square menu icon, and type the following create table query:
+1\. Go back to Ambari and then to Hive View 2.0 from 9 square menu icon, and type the following create table query:
 
 ~~~sql
 create table employee (ssn string, name string, location string)
@@ -138,7 +138,7 @@ fields terminated by ','
 stored as textfile;
 ~~~
 
-And click on green `Execute` button.
+2\. And click on green `Execute` button.
 
 ![create_hive_table](assets/create_hive_table_employee.png)
 
@@ -148,7 +148,7 @@ You can check whether your table gets created or not by going to the **TABLES** 
 
 Now let’s put some records into this table.
 
-First SSH into the Hortonworks Sandbox with the command:
+3\. First SSH into the Hortonworks Sandbox with the command:
 
 ~~~
 ssh root@127.0.0.1 -p 2222
@@ -156,28 +156,19 @@ ssh root@127.0.0.1 -p 2222
 
 ![sshTerminal](assets/sshTerminal.png)
 
-Create a new file called `employeedata.txt` from the terminal:
+4\. Create the employeedata.txt file with the following data using the command:
 
-~~~
-vi employeedata.txt
-~~~
-
-And put following data:
-
-~~~
-111-111-111,James,San Jose
-222-222-222,Mike,Santa Clara
-333-333-333,Robert,Fremont
+~~~bash
+printf "111-111-111,James,San Jose\n222-222-222,Mike,Santa Clara\n333-333-333,Robert,Fremont" > employeedata.txt
 ~~~
 
-Exit the vi shell by typing Esc-->wq!
-Now copy this file to HDFS where employee table data is being stored.
+5\. Copy the employeedata.txt file from your centOS file system to HDFS running on HDP with Hadoop hdfs command:
 
 ~~~
 hdfs dfs -copyFromLocal employeedata.txt /apps/hive/warehouse/employee
 ~~~
 
-Now let’s go back to hive view to view this data.
+6\. Now let’s go back to hive view 2.0 to view this data.
 
 Go to **TABLES** tab, note down the employee table name, then head back to **QUERY** tab and write the hive script:
 
@@ -193,16 +184,16 @@ In the first scenario, you have an `employee` data table in Apache Hive with `ss
 
 You need to create a Ranger policy which allows for access to name column except ssn and location. This policy will be assigned to both raj_ops and maria_dev user for now.
 
-Go to Ranger UI on:
+7\. Go to Ranger UI on:
 `127.0.0.1:6080`
 
 ![ranger_homepage_rajops](assets/ranger_homepage_rajops.png)
 
-Go back to `Sandbox_hive` and then `Add New Policy`:
+8\. Go back to `Sandbox_hive` and then `Add New Policy`:
 
 ![new_sandbox_hive_policies](assets/new_sandbox_hive_policies.png)
 
-Enter following values:
+9\. Enter following values:
 
 ~~~
 Policy Names - policy to restrict employee data
@@ -212,7 +203,7 @@ Hive_column - ssn, location (NOTE : Do NOT forget to exclude these columns)
 Description - Any description
 ~~~
 
-In the `Allow Conditions`, it should have the following values:
+10\. In the `Allow Conditions`, it should have the following values:
 
 ~~~
 Select Group – blank, no input
@@ -226,33 +217,35 @@ You should have your policy configured like this:
 
 ![employee_policy_rajops](assets/employee_policy_rajops.png)
 
-Click on `Add` and you can see the list of policies that are present in `Sandbox_hive`.
+11\. Click on `Add` and you can see the list of policies that are present in `Sandbox_hive`.
 
 ![employee_policy_added_rajops](assets/employee_policy_added_rajops.png)
 
-You have to disable the `Hive Global Tables Allow` to test out the one that you just created. Go inside to this policy and toggle to disable it. Disable the **Policy Name.**
+12\. You have to disable the `Hive Global Tables Allow` to test out the one that you just created. Go inside to this policy and toggle to disable it. Disable the **Policy Name.**
 
 ![hive_global_policy_rajops](assets/hive_global_policy_rajops.png)
 
-To check the access, get back to Ambari as `maria_dev` user.
+13\. To check the access, get back to Ambari as `maria_dev` user.
 
 ![maria_dev_ambari_login](assets/maria_dev_ambari_login.png)
 
-Go directly to `Hive View 2.0`, then **QUERY** tab, write the hive script to load the data from employee table.
+14\. Go directly to `Hive View 2.0`, then **QUERY** tab, write the hive script to load the data from employee table.
 
 ~~~sql
 select * from employee;
 ~~~
 
-Click on the **NOTIFICATIONS** tab:
+15\. Click on the **NOTIFICATIONS** tab:
 
 ![maria_dev_access_error](assets/load_data_authorization_error.png)
 
-You will get an authorization error. This is expected as the user does not have access to 2 columns in this table (ssn and location). To verify this, you can also view the **Audits** in Ranger. Go back to Ranger and click on `Audits=>Access` and select `Sandbox_hive` in Service Name. You will see the entry of Access Denied for maria_dev.
+You will get an authorization error. This is expected as the user does not have access to 2 columns in this table (ssn and location).
+
+16\. To verify this, you can also view the **Audits** in Ranger. Go back to Ranger and click on `Audits=>Access` and select `Sandbox_hive` in Service Name. You will see the entry of Access Denied for maria_dev.
 
 ![new_policy_audit](assets/new_policy_audit.png)
 
-Now coming back to `Hive View 2.0`, try running a query for selective column.
+17\. Now coming back to `Hive View 2.0`, try running a query for selective column.
 
 ~~~sql
 SELECT name FROM employee;
