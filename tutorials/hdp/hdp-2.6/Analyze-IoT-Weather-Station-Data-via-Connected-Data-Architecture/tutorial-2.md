@@ -20,7 +20,7 @@ You'll make an IoT Weather Station with a Raspberry Pi and Sense HAT. Additional
 -   Step 2: SSH into the Raspberry Pi
 -   Step 3: Install MiNiFi Java Agent onto Raspberry Pi
     - 3.1: Install OS Dependencies
-    
+
 ### Steps for Deploying MiNiFi, HDF, HDP Connected Data Architecture
 -   Step 4: Start HDF Sandbox
     - 4.1: Configure NiFi to Receive Data
@@ -114,13 +114,13 @@ sudo apt-get update && sudo apt-get install oracle-java8-jdk
 
 > Note: the install will take approximately 10 minutes depending on Raspbian OS resources being used.
 
-1\. Download MiNiFi Java Agent from [apache website downloads](https://www.apache.org/dyn/closer.lua?path=/nifi/minifi/0.1.0/minifi-0.1.0-bin.tar.gz) using the following command:
+2\. Download MiNiFi Java Agent from [apache website downloads](https://www.apache.org/dyn/closer.lua?path=/nifi/minifi/0.1.0/minifi-0.1.0-bin.tar.gz) using the following command:
 
 ~~~bash
 wget http://public-repo-1.hortonworks.com/HDF/2.1.2.0/minifi-1.0.2.1.2.0-10-bin.tar.gz
 ~~~
 
-2\. Unpack the MiNiFi project using the following command:
+3\. Unpack the MiNiFi project using the following command:
 
 ~~~bash
 tar -zxvf minifi-*-bin.tar.gz
@@ -150,7 +150,7 @@ Example of the above docker load command:
 docker load < HDF_2.1.2_docker_image_04_05_2017_13_12_03.tar.gz
 ~~~
 
-You'll need the script to deploy an HDF Sandbox Container off of the HDF Sandbox Docker image, Download start HDF Sandbox script here: [start_sandbox-hdf.sh](assets/auto_scripts/start_sandbox-hdf.sh)
+You'll need the script to deploy an HDF Sandbox Container off of the HDF Sandbox Docker image, Download start HDF Sandbox script here: [start_sandbox-hdf.sh](assets/auto-scripts/start_sandbox-hdf.sh)
 
 1\. run the start_sandbox-hdf.sh script below:
 
@@ -270,19 +270,19 @@ docker load < HDP_2.6_docker_image_05_05_2017_15_01_40.tar.gz
 ~~~
 
 
-You'll need the script to deploy an HDP Sandbox Container off of the HDP Sandbox Docker image, Download start HDP Sandbox script here: [start_sandbox-hdf.sh](assets/auto_scripts/start_sandbox-hdf.sh)
+You'll need the script to deploy an HDP Sandbox Container off of the HDP Sandbox Docker image, Download the **install and start HDP Sandbox script** here: [start_sandbox-hdp.sh](assets/auto-scripts/start_sandbox-hdp.sh)
 
 1\. Run the start_sandbox-hdp.sh script below:
 
 ~~~bash
-./start_sandboxh-hdp.sh
+./start_sandbox-hdp.sh
 ~~~
 
 Your Docker HDP Sandbox will deploy as a Container and Start up too. You are now ready to go to **substep 5.1**
 
 ### Option 2: For User Who Has Deployed HDP Sandbox Container
 
-Download the start HDP Sandbox Container script here: [docker_sandbox_hdp.sh](assets/auto_scripts/docker_sandbox_hdp.sh)
+Download the **start HDP Sandbox Container script** here: [docker_sandbox_hdp.sh](assets/auto-scripts/docker_sandbox_hdp.sh)
 
 1\. Turn on your HDP Sandbox container using the script:
 
@@ -303,8 +303,6 @@ localhost:8080
 user is `admin`. password is what you set it up as in [Learning the Ropes of Hortonworks Sandbox: Section 2.2](https://hortonworks.com/hadoop-tutorial/learning-the-ropes-of-the-hortonworks-sandbox/#setup-ambari-admin-password)
 
 3\. In the left hand side of HDP Services on the Ambari Stack, turn off Oozie and Flume with Ambari **Service Actions -> Stop** since you'll need more memory to run HBase.
-
-<!-- ![oozie_turn_off]() -->
 
 ### 5.2 Start HBase
 
