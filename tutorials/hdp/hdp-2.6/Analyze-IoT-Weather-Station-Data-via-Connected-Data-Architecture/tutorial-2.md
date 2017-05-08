@@ -10,7 +10,7 @@ You'll make an IoT Weather Station with a Raspberry Pi and Sense HAT. Additional
 - Downloaded and Installed Latest [Raspbian OS](https://www.raspberrypi.org/downloads/raspbian/) onto Raspberry Pi
     - If you need help installing Raspbian OS onto the Raspberry Pi, refer to Appendix A.
 - Downloaded and Installed [Docker Engine](https://docs.docker.com/engine/installation/) on Local Machine
-    - Set [Docker Memory to 12GB](https://docs.docker.com/docker-for-mac/#preferences) to run both HDF and HDP Sandboxes.
+    - Set [Docker Memory to 12GB](https://docs.docker.com/docker-for-mac/#preferences) to run both HDF and HDP Sandboxes on one laptop.
         - Link above will take you to Docker preferences for Mac. In the Docker documentation, choose your OS.
 - Downloaded the latest [MiNiFi Toolkit](https://nifi.apache.org/minifi/download.html) onto your local machine
 - Read Analyze IoT Weather Station Data via Connected Data Architecture Intro
@@ -132,7 +132,7 @@ A MiNiFi Agent is embedded onto the Raspberry Pi.
 
 ## Deploying MiNiFi, HDF and HDP Connected Data Architecture
 
-> Note: Before deploying HDF and HDP Sandbox, you will need to set the Docker Engine memory to at least 12GB to run both sandboxes.
+> Note: Before deploying HDF and HDP Sandbox, you will need to set the Docker Engine memory to at least 12GB to run both sandboxes on one laptop.
 
 ### Step 4: Start HDF Sandbox
 
