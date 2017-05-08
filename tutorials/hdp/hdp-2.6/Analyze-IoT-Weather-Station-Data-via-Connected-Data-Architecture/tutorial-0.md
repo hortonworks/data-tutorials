@@ -31,6 +31,10 @@ By the end of this tutorial series, you will acquire the fundamental knowledge t
 
 - [IoT Weather Station Electronics List](http://a.co/8FNMlUu)
 
+## Hardware Requirements
+
+- At least 12 GB of RAM to run both HDF and HDP Sandboxes on one laptop
+
 ## Tutorial Series Overview
 
 In this tutorial, we work with barometric pressure, temperature and humidity sensor data gathered from a R-Pi using Apache MiNiFi. We transport the MiNiFi data to NiFi using Site-To-Site, then we upload the data with NiFi into HBase to perform data analytics.
