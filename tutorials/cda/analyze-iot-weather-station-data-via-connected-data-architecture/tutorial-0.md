@@ -1,3 +1,10 @@
+---
+title: Analyze IoT Weather Station Data via Connected Data Architecture
+tutorial-id: 820
+platform: hdp-2.6.0
+tags: [nifi, minifi, raspberry pi, connected data architecture, hbase, iot, weather]
+---
+
 # Analyze IoT Weather Station Data via Connected Data Architecture
 
 ## Introduction

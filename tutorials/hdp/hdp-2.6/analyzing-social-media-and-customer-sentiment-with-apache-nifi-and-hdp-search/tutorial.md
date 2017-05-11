@@ -1,7 +1,7 @@
 ---
 title: Analyzing Social Media and Customer Sentiment With Apache NiFi and HDP Search
 tutorial-id: 210
-platform: hdp-2.5.0
+platform: hdp-2.6.0
 tags: [solr, nifi, hive, ambari, zeppelin]
 ---
 
