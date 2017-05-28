@@ -13,7 +13,7 @@ tags: [sandbox, documentation]
 -   [Behavior Changes](#behavior-changes)
 -   [Known Issues](#known-issues)
 -   [Limitations](#limitations)
--   [System Informaiton](#system-information)
+-   [System Information](#system-information)
     -   [Databases Used](#databases-used)
     -   [HDP Supported Components Not Installed](#hdp-supported-components-not-installed)
     -   [Newly Added HDP Supported Packages](#newly-added-hdp-supported-packages)
@@ -59,7 +59,7 @@ This is a list of common limitations along with their workarounds.
     -   Workaround: Avoid having to suspend your virtual machine.
 
 
-## System Informaiton
+## System Information
 
 Operating System and Java versions that the Sandbox has installed.
 -   OS Version (docker container)
