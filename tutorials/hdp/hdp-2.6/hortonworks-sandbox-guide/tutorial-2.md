@@ -14,6 +14,7 @@ tags: [sandbox, documentation]
     -   [Databases Used](#databases-used)
 -   [HDF Services Started Automatically on Startup](#hdf-services-started-automatically-on-startup)
 -   [HDF Services Not Started Automatically on Startup](#hdf-services-not-started-automatically-on-startup)
+-   [Services Not Supported by HDF](#services-not-supported-by-hdf)
 -   [Further Reading](#further-reading)
 
 
@@ -83,6 +84,11 @@ Because of the limited resources avaialble in the sandbox virtual machine enviro
 -   Atlas
     -   Main - org.apache.atlas.Main
 
+## Services Not Supported by HDF
+
+Services that are not yet supported by HDF sandbox.
+
+-   Log Search
 
 ## Further Reading
 -   <https://hortonworks.com/products/data-center/hdf/>
