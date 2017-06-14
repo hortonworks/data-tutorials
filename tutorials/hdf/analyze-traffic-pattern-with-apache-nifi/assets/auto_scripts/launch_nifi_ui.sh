@@ -20,7 +20,7 @@ until [[ "$environment" == "Docker" || "$environment" == "VirtualBox" ]]; do
     case $environment in
         "Docker" )
             echo "You entered HDF Sandbox runs on: $environment"
-            ./auto_scripts/docker-scripts/docker_sandbox_hdf.sh
+            ./auto_scripts/docker-scripts/start_sandbox-hdf.sh
             ;;
         "VirtualBox" )
             echo "You entered HDF Sandbox runs on: $environment"
@@ -34,4 +34,4 @@ done
 #Access NiFi HTML UI via Mac CLI
 echo "Launch NiFi HTML UI, may take an extra 30 sec..."
 sleep 30
-open http://sandbox.hortonworks.com:19090/nifi/
+open http://sandbox-hdf.hortonworks.com:19090/nifi/

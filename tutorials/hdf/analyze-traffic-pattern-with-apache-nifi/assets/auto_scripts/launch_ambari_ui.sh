@@ -21,17 +21,17 @@ until [[ "$environment" == "Docker" || "$environment" == "VirtualBox" ]]; do
     case $environment in
         "Docker" )
             echo "You entered HDF Sandbox runs on: $environment"
-            ./auto_scripts/docker-scripts/docker_sandbox_hdf.sh
+            ./auto_scripts/docker-scripts/start_sandbox-hdf.sh
             #Access Ambari UI via Mac CLI (Port Number Docker)
             echo "Launch Ambari UI..."
-            open http://sandbox.hortonworks.com:28080/
+            open http://sandbox-hdf.hortonworks.com:9080/
             ;;
         "VirtualBox" )
             echo "You entered HDF Sandbox runs on: $environment"
             ./auto_scripts/virtualbox-scripts/virtualbox_sandbox_hdf.sh
             #Access Ambari UI via Mac CLI (Port Number VirtualBox)
             echo "Launch Ambari UI..."
-            open http://sandbox.hortonworks.com:18080/
+            open http://sandbox-hdf.hortonworks.com:9080/
             ;;
         * )
             echo "Please enter 'Docker' or 'VirtualBox'."
