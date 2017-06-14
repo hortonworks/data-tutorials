@@ -6,7 +6,8 @@ In this tutorial, you will learn how to build the Stream Analytics Manager (SAM)
 
 ## Prerequisites
 
-- Downloaded and Installed HDF 3.0 Sandbox
+- [Downloaded HDF 3.0 Sandbox](https://hortonworks.com/downloads/#sandbox)
+- [Deployed and Installed HDF 3.0 Sandbox](https://hortonworks.com/tutorial/sandbox-deployment-and-install-guide/)
 
 Download SAM Demo Dependencies onto your local machine.
 
