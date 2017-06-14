@@ -28,6 +28,7 @@ You'll make an IoT Weather Station with a Raspberry Pi and Sense HAT. Additional
 ### Steps for Embedding MiNiFi on IoT Device(Raspberry Pi)
 -   Step 1: Connect Sense HAT to Raspberry Pi
 -   Step 2: SSH into the Raspberry Pi
+    - 2.1 Install the Sense HAT Software
 -   Step 3: Install MiNiFi Java Agent onto Raspberry Pi
     - 3.1: Install OS Dependencies
 

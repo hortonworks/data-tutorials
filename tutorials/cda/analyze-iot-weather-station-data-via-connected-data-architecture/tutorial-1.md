@@ -48,6 +48,8 @@ The R-Pi is not just a platform for building IoT projects, it is a super platfor
 
 ![sense-hat-pins](assets/tutorial2/sense-hat-pins.jpg)
 
+The Sense HAT comes with an 8x8 LED Matrix, five-button joystick and the following sensors: gyroscope, accelerometer, magnetometer, temperature, barometric pressure and humidity.
+
 ### What exactly does the Sense HAT Sensor Measure?
 
 The Sense HAT sensors enable users to measure orientation via an 3D accelerometer, 3D gyroscope and 3D magnetometer combined into one chip LSM9DS1. The Sense HAT also functions to measure air pressure and temperature via barometric pressure and temperature combined into the LPS25H chip. The HAT can monitor the percentage of humidity in correlation with temperature in the air via humidity and temperature sensor HTS221. All three of the these sensors are I2C.
