@@ -88,7 +88,7 @@ sandbox-hdp /usr/sbin/sshd -D
 #fi
 
 docker exec -t sandbox-hdp make --makefile /usr/lib/hue/tools/start_scripts/start_deps.mf  -B Startup -j -i
-docker exec -t sandbox-hdp nohup su - hue -c '/bin/bash /usr/lib/tutorials/tutorials_app/run/run.sh' &>/dev/nul
+docker exec -t sandbox-hdp nohup su - hue -c '/bin/bash /usr/lib/tutorials/tutorials_app/run/run.sh' &>/dev/null
 docker exec -t sandbox-hdp touch /usr/hdp/current/oozie-server/oozie-server/work/Catalina/localhost/oozie/SESSIONS.ser
 docker exec -t sandbox-hdp chown oozie:hadoop /usr/hdp/current/oozie-server/oozie-server/work/Catalina/localhost/oozie/SESSIONS.ser
 docker exec -d sandbox-hdp /etc/init.d/tutorials start
