@@ -313,7 +313,7 @@ Your Docker HDP Sandbox Container will Start up soon.
 localhost:8080
 ~~~
 
-user is `admin`. password is what you set it up as in [Learning the Ropes of Hortonworks Sandbox: Section 2.2](https://hortonworks.com/hadoop-tutorial/learning-the-ropes-of-the-hortonworks-sandbox/#setup-ambari-admin-password)
+user is `admin`. password is what you set it up as in [Learning the Ropes of Hortonworks Sandbox: Section 2.2](https://hortonworks.com/tutorial/learning-the-ropes-of-the-hortonworks-sandbox/#setup-ambari-admin-password)
 
 3\. In the left hand side of HDP Services on the Ambari Stack, turn off Oozie and Flume with Ambari **Service Actions -> Stop** since you'll need more memory to run HBase.
 
