@@ -11,7 +11,8 @@ With the HDF Sandbox, Apache NiFi comes preinstalled in the Ambari Stack and pre
 ## Prerequisites
 -   Completed Analyze Traffic Patterns with Apache NiFi Introduction
 -   Read NiFi DataFlow Automation Concepts
--   Downloaded and installed [HDF Sandbox](https://hortonworks.com/products/sandbox/) for VMware, VirtualBox or Native Docker
+-   Downloaded [HDF Sandbox](https://hortonworks.com/products/sandbox/) for VMWare, VirtualBox or Native Docker
+-   [Installed and Deployed HDF Sandbox](https://hortonworks.com/tutorial/sandbox-deployment-and-install-guide/) for VMWare, VirtualBox or Native Docker
 
 ## Outline
 -   [Step 1: Download HDF NiFi Shell Script](#download-hdf-nifi-shell-script)
@@ -35,7 +36,7 @@ unzip auto_scripts.zip
 chmod -R 755 auto_scripts
 ~~~
 
-> Note: You will utilize these scripts throughout either section.
+> Note: The "auto_scripts" folder consists of auto scripts to launch the nifi ui and ambari ui. These scripts initialize your sandbox environment with a vehicle traffic data seed for NiFi. Additionally, these auto scripts were built with the assumption that you already deployed HDF 3.0 Sandbox on Docker or VirtualBox. Thus, there are scripts that will start the sleeping sandboxes you previously deployed. You will utilize these scripts throughout either approach.
 
 ### Approach 1: Launch NiFi HTML UI via Shell Script
 

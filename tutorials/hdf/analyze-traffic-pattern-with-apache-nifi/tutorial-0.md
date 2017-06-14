@@ -7,7 +7,7 @@ persona: Data Scientist & Analyst
 source: Hortonworks
 use case: Streaming
 technology: Apache NiFi
-release: hdf-2.1.0
+release: hdf-3.0.0
 environment: Sandbox
 product: HDF
 series: HDF > Develop with Hadoop > Hello World
@@ -36,7 +36,8 @@ The learning objectives of this tutorial are to:
 
 ## Prerequisites
 
-- Downloaded and installed [HDF Sandbox](https://hortonworks.com/products/sandbox/) for VMware, VirtualBox or Native Docker
+- Downloaded [HDF Sandbox](https://hortonworks.com/products/sandbox/) for VMware, VirtualBox or Native Docker
+- [Installed and Deployed HDF Sandbox](https://hortonworks.com/tutorial/sandbox-deployment-and-install-guide/) for VMWare, VirtualBox or Native Docker
 - For Windows 10 users, use Ubuntu bash shell
 
 ## Outline
