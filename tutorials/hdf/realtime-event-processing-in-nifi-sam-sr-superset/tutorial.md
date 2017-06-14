@@ -1,3 +1,18 @@
+---
+title: Real-Time Event Processing In NiFi, SAM, Schema Registry and SuperSet
+author: James Medel
+tutorial-id: 830
+experience: Advanced
+persona: Data Scientist & Analyst
+source: Hortonworks
+use case: Streaming
+technology: Apache NiFi, Apache Storm, Apache Kafka, SAM, Schema Registry, SuperSet, Apache Druid
+release: hdf-3.0.0
+environment: Sandbox
+product: HDF
+series: HDF > Develop with Hadoop > Real World Examples
+---
+
 # Real-Time Event Processing In NiFi, SAM, Schema Registry and SuperSet
 
 ## Introduction
