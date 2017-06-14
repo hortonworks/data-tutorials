@@ -332,19 +332,7 @@ ssh root@127.0.0.1 -p 12222
 ~~~bash
 cd /root/Data-Loader
 tar -zxvf routes.tar.gz
-nohup java -cp \
-/root/Data-Loader/stream-simulator-jar-with-dependencies.jar \
-hortonworks.hdp.refapp.trucking.simulator.SimulationRegistrySerializerRunnerApp \
-20000 \
-hortonworks.hdp.refapp.trucking.simulator.impl.domain.transport.Truck \
-hortonworks.hdp.refapp.trucking.simulator.impl.collectors.KafkaEventSerializedWithRegistryCollector \
-1 \
-/root/Data-Loader/routes/midwest/ \
-10000 \
-sandbox-hdf.hortonworks.com:6667 \
-http://sandbox-hdf.hortonworks.com:17788/api/v1 \
-ALL_STREAMS \
-NONSECURE &
+nohup java -cp /root/Data-Loader/stream-simulator-jar-with-dependencies.jar  hortonworks.hdp.refapp.trucking.simulator.SimulationRegistrySerializerRunnerApp 20000 hortonworks.hdp.refapp.trucking.simulator.impl.domain.transport.Truck  hortonworks.hdp.refapp.trucking.simulator.impl.collectors.KafkaEventSerializedWithRegistryCollector 1 /root/Data-Loader/routes/midwest/ 10000 sandbox-hdf.hortonworks.com:6667 http://sandbox-hdf.hortonworks.com:17788/api/v1 ALL_STREAMS NONSECURE &
 ~~~
 
 3\. Check the nohup.out file:
