@@ -1,0 +1,18 @@
+{
+   "type" : "record",
+   "namespace" : "hortonworks.hdp.refapp.trucking",
+   "name" : "truckgeoevent",
+   "fields" : [
+      { "name" : "eventTime" , "type" : "string" },
+      { "name" : "eventSource" , "type" : "string" },
+      { "name" : "truckId" , "type" : "int" },
+      { "name" : "driverId" , "type" : "int"},
+      { "name" : "driverName" , "type" : "string"},
+      { "name" : "routeId" , "type" : "int"},
+      { "name" : "route" , "type" : "string"},
+      { "name" : "eventType" , "type" : "string"},
+      { "name" : "latitude" , "type" : "double"},
+      { "name" : "longitude" , "type" : "double"},
+      { "name" : "correlationId" , "type" : "long"}
+   ]
+}

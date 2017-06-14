@@ -1,0 +1,15 @@
+{
+   "type" : "record",
+   "namespace" : "hortonworks.hdp.refapp.trucking",
+   "name" : "truckspeedevent",
+   "fields" : [
+      { "name" : "eventTime" , "type" : "string" },
+      { "name" : "eventSource" , "type" : "string" },
+      { "name" : "truckId" , "type" : "int" },
+      { "name" : "driverId" , "type" : "int"},
+      { "name" : "driverName" , "type" : "string"},
+      { "name" : "routeId" , "type" : "int"},
+      { "name" : "route" , "type" : "string"},
+      { "name" : "speed" , "type" : "int"}
+   ]
+}
