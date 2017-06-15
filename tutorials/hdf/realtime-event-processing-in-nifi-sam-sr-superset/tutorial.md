@@ -85,7 +85,7 @@ Once both configs have been updated, save the configuration and call it: "update
 - [Step 7: Create a SuperSet Dashboard with Slices](#step7)
 - [Summary](#summary)
 - [Further Reading](#further-reading)
-- [Appendix: Troubleshoot Real-time Event Processing Demo](appendix)
+- [Appendix: Troubleshoot Real-time Event Processing Demo](#appendix)
 
 ### Concepts
 
