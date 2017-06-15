@@ -14,7 +14,7 @@ In this tutorial, you will learn how to build the Stream Analytics Manager (SAM)
 
 - [Downloaded HDF 3.0 Sandbox](https://hortonworks.com/downloads/#sandbox)
 - [Deployed and Installed HDF 3.0 Sandbox](https://hortonworks.com/tutorial/sandbox-deployment-and-install-guide/)
-- 4 cores/ 8GB RAM
+- 4 cores/ 8GB RAM for the VM or Container environment
 - If you are using Windows OS version below 10, then download [Git Bash](https://git-scm.com/downloads) and all shell commands should be universal.
 
 1\. Open Notepad as an administrator. Open the "hosts" file at this path: `c:\Windows\System32\drivers\etc\hosts` and add:

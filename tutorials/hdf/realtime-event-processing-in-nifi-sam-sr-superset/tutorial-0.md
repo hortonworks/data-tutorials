@@ -26,6 +26,7 @@ In this tutorial, you will learn how to build the Stream Analytics Manager (SAM)
 
 - [Downloaded HDF 3.0 Sandbox](https://hortonworks.com/downloads/#sandbox)
 - [Deployed and Installed HDF 3.0 Sandbox](https://hortonworks.com/tutorial/sandbox-deployment-and-install-guide/)
+- 4 cores/ 8GB RAM for the VM or Container environment
 
 1\. On your local machine, update the `/private/etc/hosts` file with the following value: `sandbox-hdf.hortonworks.com` and remove the "#" hash symbol:
 
