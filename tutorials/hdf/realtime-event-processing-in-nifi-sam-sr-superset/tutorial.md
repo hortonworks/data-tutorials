@@ -27,16 +27,20 @@ In this tutorial, you will learn how to build the Stream Analytics Manager (SAM)
 Download SAM Demo Dependencies onto your local machine.
 
 ~~~bash
-cd /tmp
-wget https://raw.githubusercontent.com/georgevetticaden/hdp/master/reference-apps/iot-trucking-app/trucking-data-simulator/src/main/resources/schema/truck-geo-event-log.avsc -O truck-geo-event-log.avsc
-wget https://raw.githubusercontent.com/georgevetticaden/hdp/master/reference-apps/iot-trucking-app/trucking-data-simulator/src/main/resources/schema/truck-speed-event-log.avsc -O truck-speed-event-log.avsc
-wget https://raw.githubusercontent.com/georgevetticaden/hdp/master/reference-apps/iot-trucking-app/trucking-data-simulator/src/main/resources/schema/truck-geo-event-kafka.avsc -O truck-geo-event-kafka.avsc
-wget https://raw.githubusercontent.com/georgevetticaden/hdp/master/reference-apps/iot-trucking-app/trucking-data-simulator/src/main/resources/schema/truck-speed-event-kafka.avsc -O truck-speed-event-kafka.avsc
+cd ~/Downloads
+wget https://github.com/hortonworks/data-tutorials/raw/master/tutorials/hdf/realtime-event-processing-in-nifi-sam-sr-superset/assets/templates.zip
+unzip templates.zip
 ~~~
+
+This templates folder includes the NiFi flow, SAM topology, SAM custom UDF and Schemas for Schema Registry.
 
 **Setup HDF to Run SAM Demo**
 
-1\. SSH into the HDF sandbox. Then run the command to reset the data in mysql for SAM:
+1\. Login to the Ambari UI at `http://sandbox-hdf.hortonworks.com:9080` using `admin/admin`.
+
+2\. In the left hand sidebar, select "Streaming Analytics Manager (SAM)," Summary tab appears, click on "Service Actions", click on the "Start" button and turn off "maintenance mode".
+
+3\. Open your terminal on your host machine. SSH into the HDF sandbox. The "bootstrap-storage.sh drop-create" command resets the tables in mysql to store SAM metadata. "bootstrap.sh pulls" creates SAM (streamline) default components, notifiers, udfs and roles. Run the commands:
 
 ~~~bash
 ssh root@localhost -p 12222
@@ -45,27 +49,29 @@ cd /usr/hdf/current/streamline
 ./bootstrap/bootstrap.sh
 ~~~
 
-2\. Login to the Ambari UI at `http://sandbox-hdf.hortonworks.com:9080` using `admin/admin`.
-
-3\. Go to SAM Service in the the left hand sidebar of Ambari Dashboard. Then
-click on "Config" -> "Streamline Config". Change "registry.url" to
+4\. Go to SAM Service in the the left hand sidebar of Ambari Dashboard. Then
+click on "Config" -> "Streamline Config". Search "registry.url" in the filter box, then enter "registry.url" field:
 `http://sandbox-hdf.hortonworks.com:17788/api/v1`.
 
 ![sam_registry_url](assets/images/setup/sam_registry_url.png)
 
-4\. Go to Druid Service, "Config", "Advanced", then in the search box, type **druid.indexer.logs.directory**. Update this config with `/home/druid/logs`.
+Then save the configuration and call it "updated registry.url". Restart SAM service.
+
+5\. Go to Druid Service, "Config", "Advanced" to update directories, so Druid can write to them. In the search box, type **druid.indexer.logs.directory**. Update this config with `/home/druid/logs`.
 
 ![druid_indexer_logs_directory](assets/images/setup/druid_indexer_logs_directory.png)
 
-5\. Now search for **druid.storage.storageDirectory** and update the config with `/home/druid/data`.
+6\. Search for **druid.storage.storageDirectory** and update the config with `/home/druid/data`.
 
 ![druid_storage_storageDirectory](assets/images/setup/druid_storage_storageDirectory.png)
 
-6\. The left hand sidebar lists all services available in HDF 3.0 Stack. Choose HDFS. In the Summary window, select "Service Actions" dropdown, click "Start".
+Once both configs have been updated, save the configuration and call it: "updated directories, so druid can write to them".
+
+7\. From the left hand sidebar, choose HDFS and start the service like you did with SAM earlier.
 
 ![start_hdfs_service](assets/images/setup/start_hdfs_service.png)
 
-7\. Restart **Storm, Druid, Registry** and **Streaming Analytics Manager (SAM)** the same way you started HDFS.
+8\. Start **Storm, Ambari Metrics, Kafka, Druid, Registry** and **Streaming Analytics Manager (SAM)** the same way you started HDFS.
 
 ## Outline
 
@@ -79,11 +85,7 @@ click on "Config" -> "Streamline Config". Change "registry.url" to
 - [Step 7: Create a SuperSet Dashboard with Slices](#step7)
 - [Summary](#summary)
 - [Further Reading](#further-reading)
-- [Appendix A: Shutdown the SAM Application](#appendix-a)
-- [Appendix B: Create Kafka Topics if they Didn't Exist](#appendix-b)
-- [Appendix C: Troubleshoot NiFi Flow Process Group Use Case 1](#appendix-c)
-- [Appendix D: Add Notification Sink to SAM Topology](#appendix-d)
-- [Appendix E: Add SAM Demo Extensions](#appendix-e)
+- [Appendix: Troubleshoot Real-time Event Processing Demo](appendix)
 
 ### Concepts
 
@@ -103,7 +105,9 @@ Stream Analytics Manager is a drag and drop program that enables stream processi
 
 Schema Registry (SR) stores and retrieves Avro Schemas via RESTful interface. SR stores a version history containing all schemas. Serializers are provided to plug into Kafka clients that are responsible for schema storage and retrieve Kafka messages sent in Avro format.
 
-### Step 1: Add MAPBox API Key to Druid Service
+### Step 1: Add MapBox API Key to Druid Service
+
+Mapbox is a service that allows you to create map visualizations of the data and we will use it in SuperSet. In order to use Mapbox’s map visualization feature in SuperSet, you need to add the MapBox API Key as a Druid Configuration.
 
 1\. To get the API key, go to `mapbox.com`, create an account. Then you will
 select Mapbox Studio -> "My Access Tokens" -> "Create a new token" -> name it
@@ -136,7 +140,7 @@ and this property will appear. Update the **MAPBOX_API_KEY** with the one you ob
 
 ### Step 2: Check Kafka Truck Topics Are Created
 
-1\. SSH into your HDF 3.0 Sandbox.
+1\. Switch to user hdfs and create directories and give permissions to all users, so SAM can write data to all those directories.
 
 ~~~bash
 su hdfs
@@ -165,9 +169,14 @@ Access Schema Registry at `sandbox-hdf.hortonworks.com:17788` or through Ambari 
 | Group | truck-sensors-kafka |
 | Browse File | raw-truck_events_avro.avsc |
 
-Once the schema information fields have been filled and template uploaded, click Save.
+**Browse File**: go into the "templates" folder downloaded from earlier and it will have all the Schema templates in the "Schema" folder.
+
+Once the schema information fields have been filled and template uploaded, click **Save**.
 
 ![raw_truck_events_avro](assets/images/step3_registry/raw_truck_events_avro.png)
+
+> Note: Groups are like logical group. A way for app developers to pull Schema from the same overall schema registry and group them under a name related to their project.
+
 
 3\. Add the **second new schema** with the information from **Table 2**.
 
@@ -180,7 +189,7 @@ Once the schema information fields have been filled and template uploaded, click
 | Group | truck-sensors-kafka |
 | Browse File | raw-truck_speed_events_avro.avsc |
 
-Once the schema information fields have been filled and template uploaded, click Save.
+Once the schema information fields have been filled and template uploaded, click **Save**.
 
 ![raw-truck_speed_events_avro](assets/images/step3_registry/raw-truck_speed_events_avro.png)
 
@@ -195,7 +204,7 @@ Once the schema information fields have been filled and template uploaded, click
 | Group | truck-sensors-kafka |
 | Browse File | truck_events_avro.avsc |
 
-Once the schema information fields have been filled and template uploaded, click Save.
+Once the schema information fields have been filled and template uploaded, click **Save**.
 
 ![truck_events_avro](assets/images/step3_registry/truck_events_avro.png)
 
@@ -212,13 +221,13 @@ Once the schema information fields have been filled and template uploaded, click
 
 ![truck_speed_events_avro](assets/images/step3_registry/truck_speed_events_avro.png)
 
-Click Save.
+Click **Save**.
 
 ### Step 4: Deploy NiFi Flow to GeoEnrich Kafka Data
 
 1\. Launch NiFi "Quick Link" from Ambari NiFi Service Summary window or open NiFi UI at `http://sandbox-hdf.hortonworks.com:19090/nifi`.
 
-2\. Use NiFi upload template button in the "Operate panel" to upload `Nifi_and_Schema_Registry_Integration.xml`.
+2\. Use NiFi upload template button in the "Operate panel" to upload `Nifi_and_Schema_Registry_Integration.xml` found in the "templates" -> "nifi" folder downloaded from earlier.
 
 ![upload_nifi_template](assets/images/step4_nifi/upload_nifi_template.png)
 
@@ -226,7 +235,15 @@ Click Save.
 
 ![template_of_nifi_flow_use_case1](assets/images/step4_nifi/template_of_nifi_flow_use_case1.png)
 
-4\. Go back out to the root level of the NiFi canvas. Start the NiFi flow. Right click on "Use Case 1" Process Group and select "Start". It won't start populating with data until the "Data-Loader" executes.
+4\. Click on the gear in the left corner of the "Operate panel", then open the "Controller Services" tab.
+
+5\. Check "HWX Schema Registry" service. Verify the Schema Registry REST API URL points to the appropriate Schema Registry port running on your HDF 3.0 Sandbox. It should be `http://sandbox-hdf.hortonworks.com:17788/api/v1`.
+
+6\. Verify the "HWX Schema Registry" service is enabled. Verify all other referencing services dependent on "HWX Schema Registry" are enabled. If they are not enabled as shown below, click on the **Lightning Bolt** symbol to enable them.
+
+![nifi_controller_services](assets/images/step4_nifi/nifi_controller_services.png)
+
+7\. From the root level of the NiFi flow as can be seen in the bottom left corner "NiFi Flow", **Start the NiFi flow**. Right click on "Use Case 1" Process Group and select "Start". It won't start populating with data until the "Data-Loader" executes.
 
 ![start_nifi_flow_pg_uc1](assets/images/step4_nifi/start_nifi_flow_pg_uc1.png)
 
@@ -282,6 +299,8 @@ values in the "ADD UDF" window fields in regards to the table below, then click 
 | Classname   | hortonworks.hdf.sam.custom.udf.math.Round    |
 | UDF JAR  | sam-custom-udf-0.0.5.jar    |
 
+> Note: The UDF JAR can be found in the "templates" folder inside the "sam" folder downloaded from earlier.
+
 - **ADD New UDF**
 
 ![add_udf_round](assets/images/step5_sam/add_udf_round.png)
@@ -292,24 +311,24 @@ values in the "ADD UDF" window fields in regards to the table below, then click 
 
 Press the SAM logo to return to the "My Application" page.
 
-8\. Click the "+" button to add a new application. Select "Import Application". Choose "IOT-Trucking-Ref-App.json" template from the SAM Demo Bundle.
+8\. Click the "+" button to add a new application. Select "Import Application". Choose "IOT-Trucking-Ref-App.json" template from the "sam" folder.
 
 - Application Name: `IOT-Trucking-Demo`
 - Environment: HDF3_Docker_Sandbox
 
-Click OK.
+Click **OK**.
 
 ![iot-trucking-demo](assets/images/step5_sam/iot-trucking-demo.png)
 
-9\. From the SAM topology that appears on the canvas, edit both Kafka Sinks. Double click each one, then for "Security Protocol" select "PLAINTEXT". The Kafka Broker URL should update to `sandbox-hdf.hortonworks.com:6667`.
+9\. From the SAM topology that appears on the canvas, verify both Kafka Sinks. Double click each one, then for "Security Protocol", verify "PLAINTEXT" is selected. The Kafka Broker URL should point to `sandbox-hdf.hortonworks.com:6667`.
 
 ![kafka_sinks_edit_broker_url](assets/images/step5_sam/kafka_sinks_edit_broker_url.png)
 
-10\. Edit the Druid Sinks and verify the ZOOKEEPER CONNECT STRING URL is set to `sandbox-hdf.hortonworks.com:2181`, else update it.
+10\. Verify the Druid Sinks and verify the ZOOKEEPER CONNECT STRING URL is set to `sandbox-hdf.hortonworks.com:2181`, else update it.
 
 ![verify_druid_url](assets/images/step5_sam/verify_druid_url.png)
 
-11\. Click Run icon in Bottom Right corner to deploy the SAM topology.
+11\. Click **Run** icon in Bottom Right corner to deploy the SAM topology.
 
 ![run_the_sam_app](assets/images/step5_sam/run_the_sam_app.png)
 
@@ -321,38 +340,35 @@ It should show the demo deployed successfully.
 
 ### Step 6: Execute Data-Loader on the App
 
-1\. SSH into the sandbox:
+1\. Exit from hdfs user, and then execute the Data-Loader to generate data and transport to the Kafka Topics.
 
 ~~~bash
-ssh root@127.0.0.1 -p 12222
-~~~
-
-2\. Run the following commands. Execute the Data-Loader to generate data and transport to the Kafka Topics.
-
-~~~bash
+exit
 cd /root/Data-Loader
 tar -zxvf routes.tar.gz
 nohup java -cp /root/Data-Loader/stream-simulator-jar-with-dependencies.jar  hortonworks.hdp.refapp.trucking.simulator.SimulationRegistrySerializerRunnerApp 20000 hortonworks.hdp.refapp.trucking.simulator.impl.domain.transport.Truck  hortonworks.hdp.refapp.trucking.simulator.impl.collectors.KafkaEventSerializedWithRegistryCollector 1 /root/Data-Loader/routes/midwest/ 10000 sandbox-hdf.hortonworks.com:6667 http://sandbox-hdf.hortonworks.com:17788/api/v1 ALL_STREAMS NONSECURE &
 ~~~
 
-3\. Check the nohup.out file:
+By running the Data-Loader, data is persisted to the Kafka Topics, which NiFi and SAM pull data from.
+
+2\. Check the nohup.out file is populated with data:
 
 ![data-loader-output](assets/images/step6_data_loader/data-loader-output.png)
 
 ### 6.1 Verify Data Flow and Stream Processes the Data
 
-4\. Head back to the NiFi UI. It should be pulling in Truck Events from the Kafka Consumers, else you did something wrong previously.
+3\. Head back to the NiFi UI. It should be pulling in Truck Events from the Kafka Consumers, else you did something wrong previously.
 
 ![nifi_pg_data_flows](assets/images/step6_data_loader/nifi_pg_data_flows.png)
 
-5\. Head back to the SAM UI, go to the root level of SAM by clicking on the SAM
-logo. It will ask if you want to navigate away from the page, click OK. Then it
+4\. Head back to the SAM UI, go to the **root level of SAM** by clicking on the **SAM
+logo** in the top left corner. It will ask if you want to navigate away from the page, click **OK**. Then it
 should provide an overview of the application. To see a more detailed view of
 the app, click on the app.
 
 ![overview_sam_app](assets/images/step6_data_loader/overview_sam_app.png)
 
-6\. Click on the Storm Monitor and verify storm is processing tuples.
+5\. Click on the Storm Monitor and verify storm is processing tuples.
 
 ![storm_process_data](assets/images/step6_data_loader/storm_process_data.png)
 
@@ -360,9 +376,9 @@ the app, click on the app.
 
 1\. From Ambari dashboard, click on Druid service, then press the "Quick Links" dropdown and select SuperSet.
 
-2\. login credentials are admin / hadoophadoop.
+2\. If you aren't logged in by default, login credentials are `admin / hadoophadoop`.
 
-3\. Click on "Sources," then "Refresh Druid Metadata." The two Data Sources created by the SAM topology should appear.
+3\. Click on "Sources," then "Refresh Druid Metadata." The two Data Sources created by the SAM topology should appear within 25 minutes.
 
 ![druid_datasource_appears](assets/images/step7_druid/druid_datasource_appears.png)
 
@@ -384,7 +400,7 @@ type to `Sunburst`.
 
 3\. Set Hierarchy to `driverName, eventType`
 
-4\. Run Query by pressing the "green query button" at the top left, check output
+4\. Run Query by pressing the "green query button" at the top left, check output. The Sunburst visualization takes 18.49 seconds.
 
 5\. Click the Save as button and save with name `DriverViolationsSunburst` and add to new Dashboard `TruckDriverMonitoring`
 
@@ -394,7 +410,7 @@ type to `Sunburst`.
 
 1\. For "Table View", choose `Mapbox`.
 
-2\. Keep previous configs for Time.
+2\. Keep previous configs for **Time**.
 
 2\. Change "Longitude" and "Latitude" to their namesake variables (Longitude and Latitude)
 
@@ -443,6 +459,8 @@ Congratulations! You deployed the SAM demo that processes truck event data by us
 - [Druid](http://druid.io/docs/latest/design/index.html)
 - [Schema Registry](http://docs.confluent.io/current/schema-registry/docs/index.html)
 
+Appendix: Troubleshoot Real-time Event Processing Demo
+
 ### Appendix A: Shutdown the SAM Application
 
 1\. kill the data-loader
@@ -484,21 +502,7 @@ sudo su -
 /usr/hdp/current/kafka-broker/bin/kafka-topics.sh --create --if-not-exists --zookeeper sandbox-hdf.hortonworks.com:2181 --replication-factor 1 --partition 1 --topic truck_speed_events_avro
 ~~~
 
-### Appendix C: Troubleshoot NiFi Flow Process Group Use Case 1
-
-1\. Click on the gear in the left corner of the "Operate panel", then open the "Controller Services" tab.
-
-2\. Check "HWX Schema Registry" service. Verify the Schema Registry REST API URL points to the appropriate Schema Registry port running on your HDF 3.0 Sandbox. It should be `http://sandbox-hdf.hortonworks.com:17788/api/v1`.
-
-3\. Verify the "HWX Schema Registry" service is enabled. Verify all other referencing services dependent on "HWX Schema Registry" are enabled.
-
-![nifi_controller_services](assets/images/step4_nifi/nifi_controller_services.png)
-
-4\. Enter Process Group (PG) "Use Case 1". Verify the KafkaPublisher processor property "Kafka Broker" value targets the correct "host:port" for HDF 3.0 Sandbox `http://sandbox-hdf.hortonworks.com:16667`
-
-5\. Enter PG "Acquire Events", Verify the two "KafkaConsumer" processors have their "Kafka Broker" property values target the correct "host:port" for HDF 3.0 Sandbox `http://sandbox-hdf.hortonworks.com:16667`.
-
-### Appendix D: Add Notification Sink to SAM Topology
+### Appendix C: Add Notification Sink to SAM Topology
 
 1\. In the left hand side bar of processor, scroll to the Notification Sink.
 Drag replacement Notification Sink and connect it to the topology. Accept the
@@ -524,7 +528,7 @@ default connections.
 | Subject       | Driver Violation      |
 | Message       | Driver ${driverName} is speeding at ${speed_AVG} mph over the last 3 minutes      |
 
-### Appendix E: Add SAM Demo Extensions
+### Appendix D: Add SAM Demo Extensions
 
 The SAM Demo Extension comes with custom processors and UDFs. You will be able to incorporate these components into your topology by adding them in "Application Resources" -> "Custom Processor" or "UDF".
 
