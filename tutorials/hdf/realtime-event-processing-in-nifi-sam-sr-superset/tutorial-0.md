@@ -15,18 +15,24 @@ series: HDF > Develop with Hadoop > Real World Examples
 
 # Real-Time Event Processing In NiFi, SAM, Schema Registry and SuperSet
 
+> This tutorial is tailored for the MAC and Linux OS user.
+
 ## Introduction
 
 In this tutorial, you will learn how to build the Stream Analytics Manager (SAM) Topology in visual canvas. You will create schemas in the Schema Registry, which SAM and NiFi rely on to pull data into the flow. Once SAM Topology is deployed, you will learn to create different visualization slices with SuperSet running on top of Druid.
-
-This tutorial is tailored for the MAC and Linux OS user.
 
 ## Prerequisites
 
 - [Downloaded HDF 3.0 Sandbox](https://hortonworks.com/downloads/#sandbox)
 - [Deployed and Installed HDF 3.0 Sandbox](https://hortonworks.com/tutorial/sandbox-deployment-and-install-guide/)
 
-Download SAM Demo Dependencies onto your local machine.
+1\. On your local machine, update the `/private/etc/hosts` file with the following value: `sandbox-hdf.hortonworks.com` and remove the "#" hash symbol:
+
+~~~bash
+127.0.0.1   localhost   sandbox-hdf.hortonworks.com
+~~~
+
+2\. Download SAM Demo Dependencies onto your local machine.
 
 ~~~bash
 cd ~/Downloads
