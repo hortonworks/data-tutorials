@@ -19,6 +19,8 @@ series: HDF > Develop with Hadoop > Real World Examples
 
 In this tutorial, you will learn how to build the Stream Analytics Manager (SAM) Topology in visual canvas. You will create schemas in the Schema Registry, which SAM and NiFi rely on to pull data into the flow. Once SAM Topology is deployed, you will learn to create different visualization slices with SuperSet running on top of Druid.
 
+This tutorial is tailored for the MAC and Linux OS user.
+
 ## Prerequisites
 
 - [Downloaded HDF 3.0 Sandbox](https://hortonworks.com/downloads/#sandbox)
