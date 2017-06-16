@@ -55,7 +55,7 @@ Finally, we will use [Apache Zeppelin](https://hortonworks.com/hadoop/zeppelin/)
 
 ## Install Apache Nifi <a id="install-apache-nifi"></a>
 
-The first thing you're going to need if you haven't done it already is install the Apache Nifi service on your Sandbox. Follow the [Set up Nifi Environment section](https://hortonworks.com/tutorial/learning-ropes-apache-nifi/#section_3) of [Analyze Traffic Pattern with Apache Nifi](https://hortonworks.com/tutorial/learning-ropes-apache-nifi/).
+The first thing you're going to need if you haven't done it already is install the Apache NiFi service on your Sandbox. Click on **Actions** button in the left sidebar on the Ambari Dashboard. Click on **Add Service**. Then from the list of services, choose **NiFi**. Then click next, and continue clicking next until you reach the page where a progress bar shows NiFi is being installed. If recommended configurations are not set, you can ignore them since they are for a production cluster, but we are building a demo on a sandbox. You should see NiFi installed successfully.
 
 ## Configure and Start Solr <a id="configure-and-start-solr"></a>
 
