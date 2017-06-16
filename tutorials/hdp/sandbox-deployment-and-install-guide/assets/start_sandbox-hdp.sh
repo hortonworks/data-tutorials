@@ -5,7 +5,7 @@
 #if [ $? -eq 0 ]; then
 # /usr/bin/docker start sandbox
 #else
-docker run -v hadoop:/hadoop --name sandbox-hdp --hostname "sandbox.hortonworks.com" --privileged -d \
+docker run --name sandbox-hdp --hostname "sandbox.hortonworks.com" --privileged -d \
 -p 1111:111 \
 -p 1000:1000 \
 -p 1100:1100 \
@@ -88,11 +88,7 @@ sandbox-hdp /usr/sbin/sshd -D
 #fi
 
 docker exec -t sandbox-hdp make --makefile /usr/lib/hue/tools/start_scripts/start_deps.mf  -B Startup -j -i
-<<<<<<< HEAD:tutorials/hdp/hdp-2.6/sandbox-deployment-and-install-guide/assets/start_sandbox-hdp.sh
 docker exec -t sandbox-hdp nohup su - hue -c '/bin/bash /usr/lib/tutorials/tutorials_app/run/run.sh' &>/dev/null
-=======
-docker exec -t sandbox-hdp nohup su - hue -c '/bin/bash/usr/lib/tutorials/tutorials_app/run/run.sh' &>/dev/null
->>>>>>> hortonworks/master:tutorials/hdp/sandbox-deployment-and-install-guide/assets/start_sandbox-hdp.sh
 docker exec -t sandbox-hdp touch /usr/hdp/current/oozie-server/oozie-server/work/Catalina/localhost/oozie/SESSIONS.ser
 docker exec -t sandbox-hdp chown oozie:hadoop /usr/hdp/current/oozie-server/oozie-server/work/Catalina/localhost/oozie/SESSIONS.ser
 docker exec -d sandbox-hdp /etc/init.d/tutorials start
