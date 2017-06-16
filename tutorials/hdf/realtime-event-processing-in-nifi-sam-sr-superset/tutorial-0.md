@@ -16,7 +16,7 @@ series: HDF > Develop with Hadoop > Real World Examples
 
 # Real-Time Event Processing In NiFi, SAM, Schema Registry and SuperSet (Mac/Linux)
 
-> This tutorial is tailored for the MAC and Linux OS user.
+> This tutorial is tailored for the **MAC and Linux OS user**.
 
 ## Introduction
 
@@ -321,7 +321,7 @@ values in the "ADD UDF" window fields in regards to the table below, then click 
 
 Press the SAM logo to return to the "My Application" page.
 
-8\. Click the "+" button to add a new application. Select "Import Application". Choose "IOT-Trucking-Ref-App.json" template from the "sam" folder.
+8\. Click the "+" button to add a new application. Select "Import Application". Choose "IOT-Trucking-Demo.json" template from the "sam" folder.
 
 - Application Name: `IOT-Trucking-Demo`
 - Environment: HDF3_Docker_Sandbox
