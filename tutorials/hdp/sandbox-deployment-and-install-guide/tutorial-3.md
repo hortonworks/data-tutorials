@@ -103,6 +103,17 @@ Download one of the following scripts and save it somewhere on your computer.
 -   For Linux/Mac: Use this [start_sandbox-hdf.sh](assets/start_sandbox-hdf.sh)
 -   For Windows: Use this [start_sandbox-hdf.ps1](assets/start_sandbox-hdf.ps1)
 
+For HDF 3.0 users, change the Docker Image name to "sandbox-hdf":
+
+~~~
+docker tag [IMAGE-ID] sandbox-hdf
+~~~
+
+Untag the previous docker REPOSITORY called sandbox:
+
+~~~
+docker rmi sandbox
+~~~
 
 Run the script you just downloaded.  It will start the sandbox for you, creating the sandbox docker container in the process if neceesary.
 
