@@ -90,6 +90,15 @@ docker exec -d sandbox-hdf /root/start_sandbox.sh | Out-Host
 docker exec -d sandbox-hdf /etc/init.d/tutorials start | Out-Host
 docker exec -d sandbox-hdf /etc/init.d/shellinaboxd start | Out-Host
 
+docker exec -d sandbox-hdf service mysqld start | Out-Host
+docker exec -d sandbox-hdf service postgresql start | Out-Host
+docker exec -t sandbox-hdf ambari-server start | Out-Host
+docker exec -t sandbox-hdf ambari-agent start | Out-Host
+docker exec -t sandbox-hdf  /bin/sh -c ' until curl -u admin:admin -H "X-Requested-By:ambari" -i -X GET  http://localhost:8080/api/v1/clusters/Sandbox/hosts/sandbox-hdf.hortonworks.com/host_components/ZOOKEEPER_SERVER | grep state | grep -v desired | grep INSTALLED; do sleep 1; done; sleep 10' | Out-Host
+docker exec -d sandbox-hdf /root/start_sandbox.sh | Out-Host
+docker exec -d sandbox-hdf /etc/init.d/tutorials start | Out-Host
+docker exec -d sandbox-hdf /etc/init.d/shellinaboxd start | Out-Host
+
 Write-Host "HDF Sandbox is good to do.  Press any key to continue..."
 $x = $host.UI.RawUI.ReadKey("NoEcho,IncludeKeyDown")
 
