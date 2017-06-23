@@ -109,7 +109,7 @@ For HDF 3.0 users, change the Docker Image name to "sandbox-hdf":
 docker tag [IMAGE-ID] sandbox-hdf
 ~~~
 
-Untag the previous docker REPOSITORY called sandbox:
+Untag the previous docker REPOSITORY called "sandbox":
 
 ~~~
 docker rmi sandbox
