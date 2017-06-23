@@ -82,13 +82,6 @@ Else {
 Write-Host "Starting processes on the HDF Sandbox..."
 
 docker exec -d sandbox-hdf service mysqld start | Out-Host
-docker exec -d sandbox-hdf service ambari-server start |  Out-Host
-docker exec -d sandbox-hdf service ambari-agent start | Out-Host
-docker exec -d sandbox-hdf /root/start_sandbox.sh | Out-Host
-docker exec -d sandbox-hdf /etc/init.d/shellinaboxd start | Out-Host
-docker exec -d sandbox-hdf /etc/init.d/tutorials start | Out-Host
-
-docker exec -d sandbox-hdf service mysqld start | Out-Host
 docker exec -d sandbox-hdf service postgresql start | Out-Host
 docker exec -t sandbox-hdf ambari-server start | Out-Host
 docker exec -t sandbox-hdf ambari-agent start | Out-Host
