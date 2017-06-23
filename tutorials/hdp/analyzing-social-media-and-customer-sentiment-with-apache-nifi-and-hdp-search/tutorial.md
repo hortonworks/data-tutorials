@@ -39,7 +39,7 @@ Finally, we will use [Apache Zeppelin](https://hortonworks.com/hadoop/zeppelin/)
 
 - Downloaded and Installed the [Hortonworks Sandbox with HDP](https://hortonworks.com/hdp/downloads/)
 - [Learning the Ropes of the Hortonworks Sandbox](https://hortonworks.com/tutorial/learning-the-ropes-of-the-hortonworks-sandbox/)
-- [Deploying Hortonworks Sandbox on Microsoft Azure](https://hortonworks.com/tutorial/deploying-hortonworks-sandbox-on-microsoft-azure/)
+- [Deploying Hortonworks Sandbox on Microsoft Azure](https://hortonworks.com/tutorial/sandbox-deployment-and-install-guide/section/4/)
 
 ## Outline
 
@@ -709,7 +709,6 @@ Using this data you can determine how you might want to market your products to 
 ## Further Reading
 
 - [NiFi blogs](https://hortonworks.com/blog/category/nifi/)
-- [Indexing and Searching Documents with Apache Solr](https://hortonworks.com/tutorial/searching-data-solr/)
 - [Introduction to Data Science with Apache Zeppelin](https://hortonworks.com/blog/introduction-to-data-science-with-apache-spark/)
 - [Hortonworks Community Connection](https://hortonworks.com/community/)
 - [HDP Sandbox & Learning Forum](https://community.hortonworks.com/spaces/81/index.html)

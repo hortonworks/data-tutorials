@@ -18,12 +18,12 @@ series: HDP > Develop with Hadoop > Apache Spark
 
 ## Introduction
 
-This is the third tutorial in a series about building and deploying machine learning models with Apache Nifi and Spark. In [Part 1](https://hortonworks.com/tutorial/how-to-refine-and-visualize-sentiment-data/) of the series we learned how to use Nifi to ingest and store Twitter Streams. In [Part 2](https://hortonworks.com/tutorial/sentiment-analysis-apache-spark/) we ran Spark from a Zeppelin notebook to design a machine learning model that classified tweets as happy or sad. In this tutorial we'll combine our results from Part 1 and Part 2 to stream tweets and perform sentiment analysis in real-time. To accomplish this we're going to build a Spark Streaming program which will deploy our model.
+This is the third tutorial in a series about building and deploying machine learning models with Apache Nifi and Spark. In [Part 1](https://hortonworks.com/tutorial/analyzing-social-media-and-customer-sentiment-with-apache-nifi-and-hdp-search/) of the series we learned how to use Nifi to ingest and store Twitter Streams. In [Part 2](https://hortonworks.com/tutorial/sentiment-analysis-with-apache-spark/) we ran Spark from a Zeppelin notebook to design a machine learning model that classified tweets as happy or sad. In this tutorial we'll combine our results from Part 1 and Part 2 to stream tweets and perform sentiment analysis in real-time. To accomplish this we're going to build a Spark Streaming program which will deploy our model.
 
 ## Prerequisites
 
 -   [Install the Hortonworks Sandbox](https://hortonworks.com/downloads/)
--   Complete [Part 1](https://hortonworks.com/tutorial/how-to-refine-and-visualize-sentiment-data/) and [Part 2](https://hortonworks.com/tutorial/sentiment-analysis-apache-spark/) of the tutorial
+-   Complete [Part 1](https://hortonworks.com/tutorial/analyzing-social-media-and-customer-sentiment-with-apache-nifi-and-hdp-search/) and [Part 2](https://hortonworks.com/tutorial/sentiment-analysis-with-apache-spark/) of the tutorial
 
 
 ## Outline
@@ -48,7 +48,7 @@ Next, we'll need a way to connect Nifi to Spark. While we could connect Nifi to 
 
 ## Configuring Nifi
 
-Let's start by configuring Nifi to stream tweets to Kafka. Download the Nifi template [here](https://github.com/hortonworks/data-tutorials/tree/master/tutorials/hdp/hdp-2.6/deploying-machine-learning-models-using-spark-structured-streaming/assets/nifi.xml) and load it into Nifi by clicking on the upload template button. Then drag the template icon onto the canvas and select NifiToSpark. Your Nifi canvas should look like this:
+Let's start by configuring Nifi to stream tweets to Kafka. Download the Nifi template [here](assets/nifi.xml) and load it into Nifi by clicking on the upload template button. Then drag the template icon onto the canvas and select NifiToSpark. Your Nifi canvas should look like this:
 
 ![Nifi2](assets/nifi2.png)
 
@@ -187,6 +187,4 @@ You'll then be able to see a sentiment score for each tweet, where 1 indicates h
 
 ## Summary
 
-In this series of tutorials you've now seen how to ingest data using Nifi, how to build a machine learning model using Spark and Zeppelin, and how to deploy models into production using Spark Streaming. You've also learned how to use Kafka, and how to compile code using SBT and deploy it to a cluster. Now that you're ready to build sophisticated Spark programs, you may be interested in [this](https://hortonworks.com/tutorial/setting-spark-development-environment-scala/) guide about debugging Spark jobs from an IDE.
-
-Tutorial By Greg Womack (Twitter: @gregw134)
+In this series of tutorials you've now seen how to ingest data using Nifi, how to build a machine learning model using Spark and Zeppelin, and how to deploy models into production using Spark Streaming. You've also learned how to use Kafka, and how to compile code using SBT and deploy it to a cluster. Now that you're ready to build sophisticated Spark programs, you may be interested in [this](https://hortonworks.com/tutorial/configuring-a-spark-development-environment-with-scala/) guide about debugging Spark jobs from an IDE.

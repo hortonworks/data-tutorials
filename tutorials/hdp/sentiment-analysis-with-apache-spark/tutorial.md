@@ -27,7 +27,7 @@ You can follow this tutorial by running the accompanying [Zeppelin notebook](ass
 Before starting this model you should make sure HDFS and Spark2 are started.
 
 -   Download and install [Hortonworks Sandbox 2.6](https://hortonworks.com/downloads/)
--   (Optional) Complete the Sentiment Analysis [Part I Tutorial](https://hortonworks.com/tutorial/how-to-refine-and-visualize-sentiment-data/)
+-   (Optional) Complete the Sentiment Analysis [Part I Tutorial](https://hortonworks.com/tutorial/analyzing-social-media-and-customer-sentiment-with-apache-nifi-and-hdp-search/)
 -   Start HDFS and Spark2 on your Hortonworks Sandbox
 
 
@@ -45,7 +45,7 @@ Before starting this model you should make sure HDFS and Spark2 are started.
 
 Gradient Boosting is a supervised machine learning algorithm, which means we will have to provide it with many examples of statements that are labeled as happy or sad. In an ideal world we would prefer to have a large dataset where a group of experts hand-labeled each statement as happy or sad. Since we don’t have that dataset we can improvise by streaming tweets that contain the words “happy” or “sad”, and use the presence of these words as our labels. This isn’t perfect: a few sentences like “I’m not happy” will end up being incorrectly labeled as happy. If you wanted more accurate labeled data, you could use a part of speech tagger like Stanford NLP or SyntaxNet, which would let you make sure the word “happy” is always describing “I” or “I’m” and the word “not” isn’t applied to “happy”. However, this basic labeling will be good enough to train a working model.
 
-If you’ve followed the [first sentiment analysis tutorial](https://hortonworks.com/tutorial/how-to-refine-and-visualize-sentiment-data/) you’ve learned how to use Nifi to stream live tweets to your local computer and HDFS storage. If you’ve followed this tutorial you can stream your own tweets by configuring the GetTwitter processor to filter on “happy” and “sad”. If you’re running on the sandbox and want to process a large amount of tweets, you may also want to raise the amount of memory available to YARN and Spark2. You can do that by modifying the setting “Memory allocated for all YARN containers on a node” to > 4G for YARN and spark_daemon_memory to > 4G for Spark2.
+If you’ve followed the [first sentiment analysis tutorial](https://hortonworks.com/tutorial/analyzing-social-media-and-customer-sentiment-with-apache-nifi-and-hdp-search/) you’ve learned how to use Nifi to stream live tweets to your local computer and HDFS storage. If you’ve followed this tutorial you can stream your own tweets by configuring the GetTwitter processor to filter on “happy” and “sad”. If you’re running on the sandbox and want to process a large amount of tweets, you may also want to raise the amount of memory available to YARN and Spark2. You can do that by modifying the setting “Memory allocated for all YARN containers on a node” to > 4G for YARN and spark_daemon_memory to > 4G for Spark2.
 
 Otherwise, you can run the next cell to download pre-packaged tweets.
 
@@ -408,7 +408,4 @@ You’ve now seen how to build a sentiment analysis model. The techniques you’
 
 ## Further Reading
 
-- [NLP and Sentiment Analysis Using HDP and ITC Infotech Radar](https://hortonworks.com/tutorial/nlp-sentiment-analysis-retailers-using-hdp-itc-infotech-radar/)
-- [Analyzing Social Media and Customer Sentiment with Apache Nifi and HDP Search](https://hortonworks.com/tutorial/how-to-refine-and-visualize-sentiment-data/)
-
-Tutorial By Greg Womack (Twitter: @gregw134)
+- [Analyzing Social Media and Customer Sentiment with Apache Nifi and HDP Search](https://hortonworks.com/tutorial/analyzing-social-media-and-customer-sentiment-with-apache-nifi-and-hdp-search/)

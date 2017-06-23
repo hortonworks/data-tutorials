@@ -629,4 +629,4 @@ This signifies that the flight got delayed 1635 times but predicted 2146 by the 
 
 Congratulations, you now know how to use SparkR.  If you want to learn more about using Apache Spark for machine learning and processing large datasets please check out these tutorials:
 -   [5-Minute tour of Apache Spark](https://hortonworks.com/tutorial/hands-on-tour-of-apache-spark-in-5-minutes/)
--   [Intro to Machine Learning with Spark](https://hortonworks.com/tutorial/intro-machine-learning-apache-spark-apache-zeppelin/)
+-   [Intro to Machine Learning with Spark](https://hortonworks.com/tutorial/intro-to-machine-learning-with-apache-spark-and-apache-zeppelin/)

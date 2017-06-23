@@ -5,7 +5,7 @@ tutorial-id: 802
 experience: Intermediate
 persona: Data Scientist & Analyst
 source: Hortonworks
-use case: Data Discovery
+use case: Predictive
 technology: Apache Spark
 release: hdp-2.6.0
 environment: Sandbox
@@ -17,7 +17,7 @@ series: HDP > Develop with Hadoop > Apache Spark
 
 ## Introduction
 
-This tutorial will teach you how to set up a full development environment for developing and debugging Spark applications. For this tutorial we'll be using Java, but Spark also supports development with Java, Python, and R. The Scala version of this tutorial can be found [here](https://hortonworks.com/tutorial/setting-spark-development-environment-scala/), and the Python version [here](https://hortonworks.com/tutorial/setting-spark-development-environment-python/). We'll be using IntelliJ as our IDE, and since we're using Java we'll use Maven as our build manager. By the end of the tutorial, you'll know how to set up IntelliJ, how to use Maven to manage dependencies, how to package and deploy your Spark application to a cluster, and how to connect your live program to a debugger.
+This tutorial will teach you how to set up a full development environment for developing and debugging Spark applications. For this tutorial we'll be using Java, but Spark also supports development with Java, Python, and R. The Scala version of this tutorial can be found [here](https://hortonworks.com/tutorial/setting-up-a-spark-development-environment-with-scala/), and the Python version [here](https://hortonworks.com/tutorial/setting-up-a-spark-development-environment-with-python/). We'll be using IntelliJ as our IDE, and since we're using Java we'll use Maven as our build manager. By the end of the tutorial, you'll know how to set up IntelliJ, how to use Maven to manage dependencies, how to package and deploy your Spark application to a cluster, and how to connect your live program to a debugger.
 
 ## Prerequisites
 
@@ -284,5 +284,3 @@ Then click the + button at the upper-left and add a new remote configuration. Fi
 ![intellij7](assets/intellij7.png)
 
 If you run this debug configuration from your IDE immediately after submitting your Spark job, the debugger will attach and Spark will stop at breakpoints. You can also inspect the values of live variables within your program. This is invaluable when trying to pin down bugs in your code.
-
-Tutorial By Greg Womack (Twitter: @gregw134)

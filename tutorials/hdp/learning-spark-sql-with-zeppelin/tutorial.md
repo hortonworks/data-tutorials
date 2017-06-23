@@ -28,7 +28,7 @@ The lab is part of our Apache Zeppelin based lab series, providing an intuitive 
 
 -   This tutorial is a part of series of hands-on tutorials using the [Hortonworks Data Platform (HDP)](https://hortonworks.com/products/data-center/hdp/) via either the [Hortonworks Data Cloud (HDCloud)](https://hortonworks.com/products/cloud/aws/) or a pre-configured downloadable [HDP Sandbox](https://hortonworks.com/products/sandbox/).
 -   The Zeppelin notebook uses basic [Scala](http://www.dhgarrette.com/nlpclass/scala/basics.html) syntax. A Python version is coming soon.
--   (Optional) If you are new to Zeppelin, review the following tutorial: [Getting Started with Apache Zeppelin](https://hortonworks.com/tutorial/getting-started-apache-zeppelin/)
+-   (Optional) If you are new to Zeppelin, review the following tutorial: [Getting Started with Apache Zeppelin](https://hortonworks.com/tutorial/getting-started-with-apache-zeppelin/)
 
 ## Outline
 -   [Tutorial Details](#tutorial-details)
@@ -92,13 +92,13 @@ Before you start, here's a preview of the notebook.
 
 ![Notebook Preview](assets/large-notebook-preview.jpg)
 
-A dynamic preview (allowing code copy) can be found [here](https://www.zeppelinhub.com/viewer/notebooks/aHR0cHM6Ly9yYXcuZ2l0aHVidXNlcmNvbnRlbnQuY29tL2hvcnRvbndvcmtzLWdhbGxlcnkvemVwcGVsaW4tbm90ZWJvb2tzL2hkcC0yLjYvMkNBNTg3Szc3L25vdGUuanNvbg).
+A dynamic preview (allowing code copy) can be found [here](https://www.zepl.com/viewer/notebooks/aHR0cHM6Ly9yYXcuZ2l0aHVidXNlcmNvbnRlbnQuY29tL2hvcnRvbndvcmtzLWdhbGxlcnkvemVwcGVsaW4tbm90ZWJvb2tzL2hkcC0yLjYvMkNKVzUzTTUyL25vdGUuanNvbg).
 
 ## Start Tutorial
 
-To begin the tutorial, import the *Exploring Spark SQL Module* notebook into your Zeppelin environment. (If at any point you have any issues, make sure to checkout the [Getting Started with Zeppelin](https://hortonworks.com/tutorial/getting-started-apache-zeppelin/) tutorial.)
+To begin the tutorial, import the *Exploring Spark SQL Module* notebook into your Zeppelin environment. (If at any point you have any issues, make sure to checkout the [Getting Started with Zeppelin](https://hortonworks.com/tutorial/getting-started-with-apache-zeppelin/) tutorial.)
 
-On the Zeppelin home screen click `Import note` -> `Add from URL` and copy and paste the following URL: [https://raw.githubusercontent.com/hortonworks-gallery/zeppelin-notebooks/hdp-2.6/2CA587K77/note.json](https://raw.githubusercontent.com/hortonworks-gallery/zeppelin-notebooks/hdp-2.6/2CA587K77/note.json)
+On the Zeppelin home screen click `Import note` -> `Add from URL` and copy and paste the following URL: [https://raw.githubusercontent.com/hortonworks-gallery/zeppelin-notebooks/hdp-2.6/2CJW53M52/note.json](https://raw.githubusercontent.com/hortonworks-gallery/zeppelin-notebooks/hdp-2.6/2CJW53M52/note.json)
 
 Once your notebook is imported, you can open it from the Zeppelin home screen by clicking
 `Labs` -> `Spark 2.x` -> `Data Worker` -> `Scala` -> `101 - Intro to SparkSQL`

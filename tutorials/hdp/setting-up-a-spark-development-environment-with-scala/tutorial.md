@@ -1,9 +1,9 @@
 ---
-title: Configuring a Spark Development Environment with Scala
-author: Edgar Orendain
+title: Setting up a Spark Development Environment with Scala
+author: Robert Hryniewicz
 tutorial-id: 803
 experience: Intermediate
-persona: Developer
+persona: Data Scientist & Analyst
 source: Hortonworks
 use case: Predictive
 technology: Apache Spark
@@ -13,11 +13,11 @@ product: HDP
 series: HDP > Develop with Hadoop > Apache Spark
 ---
 
-# Configuring a Spark Development Environment with Scala
+# Setting up a Spark Development Environment with Scala
 
 ## Introduction
 
-This tutorial will teach you how to set up a full development environment for developing and debugging Spark applications. For this tutorial we'll be using Scala, but Spark also supports development with Java, Python, and R. The Java version of this tutorial can be found [here](https://hortonworks.com/tutorial/setting-spark-development-environment-scala/), and the Python version [here](https://hortonworks.com/tutorial/setting-spark-development-environment-python/). We'll be using IntelliJ as our IDE, and since we're using Scala we'll use SBT as our build manager. By the end of the tutorial, you'll know how to set up IntelliJ, how to use SBT to manage dependencies, how to package and deploy your Spark application, and how to connect your live program to a debugger.
+This tutorial will teach you how to set up a full development environment for developing and debugging Spark applications. For this tutorial we'll be using Scala, but Spark also supports development with Java, Python, and R. The Java version of this tutorial can be found [here](https://hortonworks.com/tutorial/setting-up-a-spark-development-environment-with-scala/), and the Python version [here](https://hortonworks.com/tutorial/setting-up-a-spark-development-environment-with-python/). We'll be using IntelliJ as our IDE, and since we're using Scala we'll use SBT as our build manager. By the end of the tutorial, you'll know how to set up IntelliJ, how to use SBT to manage dependencies, how to package and deploy your Spark application, and how to connect your live program to a debugger.
 
 ## Prerequisites
 
@@ -111,7 +111,7 @@ Where in our case the Group Id is "org.apache.spark", Artifact Id is "spark-core
 
 ## Create a Spark Application
 
-For our first "Hello World" application we're going to build a simple program that performs a word count on the collected works of Shakespeare. Download the text file [here](https://github.com/Gregw135/SparkTutorials/raw/master/setting-up-a-spark-development-environment-with-scala/assets/shakespeare.txt). Later we'll want to Spark to retrieve this file from HDFS (Hadoop Distributed File System), so let's place it there now.
+For our first "Hello World" application we're going to build a simple program that performs a word count on the collected works of Shakespeare. Download the text file [here](assets/shakespeare.txt). Later we'll want to Spark to retrieve this file from HDFS (Hadoop Distributed File System), so let's place it there now.
 
 To upload to HDFS, first make sure the sandbox is on, then navigate to localhost:8080 and login (default username/password is maria_dev/maria_dev). Once you've logged into Ambari Manager, mouse over the drop-down menu on the upper-right hand corner and click on Files View. Then open the tmp folder and click the upload button in the upper-right corner to upload the file. Make sure it's named shakespeare.txt.
 
@@ -299,5 +299,3 @@ Then click the + button at the upper-left and add a new remote configuration. Fi
 ![intellij7](assets/intellij7.png)
 
 If you run this debug configuration from your IDE immediately after submitting your Spark job, the debugger will attach and Spark will stop at breakpoints. You can also inspect the values of live variables within your program. This is invaluable when trying to pin down bugs in your code.
-
-Tutorial By Greg Womack (Twitter: @gregw134)
