@@ -6,61 +6,46 @@ title: Launch NiFi HTML UI
 
 ## Introduction
 
-With the HDF Sandbox, Apache NiFi comes preinstalled in the Ambari Stack and preconfigured out of the box to utilize many of its features. In the tutorial, it shows you how to access the NiFi HTML UI in one of two ways: use autoscript to access the NiFi UI or manually access it via Ambari.
+With the HDF Sandbox, Apache NiFi comes preinstalled in the Ambari Stack and preconfigured out of the box to utilize many of its features. In the tutorial, it shows you how to access the NiFi HTML UI in one of two ways: use the HDF Splash Screen Page "Advanced Quick Links" or Ambari UI "Quick Links".
 
 ## Prerequisites
--   Completed Analyze Traffic Patterns with Apache NiFi Introduction
--   Read NiFi DataFlow Automation Concepts
+-   Completed the prior tutorials within this tutorial series
 -   Downloaded [HDF Sandbox](https://hortonworks.com/products/sandbox/) for VMWare, VirtualBox or Native Docker
--   [Installed and Deployed HDF Sandbox](https://hortonworks.com/tutorial/sandbox-deployment-and-install-guide/) for VMWare, VirtualBox or Native Docker
+-   [Installed and Deployed HDF 3.0 Sandbox](https://hortonworks.com/tutorial/sandbox-deployment-and-install-guide/) for VMWare, VirtualBox or Native Docker
 
 ## Outline
--   [Step 1: Download HDF NiFi Shell Script](#download-hdf-nifi-shell-script)
--   [Approach 1: Access NiFi HTML UI via Shell Script](#access-nifi-html-ui-via-shell-script)
+-   [Step 1: Open HDF Splash Page](#step-1-open-hdf-splash-page)
+-   [Approach 1: Launch NiFi HTML UI from HDF Splash Quick Links](#access-nifi-html-ui-from-hdf-splash-page)
 -   [Approach 2: Access NiFi HTML UI via Ambari](#access-nifi-html-ui-via-ambari)
 -   [Summary](#summary)
 
-Refer to Approach 1 to quickly launch NiFi HTML UI via script,
+Refer to Approach 1 to quickly launch NiFi HTML UI via HDF Splash Screen,
 else go to Approach 2 to launch NiFi HTML UI from Ambari,
 but first complete Step 1.
 
-### Step 1: Download HDF NiFi Shell Script
+### Step 1: Open HDF Splash Page
 
-Download the auto-scripts and change permissions for the scripts:
+1\. Open `sandbox-hdf.hortonworks.com:18888` with your favorite web browser:
 
-Download [auto_scripts.zip](assets/auto_scripts.zip)
+![hdf_splash_screen](assets/tutorial-0-launch-nifi-html-ui/approach-1-splash/hdf_splash_screen.png)
 
-~~~bash
-cd ~/Downloads
-unzip auto_scripts.zip
-chmod -R 755 auto_scripts
-~~~
+### Approach 1: Launch NiFi HTML UI from HDF Splash Quick Links
 
-> Note: The "auto_scripts" folder consists of auto scripts to launch the nifi ui and ambari ui. These scripts initialize your sandbox environment with a vehicle traffic data seed for NiFi. Additionally, these auto scripts were built with the assumption that you already deployed HDF 3.0 Sandbox on Docker or VirtualBox. Thus, there are scripts that will start the sleeping sandboxes you previously deployed. You will utilize these scripts throughout either approach.
+1\. Select the **QUICK LINKS** button
 
-### Approach 1: Launch NiFi HTML UI via Shell Script
+2\. Hover over the NiFi 1.2.0 box and select **Go to UI**
 
-1\. Execute the script:
+![splash_nifi_quicklink](assets/tutorial-0-launch-nifi-html-ui/approach-1-splash/splash_nifi_quicklink.png)
 
-~~~bash
-./auto_scripts/launch_nifi_ui.sh
-~~~
-
-NiFi HTML UI will open in your chrome browser as below:
+NiFi HTML UI:
 
 ![open_nifi_html_interface.png](assets/tutorial-0-launch-nifi-html-ui/open_nifi_html_interface.png)
 
 ### Approach 2: Access NiFi HTML UI via Ambari
 
-1\. Start HDF Sandbox via Script:
-
-~~~bash
-./auto_scripts/launch_ambari_ui.sh
-~~~
+1\. Select the **LAUNCH DASHBOARD** button
 
 2\. Login to Ambari UI with credentials (admin/admin).
-
-The Ambari Login UI will look as below:
 
 ![login_ambari_ui.png](assets/tutorial-0-launch-nifi-html-ui/login_ambari_ui.png)
 
@@ -72,10 +57,10 @@ The Ambari Login UI will look as below:
 
 ![open-nifi-ui-via-ambari.png](assets/tutorial-0-launch-nifi-html-ui/open-nifi-ui-via-ambari.png)
 
-NiFi HTML UI will open as below:
+NiFi HTML UI:
 
 ![open_nifi_html_interface.png](assets/tutorial-0-launch-nifi-html-ui/open_nifi_html_interface.png)
 
 ## Summary
 
-Congratulations! As a review, HDF Sandbox comes preinstalled and preconfigured with NiFi. Therefore, you launched NiFi HTML UI through Ambari or via Shell Script within a few minutes. Now that you have NiFi running, let's head to the next tutorial to began building our simple dataflow.
+Congratulations! You explored two approaches for launching NiFi UI. You opened the HDF 3.0 Splash Page: Approach 1 was launching the Ambari Dashboard from the "New To HDF path" while Approach 2 was using the NiFi Quick Link from the "Advanced HDF path". Now you are ready to explore the next tutorial to began building our simple dataflow.
