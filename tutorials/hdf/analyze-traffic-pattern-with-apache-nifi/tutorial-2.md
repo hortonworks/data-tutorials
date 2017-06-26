@@ -39,7 +39,7 @@ but first complete Step 1.
 
 NiFi HTML UI:
 
-![open_nifi_html_interface.png](assets/tutorial-0-launch-nifi-html-ui/open_nifi_html_interface.png)
+![open_nifi_html_interface.png](assets/tutorial-0-launch-nifi-html-ui/approach-1-splash/open_nifi_html_interface.png)
 
 ### Approach 2: Access NiFi HTML UI via Ambari
 
@@ -47,19 +47,19 @@ NiFi HTML UI:
 
 2\. Login to Ambari UI with credentials (admin/admin).
 
-![login_ambari_ui.png](assets/tutorial-0-launch-nifi-html-ui/login_ambari_ui.png)
+![login_ambari_ui.png](assets/tutorial-0-launch-nifi-html-ui/approach-2-ambari/login_ambari_ui.png)
 
 3\. Verify the NiFi Service is running, it should have a green check mark:
 
-![verify_nifi_running.png](assets/tutorial-0-launch-nifi-html-ui/verify_nifi_running.png)
+![verify_nifi_running.png](assets/tutorial-0-launch-nifi-html-ui/approach-2-ambari/verify_nifi_running.png)
 
 4\. Select the NiFi Service, click on Quick Links dropdown and press the NiFi UI:
 
-![open-nifi-ui-via-ambari.png](assets/tutorial-0-launch-nifi-html-ui/open-nifi-ui-via-ambari.png)
+![open-nifi-ui-via-ambari.png](assets/tutorial-0-launch-nifi-html-ui/approach-2-ambari/open-nifi-ui-via-ambari.png)
 
 NiFi HTML UI:
 
-![open_nifi_html_interface.png](assets/tutorial-0-launch-nifi-html-ui/open_nifi_html_interface.png)
+![open_nifi_html_interface.png](assets/tutorial-0-launch-nifi-html-ui/approach-2-ambari/open_nifi_html_interface.png)
 
 ## Summary
 
