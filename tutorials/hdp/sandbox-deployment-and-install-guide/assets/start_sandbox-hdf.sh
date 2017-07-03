@@ -42,7 +42,7 @@ docker run --name sandbox-hdf --hostname "sandbox-hdf.hortonworks.com" --privile
 -p 17003:17003 \
 -p 17004:17004 \
 -p 17005:17005 \
--p 18081:8081 \
+-p 28081:8081 \
 -p 18090:8090 \
 -p 19060:9060 \
 -p 19089:9089 \
