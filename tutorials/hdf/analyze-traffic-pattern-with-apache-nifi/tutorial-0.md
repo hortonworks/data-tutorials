@@ -1,5 +1,5 @@
 ---
-title: Analyze Traffic Patterns with Apache NiFi
+title: Analyze Transit Patterns with Apache NiFi
 author: James Medel
 tutorial-id: 640
 experience: Intermediate
