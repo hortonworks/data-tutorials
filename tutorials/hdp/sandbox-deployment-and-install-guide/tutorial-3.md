@@ -103,15 +103,21 @@ Download one of the following scripts and save it somewhere on your computer.
 -   For Linux/Mac: Use this [start_sandbox-hdf.sh](assets/start_sandbox-hdf.sh)
 -   For Windows: Use this [start_sandbox-hdf.ps1](assets/start_sandbox-hdf.ps1)
 
-For HDF 3.0 users, change the Docker Image name to "sandbox-hdf":
+For HDF 3.0 users, if the "docker load command does not work", then run the command:
 
+~~~bash
+docker import [docker-name.tar]
 ~~~
+
+For HDF 3.0 users, if your Docker Image name is not "sandbox-hdf", then run the commands:
+
+~~~bash
 docker tag [IMAGE-ID] sandbox-hdf
 ~~~
 
 Untag the previous docker REPOSITORY called "sandbox":
 
-~~~
+~~~bash
 docker rmi sandbox
 ~~~
 
