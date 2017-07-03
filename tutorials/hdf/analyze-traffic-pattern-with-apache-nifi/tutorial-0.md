@@ -5,7 +5,7 @@ tutorial-id: 640
 experience: Intermediate
 persona: Data Scientist & Analyst
 source: Hortonworks
-use case: Streaming
+use case: Flow Management
 technology: Apache NiFi
 release: hdf-3.0.0
 environment: Sandbox
@@ -13,7 +13,7 @@ product: HDF
 series: HDF > Develop with Hadoop > Hello World
 ---
 
-# Analyze Traffic Patterns with Apache NiFi
+# Analyze Transit Patterns with Apache NiFi
 
 ## Introduction
 
@@ -38,18 +38,20 @@ The learning objectives of this tutorial are to:
 
 - Downloaded [HDF Sandbox](https://hortonworks.com/products/sandbox/) for VMware, VirtualBox or Native Docker
 - [Installed and Deployed HDF Sandbox](https://hortonworks.com/tutorial/sandbox-deployment-and-install-guide/) for VMWare, VirtualBox or Native Docker
-- For Windows 10 users, use Ubuntu bash shell
+- For Windows 10 users, use Ubuntu bash shell or Sandbox Web Shell Client
 
 ## Outline
 
 In this tutorial, we work with San Francisco MUNI Transit agency data, gathered from NextBus XML Live Feed, handling vehicle locations, speeds, and other variables.
 
-The tutorial consists of five sections:
+The tutorial consists of seven sections:
 
-1. **[NiFi DataFlow Automation Concepts](https://hortonworks.com/tutorial/analyze-traffic-patterns-with-apache-nifi/section/1/)** - Explore the fundamentals of Data Flow Management with NiFi: Core Concepts, Architecture, etc
-2. **[Launch NiFi HTML UI](https://hortonworks.com/tutorial/analyze-traffic-patterns-with-apache-nifi/section/2/)** - Launch your NiFi HTML User Interface (UI). Get NiFi up and running on Hortonworks DataFlow Sandbox.
-3. **[Build A Simple NiFi DataFlow](https://hortonworks.com/tutorial/analyze-traffic-patterns-with-apache-nifi/section/3/)** - Open NiFi UI and explore its features. Create a dataflow by adding and configuring eleven processors. Ingest data from a transit location XML simulator, extract transit location detail attributes from flowfiles, and route attributes to a converted JSON file. Run the dataflow and verify the results in a terminal.
-4. **[Enrich Simple DataFlow via Places API](https://hortonworks.com/tutorial/analyze-traffic-patterns-with-apache-nifi/section/4/)** - Add geographic location enrichment to the dataflow; incorporate Google Places Nearby API into the dataflow to retrieve places near the vehicle's location.
-5. **[Ingest Live Vehicle Routes via NextBus API](https://hortonworks.com/tutorial/analyze-traffic-patterns-with-apache-nifi/section/5/)** - Ingest NextBus's live stream data for San Francisco MUNI agency.
+1. **NiFi DataFlow Automation Concepts** - Explore the fundamentals of Data Flow Management with NiFi: Core Concepts, Architecture, etc
+2. **Launch NiFi HTML UI** - Launch your NiFi HTML User Interface (UI). Get NiFi up and running on Hortonworks DataFlow Sandbox.
+3. **Build a NiFi Process Group to Simulate NextBus API** - Simulate the NextBus API live feed with a data seed and check the data generating from the simulator.
+4. **Build a NiFi Process Group to Parse Transit Events** - Parse the XML file for transit observations(vehicle location, speed, vehicle ID, etc).
+5. **Build a NiFi Process Group to Validate the GeoEnriched Data** - Integrate Google Places API to bring more meaningful geographic insights and validate them.
+6. **Build a NiFi Process Group to Store Data As JSON** - Convert XML to JSON data format and store into file on local file system.
+7. **Ingest Live Vehicle Routes via NextBus API** - Ingest NextBus's live stream data for San Francisco MUNI agency.
 
 Each tutorial provides step by step instructions, so that you can complete the learning objectives and tasks associate with it. You are also provided with a dataflow template for each tutorial that you can use for verification. Each tutorial builds on the previous.

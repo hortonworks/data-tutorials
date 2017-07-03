@@ -30,39 +30,49 @@ NiFi is used for **data ingestion** to pull data into NiFi, from numerous differ
 
 ### Explore NiFi HTML User Interface
 
-When NiFi is accessed at `sandbox.hortonworks.com:19090/nifi` by users who run NiFi from HDF sandbox or `sandbox.hortonworks.com:8080/nifi` by users who run NiFi from their local machine, [NiFi's User Interface (UI)](http://docs.hortonworks.com/HDPDocuments/HDF2/HDF-2.1.2/bk_dataflow-user-guide/content/User_Interface.html) appears on the screen. The UI is where dataflows will be developed. It includes a canvas and _mechanisms_ to build, visualize, monitor, edit, and administer our dataflows in the tutorials. The **components** toolbar contains all tools for building the dataflow. The **actions** toolbar consists of buttons that manipulate the components on the canvas. The **management** toolbar has buttons for the DFM to manage the flow and a NiFi administrator to manage user access & system properties. The **search** toolbar enables users to search for any component in the dataflow. The image below shows a visualization of where each mechanism is located.
+When NiFi is accessed at `sandbox.hortonworks.com:9090/nifi` by users who run NiFi from HDF sandbox or `sandbox.hortonworks.com:8080/nifi` by users who run NiFi from their local machine, [NiFi's User Interface (UI)](http://docs.hortonworks.com/HDPDocuments/HDF2/HDF-2.1.2/bk_dataflow-user-guide/content/User_Interface.html) appears on the screen. The UI is where dataflows will be developed. It includes a canvas and _mechanisms_ to build, visualize, monitor, edit, and administer our dataflows in the tutorials. The **components** toolbar contains all tools for building the dataflow. The **actions** toolbar consists of buttons that manipulate the components on the canvas. The **management** toolbar has buttons for the DFM to manage the flow and a NiFi administrator to manage user access & system properties. The **search** toolbar enables users to search for any component in the dataflow. The image below shows a visualization of where each mechanism is located.
 
-![nifi_dataflow_html_interface](assets/nifi-dataflow-automation-concepts/nifi_dataflow_html_interface.png)
+![nifi_dataflow_html_interface](assets/tutorial-1-nifi-dataflow-automation-concepts/nifi_dataflow_html_interface.png)
 
 ### Find and Add Processor Overview
 
-Every dataflow requires a set of processors. In the tutorials, you will use the processor icon ![processor_nifi_iot](assets/tutorial-1-build-a-simple-nifi-dataflow/processor_nifi_iot.png) to add processors to the dataflow. Let’s view the add processor window. There are 3 options to find our desired processor. The **processor list** contains almost 190 items with descriptions for each processor. The **tag cloud** reduces the list by category, so if you know what particular use case your desired processor is associated with, select the tag and find the appropriate processor faster. The **filter bar** searches for the processor based on the keyword entered. The image below illustrates where each option is located on the add processor window.
+Every dataflow requires a set of processors. In the tutorials, you will use the processor icon ![processor_nifi_iot](assets/tutorial-1-nifi-dataflow-automation-concepts/processor_nifi.png) to add processors to the dataflow. Let’s view the add processor window. There are 3 options to find our desired processor. The **processor list** contains almost 190 items with descriptions for each processor. The **tag cloud** reduces the list by category, so if you know what particular use case your desired processor is associated with, select the tag and find the appropriate processor faster. The **filter bar** searches for the processor based on the keyword entered. The image below illustrates where each option is located on the add processor window.
 
-![add_processor_window](assets/nifi-dataflow-automation-concepts/add_processor_window.png)
+![add_processor_window](assets/tutorial-1-nifi-dataflow-automation-concepts/add_processor_window.png)
 
 ### Configure Processor Dialog
 
 As we add each processor to our dataflow, we must make sure they are properly configured. DataFlow Managers navigate around the 4 configuration tabs to control the processor's specific behavior and instruct the processor on how to process the data that is flowing. Let's explore these tabs briefly. The **Settings** tab allows users to change the processor's name, define relationships & includes many different parameters. The **Scheduling** tab affects how the processor is scheduled to run. The **Properties** tab affects the processor's specific behavior. The **Comments** tab provides a place for DFMs to include useful information about the processor's use-case. For the tutorial series, you will spend most of time modifying properties.
 
-![putfile_logs_nifi_iot](assets/nifi-dataflow-automation-concepts/putfile_logs_nifi_iot.png)
+![putfile_logs_nifi_iot](assets/tutorial-1-nifi-dataflow-automation-concepts/putfile_logs_nifi_iot.png)
 
 ### Configure Processor Properties Tab
 
-Let's further explore the properties tab, so we can be familiar with this tab in advance for the tutorials. If you want to know more about what a particular property does, hover over the **help symbol** ![question_mark_symbol_properties_config_iot](assets/tutorial-1-build-a-simple-nifi-dataflow/question_mark_symbol_properties_config_iot.png) located next to the property name to find additional details about that property, its value and history. Some processors enable the DFM to add new properties into the property table. For the tutorials, you will add user-defined properties into processors, such as **UpdateAttribute**. The custom user-defined property you create will assign unique filenames to each FlowFile that transfer through this processor. View the processor properties tab below:
+Let's further explore the properties tab, so we can be familiar with this tab in advance for the tutorials. If you want to know more about what a particular property does, hover over the **help symbol** ![question_mark_symbol_properties_config_iot](assets/tutorial-1-nifi-dataflow-automation-concepts/question_mark_symbol_properties_config_iot.png) located next to the property name to find additional details about that property, its value and history. Some processors enable the DFM to add new properties into the property table. For the tutorials, you will add user-defined properties into processors, such as **UpdateAttribute**. The custom user-defined property you create will assign unique filenames to each FlowFile that transfer through this processor. View the processor properties tab below:
 
-![updateAttribute_config_property_tab_window](assets/nifi-dataflow-automation-concepts/updateAttribute_config_property_tab_window.png)
+![updateAttribute_config_property_tab_window](assets/tutorial-1-nifi-dataflow-automation-concepts/updateAttribute_config_property_tab_window.png)
 
 ### Connections & relationships
 
 As each processor configuration is completed, we must [connect](http://docs.hortonworks.com/HDPDocuments/HDF2/HDF-2.1.2/bk_dataflow-user-guide/content/Connecting_Components.html) it to another component. A connection is a linkage between processors (or components) that contain at least one relationship. The user selects the relationship and based on the processing outcome that will determine where the data is routed. Processors can have zero or more auto-terminate relationships. If the processing outcome for FlowFile is true for a processor with a relationship tied to itself, the FlowFile will be removed from the flow. For instance, if **EvaluateXPath** has an unmatched relationship defined to itself and when that outcome is true, then a FlowFile is removed from the flow. Else a FlowFile is routed to the next processor based on matched. View the visual to see the objects that define connections and relationships.
 
-![completed-data-flow-lab1-connection_relationship_concepts](assets/nifi-dataflow-automation-concepts/completed-data-flow-lab1-connection_relationship_concepts.png)
+![completed-data-flow-lab1-connection_relationship_concepts](assets/tutorial-1-nifi-dataflow-automation-concepts/connection_relationship_concepts.png)
+
+### Troubleshoot Common Processor Issues
+
+When a processor has a warning symbol ![warning_symbol_nifi_iot](assets/tutorial-1-nifi-dataflow-automation-concepts/warning_symbol_nifi_iot.png) in the upper left corner of the processor face, the processor configuration is invalid.
+
+1\. To troubleshoot, hover over one of the processors, for instance the **GetFile** processor, and a warning message will appear. This message informs us of the requirements needed, so we can run this processor.
+
+![error_getFile_processor_nifi_lab1](assets/tutorial-1-nifi-dataflow-automation-concepts/warning_getFile_processor_nifi.png)
+
+For instance, the warning message indicates: we need to specify a directory path to tell the processor where to pull data and a connection for the processor to establish a relationship.
 
 ### Running the NiFi DataFlow
 
-Once we finish connecting and configuring the components in our dataflow, there are at least 3 conditions we should check to ensure our dataflow successfully runs. We must verify that all relationships are established, the components are valid, stopped, enabled and have no active tasks. After you complete the verification process, you can select the processors, click the play symbol ![start_button_nifi_iot](assets/tutorial-1-build-a-simple-nifi-dataflow/start_button_nifi_iot.png) in the actions toolbar to run the dataflow. View the image of a dataflow that is active.
+Once we finish connecting and configuring the components in our dataflow, there are at least 3 conditions we should check to ensure our dataflow successfully runs. We must verify that all relationships are established, the components are valid, stopped, enabled and have no active tasks. After you complete the verification process, you can select the processors, click the play symbol ![start_button_nifi](assets/tutorial-1-nifi-dataflow-automation-concepts/start_button_nifi.png) in the actions toolbar to run the dataflow. View the image of a dataflow that is active.
 
-![run_dataflow_lab1_nifi_learn_ropes_concepts_section](assets/nifi-dataflow-automation-concepts/run_dataflow_lab1_nifi_learn_ropes_concepts_section.png)
+![run_dataflow_lab1_nifi_learn_ropes_concepts_section](assets/tutorial-1-nifi-dataflow-automation-concepts/run_dataflow_concepts.png)
 
 ## The Core Concepts of NiFi
 
@@ -73,16 +83,17 @@ When we learned the process of building a dataflow, we crossed paths with many o
 | NiFi Term  | Description  |
 |:---|---:|
 | `FlowFile`  | `Data brought into NiFi that moves through the system. This data holds attributes and can contain content.` |
-| [Processor](http://docs.hortonworks.com/HDPDocuments/HDF2/HDF-2.1.2/bk_dataflow-user-guide/content/processor_anatomy.html)  | `Tool that pulls data from external sources, performs actions on attributes and content of FlowFiles and publishes data to external source.` |
+| `Processor` | `Tool that pulls data from external sources, performs actions on attributes and content of FlowFiles and publishes data to external source.` |
 | `Connection`  | `Linkage between processors that contain a queue and relationship(s) that effect where data is routed.` |
 | `Flow Controller` | `Acts as a Broker to facilitate the exchange of FlowFiles between processors.` |
 | `Process Group` | `Enables the creation of new components based on the composition of processors, funnels, etc.` |
+| `Data Provenance` | `History of actions that occur on the data as it moves throughout the flow. Enables users to check the data from any processor or component while the FlowFiles move throughout the dataflow.` |
 
 ## NiFi Architecture
 
 Let's dive deeper into the infrastructure that enables NiFi to perform so well when it comes to building DataFlows that address various use cases.
 
-![nifi_architecture_diagram](assets/nifi-dataflow-automation-concepts/nifi_architecture_diagram.png)
+![nifi_architecture_diagram](assets/tutorial-1-nifi-dataflow-automation-concepts/nifi_architecture_diagram.png)
 
 NiFi executes within the Java Virtual Machine (JVM) located in the Host Operating System (OS/Host).
 

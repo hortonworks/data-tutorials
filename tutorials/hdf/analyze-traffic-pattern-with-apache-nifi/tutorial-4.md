@@ -1,251 +1,218 @@
 ---
-title: Enrich Simple DataFlow via Places API
+title: Build a NiFi Process Group to Parse Transit Events
 ---
 
-# Enrich Simple DataFlow via Places API
+# Build a NiFi Process Group to Parse Transit Events
 
 ## Introduction
 
-In this section, you will build a geographic location enrichment for the vehicle filtering dataflow. You will obtain a deep understanding of the automated and managed flow of information between multiple systems and the facilities in NiFi for monitoring and examining the dataflow. To add this enhancement, we will incorporate Google Places Nearby API with NiFi, which will show the neighborhoods nearby the vehicle's location as it moves. This incorporation of external API's is a feasible design pattern because NiFi makes it easy to bring in other technologies to process the data.
-
-In this tutorial, you will build the Geo Location Enrichment section of the dataflow:
-
-![complete_dataflow_lab2_geoEnrich](assets/tutorial-2-enrich-simple-dataflow-via-places-api/complete_dataflow_lab2_geoEnrich.png)
+You will build a portion of the NiFi DataFlow in a process group to parse for **timestamp, vehicle location, speed, vehicle ID** and **other data **from a **San Francisco Muni Transit Simulator**.
 
 ## Prerequisites
-- Completed Tutorial 0: Launch NiFi HTML UI
-- Completed Tutorial 1: Build A Simple NiFi DataFlow
+-   Completed the prior tutorials within this tutorial series
 
 ## Outline
-- [Approach 1: Import Enriched NiFi Flow Via Places API](#approach1-import-enriched-nifi-flow-via-places-api)
-- [Approach 2: Manually Build Enriched NiFi Flow Via Places API](#approach2-manually-build-enriched-nifi-flow-via-places-api)
-- [Google Places API](#google-places-api)
-- [Step 1: Obtain API Key for NiFi to Build HTTP URL](#obtain-api-key-for-flow)
-- [Step 2: Build Geo Location Enrichment DataFlow Section](#build-geo-loc-enrich)
-- [Step 3: Run NiFi DataFlow](#run-nifi-flow)
-- [Summary](#summary-tutorial2)
-- [Further Reading](#further-reading-tutorial2)
 
-If you want to see the NiFi flow in action within minutes, refer to **Approach 1**. Else if you prefer to build the dataflow manually step-by-step, continue on to **Approach 2**.
+- [Approach 1: Manually Build ParseTransitEvents Process Group (PG)](#approach1-manually-build-parsetransitevents-process-group-4)
+- [Step 1: Create a Process Group](#create-process-group-4)
+- [Step 2: Add an Input Port to Ingest Data Into this PG](#add-an-input-port-to-ingest-data-into-this-pg-4)
+- [Step 3: Add EvaluateXPath to Extract the Timestamp for Transit Observation](#add-evaluatexpath-to-extract-the-timestamp-for-transit-observation-4)
+- [Step 4: Add SplitXml to Split A FlowFile into Multiple Separate FlowFiles](#add-splitxml-to-split-a-flowfile-into-multiple-separate-flowfiles-4)
+- [Step 5: Add EvaluateXPath to Extract Transit Observations](#add-evaluatexpath-to-extract-transit-observations-4)
+- [Step 6: Add an Output Port to Route Data Outside this PG](#add-an-output-port-to-route-data-outside-this-pg-4)
+- [Step 7: Connect SimulateXmlTransitEvents to ParseTransitEvents](#connect-simulatexmltransitEvents-to-parseTransitevents-4)
+- [Step 8: Verify EvaluateXPath is Extracting Values From XML](#verify-evaluatexpath-is-extracting-values-from-xml-4)
+- [Approach 2: Import ParseTransitEvents Process Group](#approach2-import-parsetransitevents-process-group-4)
+- [Summary](#summary-4)
+- [Further Reading](#further-reading-4)
 
-## Approach 1: Import Enriched NiFi Flow Via Places API
+If you prefer to build the dataflow manually step-by-step, continue on to **Approach 1**. Else if you want to see the NiFi flow in action within minutes, refer to **Approach 2**.
 
-1\. Download the [Tutorial-2-enrich-flow-via-places-api.xml](assets/tutorial-2-enrich-simple-dataflow-via-places-api/nifi-template/tutorial-2-enrich-flow-via-places-api.xml) template file. Then import the template file into NiFi.
+### Approach 1: Manually Build ParseTransitEvents Process Group (PG)
 
-2\. Refer to **Step 1** in **Approach 2** to obtain the Google API key and set up **Google Places API: HTTP URL**.
+### 1.1 Create Label for Process Group
 
-3\. Replace the **InvokeHTTP** processor's **Remote URL** property value with the new **Google Places API: HTTP URL** value.
+1\. Add a Label ![label_icon](assets/tutorial-4-build-nifi-process-group-to-parse-transit-events/label_icon.png) onto the NiFi canvas for the new process group. Right click, **Change color** to **Blue**.
 
-4\. Hit the **start** button ![start_button_nifi_iot](assets/tutorial-2-enrich-simple-dataflow-via-places-api/start_button_nifi_iot.png). to activate the dataflow.
+2\. Right click, select configure and name it `Extract Transit Key Values pairs (Timestamp, Direction, Latitude, Longitude, Vehicle_ID, Vehicle_Speed) From XML FlowFiles using XPath Expression`. Choose Font Size to `18px`.
 
-![complete_dataflow_lab2_geoEnrich](assets/tutorial-2-enrich-simple-dataflow-via-places-api/running_dataflow_lab2_geoEnrich.png)
+![label_for_simulatexmltransitevents](assets/tutorial-4-build-nifi-process-group-to-parse-transit-events/label_parsetransitevents.png)
 
-## Approach 2: Manually Build Enriched NiFi Flow Via Places API
+### Step 1: Create a Process Group (PG)
 
-## Google Places API <a id="google-places-api"></a>
+1\. Add a new Process Group onto the NiFi canvas and name it `ParseTransitEvents`
 
-Google Places API Web Service returns information about places: establishments, geographic locations and prominent points of interest using HTTP requests. The Places API includes six place requests: Place Searches, Place Details, Place Add, Place Photos, Place Autocomplete and Query Autocomplete. Read more about these place requests in [Introducing the API](https://developers.google.com/places/web-service/intro).
+![ParseTransitEvents](assets/tutorial-4-build-nifi-process-group-to-parse-transit-events/ParseTransitEvents.png)
 
-All requests are accessed through an HTTP request and return either JSON or XML response.
+2\. Double click on the new Process Group to enter it.
 
-What are the necessary components to use the Places API?
-- https:// protocol
-- API Key
+![ParseTransitEvents](assets/tutorial-4-build-nifi-process-group-to-parse-transit-events/breadcrumbs_ParseTransitEvents.png)
 
-### Step 1: Obtain API Key for NiFi to Build HTTP URL <a id="obtain-api-key-for-flow"></a>
+### Step 2: Add an Input Port to Ingest Data Into this PG
 
-For our dataflow, our task is to enrich the data by searching for neighborhoods within proximity of a vehicle's varying location. We will retrieve two parameters from this data: name of the neighborhoods and San Francisco Muni Transit Agency. So, we will integrate Nearby Search HTTP request with NiFi.
+1\. Add the **Input Port** ![output_port](assets/tutorial-4-build-nifi-process-group-to-parse-transit-events/input_port.png) component onto the NiFi canvas. Name it `IngestRawTransitEvents`.
 
-The Nearby Search request is an HTTP URL of the following definition, which we will need for NiFi:
+![IngestRawTransitEvents](assets/tutorial-4-build-nifi-process-group-to-parse-transit-events/IngestRawTransitEvents.png)
 
-~~~
-https://maps.googleapis.com/maps/api/place/nearbysearch/output?parameters
-~~~
+### Step 3: Add EvaluateXPath to Extract the Timestamp for Transit Observation
 
-The `output` can come in two formats: `json` or `xml`. We will use json for this tutorial.
+1\. Add the **EvaluateXPath** processor onto the NiFi canvas.
 
-Let's obtain the **required parameters** to initiate a Nearby Search request.
+2\. Connect **IngestRawTransitEvents** input port to **EvaluateXPath** processor. When the Create Connection window appears, click **Add**.
 
-1\. We will need to [obtain an API key](https://developers.google.com/places/web-service/get-api-key), so it can identify our application for quota management and places added from the application are instantly available to our app (NiFi).
+![ingestrawtransitevents_to_evaluatexpath](assets/tutorial-4-build-nifi-process-group-to-parse-transit-events/ingestrawtransitevents_to_evaluatexpath.png)
 
-2\. We will use a standard Google Places API. Click on the blue **Get A Key** button to activate the API Web Service.
+**Figure 1:** Connect **IngestRawTransitEvents** to **EvaluateXPath**
 
-3\. A window will appear that says **Enable Google Places API Web Service**. Select **Yes**. Then **Create And Enable API**. Wait a few seconds for the new window to load.
+3\. Open the processor configuration **properties** tab. Add the properties listed in **Table 1** and if the original properties have values, update them. For the second property in **Table 1**, add a new dynamic property for XPath expression, select the plus **( + )** button. Insert the following property name and value into your properties tab as shown in the table below:
 
-4\. Now a screen with your unique API key will appear similar to the screen below:
-
-![api_key](assets/tutorial-2-enrich-simple-dataflow-via-places-api/api_key.png)
-
-Now we have the API Key parameter for our HTTP request. We also have the other required parameters: **location** thanks to tutorial 1 in which we extracted longitude & latitude attributes and **radius**, which can be a distance that does not surpass 50,000 meters. We will use one optional parameter **type** to signify what type of place we are interested in searching for.
-
-5\. Let's build our HTTP URL with the parameters below, so we can insert the URL as a property value into **InvokeHTTP** later in the tutorial.
-
-- API Key = AIzaSyDY3asGAq-ArtPl6J2v7kcO_YSRYrjTFug
-- Latitude = ${Latitude}
-- Longitude = ${Longitude}
-- radius = 500
-- type = neighborhood
-
-~~~
-https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${Latitude},${Longitude}&radius=500&type=neighborhood&key=AIzaSyDY3asGAq-ArtPl6J2v7kcO_YSRYrjTFug
-~~~
-
-> Note: Your API Key will be different than the one in the URL above.
-
-### Step 2: Build Geo Location Enrichment DataFlow Section <a id="build-geo-loc-enrich"></a>
-
-Six processors are needed to add geographic location enrichment to your dataflow. Each processor holds a critical role in transporting the enriched data to a destination:
-
-- **InvokeHTTP** performs an HTTP request to access data from Google Places API about places nearby a vehicle's location
-- **EvaluateJsonPath** extract neighborhoods_nearby and city data elements out of JSON structure
-- **RouteOnAttribute** routes FlowFiles as long as their neighborhoods_nearby and city attributes do not contain empty strings
-- **AttributesToJSON** represents the enriched attributes in JSON structure
-- **MergeContent** merges FlowFiles together by concatenating their JSON content together
-- **PutFile** writes the enriched geographic location contents of the FlowFile to the local file system
-
-### 2.1 Learning Objectives: DataFlow Geo Enrichment Addition
-- Add/Configure/Connect processors to ingest, filter and store geo enriched API data
-- Troubleshoot problems that may occur
-- Run the dataflow
-
-### InvokeHTTP
-
-1\. Add the InvokeHTTP processor onto the NiFi graph. Connect **RouteOnAttribute** from tutorial 1 to **InvokeHTTP** processor. When the Create Connection window appears, verify **Filter Attributes** checkbox is checked, if not check it. Click **Add**.
-
-2\. Open InvokeHTTP configure properties tab and add the property listed in **Table 1**.
-
-**Table 1:** Update InvokeHTTP Property Value(s)
-
-| Property  | Value  |
-|:---|---:|
-| `Remote URL`  | `https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${Latitude},${Longitude}&radius=500&type=neighborhood&key=AIzaSyDY3asGAq-ArtPl6J2v7kcO_YSRYrjTFug` |
-
-**Remote URL** connects to the HTTP URL we created using Google Places API and feeds that data into the dataflow. Notice we use two NiFi expressions for location parameter. This is because those two values change as new FlowFiles pass through this processor.
-
-![invokeHTTP_config_property_tab_window](assets/tutorial-2-enrich-simple-dataflow-via-places-api/invokeHTTP_config_property_tab_window.png)
-
-3\. Navigate to the **Settings** tab, change the name from InvokeHTTP to `GoogleNearbySearchAPI`. Under Auto terminate relationships check the **Failure**, **No Retry**, **Original** and **Retry** checkboxes. Click **Apply** button.
-
-### EvaluateJsonPath
-
-1\. Add the EvaluateJsonPath processor onto the NiFi graph. Connect InvokeHTTP to EvaluateJsonPath processor. When the Create Connection window appears, select **Response** checkbox. Click Add.
-
-2\. Open EvaluateJsonPath configure properties tab and update the original properties with the properties listed in **Table 2**. Note: add `city` and `neighborhoods_nearby` property by clicking the **New property** button, then insert their values into the properties tab.
-
-**Table 2:** Update and Add New EvaluateJsonPath Property Values
+**Table 1:** Update EvaluateXPath Property Values
 
 | Property  | Value  |
 |:---|---:|
 | `Destination`  | `flowfile-attribute`  |
-| `Return Type`  | `json`  |
-| `city`  | `$.results[0].vicinity`  |
-| `neighborhoods_nearby`  | `$.results[*].name`  |
+| `Last_Time`  | `//body/lastTime/@time`  |
 
-- **Destination** result from JSON Path Evaluation stored in FlowFile attributes.
-- **2 user-defined attributes** each hold a value that is used in the NiFi Expression language filtering condition in the next processor.
+- **Destination** result from XPath evaluation stored into FlowFile attribute
 
-![evaluateJsonPath_config_property_tab_window](assets/tutorial-2-enrich-simple-dataflow-via-places-api/evaluateJsonPath_config_property_tab_window.png)
+- **Last_Time** is a FlowFile Attribute and XPath expression that retrieves value of time node in the XML file
 
-3\. Navigate to the **Settings** tab. Under Auto terminate relationships check the **unmatched** and **failure** checkboxes. Click **Apply** button.
+![evaluateXPath_config_property_tab_window](assets/tutorial-4-build-nifi-process-group-to-parse-transit-events/evaluateXPath_config_property_tab_window.png)
 
+**Figure 2:** EvaluateXPath Configuration Property Tab Window
 
-### RouteOnAttribute
+4\. Open the processor config **Settings** tab, change the name to **ExtractTimestamp**, then under Auto terminate relationships, check the **failure** and **unmatched** checkboxes. Click **Apply**.
 
-1\. Add the RouteOnAttribute processor onto the NiFi graph. Connect EvaluateJsonPath to RouteOnAttribute processor. When the Create Connection window appears, select **matched** checkbox. Click Add.
+### Step 4: Add SplitXml to Split A FlowFile into Multiple Separate FlowFiles
 
-2\. Open RouteOnAttribute configure properties tab and click on **New property** button to add `RouteNearbyNeighborhoods` to property name and insert its NiFi expression value listed in **Table 3**.
+1\. Add the **SplitXml** processor onto the NiFi canvas.
 
-**Table 3:** Add New RouteOnAttribute Property Value
+2\. Connect **EvaluateXPath** to **SplitXML** processor. When the Create Connection window appears, verify **matched** checkbox is checked, else check it. Click **Add**.
 
-| Property  | Value  |
-|:---|---:|
-| `RouteNearbyNeighborhoods`  | `${city:isEmpty():not():and(${neighborhoods_nearby:isEmpty():not()})}`  |
+![evaluatexpath_to_splitxml](assets/tutorial-4-build-nifi-process-group-to-parse-transit-events/evaluatexpath_to_splitxml.png)
 
-**RouteNearbyNeighborhoods** uses the FlowFile Attribute values obtained from JSON Path Expressions to filter out any FlowFiles that have at least one empty Attribute value. Else the FlowFiles are passed to the remaining processors.
+**Figure 3:** Connect **EvaluateXPath** to **SplitXML**
 
-![routeOnAttribute_geoEnrich_config_property_tab_window](assets/tutorial-2-enrich-simple-dataflow-via-places-api/routeOnAttribute_geoEnrich_config_property_tab_window.png)
+3\. Keep SplitXML default configuration **properties**.
 
-3\. Navigate to the **Settings** tab, change the name from RouteOnAttribute to `RouteNearbyNeighborhoods`. Under Auto terminate relationships check the **unmatched** checkbox. Click **Apply** button.
+4\. Since each property is updated, navigate to the **Scheduling tab** and change the **Run Schedule** from 0 sec to `1 sec`, so the processor executes a task every 1 second.
 
-### AttributesToJSON
+5\.  Open the processor config **Settings** tab, under Auto terminate relationships, check the **failure** and **original** checkboxes. Click **Apply**.
 
-1\. Add the AttributesToJSON processor onto the NiFi graph. Connect RouteOnAttribute to AttributesToJSON processor. When the Create Connection window appears, select **RouteNearbyNeighborhoods** checkbox. Click Add.
+### Step 5: Add EvaluateXPath to Extract Transit Observations
 
-2\. Open AttributesToJSON configure properties tab and update the properties with the information listed in **Table 4**.
+1\. Add the **EvaluateXPath** processor onto the NiFi canvas.
 
-**Table 4:** Update AttributesToJSON Property Values
+2\. Connect **SplitXML** to **EvaluateXPath** processor. When the Create Connection window appears, verify **split** checkbox is checked, if not check it. Click Add.
 
-| Property  | Value  |
-|:---|---:|
-| `Attributes List`  | `Vehicle_ID, city, Latitude, Longitude, neighborhoods_nearby, Last_Time`  |
-| `Destination`  | flowfile-content  |
+![splitxml_to_evaluatexpath](assets/tutorial-4-build-nifi-process-group-to-parse-transit-events/splitxml_to_evaluatexpath.png)
 
-![attributesToJSON_geoEnrich_config_property_tab_window](assets/tutorial-2-enrich-simple-dataflow-via-places-api/attributesToJSON_geoEnrich_config_property_tab_window.png)
+**Figure 4:** Connect **SplitXML** to **EvaluateXPath**
 
-3\. Navigate  to the **Settings** tab, under Auto terminate relationships check the **failure** checkbox. Click **Apply** button.
+3\. Open the processor configuration **properties** tab. Add the properties listed in **Table 2** and if the original properties have values, update them. For the remaining properties in **Table 2**, add new dynamic properties for XPath expressions, click on the **( + )** button. Insert the following property name and value into your properties tab as shown in the table below:
 
-### MergeContent
-
-1\. Add the MergeContent processor onto the NiFi graph. Connect AttributesToJSON to MergeContent processor. When the Create Connection window appears, select **success** checkbox. Click Add.
-
-2\. Open MergeContent configure properties tab and update the properties with the information listed in **Table 5**. For the Demarcator property, type `,` then press `shift+enter`.
-
-**Table 5:** Update MergeContent Property Values
+**Table 2:** Update EvaluateXPath Property Values
 
 | Property  | Value  |
 |:---|---:|
-| `Minimum Number of Entries`  | `10`  |
-| `Maximum Number of Entries`  | `15`  |
-| `Delimiter Strategy`  | Text  |
-| `Header`  | `[`  |
-| `Footer`  | `]`  |
-| `Demarcator`  | `,` {press-shift+enter}  |
+| `Destination`  | `flowfile-attribute`  |
+| `Direction_of_Travel`  | `//vehicle/@dirTag`  |
+| `Latitude`  | `//vehicle/@lat`  |
+| `Longitude`  | `//vehicle/@lon`  |
+| `Vehicle_ID`  | `//vehicle/@id`  |
+| `Vehicle_Speed`  | `//vehicle/@speedKmHr`  |
 
-![mergeContent_geoEnrich_config_property_tab_window](assets/tutorial-2-enrich-simple-dataflow-via-places-api/mergeContent_geoEnrich_config_property_tab_window.png)
+- **Destination** set to FlowFile attribute because the result of values from XPath expressions need to be stored in FlowFile attributes.
 
-3\. Navigate  to the **Settings** tab, under Auto terminate relationships check the **failure** and **original** checkbox. Click **Apply** button.
+- **5 user-defined attributes** each represent data related to transit observations associated with the timestamp extracted earlier.
 
-### PutFile
+![evaluateXPath_extract_splitFlowFiles_config_property_tab](assets/tutorial-4-build-nifi-process-group-to-parse-transit-events/evaluateXPath_extract_splitFlowFiles_config_property_tab.png)
 
-1\. Add the PutFile processor onto the NiFi graph. Connect MergeContent to PutFile processor. When the Create Connection window appears, select **merged** checkbox. Click Add.
+**Figure 5:** EvaluateXPath Configuration Property Tab Window
 
-2\. Open PutFile configure properties tab and update the property with the information listed in **Table 6**.
+4\. Open the processor config **Settings** tab, change the name to **ExtractTransitObservations**, then under Auto terminate relationships, check the **failure** and **unmatched** checkboxes. Click **Apply**.
 
-**Table 6:** Update PutFile Property Values
+### Step 6: Add an Output Port to Route Data Outside this PG
 
-| Property  | Value  |
-|:---|---:|
-| `Directory`  | `/tmp/nifi/output/nearby_neighborhoods_search`  |
+1\. Add the **Output Port** ![output_port](assets/tutorial-4-build-nifi-process-group-to-parse-transit-events/output_port.png) component onto the NiFi canvas. Name it `ParsedTransitEvents`.
 
-![putFile_geoEnrich_config_property_tab_window](assets/tutorial-2-enrich-simple-dataflow-via-places-api/putFile_geoEnrich_config_property_tab_window.png)
+2\. Connect **EvaluateXPath** to **ParsedTransitEvents** output port. When the Create Connection window appears, verify **matched** checkbox is checked, if not check it. Click Add.
 
-3\. Navigate  to the **Settings** tab, under Auto terminate relationships check the **success** checkbox. Click **Apply** button. Connect the processor to itself and when the Create Connection window appears, select **failure** checkbox.
+![ParseTransitEvents_dataflow_pg](assets/tutorial-4-build-nifi-process-group-to-parse-transit-events/ParseTransitEvents_dataflow_pg.png)
 
-### Step 3: Run NiFi DataFlow <a id="run-nifi-flow"></a>
+**Figure 6:** Connect **EvaluateXPath** to **ParsedTransitEvents**
 
-Now that we added geographic location enrichment dataflow section to our previous dataflow, let's run the dataflow and verify if we receive the expected results in our output directory.
+### Step 7: Connect SimulateXmlTransitEvents to ParseTransitEvents
 
-1\. Go to the actions toolbar and click the start button ![start_button_nifi_iot](assets/tutorial-2-enrich-simple-dataflow-via-places-api/start_button_nifi_iot.png). Your screen should look like the following:
+1\. Re-enter the `NiFi Flow` breadcrumb.
 
-![complete_dataflow_lab2_geoEnrich](assets/tutorial-2-enrich-simple-dataflow-via-places-api/running_dataflow_lab2_geoEnrich.png)
+![re_enter_nifi_flow_breadcrumb](assets/tutorial-4-build-nifi-process-group-to-parse-transit-events/re_enter_nifi_flow_breadcrumb.png)
 
-2\. Let's check the data was written to our expected directory, open your terminal. Make sure to SSH into your sandbox if on sandbox, else navigate to the output directory on your local machine. Navigate to the directory you wrote for the PutFile processor. List the files and open one of the newly created files to view geographic neighborhoods nearby transit location enrichment data output. In the tutorial our directory path is: `/tmp/nifi/output/nearby_neighborhoods_search`.
+2\. Connect **SimulateXmlTransitEvents** to **ParseTransitEvents** process group. When the Create Connection window appears, verify **From Output = RawTransitEvents** and connects to **To Input = IngestRawTransitEvents**. Click **Add**.
 
-~~~
-cd /tmp/nifi/output/nearby_neighborhoods_search
-ls
-vi 2ae30f7d-5ffe-4e29-92f0-8f0e7c9224b6
-~~~
+![SimulateXmlTransitEvents_to_ParseTransitEvents](assets/tutorial-4-build-nifi-process-group-to-parse-transit-events/parsetransitevents_pg.png)
 
-![output_geoEnrich_nearby_neighborhoods_data](assets/tutorial-2-enrich-simple-dataflow-via-places-api/output_geoEnrich_nearby_neighborhoods_data.png)
+**Figure 7:** Connection of **SimulateXmlTransitEvents** and **ParseTransitEvents** PG
 
-## Summary <a id="summary-tutorial2"></a>
+### Step 8: Verify EvaluateXPath is Extracting Values From XML
 
-Congratulations! For the Geo Enrichment section of the dataflow, you learned to use InvokeHTTP to access geographic location of nearby places with Google Places Search API. You learned to add NiFi expression variables into InvokeHTTP property RemoteURL, so that the values for latitude and longitude constantly change in the URL when new FlowFiles pass through this processor. You learned to use EvaluateJsonPath similar to EvaluateXPath, except JSON Expression is used to extract JSON elements (neighborhoods_nearby & city) from a JSON structure. Now you know how to incorporate external API's into NiFi further enhance the dataflow.
+1\. Either select both process groups or leave them unselected, then hit the **start** button ![start_button_nifi_iot](assets/tutorial-4-build-nifi-process-group-to-parse-transit-events/start_button_nifi_iot.png) located in the Operate Palette to activate the dataflow.
 
-## Further Reading <a id="further-reading-tutorial2"></a>
+![parsetransitevents_pg](assets/tutorial-4-build-nifi-process-group-to-parse-transit-events/started_parsetransitevents_pg.png)
 
-- [Google Places API](https://developers.google.com/places/)
-- [HTTP Protocol Overview](http://code.tutsplus.com/tutorials/http-the-protocol-every-web-developer-must-know-part-1--net-31177)
-- [JSON Path Expressions](http://goessner.net/articles/JsonPath/index.html#e2)
-- [JSON Path Online Evaluator](http://jsonpath.com/)
+2\. Enter the **ParseTransitEvents** PG. Right click on the **ExtractTransitObservations** processor, select **Data Provenance**.
+
+![extracttransitobservations_data_provenance](assets/tutorial-4-build-nifi-process-group-to-parse-transit-events/extracttransitobservations_data_provenance.png)
+
+3\. View any event by selecting the view provenance event icon ![i_symbol_nifi](assets/tutorial-4-build-nifi-process-group-to-parse-transit-events/i_symbol_nifi_lab1.png)
+
+4\. Click on the **Attributes** tab. Select **Show modified attributes only** to display only the attributes being parsed with XPath expression language. As long as you see values mapped to their attribute name, you have verified the processor is extracting xml data from the flowfile successfully.
+
+![verify_evaluateXPath_extracts_data](assets/tutorial-4-build-nifi-process-group-to-parse-transit-events/verify_evaluateXPath_extracts_data.png)
+
+**Figure 4:** EvaluateXPath (ExtractTransitObservations) is parsing the XML data for **Direction_of_Travel**, **Latitude**, **Longitude**, **Vehicle_ID**, **Vehicle_Speed**.
+
+### Approach 2: Import ParseTransitEvents Process Group
+
+1\. Download the [tutorial-4-ParseTransitEvents.xml](#assets/tutorial-4-build-nifi-process-group-to-parse-transit-events/template/tutorial-4-ParseTransitEvents.xml) template file.
+
+2\. Use the template icon ![nifi_template_icon](assets/tutorial-4-build-nifi-process-group-to-parse-transit-events/nifi_template_icon.png) located in the Operate Palette.
+
+3\. **Browse**, find the template file, click **Open** and hit **Import**.
+
+4\. From the **Components Toolbar**, drag the template icon ![nifi_template_icon](assets/tutorial-4-build-nifi-process-group-to-parse-transit-events/add_nifi_template.png) onto the graph and select the **tutorial-1-nifi-flow-parse-transit-data.xml** template file.
+
+5\. Hit the **start** button ![start_button_nifi_iot](assets/tutorial-4-build-nifi-process-group-to-parse-transit-events/start_button_nifi_iot.png) to activate the dataflow.
+
+![run_dataflow_lab1_nifi_learn_ropes](assets/tutorial-4-build-nifi-process-group-to-parse-transit-events/started_parsetransitevents_pg.png)
+
+**Figure 5:** **tutorial4-ParseTransitEvents.xml** template includes a NiFi Flow that pulls in San Francisco Muni Transit Events from the XML Simulator, parses through the data to extract key values and stores the transit observations as a JSON file.
+
+Overview of the Process Groups and their Processors:
+
+- **SimulateXmlTransitEvents (Process Group)**
+  - **GetFile** fetches the vehicle location simulator data for files in a directory.
+  - **UnpackContent** decompresses the contents of FlowFiles from the traffic simulator zip file.
+  - **ControlRate** controls the rate at which FlowFiles are transferred to follow-on processors enabling traffic simulation.
+  - **UpdateAttribute** renames every FlowFile to give them unique names
+  - **PutFile** stores data to local file system
+  - **Output Port** makes the connection for the process group to connect to other components (process groups, processors, etc)
+
+- **ParseTransitEvents (Process Group)**
+  - **Input Port** ingests data from SimulateXmlTransitEvents Process Group
+  - **EvaluateXPath** extracts the timestamp of the last update for vehicle location data returned from each FlowFile.
+  - **SplitXML** splits the parent's child elements into separate FlowFiles. Since vehicle is a child element in our xml file, each new vehicle element is stored separately.
+  - **EvaluateXPath** extracts attributes: vehicle id, direction, latitude, longitude and speed from vehicle element in each FlowFile.
+  - **Output Port** outputs data with the new FlowFile attribute (key/values) to the rest of the flow
+
+Refer to [NiFi's Documentation](https://nifi.apache.org/docs.html) to learn more about each processor described above.
+
+### Summary
+
+Congratulations! You just built a NiFi **ParseTransitEvents** process group to parse the XML content and extract transit observations into FlowFile attributes. The **Input Port** pulls data from the **SimulateXmlTransitEvents** process group, which goes into an **EvaluateXPath** processor to pull out the **timestamp** for the vehicle observation and add that timestamp as a FlowFile attribute. The FlowFile content rows are then split into multiple FlowFiles via **SplitXml** processor. These single FlowFile records are routed to another **EvaluateXPath** processor to extract **transit observations** for multiple transit vehicles of that timestamp from earlier. This data with new FlowFile attributes is routed to the rest of the flow via **Output Port**.
+
+### Further Reading
+
+-   [Apache NiFi](https://hortonworks.com/apache/nifi/)
+-   [Hortonworks DataFlow Documentation](http://docs.hortonworks.com/HDPDocuments/HDF2/HDF-2.1.2/bk_dataflow-user-guide/content/ch_user-guide.html)
+-   [XPath Expression Tutorial](http://www.w3schools.com/xml/xpath_intro.asp)
