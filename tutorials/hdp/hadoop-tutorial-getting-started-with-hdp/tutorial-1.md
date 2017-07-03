@@ -8,7 +8,7 @@ title: Concepts
 
 ## Introduction
 
-In this tutorial, we will explore important concepts that will strengthen your foundation in the Hortonworks Data Platform (HDP). Apache Hadoop is a layered structure to process and store massive amounts of data. In our case, Apache<sup>TM</sup> Hadoop will be recognized as an enterprise solution in the form of HDP. At the base of HDP exists our data storage environment known as the Hadoop Distributed File System. When data files are accessed by Hive, Pig or another coding language, YARN is the Data Operating System that enables them to analyze, manipulate or process that data. HDP includes various components that open new opportunities and efficiencies in healthcare, finance, insurance and other industries that impact people.
+In this tutorial, we will explore important concepts that will strengthen your foundation in the Hortonworks Data Platform (HDP). Apache Hadoop is a layered structure to process and store massive amounts of data. In our case, Apache Hadoop will be recognized as an enterprise solution in the form of HDP. At the base of HDP exists our data storage environment known as the Hadoop Distributed File System. When data files are accessed by Hive, Pig or another coding language, YARN is the Data Operating System that enables them to analyze, manipulate or process that data. HDP includes various components that open new opportunities and efficiencies in healthcare, finance, insurance and other industries that impact people.
 
 ## Prerequisites
 -   Downloaded and Installed [Hortonworks Sandbox](https://hortonworks.com/downloads/#sandbox)
@@ -24,7 +24,7 @@ In this tutorial, we will explore important concepts that will strengthen your f
 
 ## 1. Concept: Hadoop & HDP <a id="concepts-hadoop-hdp"></a>
 
-In this module you will learn about Apache<sup>TM</sup> Hadoop® and what makes it scale to large data sets. We will also talk about various components of the Hadoop ecosystem that make Apache Hadoop enterprise ready in the form of Hortonworks Data Platform (HDP) distribution. This module discusses Apache Hadoop and its capabilities as a data platform. The core of Hadoop and its surrounding ecosystem solution vendors provide enterprise requirements to integrate alongside Data Warehouses and other enterprise data systems. These are steps towards the implementation of a modern data architecture, and towards delivering an enterprise ‘Data Lake’
+In this module you will learn about Apache Hadoop and what makes it scale to large data sets. We will also talk about various components of the Hadoop ecosystem that make Apache Hadoop enterprise ready in the form of Hortonworks Data Platform (HDP) distribution. This module discusses Apache Hadoop and its capabilities as a data platform. The core of Hadoop and its surrounding ecosystem solution vendors provide enterprise requirements to integrate alongside Data Warehouses and other enterprise data systems. These are steps towards the implementation of a modern data architecture, and towards delivering an enterprise ‘Data Lake’
 
 ### 1.1 Goals of this module
 
@@ -55,7 +55,7 @@ Each project has been developed to deliver an explicit function and each has its
     -   [**Apache Pig**](https://hortonworks.com/hadoop/pig) – A platform for processing and analyzing large data sets. Pig consists of a high-level language (Pig Latin) for expressing data analysis programs paired with the MapReduce framework for processing these programs.
     -   [**MapReduce**](https://hortonworks.com/hadoop/mapreduce/) – MapReduce is a framework for writing applications that process large amounts of structured and unstructured data in parallel across a cluster of thousands of machines, in a reliable and fault-tolerant manner.
     -   [**Apache Spark**](https://hortonworks.com/hadoop/spark) – Spark is ideal for in-memory data processing. It allows data scientists to implement fast, iterative algorithms for advanced analytics such as clustering and classification of datasets.
-    -   [**Apache Storm**](https://hortonworks.com/hadoop/storm) – Storm is a distributed real-time computation system for processing fast, large streams of data adding reliable real-time data processing capabilities to Apache Hadoop® 2.x
+    -   [**Apache Storm**](https://hortonworks.com/hadoop/storm) – Storm is a distributed real-time computation system for processing fast, large streams of data adding reliable real-time data processing capabilities to Apache Hadoop 2.x
     -   [**Apache HBase**](https://hortonworks.com/hadoop/hbase) – A column-oriented NoSQL data storage system that provides random real-time read/write access to big data for user applications.
     -   [**Apache Tez**](https://hortonworks.com/hadoop/tez) – Tez generalizes the MapReduce paradigm to a more powerful framework for executing a complex DAG (directed acyclic graph) of tasks for near real-time big data processing.
     -   [**Apache Kafka**](https://hortonworks.com/hadoop/kafka) – Kafka is a fast and scalable publish-subscribe messaging system that is often used in place of traditional message brokers because of its higher throughput, replication, and fault tolerance.
@@ -132,7 +132,7 @@ Ambari Files User View
 
 ![HDFS_3](assets/hdfs_files_view_base_folder_concepts.png)
 
-Ambari Files User View provides a user friendly interface to upload, store and move data. Underlying all components in Hadoop is the Hadoop Distributed File System([HDFS](https://hortonworks.com/hadoop/hdfs/)™).  This is the foundation of the Hadoop cluster. The HDFS file system manages how the datasets are stored in the Hadoop cluster. It is responsible for distributing the data across the datanodes, managing replication for redundancy and administrative tasks like adding, removing and recovery of data nodes.
+Ambari Files User View provides a user friendly interface to upload, store and move data. Underlying all components in Hadoop is the Hadoop Distributed File System([HDFS](https://hortonworks.com/hadoop/hdfs/)).  This is the foundation of the Hadoop cluster. The HDFS file system manages how the datasets are stored in the Hadoop cluster. It is responsible for distributing the data across the datanodes, managing replication for redundancy and administrative tasks like adding, removing and recovery of data nodes.
 
 ## 3. Concept: MapReduce & YARN <a id="concepts-mapreduce-yarn"></a>
 
@@ -203,7 +203,7 @@ Hive is an SQL like query language that enables those analysts familiar with SQL
 -   Understanding Apache Tez
 -   Understanding Ambari Hive User Views on Hortonworks Sandbox
 
-### [4.3 Apache Hive](https://hive.apache.org/)**™**
+### [4.3 Apache Hive](https://hive.apache.org/)
 
 Data analysts use Hive to explore, structure and analyze that data, then turn it into business insights. Hive implements a dialect of SQL (Hive QL) that focuses on analytics and presents a rich set of SQL semantics including OLAP functions, sub-queries, common table expressions and more. Hive allows SQL developers or users with SQL tools to easily query, analyze and process data stored in Hadoop.Hive also allows programmers familiar with the MapReduce framework to plug in their custom mappers and reducers to perform more sophisticated analysis that may not be supported by the built-in capabilities of the language.
 
@@ -299,7 +299,7 @@ MapReduce allows allows you to specify map and reduce functions, but working out
 -   Understanding Apache Pig on Tez
 -   Understanding Ambari Pig User Views on Hortonworks Sandbox
 
-### [4.4.2 Apache Pig](https://pig.apache.org/)**™**
+### [4.4.2 Apache Pig](https://pig.apache.org/)
 
 Apache Pig allows Apache Hadoop users to write complex MapReduce transformations using a simple scripting language called Pig Latin. Pig translates the Pig Latin script into MapReduce so that it can be executed within YARN for access to a single dataset stored in the Hadoop Distributed File System (HDFS).
 

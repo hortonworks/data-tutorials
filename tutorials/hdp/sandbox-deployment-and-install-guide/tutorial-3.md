@@ -67,18 +67,8 @@ Select the **Advanced** tab and adjust the dedicated memory to **at least 8GB of
 Open up a console and use the following command to load in the sandbox image you downloaded from <https://hortonworks.com/downloads/#sandbox>.
 
 ```
-docker load -i /path/to/image/sandbox_docker_image.tar.gz
+docker load -i <sandbox-docker-image-path>
 ```
-
-Some users will see an error related to ```no space left on device``` similar the one below:
-
-```
-Error processing tar file(exit status 1): write /usr/hdp/2.6.0.3-8/pig/lib/hive-exec-1.2.1000.2.6.0.3-8-core.jar: no space left on device
-```
-
-If you see this error, there are two HCC articles that walk you through resolving the issue:
-- [Increase the size of base Docker for Mac VM image](<https://community.hortonworks.com/content/kbentry/65901/how-to-increase-the-size-of-the-base-docker-for-ma.html>)
-- [Modify default Docker configuration for CentOS 7 to import HDP Sandbox](<https://community.hortonworks.com/content/kbentry/65714/how-to-modify-the-default-docker-configuration-on.html>)
 
 To check that the image was imported successfully, run the following command.  You should see the sandbox docker image on the list.
 
@@ -86,6 +76,36 @@ To check that the image was imported successfully, run the following command.  Y
 docker images
 ```
 
+### Error and Solution you may encounter
+1\. **No space left on device** similar the one below:
+
+```
+Error processing tar file(exit status 1): write /usr/hdp/2.6.0.3-8/pig/lib/hive-exec-1.2.1000.2.6.0.3-8-core.jar: no space left on device
+```
+-   Solution(s)
+    -   [Increase the size of base Docker for Mac VM image](<https://community.hortonworks.com/content/kbentry/65901/how-to-increase-the-size-of-the-base-docker-for-ma.html>)
+    -   [Modify default Docker configuration for CentOS 7 to import HDP Sandbox](<https://community.hortonworks.com/content/kbentry/65714/how-to-modify-the-default-docker-configuration-on.html>)
+
+2\. **Docker Load -i** command failed for HDF 3.0
+
+-   Solution(s)
+    -   Use Docker import as follows:
+
+~~~bash
+docker import <sandbox-docker-image-path>
+~~~
+
+If your Docker Image name is not **sandbox-hdf**, then run the commands:
+
+~~~bash
+docker tag [IMAGE-ID] sandbox-hdf
+~~~
+
+Untag the previous docker REPOSITORY called "sandbox":
+
+~~~bash
+docker rmi sandbox
+~~~
 
 ## Start Sandbox
 
@@ -103,29 +123,15 @@ Download one of the following scripts and save it somewhere on your computer.
 -   For Linux/Mac: Use this [start_sandbox-hdf.sh](assets/start_sandbox-hdf.sh)
 -   For Windows: Use this [start_sandbox-hdf.ps1](assets/start_sandbox-hdf.ps1)
 
-For HDF 3.0 users, if the "docker load command does not work", then run the command:
-
-~~~bash
-docker import [docker-name.tar]
-~~~
-
-For HDF 3.0 users, if your Docker Image name is not "sandbox-hdf", then run the commands:
-
-~~~bash
-docker tag [IMAGE-ID] sandbox-hdf
-~~~
-
-Untag the previous docker REPOSITORY called "sandbox":
-
-~~~bash
-docker rmi sandbox
-~~~
-
 Run the script you just downloaded.  It will start the sandbox for you, creating the sandbox docker container in the process if neceesary.
 
 You should see something like the following:
 
 ![start script ouput](assets/docker-start-sandbox-output.jpg)
+
+or
+
+![start script ouput for Windows](assets/docker-start-sandbox-output-windows.jpg)
 
 The sandbox is now created and ready for use.
 

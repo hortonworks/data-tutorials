@@ -18,7 +18,6 @@ settings and access refined data.
 -   Lab 1: Load sensor data into HDFS
 -   Lab 2: Data Manipulation with Apache Hive
 -   Lab 3: Use Pig to compute Driver Risk Factor/ Lab 4: Use Spark to compute Driver Risk Factor
--   Allow yourself around one hour to complete this tutorial.
 
 ## Outline
 

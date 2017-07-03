@@ -289,7 +289,7 @@ Some **key resources** to **learn more about vectorization** and some of the **k
 -   [HDP Docs Vectorization docs](https://docs.hortonworks.com/HDPDocuments/HDP2/HDP-2.0.9.0/bk_dataintegration/content/ch_using-hive-1a.html)
 -   [Hive Blogs](https://hortonworks.com/blog/category/hive/)
 -   [5 Ways to Make Your Hive Queries Run Faster](https://hortonworks.com/blog/5-ways-make-hive-queries-run-faster/)
--   [Interactive Query for Hadoop with Apache Hive on Apache Tez](https://hortonworks.com/tutorial/supercharging-interactive-queries-hive-tez/)
+-   [Interactive Query for Hadoop with Apache Hive on Apache Tez](https://hortonworks.com/tutorial/interactive-query-for-hadoop-with-apache-hive-on-apache-tez/)
 -   [Evaluating Hive with Tez as a Fast Query Engine](https://hortonworks.com/blog/evaluating-hive-with-tez-as-a-fast-query-engine/)
 
 ## Step 2.4: Analyze the Trucks Data <a id="analyze-truck-data"></a>
