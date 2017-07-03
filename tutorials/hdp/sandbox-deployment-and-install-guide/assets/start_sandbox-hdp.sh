@@ -47,7 +47,6 @@ docker run --name sandbox-hdp --hostname "sandbox.hortonworks.com" --privileged 
 -p 8983:8983 \
 -p 8993:8993 \
 -p 9000:9000 \
--p 9090:9090 \
 -p 9995:9995 \
 -p 9996:9996 \
 -p 10000:10000 \
