@@ -38,7 +38,7 @@ The learning objectives of this tutorial are to:
 
 - Downloaded [HDF Sandbox](https://hortonworks.com/products/sandbox/) for VMware, VirtualBox or Native Docker
 - [Installed and Deployed HDF Sandbox](https://hortonworks.com/tutorial/sandbox-deployment-and-install-guide/) for VMWare, VirtualBox or Native Docker
-- For Windows 10 users, use [Ubuntu bash shell](https://www.windowscentral.com/how-install-bash-shell-command-line-windows-10) or Sandbox Web Shell Client
+- For Windows 10 users, use Ubuntu bash shell or Sandbox Web Shell Client
 
 ## Outline
 
