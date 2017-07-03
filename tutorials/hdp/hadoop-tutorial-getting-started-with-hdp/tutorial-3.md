@@ -8,7 +8,7 @@ title: Hive - Data ETL
 
 ## Introduction
 
-In this tutorial, you will be introduced to Apache(<sup>TM</sup>) Hive. In the earlier section, we covered how to load data into HDFS. So now you have **geolocation** and **trucks** files stored in HDFS as csv files. In order to use this data in Hive, we will guide you on how to create a table and how to move data into a Hive warehouse, from where it can be queried. We will analyze this data using SQL queries in Hive User Views and store it as ORC. We will also walk through Apache Tez and how a DAG is created when you specify Tez as execution engine for Hive. Let's start..!!
+In this tutorial, you will be introduced to Apache Hive. In the earlier section, we covered how to load data into HDFS. So now you have **geolocation** and **trucks** files stored in HDFS as csv files. In order to use this data in Hive, we will guide you on how to create a table and how to move data into a Hive warehouse, from where it can be queried. We will analyze this data using SQL queries in Hive User Views and store it as ORC. We will also walk through Apache Tez and how a DAG is created when you specify Tez as execution engine for Hive. Let's start..!!
 
 ## Prerequisites
 
@@ -16,8 +16,7 @@ The tutorial is a part of a series of hands on tutorials to get you started on H
 
 -   [Learning the Ropes of the Hortonworks Sandbox](https://hortonworks.com/tutorial/learning-the-ropes-of-the-hortonworks-sandbox/)
 -   Hortonworks Sandbox
--   Lab 1: Load sensor data into HDFS
--   Allow yourself around **one hour** to complete this tutorial.
+-   Loading Sensor Data into HDFS
 
 ## Outline
 
@@ -47,24 +46,34 @@ The Ambari Hive View looks like the following:
 
 ![Lab2_2](assets/ambari_hive_user_view_concepts.png)
 
-Now let’s take a closer look at the SQL editing capabilities in the Hive View:
+Now let’s take a closer look at the SQL editing capabilities in Hive View:
 
--   There are six tabs to interact with SQL:
-    -   **QUERY**: This is the interface shown above and the primary interface to write, edit and execute new SQL statements
-    -   **JOBS**: This allows you to look at past queries or currently running queries.  It also allows you to see all SQL queries you have authority to view.  For example, if you are an operator and an analyst needs help with a query, then the Hadoop operator can use the History feature to see the query that was sent from the reporting tool.
-    -   **TABLES**: Provides one central place to view, create, delete, and manage tables of whichever databases that you select.
-    -   **SAVED QUERIES**: shows all the queries that have been saved by the current user. Click the gear icon to the right of the query list to view the history of a query or to delete it.
-    -   **UDFs**: User-defined functions (UDFs) can be added to queries by pointing to a JAR file on HDFS and indicating the Java classpath, which contains the UDF definition. After the UDF is added here, an Insert UDF button appears in the Query Editor that enables you to add the UDF to your query.
-    -   **SETTINGS**: Allows you to append settings to queries that you execute in Hive View.
+There are 6 tabs to interact with Hive View 2.0:
 
-Take a few minutes to explore the various Hive View features.
+1\. **QUERY**: This is the interface shown above and the primary interface to write, edit and execute new SQL statements.
+
+2\. **JOBS**: This allows you to see past and currently running queries. It also allows you to see all SQL queries you have authority to view. For example, if you are an operator and an analyst needs help with a query, then the Hadoop operator can use the History feature to see the query that was sent from the reporting tool.
+
+3\. **TABLES**: Provides one central place to view, create, delete, and manage tables.
+
+4\. **SAVED QUERIES**: Display queries saved by current user. Click the gear icon to the right of the query to open saved query in worksheet to edit or execute. You can also remove saved query from the saved list.
+
+5\. **UDFs**: User-defined functions (UDFs) can be added to queries by pointing to a JAR file on HDFS and indicating the Java classpath, which contains the UDF definition. After the UDF is added here, an Insert UDF button appears in the Query Editor that enables you to add the UDF to your query.
+
+6\. **SETTINGS**: Allows you to modify settings which will affect queries executed in Hive View.
+
+Take a few minutes to explore the various Hive View sub-features.
 
 ### 2.1.1 Set hive.execution.engine as Tez
 
 A feature we will configure before we run our hive queries is to set the hive execution engine as Tez. You can try map reduce if you like. We will use Tez in this tutorial.
 
-1.  Click on the gear in the sidebar referred to as number 6 in the interface above.
-2.  Click on the dropdown menu, choose hive.execution.engine and set the value as tez. Now we are ready to run our queries for this tutorial.
+1.  Click on settings tab, referred to as number 6 in the interface above.
+2.  Click on **+Add New**
+3.  Click on the KEY dropdown menu and choose ```hive.execution.engine```
+4.  Set the value as ```tez```.
+
+Now we are ready to run our queries for this tutorial.
 
 ## Step 2.2: Define a Hive Table <a id="define-a-hive-table"></a>
 
@@ -102,7 +111,7 @@ The Optimized Row Columnar ([new Apache ORC project](https://hortonworks.com/blo
 To use the ORC format, specify ORC as the file format when creating the table. Here is an example::
 
 ~~~
-CREATE TABLE … **STORED AS ORC**
+CREATE TABLE ... STORED AS ORC ...
 CREATE TABLE trucks STORED AS ORC AS SELECT * FROM trucks_temp_table;
 ~~~
 
@@ -148,7 +157,7 @@ To verify the tables were defined successfully:
 Click on the `QUERY` tab, type the following query into the query editor and click on `Execute`:
 
 ~~~sql
-select * from trucks limit 100;
+select * from trucks limit 10;
 ~~~
 
 The results should look similar to:
@@ -427,7 +436,7 @@ Table `avg_mileage` provides a list of average miles per gallon for each truck.
 
 ### 2.4.8 Create Table DriverMileage from Existing truck_mileage data
 
-The following CTAS groups the records by driverid and sums of miles. Copy the following DDL into the query editor, then click `Execute`:
+The following CTAS groups the records by driverid and sums of miles. Copy the following DDL into the query editor, then click **Execute**:
 
 ~~~sql
 CREATE TABLE DriverMileage

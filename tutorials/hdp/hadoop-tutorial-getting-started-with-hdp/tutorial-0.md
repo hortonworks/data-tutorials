@@ -35,9 +35,11 @@ Here is the video of [Analyzing Geolocation Data](http://youtu.be/n8fdYHoEEAM) t
 
 ## Outline
 
-1.  **Concepts** Concepts that will strengthen your foundation in the Hortonworks Data Platform (HDP)
-1.  **Lab 1** Loading Sensor Data into HDFS
-2.  **Lab 2** Data Manipulation with Hive
-3.  **Lab 3** Use Pig to compute Driver Risk Factor
-4.  **Lab 4** Use Apache Spark to compute Driver Risk Factor
-5.  **Lab 5** Optional Visualization and Reporting with Zeppelin
+-   Concepts that will strengthen your foundation in the Hortonworks Data Platform (HDP)
+-   Loading Sensor Data into HDFS
+-   Hive - Data ETL
+-   Pig - Risk Factor
+-   Spark - Risk Factor
+-   Data Reporting with Zeppelin
+-   Data Reporting with Excel
+-   Data Reporting with Zoomdata

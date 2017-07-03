@@ -16,20 +16,19 @@ The tutorial is a part of series of hands on tutorial to get you started on HDP 
 
 -   Hortonworks Sandbox
 -   [Learning the Ropes of the Hortonworks Sandbox](https://hortonworks.com/tutorial/learning-the-ropes-of-the-hortonworks-sandbox/)
--   Lab 1: Load sensor data into HDFS
--   Lab 2: Data Manipulation with Apache Hive
--   Allow yourself around **one hour** to complete this tutorial.
+-   Loading Sensor Data into HDFS
+-   Hive - Data ETL
 
 ## Outline
 
 -   [Pig Basics](#pig-basics)
--   [Step 3.1: Create Pig Script](#step3.2)
--   [Step 3.2: Quick Recap](#step3.3)
--   [Step 3.3: Execute Pig Script on Tez](#step3.4)
--   [Summary](#summary-lab3)
+-   [Create Pig Script](#create-pig-script)
+-   [Quick Recap](#quick-recap)
+-   [Execute Pig Script on Tez](#execute-pig-script-on-tez)
+-   [Summary](#summary)
 -   [Further Reading](#further-reading)
 
-## Pig Basics <a id="pig-basics"></a>
+## Pig Basics
 
 Pig is a **high-level scripting language** used with Apache Hadoop. Pig enables data workers to **write complex data transformations** without knowing Java. Pig’s _simple SQL-like scripting language_ is called Pig Latin, and appeals to developers already familiar with scripting languages and SQL.
 
@@ -54,11 +53,11 @@ STORED AS ORC;
 
 Verify the `riskfactor` table was created successfully. It will be empty now, but you will populate it from a Pig script. You are now ready to compute the risk factor using Pig. Let’s take a look at Pig and how to execute Pig scripts from within Ambari.
 
-## Step 3.1: Create Pig Script <a id="step3.2"></a>
+## Create Pig Script
 
 In this phase of the tutorial, we create and run a Pig script. We will use the Ambari Pig View. Let’s get started…
 
-### 3.1.1 Log in to Ambari Pig User Views
+### Log in to Ambari Pig User Views
 
 To get to the Ambari Pig View, click on the Ambari Views icon at top right and select **Pig**:
 
@@ -74,7 +73,7 @@ The following screenshot shows and describes the various components and features
 
 ![Lab3_5](assets/pig_user_view_components_hello_hdp.png)
 
-### 3.1.2 Create a New Script
+### Create a New Script
 
 Let’s enter a Pig script. Click the **New Script** button in the upper-right corner of the view:
 
@@ -84,7 +83,7 @@ Name the script **riskfactor.pig**, then click the **Create** button:
 
 ![Lab3_7](assets/Lab3_7.png)
 
-### 3.1.3 Load Data in Pig using Hcatalog
+### Load Data in Pig using Hcatalog
 
 We will use **HCatalog** to _load data into Pig_. HCatalog allows us to _share schema across tools_ and users within our Hadoop environment. It also allows us to _factor out schema_ and _location information from_ our _queries and scripts_ and _centralize them in a common repository_. Since it is in HCatalog we can use the **HCatLoader() function**. Pig allows us to give the table a name or alias and not have to worry about allocating space and defining the structure. We just have to worry about how we are processing the table.
 
@@ -101,7 +100,7 @@ The script above loads data, in our case, from a file named **geolocation** usin
 
 > Note: Refer to [Pig Latin Basics - load](http://pig.apache.org/docs/r0.14.0/basic.html#load) to learn more about the **load** operator.
 
-### 3.1.4 Filter your data set
+### Filter your data set
 
 The next step is to **select a subset of the records**, so we have the records of drivers _for which the event is not normal_. To do this in Pig we **use the Filter operator**. We **instruct Pig to Filter** our table and keep _all records where event !=“normal”_ and store this in b. With this one simple statement, Pig will look at each record in the table and filter out all the ones that do not meet our criteria.
 
@@ -118,7 +117,7 @@ Copy-and-paste the above Pig code into the riskfactor.pig window.
 
 > Note: Refer to [Pig Latin Basics - filter](http://pig.apache.org/docs/r0.14.0/basic.html#filter) to learn more about the **filter** operator.
 
-### 3.1.5 Iterate your data set
+### Iterate your data set
 
 Since we have the right set of records, let's iterate through them. We use the **“foreach”** operator on the grouped data to iterate through all the records. We would also like to **know the number of non normal events associated with a driver**, so to achieve this we _add ‘1’ to every row_ in the data set.
 
@@ -134,7 +133,7 @@ Copy-and-paste the above Pig code into the riskfactor.pig window:
 
 > Note: Refer to [Pig Latin Basics - foreach](http://pig.apache.org/docs/r0.14.0/basic.html#foreach) to learn more about the **foreach** operator.
 
-### 3.1.6 Calculate the total non normal events for each driver
+### Calculate the total non normal events for each driver
 
 The **group** statement is important because it _groups the records by one or more relations_. In our case, we want to group by driver id and iterate over each row again to sum the non normal events.
 
@@ -156,7 +155,7 @@ e = foreach d generate group as driverid, SUM(c.occurance) as t_occ;
 
 > Note: Refer to [Pig Latin Basics - group](http://pig.apache.org/docs/r0.14.0/basic.html#group) to learn more about the **group** operator.
 
-### 3.1.7 Load drivermileage Table and Perform a Join Operation
+### Load drivermileage Table and Perform a Join Operation
 
 In this section, we will load drivermileage table into Pig using **Hcatlog** and perform a **join** operation on driverid. The **resulting data** set will _give us total miles and total non normal events_ for a particular driver.
 
@@ -178,7 +177,7 @@ Copy-and-paste the above two Pig codes into the riskfactor.pig window.
 
 > Note: Refer to [Pig Latin Basics - join](http://pig.apache.org/docs/r0.14.0/basic.html#join) to learn more about the **join** operator.
 
-### 3.1.8 Compute Driver Risk factor
+### Compute Driver Risk factor
 
 In this section, we will associate a driver risk factor with every driver. To **calculate driver risk factor**, _divide total miles travelled by non normal event occurrences_.
 
@@ -198,7 +197,7 @@ Here is the final code and what it will look like once you paste it into the edi
 
 > Note: Refer to [Pig Latin Basics - store](http://pig.apache.org/docs/r0.14.0/basic.html#store) to learn more about the **store** operator.
 
-### 3.1.9 Add Pig argument
+### Add Pig argument
 
 Add Pig argument **-useHCatalog** (Case Sensitive).
 
@@ -222,7 +221,7 @@ store final_data into 'riskfactor' using org.apache.hive.hcatalog.pig.HCatStorer
 
 Save the file `riskfactor.pig` by clicking the **Save** button in the left-hand column.
 
-## Step 3.2: Quick Recap <a id="step3.3"></a>
+## Quick Recap
 
 Before we execute the code, let’s review the code again:
 
@@ -243,15 +242,15 @@ You need to configure the Pig Editor to use HCatalog so that the Pig script can 
 The **Arguments** section of the Pig View should now look like the following:
 ![Lab3_10](assets/Lab3_10.png)
 
-## Step 3.3: Execute Pig Script on Tez <a id="step3.4"></a>
+## Execute Pig Script on Tez
 
-### 3.3.1 Execute Pig Script
+### Execute Pig Script
 
 Click **Execute on Tez** checkbox and finally hit the blue **Execute** button to submit the job. Pig job will be submitted to the cluster. This will generate a new tab with a status of the running of the Pig job and at the top you will find a progress bar that shows the job status.
 
 ![Lab3_11](assets/execute_pig_script_compute_riskfactor_hello_hdp_lab3.png)
 
-### 3.3.2 View Results Section
+### View Results Section
 
 Wait for the job to complete. The output of the job is displayed in the **Results** section. Notice your script does not output any result – it stores the result into a Hive table – so your Results section will be empty.
 
@@ -261,7 +260,7 @@ Wait for the job to complete. The output of the job is displayed in the **Result
 
 Click on the **Logs** dropdown menu to see what happened when your script ran. Errors will appear here.
 
-### 3.3.3 View Logs section (Debugging Practice)
+### View Logs section (Debugging Practice)
 
 **Why are Logs important?**
 
@@ -277,7 +276,7 @@ What results do our logs show us about our Pig Script?
 -   Read 100 records from our **drivermileage** table
 -   Stored 99 records into our **riskfactor** table
 
-### 3.3.4 Verify Pig Script Successfully Populated Hive Table
+### Verify Pig Script Successfully Populated Hive Table
 
 Go back to the Ambari Hive View 2.0 and browse the data in the `riskfactor` table to verify that your Pig job successfully populated this table. Here is what is should look like:
 
@@ -285,7 +284,7 @@ Go back to the Ambari Hive View 2.0 and browse the data in the `riskfactor` tabl
 
 At this point we now have our truck average miles per gallon table (`avg_mileage`) and our risk factor table (`riskfactor`).
 
-## Summary <a id="summary-lab3"></a>
+## Summary
 
 Congratulations! Let’s summarize the Pig commands we learned in this tutorial to compute risk factor analysis on the geolocation and truck data. We learned to use Pig to access the data from Hive using the **LOAD {hive_table} …HCatLoader()** script. Therefore, we were able to perform the **filter**, **foreach**, **group**, **join**, and **store {hive_table} …HCatStorer()** scripts to manipulate, transform and process this data. To review these bold pig latin operators, view the [Pig Latin Basics](http://pig.apache.org/docs/r0.14.0/basic.html), which contains documentation on each operator.
 

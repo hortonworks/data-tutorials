@@ -8,8 +8,7 @@ title: Data Reporting With Zeppelin
 
 ## Introduction
 
-In this tutorial you will be introduced to Apache Zeppelin. In the earlier section of lab, you learned how to perform data visualization
-using Excel. This section will teach you to visualize data using Zeppelin.
+In this tutorial you will be introduced to Apache Zeppelin and teach you to visualize data using Zeppelin.
 
 ## Prerequisites
 
@@ -17,22 +16,21 @@ The tutorial is a part of series of hands on tutorial to get you started on HDP 
 
 -   Hortonworks Sandbox
 -   [Learning the Ropes of the Hortonworks Sandbox](https://hortonworks.com/tutorial/learning-the-ropes-of-the-hortonworks-sandbox/)
--   Lab 1: Load sensor data into HDFS
--   Lab 2: Data Manipulation with Apache Hive
--   Lab 3: Use Pig to compute Driver Risk Factor
--   Lab 4: Use Spark to compute Driver Risk Factor
--   Allow yourself approximately one hour to complete this tutorial.
+-   Loading Sensor Data into HDFS
+-   Hive - Data ETL
+-   Pig - Risk Factor
+-   Spark - Risk Factor
 
 ## Outline
 
 -   [Apache Zeppelin](#apache-zeppelin)
--   [Step 5.1: Create a Zeppelin Notebook](#step5.1)
--   [Step 5.2: Execute a Hive Query](#step5.2)
--   [Step 5.3: Build Charts Using Zeppelin](#step5.3)
--   [Summary](#summary-lab5)
+-   [Create a Zeppelin Notebook](#create-a-zeppelin-notebook)
+-   [Execute a Hive Query](#execute-a-hive-query)
+-   [Build Charts Using Zeppelin](#build-charts-using-zeppelin)
+-   [Summary](#summary)
 -   [Further Reading](#further-reading)
 
-## Apache Zeppelin <a id="apache-zeppelin"></a>
+## Apache Zeppelin
 
 Apache Zeppelin provides a powerful web-based notebook platform for data analysis and discovery.
 Behind the scenes it supports Spark distributed contexts as well as other language bindings on top of Spark.
@@ -42,9 +40,9 @@ riskfactor data that we've collected earlier and visualize the result through gr
 
 NOTE: We can also run queries via various interpreters for the following (but not limited to) spark, hawq and postgresql.
 
-## Step 5.1: Create a Zeppelin Notebook <a id="step5.1"></a>
+## Create a Zeppelin Notebook
 
-### 5.1.1 Navigate to Zeppelin Notebook
+### Navigate to Zeppelin Notebook
 
 Open Zeppelin interface using browser URL:
 
@@ -58,9 +56,9 @@ Click on a Notebook tab at the top left and select **Create new note**. Name you
 
 ![Zeppelin Create New Notebook](assets/zeppelin_create_new_notebook.png)
 
-## Step 5.2: Execute a Hive Query <a id="step5.2"></a>
+## Execute a Hive Query
 
-### 5.2.1 Visualize finalresults Data in Tabular Format
+### Visualize finalresults Data in Tabular Format
 
 In the previous Spark and Pig tutorials you already created a table finalresults or riskfactor which gives the risk factor associated with every driver. We will use the data we generated in this table to visualize which drivers have the highest risk factor. We will use the jdbc hive interpreter to write queries in Zeppelin.
 
@@ -78,9 +76,9 @@ Initially, the query will produce the data in tabular format as shown in the scr
 
 ![play_button_zeppelin_workbook](assets/output_riskfactor_zeppelin_lab6.png)
 
-## Step 5.3: Build Charts using Zeppelin <a id="step5.3"></a>
+## Build Charts using Zeppelin
 
-### 5.3.1 Visualize finalresults Data in Chart Format
+### Visualize finalresults Data in Chart Format
 
 1\. Iterate through each of the tabs that appear underneath the query.
 Each one will display a different type of chart depending on the data that is returned in the query.
@@ -127,7 +125,7 @@ The chart should look similar to the following.
 
 You can hover over the highest point to determine which driver has highest risk factor and where the live.
 
-## Summary <a id="summary-lab5"></a>
+## Summary
 
 Now that we know how to use Apache Zeppelin to obtain and visualize our data, we can use the skills
 we've learned from our Hive, Pig, and Spark labs, as well and apply them to new kinds of data to

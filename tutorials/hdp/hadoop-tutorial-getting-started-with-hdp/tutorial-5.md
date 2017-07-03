@@ -16,21 +16,20 @@ This tutorial is a part of a series of hands on tutorials to get you started on 
 
 -   Hortonworks Sandbox
 -   [Learning the Ropes of the Hortonworks Sandbox](https://hortonworks.com/tutorial/learning-the-ropes-of-the-hortonworks-sandbox/)
--   Lab 1: Loading sensor data into HDFS
--   Lab 2: Data Manipulation with Apache Hive
--   Allow yourself around one hour to complete this tutorial.
+-   Loading Sensor Data into HDFS
+-   Hive - Data ETL
 
 ## Outline
 
 -   [Concepts](#concepts)
 -   [Apache Spark Basics](#apache-spark-basics)
--   [Step 4.1: Configure Spark services using Ambari](#step4.1)
--   [Step 4.2: Create a Hive Context](#step4.2)
--   [Step 4.3: Create a RDD from Hive Context](#step4.3)
--   [Step 4.4 Querying Against a Table](#step4.4)
--   [Step 4.5: Load and save data into Hive as ORC](#step4.5)
--   [Full Spark Code Review for Lab](#full-spark-code-review-for-lab)
--   [Summary](#summary-lab4)
+-   [Configure Spark services using Ambari](#configure-spark-services-using-ambari)
+-   [Create a Hive Context](#create-a-hive-context)
+-   [Create a RDD from Hive Context](#create-a-rdd-from-hive-context)
+-   [Querying Against a Table](#querying-against-a-table)
+-   [Load and save data into Hive as ORC](#load-and-save-data-into-hive-as-orc)
+-   [Full Spark Code Review](#full-spark-code-review)
+-   [Summary](#summary)
 -   [Further Reading](#further-reading)
 -   [Appendix A: Run Spark in the Spark Interactive Shell](#run-spark-in-shell)
 
@@ -40,7 +39,7 @@ MapReduce has been useful, but the amount of time it takes for the jobs to run c
 
 Apache Spark was designed to be a fast, general-purpose, easy-to-use computing platform. It extends the MapReduce model and takes it to a whole other level. The speed comes from the in-memory computations. Applications running in memory allow for much faster processing and response.
 
-## Apache Spark Basics <a id="apache-spark-basics"></a>
+## Apache Spark Basics
 
 [Apache Spark](https://hortonworks.com/hadoop/spark/) is a fast, in-memory data processing engine with elegant and expressive development [APIs](https://spark.apache.org/docs/1.6.1/api/R/index.html) in [Scala](https://spark.apache.org/docs/1.6.1/api/scala/index.html#package),[Java](https://spark.apache.org/docs/1.6.1/api/java/index.html), and [Python](https://spark.apache.org/docs/1.6.1/api/python/index.html) and [R](https://spark.apache.org/docs/1.6.1/api/R/index.html) that allow data workers to efficiently execute machine learning algorithms that require fast iterative access to datasets. Spark on [Apache Hadoop YARN](https://hortonworks.com/hadoop/YARN) enables deep integration with Hadoop and other YARN enabled workloads in the enterprise.
 
@@ -50,7 +49,7 @@ You can run batch application such as MapReduce types jobs or iterative algorith
 
 Let's get started!
 
-## Step 4.1: Configure Spark services using Ambari <a id="step4.1"></a>
+## Configure Spark services using Ambari
 
 1\.  Log on to Ambari Dashboard as `maria_dev`. At the bottom left corner of the services column, check that Spark and Zeppelin are running.
 
@@ -78,11 +77,11 @@ Click on a Notebook tab at the top left and select **Create new note**. Name you
 
 ![notebook_name](assets/notebook_name_hello_hdp_lab4.png)
 
-### Step 4.2: Create a Hive Context <a id="step4.2"></a>
+## Create a Hive Context
 
 For improved Hive integration, [ORC file](https://hortonworks.com/blog/orcfile-in-hdp-2-better-compression-better-performance/) support for Spark. This allows Spark to read data stored in ORC files. Spark can leverage ORC file’s more efficient columnar storage and predicate pushdown capability for even faster in-memory processing. HiveContext is an instance of the Spark SQL execution engine that integrates with data stored in Hive. The more basic SQLContext provides a subset of the Spark SQL support that does not depend on Hive. It reads the configuration for Hive from hive-site.xml on the classpath.
 
-#### Import sql libraries:
+### Import sql libraries:
 
 If you have gone through Pig section, you have to drop the table riskfactor so that you can populate it again using Spark. Copy and paste the following code into your Zeppelin notebook, then click the play button. Alternatively, press `shift+enter` to run the code.
 
@@ -104,7 +103,7 @@ To verify table has been dropped, let us do show tables again:
 
 ![drop_table_lab4](assets/drop_table_lab4.png)
 
-#### Instantiate SparkSession
+### Instantiate SparkSession
 
 ~~~scala
 %spark2
@@ -113,7 +112,7 @@ val hiveContext = new org.apache.spark.sql.SparkSession.Builder().getOrCreate()
 
 ![Lab4_6](assets/instantiate_hivecontext_hello_hdp_lab4.png)
 
-## Step 4.3: Create a RDD from Hive Context <a id="step4.3"></a>
+## Create a RDD from Hive Context
 
 **What is a RDD?**
 
@@ -136,7 +135,7 @@ Once a RDD is instantiated, you can apply a [series of operations](https://spark
 -   **Transformation** operations, as the name suggests, create new datasets from an existing RDD and build out the processing DAG that can then be applied on the partitioned dataset across the YARN cluster. Transformations do not return a value. In fact, nothing is evaluated during the definition of these transformation statements. Spark just creates these Direct Acyclic Graphs or DAG, which will only be evaluated at runtime. We call this *lazy* evaluation.
 -   An **Action** operation, on the other hand, executes a DAG and returns a value.
 
-### 4.3.1 View List of Tables in Hive Warehouse
+### View List of Tables in Hive Warehouse
 
 Use a simple show command to see the list of tables in Hive warehouse.
 
@@ -149,7 +148,7 @@ hiveContext.sql("show tables").show()
 
 You will notice that the `geolocation` table and the `drivermileage` table that we created earlier in an tutorial are already listed in **Hive metastore** and can be directly queried upon.
 
-### 4.3.2 Query Tables To Build Spark RDD
+### Query Tables To Build Spark RDD
 
 We will do a simple select query to fetch data from `geolocation` and `drivermileage` tables to a spark variable. Getting data into Spark this way also allows to copy table schema to RDD.
 
@@ -167,9 +166,9 @@ val drivermileage_temp1 = hiveContext.sql("select * from drivermileage")
 
 ![Lab4_9](assets/drivermileage_spark_rdd_hello_hdp_lab4.png)
 
-## Step 4.4 Querying Against a Table <a id="step4.4"></a>
+## Querying Against a Table
 
-### 4.4.1 Registering a Temporary Table
+### Registering a Temporary Table
 
 Now let’s register temporary tables and use SQL syntax to query against that table.
 
@@ -217,7 +216,7 @@ geolocation_temp2.show(10)
 ![Lab4_11](assets/view_results_op_on_rdd_hello_hdp_lab4.png)
 
 
-### 4.4.2  Perform join Operation
+### Perform join Operation
 
 In this section we will perform a join operation geolocation_temp2 table has details of drivers and count of their respective non-normal events. drivermileage_temp1 table has details of total miles travelled by each driver.
 
@@ -249,7 +248,7 @@ joined.show(10)
 
 ![Lab4_13](assets/show_results_joined_table_hello_hdp_lab4.png)
 
-### 4.4.3  Compute Driver Risk Factor
+### Compute Driver Risk Factor
 
 In this section we will associate a driver risk factor with every driver. Driver risk factor will be calculated by dividing total miles travelled by non-normal event occurrences.
 
@@ -277,13 +276,13 @@ risk_factor_spark.show(10)
 
 ![Lab4_15](assets/view_results_filtertable_hello_hdp_lab4.png)
 
-## Step 4.5: Load and Save Data into Hive as ORC <a id="step4.5"></a>
+## Load and Save Data into Hive as ORC
 
 In this section we store data in a smart ORC (Optimized Row Columnar) format using Spark. ORC is a self-describing type-aware columnar file format designed for Hadoop workloads. It is optimized for large streaming reads and with integrated support for finding required rows fast. Storing data in a columnar format lets the reader read, decompress, and process only the values required for the current query. Because ORC files are type aware, the writer chooses the most appropriate encoding for the type and builds an internal index as the file is persisted.
 
 Predicate pushdown uses those indexes to determine which stripes in a file need to be read for a particular query and the row indexes can narrow the search to a particular set of 10,000 rows. ORC supports the complete set of types in Hive, including the complex types: structs, lists, maps, and unions.
 
-### 4.5.1 Create an ORC table
+### Create an ORC table
 
 Create a table and store it as ORC. Specifying as *orc* at the end of the SQL statement below ensures that the Hive table is stored in the ORC format.
 
@@ -297,7 +296,7 @@ hiveContext.sql("show tables").show()
 
 ![create_orc_table](assets/create_orc_table_hello_hdp_lab4.png)
 
-### 4.5.2 Convert data into ORC table
+### Convert data into ORC table
 
 Before we load the data into hive table that we created above, we will have to convert our data file into ORC format too.
 
@@ -308,7 +307,7 @@ risk_factor_spark.write.format("orc").save("risk_factor_spark")
 
 ![risk_factor_orc](assets/convert_orc_table_hello_hdp_lab4.png)
 
-### 4.5.3 Load the data into Hive table using load data command
+### Load the data into Hive table using load data command
 
 ~~~scala
 %spark2
@@ -317,7 +316,7 @@ hiveContext.sql("load data inpath 'risk_factor_spark' into table finalresults")
 
 ![load_data_to_finalresults](assets/load_data_to_finalresults_hello_hdp_lab4.png)
 
-### 4.5.4 Create the final table Riskfactor using CTAS
+### Create the final table Riskfactor using CTAS
 
 ~~~scala
 %spark
@@ -326,13 +325,13 @@ hiveContext.sql("create table riskfactor as select * from finalresults").toDF()
 
 ![create_table_riskfactor_spark](assets/create_table_riskfactor_spark.png)
 
-### 4.5.5 Verify Data Successfully Populated Hive Table in Hive
+### Verify Data Successfully Populated Hive Table in Hive
 
 Execute a select query to verify your table has been successfully stored. You can go to Ambari Hive user view to check whether the Hive table you created has the data populated in it.
 
 ![riskfactor_table_populated](assets/riskfactor_table_populated.png)
 
-## Full Spark Code Review for Lab
+## Full Spark Code Review
 
 **Instantiate SparkSession**
 
@@ -412,7 +411,7 @@ hiveContext.sql("load data inpath 'risk_factor_spark' into table finalresults")
 hiveContext.sql("create table riskfactor as select * from finalresults").toDF()
 ~~~
 
-## Summary <a id="summary-lab4"></a>
+## Summary
 
 Congratulations! Let’s summarize the spark coding skills and knowledge we acquired to compute risk factor associated with every driver. Apache Spark is efficient for computation because of its **in-memory data processing engine**. We learned how to integrate hive with spark by creating a **Hive Context**. We used our existing data from Hive to create an **RDD**. We learned to perform **RDD transformations and actions** to create new datasets from existing RDDs. These new datasets include filtered, manipulated and processed data. After we computed **risk factor**, we learned to load and save data into Hive as **ORC**.
 
@@ -425,7 +424,7 @@ To learn more about Spark, checkout these resources:
 -   [Learning Spark](http://www.amazon.com/Learning-Spark-Lightning-Fast-Data-Analysis/dp/1449358624/ref=sr_1_1?ie=UTF8&qid=1456010684&sr=8-1&keywords=apache+spark)
 -   [Advanced Analytics with Spark](http://www.amazon.com/Advanced-Analytics-Spark-Patterns-Learning/dp/1491912766/ref=pd_bxgy_14_img_2?ie=UTF8&refRID=19EGG68CJ0NTNE9RQ2VX)
 
-## Appendix A: Run Spark Code in the Spark Interactive Shell <a id="run-spark-in-shell"></a>
+## Appendix A: Run Spark in the Spark Interactive Shell <a id="run-spark-in-shell"></a>
 
 1) Open your terminal or putty.  SSH into the Sandbox using `root` as login and `hadoop` as password.
 
