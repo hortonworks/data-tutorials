@@ -28,6 +28,7 @@ In this tutorial, you will learn about the different features available in the H
 
 -   [Concepts](#concepts)
 -   [Learn the Host Address of Your Environment](#learn-the-host-address-of-your-environment)
+-   [Add Sandbox Hostname to Your Hosts File](#add-sandbox-hostname-to-your-hosts-file)
 -   [Connect to the Welcome Screen](#connect-to-the-welcome-screen)
 -   [Multiple Ways to Execute Terminal Commands](#multiple-ways-to-execute-terminal-commands)
 -   [Explore Ambari](#explore-ambari)
@@ -48,6 +49,34 @@ The Sandbox is a straightforward, pre-configured, learning environment that cont
 Once you installed the Sandbox VM or container, it resolves to the host on your environment, the address of which varies depending upon the Virtual Machine you are using(Vmware, VirtualBox, etc) or container (Docker, etc). As, a general thumb rule, wait for the installation to complete and confirmation screen will tell you the host your sandbox resolves to. For example:
 
 In case of Docker: `host` would be `127.0.0.1`
+
+## Add Sandbox Hostname to Your Hosts File
+
+To be able to access HDF services on the Sandbox from our local machine's browser, you will need to add `sandbox-hdf.hortonworks.com` mapped to your IP address to the list of hosts in your **hosts** file. The location of the **hosts** file is different for each OS.
+
+For mac users, enter the following command in your terminal:
+
+~~~
+echo '{Host-Name} sandbox-hdf.hortonworks.com' | sudo tee -a /private/etc/hosts
+~~~
+> NOTE: In single machine, just replace {Host-Name} with 127.0.0.1
+
+For most Linux users, enter the following command in your terminal:
+
+~~~
+echo '{Host-Name} sandbox-hdf.hortonworks.com' | sudo tee -a /private/etc/hosts
+~~~
+> NOTE: In single machine, just replace {Host-Name} with 127.0.0.1
+
+1\. For Windows 10 users, open Notepad as an **administrator**. Open the "hosts" file at this path: `c:\Windows\System32\drivers\etc\hosts` and add:
+
+~~~bash
+127.0.0.1   localhost   sandbox-hdf.hortonworks.com
+~~~
+
+> Note: Make sure to remove the "#" hash symbol from the left side of the line and add "sandbox-hdf.hortonworks.com".
+
+Then save the file.
 
 ## Connect to the Welcome Screen
 
