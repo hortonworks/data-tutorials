@@ -13,6 +13,7 @@ product: HDF
 series: HDF > Develop with Hadoop > Hello World
 ---
 
+
 # Analyze Transit Patterns with Apache NiFi
 
 ## Introduction
