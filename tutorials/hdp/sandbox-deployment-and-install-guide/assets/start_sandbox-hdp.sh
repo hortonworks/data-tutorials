@@ -1,10 +1,10 @@
 #!/bin/bash
-#echo "Waiting for docker daemon to start up:"
-#until /usr/bin/docker ps 2>&1| grep STATUS>/dev/null; do  sleep 1; done;  >/dev/null
-#/usr/bin/docker ps -a | grep sandbox
-#if [ $? -eq 0 ]; then
-# /usr/bin/docker start sandbox
-#else
+echo "Waiting for docker daemon to start up:"
+until docker ps 2>&1| grep STATUS>/dev/null; do  sleep 1; done;  >/dev/null
+docker ps -a | grep sandbox-hdp
+if [ $? -eq 0 ]; then
+ docker start sandbox-hdp
+else
 docker run --name sandbox-hdp --hostname "sandbox.hortonworks.com" --privileged -d \
 -p 1111:111 \
 -p 1000:1000 \
@@ -84,7 +84,7 @@ docker run --name sandbox-hdp --hostname "sandbox.hortonworks.com" --privileged 
 -p 15505:15505 \
 -p 2222:22 \
 sandbox-hdp /usr/sbin/sshd -D
-#fi
+fi
 
 docker exec -t sandbox-hdp make --makefile /usr/lib/hue/tools/start_scripts/start_deps.mf  -B Startup -j -i
 docker exec -t sandbox-hdp nohup su - hue -c '/bin/bash /usr/lib/tutorials/tutorials_app/run/run.sh' &>/dev/null
