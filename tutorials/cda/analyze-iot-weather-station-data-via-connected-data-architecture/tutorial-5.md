@@ -1,11 +1,8 @@
 ---
-title: Analyze IoT Weather Station Data via Connected Data Architecture
-tutorial-id: 820
-platform: hdp-2.6.0
-tags: [nifi, minifi, raspberry pi, connected data architecture, hbase, iot, weather]
+title: Visualize Weather Data with Zeppelin's Phoenix Interpreter
 ---
 
-# Visually Monitor Weather Data with Zeppelin's Phoenix Interpreter
+# Visualize Weather Data with Zeppelin's Phoenix Interpreter
 
 ## Introduction
 
@@ -13,20 +10,21 @@ You'll use Phoenix to perform SQL queries against the HBase table by mapping a p
 
 ## Prerequisites
 
-- Completed **Store Data into HDP HBase**
+- Completed previous tutorials in the series
 
 ## Outline
 
-- Step 1: Create Zeppelin Notebook
-- Step 2: Create Phoenix Table Mapping to HBase Table
-- Step 3: Monitor Sense HAT Weather Data
-- Step 4: Visualize Weather Readings on a Map
-- Summary
-- Further Readings
+- [Step 1: Create Zeppelin Notebook](#create-zeppelin-notebook-5)
+- [Step 2: Create Phoenix Table Mapping to HBase Table](#create-phoenix-table-mapping-to-hbase-table-5)
+- [Step 3: Monitor Temperature Over Time](#monitor-temperature-over-time-5)
+- [Step 4: Monitor Humidity Over Time](#monitor-humidity-over-time-5)
+- [Step 5: Monitor Pressure Over Time](#monitor-pressure-over-time-5)
+- [Summary](#summary-5)
+- [Further Readings](#further-readings-5)
 
 ### Step 1: Create Zeppelin Notebook
 
-Select notebook next to the Zeppelin icon, and hit “Create new note” to create the Zeppelin Notebook. Name it `Visualize Weather Data with Phoenix SQL`.
+Select notebook next to the Zeppelin icon, and hit “Create new note” to create the Zeppelin Notebook. Name it `Visualize Weather Data with Phoenix SQL`. Choose "Default Interpreter" as `jdbc`.
 
 ### Step 2: Create Phoenix Table Mapping to HBase Table
 
@@ -34,97 +32,98 @@ We must create a phoenix table to map to our HBase table in order to perform SQL
 
 ~~~SQL
 %jdbc(phoenix)
-CREATE TABLE IF NOT EXISTS "sensor_readings" ("row" VARCHAR primary key,"weather"."Sensor_ID" VARCHAR, "weather"."Time" VARCHAR, "weather"."Public_IP.geo.city" VARCHAR, "weather"."Public_IP.geo.subdivision.isocode.0" VARCHAR, "weather"."Temp_C" VARCHAR,
-"weather"."Pressure_Pa" VARCHAR,"weather"."Sealevel_Pressure_Pa" VARCHAR,"weather"."Altitude_m" VARCHAR)
+CREATE TABLE IF NOT EXISTS "sense_hat_logs" ("row" VARCHAR primary key,"weather"."Serial" VARCHAR, "weather"."Public_IP.geo.city" VARCHAR, "weather"."Public_IP.geo.subdivision.isocode.0" VARCHAR, "weather"."Temp_F" VARCHAR,
+"weather"."Pressure_In" VARCHAR,"weather"."Humidity" VARCHAR)
 ~~~
+
+![create_table_phoenix](assets/tutorial5/create_table_phoenix.png)
 
 Run quick test to verify Phoenix table successfully mapped to HBase table.
 
-Display the first 10 rows of the Phoenix table.
+Display the first 10 rows of the Phoenix table using Zeppelin's **Table Visualization**.
 
 ~~~SQL
 %jdbc(phoenix)
-select * from "sensor_readings" limit 10
+select * from "sense_hat_logs" limit 10
 ~~~
 
-### Step 3: Monitor Sense HAT Weather Data
+![load_data_table_view](assets/tutorial5/load_data_table_view.png)
 
-### 3.1 Monitor AVG, MIN, MAX for Temperature in Table View
+**Figure 1:** Zeppelin's Table Visualization
 
-Perform Aggregate functions to find the AVG, MIN and MAX temperature out of all the records in our Phoenix table.
+### Step 3: Monitor Temperature Over Time
 
 ~~~SQL
 %jdbc(phoenix)
-select COUNT("Temp_C") AS COUNT_TEMP,
-AVG(TO_NUMBER("Temp_C")) AS MEAN_TEMP,
-MIN("Temp_C") AS MIN_TEMP,
-MAX("Temp_C") AS MAX_TEMP
-from "sensor_readings" where TO_NUMBER("Sensor_ID") = 1
+select "row" AS DATE_TIME,
+"Temp_F" AS TEMP_F
+from "sense_hat_logs"
 ~~~
 
-**Visualize in temperature table**
+![temp_over_time](assets/tutorial5/temp_over_time.png)
 
-### 3.2 Monitor AVG, MIN, MAX for Pressure in Table View
+**Figure 2:** Temperature Line Chart Visualization
 
-**Pressure**
+The graph reveals the temperature was its highest at 100.72
+(July 9, 2017 at 11:51 PM) and lowest at 94.71 (July 9, 2017 at 11:34 PM).
+
+As you will notice even after we tried to calibrate the Sense HAT's temperature
+readings, the temperature is still off compared to actual temperature of the
+living room. The best solution is to get the Sense HAT away from the Raspberry
+Pi, but then that defeats the purpose of the Sense HAT being compact.
+
+### Step 4: Monitor Humidity Over Time
+
+Humidity is the ratio of actual water vapour in the air compared to the actual
+amount of water vapour the air is able to hold at a particular temperature.
+Relative humidity tells us how close the air is being saturated. The higher
+the air temperature, the lower the relative humidity percentage and vise versa.
 
 ~~~SQL
 %jdbc(phoenix)
-select COUNT("Pressure_Pa") AS COUNT_P,
-AVG(TO_NUMBER("Pressure_Pa")) AS MEAN_P,
-MIN("Pressure_Pa") AS MIN_P,
-MAX("Pressure_Pa") AS MAX_P
-from "sensor_readings" where TO_NUMBER("Sensor_ID") = 1
+select "row" AS DATE_TIME,
+"Humidity" AS HUMIDITY_Percentage_RH
+from "sense_hat_logs"
 ~~~
 
-**Visualize in pressure table**
+![humidity_over_time](assets/tutorial5/humidity_over_time.png)
 
+**Figure 2:** Humidity Line Chart Visualization
 
-### 3.3 Monitor AVG for Temp, Pressure in Table View
+The chart above reveals the Relative Humidity Percentage was at its highest
+around 40.8% (July 9, 2017 at 11:00 PM) while its lowest was 33.75%
+(July 9, 2017 at 11:52 PM). At 40.8%, the air was more saturated
+than 33.75%. Relative Humidity
+
+### Step 5: Monitor Pressure Over Time
+
+Barometric Pressure is the force exerted by the atmosphere at a particular point.
+Forecasters monitor the changes in air pressure to predict short-term
+changes in the weather.
 
 ~~~SQL
 %jdbc(phoenix)
-select AVG(TO_NUMBER("Temp_C")) AS MEAN_TEMP,
-AVG(TO_NUMBER("Pressure_Pa")) AS MEAN_P
-from "sensor_readings" where TO_NUMBER("Sensor_ID") = 1
+select "row" AS DATE_TIME,
+"Pressure_In" AS PRESSURE
+from "sense_hat_logs"
 ~~~
 
-**Visualize Sense HAT Weather Readings in table**
+![pressure_over_time](assets/tutorial5/pressure_over_time.png)
 
-### 3.4 Monitor MIN Pressure per Hour in Line Graph
+The chart above shows the barometric pressure stayed stable at around 29.98 and
+29.97 over 10:42 PM on July 9, 2017 to 12:22 AM July 10, 2017.
 
-Let’s add line graph to visualize the Pressure across 4 hours. We will show the MIN pressure at each hour and the city of the recording.
-
-~~~SQL
-%jdbc(phoenix)
-select
-"Public_IP.geo.city", HOUR(TO_TIMESTAMP("Time")) AS HOUR, MIN("Pressure_Pa") AS MIN_PRESSURE
-from "sensor_readings"
-where TO_NUMBER("Pressure_Pa") > 101000 AND TO_NUMBER("Pressure_Pa") <= 103000
-group by "Public_IP.geo.city", HOUR
-order by HOUR
-~~~
-
-Analysis of the Line Graph: The MIN pressure at HOUR 16 in Fremont was 101,776 and at HOUR 19 in Fremont was 101,832.
-
-### 3.5 Monitor MAX Temp per Hour in Line Graph
-
-~~~SQL
-%jdbc(phoenix)
-select
-"Public_IP.geo.city", HOUR(TO_TIMESTAMP("Time")) AS HOUR, MAX("Temp_C") AS MAX_TEMP
-from "sensor_readings"
-where TO_NUMBER("Temp_C") <= 22.4
-group by "Public_IP.geo.city", HOUR
-order by HOUR
-~~~
-
-The MAX temperature at HOUR 16 in Fremont was [fill_in](#) and at HOUR 19 in Fremont was [fill_in](#).
-
-### Step 4: Visualize Weather Readings on a Map
-
-
+After comparing the pressure for San Jose at "The Weather Channel," the readings
+we obtained are within same range. The Weather Channel predicts that pressure
+will increase from 29.90 inches. Our graph also supports that prediction.
+This **rise in pressure** indicates that the **weather** may soon **clear**, turn **fair** and
+**sunny**.
 
 ### Summary
 
-Congratulations, now you know how to write Phoenix SQL queries against an HBase table. You also know how to use some of the aggregate functions offered by Phoenix to tell us MAX, MIN, AVG. You also know how to use the Phoenix Interpreter integrated with Zeppelin to visualize the data associated with our weather sensor. Now you can generate Line Graphs in Zeppelin to show you the (MIN, MAX) temperature, pressure on a particular hour and the location that the those attributes were read for data analysis.
+Congratulations, now you know how to write Phoenix SQL queries against an HBase table. You performed Phoenix SQL like queries against HBase to monitor temperature, humidity and pressure over time. You also know how to use the Phoenix Interpreter integrated with Zeppelin to visualize the data associated with our weather sensor. Feel free to further explore the different Zeppelin Interpreters and other visualizations for your data analysis journey.
+
+### Further Readings
+
+- Read more about Zeppelin at [Apache Zeppelin Docs](https://zeppelin.apache.org/)
+- Read more about Phoenix at [Apache Phoenix Docs](https://phoenix.apache.org/)
