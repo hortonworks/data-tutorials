@@ -70,7 +70,7 @@ If you have a R-Pi and Sense HAT, follow track 1: tutorials 1 - 4. If you don’
 
 **IoT and Connected Data Architecture Concepts** - Familiarize yourself with Raspberry Pi, Sense HAT Sensor Functionality, Docker, HDF and HDP Sandbox Container Communication, NiFi, MiNiFi, Zookeeper, HBase, Phoenix and Zeppelin.
 
-**Deploy IoT Weather Station** - Set up the IoT Weather Station for processing the sensor data. You will install Raspbian OS and MiNiFi on the R-Pi, HDF Sandbox and HDP Sandbox on your local machine.
+**Deploy IoT Weather Station and Connected Data Architecture** - Set up the IoT Weather Station for processing the sensor data. You will install Raspbian OS and MiNiFi on the R-Pi, HDF Sandbox and HDP Sandbox on your local machine.
 
 **Collect Sense HAT Weather Data on CDA** - Program the R-Pi to retrieve the sensor data from the Sense HAT Sensor. Embed a MiNiFi Agent onto the R-Pi to collect sensor data and transport it to NiFi on HDF via Site-to-Site. Store the Raw sensor readings into HDFS on HDP using NiFi.
 
