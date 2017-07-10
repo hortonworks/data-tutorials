@@ -1,11 +1,8 @@
 ---
-title: Analyze IoT Weather Station Data via Connected Data Architecture
-tutorial-id: 820
-platform: hdp-2.6.0
-tags: [nifi, minifi, raspberry pi, connected data architecture, hbase, iot, weather]
+title: Deploy IoT Weather Station and Connected Data Architecture
 ---
 
-# Deploy IoT Weather Station
+# Deploy IoT Weather Station and Connected Data Architecture
 
 ## Introduction
 
@@ -13,99 +10,90 @@ You'll make an IoT Weather Station with a Raspberry Pi and Sense HAT. Additional
 
 ## Prerequisites
 
-- Downloaded and Installed [Docker Engine](https://docs.docker.com/engine/installation/) on Local Machine
-    - Set [Docker Memory to 12GB](https://docs.docker.com/docker-for-mac/#preferences) to run both HDF and HDP Sandboxes on one laptop.
+- Downloaded and Installed **Docker Engine** onto your computer, refer to [Install Docker](https://docs.docker.com/engine/installation/) if you need help
+    - Set **Docker Memory to 12GB** to run both HDF and HDP Sandboxes on one laptop, refer to [Docker Preferences Overview](https://docs.docker.com/docker-for-mac/#preferences) if you need help configuring Docker Memory.
         - Link above will take you to Docker preferences for Mac. In the Docker documentation, choose your OS.
-- Downloaded Latest [HDF and HDP Sandboxes](https://hortonworks.com/downloads) for Docker Engine
-- Installed Latest [HDF and HDP Sandboxes](https://github.com/hortonworks/data-tutorials/blob/master/tutorials/hdp/hdp-2.6/sandbox-deployment-and-install-guide/tutorial-0.md) on Local Machine
+- Downloaded Latest [HDF and HDP Docker Sandboxes](https://hortonworks.com/downloads) for Docker Engine
+- **Installed Latest HDF and HDP Docker Sandboxes** onto your computer, refer to [Sandbox Deployment and Install Guide](https://hortonworks.com/tutorial/sandbox-deployment-and-install-guide/section/3/) if you need help
 - Downloaded and Installed Latest [Raspbian OS](https://www.raspberrypi.org/downloads/raspbian/) onto Raspberry Pi
-    - If you need help installing Raspbian OS onto the Raspberry Pi, refer to Appendix A.
-- Downloaded the latest [MiNiFi Toolkit](https://nifi.apache.org/minifi/download.html) onto your local machine
-- Read Analyze IoT Weather Station Data via Connected Data Architecture Intro
+    - If you need help installing Raspbian OS onto the Raspberry Pi, refer to **Appendix A**.
+- Read "Analyze IoT Weather Station Data via Connected Data Architecture" Overview
 
 ## Outline
 
-### Steps for Embedding MiNiFi on IoT Device(Raspberry Pi)
--   Step 1: Connect Sense HAT to Raspberry Pi
--   Step 2: SSH into the Raspberry Pi
-    - 2.1 Install the Sense HAT Software
--   Step 3: Install MiNiFi Java Agent onto Raspberry Pi
-    - 3.1: Install OS Dependencies
+- [Step 1: Install Sense HAT and MiNiFi onto Raspberry Pi](#install-sense-hat-minifi-rpi-2)
+- [Step 2: Calibrate Raspberry Pi Timezone](#calibrate-raspberry-pi-timezone-2)
+- [Step 3: Start HDF Sandbox and Setup NiFi Site-To-Site](#start-hdf-setup-site-to-site-2)
+- [Step 4: Start HDP Sandbox and Disable Irrelevant Services](#start-hdp-disable-irrelevant-services-2)
+- [Step 5: Connect HDF and HDP to Deploy Connected Data Architecture](#connect-hdf-hdp-deploy-cda-2)
+- [Summary](#summary-2)
+- [Further Reading](#further-reading-2)
+- [Appendix A: Install Raspbian OS onto Raspberry Pi](#appendix-a-install-raspbian-2)
+- [Appendix B: Reset Raspberry Pi Time and Date for your Region](#reset-rpi-time-date-2)
 
-### Steps for Deploying MiNiFi, HDF, HDP Connected Data Architecture
--   Step 4: Start HDF Sandbox
-    - 4.1: Configure NiFi to Receive Data
-    - 4.2: Restart NiFi
-    - 4.3: Add GeoLite2 database
--   Step 5: Start HDP Sandbox
-    - 5.1 Disable Oozie, Flume
-    - 5.2 Start HBase
--   Step 6: Connect HDF and HDP
-    - 6.1: Update hosts file for HDF and HDP CentOS
-    - 6.2: Create HBaseClient Service in HDF NiFi
--   Summary
--   Further Reading
--   Appendix A: Install Raspbian OS onto Raspberry Pi
--   Appendix B: Verify Communication between HDF and HDP Sandboxes
+### Step 1: Install Sense HAT and MiNiFi onto Raspberry Pi
 
-There are two phases you will go through in deploying IoT Weather Station Data Analytics, which include embedding MiNiFi onto the Raspberry Pi and deploying Connected Data Architecture between MiNiFi, HDF Sandbox and HDP Sandbox.
+### 1.1: Connect Sense HAT Hardware to Raspberry Pi
 
-## Embedding MiNiFi on Raspberry Pi
-
-### Step 1: Connect Sense HAT to Raspberry Pi
+In this section, you learn to connect the Sense HAT to the Raspberry Pi using their header pins. The hardware needs to be connected to Raspberry Pi to draw
+real-time sensor readings.
 
 1\. Connect the Sense HAT's 40 female pins to the Raspberry Pi's 40 male pins.
 
 ![raspberry-pi-pins](assets/tutorial2/raspberry-pi-pins.jpg)
 
+**Figure 1:** Raspberry Pi 40 male pin headers
+
 ![sense-hat-pins](assets/tutorial2/sense-hat-pins.jpg)
+
+**Figure 2:** Sense HAT 40 female pin headers
 
 ![iot-device-pins-connected](assets/tutorial2/iot-device-pins-connected.jpg)
 
-### Step 2: SSH into the Raspberry Pi
+**Figure 3:** Sense HAT female pins connected to Raspberry Pi male pins
 
-If you haven't installed Raspbian on your device, refer to **Appendx A**.
+### 1.2: Power the Raspberry Pi and Establish Internet Connection
 
-1\. Open your terminal, clone the **Raspberry Pi Finder** Open Source Program provided by Adafruit Inc:
+The Raspberry Pi needs Internet Access to be able to connect to your computer.
 
-~~~bash
-wget https://github.com/adafruit/Adafruit-Pi-Finder/releases/download/3.0.0/PiFinder-3.0.0-osx-x64.zip
-unzip PiFinder-*-osx-*.zip
-~~~
+Make the connection between the Raspberry Pi and your router using an
+ethernet cable. Plug in the Micro USB Power Supply to power your Raspberry Pi.
 
-2\. Open Raspberry Pi Finder and **Click Find My Pi!**:
+![power-ethernet_rpi](assets/tutorial2/power-ethernet_rpi.png)
+
+**Figure 4:** Raspberry Pi Ethernet Cable Connected for Internet Access
+
+### 1.3: SSH into the Raspberry Pi
+
+In this section, you learn to use **Adafruit's Pi Finder** to discover your Raspberry Pi's IP address, so you can access it remotely.
+
+> Note: If you haven't installed Raspbian OS on your Raspberry Pi, refer to **Appendx A**.
+
+1\. Download Raspberry **Pi Finder** for your appropriate OS at [Adafruit-Pi-Finder Latest Releases](https://github.com/adafruit/Adafruit-Pi-Finder/releases/tag/3.0.0)
+
+2\. Open Raspberry **Pi Finder** and **Click Find My Pi!**:
 
 ![find_my_pi](assets/tutorial2/find_my_pi.png)
 
-3\. Results include the IP address of your Raspberry Pi:
+**Figure 5:** Pi Finder GUI
+
+**Pi Finder** - used to detect _Raspberry Pi IP address_ in a home setting
+
+3\. Results include the **IP address**, **SSH User** and **SSH Password** of your Raspberry Pi:
 
 ![pi_finder_found_my_pi](assets/tutorial2/pi_finder_found_my_pi.png)
 
-4\. SSH into the Pi from your laptop using the ip address you just collect with the following command:
+**Figure 6:** Pi Finder Found My Pi
 
-~~~bash
-#definition
-ssh pi@<pi-ip-addr> -p 22
-~~~
-
-> Note: <pi-ip-addr> will be different for each Raspberry Pi.
-
-Example of the ssh command used to ssh into a raspberry pi:
-
-~~~bash
-#example
-ssh pi@192.168.2.2 -p 22
-~~~
-
-> Note: You'll be asked for the password, enter `raspberry`.
-
-After successfully SSHing into the Raspberry Pi, your console will look similar:
+4\. SSH into the Pi from your laptop by pressing the **Terminal** button.
 
 ![successful_ssh_to_rpi](assets/tutorial2/successful_ssh_to_rpi.png)
 
-### 2.1 Install the Sense HAT Software
+**Figure 7:** Pi Raspbian OS CLI
 
-1\. Download and install the Sense HAT Software.
+### 1.4: Install the Sense HAT Software onto Raspberry Pi
+
+Download and install the Sense HAT Software using the following command:
 
 ~~~bash
 sudo apt-get update
@@ -113,11 +101,13 @@ sudo apt-get install sense-hat
 sudo pip3 install pillow
 ~~~
 
-Now you have the software needed to program the Sense HAT, you will utilize it in the next tutorial.
+Now you have the Sense HAT software library, so you can create a program to retrieve sensor readings, you will utilize it in the next tutorial.
 
-### Step 3: Install MiNiFi Java Agent onto Raspberry Pi
+### 1.5: Install MiNiFi Java Agent onto Raspberry Pi
 
-1\. In Raspbian's OS terminal, download Java 8 and JDK1.8 using the following command:
+In this section, you install Java 8 and JDK 1.8 onto the Raspberry Pi because it is required to run MiNiFi.
+
+Download and Install Java 8 and JDK1.8:
 
 ~~~bash
 sudo apt-get update && sudo apt-get install oracle-java8-jdk
@@ -125,213 +115,307 @@ sudo apt-get update && sudo apt-get install oracle-java8-jdk
 
 > Note: the install will take approximately 10 minutes depending on Raspbian OS resources being used.
 
-2\. Download MiNiFi Java Agent from [apache website downloads](https://www.apache.org/dyn/closer.lua?path=/nifi/minifi/0.1.0/minifi-0.1.0-bin.tar.gz) using the following command:
+2\. Download MiNiFi Java Agent from [Apache nifi minifi Downloads](http://nifi.apache.org/minifi/download.html) under section **Releases -> MiNiFi (Java) -> Binaries**.
+
+3\. Click on `minifi-0.2.0-bin.zip`, then download MiNiFi from any of the links provided onto your computer.
+
+![download_links_minifi](assets/tutorial2/download_links_minifi.png)
+
+4\. Use Pi Finder's **Upload** button to transport MiNiFi application onto your
+Raspberry Pi. Select `minifi-0.2.0-bin.zip` and click **Open**.
+
+![upload_minifi_to_rpi](assets/tutorial2/upload_minifi_to_rpi.png)
+
+5\. Use the Pi Finder's **Terminal** button and then Unzip the MiNiFi project.
 
 ~~~bash
-wget http://public-repo-1.hortonworks.com/HDF/2.1.2.0/minifi-1.0.2.1.2.0-10-bin.tar.gz
+unzip minifi-0.2.0-bin.zip
 ~~~
 
-3\. Unpack the MiNiFi project using the following command:
+A MiNiFi Agent is installed onto the Raspberry Pi. We'll explain more about the MiNiFi Agent in the next tutorial.
 
-~~~bash
-tar -zxvf minifi-*-bin.tar.gz
-~~~
+### 1.6: Download MiNiFi Toolkit onto your Computer
 
-A MiNiFi Agent is embedded onto the Raspberry Pi.
+In this section, you download MiNiFi toolkit onto your computer because it is needed to convert NiFi flow to MiNiFi flow format. In the next tutorial, you will
+built the MiNiFi flow in NiFi.
 
-## Deploying MiNiFi, HDF and HDP Connected Data Architecture
+1\. Download MiNiFi Tookit from [Apache nifi minifi Downloads](http://nifi.apache.org/minifi/download.html) under section **Releases -> MiNiFi Toolkit Binaries -> 0.2.0 - Compatible with MiNiFi Java 0.2.0+**.
 
-> Note: Before deploying HDF and HDP Sandbox, you will need to set the Docker Engine memory to at least 12GB to run both sandboxes on one laptop.
+2\. Click on `minifi-toolkit-0.2.0-bin.zip` then download MiNiFi Toolkit from any of the links provided onto your computer.
 
-### Step 4: Start HDF Sandbox
+3\. Go to the location where MiNiFi was downloaded and Unzip MiNiFi Toolkit
+using your favorite decompression software:
 
-For starting HDF Sandbox, there are two options listed below. **Option1** is for users who have not downloaded or installed HDF Sandbox in the Docker Engine. **Option 2** is for users who have installed and deployed an HDF Sandbox Docker Container.
+![decompress_minifi_toolkit](assets/tutorial2/decompress_minifi_toolkit.png)
 
-### Option1: For User Who Haven't Deployed HDF Sandbox Container
+Now MiNiFi Toolkit is available for use in the next tutorial.
 
-If you have't downloaded the Docker HDF Sandbox, download it here: [HDF Sandbox Docker](https://hortonworks.com/downloads)
+### Step 2: Calibrate Raspberry Pi Timezone
 
-1\. Run the command to load the docker sandbox image into the docker engine:
+Why is it important to calibrate the timezone on the Raspberry Pi?
 
-~~~bash
-docker load < {name-of-your-hdf-sandbox-docker-image}
-~~~
+In order for your system to have the correct time and date, the timezone needs to be calibrated. An area where this configuration is important is in the next tutorial when you create the Python script that draws timestamp for each sensor readings.
 
-Example of the above docker load command:
+SSH into the Raspberry Pi using Adafruit's Pi Finder **Terminal** button.
 
-~~~bash
-docker load < HDF_2.1.2_docker_image_04_05_2017_13_12_03.tar.gz
-~~~
+1\. Type `sudo raspi-config`
 
-You'll need the script to deploy an HDF Sandbox Container off of the HDF Sandbox Docker image, Download start HDF Sandbox script here: [start_sandbox-hdf.sh](assets/auto-scripts/start_sandbox-hdf.sh)
+- **raspi-config** is used for changing OS configurations and will be used to recalibrate the current date/time for your timezone
 
-1\. run the start_sandbox-hdf.sh script below:
+![raspi_config_menu](assets/tutorial2/raspi_config_menu.png)
 
-~~~bash
-./start_sandboxh-hdf.sh
-~~~
+**Figure 8:** raspi-config main menu
 
-Your Docker HDF Sandbox will deploy as a Container and Start up too. You are now ready to go to **substep 4.1**
+2\. Select `4. Internationalisation Options`. Press "Enter" on keyboard.
 
-### Option 2: For User Who Has Deployed HDF Sandbox Container
+3\. Select `I2 Change Timezone`.
 
-1\. Turn on your HDF Sandbox using the script:
+![change_timezone](assets/tutorial2/change_timezone.png)
 
-~~~bash
-wget https://raw.githubusercontent.com/james94/data-tutorials/master/tutorials/hdf/hdf-2.1/analyze-traffic-pattern-with-apache-nifi/assets/auto_scripts/docker-scripts/docker_sandbox_hdf.sh
-./docker_sandbox_hdf.sh
-~~~
+**Figure 9:** Internationalisation Options Menu
 
-Your Docker HDF Sandbox Container will Start up soon.
+4\. Select your appropriate `Geographic area`.
+
+- Ex: US
+
+![geographic_area](assets/tutorial2/geographic_area.png)
+
+**Figure 10:** Geographic area Selection Items
+
+5\. Select your appropriate `Time zone`.
+
+- Ex: Pacific Ocean
+
+![time_zone](assets/tutorial2/time_zone.png)
+
+**Figure 11:** Time Zone Selection Items
+
+6\. You are brought back to the menu. Select `<Finish>`. Your new calibrated time should display:
+
+![output_calibrated_time](assets/tutorial2/output_calibrated_time.png)
+
+**Figure 12:** Time Zone Calibrated
 
 
-### 4.1: Configure NiFi to Receive Data
+### Step 3: Setup and Start HDF Sandbox
 
-2\. Login to Ambari at:
+> Note: Before starting HDF and HDP Sandbox, you will need to set the Docker Engine memory to at least 12GB to run both sandboxes on one laptop.
 
-~~~bash
-localhost:9080
-~~~
+**Option 1: For Users Who Haven't Deployed HDF Sandbox**
 
-The user/password is `admin/admin`
+Run through this tutorial: [Deploying Hortonworks Sandbox on Docker](https://hortonworks.com/tutorial/sandbox-deployment-and-install-guide/section/3/). It will walk you the general approach to install Hortonworks Sandbox HDF onto Docker on your computer.
 
-3\. Head to Advanced NiFi-Properties in Ambari Config Settings for NiFi. Update the input socket port and add the remote host NiFi runs on:
+**Option 2: For Users Have Deployed HDF Sandbox**
 
-The properties should be updated with the following values:
+Run through "Deploying Hortonworks Sandbox on Docker" section called ["Start Sandbox"](https://hortonworks.com/tutorial/sandbox-deployment-and-install-guide/section/3/#start-sandbox). If you do not have the start_sandbox-hdf script, this section will provide you downloadable access, so you run it to start your sandbox.
 
-~~~bash
-nifi.remote.input.host = <internal ip address>
-nifi.remote.input.socket.port = 17000
-~~~
+### 3.1 Login to Ambari Dashboard UI
 
-> Note: laptop <internal ip addr> was printed as output earlier when you were learning how to SSH into Raspberry Pi. `ifconfig | grep inet`.
+1\. Login to Ambari at `sandbox-cda.hortonworks.com:9080`:
 
-The updates to Advanced NiFi-Properties should look similar as below:
+> Note: The user/password is `admin/admin`
+
+### 3.2: Configure NiFi to Receive Data
+
+In this section, you learn to configure Nifi Site-To-Site protocol, so NiFi nodes or MiNiFi agents can remotely connect to NiFi master node.
+
+Head to `Advanced NiFi-Properties` in Ambari Config Settings for NiFi. Update the following configurations similar to the image below:
+
 
 ![advanced_nifi_properties](assets/tutorial2/nifi_properties_sitetosite.png)
 
-3.1\. Enter NiFi Service in Ambari Stack
+**Figure 13:** Update NiFi Config for Site-to-Site
 
-3.2\. Enter NiFi Configs
+1\. Enter **NiFi Service** in Ambari Stack
 
-3.3\. Filter search for **nifi.remote**
+2\. Enter **NiFi Configs**
 
-3.4\. Insert **nifi.remote.input.host** with your `laptop's internal ip address`
+3\. Filter search for **nifi.remote**
 
-3.5\. Verify **nifi.remote.input.http.enabled** checked
+4\. Insert **nifi.remote.input.host** with your `<host machine ip address>`
 
-3.6\. Insert **nifi.remote.input.socket.port** with `17000`
+> Note: `<host machine ip address>` for linux/mac, can be found with the terminal command: `ifconfig | grep inet`. For Windows, use the command prompt command as an administrator: `ipconfig`, then under "Wireless LAN adapter Wi-Fi," retrieve the value from "IPv4 Address".
 
-3.7\. Save the configuration.
+5\. Verify **nifi.remote.input.http.enabled** checked
 
-Now NiFi is configured for Socket Site-To-Site protocol.
+6\. Insert **nifi.remote.input.socket.port** with `17000`
 
-### 4.2: Restart NiFi
+7\. Save the configuration. Write in Notes `Configured NiFi for Socket Site-To-Site`
 
-3\. Restart NiFi from Ambari with the **orange restart button** for the changes to take effect.
+Now NiFi is configured for Socket Site-To-Site protocol. If you encounter issues deploying MiNiFi to NiFi flow, it could be because the value **nifi.remote.iput.host** changed or **nifi.remote.input.socket.port** you chose is already being used. Of course there are other reasons for issues, but these two are ones to be mindful of.
 
-### 4.3: Add GeoLite2 database to HDF Sandbox CentOS
+### 3.3: Restart NiFi
 
-You will need to add the GeoLite2 to HDF Sandbox CentOS for when you add geographic location enhancement to the NiFi DataFlow.
+Restart NiFi from Ambari with the **orange restart button** for the changes to take effect.
 
-4\. SSH into the HDF Sandbox:
+### 3.4: Add GeoLite2 database to HDF Sandbox CentOS
 
-~~~
-ssh root@127.0.0.1 -p 12222
-~~~
+Add the GeoLite2 to HDF Sandbox CentOS, which is a database filled with Public IP Addresses mapped to geographic insights.
 
-5\. Create directory for GeoFile:
+1\. Access HDF Web Shell Client at `sandbox-cda.hortonworks.com:14200`. User/Password is `root/hadoop`.
 
-~~~
-mkdir -p /tmp/nifi/GeoFile
-~~~
+![hdf_web_shell](assets/tutorial2/hdf_web_shell.png)
 
-6\. Ensure NiFi has access to that location:
+**Figure 14:** HDF Web Shell
 
-~~~
-chmod 777 -R /tmp/nifi
-~~~
+> Note: You will be prompted to change the password if this is your first time logging into the Sandbox.
 
-7\. Download GeoLite2-City.mmdb to specified location GeoEnrichIP looks:
+
+2\. Create directory for GeoFile. Change permissions of the directory to ensure NiFi has access.
 
 ~~~
-cd /tmp/nifi/GeoFile
-wget https://github.com/hortonworks/data-tutorials/raw/master/tutorials/hdp/hdp-2.5/refine-and-visualize-server-log-data/assets/GeoLite2-City.mmdb
+mkdir -p /sandbox/tutorial-id/820/nifi/input/GeoFile
+chmod 777 -R /sandbox/tutorial-id/820/nifi/
 ~~~
 
-The **warning message** on the GeoEnrichIP processor should disappear:
+3\. Download GeoLite2-City.mmdb to specified location GeoEnrichIP looks:
 
+~~~
+cd /sandbox/tutorial-id/820/nifi/input/GeoFile
+wget http://geolite.maxmind.com/download/geoip/database/GeoLite2-City.tar.gz
+tar -zxvf GeoLite2-City.tar.gz
+~~~
 
-### Step 5: Start HDP Sandbox
+![added_geolite_to_hdf](assets/tutorial2/added_geolite_to_hdf.png)
 
-For starting HDP Sandbox, there are two options listed below. **Option1** is for users who have not downloaded or installed HDP Sandbox in the Docker Engine. **Option 2** is for users who have installed and deployed an HDP Sandbox Docker Container.
+**Figure 15:** Downloaded and Extracted GeoLite2-City Database
 
-### Option1: For User Who Haven't Deployed HDF Sandbox Container
+4\. Get the full pathname to GeoLite2-City.mmdb:
 
-If you have't downloaded the the latest Docker HDP Sandbox, download it here: [HDP Sandbox Docker](https://hortonworks.com/downloads)
+~~~
+cd GeoLite2-City_[date-updated]
+ls
+pwd
+~~~
 
-1\. Run the command to load the Docker HDP Sandbox image into the docker engine:
+![get_filepath_geolite_dbfile](assets/tutorial2/get_filepath_geolite_dbfile.png)
+
+**Figure 16:** Grab Full Pathname to GeoLite2-City.mmdb file
+
+Note down the folder name that GeoLite2-City.mmdb is located in. According to the image above, the full pathname is: `/sandbox/tutorial-id/820/nifi/input/GeoFile/GeoLite2-City_20170704/GeoLite2-City.mmdb`
+
+> Note: GeoLite2-City_[date-updated] according to the image above is GeoLite2-City_20170704. However, at the time you download the GeoLite DB file, your [date-updated] will most likely be different than 20170704, so if needed, update the full pathname.
+
+This full pathname will be used in tutorial 4 when you build the NiFi Flow that pulls in geographic insights.
+
+### 3.5: Update the HDF core-site.xml to point to HDP HDFS
+
+You will modify HDF's core-site.xml file, so that it points to the hostname that HDP's HDFS is located at. Thus, HDF services that reference this file will be able to connect to HDP's HDFS.
+
+1\. Open the **core-site.xml** with your favorite text editor or use vi.
 
 ~~~bash
-docker load < {name-of-your-hdp-sandbox-docker-image}
+cd /etc/hadoop/conf
+vi core-site.xml
 ~~~
 
-Example of the above docker load command:
+2\. Replace all occurrences of "sandbox-hdf.hortonworks.com" with "sandbox.hortonworks.com" to point to HDP. Copy the command below, then paste in
+vi command.
 
 ~~~bash
-docker load < HDP_2.6_docker_image_05_05_2017_15_01_40.tar.gz
+:%s/sandbox-hdf.hortonworks.com/sandbox.hortonworks.com/
 ~~~
 
+![core_site_vi_replace_string](assets/tutorial2/core_site_vi_replace_string.png)
 
-You'll need the script to deploy an HDP Sandbox Container off of the HDP Sandbox Docker image, Download the **install and start HDP Sandbox script** here: [start_sandbox-hdp.sh](assets/auto-scripts/start_sandbox-hdp.sh)
+**Figure 17:** Copy/Paste vi Replace Command using the above command
 
-1\. Run the start_sandbox-hdp.sh script below:
+![core_site_vi_replaced_string](assets/tutorial2/core_site_vi_replaced_string.png)
+
+**Figure 18:** "sandbox.hortonworks.com" replaced "sandbox-hdf.hortonworks.com"
+
+3\. Save the file. If you're using vi, Copy/Paste the command `:wq` as a vi
+command.
+
+### 3.6: Update the HDF hbase-site.xml to point to HDP hbase-site
+
+You will modify HDF's hbase-site.xml file, so that it points to the hostname that HDP's HBase is located at. Thus, HDF services that reference this file will be able to connect to HDP's HBase.
+
+1\. Open the **hbase-site.xml** with your favorite text editor.
 
 ~~~bash
-./start_sandbox-hdp.sh
+cd /etc/hbase/conf
+vi hbase-site.xml
 ~~~
 
-Your Docker HDP Sandbox will deploy as a Container and Start up too. You are now ready to go to **substep 5.1**
-
-### Option 2: For User Who Has Deployed HDP Sandbox Container
-
-Download the **start HDP Sandbox Container script** here: [docker_sandbox_hdp.sh](assets/auto-scripts/docker_sandbox_hdp.sh)
-
-1\. Turn on your HDP Sandbox container using the script:
+2\. Replace all occurrences of "sandbox-hdf.hortonworks.com" with "sandbox.hortonworks.com" to point to HDP.
 
 ~~~bash
-./docker_sandbox_hdp.sh
+:%s/sandbox-hdf.hortonworks.com/sandbox.hortonworks.com/
 ~~~
 
-Your Docker HDP Sandbox Container will Start up soon.
+3\. Save the file. If you're using vi, Copy/Paste the command `:wq` as a vi
+command.
 
-### 5.1 Disable Oozie, Flume
+### Step 4: Setup and Start HDP Sandbox
 
-2\. Login to Ambari at:
+**Option 1: For Users Who Haven't Deployed HDP Sandbox**
+
+Run through this tutorial: [Deploying Hortonworks Sandbox on Docker](https://hortonworks.com/tutorial/sandbox-deployment-and-install-guide/section/3/). It will walk you the general approach to install Hortonworks Sandbox HDP onto Docker on your computer.
+
+**Option 2: For Users Have Deployed HDP Sandbox**
+
+Run through "Deploying Hortonworks Sandbox on Docker" section called ["Start Sandbox"](https://hortonworks.com/tutorial/sandbox-deployment-and-install-guide/section/3/#start-sandbox). If you do not have the start_sandbox-hdp script, this section will provide you downloadable access, so you run it to start your sandbox.
+
+### 4.1: Login to Ambari Dashboard UI
+
+Login to Ambari at `sandbox-cda.hortonworks.com:8080`:
+
+user is `admin`. password you can learn to set up in [Learning the Ropes of Hortonworks Sandbox: Section 2.2](https://hortonworks.com/tutorial/learning-the-ropes-of-the-hortonworks-sandbox/#setup-ambari-admin-password)
+
+### 4.2: Disable Oozie, Flume, Hive
+
+These are services that will not be used in this project, so you should turn them off to save memory.
+
+In the left hand side of HDP Services on the Ambari Stack, turn off **Oozie**, **Flume** and **Hive** with Ambari **Service Actions -> Stop** since you'll need more memory to run HBase.
+
+### 4.3: Verify HBase RPC Bindings Are configured
+
+You will verify HBase RPC Bindings are configured because they are needed for remote services to be able to connect to HBase.
+
+1\. Go to HBase Service, Configs, Advanced. Scroll down to **Custom hbase-site**
+
+2\. Check if the following properties exist, else add them and click
+**Add Property ...**:
 
 ~~~bash
-localhost:8080
+hbase.master.ipc.address=0.0.0.0
+hbase.regionserver.ipc.address=0.0.0.0
+hbase.rpc.engine=org.apache.hadoop.hbase.ipc.SecureRpcEngine
 ~~~
 
-user is `admin`. password is what you set it up as in [Learning the Ropes of Hortonworks Sandbox: Section 2.2](https://hortonworks.com/tutorial/learning-the-ropes-of-the-hortonworks-sandbox/#setup-ambari-admin-password)
+![hbase_rpc_bindings_not_exist](assets/tutorial2/hbase_rpc_bindings_not_exist.png)
 
-3\. In the left hand side of HDP Services on the Ambari Stack, turn off Oozie and Flume with Ambari **Service Actions -> Stop** since you'll need more memory to run HBase.
+**Figure 19:** HBase RPC Bindings Not Configured
 
-### 5.2 Start HBase
+![add_hbase_rpc_bindings](assets/tutorial2/add_hbase_rpc_bindings.png)
 
-4\. Turn on HBase Service with Ambari **Service Actions -> Start**
+**Figure 20:** Add HBase RPC Bindings
+
+3\. Once the Property has been added, **Save** the configuration and name it
+`HBase RPC Bindings Configured`.
+
+![verify_hbase_rpc_bindings](assets/tutorial2/verify_hbase_rpc_bindings.png)
+
+**Figure 21:** HBase RPC Bindings Configured
+
+### 4.4: Restart HBase
+
+Start the HBase Service with Ambari **Service Actions -> Start**. If **Maintenance Mode** is on, turn it off.
 
 ![hbase_turn_on](assets/tutorial2/hbase_turn_on.png)
 
+**Figure 22:** Start HBase via Ambari Service Actions
+
 HBase service activated will be indicated by a green check mark.
 
-### Step 6: Connect HDF and HDP
+### Step 5: Connect HDF and HDP to Deploy Connected Data Architecture
 
-### 6.1: Update hosts file for HDF and HDP CentOS
+### 5.1: Update hosts file for HDF and HDP CentOS
 
-Update the hosts file for HDF and HDP CentOS, so both sandboxes can reach each other using their hostnames.
+Update the **hosts file** on CentOS for each Sandbox, so both sandbox server nodes can reach each other using their hostnames. Without sandboxes being aware of each other, HDF can't connect to HDP.
 
-1\. From your local machine terminal, to find the ip address of each docker sandbox, type or copy/paste the following command:
+1\. Run the following command in your host machine's terminal or command prompt to find the ip address of each docker sandbox:
 
 ~~~bash
 docker network inspect bridge
@@ -339,100 +423,116 @@ docker network inspect bridge
 
 ![docker_bridge_network](assets/tutorial2/docker_bridge_network.png)
 
-> Note: the internal ip address for HDP and HDF Sandbox. You will need these IP addresses in order for each sandbox to be reach each other.
+**Figure 23:** MAC OS Terminal shows Containers that Reside in Docker Bridge Network
 
-2\. Add HDP's ip address mapped to its hostname into HDF's hosts file using the following command:
+> Note: the container ip address for HDP and HDF Sandbox. You will need these IP addresses in order for each sandbox to be reach each other.
 
-~~~bash
-echo '{hdp-ip-address} sandbox.hortonworks.com' | sudo tee -a /private/etc/hosts
-~~~
+2\. Navigate back to HDF Sandbox via Web Shell Client at `sandbox-cda.hortonworks.com:14200`
 
-3\. Add HDF's ip address mapped to its hostname into HDP's hosts file using the following command:
+> Reminder: user/password is `root/password-you-set`
 
-~~~bash
-echo '{hdf-ip-address} sandbox-hdf.hortonworks.com' | sudo tee -a /private/etc/hosts
-~~~
-
-> Note: the two commands were tested on a mac. So, the paths may be different depending on your OS.
-
-### 6.2: Create HBaseClient Service in HDF NiFi
-
-1\. Go to NiFi UI on HDF Sandbox at:
+3\. Add to **HDF's hosts file**, HDP's IP address mapped to its hostname using the following command:
 
 ~~~bash
-localhost:19090/nifi
+echo '{hdp-ip-address} sandbox.hortonworks.com' | sudo tee -a /etc/hosts
 ~~~
 
-2\. At the top right corner, go to **Global Menu -> Controller Settings -> Controller Services -> Plus Button**
+> Example from "sandbox-hdp" in Figure 9: `echo '172.17.0.3 sandbox.hortonworks.com' | sudo tee -a /etc/hosts`
 
-3\. Look for the **HBaseClient Service** in the list of controller services, then add it.
+![add_hdp_hostname_to_hdf_hosts](assets/tutorial2/add_hdp_hostname_to_hdf_hosts.png)
 
-![hbase_controller_service](assets/tutorial2/hbase_controller_service.png)
+4\. Navigate to HDP Sandbox via Web Shell Client at `sandbox-cda.hortonworks.com:4200`
 
-4\. Configure the HBaseClient Service and add to the property tab under **Hadoop Configuration Files**, the file path:
+> Reminder: user/password is `root/password-you-set`
+
+5\.  Add to **HDP's hosts file**, Add HDF's ip address mapped to its hostname using the following command:
 
 ~~~bash
-/etc/hbase/hbase-site.xml
+echo '{hdf-ip-address} sandbox-hdf.hortonworks.com' | sudo tee -a /etc/hosts
 ~~~
 
-![hbaseclient-service-filepath](assets/tutorial2/hbaseclient-service-filepath.png)
+> Example from "sandbox-hdf" in Figure 9: `echo '172.17.0.2 sandbox-hdf.hortonworks.com' | sudo tee -a /etc/hosts`
 
-NiFi needs this file to be able to connect to the remote HBase instance running on HDP Sandbox.
+![add_hdf_hostname_to_hdp_hosts](assets/tutorial2/add_hdf_hostname_to_hdp_hosts.png)
 
 ## Summary
 
-Congratulations! You know how to setup your own IoT Weather Station using the Raspberry Pi, Sense HAT, MiNiFi, HDF Sandbox and HDP Sandbox. You are also familiar with how to embed MiNiFi onto the Raspberry Pi and how to setup MiNiFi, HDF and HDP Connected Data Architecture. In the next tutorials, you'll focus on data preprocessing, data storage into a nosql database and analyzing the data in real-time as it saves to the database.
+Congratulations! You know how to setup your own IoT Weather Station using the Raspberry Pi, Sense HAT, MiNiFi, HDF Sandbox and HDP Sandbox. You are also familiar with how to install MiNiFi onto the Raspberry Pi. You also have begun setting up Connected Data Architecture between HDF and HDP SB nodes in a Docker Network. In the next tutorials, you'll focus on data preprocessing, data storage into a nosql database and analyzing the data in real-time as it saves to the database.
+
 
 ## Further Reading
 
-- [Raspberry Pi Software Guide](https://www.raspberrypi.org/learning/software-guide/quickstart/)
-- [Installing Operating System Images on MAC OS](https://www.raspberrypi.org/documentation/installation/installing-images/mac.md)
-- [SSH Using Mac or Linux](https://www.raspberrypi.org/documentation/remote-access/ssh/unix.md)
-- [Is your Pi not booting? (The Boot Problems Sticky)](https://www.raspberrypi.org/forums/viewtopic.php?t=58151)
-- [Use SSH to talk with your Raspberry Pi](http://www.instructables.com/id/Use-ssh-to-talk-with-your-Raspberry-Pi/)
-- [Raspberry Pi Pinout Diagram](http://www.jameco.com/Jameco/workshop/circuitnotes/raspberry_pi_circuit_note_fig2a.jpg)
-- [Find Raspberry Pi Address on Local Network](http://raspberrypi.stackexchange.com/questions/13936/find-raspberry-pi-address-on-local-network)
+- Learn to Install Raspbian OS through the official [Raspberry Pi Software Guide](https://www.raspberrypi.org/learning/software-guide/quickstart/)
+- Learn to explore the Pi Finder through [The Adafruit Raspberry Pi Finder Guide](https://learn.adafruit.com/the-adafruit-raspberry-pi-finder/overview)
+- Explore the functionality of each pin through [Raspberry Pi Pinout Diagram](http://www.jameco.com/Jameco/workshop/circuitnotes/raspberry_pi_circuit_note_fig2a.jpg)
 
 ### Appendix A: Install Raspbian OS onto Raspberry Pi
 
-For users who need help installing Raspbian OS onto their Raspberry Pi, we have provided this appendix for the step-by-step procedure for users who have computers with SD card slots.
+For users who need help installing Raspbian OS onto their Raspberry Pi, we have provided a step-by-step procedure. First you insert the microSD card into your computer, then download the Raspbian Image OS to your computer. We will walk you through two approaches for creating the bootable Raspbian OS. Approach 1 uses Etcher SD Card Image Utility GUI program whereas Approach 2 uses CLI.
 
-### A.1 Configure a bootable Raspbian OS on microSD
+Recommended Hardware:
 
-1\. Connect the SanDisk MicroSD Card into SanDisk microSD Adapter and insert that SDCard Adapter into the SD card slot of your computer.
+- [IoT Weather Station Electronics List](http://a.co/8FNMlUu)
 
-MicroSD Card on left and SD Card Adapter on right.
+### Insert microSD Card into Computer
+
+1\. Connect MicroSD to microSD Adapter.
 
 ![microsd_microsd_adapter](assets/tutorial2/microsd_microsd_adapter.png)
 
-MicroSD Card connected to SD Card Adapter insereted into computer's SD Card slot.
+**Figure 24:** MicroSD on left and microSD Card Adapter on right
+
+2\. Insert the microSD Adapter into the computer.
 
 ![insert_microsdAdater_laptop](assets/tutorial2/insert_microsdAdater_laptop.png)
 
-2\. Download [Raspbian Jessie Lite operating system image](https://www.raspberrypi.org/downloads/raspbian/) onto your local machine.
+**Figure 25:** microSD Adapter Inserted into Computer
 
-3\. Open your terminal for local machine, navigate to the Downloads folder. Unzip **raspbian-jessie-lite.zip**:
+### Download Raspbian OS Image
 
-~~~bash
-cd ~/Downloads
-unzip 2017-*-raspbian-jessie-lite.zip
-~~~
+3\. Download [Rasbpian Jessie Lite OS Image](https://www.raspberrypi.org/downloads/raspbian/) onto your host machine.
 
-4\. See a list of all devices that are mounted on laptop using command:
+4\. Unzip the OS Image.
+
+### Approach 1: Create a Bootable Raspbian OS on microSD Card with Etcher.io (Windows/MAC/Linux)
+
+You will create a Raspbian bootable OS on microSD card using etcher.io graphic install wizard instead of the command line.
+
+1\. Download and install Etcher SD card image utility from etcher.io
+
+2\. Use Etcher to transfer the Raspbian image to the location of your SD card. **Select Image** of Raspbian OS from the download location, then **Select Drive** (your microSD Card may already be selected by default) and choose **Flash!** to create a bootable Flash Image on the microSD.
+
+![etcher_dashboard](assets/tutorial2/etcher_dashboard.png)
+
+**Figure 26:** Etcher Dashboard to Create a Bootable OS on microSD
+
+![etcher_created_bootable_os](assets/tutorial2/etcher_created_bootable_os.png)
+
+**Figure 27:** Flash Complete, Bootable OS Now Created
+
+Once the operation completes, Etcher automatically unmounts the SD card and is safe to eject.
+
+### Approach 2: Create a Bootable Raspbian OS on microSD with CLI (MAC/Linux)
+
+1\. See a list of all devices that are mounted on laptop using command:
 
 ~~~bash
 df
 ~~~
 
-5\. Note down the device path listed next to the volume, look for the most recent volume added, it'll probably have name **/Volumes/BOOT** under Mounted On column.
+2\. Note down the device path listed next to the volume, look for the most recent volume added, it'll probably have name **/Volumes/BOOT** under Mounted On column.
 
 ![list_all_devices_mounted](assets/tutorial2/list_all_devices_mounted.png)
 
-6\. Open Disk Utility, select SD card, then press **Unmount**, so we can write to the entire card.
+**Figure 28:** List of all Devices Mounted on Computer
+
+3\. Open Disk Utility, select SD card, then press **Unmount**, so we can write to the entire card.
 
 ![disk_utility_sd_unmount](assets/tutorial2/disk_utility_sd_unmount.png)
 
-7\. Head to terminal, in the Downloads folder where the Raspbian OS is located, run the DD command to write a bootable Raspbian OS onto micro SD card:
+**Figure 29:** MAC Disk Utility to Unmount Device for Writing to it
+
+4\. Head to terminal, in the Downloads folder where the Raspbian OS is located, run the DD command to write a bootable Raspbian OS onto micro SD card:
 
 ~~~
 sudo dd bs=1m if=2017-02-16-raspbian-jessie-lite.img of=/dev/rdisk2
@@ -444,21 +544,29 @@ The DD operation will take 1 to 5 minutes until completion.
 
 ![dd_opearation_completion_result](assets/tutorial2/dd_opearation_completion_result.png)
 
+**Figure 30:** Progress of Creating Bootable OS on microSD
+
 After the dd operation completes, you should see the Raspbian bootable OS  successfully transferred over to the SD card.
 
-8\. To setup a headless raspberry pi, ssh can be enabled by placing a file named **ssh** onto the boot partition's base directory:
+5\. To setup a headless raspberry pi, ssh can be enabled by placing a file named **ssh** onto the boot partition's base directory:
 
 ![place_ssh_file_sd_base_dir](assets/tutorial2/place_ssh_file_sd_base_dir.png)
 
+**Figure 31:** Create SSH file to Enable SSH Access to Raspberry Pi
+
 > Note: the path to the SD card is `/Volumes/boot`. `touch ssh` creates a new file. `ls -ltr` verifies new file was created.
 
-9\. Eject the microSD card Adapter and remove it from your laptop. Insert the microSD card into the micro SD card slot of the Raspberry Pi.
+6\. Eject the microSD card Adapter and remove it from your laptop. Insert the microSD card into the micro SD card slot of the Raspberry Pi.
 
 ![microsd_inserted_to_rpi](assets/tutorial2/microsd_inserted_to_rpi.png)
 
-10\. Connect ethernet cable to the Raspberry Pi to give it internet access, connect the 5V for power and the Pi should start up.
+**Figure 32:** MicroSD Inserted into Raspberry Pi
+
+7\. Connect ethernet cable to the Raspberry Pi to give it internet access, connect the 5V for power and the Pi should start up.
 
 ![power-ethernet_rpi](assets/tutorial2/power-ethernet_rpi.png)
+
+**Figure 33:** Raspberry Pi Ethernet Cable Connected for Internet Access
 
 The Pi's default login credentials:
 
@@ -467,82 +575,3 @@ username/password = pi/raspberry
 ~~~
 
 > Note: you will need the password for ssh access to the Raspberry Pi.
-
-### Appendix B: Verify Communication between HDF and HDP Sandboxes
-
-Check the docker networks available:
-
-~~~
-docker network ls
-~~~
-
-Check if both docker containers are connected to the “bridge” docker network
-
-~~~
-docker network inspect bridge
-~~~
-
-SSH into HDF container
-
-~~~
-ssh root@localhost -p 12222
-~~~
-
-SSH into HDP container
-
-~~~
-ssh root@localhost -p 2222
-~~~
-
-Check for connectivity to HDP container from HDF container:
-
-~~~
-ping sandbox.hortonworks.com
-~~~
-
-Check for connectivity to HDF container from HDF container:
-
-~~~
-ping sandbox-hdf.hortonworks.com
-~~~
-
-As long as both container can ping each other, they can communicate. Message you should see looks like:
-
-~~~
-PING 172.17.0.2 (172.17.0.2) 56(84) bytes of data.
-64 bytes from 172.17.0.2: icmp_seq=1 ttl=64 time=0.078 ms
-~~~
-
-Check connectivity to zookeeper from HDF Sandbox Container
-
-~~~
-telnet sandbox.hortonworks.com 2181
-~~~
-
-Check connectivity to HBase Master and Regionserver
-
-Connection to HMaster UI
-
-~~~
-telnet sandbox.hortonworks.com 160000
-~~~
-
-Connection to HMaster Bind Port
-
-~~~
-telnet sandbox.hortonworks.com 160010
-~~~
-
-Connection to HBase RegionServer
-
-~~~
-telnet sandbox.hortonworks.com 160020
-~~~
-
-Connection to HBase RegionServer Bind Port
-
-~~~
-telnet sandbox.hortonworks.com 160030
-~~~
-
-As long as all commands above check out with no error responses, then you have successful communication between HDF and HDP Sandboxes
