@@ -1,17 +1,17 @@
 <?xml version="1.0" ?>
-<template encoding-version="1.0">
+<template encoding-version="1.1">
   <description></description>
-  <groupId>7c84501d-d10c-407c-b9f3-1d80e38fe36a</groupId>
-  <name>SensorWeatherDataEdgeHome</name>
+  <groupId>1e9fc2fc-015d-1000-ffff-ffff8c5e0b77</groupId>
+  <name>weather-station-node-sj</name>
   <snippet>
     <connections>
-      <id>da82ace2-015b-1000-0000-000000000000</id>
-      <parentGroupId>7c84501d-d10c-407c-0000-000000000000</parentGroupId>
+      <id>885c29e5-3232-3e23-0000-000000000000</id>
+      <parentGroupId>fe400948-57e6-3d76-0000-000000000000</parentGroupId>
       <backPressureDataSizeThreshold>1 GB</backPressureDataSizeThreshold>
       <backPressureObjectThreshold>10000</backPressureObjectThreshold>
       <destination>
-        <groupId>da821681-015b-1000-0000-000000000000</groupId>
-        <id>479b7c3d-0159-1000-963e-01eca4014873</id>
+        <groupId>c202e760-d687-3880-0000-000000000000</groupId>
+        <id>1e99e928-015d-1000-ffff-ffffb6732294</id>
         <type>REMOTE_INPUT_PORT</type>
       </destination>
       <flowFileExpiration>0 sec</flowFileExpiration>
@@ -19,19 +19,24 @@
       <name></name>
       <selectedRelationships>success</selectedRelationships>
       <source>
-        <groupId>7c84501d-d10c-407c-0000-000000000000</groupId>
-        <id>da8182bb-015b-1000-0000-000000000000</id>
+        <groupId>fe400948-57e6-3d76-0000-000000000000</groupId>
+        <id>adfe316f-3851-36f4-0000-000000000000</id>
         <type>PROCESSOR</type>
       </source>
       <zIndex>0</zIndex>
     </connections>
     <processors>
-      <id>da8182bb-015b-1000-0000-000000000000</id>
-      <parentGroupId>7c84501d-d10c-407c-0000-000000000000</parentGroupId>
+      <id>adfe316f-3851-36f4-0000-000000000000</id>
+      <parentGroupId>fe400948-57e6-3d76-0000-000000000000</parentGroupId>
       <position>
         <x>0.0</x>
-        <y>22.0</y>
+        <y>18.0</y>
       </position>
+      <bundle>
+        <artifact>nifi-standard-nar</artifact>
+        <group>org.apache.nifi</group>
+        <version>1.2.0.3.0.0.0-452</version>
+      </bundle>
       <config>
         <bulletinLevel>WARN</bulletinLevel>
         <comments></comments>
@@ -82,6 +87,7 @@
           </entry>
           <entry>
             <key>Batch Duration</key>
+            <value>5 sec</value>
           </entry>
           <entry>
             <key>Redirect Error Stream</key>
@@ -93,7 +99,7 @@
           </entry>
         </properties>
         <runDurationMillis>0</runDurationMillis>
-        <schedulingPeriod>0 sec</schedulingPeriod>
+        <schedulingPeriod>1 sec</schedulingPeriod>
         <schedulingStrategy>TIMER_DRIVEN</schedulingStrategy>
         <yieldDuration>1 sec</yieldDuration>
       </config>
@@ -106,33 +112,32 @@
       <type>org.apache.nifi.processors.standard.ExecuteProcess</type>
     </processors>
     <remoteProcessGroups>
-      <id>da821681-015b-1000-0000-000000000000</id>
-      <parentGroupId>7c84501d-d10c-407c-0000-000000000000</parentGroupId>
+      <id>c202e760-d687-3880-0000-000000000000</id>
+      <parentGroupId>fe400948-57e6-3d76-0000-000000000000</parentGroupId>
       <position>
-        <x>675.0</x>
+        <x>652.0</x>
         <y>0.0</y>
       </position>
       <communicationsTimeout>30 sec</communicationsTimeout>
       <contents>
         <inputPorts>
-          <comments></comments>
           <concurrentlySchedulableTaskCount>1</concurrentlySchedulableTaskCount>
           <connected>true</connected>
           <exists>true</exists>
-          <id>479b7c3d-0159-1000-963e-01eca4014873</id>
-          <name>IngestSensorReadings</name>
-          <targetRunning>true</targetRunning>
-          <transmitting>true</transmitting>
+          <id>1e99e928-015d-1000-ffff-ffffb6732294</id>
+          <name>From_MiNiFi</name>
+          <targetRunning>false</targetRunning>
+          <transmitting>false</transmitting>
           <useCompression>false</useCompression>
         </inputPorts>
       </contents>
       <proxyHost></proxyHost>
       <proxyUser></proxyUser>
-      <targetUri>http://192.168.2.3:19090/nifi/</targetUri>
-      <targetUris>http://192.168.2.3:19090/nifi/</targetUris>
+      <targetUri>http://192.168.2.6:9090/nifi/</targetUri>
+      <targetUris>http://192.168.2.6:9090/nifi/</targetUris>
       <transportProtocol>RAW</transportProtocol>
       <yieldDuration>10 sec</yieldDuration>
     </remoteProcessGroups>
   </snippet>
-  <timestamp>05/05/2017 21:27:56 UTC</timestamp>
+  <timestamp>07/07/2017 20:12:33 UTC</timestamp>
 </template>

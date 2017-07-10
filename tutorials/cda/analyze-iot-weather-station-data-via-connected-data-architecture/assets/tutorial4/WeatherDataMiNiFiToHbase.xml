@@ -1,72 +1,77 @@
 <?xml version="1.0" ?>
-<template encoding-version="1.0">
+<template encoding-version="1.1">
   <description></description>
   <groupId>7c84501d-d10c-407c-b9f3-1d80e38fe36a</groupId>
   <name>WeatherDataMiNiFiToHbase</name>
   <snippet>
     <connections>
-      <id>fd9b605b-015a-1000-0000-000000000000</id>
-      <parentGroupId>7c84501d-d10c-407c-0000-000000000000</parentGroupId>
+      <id>919ceba0-81f2-3eb1-0000-000000000000</id>
+      <parentGroupId>46f95fe5-3024-31d8-0000-000000000000</parentGroupId>
       <backPressureDataSizeThreshold>1 GB</backPressureDataSizeThreshold>
       <backPressureObjectThreshold>10000</backPressureObjectThreshold>
       <destination>
-        <groupId>fd95b86f-015a-1000-0000-000000000000</groupId>
-        <id>fd9809a8-015a-1000-0000-000000000000</id>
-        <type>INPUT_PORT</type>
-      </destination>
-      <flowFileExpiration>0 sec</flowFileExpiration>
-      <labelIndex>1</labelIndex>
-      <name></name>
-      <source>
-        <groupId>7c84501d-d10c-407c-0000-000000000000</groupId>
-        <id>479b7c3d-0159-1000-0000-000000000000</id>
-        <type>INPUT_PORT</type>
-      </source>
-      <zIndex>0</zIndex>
-    </connections>
-    <connections>
-      <id>fd9bf8ea-015a-1000-0000-000000000000</id>
-      <parentGroupId>7c84501d-d10c-407c-0000-000000000000</parentGroupId>
-      <backPressureDataSizeThreshold>1 GB</backPressureDataSizeThreshold>
-      <backPressureObjectThreshold>10000</backPressureObjectThreshold>
-      <destination>
-        <groupId>7c84501d-d10c-407c-0000-000000000000</groupId>
-        <id>48643198-532b-10a4-0000-000000000000</id>
+        <groupId>46f95fe5-3024-31d8-0000-000000000000</groupId>
+        <id>158c1890-fffc-37d8-0000-000000000000</id>
         <type>PROCESSOR</type>
       </destination>
       <flowFileExpiration>0 sec</flowFileExpiration>
       <labelIndex>1</labelIndex>
       <name></name>
       <source>
-        <groupId>fd95b86f-015a-1000-0000-000000000000</groupId>
-        <id>fd9ab955-015a-1000-0000-000000000000</id>
+        <groupId>d8167533-43ef-34ad-0000-000000000000</groupId>
+        <id>5d5977d9-2660-3275-0000-000000000000</id>
         <type>OUTPUT_PORT</type>
       </source>
       <zIndex>0</zIndex>
     </connections>
     <connections>
-      <id>fd9c198c-015a-1000-0000-000000000000</id>
-      <parentGroupId>7c84501d-d10c-407c-0000-000000000000</parentGroupId>
+      <id>b795a782-6283-3851-0000-000000000000</id>
+      <parentGroupId>46f95fe5-3024-31d8-0000-000000000000</parentGroupId>
       <backPressureDataSizeThreshold>1 GB</backPressureDataSizeThreshold>
       <backPressureObjectThreshold>10000</backPressureObjectThreshold>
       <destination>
-        <groupId>7c84501d-d10c-407c-0000-000000000000</groupId>
-        <id>bb445d4f-015a-1000-0000-000000000000</id>
+        <groupId>d8167533-43ef-34ad-0000-000000000000</groupId>
+        <id>4e57f2df-c1dc-37ee-0000-000000000000</id>
+        <type>INPUT_PORT</type>
+      </destination>
+      <flowFileExpiration>0 sec</flowFileExpiration>
+      <labelIndex>1</labelIndex>
+      <name></name>
+      <source>
+        <groupId>46f95fe5-3024-31d8-0000-000000000000</groupId>
+        <id>9249a2df-ad6c-3432-0000-000000000000</id>
+        <type>INPUT_PORT</type>
+      </source>
+      <zIndex>0</zIndex>
+    </connections>
+    <connections>
+      <id>72df67d5-e63a-3b2c-0000-000000000000</id>
+      <parentGroupId>46f95fe5-3024-31d8-0000-000000000000</parentGroupId>
+      <backPressureDataSizeThreshold>1 GB</backPressureDataSizeThreshold>
+      <backPressureObjectThreshold>10000</backPressureObjectThreshold>
+      <destination>
+        <groupId>46f95fe5-3024-31d8-0000-000000000000</groupId>
+        <id>13c95b5a-0a10-3f31-0000-000000000000</id>
         <type>PROCESSOR</type>
       </destination>
       <flowFileExpiration>0 sec</flowFileExpiration>
       <labelIndex>1</labelIndex>
       <name></name>
       <source>
-        <groupId>fd95b86f-015a-1000-0000-000000000000</groupId>
-        <id>fd9ab955-015a-1000-0000-000000000000</id>
+        <groupId>d8167533-43ef-34ad-0000-000000000000</groupId>
+        <id>5d5977d9-2660-3275-0000-000000000000</id>
         <type>OUTPUT_PORT</type>
       </source>
       <zIndex>0</zIndex>
     </connections>
     <controllerServices>
-      <id>028219f0-015b-1000-0000-000000000000</id>
-      <parentGroupId>7c84501d-d10c-407c-0000-000000000000</parentGroupId>
+      <id>0df71fd1-6192-3d88-0000-000000000000</id>
+      <parentGroupId>46f95fe5-3024-31d8-0000-000000000000</parentGroupId>
+      <bundle>
+        <artifact>nifi-hbase_1_1_2-client-service-nar</artifact>
+        <group>org.apache.nifi</group>
+        <version>1.2.0.3.0.0.0-452</version>
+      </bundle>
       <comments></comments>
       <descriptors>
         <entry>
@@ -119,10 +124,11 @@
         </entry>
       </descriptors>
       <name>HBase_1_1_2_ClientService</name>
+      <persistsState>false</persistsState>
       <properties>
         <entry>
           <key>Hadoop Configuration Files</key>
-          <value>/etc/hbase/hbase-site.xml</value>
+          <value>/etc/hbase/conf/hbase-site.xml</value>
         </entry>
         <entry>
           <key>Kerberos Principal</key>
@@ -141,46 +147,88 @@
         </entry>
         <entry>
           <key>HBase Client Retries</key>
-          <value>15</value>
+          <value>1</value>
         </entry>
         <entry>
           <key>Phoenix Client JAR Location</key>
         </entry>
       </properties>
-      <state>ENABLING</state>
+      <state>ENABLED</state>
       <type>org.apache.nifi.hbase.HBase_1_1_2_ClientService</type>
     </controllerServices>
     <inputPorts>
-      <id>479b7c3d-0159-1000-0000-000000000000</id>
-      <parentGroupId>7c84501d-d10c-407c-0000-000000000000</parentGroupId>
+      <id>9249a2df-ad6c-3432-0000-000000000000</id>
+      <parentGroupId>46f95fe5-3024-31d8-0000-000000000000</parentGroupId>
       <position>
         <x>0.0</x>
-        <y>230.5973317902758</y>
+        <y>0.0</y>
       </position>
       <comments></comments>
       <concurrentlySchedulableTaskCount>1</concurrentlySchedulableTaskCount>
-      <name>IngestSensorReadings</name>
+      <name>From_MiNiFi</name>
       <state>STOPPED</state>
       <transmitting>false</transmitting>
       <type>INPUT_PORT</type>
     </inputPorts>
     <processGroups>
-      <id>fd95b86f-015a-1000-0000-000000000000</id>
-      <parentGroupId>7c84501d-d10c-407c-0000-000000000000</parentGroupId>
+      <id>d8167533-43ef-34ad-0000-000000000000</id>
+      <parentGroupId>46f95fe5-3024-31d8-0000-000000000000</parentGroupId>
       <position>
-        <x>490.80399004721176</x>
-        <y>197.2962190511173</y>
+        <x>306.9538389307943</x>
+        <y>177.2962190511173</y>
       </position>
       <comments></comments>
       <contents>
         <connections>
-          <id>ada43d43-5d64-15d2-0000-000000000000</id>
-          <parentGroupId>fd95b86f-015a-1000-0000-000000000000</parentGroupId>
+          <id>8c865ffb-e258-3df7-0000-000000000000</id>
+          <parentGroupId>d8167533-43ef-34ad-0000-000000000000</parentGroupId>
           <backPressureDataSizeThreshold>1 GB</backPressureDataSizeThreshold>
           <backPressureObjectThreshold>10000</backPressureObjectThreshold>
           <destination>
-            <groupId>fd95b86f-015a-1000-0000-000000000000</groupId>
-            <id>f0b93a3c-fc98-1f8b-0000-000000000000</id>
+            <groupId>d8167533-43ef-34ad-0000-000000000000</groupId>
+            <id>c3e43a01-117b-358e-0000-000000000000</id>
+            <type>PROCESSOR</type>
+          </destination>
+          <flowFileExpiration>0 sec</flowFileExpiration>
+          <labelIndex>1</labelIndex>
+          <name></name>
+          <selectedRelationships>matched</selectedRelationships>
+          <source>
+            <groupId>d8167533-43ef-34ad-0000-000000000000</groupId>
+            <id>9da6a9ed-2b22-3c44-0000-000000000000</id>
+            <type>PROCESSOR</type>
+          </source>
+          <zIndex>0</zIndex>
+        </connections>
+        <connections>
+          <id>c2d4f803-75da-3747-0000-000000000000</id>
+          <parentGroupId>d8167533-43ef-34ad-0000-000000000000</parentGroupId>
+          <backPressureDataSizeThreshold>1 GB</backPressureDataSizeThreshold>
+          <backPressureObjectThreshold>10000</backPressureObjectThreshold>
+          <destination>
+            <groupId>d8167533-43ef-34ad-0000-000000000000</groupId>
+            <id>195f131d-f42e-32ea-0000-000000000000</id>
+            <type>PROCESSOR</type>
+          </destination>
+          <flowFileExpiration>0 sec</flowFileExpiration>
+          <labelIndex>1</labelIndex>
+          <name></name>
+          <selectedRelationships>matched</selectedRelationships>
+          <source>
+            <groupId>d8167533-43ef-34ad-0000-000000000000</groupId>
+            <id>2def7d70-f562-363e-0000-000000000000</id>
+            <type>PROCESSOR</type>
+          </source>
+          <zIndex>0</zIndex>
+        </connections>
+        <connections>
+          <id>da89159d-acfd-3fe0-0000-000000000000</id>
+          <parentGroupId>d8167533-43ef-34ad-0000-000000000000</parentGroupId>
+          <backPressureDataSizeThreshold>1 GB</backPressureDataSizeThreshold>
+          <backPressureObjectThreshold>10000</backPressureObjectThreshold>
+          <destination>
+            <groupId>d8167533-43ef-34ad-0000-000000000000</groupId>
+            <id>2def7d70-f562-363e-0000-000000000000</id>
             <type>PROCESSOR</type>
           </destination>
           <flowFileExpiration>0 sec</flowFileExpiration>
@@ -188,61 +236,20 @@
           <name></name>
           <selectedRelationships>found</selectedRelationships>
           <source>
-            <groupId>fd95b86f-015a-1000-0000-000000000000</groupId>
-            <id>faa031fc-92ce-1ca1-0000-000000000000</id>
+            <groupId>d8167533-43ef-34ad-0000-000000000000</groupId>
+            <id>c3e43a01-117b-358e-0000-000000000000</id>
             <type>PROCESSOR</type>
           </source>
           <zIndex>0</zIndex>
         </connections>
         <connections>
-          <id>f0ec3df7-cf16-1b13-0000-000000000000</id>
-          <parentGroupId>fd95b86f-015a-1000-0000-000000000000</parentGroupId>
+          <id>066163e2-4d09-376a-0000-000000000000</id>
+          <parentGroupId>d8167533-43ef-34ad-0000-000000000000</parentGroupId>
           <backPressureDataSizeThreshold>1 GB</backPressureDataSizeThreshold>
           <backPressureObjectThreshold>10000</backPressureObjectThreshold>
           <destination>
-            <groupId>fd95b86f-015a-1000-0000-000000000000</groupId>
-            <id>93f13276-addc-1aed-0000-000000000000</id>
-            <type>PROCESSOR</type>
-          </destination>
-          <flowFileExpiration>0 sec</flowFileExpiration>
-          <labelIndex>1</labelIndex>
-          <name></name>
-          <selectedRelationships>success</selectedRelationships>
-          <source>
-            <groupId>fd95b86f-015a-1000-0000-000000000000</groupId>
-            <id>c7b93332-c9cf-1d70-0000-000000000000</id>
-            <type>PROCESSOR</type>
-          </source>
-          <zIndex>0</zIndex>
-        </connections>
-        <connections>
-          <id>fd986109-015a-1000-0000-000000000000</id>
-          <parentGroupId>fd95b86f-015a-1000-0000-000000000000</parentGroupId>
-          <backPressureDataSizeThreshold>1 GB</backPressureDataSizeThreshold>
-          <backPressureObjectThreshold>10000</backPressureObjectThreshold>
-          <destination>
-            <groupId>fd95b86f-015a-1000-0000-000000000000</groupId>
-            <id>bf403c90-96d3-1cd6-0000-000000000000</id>
-            <type>PROCESSOR</type>
-          </destination>
-          <flowFileExpiration>0 sec</flowFileExpiration>
-          <labelIndex>1</labelIndex>
-          <name></name>
-          <source>
-            <groupId>fd95b86f-015a-1000-0000-000000000000</groupId>
-            <id>fd9809a8-015a-1000-0000-000000000000</id>
-            <type>INPUT_PORT</type>
-          </source>
-          <zIndex>0</zIndex>
-        </connections>
-        <connections>
-          <id>fd9addd4-015a-1000-0000-000000000000</id>
-          <parentGroupId>fd95b86f-015a-1000-0000-000000000000</parentGroupId>
-          <backPressureDataSizeThreshold>1 GB</backPressureDataSizeThreshold>
-          <backPressureObjectThreshold>10000</backPressureObjectThreshold>
-          <destination>
-            <groupId>fd95b86f-015a-1000-0000-000000000000</groupId>
-            <id>fd9ab955-015a-1000-0000-000000000000</id>
+            <groupId>d8167533-43ef-34ad-0000-000000000000</groupId>
+            <id>5d5977d9-2660-3275-0000-000000000000</id>
             <type>OUTPUT_PORT</type>
           </destination>
           <flowFileExpiration>0 sec</flowFileExpiration>
@@ -250,57 +257,56 @@
           <name></name>
           <selectedRelationships>success</selectedRelationships>
           <source>
-            <groupId>fd95b86f-015a-1000-0000-000000000000</groupId>
-            <id>93f13276-addc-1aed-0000-000000000000</id>
+            <groupId>d8167533-43ef-34ad-0000-000000000000</groupId>
+            <id>52bd1ac5-c3ec-36e8-0000-000000000000</id>
             <type>PROCESSOR</type>
           </source>
           <zIndex>0</zIndex>
         </connections>
         <connections>
-          <id>1e9737aa-cc7b-1049-0000-000000000000</id>
-          <parentGroupId>fd95b86f-015a-1000-0000-000000000000</parentGroupId>
+          <id>55811b81-bd4e-390b-0000-000000000000</id>
+          <parentGroupId>d8167533-43ef-34ad-0000-000000000000</parentGroupId>
           <backPressureDataSizeThreshold>1 GB</backPressureDataSizeThreshold>
           <backPressureObjectThreshold>10000</backPressureObjectThreshold>
           <destination>
-            <groupId>fd95b86f-015a-1000-0000-000000000000</groupId>
-            <id>c7b93332-c9cf-1d70-0000-000000000000</id>
+            <groupId>d8167533-43ef-34ad-0000-000000000000</groupId>
+            <id>9da6a9ed-2b22-3c44-0000-000000000000</id>
             <type>PROCESSOR</type>
           </destination>
           <flowFileExpiration>0 sec</flowFileExpiration>
           <labelIndex>1</labelIndex>
           <name></name>
-          <selectedRelationships>matched</selectedRelationships>
           <source>
-            <groupId>fd95b86f-015a-1000-0000-000000000000</groupId>
-            <id>f0b93a3c-fc98-1f8b-0000-000000000000</id>
-            <type>PROCESSOR</type>
+            <groupId>d8167533-43ef-34ad-0000-000000000000</groupId>
+            <id>4e57f2df-c1dc-37ee-0000-000000000000</id>
+            <type>INPUT_PORT</type>
           </source>
           <zIndex>0</zIndex>
         </connections>
         <connections>
-          <id>37ba35c5-3ba0-1fa7-0000-000000000000</id>
-          <parentGroupId>fd95b86f-015a-1000-0000-000000000000</parentGroupId>
+          <id>69173183-b7b7-359f-0000-000000000000</id>
+          <parentGroupId>d8167533-43ef-34ad-0000-000000000000</parentGroupId>
           <backPressureDataSizeThreshold>1 GB</backPressureDataSizeThreshold>
           <backPressureObjectThreshold>10000</backPressureObjectThreshold>
           <destination>
-            <groupId>fd95b86f-015a-1000-0000-000000000000</groupId>
-            <id>faa031fc-92ce-1ca1-0000-000000000000</id>
+            <groupId>d8167533-43ef-34ad-0000-000000000000</groupId>
+            <id>52bd1ac5-c3ec-36e8-0000-000000000000</id>
             <type>PROCESSOR</type>
           </destination>
           <flowFileExpiration>0 sec</flowFileExpiration>
           <labelIndex>1</labelIndex>
           <name></name>
-          <selectedRelationships>matched</selectedRelationships>
+          <selectedRelationships>success</selectedRelationships>
           <source>
-            <groupId>fd95b86f-015a-1000-0000-000000000000</groupId>
-            <id>bf403c90-96d3-1cd6-0000-000000000000</id>
+            <groupId>d8167533-43ef-34ad-0000-000000000000</groupId>
+            <id>195f131d-f42e-32ea-0000-000000000000</id>
             <type>PROCESSOR</type>
           </source>
           <zIndex>0</zIndex>
         </connections>
         <inputPorts>
-          <id>fd9809a8-015a-1000-0000-000000000000</id>
-          <parentGroupId>fd95b86f-015a-1000-0000-000000000000</parentGroupId>
+          <id>4e57f2df-c1dc-37ee-0000-000000000000</id>
+          <parentGroupId>d8167533-43ef-34ad-0000-000000000000</parentGroupId>
           <position>
             <x>290.99999596918815</x>
             <y>108.99999627333517</y>
@@ -308,12 +314,12 @@
           <comments></comments>
           <concurrentlySchedulableTaskCount>1</concurrentlySchedulableTaskCount>
           <name>ingestRawData</name>
-          <state>STOPPED</state>
+          <state>RUNNING</state>
           <type>INPUT_PORT</type>
         </inputPorts>
         <outputPorts>
-          <id>fd9ab955-015a-1000-0000-000000000000</id>
-          <parentGroupId>fd95b86f-015a-1000-0000-000000000000</parentGroupId>
+          <id>5d5977d9-2660-3275-0000-000000000000</id>
+          <parentGroupId>d8167533-43ef-34ad-0000-000000000000</parentGroupId>
           <position>
             <x>1485.9999959691881</x>
             <y>774.9999962733352</y>
@@ -321,66 +327,21 @@
           <comments></comments>
           <concurrentlySchedulableTaskCount>1</concurrentlySchedulableTaskCount>
           <name>sendProcessedData</name>
-          <state>STOPPED</state>
+          <state>RUNNING</state>
           <type>OUTPUT_PORT</type>
         </outputPorts>
         <processors>
-          <id>93f13276-addc-1aed-0000-000000000000</id>
-          <parentGroupId>fd95b86f-015a-1000-0000-000000000000</parentGroupId>
-          <position>
-            <x>1123.5482320531728</x>
-            <y>575.2576104090774</y>
-          </position>
-          <config>
-            <bulletinLevel>WARN</bulletinLevel>
-            <comments></comments>
-            <concurrentlySchedulableTaskCount>1</concurrentlySchedulableTaskCount>
-            <descriptors>
-              <entry>
-                <key>Delete Attributes Expression</key>
-                <value>
-                  <name>Delete Attributes Expression</name>
-                </value>
-              </entry>
-              <entry>
-                <key>filename</key>
-                <value>
-                  <name>filename</name>
-                </value>
-              </entry>
-            </descriptors>
-            <executionNode>ALL</executionNode>
-            <lossTolerant>false</lossTolerant>
-            <penaltyDuration>30 sec</penaltyDuration>
-            <properties>
-              <entry>
-                <key>Delete Attributes Expression</key>
-              </entry>
-              <entry>
-                <key>filename</key>
-                <value>weatherdata-${now():format("yyyy-MM-dd-HHmmssSSS")}-${UUID()}.json</value>
-              </entry>
-            </properties>
-            <runDurationMillis>0</runDurationMillis>
-            <schedulingPeriod>3 sec</schedulingPeriod>
-            <schedulingStrategy>TIMER_DRIVEN</schedulingStrategy>
-            <yieldDuration>1 sec</yieldDuration>
-          </config>
-          <name>UpdateAttribute</name>
-          <relationships>
-            <autoTerminate>false</autoTerminate>
-            <name>success</name>
-          </relationships>
-          <style></style>
-          <type>org.apache.nifi.processors.attributes.UpdateAttribute</type>
-        </processors>
-        <processors>
-          <id>bf403c90-96d3-1cd6-0000-000000000000</id>
-          <parentGroupId>fd95b86f-015a-1000-0000-000000000000</parentGroupId>
+          <id>9da6a9ed-2b22-3c44-0000-000000000000</id>
+          <parentGroupId>d8167533-43ef-34ad-0000-000000000000</parentGroupId>
           <position>
             <x>529.609908078563</x>
             <y>212.99999627333517</y>
           </position>
+          <bundle>
+            <artifact>nifi-standard-nar</artifact>
+            <group>org.apache.nifi</group>
+            <version>1.2.0.3.0.0.0-452</version>
+          </bundle>
           <config>
             <bulletinLevel>WARN</bulletinLevel>
             <comments></comments>
@@ -471,15 +432,15 @@
                 </value>
               </entry>
               <entry>
-                <key>Altitude_m</key>
+                <key>Humidity</key>
                 <value>
-                  <name>Altitude_m</name>
+                  <name>Humidity</name>
                 </value>
               </entry>
               <entry>
-                <key>Pressure_Pa</key>
+                <key>Pressure_In</key>
                 <value>
-                  <name>Pressure_Pa</name>
+                  <name>Pressure_In</name>
                 </value>
               </entry>
               <entry>
@@ -489,27 +450,15 @@
                 </value>
               </entry>
               <entry>
-                <key>Sealevel_Pressure_Pa</key>
+                <key>Serial</key>
                 <value>
-                  <name>Sealevel_Pressure_Pa</name>
+                  <name>Serial</name>
                 </value>
               </entry>
               <entry>
-                <key>Sensor_ID</key>
+                <key>Temp_F</key>
                 <value>
-                  <name>Sensor_ID</name>
-                </value>
-              </entry>
-              <entry>
-                <key>Temp_C</key>
-                <value>
-                  <name>Temp_C</name>
-                </value>
-              </entry>
-              <entry>
-                <key>Time</key>
-                <value>
-                  <name>Time</name>
+                  <name>Temp_F</name>
                 </value>
               </entry>
               <entry>
@@ -573,39 +522,31 @@
               </entry>
               <entry>
                 <key>Include Capture Group 0</key>
-                <value>true</value>
+                <value>false</value>
               </entry>
               <entry>
                 <key>extract-text-enable-repeating-capture-group</key>
                 <value>false</value>
               </entry>
               <entry>
-                <key>Altitude_m</key>
-                <value>(?&lt;=Altitude = )([\w+.-]+)</value>
+                <key>Humidity</key>
+                <value>(?&lt;=Humidity_PRH = )([\w+.-]+)</value>
               </entry>
               <entry>
-                <key>Pressure_Pa</key>
-                <value>(?&lt;=Pressure = )([\w+.-]+)</value>
+                <key>Pressure_In</key>
+                <value>(?&lt;=Pressure_In = )([\w+.-]+)</value>
               </entry>
               <entry>
                 <key>Public_IP</key>
-                <value>(?&lt;=Public_IP: )([\w+.-]+)</value>
+                <value>(?&lt;=Public_IP = )([\w+.-]+)</value>
               </entry>
               <entry>
-                <key>Sealevel_Pressure_Pa</key>
-                <value>(?&lt;=Sealevel_Pressure = )([\w+.-]+)</value>
+                <key>Serial</key>
+                <value>(?&lt;=Serial = )([\w+.-]+)</value>
               </entry>
               <entry>
-                <key>Sensor_ID</key>
-                <value>(?&lt;=Sensor_ID = )([\w+.-]+)</value>
-              </entry>
-              <entry>
-                <key>Temp_C</key>
-                <value>(?&lt;=Temp = )([\w+.-]+)</value>
-              </entry>
-              <entry>
-                <key>Time</key>
-                <value>(?&lt;=")([^\"]+)</value>
+                <key>Temp_F</key>
+                <value>(?&lt;=Temperature_F = )([\w+.-]+)</value>
               </entry>
               <entry>
                 <key>Timestamp</key>
@@ -630,12 +571,77 @@
           <type>org.apache.nifi.processors.standard.ExtractText</type>
         </processors>
         <processors>
-          <id>c7b93332-c9cf-1d70-0000-000000000000</id>
-          <parentGroupId>fd95b86f-015a-1000-0000-000000000000</parentGroupId>
+          <id>c3e43a01-117b-358e-0000-000000000000</id>
+          <parentGroupId>d8167533-43ef-34ad-0000-000000000000</parentGroupId>
+          <position>
+            <x>1123.683376174286</x>
+            <y>212.27221807892926</y>
+          </position>
+          <bundle>
+            <artifact>nifi-enrich-nar</artifact>
+            <group>org.apache.nifi</group>
+            <version>1.2.0.3.0.0.0-452</version>
+          </bundle>
+          <config>
+            <bulletinLevel>WARN</bulletinLevel>
+            <comments></comments>
+            <concurrentlySchedulableTaskCount>1</concurrentlySchedulableTaskCount>
+            <descriptors>
+              <entry>
+                <key>Geo Database File</key>
+                <value>
+                  <name>Geo Database File</name>
+                </value>
+              </entry>
+              <entry>
+                <key>IP Address Attribute</key>
+                <value>
+                  <name>IP Address Attribute</name>
+                </value>
+              </entry>
+            </descriptors>
+            <executionNode>ALL</executionNode>
+            <lossTolerant>false</lossTolerant>
+            <penaltyDuration>30 sec</penaltyDuration>
+            <properties>
+              <entry>
+                <key>Geo Database File</key>
+                <value>/sandbox/tutorial-id/820/nifi/input/GeoFile/GeoLite2-City_20170704/GeoLite2-City.mmdb</value>
+              </entry>
+              <entry>
+                <key>IP Address Attribute</key>
+                <value>Public_IP</value>
+              </entry>
+            </properties>
+            <runDurationMillis>0</runDurationMillis>
+            <schedulingPeriod>0 sec</schedulingPeriod>
+            <schedulingStrategy>TIMER_DRIVEN</schedulingStrategy>
+            <yieldDuration>1 sec</yieldDuration>
+          </config>
+          <name>GeoEnrichIP</name>
+          <relationships>
+            <autoTerminate>false</autoTerminate>
+            <name>found</name>
+          </relationships>
+          <relationships>
+            <autoTerminate>true</autoTerminate>
+            <name>not found</name>
+          </relationships>
+          <style></style>
+          <type>org.apache.nifi.processors.GeoEnrichIP</type>
+        </processors>
+        <processors>
+          <id>195f131d-f42e-32ea-0000-000000000000</id>
+          <parentGroupId>d8167533-43ef-34ad-0000-000000000000</parentGroupId>
           <position>
             <x>533.9999959691881</x>
             <y>393.93937920790546</y>
           </position>
+          <bundle>
+            <artifact>nifi-standard-nar</artifact>
+            <group>org.apache.nifi</group>
+            <version>1.2.0.3.0.0.0-452</version>
+          </bundle>
           <config>
             <bulletinLevel>WARN</bulletinLevel>
             <comments></comments>
@@ -672,7 +678,7 @@
             <properties>
               <entry>
                 <key>Attributes List</key>
-                <value>Time, Timestamp, Public_IP.geo.city, Public_IP.geo.subdivision.isocode.0, Sensor_ID, Temp_C, Pressure_Pa, Sealevel_Pressure_Pa, Altitude_m</value>
+                <value>Timestamp, Public_IP.geo.city, Public_IP.geo.subdivision.isocode.0, Serial, Temp_F, Humidity, Pressure_In, Humidity</value>
               </entry>
               <entry>
                 <key>Destination</key>
@@ -680,7 +686,7 @@
               </entry>
               <entry>
                 <key>Include Core Attributes</key>
-                <value>false</value>
+                <value>true</value>
               </entry>
               <entry>
                 <key>Null Value</key>
@@ -705,12 +711,17 @@
           <type>org.apache.nifi.processors.standard.AttributesToJSON</type>
         </processors>
         <processors>
-          <id>f0b93a3c-fc98-1f8b-0000-000000000000</id>
-          <parentGroupId>fd95b86f-015a-1000-0000-000000000000</parentGroupId>
+          <id>2def7d70-f562-363e-0000-000000000000</id>
+          <parentGroupId>d8167533-43ef-34ad-0000-000000000000</parentGroupId>
           <position>
             <x>1125.872969602001</x>
             <y>412.46780328017104</y>
           </position>
+          <bundle>
+            <artifact>nifi-standard-nar</artifact>
+            <group>org.apache.nifi</group>
+            <version>1.2.0.3.0.0.0-452</version>
+          </bundle>
           <config>
             <bulletinLevel>WARN</bulletinLevel>
             <comments></comments>
@@ -723,15 +734,15 @@
                 </value>
               </entry>
               <entry>
-                <key>Check_Altitude</key>
-                <value>
-                  <name>Check_Altitude</name>
-                </value>
-              </entry>
-              <entry>
                 <key>Check_City</key>
                 <value>
                   <name>Check_City</name>
+                </value>
+              </entry>
+              <entry>
+                <key>Check_Humidity</key>
+                <value>
+                  <name>Check_Humidity</name>
                 </value>
               </entry>
               <entry>
@@ -747,15 +758,9 @@
                 </value>
               </entry>
               <entry>
-                <key>Check_Sealevel_Pressure</key>
+                <key>Check_Serial</key>
                 <value>
-                  <name>Check_Sealevel_Pressure</name>
-                </value>
-              </entry>
-              <entry>
-                <key>Check_Sensor_ID</key>
-                <value>
-                  <name>Check_Sensor_ID</name>
+                  <name>Check_Serial</name>
                 </value>
               </entry>
               <entry>
@@ -786,12 +791,12 @@
                 <value>Route to 'match' if all match</value>
               </entry>
               <entry>
-                <key>Check_Altitude</key>
-                <value>${Altitude_m:lt(6267)}</value>
-              </entry>
-              <entry>
                 <key>Check_City</key>
                 <value>${Public_IP.geo.city:isEmpty():not()}</value>
+              </entry>
+              <entry>
+                <key>Check_Humidity</key>
+                <value>${Humidity:isEmpty():not()}</value>
               </entry>
               <entry>
                 <key>Check_IP</key>
@@ -799,21 +804,13 @@
               </entry>
               <entry>
                 <key>Check_Pressure</key>
-                <value>${Pressure_Pa:lt(108000):and(
-	${Pressure_Pa:gt(87000)}
+                <value>${Pressure_In:lt(32):and(
+	${Pressure_In:gt(26)}
 )}</value>
               </entry>
               <entry>
-                <key>Check_Sealevel_Pressure</key>
-                <value>${Sealevel_Pressure_Pa:lt(108000):and(
-	${Sealevel_Pressure_Pa:gt(87000)}
-)}</value>
-              </entry>
-              <entry>
-                <key>Check_Sensor_ID</key>
-                <value>${Sensor_ID:lt(100):and(
-	${Sensor_ID:gt(0)}
-)}</value>
+                <key>Check_Serial</key>
+                <value>${Serial:isEmpty():not()}</value>
               </entry>
               <entry>
                 <key>Check_State</key>
@@ -821,13 +818,11 @@
               </entry>
               <entry>
                 <key>Check_Temp</key>
-                <value>${Temp_C:lt(88)}</value>
+                <value>${Temp_F:lt(190.4)}</value>
               </entry>
               <entry>
                 <key>Check_Time</key>
-                <value>${Time:isEmpty():not():and(
-	${Timestamp:isEmpty():not()}
-)}</value>
+                <value>${Timestamp:isEmpty():not()}</value>
               </entry>
             </properties>
             <runDurationMillis>0</runDurationMillis>
@@ -848,27 +843,44 @@
           <type>org.apache.nifi.processors.standard.RouteOnAttribute</type>
         </processors>
         <processors>
-          <id>faa031fc-92ce-1ca1-0000-000000000000</id>
-          <parentGroupId>fd95b86f-015a-1000-0000-000000000000</parentGroupId>
+          <id>52bd1ac5-c3ec-36e8-0000-000000000000</id>
+          <parentGroupId>d8167533-43ef-34ad-0000-000000000000</parentGroupId>
           <position>
-            <x>1123.683376174286</x>
-            <y>212.27221807892926</y>
+            <x>1123.5482320531728</x>
+            <y>575.2576104090774</y>
           </position>
+          <bundle>
+            <artifact>nifi-update-attribute-nar</artifact>
+            <group>org.apache.nifi</group>
+            <version>1.2.0.3.0.0.0-452</version>
+          </bundle>
           <config>
             <bulletinLevel>WARN</bulletinLevel>
             <comments></comments>
             <concurrentlySchedulableTaskCount>1</concurrentlySchedulableTaskCount>
             <descriptors>
               <entry>
-                <key>Geo Database File</key>
+                <key>Delete Attributes Expression</key>
                 <value>
-                  <name>Geo Database File</name>
+                  <name>Delete Attributes Expression</name>
                 </value>
               </entry>
               <entry>
-                <key>IP Address Attribute</key>
+                <key>Store State</key>
                 <value>
-                  <name>IP Address Attribute</name>
+                  <name>Store State</name>
+                </value>
+              </entry>
+              <entry>
+                <key>Stateful Variables Initial Value</key>
+                <value>
+                  <name>Stateful Variables Initial Value</name>
+                </value>
+              </entry>
+              <entry>
+                <key>filename</key>
+                <value>
+                  <name>filename</name>
                 </value>
               </entry>
             </descriptors>
@@ -877,41 +889,48 @@
             <penaltyDuration>30 sec</penaltyDuration>
             <properties>
               <entry>
-                <key>Geo Database File</key>
-                <value>/tmp/nifi/GeoFile/GeoLite2-City.mmdb</value>
+                <key>Delete Attributes Expression</key>
               </entry>
               <entry>
-                <key>IP Address Attribute</key>
-                <value>Public_IP</value>
+                <key>Store State</key>
+                <value>Do not store state</value>
+              </entry>
+              <entry>
+                <key>Stateful Variables Initial Value</key>
+              </entry>
+              <entry>
+                <key>filename</key>
+                <value>weatherdata-${now():format("yyyy-MM-dd-HHmmssSSS")}-${UUID()}.json</value>
               </entry>
             </properties>
             <runDurationMillis>0</runDurationMillis>
-            <schedulingPeriod>0 sec</schedulingPeriod>
+            <schedulingPeriod>3 sec</schedulingPeriod>
             <schedulingStrategy>TIMER_DRIVEN</schedulingStrategy>
             <yieldDuration>1 sec</yieldDuration>
           </config>
-          <name>GeoEnrichIP</name>
+          <name>UpdateAttribute</name>
           <relationships>
             <autoTerminate>false</autoTerminate>
-            <name>found</name>
-          </relationships>
-          <relationships>
-            <autoTerminate>true</autoTerminate>
-            <name>not found</name>
+            <name>success</name>
           </relationships>
           <style></style>
-          <type>org.apache.nifi.processors.GeoEnrichIP</type>
+          <type>org.apache.nifi.processors.attributes.UpdateAttribute</type>
         </processors>
       </contents>
       <name>PreProcessDataForHBaseAndHadoop</name>
     </processGroups>
     <processors>
-      <id>bb445d4f-015a-1000-0000-000000000000</id>
-      <parentGroupId>7c84501d-d10c-407c-0000-000000000000</parentGroupId>
+      <id>13c95b5a-0a10-3f31-0000-000000000000</id>
+      <parentGroupId>46f95fe5-3024-31d8-0000-000000000000</parentGroupId>
       <position>
-        <x>1103.3905224609375</x>
-        <y>324.8113364327837</y>
+        <x>928.54037134452</x>
+        <y>388.8113364327837</y>
       </position>
+      <bundle>
+        <artifact>nifi-hadoop-nar</artifact>
+        <group>org.apache.nifi</group>
+        <version>1.2.0.3.0.0.0-452</version>
+      </bundle>
       <config>
         <bulletinLevel>WARN</bulletinLevel>
         <comments></comments>
@@ -1008,7 +1027,7 @@
         <properties>
           <entry>
             <key>Hadoop Configuration Resources</key>
-            <value>/etc/hdfs/core-site.xml</value>
+            <value>/etc/hadoop/conf/core-site.xml</value>
           </entry>
           <entry>
             <key>Kerberos Principal</key>
@@ -1025,7 +1044,7 @@
           </entry>
           <entry>
             <key>Directory</key>
-            <value>/tmp/weather</value>
+            <value>/sandbox/tutorial-id/820/nifi/output/geoenriched-data</value>
           </entry>
           <entry>
             <key>Conflict Resolution Strategy</key>
@@ -1072,12 +1091,17 @@
       <type>org.apache.nifi.processors.hadoop.PutHDFS</type>
     </processors>
     <processors>
-      <id>48643198-532b-10a4-0000-000000000000</id>
-      <parentGroupId>7c84501d-d10c-407c-0000-000000000000</parentGroupId>
+      <id>158c1890-fffc-37d8-0000-000000000000</id>
+      <parentGroupId>46f95fe5-3024-31d8-0000-000000000000</parentGroupId>
       <position>
-        <x>1096.0890991879382</x>
-        <y>0.0</y>
+        <x>930.2389480715208</x>
+        <y>72.0</y>
       </position>
+      <bundle>
+        <artifact>nifi-hbase-nar</artifact>
+        <group>org.apache.nifi</group>
+        <version>1.2.0.3.0.0.0-452</version>
+      </bundle>
       <config>
         <bulletinLevel>WARN</bulletinLevel>
         <comments></comments>
@@ -1145,11 +1169,11 @@
         <properties>
           <entry>
             <key>HBase Client Service</key>
-            <value>028219f0-015b-1000-0000-000000000000</value>
+            <value>0df71fd1-6192-3d88-0000-000000000000</value>
           </entry>
           <entry>
             <key>Table Name</key>
-            <value>sensor_readings</value>
+            <value>sense_hat_logs</value>
           </entry>
           <entry>
             <key>Row Identifier</key>
@@ -1197,5 +1221,5 @@
       <type>org.apache.nifi.hbase.PutHBaseJSON</type>
     </processors>
   </snippet>
-  <timestamp>04/29/2017 14:43:47 UTC</timestamp>
+  <timestamp>07/10/2017 05:23:31 UTC</timestamp>
 </template>
