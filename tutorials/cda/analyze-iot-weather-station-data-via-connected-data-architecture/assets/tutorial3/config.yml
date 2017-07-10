@@ -1,6 +1,6 @@
 MiNiFi Config Version: 2
 Flow Controller:
-  name: SensorWeatherDataEdgeHome
+  name: weather-station-node-sj
   comment: ''
 Core Properties:
   flow controller graceful shutdown period: 10 sec
@@ -41,19 +41,19 @@ Security Properties:
     algorithm: PBEWITHMD5AND256BITAES-CBC-OPENSSL
     provider: BC
 Processors:
-- id: da8182bb-015b-1000-0000-000000000000
+- id: adfe316f-3851-36f4-0000-000000000000
   name: ExecuteProcess
   class: org.apache.nifi.processors.standard.ExecuteProcess
   max concurrent tasks: 1
   scheduling strategy: TIMER_DRIVEN
-  scheduling period: 0 sec
+  scheduling period: 1 sec
   penalization period: 30 sec
   yield period: 1 sec
   run duration nanos: 0
   auto-terminated relationships list: []
   Properties:
     Argument Delimiter: ' '
-    Batch Duration:
+    Batch Duration: 5 sec
     Command: python
     Command Arguments: /home/pi/WeatherStation.py
     Redirect Error Stream: 'false'
@@ -62,27 +62,27 @@ Input Ports: []
 Output Ports: []
 Funnels: []
 Connections:
-- id: da82ace2-015b-1000-0000-000000000000
-  name: ExecuteProcess/success/479b7c3d-0159-1000-963e-01eca4014873
-  source id: da8182bb-015b-1000-0000-000000000000
+- id: 885c29e5-3232-3e23-0000-000000000000
+  name: ExecuteProcess/success/1e99e928-015d-1000-ffff-ffffb6732294
+  source id: adfe316f-3851-36f4-0000-000000000000
   source relationship names:
   - success
-  destination id: 479b7c3d-0159-1000-963e-01eca4014873
+  destination id: 1e99e928-015d-1000-ffff-ffffb6732294
   max work queue size: 10000
   max work queue data size: 1 GB
   flowfile expiration: 0 sec
   queue prioritizer class: ''
 Remote Process Groups:
-- id: da821681-015b-1000-0000-000000000000
+- id: c202e760-d687-3880-0000-000000000000
   name: ''
-  url: http://192.168.2.3:19090/nifi/
+  url: http://192.168.2.6:9090/nifi/
   comment: ''
   timeout: 30 sec
   yield period: 10 sec
   transport protocol: RAW
   Input Ports:
-  - id: 479b7c3d-0159-1000-963e-01eca4014873
-    name: IngestSensorReadings
+  - id: 1e99e928-015d-1000-ffff-ffffb6732294
+    name: From_MiNiFi
     comment: ''
     max concurrent tasks: 1
     use compression: false
