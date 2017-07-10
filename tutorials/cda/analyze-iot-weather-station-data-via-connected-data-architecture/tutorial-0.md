@@ -29,17 +29,14 @@ By the end of this tutorial series, you will acquire the fundamental knowledge t
 
 **The learning objectives of this tutorial series include:**
 
-- Install an Operating System (Linux) on the R-Pi (Tutorial 1)
-- Setup HDP Sandbox on your local machine (Tutorial 1)
-- Understand the R-Pi’s Place in the IoT Spectrum (Tutorial 1)
-- Understand Barometric Pressure/Temperature/Altitude Sensor’s Functionality (Tutorial 1)
-- Configure R-Pi to communicate with Sensor via I2C (Tutorial 2)
-- Implement a Python Script to Show Sensor Readings (Tutorial 2)
-- Create HBase Table to hold Sensor Readings (Tutorial 3)
-- Build a MiNiFi flow in NiFi using ExecuteProcess Processor and Remote Process Group to Ingest Raw Sensor Data from Python and Transport it to a Remote NiFi (Tutorial 3)
-- Build a Remote NiFi flow that geographically enriches the sensor dataset, converts the data format to JSON and stores the data into HBase (Tutorial 3)
-- Perform Aggregate Functions for Temperature, Pressure & Altitude with Phoenix (Tutorial 5)
-- Visualize the Analyzed Data with Apache Zeppelin (Tutorial 5)
+- Deploy IoT Weather Station and Connected Data Architecture
+- Become familiar with Raspberry Pi IoT Projects
+- Understand Barometric Pressure/Temperature/Altitude Sensor’s Functionality
+- Implement a Python Script to Control Sense HAT to Generate Weather Data
+- Create HBase Table to hold Sensor Readings
+- Build a MiNiFi flow to Transport the Sensor Data from Raspberry Pi to Remote NiFi located on HDF running on your computer
+- Build a NiFi flow on HDF Sandbox that preprocesses the data and geographically enriches the sensor dataset, and stores the data into HBase on HDP Sandbox
+- Visualize the Sensor Data with Apache Zeppelin Phoenix Interpreter
 
 
 ## Prerequisites
