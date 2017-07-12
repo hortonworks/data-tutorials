@@ -54,7 +54,7 @@ This tutorial will be using Spark 1.6.x. API syntax for all the examples.
 
 To begin, login to Hortonworks Sandbox through SSH:
 
-![](assets/Screenshot_2015-04-13_07_58_43.png?dl=1)
+![](assets/Screenshot_2015-04-13_07_58_43.png)
 
 The default password is `hadoop`.
 
@@ -64,7 +64,7 @@ Now let’s download the dataset with the command below:
 wget http://hortonassets.s3.amazonaws.com/tutorial/data/yahoo_stocks.csv
 ~~~
 
-![](assets/Screenshot%202015-05-28%2008.49.00.png?dl=1)
+![](assets/Screenshot%202015-05-28%2008.49.00.png)
 
 and copy the downloaded file to HDFS:
 
@@ -72,7 +72,7 @@ and copy the downloaded file to HDFS:
 hdfs dfs -put ./yahoo_stocks.csv /tmp/
 ~~~
 
-![](assets/Screenshot%202015-05-28%2008.49.55.png?dl=1)
+![](assets/Screenshot%202015-05-28%2008.49.55.png)
 
 ## Starting the Spark shell
 
@@ -82,7 +82,7 @@ Use the command below to launch the Scala REPL for Apache Spark:
 spark-shell
 ~~~
 
-![](assets/Screenshot%202015-05-28%2008.53.08.png?dl=1)
+![](assets/Screenshot%202015-05-28%2008.53.08.png)
 
 Notice it is already starting with Hive integration as we have preconfigured it on the Hortonworks Sandbox.
 
@@ -93,7 +93,7 @@ import org.apache.spark.sql.hive.orc._
 import org.apache.spark.sql._
 ~~~
 
-![](assets/Screenshot%202015-05-21%2011.43.56.png?dl=1)
+![](assets/Screenshot%202015-05-21%2011.43.56.png)
 
 ## Creating HiveContext
 
@@ -103,7 +103,7 @@ HiveContext is an instance of the Spark SQL execution engine that integrates wit
 val hiveContext = new org.apache.spark.sql.hive.HiveContext(sc)
 ~~~
 
-![](assets/Screenshot%202015-05-21%2011.47.33.png?dl=1)
+![](assets/Screenshot%202015-05-21%2011.47.33.png)
 
 ## Creating ORC tables
 
@@ -117,7 +117,7 @@ Specifying `as orc` at the end of the SQL statement below ensures that the Hive 
 hiveContext.sql("create table yahoo_orc_table (date STRING, open_price FLOAT, high_price FLOAT, low_price FLOAT, close_price FLOAT, volume INT, adj_price FLOAT) stored as orc")
 ~~~
 
-![](assets/Screenshot%202015-05-28%2009.33.34.png?dl=1)
+![](assets/Screenshot%202015-05-28%2009.33.34.png)
 
 ## Loading the file and creating a RDD
 
@@ -133,7 +133,7 @@ With the command below we instantiate an RDD:
 val yahoo_stocks = sc.textFile("hdfs://sandbox.hortonworks.com:8020/tmp/yahoo_stocks.csv")
 ~~~
 
-![](assets/Screenshot%202015-05-21%2012.08.16.png?dl=1)
+![](assets/Screenshot%202015-05-21%2012.08.16.png)
 
 To preview data in `yahoo_stocks` type:
 
@@ -151,7 +151,7 @@ Let’s assign the first row of the RDD above to a new variable
 val header = yahoo_stocks.first
 ~~~
 
-![](assets/Screenshot%202015-05-28%2010.14.21.png?dl=1)
+![](assets/Screenshot%202015-05-28%2010.14.21.png)
 
 Let’s dump this new RDD in the console to see what we have here:
 
@@ -159,7 +159,7 @@ Let’s dump this new RDD in the console to see what we have here:
 header
 ~~~
 
-![](assets/Screenshot%202015-05-28%2010.22.10.png?dl=1)
+![](assets/Screenshot%202015-05-28%2010.22.10.png)
 
 Now we need to separate the data into a new RDD where we do not have the header above and :
 
@@ -181,7 +181,7 @@ There’s two ways of doing this.
 case class YahooStockPrice(date: String, open: Float, high: Float, low: Float, close: Float, volume: Integer, adjClose: Float)
 ~~~
 
-![](assets/Screenshot%202015-05-28%2011.54.06.png?dl=1)
+![](assets/Screenshot%202015-05-28%2011.54.06.png)
 
 ### Attaching the schema to the parsed data
 
@@ -191,7 +191,7 @@ Create an RDD of Yahoo Stock Price objects and register it as a table.
 val stockprice = data.map(_.split(",")).map(row => YahooStockPrice(row(0), row(1).trim.toFloat, row(2).trim.toFloat, row(3).trim.toFloat, row(4).trim.toFloat, row(5).trim.toInt, row(6).trim.toFloat)).toDF()
 ~~~
 
-![](assets/Screenshot%202015-05-28%2011.59.33.png?dl=1)
+![](assets/Screenshot%202015-05-28%2011.59.33.png)
 
 Let’s verify that the data has been correctly parsed by the statement above by dumping the first row of the RDD containing the parsed data:
 
@@ -199,7 +199,7 @@ Let’s verify that the data has been correctly parsed by the statement above by
 stockprice.first
 ~~~
 
-![](assets/Screenshot%202015-05-28%2014.02.58.png?dl=1)
+![](assets/Screenshot%202015-05-28%2014.02.58.png)
 
 if we want to dump more all the rows, we can use
 
@@ -207,7 +207,7 @@ if we want to dump more all the rows, we can use
 stockprice.show
 ~~~
 
-![](assets/Screenshot%202015-05-28%2014.08.33.png?dl=1)
+![](assets/Screenshot%202015-05-28%2014.08.33.png)
 
 To verify the schema, let’s dump the schema:
 
@@ -215,7 +215,7 @@ To verify the schema, let’s dump the schema:
 stockprice.printSchema
 ~~~
 
-![](assets/Screenshot%202015-05-28%2014.12.38.png?dl=1)
+![](assets/Screenshot%202015-05-28%2014.12.38.png)
 
 ## Registering a temporary table
 
@@ -225,7 +225,7 @@ Now let’s give this RDD a name, so that we can use it in Spark SQL statements:
 stockprice.registerTempTable("yahoo_stocks_temp")
 ~~~
 
-![](assets/Screenshot%202015-05-28%2014.19.30.png?dl=1)
+![](assets/Screenshot%202015-05-28%2014.19.30.png)
 
 ### Querying against the table
 
@@ -235,7 +235,7 @@ Now that our schema’s RDD with data has a name, we can use Spark SQL commands 
 val results = sqlContext.sql("SELECT * FROM yahoo_stocks_temp")
 ~~~
 
-![](assets/Screenshot%202015-05-28%2016.24.14.png?dl=1)
+![](assets/Screenshot%202015-05-28%2016.24.14.png)
 
 The resultset returned from the Spark SQL query is now loaded in the `results` RDD. Let’s pretty print it out on the command line.
 
@@ -243,7 +243,7 @@ The resultset returned from the Spark SQL query is now loaded in the `results` R
 results.map(t => "Stock Entry: " + t.toString).collect().foreach(println)
 ~~~
 
-![](assets/Screenshot%202015-05-21%2013.08.32.png?dl=1)
+![](assets/Screenshot%202015-05-21%2013.08.32.png)
 
 ## Saving as an ORC file
 
@@ -259,7 +259,7 @@ To store results in a hive directory rather than user directory, use this path i
 /apps/hive/warehouse/yahoo_stocks_orc
 ~~~
 
-![](assets/Screenshot%202015-05-28%2016.52.44.png?dl=1)
+![](assets/Screenshot%202015-05-28%2016.52.44.png)
 
 ### Reading the ORC file
 
@@ -269,7 +269,7 @@ Let’s now try to read back the ORC file, we just created back into an RDD. But
 val hiveContext = new org.apache.spark.sql.hive.HiveContext(sc)
 ~~~
 
-![](assets/Screenshot%202015-05-28%2017.23.06.png?dl=1)
+![](assets/Screenshot%202015-05-28%2017.23.06.png)
 
 now we can try to read the ORC file with:
 
@@ -277,7 +277,7 @@ now we can try to read the ORC file with:
 val yahoo_stocks_orc = hiveContext.read.format("orc").load("yahoo_stocks_orc")
 ~~~
 
-![](assets/Screenshot%202015-05-28%2017.24.05.png?dl=1)
+![](assets/Screenshot%202015-05-28%2017.24.05.png)
 
 Let’s register it as a temporary in-memory table mapped to the ORC table:
 
@@ -285,7 +285,7 @@ Let’s register it as a temporary in-memory table mapped to the ORC table:
 yahoo_stocks_orc.registerTempTable("orcTest")
 ~~~
 
-![](assets/Screenshot%202015-05-28%2017.24.53.png?dl=1)
+![](assets/Screenshot%202015-05-28%2017.24.53.png)
 
 Now we can verify whether we can query it back:
 
@@ -293,7 +293,7 @@ Now we can verify whether we can query it back:
 hiveContext.sql("SELECT * from orcTest").collect.foreach(println)
 ~~~
 
-![](assets/Screenshot%202015-05-28%2017.26.08.png?dl=1)
+![](assets/Screenshot%202015-05-28%2017.26.08.png)
 
 ## Summary
 

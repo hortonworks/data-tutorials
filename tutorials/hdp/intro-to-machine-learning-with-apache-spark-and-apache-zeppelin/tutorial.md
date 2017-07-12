@@ -114,6 +114,9 @@ Once your notebook is imported, you can open it from the Zeppelin home screen by
 
 ### Final words
 
-We hope that you've been able to successfully run this first lab introducing basic, yet very common, Linear Regression model. More advanced Machine Learning models are introduced as part of series tackling specific examples, such as Twitter sentiment analysis, article auto-classification and so on.
+We hope that you've been able to successfully run this first lab introducing basic, yet very common, Linear Regression model.
 
-Make sure to checkout other [tutorials](https://hortonworks.com/tutorials/) for more examples on using Spark and Machine Learning.
+Next, if you would like to learn more on how to deploy machine learning models in production, checkout this tutorial on [deploying machine learning models with structured streaming](https://hortonworks.com/tutorial/deploying-machine-learning-models-using-spark-structured-streaming/).
+
+
+For a more advanced example, checkout our tutorial on [Twitter sentiment analysis](https://hortonworks.com/tutorial/deploying-machine-learning-models-using-spark-structured-streaming/).
