@@ -18,22 +18,16 @@ In the concepts tutorial, the goal is to give you information on the background 
 
 ## Outline
 
--   Raspberry Pi
--   Sense HAT Sensor Functionality
--   Docker
--   HDF Sandbox Docker Container
--   Apache NiFi
--   Apache MiNiFi
--   HDP Sandbox Docker Container
--   Apache Zookeeper
--   Apache HBase
--   Apache Phoenix
--   Apache Zeppelin
--   Connected Data Architecture and IoT Weather Station
+-   1\. Raspberry Pi
+-   2\. Docker
+-   3\. HDF Sandbox Docker Container
+-   4\. HDP Sandbox Docker Container
+-   5\. Connected Data Architecture and IoT Weather Station
+-   6\. HDF (Data-In-Motion) vs HDP (Data-At-Rest)
 -   Summary
 -   Further Reading
 
-## Raspberry Pi
+## 1\. Raspberry Pi
 
 ### What is a Raspberry Pi?
 
@@ -48,13 +42,13 @@ The Raspberry Pi (R-Pi) 3 is a microprocessor or computer with an open-source pl
 
 The R-Pi is not just a platform for building IoT projects, it is a super platform for learning about IoT. R-Pi is a great way to gain practical experience with IoT. According to [IBM Watson Internet of Things](http://www.ibm.com/internet-of-things/partners/raspberry-pi/), the R-Pi IoT platform can be used for the factory, environment, sports, vehicles, buildings, home and retail. All these R-Pi IoT platform use cases have in common that data is processed, which can result in augmented productivity in factories, enhanced environmental stewardship initiatives, provided winning strategies in sports, enhanced driving experience, better decision making, enhanced resident safety and security and customized and improved shopping experience in retail.
 
-## Sense HAT Functionality
+### Sense HAT Functionality
 
 ![sense-hat-pins](assets/tutorial2/sense-hat-pins.jpg)
 
 **Figure 2:** Sense HAT
 
-The Sense HAT comes with an 8x8 LED Matrix, five-button joystick and the following sensors: gyroscope, accelerometer, magnetometer, temperature, barometric pressure and humidity.
+The Sense HAT is a board that connects to the Raspberry Pi. It comes with an 8x8 LED Matrix, five-button joystick and the following sensors: gyroscope, accelerometer, magnetometer, temperature, barometric pressure and humidity.
 
 ### What exactly does the Sense HAT Sensor Measure?
 
@@ -68,7 +62,11 @@ The Sense HAT sensor uses I2C, a communication protocol, to transfer data to the
 
 I2C makes it possible to have multiple devices in connection with the R-Pi, each having a unique address and can be set by updating the settings on the Pi. It will be easier to verify everything is working because one can see all the devices connected to the Pi.
 
-## Docker
+### Apache MiNiFi
+
+MiNiFi was built to live on the edge for ingesting data at the central location of where it is born, then transport that data to your data center where NiFi lives. MiNiFi comes in two flavors Java or C++ agent. These agents access data from Microcontrollers and Microprocessors, such as Raspberry Pis and other IoT level devices. The idea behind MiNiFi is to be able to get as close to the data as possible from any particular location no matter how small the footprint on a particular embedded device.
+
+## 2\. Docker
 
 ### What is Docker?
 
@@ -90,29 +88,25 @@ You will use Docker as the backbone to deploy the Connected Data Architecture: I
 
 In the Connected Data Architecture, the Sense HAT and Raspberry Pi will be located in the Internet of Anything (alias Internet of Things), HDF Sandbox Container and HDP Sandbox Container will run in their own containers connected in a simulated network by Docker's default network feature known as Bridge.
 
-## HDF Sandbox Docker Container
+## 3\. HDF Sandbox Docker Container
 
 HDF Sandbox comes in different flavors: VirtualBox, VMware and Docker. You will be using the HDF Sandbox Docker container to build this IoT Weather Station via Connected Data Architecture. Hortonworks DataFlow (HDF) Sandbox is a way to deploy HDF into an isolated environment for testing, staging and sometimes production. [HDF is a application stack framework](https://hortonworks.com/products/data-center/hdf/) used to process data-in-motion. HDF comes with frameworks: Zookeeper, Storm, Ambari Infra, Ambari Metrics, Kafka, Log Search, Ranger and NiFi.
 
-## Apache NiFi
+### Apache NiFi
 
 NiFi is a robust and secure framework for ingesting data from various sources, performing simple transformations on that data and transporting it across a multitude of systems. The NiFi UI provides flexibility to allow teams to simultaneously change flows on the same machine. NiFi uses SAN or RAID storage for the data it ingests and the provenance data manipulation events it generates. Provenance is a record of events in the NiFi UI that shows how data manipulation occurs while data flows throughout the components, known as processors, in the NiFi flow. NiFi, program sized at approximately 800MB, has over 190 processors for custom integration with various systems and operations.
 
-## Apache MiNiFi
-
-MiNiFi was built to live on the edge for ingesting data at the central location of where it is born, then transport that data to your data center where NiFi lives. MiNiFi comes in two flavors Java or C++ agent. These agents access data from IoT and Desktop level devices. The idea behind MiNiFi is to be able to get as close to the data as possible from any particular location no matter how small the footprint on a particular embedded device.
-
-## Visualization of MiNiFi and NiFi Place in IoT
+### Visualization of MiNiFi and NiFi Place in IoT
 
 ![nifi-minifi-place-iot](assets/tutorial1/nifi-minifi-place-in-iot.png)
 
 **Figure 5:** MiNiFi to NiFi
 
-## HDP Sandbox Docker Container
+## 4\. HDP Sandbox Docker Container
 
 HDP Sandbox comes in different flavors: VirtualBox, VMware and Docker. You will be using the HDP Sandbox Docker container to build this IoT Weather Station via Connected Data Architecture. Hortonworks Data Platform (HDP) Sandbox is a way to deploy HDP into an isolated environment for testing, staging and sometimes production. [HDP is a application stack framework](https://hortonworks.com/products/data-center/hdp/) used to process data-at-rest. HDP comes with various frameworks: HDFS, Yarn + MapReduce2, HBase, Phoenix, Zeppelin, etc.
 
-## Apache Zookeeper
+### Apache Zookeeper
 
 **Overview**
 
@@ -126,21 +120,21 @@ Zookeeper is designed to be simple, replicated, ordered and fast. Ideal read/wri
 
 In a Zookeeper cluster, you will usually have servers or nodes that make up the Zookeeper service that all know each other exist. They hold in-memory image of the state, transaction logs and snapshots in the persistent store. The Zookeeper service remains available as long as the servers are up and running. The process between client and Zookeeper involves the client making a connection to a Zookeeper server. The client maintains the TCP connection and sends requests, heart beats along with obtaining responses and watch events. Once Zookeeper crashes, clients will connect to another server.
 
-## Apache HBase
+### Apache HBase
 
 Apache HBase is a noSQL database programmed in Java, but unlike other noSQL databases, it provides strong data consistency on reads and writes. HBase is a column-oriented key/value data store implemented to run on top of Hadoop Distributed File System (HDFS). HBase scales out horizontally in distributed compute clusters and supports rapid table-update rates. HBase focuses on scale, which enables it to handle very large database tables. Common scenarios include HBase tables that hold billions of rows and millions of columns. Another example is Facebook utilizes HBase as a structured data handler for its messaging infrastructure.
 
 Critical part of the HBase architecture is utilization of the master nodes to manage region servers that distribute and process parts of data tables. HBase is part of the Hadoop ecosystem along with other services such as Zookeeper, Phoenix, Zeppelin.
 
-## Apache Phoenix
+### Apache Phoenix
 
 Apache Phoenix provides the flexibility of late-bound, schema-on-read capabilities from NoSQL technology by leveraging HBase as its backing store. Phoenix has the power of standard SQL and JDBC APIs with full ACID transaction capabilities. Phoenix also enables online transaction processing (OLTP) and operational analytics in Hadoop specifically for low latency applications. Phoenix comes fully integrated to work with other products in the Hadoop ecosystem, such as Spark and Hive.
 
-## Apache Zeppelin
+### Apache Zeppelin
 
 Apache Zeppelin is a data science notebook that allows users to use interpreters to visualize their data with line, bar, pie, scatter charts and various other visualizations. One particular interpreter we will utilize is Phoenix that way we can visualize our weather data.
 
-## Connected Data Architecture and IoT Weather Station
+## 5\. Connected Data Architecture and IoT Weather Station
 
 We have talked about each component within the project individually, now we will discuss at high level how each component connects to each other.
 
@@ -157,6 +151,16 @@ The IoT Weather Station is based at the Raspberry Pi and Sense HAT. At this loca
 The combination of HDF and HDP create the idea of Connected Data Architecture. For prototyping purposes, you will be running a single node HDF sandbox container and a single node HDP sandbox container inside a docker containerized network. The way that sensor data gets into the Connected Data Architecture is through MiNiFi's connection to HDF NiFi via Site-To-Site. Site-To-Site is a protocol that allows external agents to connect to NiFi. NiFi preprocesses the sensor data and adds geographic enrichment. NiFi located on the HDF Sandbox Container then makes a connection to HBase via NiFi's HBase Client Service Controller. This Controller Service enables NiFi to connect to a remote HBase located on the HDP Sandbox Container. The way that NiFi is able to find the location of HBase is through communicating with the Zookeeper client. With successful communication from Zookeeper, NiFi is able to locate the location of HBase and store data in an HBaes table. Once the data is stored in HBase, Phoenix is used to map to the HBase table. Visualization is performed using Zeppelin's Phoenix interpreter.
 
 > Note: "Single node" just means that you have one computer or docker container that has an HDF stack or HDP stack installed on it. On the other hand, a multinode could be HDF stack installed across multiple computers or docker containers.
+
+## 6\. HDF (Data-In-Motion) vs HDP (Data-At-Rest)
+
+**HDF (Data-In-Motion)**
+
+Data-In-Motion is the idea where data is being ingested from all sorts of different devices into a flow or stream. While the data is moving throughout this flow, components or as NiFi calls them "processors" are performing actions on the data to modify, transform, aggregate and route it. Data-In-Motion covers a lot of the preprocessing stage in building a Big Data Application. For instance, data preprocessing is where Data Engineers work with the raw data to format it into a better schema, so Data Scientists can focus on analyzing and visualizing the data.
+
+**HDP (Data-At-Rest)**
+
+Data-At-Rest is the idea where data is not moving and is stored in a database or robust datastore across a distributed data storage such as Hadoop Distributed File System (HDFS). Instead of sending the data to the queries, the queries are being sent to the data to find meaningful insights. At this stage data, data processing and analysis occurs in building a Big Data Application.
 
 ## Summary
 
