@@ -1,0 +1,281 @@
+---
+title: Tag Based Policies with Apache Ranger and Apache Atlas
+author: James Medel
+tutorial-id: 660
+experience: Intermediate
+persona: Administrator
+source: Hortonworks
+use case: Security
+technology: Apache Atlas, Apache Ranger
+release: hdp-2.6.1
+environment: Sandbox
+product: HDP
+series: HDP > Hadoop Administration > Security
+---
+
+# Tag Based Policies with Apache Ranger and Apache Atlas
+
+## Introduction
+
+You will explore integration of Apache Atlas and Apache Ranger, and introduced the concept of tag or classification based policies. Enterprises can classify data in Apache Atlas and use the classification to build security policies in Apache Ranger.
+
+This tutorial walks through an example of tagging data in Atlas and building a security policy in Ranger.
+
+## Prerequisites
+
+-   [Download Hortonworks 2.6 Sandbox](https://hortonworks.com/downloads/#sandbox)
+-   [Install Hortonworks 2.6 Sandbox](https://hortonworks.com/tutorial/sandbox-deployment-and-install-guide/section/3/)
+-   Add Sandbox Hostname to Your Hosts File, refer to [Learning the Ropes of Hortonworks Sandbox](https://github.com/hortonworks/data-tutorials/blob/master/tutorials/hdp/learning-the-ropes-of-the-hortonworks-sandbox/tutorial.md), section **1.3 Add Sandbox Hostname to Your Hosts File**
+
+-   (Optional) Set the Ambari Password, refer to [Learning the Ropes of Hortonworks Sandbox](https://github.com/hortonworks/data-tutorials/blob/master/tutorials/hdp/learning-the-ropes-of-the-hortonworks-sandbox/tutorial.md), section **2.2 Setup Ambari admin Password Manually**
+
+## Outline
+
+-   [Step 1: Enable Ranger Audit to Solr](#step-1:-enable-ranger-audit-to-solr)
+-   [Step 2: Restart All Services Affected](#step-2:-restart-all-services-affected)
+-   [Step 3: Explore General Information](#step-3:-explore-general-information)
+-   [Step 4: Explore Sandbox User Personas Policy](#step-4:-explore-sandbox-user-personas-policy)
+-   [Step 5: Access Without Tag Based Policies](#step-5:-access-without-tag-based-policies)
+-   [Step 6: Create Atlas Tag to Classify Data](#step-6:-create-atlas-tag-to-classify-data)
+-   [Step 7: Create Ranger Tag Based Policy](#step-7:-create-ranger-tag-based-policy)
+-   [Summary](#summary)
+
+### Step 1: Enable Ranger Audit to Solr
+
+Log into Ambari as `raj_ops` user. User/Password is `raj_ops/raj_ops`
+
+![ambari_dashboard_rajops](assets/ambari_dashboard_rajops.png)
+
+**Figure 1: Ambari Dashboard**
+
+Click on the **Ranger** Service in the Ambari Stack of services on the left side column.
+
+Select the **Configs** tab.
+
+Select the **Ranger Audit** tab. Turn **ON** Ranger's Audit to Solr feature. Click on the **OFF button** under **Audit to Solr** to turn it **ON**.
+
+**Save** the configuration. In the **Save Configuration** window that appears, write `Enable Audit to Solr Feature`, then click **Save** in that window. click **OK** button on Dependent Configurations window. click **Proceed Anyway.** On the **Save Configuration Changes** window, click **OK**.
+
+![enable_audit_to_solr](assets/activate_ranger_audit_to_solr.png)
+
+**Figure 2: Ranger 'Audit to Solr' Config**
+
+### Step 2: Restart All Services Affected
+
+After Enabling Ranger Audit to Solr, there are services that will need to be restarted for the changes to take effect on our HDP sandbox.
+
+![affected_services](assets/images/affected_services.jpg)
+
+**Figure 3: Affected Services After Ranger Audit Config Set**
+
+Let's start by restarting services from the top of the Ambari Stack.
+
+### 2.1: Restart HDFS Service
+
+1\. Restart **HDFS**. Click on HDFS. Click on **Service Actions**, **Restart All** to restart all components of HDFS. It will also restart all affected components of HDFS.
+
+![restart_all_hdfs_components](assets/images/restart_all_hdfs_components.jpg)
+
+**Figure 4: Restart All HDFS Components**
+
+2\. On the **Confirmation** window, press **Confirm Restart All**.
+
+![hdfs_confirmation_restart](assets/images/hdfs_confirmation_restart.jpg)
+
+**Figure 5: Confirm HDFS Restart**
+
+**Background Operation Running** window will appear showing HDFS currently is being restarted. This window will appear for other services you perform a service action upon.
+
+![background_operation_running_hdfs](assets/images/background_operation_running_hdfs.jpg)
+
+**Figure 6: Background Operation Running Window**
+
+Click **X** button in top right corner.
+
+3\. Once HDFS finishes restarting, you will be able to see the components health.
+
+![hdfs_service_restart_result](assets/images/hdfs_service_restart_result.jpg)
+
+**Figure 7: Summary of HDFS Service's That Were Restarted**
+
+You may notice there is one component still needs to be restarted. **SNameNode** says **Stopped**. Click on its name.
+
+You are taken to the **Hosts Summary** page. It lists all components related to every service within the Ambari stack for the Sandbox host.
+
+4\. Search for **SNameNode**, click on **Stopped** dropdown button, click **Start**.
+
+![host_components](assets/images/host_components.jpg)
+
+**Figure 8: SNameNode Start**
+
+Starting SNameNode is like restarting it since it was initially off, it will be refreshed from the recent changes from Ranger Audit config.
+
+5\. Exit the Background Operations Window. Click on the Ambari icon ![ambari_icon](assets/images/ambari_icon.jpg) in the top right corner.
+
+6\. Head back to **HDFS** Service's **Summary** page. Click on **Service Actions** dropdown, click **Turn off Maintenance Mode**.
+
+7\. When the **Confirmation** window appears, confirm you want to **Turn off Maintenance Mode**, click **OK**.
+
+An **Information** window will appear conveying the result, click **OK**.
+
+![hdfs_summary_components](assets/images/hdfs_summary_components.jpg)
+
+**Figure 9: HDFS Summary of Final Restart Result**
+
+Now **HDFS** service has been successfully restarted. Initially, we did **Restart All**, which restarted most components, but some components have to be manually restarted like **SNameNode**.
+
+### 2.2: Stop Services Not Used in Tag Based Policies
+
+Before we can restart the rest of the remaining services, we need to stop services that will not be used as part of the Tag Based Policies tutorial.
+
+Stopping a service uses a similar approach as in section **2.1**, but instead of using **Restart All**, click on the **Stop** button located in **Service Actions**.
+
+1\. Stop **(1) Oozie**, **(2) Flume**, **(3) Spark2** and **(4) Zeppelin**
+
+![stop_services_not_needed](assets/images/stop_services_not_needed.jpg)
+
+### 2.3: Restart the Other Affected Services from Ranger Config
+
+1\. Follow the similar approach used in section **2.1** to restart the remaining affected services by the list order: **(1) YARN**, **(2) Hive**, **(3) HBase**, **(4) Storm**, **(5) Ambari Infra** **(6) Atlas**, **(7) Kafka**, **(8) Knox**, **(9) Ranger**.
+
+![services_left_to_restart](assets/images/services_left_to_restart.jpg)
+
+**Figure 10: Remaining Affected Services that Need to be Restarted**
+
+> Note: Also turn off maintenance mode for **HBase**, **Atlas** and **Kafka**.
+
+2\. In your **Background Operations Running** window, it should show that all the above services **(1-9)** are being restarted.
+
+![remaining_services_restarted](assets/images/remaining_services_restarted.jpg)
+
+**Figure 11: Remaining Affected Services Restart Progress**
+
+![remaining_services_restart_result1](assets/images/remaining_services_restart_result1.jpg)
+
+**Figure 12: Result of Affected Services Restarted**
+
+> Note: sometimes **Atlas Metadata Server** will fail to restart, all you need to do is go to the component and individually start it
+
+### Step 3: Explore General Information
+
+This section will introduce the personas we will be using in this tutorial for Ranger, Atlas and Ambari.
+
+Earlier you were introduced to the raj_ops persona. Here is a brief description of each persona:
+
+- raj_ops: Big Data Operations
+- maria_dev: Big Data Developer
+- holger_gov: Big Data Governance
+
+Access Ranger with the following credentials:
+
+User id – **raj_ops**
+Password – **raj_ops**
+
+And for Atlas:
+
+User id – **holger_gov**
+Password – **holger_gov**
+
+And for Ambari:
+
+User id – **raj_ops**
+Password – **raj_ops**
+
+User id – **maria_dev**
+Password – **maria_dev**
+
+### Step 4: Explore Sandbox User Personas Policy
+
+In this section, you will explore the prebuilt Ranger Policy for the HDP Sandbox user personas that grant them permission to a particular database. This policy affects which **tables** and **columns** these user personas have access to in the **foodmart** database.
+
+1\. Access the Ranger UI Login page at `sandbox.hortonworks.com:6080`.
+
+Login Credentials: username = `raj_ops`, password = `raj_ops`
+
+![ranger_login_rajops](assets/ranger_login_rajops.png)
+
+**Figure 13: Ranger Login is raj_ops/raj_ops**
+
+Press `Sign In` button, the home page of Ranger will be displayed.
+
+2\. Click on the `Sandbox_hive` Resource Board.
+
+![click_sandbox_hive_rajops](assets/click_sandbox_hive_rajops.png)
+
+**Figure 14: Ranger Resource Based Policies Dashboard**
+
+3\. You will see a list of all the policies under the Sandbox_hive repository. Select policy called: **policy for raj_ops, holger_gov, maria_dev and amy_ds**
+
+![click_policy_for_all_users_rajops](assets/click_policy_for_all_users_rajops.png)
+
+**Figure 15: Sandbox_hive Repository's Policies**
+
+This policy is meant for these 4 users and is applied to all tables and all columns of a `foodmart` database.
+
+![sample_foodmart_policy_rajops](assets/sample_foodmart_policy_rajops.png)
+
+**Figure 16: Ranger Policy Details**
+
+4\. To check the type of access this policy grants to users, explore the table within the **Allow Conditions** section:
+
+![allow_condition_sample_policy_rajops](assets/allow_condition_sample_policy_rajops.png)
+
+**Figure 17: Ranger Policy Allow Conditions Section**
+
+You can give any access to the users as per their roles in the organization.
+
+### Step 5: Access Without Tag Based Policies
+
+In the previous section, you saw the data within the foodmart database that users within the HDP sandbox have access to, now you will create a brand new hive table called `employee` within a different database called `default`.
+
+Keep in mind, for this new table, no policies have been created to authorize what our sandbox users can access within this table and its columns.
+
+1\. Go to **Hive View 2.0**. Hover over the Ambari 9 square menu icon ![ambari_menu_icon](assets/images/ambari_menu_icon.jpg), select **Hive View 2.0**.
+
+![menu_hive_view2](assets/images/menu_hive_view2.jpg)
+
+**Figure 18: Access Hive View 2.0 From Ambari Views**
+
+2\. Create the `employee` table:
+
+~~~sql
+create table employee (ssn string, name string, location string)
+row format delimited
+fields terminated by ','
+stored as textfile;
+~~~
+
+Then, click the green `Execute` button.
+
+![create_hive_table](assets/create_hive_table_employee.png)
+
+3\. Verify the table was created successfully by going to the **TABLES** tab:
+
+![list_hive_table](assets/list_hive_table.png)
+
+4\. Now we will populate this table with data.
+
+5\. Enter the HDP Sandbox's CentOS command line interface by using the Web Shell Client at `sandbox.hortonworks.com:4200`
+
+Login credentials are:
+
+username = `root`
+password = `hadoop` (is the initial password, but you will asked to change it)
+
+![web_shell_client](assets/images/web_shell_client.jpg)
+
+5\. Create the `employeedata.txt` file with the following data using the command:
+
+~~~bash
+printf "111-111-111,James,San Jose\\n222-222-222,Mike,Santa Clara\\n333-333-333,Robert,Fremont" > employeedata.txt
+~~~
+
+![create_employee_data](assets/images/create_employee_data.jpg)
+
+5\. Copy the employeedata.txt file from your centOS file system to HDFS. The particular location the file will be stored in is Hive warehouse's employee table directory:
+
+~~~
+hdfs dfs -copyFromLocal employeedata.txt /apps/hive/warehouse/employee
+~~~
+
+![]()
