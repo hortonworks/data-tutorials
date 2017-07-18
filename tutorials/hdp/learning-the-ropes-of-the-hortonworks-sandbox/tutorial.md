@@ -28,19 +28,6 @@ Let's begin our Hadoop journey.
 -   If on mac or linux, added `sandbox.hortonworks.com` to your `/private/etc/hosts` file
 -   If on windows 7, added `sandbox.hortonworks.com` to your `/c/Windows/System32/Drivers/etc/hosts` file
 
-If on mac or linux, to add `sandbox.hortonworks.com` to your list of hosts, open the terminal, enter the following command, replace {Host-Name} with the appropriate host for your sandbox:
-
-~~~
-echo '{Host-Name} sandbox.hortonworks.com' | sudo tee -a /private/etc/hosts
-~~~
-> NOTE: In single machine, just replace {Host-Name} with 127.0.0.1
-
-If on windows 7, to add `sandbox.hortonworks.com` to your list of hosts, open git bash, enter the following command, replace {Host-Name} with the appropriate host for your sandbox:
-
-~~~bash
-echo '{Host-Name} sandbox.hortonworks.com' | tee -a /c/Windows/System32/Drivers/etc/hosts
-~~~
-
 ## Outline
 
 -   [What is the Sandbox?](#what-is-the-sandbox)
@@ -48,9 +35,10 @@ echo '{Host-Name} sandbox.hortonworks.com' | tee -a /c/Windows/System32/Drivers/
 -   [Step 1: Explore the Sandbox in a VM](#explore-sandbox-vm)
     -   [1.1 Install the Sandbox](#install-sandbox)
     -   [1.2 Learn the Host Address of Your Environment](#learn-host-address-environment)
-    -   [1.3 Connect to the Welcome Screen](#connect-to-welcome-screen)
-    -   [1.4 Multiple Ways to Execute Terminal Commands](#ways-execute-terminal-command)
-    -   [1.5 Learn Your Sandbox Version](#learn-sandbox-version)
+    -   [1.3 Add Sandbox Hostname to Your Hosts File](#add sandbox hostname to your hosts file)
+    -   [1.4 Connect to the Welcome Screen](#connect-to-welcome-screen)
+    -   [1.5 Multiple Ways to Execute Terminal Commands](#ways-execute-terminal-command)
+    -   [1.6 Learn Your Sandbox Version](#learn-sandbox-version)
 -   [Step 2: Explore Ambari](#explore-ambari)
     -   [2.1 Use Terminal to Find the Host IP Sandbox Runs On](#find-host-ip-sandbox-runs-on)
     -   [Services Provided By the Sandbox](#services-provided-by-sandbox)
@@ -82,9 +70,9 @@ Start the Hortonworks Sandbox following the [Installation Steps](https://hortonw
 
 ### 1.2 Learn the Host Address of Your Environment <a id="learn-host-address-environment"></a>
 
-Once you have installed the Sandbox VM, it resolves to the host on your environment, the address of which varies depending upon the Virtual Machine you are using(Vmware, VirtualBox etc). As, a general thumb rule, wait for the installation to complete and confirmation screen will tell you the host your sandbox resolves to. For example:
+Once you have installed the Sandbox VM, it resolves to the localhost on your environment, the address of which varies depending upon the Virtual Machine you are using(Vmware, VirtualBox etc). As, a general thumb rule, wait for the installation to complete and confirmation screen will tell you the localhost IP address your sandbox resolves to. For example:
 
-In case of VirtualBox: `host` would be `127.0.0.1`
+In case of VirtualBox: `IP` would be `127.0.0.1`
 
 ![Host Address of Sandbox Environment](assets/learn_host_address_learning_the_ropes_sandbox.png)
 
@@ -92,7 +80,35 @@ In case of VirtualBox: `host` would be `127.0.0.1`
 
 If you are using a private cluster or a cloud to run sandbox. Please find the host your sandbox resolves to.
 
-### 1.3 Connect to the Welcome Screen <a id="connect-to-welcome-screen"></a>
+## 1.3 Add Sandbox Hostname to Your Hosts File
+
+To be able to access HDP services on the Sandbox from our host machine's browser, you will need to add `sandbox.hortonworks.com` mapped to your IP address to the list of hosts in your **hosts** file. The location of the **hosts** file is different for each OS.
+
+For mac users, enter the following command in your terminal:
+
+~~~
+echo '{Host-Name} sandbox.hortonworks.com' | sudo tee -a /private/etc/hosts
+~~~
+> NOTE: In single machine, just replace {Host-Name} with 127.0.0.1
+
+For most Linux users, enter the following command in your terminal:
+
+~~~
+echo '{Host-Name} sandbox.hortonworks.com' | sudo tee -a /etc/hosts
+~~~
+> NOTE: In single machine, just replace {Host-Name} with 127.0.0.1
+
+1\. For Windows 10 users, open Notepad as an **administrator**. Open the "hosts" file at this path: `c:\Windows\System32\drivers\etc\hosts` and add:
+
+~~~bash
+127.0.0.1   localhost   sandbox.hortonworks.com
+~~~
+
+> Note: Make sure to remove the "#" hash symbol from the left side of the line and add "sandbox.hortonworks.com".
+
+Then save the file.
+
+### 1.4 Connect to the Welcome Screen <a id="connect-to-welcome-screen"></a>
 
 Append the port number :8888 to your host address, open your browser, and access Sandbox Welcome page at `http://_host_:8888/.`
 
@@ -102,7 +118,7 @@ Click on `Launch Dashboard` to go to Ambari with a [Hello HDP tutorial](https://
 
 `Launch Dashboard` opens the Ambari user interface and an additional tutorial window.  You should login to Ambari using the username and password based on the tutorials you are following in the tutorial window.  Most of the tutorials login to Ambari using `raj_ops/raj_ops` or `maria_dev/maria_dev`.
 
-### 1.4 Multiple Ways to Execute Terminal Commands <a id="ways-execute-terminal-command"></a>
+### 1.5 Multiple Ways to Execute Terminal Commands <a id="ways-execute-terminal-command"></a>
 
 > **Note:** For all methods below, the login credential instructions will be the same to access the Sandbox through the terminal.
 
@@ -148,7 +164,7 @@ Open the Sandbox through Virtualbox or VMware. The Sandbox VM Welcome Screen wil
 
 > VirtualBox VM Terminal. When you type the password, the entry doesn't echo on the screen, it hides the user input. Carefully type correct password.
 
-### 1.5 Learn Your Sandbox Version <a id="learn-sandbox-version"></a>
+### 1.6 Learn Your Sandbox Version <a id="learn-sandbox-version"></a>
 
 To find information about your sandbox, execute the command:
 
@@ -156,7 +172,7 @@ To find information about your sandbox, execute the command:
 sandbox-version
 ~~~
 
-### 1.6 Send Data Between Sandbox & Local Machine <a id="send-data-btwn-sandbox-local-machine"></a>
+### 1.7 Send Data Between Sandbox CentOS & Local Machine <a id="send-data-btwn-sandbox-local-machine"></a>
 
 Open your terminal (linux or mac) or git bash (windows). To send data, in our example HDF .tar.gz file, from your local machine to the azure sandbox, you would input the the following command. If you want to try this command, replace the HDF filename with another filename from your Downloads folder. Modify the command and execute:
 
