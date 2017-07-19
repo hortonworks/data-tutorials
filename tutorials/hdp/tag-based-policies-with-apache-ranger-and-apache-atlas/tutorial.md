@@ -31,14 +31,14 @@ This tutorial walks through an example of tagging data in Atlas and building a s
 
 ## Outline
 
--   [Step 1: Enable Ranger Audit to Solr](#step-1:-enable-ranger-audit-to-solr)
--   [Step 2: Restart All Services Affected](#step-2:-restart-all-services-affected)
--   [Step 3: Explore General Information](#step-3:-explore-general-information)
--   [Step 4: Explore Sandbox User Personas Policy](#step-4:-explore-sandbox-user-personas-policy)
--   [Step 5: Access Without Tag Based Policies](#step-5:-access-without-tag-based-policies)
--   [Step 6: Create a Ranger Policy to Limit Access of Hive Data](step-6:-create-a-ranger-policy-to-limit-access-of-hive-data)
--   [Step 7: Create Atlas Tag to Classify Data](#step-6:-create-atlas-tag-to-classify-data)
--   [Step 8: Create Ranger Tag Based Policy](#step-7:-create-ranger-tag-based-policy)
+-   [Step 1: Enable Ranger Audit to Solr](#step-1-enable-ranger-audit-to-solr)
+-   [Step 2: Restart All Services Affected](#step-2-restart-all-services-affected)
+-   [Step 3: Explore General Information](#step-3-explore-general-information)
+-   [Step 4: Explore Sandbox User Personas Policy](#step-4-explore-sandbox-user-personas-policy)
+-   [Step 5: Access Without Tag Based Policies](#step-5-access-without-tag-based-policies)
+-   [Step 6: Create a Ranger Policy to Limit Access of Hive Data](step-6-create-a-ranger-policy-to-limit-access-of-hive-data)
+-   [Step 7: Create Atlas Tag to Classify Data](#step-7-create-atlas-tag-to-classify-data)
+-   [Step 8: Create Ranger Tag Based Policy](#step-8-create-ranger-tag-based-policy)
 -   [Summary](#summary)
 -   [Further Reading](#further-reading)
 
