@@ -468,6 +468,12 @@ page:
 
 **Figure 40: Selecting Employee Table via Atlas Basic Search**
 
+- How does Atlas get Hive employee table?
+
+Hive communicates information through Kafka, which then is transmitted to Atlas.
+This information includes the Hive tables created and all kinds of data
+associated with those tables.
+
 5\. View the details of the `employee` table.
 
 ![hive_employee_atlas_properties](assets/images/hive_employee_atlas_properties.jpg)
