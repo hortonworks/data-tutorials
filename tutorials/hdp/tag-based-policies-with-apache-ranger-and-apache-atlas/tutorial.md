@@ -158,6 +158,13 @@ Stopping a service uses a similar approach as in section **2.1**, but instead of
 
 > Note: sometimes **Atlas Metadata Server** will fail to restart, all you need to do is go to the component and individually start it
 
+### 2.4 Verify "ranger_audits" Infra Solr Collection Created
+
+Once we restart Ranger, it should go into Infra Solr and create a new Solr
+Collection called "ranger_audits" as in the picture below:
+
+![verify_ranger_audit_solr_collection_created](assets/images/verify_ranger_audit_solr_collection_created.jpg)
+
 ### Step 3: Explore General Information
 
 This section will introduce the personas we will be using in this tutorial for Ranger, Atlas and Ambari.
