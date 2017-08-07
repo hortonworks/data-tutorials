@@ -111,13 +111,13 @@ Else {
 
 Write-Host "Starting processes on the HDP Sandbox..."
 
-docker exec -d sandbox-hdp make --makefile /usr/lib/hue/tools/start_scripts/start_deps.mf  -B Startup -j -i | Out-Host
-docker exec -d sandbox-hdp nohup su - hue -c '/bin/bash /usr/lib/tutorials/tutorials_app/run/run.sh' |  Out-Host
-docker exec -d sandbox-hdp touch /usr/hdp/current/oozie-server/oozie-server/work/Catalina/localhost/oozie/SESSIONS.ser | Out-Host
-docker exec -d sandbox-hdp chown oozie:hadoop /usr/hdp/current/oozie-server/oozie-server/work/Catalina/localhost/oozie/SESSIONS.ser | Out-Host
-docker exec -d sandbox-hdp /etc/init.d/tutorials start | Out-Host
-docker exec -d sandbox-hdp /etc/init.d/splash | Out-Host
-docker exec -d sandbox-hdp /etc/init.d/shellinaboxd start | Out-Host
+docker exec sandbox-hdp make --makefile /usr/lib/hue/tools/start_scripts/start_deps.mf  -B Startup -j -i
+docker exec sandbox-hdp nohup su - hue -c '/bin/bash /usr/lib/tutorials/tutorials_app/run/run.sh'
+docker exec sandbox-hdp touch /usr/hdp/current/oozie-server/oozie-server/work/Catalina/localhost/oozie/SESSIONS.ser
+docker exec sandbox-hdp chown oozie:hadoop /usr/hdp/current/oozie-server/oozie-server/work/Catalina/localhost/oozie/SESSIONS.ser 
+docker exec sandbox-hdp /etc/init.d/tutorials start 
+docker exec sandbox-hdp /etc/init.d/splash 
+docker exec -d sandbox-hdp /etc/init.d/shellinaboxd start
 
 Write-Host "HDP Sandbox is good to do.  Press any key to continue..."
 $x = $host.UI.RawUI.ReadKey("NoEcho,IncludeKeyDown")
