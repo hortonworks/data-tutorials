@@ -54,8 +54,10 @@ Here's a screenshot with sample settings:
 
 ## Next Steps
 
-Now that you have your HDCloud environment set-up, checkout one of these cloud-ready tutorials:
+Now that you have your HDCloud environment set-up, here are some useful resources to continue your journey:
 
 1) [Spark in 5 Minutes](https://hortonworks.com/tutorial/hands-on-tour-of-apache-spark-in-5-minutes/) tutorial analyzing a Silicon Valley film series dataset
 
 2) A more in-depth tutorial on [Spark SQL](https://hortonworks.com/tutorial/learning-spark-sql-with-zeppelin/)
+
+3) And a [Data Science Starter Kit](https://hortonworks.com/info/data-science-cloud/) with pre-selected videos, tutorials, and white papers.

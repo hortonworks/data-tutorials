@@ -86,8 +86,26 @@ docker run --name sandbox-hdp --hostname "sandbox.hortonworks.com" --privileged 
 sandbox-hdp /usr/sbin/sshd -D
 fi
 
-docker exec -t sandbox-hdp make --makefile /usr/lib/hue/tools/start_scripts/start_deps.mf  -B Startup -j -i
-docker exec -t sandbox-hdp nohup su - hue -c '/bin/bash /usr/lib/tutorials/tutorials_app/run/run.sh' &>/dev/null
+docker exec -t sandbox-hdp /bin/sh -c 'chown -R mysql:mysql /var/lib/mysql'
+docker exec -d sandbox-hdp service mysqld start
+docker exec -d sandbox-hdp service postgresql start
+docker exec -t sandbox-hdp ambari-server start
+docker exec -t sandbox-hdp ambari-agent start
+docker exec -t sandbox-hdp /bin/sh -c 'rm -f /usr/hdp/current/oozie-server/libext/falcon-oozie-el-extension-0.10.0.2.6.1.0-129.jar'
+docker exec -t sandbox-hdp /bin/sh -c 'chown -R hdfs:hadoop /hadoop/hdfs'
+
+echo "Waiting for ambari agent to connect"
+docker exec -t sandbox-hdp /bin/sh -c ' until curl --silent -u admin:4o12t0n -H "X-Requested-By:ambari" -i -X GET  http://localhost:8080/api/v1/clusters/Sandbox/hosts/sandbox.hortonworks.com/host_components/ZOOKEEPER_SERVER | grep state | grep -v desired | grep INSTALLED; do sleep 5; echo -n .; done;'
+
+echo "Waiting for ambari services to start "
+docker exec -t sandbox-hdp /bin/sh -c 'until curl --silent --user admin:4o12t0n -X PUT -H "X-Requested-By: ambari"  -d "{\"RequestInfo\":{\"context\":\"_PARSE_.START.HDFS\",\"operation_level\":{\"level\":\"SERVICE\",\"cluster_name\":\"Sandbox\",\"service_name\":\"HDFS\"}},\"Body\":{\"ServiceInfo\":{\"state\":\"STARTED\"}}}" http://localhost:8080/api/v1/clusters/Sandbox/services/HDFS | grep -i accept >/dev/null; do echo -n .; sleep 5; done;'
+
+docker exec -t sandbox-hdp /bin/sh -c 'until curl --silent --user admin:4o12t0n -X PUT -H "X-Requested-By: ambari"  -d "{\"RequestInfo\":{\"context\":\"_PARSE_.START.ALL_SERVICES\",\"operation_level\":{\"level\":\"CLUSTER\",\"cluster_name\":\"Sandbox\"}},\"Body\":{\"ServiceInfo\":{\"state\":\"STARTED\"}}}" http://localhost:8080/api/v1/clusters/Sandbox/services | grep -i accept > /dev/null; do sleep 5; echo -n .; done; '
+
+docker exec -t sandbox-hdp /bin/sh -c 'until /usr/bin/curl --silent --user admin:4o12t0n -H "X-Requested-By: ambari" "http://localhost:8080/api/v1/clusters/Sandbox/requests?to=end&page_size=10&fields=Requests" | tail -n 27 | grep COMPLETED | grep COMPLETED > /dev/null; do echo -n .; sleep 1; done;'
+
+docker exec -t sandbox-hdp su - hue -c '/bin/bash /usr/lib/tutorials/tutorials_app/run/run.sh &>/dev/null'
+docker exec -t sandbox-hdp su - hue -c '/bin/bash /usr/lib/hue/tools/start_scripts/update-tutorials.sh &>/dev/null'
 docker exec -t sandbox-hdp touch /usr/hdp/current/oozie-server/oozie-server/work/Catalina/localhost/oozie/SESSIONS.ser
 docker exec -t sandbox-hdp chown oozie:hadoop /usr/hdp/current/oozie-server/oozie-server/work/Catalina/localhost/oozie/SESSIONS.ser
 docker exec -d sandbox-hdp /etc/init.d/tutorials start

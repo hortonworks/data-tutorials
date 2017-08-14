@@ -100,4 +100,4 @@ Once your notebook is imported, you can open it from the Zeppelin home screen by
 
 We hope that you've been able to successfully run this short introductory notebook in either your cloud or local environment and we've got you interested and excited enough to further explore Spark with Zeppelin.
 
-Make sure to checkout other [tutorials](https://hortonworks.com/tutorials/) for more in-depth examples of the Spark SQL module, as well as other Spark modules used for Streaming and/or Machine Learning tasks.
+Make sure to checkout other [tutorials](https://hortonworks.com/tutorials/) for more in-depth examples of the Spark SQL module, as well as other Spark modules used for Streaming and/or Machine Learning tasks. We also have a very useful [Data Science Starter Kit](https://hortonworks.com/info/data-science-cloud/) with pre-selected videos, tutorials, and white papers.

@@ -107,3 +107,5 @@ Next, if you would like to learn more on how to deploy machine learning models i
 
 
 For a more advanced example, checkout our tutorial on [Twitter sentiment analysis](https://hortonworks.com/tutorial/deploying-machine-learning-models-using-spark-structured-streaming/).
+
+ Finally, make sure to checkout our [Data Science Starter Kit](https://hortonworks.com/info/data-science-cloud/) with pre-selected videos, tutorials, white papers and other content related to Data Science and Machine Learning.

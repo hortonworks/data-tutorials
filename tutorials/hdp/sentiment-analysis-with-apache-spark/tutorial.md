@@ -409,3 +409,4 @@ You’ve now seen how to build a sentiment analysis model. The techniques you’
 ## Further Reading
 
 - [Analyzing Social Media and Customer Sentiment with Apache Nifi and HDP Search](https://hortonworks.com/tutorial/analyzing-social-media-and-customer-sentiment-with-apache-nifi-and-hdp-search/)
+- Also, checkout our [Data Science Starter Kit](https://hortonworks.com/info/data-science-cloud/) with pre-selected videos, tutorials, white papers and other content related to Data Science and Machine Learning.
