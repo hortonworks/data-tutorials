@@ -51,11 +51,11 @@ Let's get started!
 
 ## Configure Spark services using Ambari
 
-1\.  Log on to Ambari Dashboard as `maria_dev`. At the bottom left corner of the services column, check that Spark and Zeppelin are running.
+1\.  Log on to Ambari Dashboard as `maria_dev`. At the bottom left corner of the services column, check that Spark2 and Zeppelin Notebook are running.
 
 **Note:** If these services are disabled, start these services.
 
-![ambari_dashboard_lab4](assets/ambari_dashboard_lab4.png)
+![ambari_dashboard_lab4](assets/ambari_dashboard_lab4.jpg)
 
 2\. Open Zeppelin interface using browser URL:
 

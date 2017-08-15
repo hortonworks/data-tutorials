@@ -21,10 +21,10 @@ Hadoop is gradually playing a larger role as a system of record for many workloa
 
 Some reasons to perform updates may include:
 
-- Data restatements from upstream data providers.
-- Data pipeline reprocessing.
-- Slowly-changing dimensions (e.g. SCD Type 1)
-- Dimension history / evolution (e.g. SCD Type 2)
+-   Data restatements from upstream data providers.
+-   Data pipeline reprocessing.
+-   Slowly-changing dimensions (e.g. SCD Type 1)
+-   Dimension history / evolution (e.g. SCD Type 2)
 
 Standard SQL provides ACID operations through INSERT, UPDATE, DELETE, transactions, and the more recent MERGE operations. These have proven to be robust and flexible enough for most workloads. Hive offers INSERT, UPDATE and DELETE, with more of capabilities on the roadmap.
 
@@ -47,25 +47,31 @@ Standard SQL provides ACID operations through INSERT, UPDATE, DELETE, transactio
 
 ## Concepts
 
-- **Transactional Tables**: Hive supports single-table transactions. Tables must be marked as transactional in order to support UPDATE and DELETE operations.
-- **Partitioned Tables**: Hive supports table partitioning as a means of separating data for faster writes and queries. Partitions are independent of ACID. Large tables in Hive are almost always partitioned. Large ACID tables should be partitioned for optimal performance.
-- **ACID Operations (INSERT / UPDATE / DELETE)**: Standard SQL commands that allow data inserts, updates and deletes.
-- **Primary Key**: Databases use primary keys to make records easy to locate, which facilitates updates or deletes. Hive does not enforce the notion of primary keys, but if you plan to do large-scale updates and deletes you should establish a primary key convention within your application.
-- **Streaming Ingest**: Data can be streamed into transactional Hive tables in real-time using Storm, Flume or a lower-level direct API.
-- **Optimistic Concurrency**: ACID updates and deletes to Hive tables are resolved by letting the first committer win. This happens at the partition level, or at the table level for unpartitioned tables.
-- **Compactions**: Data must be periodically compacted to save space and optimize data access. It is best to let the system handle these automatically, but these can also be scheduled in an external scheduler.
+-   **Transactional Tables**: Hive supports single-table transactions. Tables must be marked as transactional in order to support UPDATE and DELETE operations.
+-   **Partitioned Tables**: Hive supports table partitioning as a means of separating data for faster writes and queries. Partitions are independent of ACID. Large tables in Hive are almost always partitioned. Large ACID tables should be partitioned for optimal performance.
+-   **ACID Operations (INSERT / UPDATE / DELETE)**: Standard SQL commands that allow data inserts, updates and deletes.
+-   **Primary Key**: Databases use primary keys to make records easy to locate, which facilitates updates or deletes. Hive does not enforce the notion of primary keys, but if you plan to do large-scale updates and deletes you should establish a primary key convention within your application.
+-   **Streaming Ingest**: Data can be streamed into transactional Hive tables in real-time using Storm, Flume or a lower-level direct API.
+-   **Optimistic Concurrency**: ACID updates and deletes to Hive tables are resolved by letting the first committer win. This happens at the partition level, or at the table level for unpartitioned tables.
+-   **Compactions**: Data must be periodically compacted to save space and optimize data access. It is best to let the system handle these automatically, but these can also be scheduled in an external scheduler.
 
 ## 1. Enabling ACID Transactions using Ambari <a id="enable-acid"></a>
 
-Log in to Ambari using user credentials **raj_ops/raj_ops**. Enabling Hive ACID is simple: **Ambari** -> **Hive** -> **Configs**. Set **ACID Transactions** to **On**. Restart all affected services.
+-   Log in to Ambari using user credentials **raj_ops/raj_ops**. Enabling Hive ACID is simple: **Ambari** -> **Hive** -> **Configs**. Set **ACID Transactions** to **On**.
 
-![enable_acid1](assets/enable_acid.png)
+![enable_acid1](assets/enable_acid.jpg)
+
+-   Set **`hive.enforce.bucketing`** to **true** and Save changes.
+
+![enforce-bucketing](assets/enforce-bucketing.jpg)
+
+-   After saving / accepting configuration changes, Restart all affected services.
 
 Let’s explore these options:
 
-* **ACID Transactions** - Turn this on to enable the creation of transactional tables globally.
-* **Run Compactor** - The “Run Compactor” setting should always be set to true.
-* **Number of threads used by Compactor** - This controls the maximum number of background MapReduce jobs that may run at any given time to compact tables. It is best to have this be a ratio of the number of transactional tables that are actively updated. In any event the value should always be greater than 0. Typically 5 to 10 would be appropriate in production settings. 1 thread is only applicable for sandbox environments.
+-   **ACID Transactions** - Turn this on to enable the creation of transactional tables globally.
+-   **Run Compactor** - The “Run Compactor” setting should always be set to true.
+-   **Number of threads used by Compactor** - This controls the maximum number of background MapReduce jobs that may run at any given time to compact tables. It is best to have this be a ratio of the number of transactional tables that are actively updated. In any event the value should always be greater than 0. Typically 5 to 10 would be appropriate in production settings. 1 thread is only applicable for sandbox environments.
 
 If you’re building a production application you can use Ambari Blueprints to provision ACID-enabled HDP clusters in a consistent and repeatable way.
 
@@ -79,11 +85,12 @@ When you have logged into Ambari, go to the Hive View 2.0 by hovering in the top
 Let’s start by creating a transactional table. Only transactional tables can support updates and deletes. Within the Hive View query editor insert this query text:
 
 ~~~sql
-drop table if exists hello_acid;
-create table hello_acid (key int, value int)
-partitioned by (load_date date)
-clustered by(key) into 3 buckets
-stored as orc tblproperties ('transactional'='true');
+DROP TABLE IF EXISTS hello_acid;
+
+CREATE TABLE hello_acid (key int, value int)
+PARTITIONED BY (load_date date)
+CLUSTERED BY(key) INTO 3 BUCKETS
+STORED AS ORC TBLPROPERTIES ('transactional'='true');
 ~~~
 
 Within the editor it will look as below. Press `Execute` to create the table.
@@ -93,22 +100,22 @@ Within the editor it will look as below. Press `Execute` to create the table.
 From here on out, everything is familiar SQL you’ve likely used for many years. Here is an example that inserts some records, deletes one record and updates one record.
 
 ~~~sql
-insert into hello_acid partition (load_date='2016-03-01') values (1, 1);
-insert into hello_acid partition (load_date='2016-03-02') values (2, 2);
-insert into hello_acid partition (load_date='2016-03-03') values (3, 3);
-select * from hello_acid;
+INSERT INTO hello_acid partition (load_date='2016-03-01') VALUES (1, 1);
+INSERT INTO hello_acid partition (load_date='2016-03-02') VALUES (2, 2);
+INSERT INTO hello_acid partition (load_date='2016-03-03') VALUES (3, 3);
+SELECT * FROM hello_acid;
 ~~~
 
 You should see the following results:
 
 ![insert_into_hello_acid](assets/insert_into_hello_acid.png)
 
-Next let’s delete and update data in the same window execution:
+Next, let’s delete and update data in the same window execution:
 
 ~~~sql
-delete from hello_acid where key = 2;
-update hello_acid set value = 10 where key = 3;
-select * from hello_acid;
+DELETE FROM hello_acid WHERE key = 2;
+UPDATE hello_acid SET value = 10 WHERE key = 3;
+SELECT * FROM hello_acid;
 ~~~
 
 You should see this:
@@ -125,8 +132,8 @@ Many organizations have continuous data streams and would like easy ways of runn
 
 Broadly there are 2 options for using Hive Streaming Data Ingestion:
 
-1. Use an existing [Storm Hive Bolt](https://github.com/apache/storm/tree/master/external/storm-hive) or [Flume Hive Sink](https://flume.apache.org/FlumeUserGuide.html#hive-sink) integration. This route is relatively simple but also relatively “buttoned up”, focusing on moving data from point A to point B with minimal processing.
-2. Use the low-level [Streaming Data Ingest API](https://cwiki.apache.org/confluence/display/Hive/Streaming+Data+Ingest) directly.
+1.  Use an existing [Storm Hive Bolt](https://github.com/apache/storm/tree/master/external/storm-hive) or [Flume Hive Sink](https://flume.apache.org/FlumeUserGuide.html#hive-sink) integration. This route is relatively simple but also relatively “buttoned up”, focusing on moving data from point A to point B with minimal processing.
+2.  Use the low-level [Streaming Data Ingest API](https://cwiki.apache.org/confluence/display/Hive/Streaming+Data+Ingest) directly.
 
 Before you use the streaming API you must create a partitioned transactional table and use it as your sink. From a query perspective everything else is identical. The rest of this document will focus on using the SQL DDL/DML approach.
 
@@ -142,41 +149,44 @@ Hive ACID supports searched updates, which are the most typical form of updates.
 
 For example let’s consider a dimension table which includes a flag to indicate whether the record is the most current value. This allows tracking a dimension’s evolution over time, a common strategy for dealing with slowly-changing dimensions (SCDs). When a set of dimension table updates arrive you want to mark all existing values as old. This is easy to do with an in list and subquery on a common key.
 
-~~~
-drop table if exists mydim;
-create table mydim (key int, name string, zip string, is_current boolean)
-clustered by(key) into 3 buckets
-stored as orc tblproperties ('transactional'='true');
+~~~sql
+DROP TABLE IF EXISTS mydim;
+
+CREATE TABLE mydim (key int, name string, zip string, is_current boolean)
+CLUSTERED BY (key) INTO 3 BUCKETS
+STORED AS ORC TBLPROPERTIES ('transactional'='true');
 ~~~
 
-~~~
-insert into mydim values
+~~~sql
+INSERT INTO mydim VALUES
   (1, 'bob',   '95136', true),
   (2, 'joe',   '70068', true),
   (3, 'steve', '22150', true);
 ~~~
 
-~~~
-drop table if exists updates_staging_table;
-create table updates_staging_table (key int, newzip string);
-insert into updates_staging_table values (1, 87102), (3, 45220);
+~~~sql
+DROP TABLE IF EXISTS updates_staging_table;
+
+CREATE TABLE updates_staging_table (key int, newzip string);
+
+INSERT INTO updates_staging_table VALUES (1, 87102), (3, 45220);
 ~~~
 
 -- **Before**
 
-~~~
-select * from mydim;
+~~~sql
+SELECT * FROM mydim;
 ~~~
 
-~~~
-update mydim set is_current=false
-  where mydim.key in (select key from updates_staging_table);
+~~~sql
+UPDATE mydim SET is_current = false
+   WHERE mydim.key IN (SELECT key FROM updates_staging_table);
 ~~~
 
 -- **After**
 
-~~~
-select * from mydim;
+~~~sql
+SELECT * FROM mydim;
 ~~~
 
 The result will be that records 1 and 3 have their is_current flag set to false. From there we can add the new, updated values to the end of the table with their is_current flag set to true.
@@ -187,10 +197,11 @@ Bulk deletes can be done easily with a staging table and in list + subquery. Thi
 
 Example:
 
-~~~
-delete from mydim
-where mydim.key in (select key from updates_staging_table);
-select * from mydim;
+~~~sql
+DELETE FROM mydim
+   WHERE mydim.key IN (SELECT key FROM updates_staging_table);
+
+SELECT * FROM mydim;
 ~~~
 
 ## 5. Overwriting Existing Records with New Records <a id="overwriting-records"></a>
@@ -225,7 +236,7 @@ Locks can be Read, Update or X locks. Update lock is compatible with Read locks 
 
 ### 6.3 Aborting Transactions:
 
-~~~sql
+~~~
 ABORT TRANSACTIONS transactionID;
 ~~~
 
@@ -255,6 +266,8 @@ With that out of the way, this column records:
 You can access this data as follows using beeline:
 
 ~~~
+beeline -u 'jdbc:hive2://sandbox.hortonworks.com:2181/;serviceDiscoveryMode=zooKeeper;zooKeeperNamespace=hiveserver2'
+
 0: jdbc:hive2://sandbox.hortonworks.com:2181/> select row__id from hello_acid;
 ~~~
 
@@ -264,8 +277,8 @@ Ouptut should look like:
 +---------------------------------------------+
 |                   row__id                   |
 +---------------------------------------------+
-| {"transactionid":5,"bucketid":1,"rowid":0}  |
-| {"transactionid":7,"bucketid":0,"rowid":0}  |
+| {"transactionid":1,"bucketid":1,"rowid":0}  |
+| {"transactionid":3,"bucketid":0,"rowid":0}  |
 +---------------------------------------------+
 ~~~
 
@@ -279,3 +292,9 @@ select count(*) from hello_acid where row__id.transactionid = X;
 Keep in mind that data from this transaction may have been deleted by a subsequent UPDATE or DELETE statement, so if the counts don’t match, consider if records may be altered some other way.
 
 Use information related to this hidden field very carefully.
+
+You can exit beeline by issuing the command:
+
+~~~
+!quit
+~~~

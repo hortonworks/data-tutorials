@@ -158,10 +158,15 @@ Stopping a service uses a similar approach as in section **2.1**, but instead of
 
 > Note: sometimes **Atlas Metadata Server** will fail to restart, all you need to do is go to the component and individually start it
 
-### 2.4 Verify "ranger_audits" Infra Solr Collection Created
+### 2.4 Verify "ranger_audits" is created in Ambari Infra Solr
 
-Once we restart Ranger, it should go into Infra Solr and create a new Solr
-Collection called "ranger_audits" as in the picture below:
+Once we restart Ranger, you should verify that **ranger_audits** is started:
+
+**Ambari** -> **Ambari Infra** -> **Quick Links** -> **Solr Admin UI**
+
+Make sure "ranger_audits" is displayed in Ambari Infra Solr as in the picture below:
+
+**Dashboard** -> **Cloud** -> **Graph**
 
 ![verify_ranger_audit_solr_collection_created](assets/images/verify_ranger_audit_solr_collection_created.jpg)
 
@@ -213,7 +218,7 @@ Press `Sign In` button, the home page of Ranger will be displayed.
 
 **Figure 14: Ranger Resource Based Policies Dashboard**
 
-3\. You will see a list of all the policies under the Sandbox_hive repository. Select policy called: **policy for raj_ops, holger_gov, maria_dev and amy_ds**
+3\. You will see a list of all the policies under the Sandbox_hive repository. Edit policy called: **policy for raj_ops, holger_gov, maria_dev and amy_ds**
 
 ![click_policy_for_all_users_rajops](assets/images/click_policy_for_all_users_rajops.png)
 
@@ -338,7 +343,7 @@ This policy will be assigned to `maria_dev` and `raj_ops`.
 3\. In the `Policy Details`, enter following values:
 
 ~~~
-Policy Names - policy to restrict employee data
+Policy Name - policy to restrict employee data
 Hive Databases - default
 table - employee
 Hive_column - ssn, location (NOTE : Do NOT forget to EXCLUDE these columns)
@@ -402,7 +407,7 @@ select * from employee;
 Authorization error will appear. This is expected as the user `maria_dev` and
 `raj_ops` do not have access to 2 columns in this table (ssn and location).
 
-4\. For further verification, you can view the **Audits** tab in Ranger.
+4\. For further verification, you can view the **Audit** tab in Ranger.
 Go back to Ranger and click on `Audits=>Access` and select
 `Service Name=>Sandbox_hive`. You will see the entry of Access Denied
 for maria_dev. maria_dev tried to access data she didn't have authorization
@@ -435,7 +440,7 @@ with a `PII` tag. So later when we create a Ranger Tag Based Policy, users
 who are associated with the `PII` tag can override permissions established in
 the Ranger Resource Board policy.
 
-1\. Login into Atlas web app using `http://sandbox.hortonworks:21000/`.
+1\. Login into Atlas web app using `http://sandbox.hortonworks.com:21000/`.
 
 - username **holger_gov** and password **holger_gov**.
 
