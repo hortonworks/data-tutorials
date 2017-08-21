@@ -58,7 +58,7 @@ ssh -p 2222 root@127.0.0.1
 mkdir /tmp/tweets
 rm -rf /tmp/tweets/*
 cd /tmp/tweets
-wget -O /tmp/tweets/tweets.zip https://raw.githubusercontent.com/hortonworks/data-tutorials/master/tutorials/hdp/hdp-2.6/sentiment-analysis-with-apache-spark/assets/tweets.zip
+wget -O /tmp/tweets/tweets.zip https://raw.githubusercontent.com/hortonworks/data-tutorials/master/tutorials/hdp/sentiment-analysis-with-apache-spark/assets/tweets.zip
 unzip /tmp/tweets/tweets.zip
 rm /tmp/tweets/tweets.zip
 
@@ -72,7 +72,7 @@ hdfs dfs -put /tmp/tweets/* /tmp/tweets_staging
 
 ### Load into Spark
 
-Let's load the tweets into Spark. Spark makes it easy to load JSON-formatted data into a dataframe. To run these code blocks, you should download [this](https://raw.githubusercontent.com/hortonworks/data-tutorials/af43922eb7188230a85eeee5337bec201c7ce4fb/tutorials/hdp/hdp-2.6/sentiment-analysis-with-apache-spark/assets/SentimentAnalysisZeppelin.json) Zeppelin notebook and run it on the HDP Sandbox.
+Let's load the tweets into Spark. Spark makes it easy to load JSON-formatted data into a dataframe. To run these code blocks, you should download [this](assets/SentimentAnalysisZeppelin.json) Zeppelin notebook and run it on the HDP Sandbox.
 
 
 ```
