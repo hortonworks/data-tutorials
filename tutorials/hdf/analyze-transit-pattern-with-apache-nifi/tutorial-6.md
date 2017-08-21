@@ -25,7 +25,6 @@ You will build a new process group called **StoreTransitEventsAsJSONToDisk** to 
 - [Step 9: Check Data By NiFi's Data Provenance](#check-data-by-nifi's-data-provenance-6)
 - [Approach 2: Import StoreTransitEventsAsJSONToDisk Process Group](#approach2-import-simple-nifi-flow-6)
 - [Summary](#summary-6)
-- [Further Reading](#further-reading-6)
 
 If you prefer to build the dataflow manually step-by-step, continue on to **Approach 1**. Else if you want to see the NiFi flow in action within minutes, refer to **Approach 2**.
 
@@ -57,7 +56,7 @@ If you prefer to build the dataflow manually step-by-step, continue on to **Appr
 
 1\. Add the **AttributesToJSON** processor onto the NiFi canvas.
 
-2\. Connect **IngestGeoEnrichedEvents** input port to **AttributesToJSON** processor. When the Create Connection window appears, verify **matched** checkbox is checked, else check it. Click **Add**.
+2\. Connect **IngestGeoEnrichedEvents** input port to **AttributesToJSON** processor.
 
 ![IngestGeoEnrichedEvents_to_AttributesToJSON](assets/tutorial-6-build-a-nifi-process-group-to-store-data-as-json/IngestGeoEnrichedEvents_to_AttributesToJSON.png)
 
@@ -127,7 +126,7 @@ If you prefer to build the dataflow manually step-by-step, continue on to **Appr
 
 **Figure 5:** Connect **MergeContent** to **UpdateAttribute** processor
 
-3\. Add a new dynamic property for NiFi expression, click on the **New property** button. Insert the following property name and value into your properties tab as shown in the table below:
+3\. Open the processor configuration properties tab. Add the properties listed in **Table 3** and if their original properties already have values, update them.
 
 **Table 3:** Add UpdateAttribute Property Value
 
@@ -177,19 +176,19 @@ If you prefer to build the dataflow manually step-by-step, continue on to **Appr
 
 ### Step 8: Run the NiFi DataFlow
 
-1\. The processors are valid since the warning symbols disappeared. Notice that the processors have a red stop symbol ![stop_symbol_nifi_iot](assets/tutorial-6-build-a-nifi-process-group-to-store-data-as-json/stop_symbol_nifi.png) in the upper left corner and are ready to run. To select all processors, hold down the **shift-key** and drag your mouse across the entire data flow.
+1\. The processors are valid since the warning symbols disappeared. Notice that the process groups have a highlighted red stop symbol ![stop_symbol_nifi_iot](assets/tutorial-6-build-a-nifi-process-group-to-store-data-as-json/stop_symbol_nifi.png) as shown back in **Figure 9**. To select all process groups, hold down the **shift-key** and drag your mouse across the entire data flow.
 
-2\. Now that all processors are selected, go to the actions toolbar in the left window labeled Operate and click the start button ![start_button_nifi_iot](assets/tutorial-6-build-a-nifi-process-group-to-store-data-as-json/start_button_nifi.png). Your screen should look like the following:
+2\. Now that all processors are selected, go to the actions toolbar in the left window labeled **Operate** and click the start button ![start_button_nifi_iot](assets/tutorial-6-build-a-nifi-process-group-to-store-data-as-json/start_button_nifi.png). Your process groups should change to a green highlighted start symbol. Your screen should look like the following:
 
 ![start_nifi_flow](assets/tutorial-6-build-a-nifi-process-group-to-store-data-as-json/start_nifi_flow.png)
 
 **Figure 10:** Start **StoreDataAsJSONToDisk** PG
 
-3\. To quickly see what the processors are doing and the information on their faces, right click on the graph, click the **refresh status** button ![refresh_nifi](assets/tutorial-6-build-a-nifi-process-group-to-store-data-as-json/refresh_nifi.png)
+3\. To quickly see what the processors are doing and the information on their faces, right click on the canvas, click the **refresh status** button ![refresh_nifi](assets/tutorial-6-build-a-nifi-process-group-to-store-data-as-json/refresh_nifi.png)
 
 ### Step 9: Check Data By NiFi's Data Provenance
 
-1\. Right click on the PutFile processor. Select `Data Provenance`. It is the 4th item in the dropdown menu.
+1\. Before we go see **PutFile**, we must double-click on **StoreDataAsJSONToDisk**. Right click on the PutFile processor. Select `Data Provenance`.
 
 NiFi searches for provenance events. The window will load with events, select any event. An event is a FlowFile that passes through a processor and the data that is viewable at that particular time.
 
@@ -219,9 +218,9 @@ Did you receive the data you expected?
 
 2\. Use the **upload template** icon ![upload_nifi_template](assets/tutorial-6-build-a-nifi-process-group-to-store-data-as-json/nifi_template_icon.png) located in the Operate Palette.
 
-3\. **Browse**, find the template file, click **Open** and hit **Import**.
+3\. **Browse**, find the template file, click **Open** and hit **Upload**.
 
-4\. From the **Components Toolbar**, drag the **add template** icon ![add_nifi_template](assets/tutorial-6-build-a-nifi-process-group-to-store-data-as-json/add_nifi_template.png) onto the graph and select the **tutorial-1-nifi-flow-parse-transit-data.xml** template file.
+4\. From the **Components Toolbar**, drag the **add template** icon ![add_nifi_template](assets/tutorial-6-build-a-nifi-process-group-to-store-data-as-json/add_nifi_template.png) onto the graph and select the **tutorial-6-StoreDataAsJSONToDisk.xml** template file.
 
 5\. Hit the **start** button ![start_button_nifi](assets/tutorial-6-build-a-nifi-process-group-to-store-data-as-json/start_button_nifi.png) to activate the dataflow.
 
@@ -269,11 +268,3 @@ Refer to [NiFi's Documentation](https://nifi.apache.org/docs.html) to learn more
 ## Summary
 
 Congratulations! For the **StoreTransitEventsAsJSONToDisk** Process Group, you learned to take the FlowFile attribute (key/value) pairs and represent them as a JSON format. You then used **MergeContent** to combine multiple FlowFiles together to create a larger FlowFile with multiple records. **UpdateAttribute** was used to ensure no FlowFiles would have duplicate names. **PutFile** was added to the flow to store the JSON data into the local file system.
-
-## Further Reading
-
--   [Apache NiFi](https://hortonworks.com/apache/nifi/)
--   [Hortonworks DataFlow Documentation](http://docs.hortonworks.com/HDPDocuments/HDF2/HDF-2.1.2/bk_dataflow-user-guide/content/ch_user-guide.html)
--   [NiFi Expression Language Guide](https://nifi.apache.org/docs/nifi-docs/html/expression-language-guide.html)
--   [XPath Expression Tutorial](http://www.w3schools.com/xml/xpath_intro.asp)
--   [JSON Tutorial](https://www.w3schools.com/js/js_json_intro.asp)
