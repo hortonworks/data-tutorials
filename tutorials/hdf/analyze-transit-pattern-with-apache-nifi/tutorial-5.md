@@ -24,7 +24,8 @@ With the transit data being pulled from NextBus API simulator, it shows location
 - [Step 7: Add RouteOnAttribute to Validate Google Places Data](#add-routeonattribute-to-validate-google-places-data-5)
 - [Step 8: Add an Output Port to Route Data Outside this PG](#add-an-output-port-to-route-data-outside-this-pg-5)
 - [Step 9: Connect ParseTransitEvents to ValidateGeoEnrichedTransitData](#connect-parsetransitevents-to-validategeoenrichedtransitdata-5)
-- [Step 10: Verify GeoEnriched Data Routed by ValidateGooglePlacesData is Valid](#verify-geoenriched-data-routed-by-validategoogleplacesdata-is-valid-5)
+- [Step 10: Run the DataFlow](#step-10-run-the-dataflow)
+- [Step 11: Verify GeoEnriched Data Routed by ValidateGooglePlacesData is Valid](#verify-geoenriched-data-routed-by-validategoogleplacesdata-is-valid-5)
 - [Approach 2: Import ValidateGeoEnrichedTransitData Process Group](#approach2-import-enriched-nifi-flow-via-places-api-5)
 - [Summary](#summary-5)
 - [Further Reading](#further-reading-5)
@@ -136,11 +137,11 @@ Validate Transit Data for empty values`.
 
 ### Step 5: Add InvokeHTTP to Pull GeoEnriched Data from Google Places API
 
-1\. Add the **InvokeHTTP** processor onto the NiFi graph. Connect **RouteOnAttribute** to **InvokeHTTP** processor. When the Create Connection window appears, verify **ValidateTransitObservations** checkbox is checked, if not check it. Click **Add**.
+1\. Add the **InvokeHTTP** processor onto the NiFi graph. Connect **ValidateNextBusData** to **InvokeHTTP** processor. When the Create Connection window appears, verify **ValidateTransitObservations** checkbox is checked, if not check it. Click **Add**.
 
 ![RouteOnAttribute_to_InvokeHTTP](assets/tutorial-5-build-a-nifi-process-group-to-validate-the-geoenriched-data/RouteOnAttribute_to_InvokeHTTP.png)
 
-**Figure 3:** Connect **RouteOnAttribute** to **InvokeHTTP**
+**Figure 3:** Connect **ValidateNextBusData** to **InvokeHTTP**
 
 2\. Open **InvokeHTTP** configure properties tab and add the property listed in **Table 2**.
 
@@ -160,11 +161,11 @@ Validate Transit Data for empty values`.
 
 ### Step 6: Add EvaluateJsonPath to Extract GeoEnriched Transit Data
 
-1\. Add the **EvaluateJsonPath** processor onto the NiFi graph. Connect **InvokeHTTP** to **EvaluateJsonPath** processor. When the Create Connection window appears, select **Response** checkbox. Click Add.
+1\. Add the **EvaluateJsonPath** processor onto the NiFi graph. Connect **GoogleNearbySearchAPI** to **EvaluateJsonPath** processor. When the Create Connection window appears, select **Response** checkbox. Click Add.
 
 ![InvokeHTTP_to_EvaluateJsonPath](assets/tutorial-5-build-a-nifi-process-group-to-validate-the-geoenriched-data/InvokeHTTP_to_EvaluateJsonPath.png)
 
-**Figure 5:** Connect **InvokeHTTP** to **EvaluateJsonPath**
+**Figure 5:** Connect **GoogleNearbySearchAPI** to **EvaluateJsonPath**
 
 2\. Open EvaluateJsonPath configure properties tab and update the original properties with the properties listed in **Table 3**. Note: add `city` and `neighborhoods_nearby` property by clicking the **New property** button, then insert their values into the properties tab.
 
@@ -184,15 +185,15 @@ Validate Transit Data for empty values`.
 
 **Figure 6:** EvaluateJsonPath Configuration Property Tab Window
 
-3\. Navigate to the **Settings** tab, change the name from InvokeHTTP to `ExtractGeoEnrichedData`. Under Auto terminate relationships check the **unmatched** and **failure** checkboxes. Click **Apply** button.
+3\. Navigate to the **Settings** tab, change the name from EvaluateJsonPath to `ExtractGeoEnrichedData`. Under Auto terminate relationships check the **unmatched** and **failure** checkboxes. Click **Apply** button.
 
 ### Step 7: Add RouteOnAttribute to Validate Google Places Data
 
-1\. Add the **RouteOnAttribute** processor onto the NiFi graph. Connect **EvaluateJsonPath** to **RouteOnAttribute** processor. When the Create Connection window appears, select **matched** checkbox. Click Add.
+1\. Add the **RouteOnAttribute** processor onto the NiFi graph. Connect **ExtractGeoEnrichedData** to **RouteOnAttribute** processor. When the Create Connection window appears, select **matched** checkbox. Click Add.
 
 ![EvaluateJsonPath_to_RouteOnAttribute](assets/tutorial-5-build-a-nifi-process-group-to-validate-the-geoenriched-data/EvaluateJsonPath_to_RouteOnAttribute.png)
 
-**Figure 7:** Connect **EvaluateJsonPath** to **RouteOnAttribute**
+**Figure 7:** Connect **ExtractGeoEnrichedData** to **RouteOnAttribute**
 
 2\. Open RouteOnAttribute configure properties tab and click on **New property** button to add `ValidateGooglePlacesData` to property name and insert its NiFi expression value listed in **Table 4**.
 
@@ -214,11 +215,11 @@ Validate Transit Data for empty values`.
 
 1\. Add the **Output Port** ![output_port](assets/tutorial-5-build-a-nifi-process-group-to-validate-the-geoenriched-data/output_port.png) component onto the NiFi canvas. Name it `SendGeoEnrichedTranistEvents`.
 
-2\. Connect **RouteOnAttribute** to **SendGeoEnrichedTranistEvents** output port. When the Create Connection window appears, verify **ValidateGooglePlacesData** checkbox is checked, if not check it. Click Add.
+2\. Connect **ValidateGooglePlacesData** to **SendGeoEnrichedTranistEvents** output port. When the Create Connection window appears, verify **ValidateGooglePlacesData** checkbox is checked, if not check it. Click Add.
 
 ![ParseTransitEvents_dataflow_pg](assets/tutorial-5-build-a-nifi-process-group-to-validate-the-geoenriched-data/RouteOnAttribute_to_SendGeoEnrichedTranistEvents.png)
 
-**Figure 9:** Connect **RouteOnAttribute (ValidateGooglePlacesData)** to **SendGeoEnrichedTranistEvents**
+**Figure 9:** Connect **ValidateGooglePlacesData** to **SendGeoEnrichedTranistEvents**
 
 ### Step 9: Connect ParseTransitEvents to ValidateGeoEnrichedTransitData
 
@@ -230,31 +231,47 @@ Validate Transit Data for empty values`.
 
 **Figure 10:** Connect **ParseTransitEvents** to **ValidateGeoEnrichedTransitData** Process Group
 
-### Step 10: Verify GeoEnriched Data Routed by ValidateGooglePlacesData is Valid
+### Step 10: Run the DataFlow
 
-For the GeoEnriched data to be considered valid after being routed by ValidateGooglePlacesData, the data must contain values for FlowFile attributes: city and neighborhoods_nearby.
+1\. Hold **Shift** and drag your mouse across the entire dataflow. You should see the dataflow is highlighted.
 
-1\. Right click on the **ValidateGooglePlacesData** queue downstream from RouteOnAttribute (ValidateGooglePlacesData), select **List queue** to see provenance events.
+![selected_entire_dataflow](assets/tutorial-5-build-a-nifi-process-group-to-validate-the-geoenriched-data/selected_entire_dataflow.jpg)
+
+**Figure 11:** Selected the entire dataflow
+
+2\. In the **Operate** panel, you should see the header says **Multiple components are selected**. Press the **Start** button.
+
+![start_dataflow](assets/tutorial-5-build-a-nifi-process-group-to-validate-the-geoenriched-data/start_dataflow.jpg)
+
+**Figure 12:** Started the entire dataflow
+
+### Step 11: Verify GeoEnriched Data Routed by ValidateGooglePlacesData is Valid
+
+Inside the **ValidateGeoEnrichedTransitData** process group, we will inspect **ValidateGooglePlacesData** processor. We will look at the flowfiles that pass through this processor and analyze their attributes. We need to make sure that each flowfile's attribute keys **city** and **neighborhoods_nearby** do not have an empty corresponding value. FlowFile attributes are in **key/value** format.
+
+1\. Jump into **ValidateGeoEnrichedTransitData** process group.
+
+2\. Right click on the **ValidateGooglePlacesData** connector downstream from **ValidateGooglePlacesData** processor, select **List queue** to see provenance events.
 
 ![routenearbyneighborhoods_listqueue](assets/tutorial-5-build-a-nifi-process-group-to-validate-the-geoenriched-data/ValidateGooglePlacesData_listqueue.png)
 
-**Figure 11:** List Queue for Queue between ValidateGooglePlacesData and SendGeoEnrichedTranistEventss
+**Figure 13:** List Queue for Connector between **ValidateGooglePlacesData** and **SendGeoEnrichedTranistEvents**
 
-2\. View any event by selecting the view provenance event icon ![i_symbol_nifi](assets/tutorial-5-build-a-nifi-process-group-to-validate-the-geoenriched-data/i_symbol_nifi_lab1.png)
+3\. View any event by selecting the view provenance event icon ![i_symbol_nifi](assets/tutorial-5-build-a-nifi-process-group-to-validate-the-geoenriched-data/i_symbol_nifi_lab1.png)
 
-3\. Click on the **Attributes** tab. As long as you see that "city" and "neighborhoods_nearby" have values, you have verified the ValidateGooglePlacesData processor is successfully routing FlowFiles based on this condition.
+4\. Click on the **Attributes** tab. As long as you see that **city** and **neighborhoods_nearby** have values, you have verified the **ValidateGooglePlacesData** processor is successfully routing flowfiles based on this condition.
 
 ![verify_evaluateXPath_extracts_data](assets/tutorial-5-build-a-nifi-process-group-to-validate-the-geoenriched-data/verify_data_routed_by_routeonattribute.png)
 
-**Figure 12:** Data Provenance for FlowFile attribute (key/value): **city** contains **San Francisco**.
+**Figure 14:** Data Provenance for FlowFile attribute (key/value): **city** contains **San Francisco**.
 
 ![verify_data_routed_by_routeonattribute_p2](assets/tutorial-5-build-a-nifi-process-group-to-validate-the-geoenriched-data/verify_data_routed_by_routeonattribute_p2.png)
 
-**Figure 13:** Data Provenance for FlowFile attribute (key/value): **neighborhoods_nearby** contains **["Saint Francis Wood","West Portal"]**
+**Figure 15:** Data Provenance for FlowFile attribute (key/value): **neighborhoods_nearby** contains **["Saint Francis Wood","West Portal"]**
 
 ## Approach 2: Import Enriched NiFi Flow Via Places API
 
-1\. Download the [tutorial-5-ValidateGeoEnrichedTransitData.xml](assets/tutorial-5-build-a-nifi-process-group-to-validate-the-geoenriched-data/nifi-template/tutorial-5-ValidateGeoEnrichedTransitData.xml) template file. Then import the template file into NiFi.
+1\. Download the [tutorial-5-ValidateGeoEnrichedTransitData.xml](assets/tutorial-5-build-a-nifi-process-group-to-validate-the-geoenriched-data/nifi-template/tutorial-5-ValidateGeoEnrichedTransitData.xml) template file. Then upload the template file into NiFi.
 
 2\. Refer to **Step 1** in **Approach 1** to obtain the Google API key and set up **Google Places API: HTTP URL**.
 
@@ -264,7 +281,7 @@ For the GeoEnriched data to be considered valid after being routed by ValidateGo
 
 ![complete_dataflow_lab2_geoEnrich](assets/tutorial-5-build-a-nifi-process-group-to-validate-the-geoenriched-data/ValidateGeoEnrichedTransitData_pg.png)
 
-**Figure 14:** **tutorial-5-ValidateGeoEnrichedTransitData.xml** template includes a NiFi Flow that pulls in San Francisco Muni Transit Events from the XML Simulator, parses through the data to extract key values and stores the transit observations as a JSON file.
+**Figure 16:** **tutorial-5-ValidateGeoEnrichedTransitData.xml** template includes a NiFi Flow that pulls in San Francisco Muni Transit Events from the XML Simulator, parses through the data to extract key values and stores the transit observations as a JSON file.
 
 Overview of the Process Groups and their Processors:
 
@@ -304,3 +321,4 @@ Congratulations! For the Geo Enrichment section of the dataflow, you learned to 
 - [HTTP Protocol Overview](http://code.tutsplus.com/tutorials/http-the-protocol-every-web-developer-must-know-part-1--net-31177)
 - [JSON Path Expressions](http://goessner.net/articles/JsonPath/index.html#e2)
 - [JSON Path Online Evaluator](http://jsonpath.com/)
+- [NiFi Expression Language Guide](https://nifi.apache.org/docs/nifi-docs/html/expression-language-guide.html)
