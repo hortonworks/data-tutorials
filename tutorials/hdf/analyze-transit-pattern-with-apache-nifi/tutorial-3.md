@@ -112,7 +112,7 @@ If you prefer to build the dataflow manually step-by-step, continue on to **Appr
 
 **Figure 6:** Connection Window for GetFile -> UnpackContent. **success** checkbox checked.
 
-3\. Open the processor configuration **properties** tab. Add the properties listed in **Table 2** to update the processor's appropriate properties.
+3\. Open the **UnpackContent** processor configuration **properties** tab. Add the properties listed in **Table 2** to update the processor's appropriate properties.
 
 **Table 2:** Update **UnpackContent** Property Value
 
@@ -274,7 +274,7 @@ cat transit-data-{flowfile-UUID}.xml
 
 2\. Use the template icon ![nifi_template_icon](assets/tutorial-3-build-a-nifi-process-group-to-simulate-nextbus-api/nifi_template_icon.png) located in the Operate Palette.
 
-3\. **Browse**, find the template file, click **Open** and hit **Import**.
+3\. **Browse**, find the template file, click **Open** and hit **Upload**.
 
 4\. From the **Components Toolbar**, drag the template icon ![nifi_template_icon](assets/tutorial-3-build-a-nifi-process-group-to-simulate-nextbus-api/add_nifi_template.png) onto the graph and select the **tutorial-3-nifi-flow-SimulateXmlTransitEvents.xml** template file.
 
