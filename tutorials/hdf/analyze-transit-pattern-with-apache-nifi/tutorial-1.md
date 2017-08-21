@@ -85,6 +85,7 @@ When we learned the process of building a dataflow, we crossed paths with many o
 | `FlowFile`  | `Data brought into NiFi that moves through the system. This data holds attributes and can contain content.` |
 | `Processor` | `Tool that pulls data from external sources, performs actions on attributes and content of FlowFiles and publishes data to external source.` |
 | `Connection`  | `Linkage between processors that contain a queue and relationship(s) that effect where data is routed.` |
+| `Back Pressure`  | `Prevents the system from being overrun with data by controlling the quantity or data size of FlowFiles that can be stored in the queue.` |
 | `Flow Controller` | `Acts as a Broker to facilitate the exchange of FlowFiles between processors.` |
 | `Process Group` | `Enables the creation of new components based on the composition of processors, funnels, etc.` |
 | `Data Provenance` | `History of actions that occur on the data as it moves throughout the flow. Enables users to check the data from any processor or component while the FlowFiles move throughout the dataflow.` |
@@ -114,7 +115,6 @@ Apache NiFi originated from the NSA Technology Transfer Program in Autumn of 201
 The topics covered in the concepts section were brief and tailored toward the tutorial series.
 
 - If you are interested in learning more in depth about these concepts, view [Getting Started with NiFi](https://nifi.apache.org/docs/nifi-docs/html/getting-started.html).
-- If there is a particular feature you want to learn more about, view our [Hortonworks NiFi User Guide](http://docs.hortonworks.com/HDPDocuments/HDF2/HDF-2.1.2/bk_dataflow-user-guide/content/ch_user-guide.html)
 - [Credit card fraud prevention on a connected data platform](https://hortonworks.com/blog/credit-card-fraud-prevention-on-a-connected-data-platform/)
 - [Qualcomm, Hortonworks showcase connected car platform at tu-automotive detroit](https://hortonworks.com/blog/qualcomm-hortonworks-showcase-connected-car-platform-tu-automotive-detroit/)
 - [Cybersecurity: conceptual architecture for analytic response](https://hortonworks.com/blog/cybersecurity-conceptual-architecture-for-analytic-response/)
