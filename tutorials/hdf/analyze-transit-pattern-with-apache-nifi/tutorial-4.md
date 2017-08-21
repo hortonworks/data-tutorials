@@ -21,7 +21,7 @@ You will build a portion of the NiFi DataFlow in a process group to parse for **
 - [Step 5: Add EvaluateXPath to Extract Transit Observations](#add-evaluatexpath-to-extract-transit-observations-4)
 - [Step 6: Add an Output Port to Route Data Outside this PG](#add-an-output-port-to-route-data-outside-this-pg-4)
 - [Step 7: Connect SimulateXmlTransitEvents to ParseTransitEvents](#connect-simulatexmltransitEvents-to-parseTransitevents-4)
-- [Step 8: Verify EvaluateXPath is Extracting Values From XML](#verify-evaluatexpath-is-extracting-values-from-xml-4)
+- [Step 8: Verify ParseTransitEvents Extracts Values From SimulateXmlTransitEvents](#verify-evaluatexpath-is-extracting-values-from-xml-4)
 - [Approach 2: Import ParseTransitEvents Process Group](#approach2-import-parsetransitevents-process-group-4)
 - [Summary](#summary-4)
 - [Further Reading](#further-reading-4)
@@ -87,7 +87,7 @@ If you prefer to build the dataflow manually step-by-step, continue on to **Appr
 
 1\. Add the **SplitXml** processor onto the NiFi canvas.
 
-2\. Connect **EvaluateXPath** to **SplitXML** processor. When the Create Connection window appears, verify **matched** checkbox is checked, else check it. Click **Add**.
+2\. Connect **ExtractTimestamp** to **SplitXML** processor. When the Create Connection window appears, verify **matched** checkbox is checked, else check it. Click **Add**.
 
 ![evaluatexpath_to_splitxml](assets/tutorial-4-build-nifi-process-group-to-parse-transit-events/evaluatexpath_to_splitxml.png)
 
@@ -136,11 +136,11 @@ If you prefer to build the dataflow manually step-by-step, continue on to **Appr
 
 1\. Add the **Output Port** ![output_port](assets/tutorial-4-build-nifi-process-group-to-parse-transit-events/output_port.png) component onto the NiFi canvas. Name it `ParsedTransitEvents`.
 
-2\. Connect **EvaluateXPath** to **ParsedTransitEvents** output port. When the Create Connection window appears, verify **matched** checkbox is checked, if not check it. Click Add.
+2\. Connect **ExtractTransitObservations** to **ParsedTransitEvents** output port. When the Create Connection window appears, verify **matched** checkbox is checked, if not check it. Click Add.
 
 ![ParseTransitEvents_dataflow_pg](assets/tutorial-4-build-nifi-process-group-to-parse-transit-events/ParseTransitEvents_dataflow_pg.png)
 
-**Figure 6:** Connect **EvaluateXPath** to **ParsedTransitEvents**
+**Figure 6:** Connect **ExtractTransitObservations** to **ParsedTransitEvents**
 
 ### Step 7: Connect SimulateXmlTransitEvents to ParseTransitEvents
 
@@ -154,7 +154,7 @@ If you prefer to build the dataflow manually step-by-step, continue on to **Appr
 
 **Figure 7:** Connection of **SimulateXmlTransitEvents** and **ParseTransitEvents** PG
 
-### Step 8: Verify EvaluateXPath is Extracting Values From XML
+### Step 8: Verify ParseTransitEvents Extracts Values From SimulateXmlTransitEvents
 
 1\. Either select both process groups or leave them unselected, then hit the **start** button ![start_button_nifi_iot](assets/tutorial-4-build-nifi-process-group-to-parse-transit-events/start_button_nifi_iot.png) located in the Operate Palette to activate the dataflow.
 
@@ -178,9 +178,9 @@ If you prefer to build the dataflow manually step-by-step, continue on to **Appr
 
 2\. Use the template icon ![nifi_template_icon](assets/tutorial-4-build-nifi-process-group-to-parse-transit-events/nifi_template_icon.png) located in the Operate Palette.
 
-3\. **Browse**, find the template file, click **Open** and hit **Import**.
+3\. **Browse**, find the template file, click **Open** and hit **Upload**.
 
-4\. From the **Components Toolbar**, drag the template icon ![nifi_template_icon](assets/tutorial-4-build-nifi-process-group-to-parse-transit-events/add_nifi_template.png) onto the graph and select the **tutorial-1-nifi-flow-parse-transit-data.xml** template file.
+4\. From the **Components Toolbar**, drag the template icon ![nifi_template_icon](assets/tutorial-4-build-nifi-process-group-to-parse-transit-events/add_nifi_template.png) onto the graph and select the **tutorial-4-ParseTransitEvents.xml** template file.
 
 5\. Hit the **start** button ![start_button_nifi_iot](assets/tutorial-4-build-nifi-process-group-to-parse-transit-events/start_button_nifi_iot.png) to activate the dataflow.
 
@@ -213,6 +213,4 @@ Congratulations! You just built a NiFi **ParseTransitEvents** process group to p
 
 ### Further Reading
 
--   [Apache NiFi](https://hortonworks.com/apache/nifi/)
--   [Hortonworks DataFlow Documentation](http://docs.hortonworks.com/HDPDocuments/HDF2/HDF-2.1.2/bk_dataflow-user-guide/content/ch_user-guide.html)
 -   [XPath Expression Tutorial](http://www.w3schools.com/xml/xpath_intro.asp)
