@@ -13,18 +13,18 @@ You will build a new process group called **StoreTransitEventsAsJSONToDisk** to 
 
 ## Outline
 
-- [Approach 1: Manually Build StoreTransitEventsAsJSONToDisk Process Group (PG) ](#approach1-manually-build-simple-nifi-flow-6)
-- [Step 1: Create a Process Group and Label For It](#create-a-process-group-and-label-for-it-6)
-- [Step 2: Add an Input Port to Ingest Data Into this PG](#add-an-input-port-to-ingest-data-into-this-pg-6)
-- [Step 3: Add AttributesToJSON to Represent FlowFile Attributes As JSON](#add-attributestojson-to-represent-flowfile-attributes-as-json-6)
-- [Step 4: Add MergeContent to Combine Multiple FlowFiles Together](#add-mergecontent-to-combine-multiple-flowfiles-together-6)
-- [Step 5: Add UpdateAttribute to Make Each FlowFile Name Unique](#add-updateattribute-to-make-each-flowfile-name-unique-6)
-- [Step 6: Add PutFile to Store Data to Local File System](#add-putfile-to-store-data-to-local-file-system-6)
-- [Step 7: Connect ValidateGeoEnrichedTransitData to StoreDataAsJSONToDisk](#connect-validategeoenrichedtransitdata-to-storedataasjsontodisk-6)
-- [Step 8: Run the NiFi DataFlow](#run-the-nifi-dataflow-6)
-- [Step 9: Check Data By NiFi's Data Provenance](#check-data-by-nifi's-data-provenance-6)
-- [Approach 2: Import StoreTransitEventsAsJSONToDisk Process Group](#approach2-import-simple-nifi-flow-6)
-- [Summary](#summary-6)
+- [Approach 1: Manually Build StoreTransitEventsAsJSONToDisk Process Group (PG) ](#approach-1-manually-build-simple-nifi-flow)
+- [Step 1: Create a Process Group and Label For It](#step-1-create-a-process-group-and-label-for-it)
+- [Step 2: Add an Input Port to Ingest Data Into this PG](#step-2-add-an-input-port-to-ingest-data-into-this-pg)
+- [Step 3: Add AttributesToJSON to Represent FlowFile Attributes As JSON](#step-3-add-attributestojson-to-represent-flowfile-attributes-as-json)
+- [Step 4: Add MergeContent to Combine Multiple FlowFiles Together](#step-4-add-mergecontent-to-combine-multiple-flowfiles-together)
+- [Step 5: Add UpdateAttribute to Make Each FlowFile Name Unique](#step-5-add-updateattribute-to-make-each-flowfile-name-unique)
+- [Step 6: Add PutFile to Store Data to Local File System](#step-6-add-putfile-to-store-data-to-local-file-system)
+- [Step 7: Connect ValidateGeoEnrichedTransitData to StoreDataAsJSONToDisk](#step-7-connect-validategeoenrichedtransitdata-to-storedataasjsontodisk)
+- [Step 8: Run the NiFi DataFlow](#step-8-run-the-nifi-dataflow-6)
+- [Step 9: Check Data By NiFi's Data Provenance](#step-9-check-data-by-nifi's-data-provenance)
+- [Approach 2: Import StoreTransitEventsAsJSONToDisk Process Group](#approach-2-import-simple-nifi-flow)
+- [Summary](#summary)
 
 If you prefer to build the dataflow manually step-by-step, continue on to **Approach 1**. Else if you want to see the NiFi flow in action within minutes, refer to **Approach 2**.
 
@@ -62,9 +62,9 @@ If you prefer to build the dataflow manually step-by-step, continue on to **Appr
 
 **Figure 1:** Connect **IngestGeoEnrichedEvents** input port to **AttributesToJSON** processor
 
-3\. Open the processor configuration **properties** tab. Add the properties listed in Table 1 and if their original properties already have values, update them.
+3\. Open the processor configuration **properties** tab. Add the properties listed in **Table 1** and if their original properties already have values, update them.
 
-**Table 1:** Update AttributesToJSON Property Values
+**Table 1:** Update **AttributesToJSON** Properties Tab
 
 | Property  | Value  |
 |:---|---:|
@@ -73,10 +73,6 @@ If you prefer to build the dataflow manually step-by-step, continue on to **Appr
 
 - **Attributes List** takes FlowFile attribute parameters and presents them in JSON format
 - **Destination** stores the output as content in the FlowFile
-
-![attributesToJSON_config_property_tab_window](assets/tutorial-6-build-a-nifi-process-group-to-store-data-as-json/attributesToJSON_config_property_tab_window.png)
-
-**Figure 2:** AttributesToJSON Configuration Property Tab Window
 
 4\. Open the processor config **Settings** tab, under Auto terminate relationships, check the **failure** checkbox. Click **Apply**.
 
@@ -88,11 +84,11 @@ If you prefer to build the dataflow manually step-by-step, continue on to **Appr
 
 ![AttributesToJSON_to_MergeContent](assets/tutorial-6-build-a-nifi-process-group-to-store-data-as-json/AttributesToJSON_to_MergeContent.png)
 
-**Figure 3:** Connect **AttributesToJSON** to **MergeContent** processor
+**Figure 2:** Connect **AttributesToJSON** to **MergeContent** processor
 
-3\. Open the processor configuration **properties** tab. Add the properties listed in Table 2 and if their original properties already have values, update them.
+3\. Open the processor configuration **properties** tab. Add the properties listed in **Table 2** and if their original properties already have values, update them.
 
-**Table 2:** Update MergeContent Property Values
+**Table 2:** Update **MergeContent** Properties Tab
 
 | Property  | Value  |
 |:---|---:|
@@ -110,10 +106,6 @@ If you prefer to build the dataflow manually step-by-step, continue on to **Appr
 - **Footer** inserts specified value at the end of the file
 - **Demarcator** inserts specified value(s) at the end of every line in the file
 
-![mergeContent_config_property_tab_window](assets/tutorial-6-build-a-nifi-process-group-to-store-data-as-json/mergeContent_config_property_tab_window.png)
-
-**Figure 4:** MergeContent Configuration Property Tab Window
-
 4\. Open the processor config **Settings** tab, under Auto terminate relationships, check the **failure** and **original** checkboxes. Click **Apply**.
 
 ### Step 5: Add UpdateAttribute to Make Each FlowFile Name Unique
@@ -124,21 +116,17 @@ If you prefer to build the dataflow manually step-by-step, continue on to **Appr
 
 ![MergeContent_to_UpdateAttribute](assets/tutorial-6-build-a-nifi-process-group-to-store-data-as-json/MergeContent_to_UpdateAttribute.png)
 
-**Figure 5:** Connect **MergeContent** to **UpdateAttribute** processor
+**Figure 3:** Connect **MergeContent** to **UpdateAttribute** processor
 
 3\. Open the processor configuration properties tab. Add the properties listed in **Table 3** and if their original properties already have values, update them.
 
-**Table 3:** Add UpdateAttribute Property Value
+**Table 3:** Add **UpdateAttribute** Properties Tab
 
 | Property  | Value  |
 |:---|---:|
 | `filename`  | `${UUID()}`  |
 
 - **filename** updates each FlowFile with a unique identifier
-
-![updateAttribute_config_property_tab_window](assets/tutorial-6-build-a-nifi-process-group-to-store-data-as-json/updateAttribute_config_property_tab_window.png)
-
-**Figure 6:** UpdateAttribute Configuration Property Tab Window
 
 ### Step 6: Add PutFile to Store Data to Local File System
 
@@ -148,19 +136,15 @@ If you prefer to build the dataflow manually step-by-step, continue on to **Appr
 
 ![putFile_config_property_tab_window](assets/tutorial-6-build-a-nifi-process-group-to-store-data-as-json/UpdateAttribute_to_PutFile.png)
 
-**Figure 7:** Connect **UpdateAttribute** to **PutFile** processor
+**Figure 4:** Connect **UpdateAttribute** to **PutFile** processor
 
-3\. Open the processor configuration **properties** tab. Add the property listed in Table 4 and if their original property already has a value, update it.
+3\. Open the processor configuration **properties** tab. Add the property listed in **Table 4** and if their original property already has a value, update it.
 
-**Table 4:** Update PutFile Property Value
+**Table 4:** Update **PutFile** Property Value
 
 | Property  | Value  |
 |:---|---:|
-| `Directory`  | `/sandbox/tutorial-id/640/nifi/output/observe-transit-data`  |
-
-![putFile_config_property_tab_window](assets/tutorial-6-build-a-nifi-process-group-to-store-data-as-json/putFile_config_property_tab_window.png)
-
-**Figure 8:** PutFile Configuration Property Tab Window
+| `Directory`  | `/sandbox/tutorial-files/640/nifi/output/observe-transit-data`  |
 
 4\. Open the processor config **Settings** tab, under Auto terminate relationships, check the **failure** and **success** checkboxes. Click **Apply**.
 
@@ -172,17 +156,17 @@ If you prefer to build the dataflow manually step-by-step, continue on to **Appr
 
 ![StoreDataAsJSONToDisk_connect_rest_flow](assets/tutorial-6-build-a-nifi-process-group-to-store-data-as-json/StoreDataAsJSONToDisk_connect_rest_flow.png)
 
-**Figure 9:** Connect **ValidateGeoEnrichedTransitData** to **StoreDataAsJSONToDisk** PG
+**Figure 5:** Connect **ValidateGeoEnrichedTransitData** to **StoreDataAsJSONToDisk** PG
 
 ### Step 8: Run the NiFi DataFlow
 
-1\. The processors are valid since the warning symbols disappeared. Notice that the process groups have a highlighted red stop symbol ![stop_symbol_nifi_iot](assets/tutorial-6-build-a-nifi-process-group-to-store-data-as-json/stop_symbol_nifi.png) as shown back in **Figure 9**. To select all process groups, hold down the **shift-key** and drag your mouse across the entire data flow.
+1\. The processors are valid since the warning symbols disappeared. Notice that the process groups have a highlighted red stop symbol ![stop_symbol_nifi_iot](assets/tutorial-6-build-a-nifi-process-group-to-store-data-as-json/stop_symbol_nifi.png) as shown back in **Figure 5**. To select all process groups, hold down the **shift-key** and drag your mouse across the entire data flow.
 
 2\. Now that all processors are selected, go to the actions toolbar in the left window labeled **Operate** and click the start button ![start_button_nifi_iot](assets/tutorial-6-build-a-nifi-process-group-to-store-data-as-json/start_button_nifi.png). Your process groups should change to a green highlighted start symbol. Your screen should look like the following:
 
 ![start_nifi_flow](assets/tutorial-6-build-a-nifi-process-group-to-store-data-as-json/start_nifi_flow.png)
 
-**Figure 10:** Start **StoreDataAsJSONToDisk** PG
+**Figure 6:** Start **StoreDataAsJSONToDisk** PG
 
 3\. To quickly see what the processors are doing and the information on their faces, right click on the canvas, click the **refresh status** button ![refresh_nifi](assets/tutorial-6-build-a-nifi-process-group-to-store-data-as-json/refresh_nifi.png)
 
@@ -196,19 +180,19 @@ NiFi searches for provenance events. The window will load with events, select an
 
 ![provenance_event_window](assets/tutorial-6-build-a-nifi-process-group-to-store-data-as-json/provenance_event_window.png)
 
-**Figure 11:** NiFi Data Provenance Window
+**Figure 7:** NiFi Data Provenance Window
 
 3\. Once you select the event, a Provenance Event Dialog Window will appear. It contains Details, Attributes and Content regarding the particular event. Take a few minutes to view each tab. Let's navigate to the `Content` tab to view the data generated from the FlowFile. NiFi gives the user the option to download or view the content of the event. Click on the **View** button.
 
 ![provenance_content_tab](assets/tutorial-6-build-a-nifi-process-group-to-store-data-as-json/provenance_content_tab.png)
 
-**Figure 12:** Provenance Event Window
+**Figure 8:** Provenance Event Window
 
 4\. NiFi gives the user the option view the data in multiple formats. We will view it in original format.
 
 ![event_content_view_window](assets/tutorial-6-build-a-nifi-process-group-to-store-data-as-json/event_content_view_window.png)
 
-**Figure 13:** View FlowFile JSON Content
+**Figure 9:** View FlowFile JSON Content
 
 Did you receive the data you expected?
 
@@ -226,7 +210,7 @@ Did you receive the data you expected?
 
 ![start_nifi_flow](assets/tutorial-6-build-a-nifi-process-group-to-store-data-as-json/start_nifi_flow.png)
 
-**Figure 14:** **tutorial-6-StoreDataAsJSONToDisk.xml** template includes a NiFi Flow that pulls in San Francisco Muni Transit Events from the XML Simulator, parses through the data to extract key values and stores the transit observations as a JSON file.
+**Figure 10:** **tutorial-6-StoreDataAsJSONToDisk.xml** template includes a NiFi Flow that pulls in San Francisco Muni Transit Events from the XML Simulator, parses through the data to extract key values and stores the transit observations as a JSON file.
 
 Overview of the Process Groups and their Processors:
 
@@ -241,18 +225,18 @@ Overview of the Process Groups and their Processors:
 
 - **ParseTransitEvents (Process Group)**
   - **Input Port** ingests data from SimulateXmlTransitEvents Process Group
-  - **EvaluateXPath** extracts the timestamp of the last update for vehicle location data returned from each FlowFile.
+  - **ExtractTimestamp** extracts the timestamp of the last update for vehicle location data returned from each FlowFile.
   - **SplitXML** splits the parent's child elements into separate FlowFiles. Since vehicle is a child element in our xml file, each new vehicle element is stored separately.
-  - **EvaluateXPath** extracts attributes: vehicle id, direction, latitude, longitude and speed from vehicle element in each FlowFile.
+  - **ExtractTransitObservations** extracts attributes: vehicle id, direction, latitude, longitude and speed from vehicle element in each FlowFile.
   - **Output Port** outputs data with the new FlowFile attribute (key/values) to the rest of the flow
 
 
 - **ValidateGooglePlacesData (Process Group)**
   - **Input Port** ingests data from ParseTransitEvents Process Group
-  - **RouteOnAttribute** checks the NextBus Simulator data by routing FlowFiles only if their attributes contain transit observation data (Direction_of_Travel, Last_Time, Latitude, Longitude, Vehicle_ID, Vehicle_Speed)
+  - **ValidateNextBusData** checks the NextBus Simulator data by routing FlowFiles only if their attributes contain transit observation data (Direction_of_Travel, Last_Time, Latitude, Longitude, Vehicle_ID, Vehicle_Speed)
   - **InvokeHTTP** sends a rest call to Google Places API to pull in geo enriched data for transit location
   - **EvaluateJSONPath** parses the flowfile content for city and neighborhoods_nearby
-  - **RouteOnAttribute** checks the new Google Places data by routing FlowFiles only if their attributes contain geo enriched data (city, neighborhoods_nearby)
+  - **ValidateGooglePlacesData** checks the new Google Places data by routing FlowFiles only if their attributes contain geo enriched data (city, neighborhoods_nearby)
   - **Output Port** outputs data with nonempty FlowFile attributes (key/values) to the rest of the flow
 
 

@@ -13,22 +13,22 @@ With the transit data being pulled from NextBus API simulator, it shows location
 
 ## Outline
 
-- [Google Places API Basics](#google-places-api-basics-5)
-- [Approach 1: Manually Build ValidateGeoEnrichedTransitData Process Group (PG)](#approach1-manually-build-ValidateGeoEnrichedTransitData-process-group-5)
-- [Step 1: Obtain API Key for NiFi's InvokeHTTP Processor](#obtain-api-key-nifi-invokehttp-processor-5)
-- [Step 2: Create Process Group and Label For It](#create-process-group-label-for-it-5)
-- [Step 3: Add an Input Port to Ingest Data Into this PG](#add-an-input-port-to-ingest-data-into-this-pg-5)
-- [Step 4: Add RouteOnAttribute to Validate NextBus Simulator Data](#add-routeonattribute-to-validate-nextbus-simulator-data-5)
-- [Step 5: Add InvokeHTTP to Pull GeoEnriched Data from Google Places API](#add-invokehttp-to-pull -geoenriched-data-from-google-places-api-5)
-- [Step 6: Add EvaluateJsonPath to Extract GeoEnriched Transit Data](#add evaluatejsonpath-to-extract-geoenriched-transit-data-5)
-- [Step 7: Add RouteOnAttribute to Validate Google Places Data](#add-routeonattribute-to-validate-google-places-data-5)
-- [Step 8: Add an Output Port to Route Data Outside this PG](#add-an-output-port-to-route-data-outside-this-pg-5)
-- [Step 9: Connect ParseTransitEvents to ValidateGeoEnrichedTransitData](#connect-parsetransitevents-to-validategeoenrichedtransitdata-5)
+- [Google Places API Basics](#google-places-api-basics)
+- [Approach 1: Manually Build ValidateGeoEnrichedTransitData Process Group (PG)](#approach-1-manually-build-ValidateGeoEnrichedTransitData-process-group)
+- [Step 1: Obtain API Key for NiFi's InvokeHTTP Processor](#step-1-obtain-api-key-nifi-invokehttp-processor)
+- [Step 2: Create Process Group and Label For It](#step-2-create-process-group-label-for-it)
+- [Step 3: Add an Input Port to Ingest Data Into this PG](#step-3-add-an-input-port-to-ingest-data-into-this-pg)
+- [Step 4: Add RouteOnAttribute to Validate NextBus Simulator Data](#step-4-add-routeonattribute-to-validate-nextbus-simulator-data)
+- [Step 5: Add InvokeHTTP to Pull GeoEnriched Data from Google Places API](#step-5-add-invokehttp-to-pull-geoenriched-data-from-google-places-api)
+- [Step 6: Add EvaluateJsonPath to Extract GeoEnriched Transit Data](#step-6-add-evaluatejsonpath-to-extract-geoenriched-transit-data)
+- [Step 7: Add RouteOnAttribute to Validate Google Places Data](#step-7-add-routeonattribute-to-validate-google-places-data)
+- [Step 8: Add an Output Port to Route Data Outside this PG](#step-8-add-an-output-port-to-route-data-outside-this-pg)
+- [Step 9: Connect ParseTransitEvents to ValidateGeoEnrichedTransitData](#step-9-connect-parsetransitevents-to-validategeoenrichedtransitdata)
 - [Step 10: Run the DataFlow](#step-10-run-the-dataflow)
-- [Step 11: Verify GeoEnriched Data Routed by ValidateGooglePlacesData is Valid](#verify-geoenriched-data-routed-by-validategoogleplacesdata-is-valid-5)
-- [Approach 2: Import ValidateGeoEnrichedTransitData Process Group](#approach2-import-enriched-nifi-flow-via-places-api-5)
-- [Summary](#summary-5)
-- [Further Reading](#further-reading-5)
+- [Step 11: Verify GeoEnriched Data Routed by ValidateGooglePlacesData is Valid](#step-11-verify-geoenriched-data-routed-by-validategoogleplacesdata-is-valid)
+- [Approach 2: Import ValidateGeoEnrichedTransitData Process Group](#approach-2-import-enriched-nifi-flow-via-places-api)
+- [Summary](#summary)
+- [Further Reading](#further-reading)
 
 If you prefer to build the dataflow manually step-by-step, continue on to **Approach 1**. Else if you want to see the NiFi flow in action within minutes, refer to **Approach 2**.
 
@@ -36,7 +36,7 @@ You will need to understand Google Places API, so that it will be easier to inco
 
 ## Google Places API Basics
 
-Google Places API Web Service returns information about places: establishments, geographic locations and prominent points of interest based on Latitude and Longitude coordinates that are passed into HTTP requests. The Places API includes six place requests: Place Searches, Place Details, Place Add, Place Photos, Place Autocomplete and Query Autocomplete. Read more about these place requests in [Introducing the API](https://developers.google.com/places/web-service/intro).
+Google Places API Web Service returns information about places: establishments, geographic locations and prominent points of interest based on Latitude and Longitude coordinates that are passed into HTTP requests. The Places API includes six place requests: **Place Searches**, **Place Details**, **Place Add**, **Place Photos**, **Place Autocomplete** and **Query Autocomplete**. Read more about these place requests in [Introducing the API](https://developers.google.com/places/web-service/intro).
 
 All requests are accessed through an HTTP request and return either JSON or XML response.
 
@@ -84,7 +84,7 @@ Now you have the API Key parameter for our HTTP request. We also have the other 
 https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${Latitude},${Longitude}&radius=500&type=neighborhood&key=AIzaSyDY3asGAq-ArtPl6J2v7kcO_YSRYrjTFug
 ~~~
 
-> Note: Your API Key will be different than the one in the URL above.
+> Note: Your **API Key** will be different than the one in the URL above.
 
 ### Step 2: Create Process Group and Label For It
 
@@ -121,17 +121,13 @@ Validate Transit Data for empty values`.
 
 3\. Open the processor configuration **properties** tab. Add a new dynamic property for NiFi expression, select the **( + )** button. Insert the following property name and value into your properties tab as shown in the table below:
 
-**Table 1:** Add RouteOnAttribute Property Value
+**Table 1:** Add to **RouteOnAttribute** Properties Tab
 
 | Property  | Value  |
 |:---|---:|
 | `ValidateTransitObservations`  | `${Direction_of_Travel:isEmpty():not():and(${Last_Time:isEmpty():not()}):and(${Latitude:isEmpty():not()}):and(${Longitude:isEmpty():not()}):and(${Vehicle_ID:isEmpty():not()}):and(${Vehicle_Speed:equals('0'):not()})}`  |
 
-**Filter_Attributes** uses the FlowFile Attribute values obtained from XPath Expressions to filter out any FlowFiles that either have at least one empty Attribute value or the speed attribute value equals 0. Else the FlowFiles are passed to the remaining processors.
-
-![routeOnAttribute_config_property_tab_window](assets/tutorial-5-build-a-nifi-process-group-to-validate-the-geoenriched-data/routeOnAttribute_config_property_tab_window.png)
-
-**Figure 2:** RouteOnAttribute Configuration Property Tab Window
+**Filter_Attributes** uses the FlowFile Attribute key values obtained from XPath Expressions to filter out any FlowFiles that either have at least one empty Attribute value or the speed attribute value equals 0. Else the FlowFiles are passed to the remaining processors.
 
 4\. Open the processor config **Settings** tab, change the name from RouteOnAttribute to `ValidateNextBusData`. under Auto terminate relationships, check the **unmatched** checkbox. Click **Apply**.
 
@@ -141,21 +137,17 @@ Validate Transit Data for empty values`.
 
 ![RouteOnAttribute_to_InvokeHTTP](assets/tutorial-5-build-a-nifi-process-group-to-validate-the-geoenriched-data/RouteOnAttribute_to_InvokeHTTP.png)
 
-**Figure 3:** Connect **ValidateNextBusData** to **InvokeHTTP**
+**Figure 2:** Connect **ValidateNextBusData** to **InvokeHTTP**
 
 2\. Open **InvokeHTTP** configure properties tab and add the property listed in **Table 2**.
 
-**Table 2:** Update InvokeHTTP Property Value(s)
+**Table 2:** Update **InvokeHTTP** Properties Tab
 
 | Property  | Value  |
 |:---|---:|
 | `Remote URL`  | `https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${Latitude},${Longitude}&radius=500&type=neighborhood&key=AIzaSyDY3asGAq-ArtPl6J2v7kcO_YSRYrjTFug` |
 
 **Remote URL** connects to the HTTP URL we created using Google Places API and feeds that data into the dataflow. Notice we use two NiFi expressions for location parameter. This is because those two values change as new FlowFiles pass through this processor.
-
-![invokeHTTP_config_property_tab_window](assets/tutorial-5-build-a-nifi-process-group-to-validate-the-geoenriched-data/invokeHTTP_config_property_tab_window.png)
-
-**Figure 4:** InvokeHTTP Configuration Property Tab Window
 
 3\. Navigate to the **Settings** tab, change the name from InvokeHTTP to `GoogleNearbySearchAPI`. Under Auto terminate relationships check the **Failure**, **No Retry**, **Original** and **Retry** checkboxes. Click **Apply** button.
 
@@ -165,11 +157,11 @@ Validate Transit Data for empty values`.
 
 ![InvokeHTTP_to_EvaluateJsonPath](assets/tutorial-5-build-a-nifi-process-group-to-validate-the-geoenriched-data/InvokeHTTP_to_EvaluateJsonPath.png)
 
-**Figure 5:** Connect **GoogleNearbySearchAPI** to **EvaluateJsonPath**
+**Figure 3:** Connect **GoogleNearbySearchAPI** to **EvaluateJsonPath**
 
-2\. Open EvaluateJsonPath configure properties tab and update the original properties with the properties listed in **Table 3**. Note: add `city` and `neighborhoods_nearby` property by clicking the **New property** button, then insert their values into the properties tab.
+2\. Open EvaluateJsonPath configure properties tab and update the original properties with the properties listed in **Table 3**. Note: add `city` and `neighborhoods_nearby` property by clicking the **( + )** button, then insert their values into the properties tab.
 
-**Table 3:** Update and Add New EvaluateJsonPath Property Values
+**Table 3:** Update **EvaluateJsonPath** Properties Tab
 
 | Property  | Value  |
 |:---|---:|
@@ -181,10 +173,6 @@ Validate Transit Data for empty values`.
 - **Destination** result from JSON Path Evaluation stored in FlowFile attributes.
 - **2 user-defined attributes** each hold a value that is used in the NiFi Expression language filtering condition in the next processor.
 
-![evaluateJsonPath_config_property_tab_window](assets/tutorial-5-build-a-nifi-process-group-to-validate-the-geoenriched-data/evaluateJsonPath_config_property_tab_window.png)
-
-**Figure 6:** EvaluateJsonPath Configuration Property Tab Window
-
 3\. Navigate to the **Settings** tab, change the name from EvaluateJsonPath to `ExtractGeoEnrichedData`. Under Auto terminate relationships check the **unmatched** and **failure** checkboxes. Click **Apply** button.
 
 ### Step 7: Add RouteOnAttribute to Validate Google Places Data
@@ -193,21 +181,17 @@ Validate Transit Data for empty values`.
 
 ![EvaluateJsonPath_to_RouteOnAttribute](assets/tutorial-5-build-a-nifi-process-group-to-validate-the-geoenriched-data/EvaluateJsonPath_to_RouteOnAttribute.png)
 
-**Figure 7:** Connect **ExtractGeoEnrichedData** to **RouteOnAttribute**
+**Figure 4:** Connect **ExtractGeoEnrichedData** to **RouteOnAttribute**
 
 2\. Open RouteOnAttribute configure properties tab and click on **New property** button to add `ValidateGooglePlacesData` to property name and insert its NiFi expression value listed in **Table 4**.
 
-**Table 4:** Add New RouteOnAttribute Property Value
+**Table 4:** Update **ValidateGooglePlacesData** Properties Tab
 
 | Property  | Value  |
 |:---|---:|
 | `ValidateGooglePlacesData`  | `${city:isEmpty():not():and(${neighborhoods_nearby:isEmpty():not()})}`  |
 
-**RouteOnAttribute (ValidateGooglePlacesData)** uses the FlowFile Attribute values obtained from JSON Path Expressions to filter out any FlowFiles that have at least one empty Attribute value. Else the FlowFiles are passed to the remaining processors.
-
-![routeOnAttribute_geoEnrich_config_property_tab_window](assets/tutorial-5-build-a-nifi-process-group-to-validate-the-geoenriched-data/routeOnAttribute_geoEnrich_config_property_tab_window.png)
-
-**Figure 8:** RouteOnAttribute Configuration Property Tab Window
+**ValidateGooglePlacesData** uses the FlowFile Attribute values obtained from JSON Path Expressions to filter out any FlowFiles that have at least one empty Attribute value. Else the FlowFiles are passed to the remaining processors.
 
 3\. Navigate to the **Settings** tab, change the name from RouteOnAttribute to `ValidateGooglePlacesData`. Under Auto terminate relationships check the **unmatched** checkbox. Click **Apply** button.
 
@@ -219,7 +203,7 @@ Validate Transit Data for empty values`.
 
 ![ParseTransitEvents_dataflow_pg](assets/tutorial-5-build-a-nifi-process-group-to-validate-the-geoenriched-data/RouteOnAttribute_to_SendGeoEnrichedTranistEvents.png)
 
-**Figure 9:** Connect **ValidateGooglePlacesData** to **SendGeoEnrichedTranistEvents**
+**Figure 5:** Connect **ValidateGooglePlacesData** to **SendGeoEnrichedTranistEvents**
 
 ### Step 9: Connect ParseTransitEvents to ValidateGeoEnrichedTransitData
 
@@ -229,7 +213,7 @@ Validate Transit Data for empty values`.
 
 ![SimulateXmlTransitEvents_to_ParseTransitEvents](assets/tutorial-5-build-a-nifi-process-group-to-validate-the-geoenriched-data/ValidateGeoEnrichedTransitData_connect_rest_flow.png)
 
-**Figure 10:** Connect **ParseTransitEvents** to **ValidateGeoEnrichedTransitData** Process Group
+**Figure 6:** Connect **ParseTransitEvents** to **ValidateGeoEnrichedTransitData** Process Group
 
 ### Step 10: Run the DataFlow
 
@@ -237,13 +221,13 @@ Validate Transit Data for empty values`.
 
 ![selected_entire_dataflow](assets/tutorial-5-build-a-nifi-process-group-to-validate-the-geoenriched-data/selected_entire_dataflow.jpg)
 
-**Figure 11:** Selected the entire dataflow
+**Figure 7:** Selected the entire dataflow
 
 2\. In the **Operate** panel, you should see the header says **Multiple components are selected**. Press the **Start** button.
 
 ![start_dataflow](assets/tutorial-5-build-a-nifi-process-group-to-validate-the-geoenriched-data/start_dataflow.jpg)
 
-**Figure 12:** Started the entire dataflow
+**Figure 8:** Started the entire dataflow
 
 ### Step 11: Verify GeoEnriched Data Routed by ValidateGooglePlacesData is Valid
 
@@ -255,7 +239,7 @@ Inside the **ValidateGeoEnrichedTransitData** process group, we will inspect **V
 
 ![routenearbyneighborhoods_listqueue](assets/tutorial-5-build-a-nifi-process-group-to-validate-the-geoenriched-data/ValidateGooglePlacesData_listqueue.png)
 
-**Figure 13:** List Queue for Connector between **ValidateGooglePlacesData** and **SendGeoEnrichedTranistEvents**
+**Figure 9:** List Queue for Connector between **ValidateGooglePlacesData** and **SendGeoEnrichedTranistEvents**
 
 3\. View any event by selecting the view provenance event icon ![i_symbol_nifi](assets/tutorial-5-build-a-nifi-process-group-to-validate-the-geoenriched-data/i_symbol_nifi_lab1.png)
 
@@ -263,11 +247,11 @@ Inside the **ValidateGeoEnrichedTransitData** process group, we will inspect **V
 
 ![verify_evaluateXPath_extracts_data](assets/tutorial-5-build-a-nifi-process-group-to-validate-the-geoenriched-data/verify_data_routed_by_routeonattribute.png)
 
-**Figure 14:** Data Provenance for FlowFile attribute (key/value): **city** contains **San Francisco**.
+**Figure 10:** Data Provenance for FlowFile attribute (key/value): **city** contains **San Francisco**.
 
 ![verify_data_routed_by_routeonattribute_p2](assets/tutorial-5-build-a-nifi-process-group-to-validate-the-geoenriched-data/verify_data_routed_by_routeonattribute_p2.png)
 
-**Figure 15:** Data Provenance for FlowFile attribute (key/value): **neighborhoods_nearby** contains **["Saint Francis Wood","West Portal"]**
+**Figure 11:** Data Provenance for FlowFile attribute (key/value): **neighborhoods_nearby** contains **["Saint Francis Wood","West Portal"]**
 
 ## Approach 2: Import Enriched NiFi Flow Via Places API
 
@@ -281,7 +265,7 @@ Inside the **ValidateGeoEnrichedTransitData** process group, we will inspect **V
 
 ![complete_dataflow_lab2_geoEnrich](assets/tutorial-5-build-a-nifi-process-group-to-validate-the-geoenriched-data/ValidateGeoEnrichedTransitData_pg.png)
 
-**Figure 16:** **tutorial-5-ValidateGeoEnrichedTransitData.xml** template includes a NiFi Flow that pulls in San Francisco Muni Transit Events from the XML Simulator, parses through the data to extract key values and stores the transit observations as a JSON file.
+**Figure 12:** **tutorial-5-ValidateGeoEnrichedTransitData.xml** template includes a NiFi Flow that pulls in San Francisco Muni Transit Events from the XML Simulator, parses through the data to extract key values and stores the transit observations as a JSON file.
 
 Overview of the Process Groups and their Processors:
 
@@ -296,18 +280,18 @@ Overview of the Process Groups and their Processors:
 
 - **ParseTransitEvents (Process Group)**
   - **Input Port** ingests data from SimulateXmlTransitEvents Process Group
-  - **EvaluateXPath** extracts the timestamp of the last update for vehicle location data returned from each FlowFile.
+  - **ExtractTimestamp** extracts the timestamp of the last update for vehicle location data returned from each FlowFile.
   - **SplitXML** splits the parent's child elements into separate FlowFiles. Since vehicle is a child element in our xml file, each new vehicle element is stored separately.
-  - **EvaluateXPath** extracts attributes: vehicle id, direction, latitude, longitude and speed from vehicle element in each FlowFile.
+  - **ExtractTransitObservations** extracts attributes: vehicle id, direction, latitude, longitude and speed from vehicle element in each FlowFile.
   - **Output Port** outputs data with the new FlowFile attribute (key/values) to the rest of the flow
 
 
 - **ValidateGooglePlacesData (Process Group)**
   - **Input Port** ingests data from ParseTransitEvents Process Group
-  - **RouteOnAttribute** checks the NextBus Simulator data by routing FlowFiles only if their attributes contain transit observation data (Direction_of_Travel, Last_Time, Latitude, Longitude, Vehicle_ID, Vehicle_Speed)
+  - **ValidateNextBusData** checks the NextBus Simulator data by routing FlowFiles only if their attributes contain transit observation data (Direction_of_Travel, Last_Time, Latitude, Longitude, Vehicle_ID, Vehicle_Speed)
   - **InvokeHTTP** sends a rest call to Google Places API to pull in geo enriched data for transit location
   - **EvaluateJSONPath** parses the flowfile content for city and neighborhoods_nearby
-  - **RouteOnAttribute** checks the new Google Places data by routing FlowFiles only if their attributes contain geo enriched data (city, neighborhoods_nearby)
+  - **ValidateGooglePlacesData** checks the new Google Places data by routing FlowFiles only if their attributes contain geo enriched data (city, neighborhoods_nearby)
   - **Output Port** outputs data with nonempty FlowFile attributes (key/values) to the rest of the flow
 
 

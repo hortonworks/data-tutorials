@@ -17,15 +17,15 @@ You will build a portion of the NiFi DataFlow in a process group to simulate the
 
 ## Outline
 
-- [Approach 1: Build SimulateXmlTransitEvents Process Group](#approach1-build-nifi-simulator-flow-3)
-- [Step 1: Create a Process Group](#create-process-group-3)
-- [Step 2: Add GetFile to Ingest NextBus Data Seed](#add-getfile-to-ingest-nextbus-data-seed-3)
-- [Step 3: Add UnpackContent to Decompress the Zipped Data](#add-unpackcontent-to-decompress-the-zipped-data-3)
-- [Step 4: Add ControlRate to Regulate Data Flow Speed](#add-controlrate-to-regulate-data-flow-speed-3)
-- [Step 5: Add Output Port for External Component Connection](#add-output-port-for-external-component-connection-3)
-- [Approach 2: Import SimulateXmlTransitEvents Process Group](#approach2-import-nifi-simulatexmltransitevents-process-group-3)
-- [Summary](#summary-3)
-- [Further Reading](#further-reading-3)
+- [Approach 1: Build SimulateXmlTransitEvents Process Group](#approach-1-build-simulatexmltransitevents-process-group)
+- [Step 1: Create a Process Group](#step-1-create-process-group)
+- [Step 2: Add GetFile to Ingest NextBus Data Seed](#step-2-add-getfile-to-ingest-nextbus-data-seed)
+- [Step 3: Add UnpackContent to Decompress the Zipped Data](#step-3-add-unpackcontent-to-decompress-the-zipped-data)
+- [Step 4: Add ControlRate to Regulate Data Flow Speed](#step-4-add-controlrate-to-regulate-data-flow-speed)
+- [Step 5: Add Output Port for External Component Connection](#step-5-add-output-port-for-external-component-connection)
+- [Approach 2: Import SimulateXmlTransitEvents Process Group](#approach-2-import-simulatexmltransitevents-process-group)
+- [Summary](#summary)
+- [Further Reading](#further-reading)
 
 If you prefer to build the dataflow manually step-by-step, continue on to **Approach 1**. Else if you want to see the NiFi flow in action within minutes, refer to **Approach 2**.
 
@@ -37,7 +37,7 @@ If you prefer to build the dataflow manually step-by-step, continue on to **Appr
 
 ![label_generic](assets/tutorial-3-build-a-nifi-process-group-to-simulate-nextbus-api/label_generic.png)
 
-2\. Click on the right corner and stretch the label over approximately 24 squares.
+2\. Click on the right bottom corner and stretch the label over approximately 24 squares.
 
 ![stretch_label](assets/tutorial-3-build-a-nifi-process-group-to-simulate-nextbus-api/stretch_label.png)
 
@@ -63,7 +63,7 @@ If you prefer to build the dataflow manually step-by-step, continue on to **Appr
 
 ![getfile_processor](assets/tutorial-3-build-a-nifi-process-group-to-simulate-nextbus-api/getfile_processor.png)
 
-- Creates FlowFiles from files in a directory. NiFI will ignore files it doesn’t have read permissions for.
+- Creates FlowFiles from files in a directory. NiFi will ignore files it doesn’t have read permissions for.
 
 3\. Right click on the **GetFile** processor, click **configure** from dropdown menu
 
@@ -71,26 +71,26 @@ If you prefer to build the dataflow manually step-by-step, continue on to **Appr
 
 4\. Enter the **Properties** tab. Add the properties listed in **Table 1** to update the processor's appropriate properties. Press **OK** after changing a property.
 
-**Table 1:** Update **GetFile** Property Values
+**Table 1:** Update **GetFile** Properties Tab
 
 | Property  | Value  |
 |:---|---:|
-| `Input Directory`  | `/sandbox/tutorial-id/640/nifi/input`  |
+| `Input Directory`  | `/sandbox/tutorial-files/640/nifi/input`  |
 | `Keep Source File`  | `true`  |
 
 - **Input Directory** location at which data is ingested into the dataflow
 
 - **Keep Source File** source files in directory remain after all data is ingested
 
-![getFile_config_property_tab_window](assets/tutorial-3-build-a-nifi-process-group-to-simulate-nextbus-api/getFile_config_property_tab_window.png)
+5\. Once each property is updated, enter the **Scheduling** tab, add the configuration information listed in **Table 2**.
 
-**Figure 2:** GetFile Property Tab Window
+**Table 2:** Update **GetFile** Scheduling Tab
 
-5\. Since each property is updated, navigate to the **Scheduling tab** and change the **Run Schedule** from 0 sec to `6 sec`, so the processor executes a task every 6 seconds. Therefore, overuse of system resources is prevented.
+| Name  | Value  |
+|:---|---:|
+| `Run Schedule`  | `6 sec`  |
 
-![getfile_scheduling_tab](assets/tutorial-3-build-a-nifi-process-group-to-simulate-nextbus-api/getfile_scheduling_tab.png)
-
-**Figure 3:** GetFile Scheduling Tab Window
+- **Run Schedule** the processor executes a task every 6 seconds
 
 6\. Click **Apply**.
 
@@ -102,19 +102,19 @@ If you prefer to build the dataflow manually step-by-step, continue on to **Appr
 
 ![arrow_icon](assets/tutorial-3-build-a-nifi-process-group-to-simulate-nextbus-api/arrow_icon.png)
 
-**Figure 4:** Arrow Icon Appears When Hovering Over **GetFile** Processor
+**Figure 2:** Arrow Icon Appears When Hovering Over **GetFile** Processor
 
 ![drag_arrow_icon_connect](assets/tutorial-3-build-a-nifi-process-group-to-simulate-nextbus-api/drag_arrow_icon_connect.png)
 
-**Figure 5:** Drag Arrow Icon to Connect two Processors (GetFile -> UnpackContent)
+**Figure 3:** Drag Arrow Icon to Connect two Processors (GetFile -> UnpackContent)
 
 ![connection_window_checkbox](assets/tutorial-3-build-a-nifi-process-group-to-simulate-nextbus-api/connection_window_checkbox.png)
 
-**Figure 6:** Connection Window for GetFile -> UnpackContent. **success** checkbox checked.
+**Figure 4:** Connection Window for GetFile -> UnpackContent. **success** checkbox checked.
 
-3\. Open the **UnpackContent** processor configuration **properties** tab. Add the properties listed in **Table 2** to update the processor's appropriate properties.
+3\. Open the **UnpackContent** processor configuration **properties** tab. Add the properties listed in **Table 3** to update the processor's appropriate properties.
 
-**Table 2:** Update **UnpackContent** Property Value
+**Table 3:** Update **UnpackContent** Properties Tab
 
 | Property  | Value  |
 |:---|---:|
@@ -122,17 +122,21 @@ If you prefer to build the dataflow manually step-by-step, continue on to **Appr
 
 - **Packaging Format** tells the processor of packaging format used to decompress the file
 
-![unpackContent_config_property_tab_window](assets/tutorial-3-build-a-nifi-process-group-to-simulate-nextbus-api/unpackContent_config_property_tab_window.png)
+4\. Once each property is updated, enter the **Scheduling** tab, add the configuration information listed in **Table 4**.
 
-**Figure 7:** UnpackContent Property Tab Window
+**Table 4:** Update **UnpackContent** Scheduling Tab
 
-4\. Since each property is updated, navigate to the **Scheduling tab** and change the **Run Schedule** from 0 sec to `1 sec`, so the processor executes a task every 1 second and avoids back pressure downstream to the next processor.
+| Name  | Value  |
+|:---|---:|
+| `Run Schedule`  | `1 sec`  |
+
+- **Run Schedule** the processor executes a task every 1 second and avoids back pressure downstream to the next processor
 
 5\. Open the processor config **Settings** tab, under Auto terminate relationships, check the **failure** and **original** checkboxes. Click **Apply**.
 
 ![unpackcontent_settings_tab_original_failure](assets/tutorial-3-build-a-nifi-process-group-to-simulate-nextbus-api/unpackcontent_settings_tab_original_failure.png)
 
-**Figure 8:** UnpackContent Settings Tab Window
+**Figure 5:** UnpackContent Settings Tab Window
 
 ### Step 4: Add ControlRate to Regulate Data Flow Speed
 
@@ -142,11 +146,11 @@ If you prefer to build the dataflow manually step-by-step, continue on to **Appr
 
 ![unpackcontent_to_controlrate](assets/tutorial-3-build-a-nifi-process-group-to-simulate-nextbus-api/unpackcontent_to_controlrate.png)
 
-**Figure 9:** Connect UnpackContent to ControlRate
+**Figure 6:** Connect UnpackContent to ControlRate
 
-3\. Open the processor configuration **properties** tab. Add the properties listed in **Table 3** to update the processor's appropriate properties.
+3\. Open the processor configuration **properties** tab. Add the properties listed in **Table 5** to update the processor's appropriate properties.
 
-**Table 3:** Update ControlRate Property Values
+**Table 5:** Update ControlRate Properties Tab
 
 | Property  | Value  |
 |:---|---:|
@@ -160,10 +164,6 @@ If you prefer to build the dataflow manually step-by-step, continue on to **Appr
 
 - **Time Duration** makes it so only 20 FlowFiles will transfer through this processor every 6 seconds.
 
-![controlRate_config_property_tab_window](assets/tutorial-3-build-a-nifi-process-group-to-simulate-nextbus-api/controlRate_config_property_tab_window.png)
-
-**Figure 10:** ControlRate Property Tab Window
-
 4\. Open the processor config **Settings** tab, under Auto terminate relationships, check the **failure** checkbox. Click **Apply**.
 
 ### Step 5: Add UpdateAttribute to Make Each FlowFile Name Unique
@@ -174,11 +174,11 @@ If you prefer to build the dataflow manually step-by-step, continue on to **Appr
 
 ![controltate_to_updateattribute](assets/tutorial-3-build-a-nifi-process-group-to-simulate-nextbus-api/controltate_to_updateattribute.png)
 
-**Figure 11:** Connect ControlRate to UpdateAttribute
+**Figure 7:** Connect ControlRate to UpdateAttribute
 
-3\. Add a new dynamic property for NiFi expression, click on the **New property** button. Insert the following property name and value into your properties tab as shown in the table below:
+3\. Add a new dynamic property for NiFi expression, click on the plus button **"+"** in the top right corner. Insert the following property name and value into your properties tab as shown in the table below:
 
-**Table 4:** Add UpdateAttribute Property Value
+**Table 6:** Add UpdateAttribute Properties Tab
 
 | Property  | Value  |
 |:---|---:|
@@ -186,7 +186,7 @@ If you prefer to build the dataflow manually step-by-step, continue on to **Appr
 
 ![updateattribute_property](assets/tutorial-3-build-a-nifi-process-group-to-simulate-nextbus-api/updateattribute_property.png)
 
-**Figure 12:** UpdateAttribute Property Tab Window
+**Figure 8:** UpdateAttribute Property Tab Window
 
 - **filename** updates each FlowFile with a unique identifier
 
@@ -200,19 +200,15 @@ If you prefer to build the dataflow manually step-by-step, continue on to **Appr
 
 ![updateattribute_to_putfile](assets/tutorial-3-build-a-nifi-process-group-to-simulate-nextbus-api/updateattribute_to_putfile.png)
 
-**Figure 13:** Connect **UpdateAttribute** to **PutFile**
+**Figure 9:** Connect **UpdateAttribute** to **PutFile**
 
-3\. Open the processor configuration **properties** tab. Add the property listed in **Table 5** and if their original property already has a value, update it.
+3\. Open the processor configuration **properties** tab. Add the property listed in **Table 7** to update the processor's appropriate properties.
 
-**Table 5:** Update PutFile Property Value
+**Table 7:** Update PutFile Properties Tab
 
 | Property  | Value  |
 |:---|---:|
-| `Directory`  | `/sandbox/tutorial-id/640/nifi/output/rawtransitevents`  |
-
-![putFile_config_property_tab_window](assets/tutorial-3-build-a-nifi-process-group-to-simulate-nextbus-api/putFile_config_property_tab_window.png)
-
-**Figure 14:** PutFile Configuration Property Tab Window
+| `Directory`  | `/sandbox/tutorial-files/640/nifi/output/rawtransitevents`  |
 
 4\. Open the processor config **Settings** tab, under Auto terminate relationships, check the **failure** and **success** checkboxes. Click **Apply**.
 
@@ -224,19 +220,19 @@ If you prefer to build the dataflow manually step-by-step, continue on to **Appr
 
 ![simulatexmltransitevents_flow](assets/tutorial-3-build-a-nifi-process-group-to-simulate-nextbus-api/simulatexmltransitevents_flow.png)
 
-**Figure 15:** Connect **UpdateAttribute** to **Output Port (RawTransitEvents)**
+**Figure 10:** Connect **UpdateAttribute** to **Output Port (RawTransitEvents)**
 
 ### Step 8: Check Data Stored to Local File System Via Web Shell Client
 
-1\. Either select the process group or leave to unselected, then hit the **start** button ![start_button_nifi_iot](assets/tutorial-4-build-nifi-process-group-to-parse-transit-events/start_button_nifi_iot.png) located in the Operate Palette to activate the **SimulateXmlTransitEvents** process group dataflow.
+1\. With the nifi dataflow unselected, hit the **start** button ![start_button_nifi_iot](assets/tutorial-4-build-nifi-process-group-to-parse-transit-events/start_button_nifi_iot.png) located in the Operate Palette to activate the **SimulateXmlTransitEvents** process group dataflow.
 
 2\. Let the flow run for about 1 minute, then stop the flow by hitting the **stop** button.
 
-3\. Launch Sandbox Web Shell Client via HDF Splash Screen from **[Advanced HDF SB Quick Links](http://sandbox-hdf.hortonworks.com:18888/splash2.html)** Link.
+3\. Launch Sandbox Web Shell Client via HDF Splash Screen from **[Advanced HDF SB Quick Links](http://sandbox-hdf.hortonworks.com:8888)** Link.
 
 ![web_shell_client_sb_quick_link](assets/tutorial-3-build-a-nifi-process-group-to-simulate-nextbus-api/web_shell_client_sb_quick_link.png)
 
-**Figure 16:** SB Quick Link for Web Shell Client
+**Figure 11:** SB Quick Link for Web Shell Client
 
 > Note: Username is "admin", initial password is "hadoop". You will be prompted to write the current password again, then set a new password.
 
@@ -247,10 +243,8 @@ You have now ssh'd into the HDF Sandbox Server.
 4\. Navigate to the output directory in which the transit data is being written to:
 
 ~~~bash
-cd /sandbox/tutorial-id/640/nifi/output/rawtransitevents
+cd /sandbox/tutorial-files/640/nifi/output/rawtransitevents
 ~~~
-
-![rawtransitevents_dir_in_webshell](assets/tutorial-3-build-a-nifi-process-group-to-simulate-nextbus-api/rawtransitevents_dir_in_webshell.png)
 
 5\. Run the `ls` command to list files in the current directory:
 
@@ -266,11 +260,11 @@ cat transit-data-{flowfile-UUID}.xml
 
 ![check_data_written_to_fs](assets/tutorial-3-build-a-nifi-process-group-to-simulate-nextbus-api/check_data_written_to_fs.png)
 
-**Figure 17:** Output of Transit Data in Web Shell Client
+**Figure 12:** Output of Transit Data in Web Shell Client
 
 ## Approach 2: Import NiFi SimulateXmlTransitEvents Process Group
 
-1\. Download the [tutorial-3-nifi-flow-SimulateXmlTransitEvents.xml](#assets/tutorial-3-build-a-nifi-process-group-to-simulate-nextbus-api/template/tutorial-3-SimulateXmlTransitEvents.xml) template file.
+1\. Download the [tutorial-3-nifi-flow-SimulateXmlTransitEvents.xml](assets/tutorial-3-build-a-nifi-process-group-to-simulate-nextbus-api/template/tutorial-3-SimulateXmlTransitEvents.xml) template file.
 
 2\. Use the template icon ![nifi_template_icon](assets/tutorial-3-build-a-nifi-process-group-to-simulate-nextbus-api/nifi_template_icon.png) located in the Operate Palette.
 
@@ -282,7 +276,7 @@ cat transit-data-{flowfile-UUID}.xml
 
 ![run_dataflow_lab1_nifi_learn_ropes](assets/tutorial-3-build-a-nifi-process-group-to-simulate-nextbus-api/complete_simulatetransitdata_pg.png)
 
-**Figure 18:** NiFi Flow that pulls in San Francisco Muni Transit Events from the XML Simulator, stores the raw transit events to the local file system and also sends the data out to the rest of the flow through the output port.
+**Figure 13:** NiFi Flow that pulls in San Francisco Muni Transit Events from the XML Simulator, stores the raw transit events to the local file system and also sends the data out to the rest of the flow through the output port.
 
 The building blocks of every dataflow consist of processors. When sections of the flow become complex, you can start grouping processors inside process groups. These tools perform actions on data to ingest, route, extract, split, aggregate or store it. Our dataflow process group above contains processors, each processor includes a high level description of their role in the tutorial:
 

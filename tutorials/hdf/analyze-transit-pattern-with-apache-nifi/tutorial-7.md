@@ -13,15 +13,15 @@ You will learn to perform **rest calls** against the **NextBus API** to retrieve
 
 ## Outline
 
-- [Approach 1: Manually Integrate NextBus API into NiFi Flow](#approach2-manually-build-live-vehicle-routes-nifi-flow-7)
-- [NextBus Live Feed API Basics](#nextbus-live-feed-api-basics-7)
-- [Step 1: Add GetHTTP to Make Rest Calls and Ingest Data via NextBus API](#add-gethttp-to-make-rest-calls-and-ingest-data-via-nextbus-api-7)
-- [Step 2: Modify PutFile in StoreDataAsJSONToDisk Process Group](#modify-putfile-in-storedataasjsontodisk-process-group-7)
-- [Step 3: Run the NiFi DataFlow](#run-the-nifi-dataflow-7)
-- [Step 4: Explore Back Pressure for NextBus API Rest Calls](#step-2-configure-back-pressure-for-nextbus-api-rest-calls)
-- [Approach 2: Import Live Vehicle Routes NiFi Flow](#approach1-import-live-vehicle-routes-nifi-flow-7)
-- [Summary](#summary-tutorial-7)
-- [Further Reading](#further-reading-tutorial-7)
+- [Approach 1: Manually Integrate NextBus API into NiFi Flow](#approach-1-manually-build-live-vehicle-routes-nifi-flow)
+- [NextBus Live Feed API Basics](#nextbus-live-feed-api-basics)
+- [Step 1: Add GetHTTP to Make Rest Calls and Ingest Data via NextBus API](#step-1-add-gethttp-to-make-rest-calls-and-ingest-data-via-nextbus-api)
+- [Step 2: Modify PutFile in StoreDataAsJSONToDisk Process Group](#step-2-modify-putfile-in-storedataasjsontodisk-process-groupp)
+- [Step 3: Run the NiFi DataFlow](#step-3-run-the-nifi-dataflow)
+- [Step 4: Explore Back Pressure for NextBus API Rest Calls](#step-4-explore-back-pressure-for-nextbus-api-rest-calls)
+- [Approach 2: Import Live Vehicle Routes NiFi Flow](#approach-2-import-live-vehicle-routes-nifi-flow)
+- [Summary](#summary)
+- [Further Reading](#further-reading)
 
 If you prefer to build the dataflow manually step-by-step, continue on to **Approach 1**. Else if you want to see the NiFi flow in action within minutes, refer to **Approach 2**.
 
@@ -81,8 +81,6 @@ You will replace the **SimulateXmlTransitEvents** Process Group with **GetHTTP**
 | `URL`  | `http://webservices.nextbus.com/service/publicXMLFeed?command=vehicleLocations&a=sf-muni&r=M&t=0` |
 | `Filename`  | `live_transit_data_${now():format("HHmmssSSS")}.xml` |
 
-![getHTTP_liveStream_config_property_tab_window](assets/tutorial-7-integrate-nextbus-api-to-pull-in-transit-live-feed/getHTTP_config_property_tab_window.png)
-
 3\. Now that each property is updated. Navigate to the **Scheduling tab** and change the **Run Schedule** from 0 sec to `6 sec`, so that the processor executes a task every 6 seconds.
 
 4\. Open the processor config **Settings** tab, change the processor's Name from GetHTTP to `IngestNextBusXMLData`. Click **Apply** button.
@@ -97,11 +95,9 @@ You will change the directory PutFile writes data to since data is coming in fro
 
 | Property  | Value  |
 |:---|---:|
-| `Directory`  | `/sandbox/tutorial-id/640/nifi/output/live_transit_data` |
+| `Directory`  | `/sandbox/tutorial-files/640/nifi/output/live_transit_data` |
 
 **Directory** is changed to a new location for the real-time data coming in from NextBus live stream.
-
-![modify_putFile_in_geo_enrich_section](assets/tutorial-7-integrate-nextbus-api-to-pull-in-transit-live-feed/modify_putFile_in_geo_enrich_section.jpg)
 
 2\. Click **Apply**. Then go back to the **NiFi Flow** breadcrumb.
 
@@ -170,18 +166,18 @@ Overview of the NiFi Flow:
 
 - **ParseTransitEvents (Process Group)**
   - **Input Port** ingests data from SimulateXmlTransitEvents Process Group
-  - **EvaluateXPath** extracts the timestamp of the last update for vehicle location data returned from each FlowFile.
+  - **ExtractTimestamp** extracts the timestamp of the last update for vehicle location data returned from each FlowFile.
   - **SplitXML** splits the parent's child elements into separate FlowFiles. Since vehicle is a child element in our xml file, each new vehicle element is stored separately.
-  - **EvaluateXPath** extracts attributes: vehicle id, direction, latitude, longitude and speed from vehicle element in each FlowFile.
+  - **ExtractTransitObservations** extracts attributes: vehicle id, direction, latitude, longitude and speed from vehicle element in each FlowFile.
   - **Output Port** outputs data with the new FlowFile attribute (key/values) to the rest of the flow
 
 
 - **ValidateGooglePlacesData (Process Group)**
   - **Input Port** ingests data from ParseTransitEvents Process Group
-  - **RouteOnAttribute** checks the NextBus Simulator data by routing FlowFiles only if their attributes contain transit observation data (Direction_of_Travel, Last_Time, Latitude, Longitude, Vehicle_ID, Vehicle_Speed)
+  - **ValidateNextBusData** checks the NextBus Simulator data by routing FlowFiles only if their attributes contain transit observation data (Direction_of_Travel, Last_Time, Latitude, Longitude, Vehicle_ID, Vehicle_Speed)
   - **InvokeHTTP** sends a rest call to Google Places API to pull in geo enriched data for transit location
   - **EvaluateJSONPath** parses the flowfile content for city and neighborhoods_nearby
-  - **RouteOnAttribute** checks the new Google Places data by routing FlowFiles only if their attributes contain geo enriched data (city, neighborhoods_nearby)
+  - **ValidateGooglePlacesData** checks the new Google Places data by routing FlowFiles only if their attributes contain geo enriched data (city, neighborhoods_nearby)
   - **Output Port** outputs data with nonempty FlowFile attributes (key/values) to the rest of the flow
 
 
