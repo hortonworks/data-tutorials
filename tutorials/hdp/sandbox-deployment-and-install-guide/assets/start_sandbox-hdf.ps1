@@ -68,6 +68,7 @@ Else {
     -p 17788:7788 `
     -p 17789:7789 `
     -p 12222:22 `
+    -p 19090:19090 `
     sandbox-hdf /usr/sbin/sshd -D | Out-Null
 }
 
