@@ -18,7 +18,7 @@ series: HDP > Develop with Hadoop > Hello World, HDP > Hadoop for Data Scientist
 
 ## Introduction
 
-In this tutorial, we’ll focus on taking advantage of the improvements to [Apache Hive](https://hortonworks.com/hadoop/hive) and [Apache Tez](https://hortonworks.com/hadoop/tez) through the work completed by the community as part of the [Stinger initiative](https://hortonworks.com/labs/stinger). These features will be discussed in this tutorial:
+In this tutorial, we’ll focus on taking advantage of the improvements to [Apache Hive](https://hortonworks.com/hadoop/hive) and [Apache Tez](https://hortonworks.com/hadoop/tez) through the work completed by the community as part of the [Stinger initiative](https://hortonworks.com/blog/100x-faster-hive/). These features will be discussed in this tutorial:
 
 *   Performance improvements of Hive on Tez
 *   Performance improvements of Vectorized Query
@@ -27,26 +27,26 @@ In this tutorial, we’ll focus on taking advantage of the improvements to [Apac
 *   SQL Compliance Improvements
 
 ## Prerequisites
--  Downloaded and Installed latest [Hortonworks Sandbox](https://hortonworks.com/downloads/#sandbox)
--  [Learning the Ropes of the Hortonworks Sandbox](https://hortonworks.com/tutorial/learning-the-ropes-of-the-hortonworks-sandbox/)
--  Allow yourself around one hour to complete this tutorial
+-   Downloaded and Installed latest [Hortonworks Sandbox](https://hortonworks.com/downloads/#sandbox)
+-   [Learning the Ropes of the Hortonworks Sandbox](https://hortonworks.com/tutorial/learning-the-ropes-of-the-hortonworks-sandbox/)
+-   Allow yourself around one hour to complete this tutorial
 
 ## Outline
-- [Step 1: Download Data](#download-data)
-- [Step 2: Upload Data Using HDFS Files View](#upload_data_using_hdfs)
-- [Step 3: Create Hive Queries](#create-hive-queries)
-- [Speed Improvements](#speed-improvements)
-- [Step 4: Configure MapReduce as Execution Engine in Hive view Settings Tab](#configure-mapreduce-engine-in-hive-settings)
-- [Step 5: Test Query on MapReduce Engine](#test-query-mapreduce-engine)
-- [Step 6: Configure Tez as Execution Engine in Hive view Settings Tab](#configure-tez-engine-in-hive-settings)
-- [Step 7: Test Query on Tez Engine](#test-query-on-tez-engine)
-- [Step 8: Execute Query as MapReduce Then Tez Engine](#execute-query-mapreduce-tez-engine)
-- [Step 9: Track Hive on Tez Jobs](#track-hive-on-tez-jobs)
-- [Stats & Cost Based Optimization (CBO)](#stats-cost-optimization)
-- [Multi-tenancy with HiveServer2](#multi-tenancy-hiveserver2)
-- [SQL Compliance](#sql-compliance)
-- [Summary](#summary)
-- [Further Reading](#further-reading)
+-   [Step 1: Download Data](#download-data)
+-   [Step 2: Upload Data Using HDFS Files View](#upload_data_using_hdfs)
+-   [Step 3: Create Hive Queries](#create-hive-queries)
+-   [Speed Improvements](#speed-improvements)
+-   [Step 4: Configure MapReduce as Execution Engine in Hive view Settings Tab](#configure-mapreduce-engine-in-hive-settings)
+-   [Step 5: Test Query on MapReduce Engine](#test-query-mapreduce-engine)
+-   [Step 6: Configure Tez as Execution Engine in Hive view Settings Tab](#configure-tez-engine-in-hive-settings)
+-   [Step 7: Test Query on Tez Engine](#test-query-on-tez-engine)
+-   [Step 8: Execute Query as MapReduce Then Tez Engine](#execute-query-mapreduce-tez-engine)
+-   [Step 9: Track Hive on Tez Jobs](#track-hive-on-tez-jobs)
+-   [Stats & Cost Based Optimization (CBO)](#stats-cost-optimization)
+-   [Multi-tenancy with HiveServer2](#multi-tenancy-hiveserver2)
+-   [SQL Compliance](#sql-compliance)
+-   [Summary](#summary)
+-   [Further Reading](#further-reading)
 
 ## Step 1: Download Data <a id="download-data"></a>
 
@@ -231,16 +231,16 @@ The ‘explain’ plan feature can be used to see if the correct stats are being
 
 ### Phases in which stats could be collected
 
-1.  While data is inserted: `hive.stats.autographer =  [true,  **false**]`
-2.  On existing data : table level `ANALYZE TABLE table [partition(key)] COMPUTE STATISTICS;`
-3.  On existing data : column level `ANALYZE TABLE table [partition(key)] COMPUTE STATISTICS FOR COLUMNS col1,col2,...;`
+1.  While data is inserted: `hive.stats.autogather = true`
+2.  On existing data : table level `ANALYZE TABLE <table_name> [partition(key)] COMPUTE STATISTICS;`
+3.  On existing data : column level `ANALYZE TABLE <table_name> [partition(key)] COMPUTE STATISTICS FOR COLUMNS;`
 
-### Configuration to make CBO effective for your query
+### Configuration to make CBO more effective on queries
 
-1.  `hive.compute.query.using.stats =  [true,  **false**];`
-2.  `hive.stats.fetch.column.stats =  [true,  **false**];`
-3.  `hive.stats.fetch.partition.stats =  [true,  **false**];`
-4.  `hive.cbo.enable =  [true,  **false**];`
+1.  `hive.compute.query.using.stats = true`
+2.  `hive.stats.fetch.column.stats = true`
+3.  `hive.stats.fetch.partition.stats = true`
+4.  `hive.cbo.enable = true`
 
 Currently, CBO for Hive is enabled by default. You can confirm this by reviewing **Ambari** -> **Hive** -> **Configs** -> **Settings**.
 
@@ -252,10 +252,10 @@ However, the only caveat is that for each table you will need to compute statist
 
 ~~~
 # Usage:
-       # ANALYZE TABLE table [partition(key)] COMPUTE STATISTICS;
-       # ANALYZE TABLE table [partition(key)] COMPUTE STATISTICS FOR COLUMNS col1,col2,...
+       # ANALYZE TABLE <table_name> [partition(key)] COMPUTE STATISTICS;
+       # ANALYZE TABLE <table_name> [partition(key)] COMPUTE STATISTICS FOR COLUMNS;
 # Example:
-         ANALYZE TABLE drivers COMPUTE STATISTICS FOR COLUMNS driverId, name;
+         ANALYZE TABLE drivers COMPUTE STATISTICS FOR COLUMNS;
 ~~~
 
 Once these two commands are both executed, Hive will utilize CBO on more complex queries.
@@ -340,5 +340,5 @@ There are several SQL query enhancements in this version of Hive.
 You learned to perform basic hive queries, compared Hive on MapReduce and Tez Engine
 
 ## Further Reading <a id="further-reading"></a>
-- [Apache Hive](https://hortonworks.com/apache/hive/)
-- [Hive Language Manual](https://cwiki.apache.org/confluence/display/Hive/LanguageManual+DDL)
+-   [Apache Hive](https://hortonworks.com/apache/hive/)
+-   [Hive Language Manual](https://cwiki.apache.org/confluence/display/Hive/LanguageManual+DDL)

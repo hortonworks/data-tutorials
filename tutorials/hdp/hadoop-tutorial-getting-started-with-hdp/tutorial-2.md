@@ -20,7 +20,7 @@ The tutorial is a part of series of hands on tutorial to get you started on HDP 
 ## Outline
 
 -   [HDFS backdrop](#hdfs-backdrop)
--   [Step 1 - Download and Extract Sensor Data Files](#step1.1) – [**Geolocation.zip**](https://app.box.com/HadoopCrashCourseData)
+-   [Step 1 - Download and Extract Sensor Data Files](#step1.1) – [**Geolocation.zip**](assets/datasets/Geolocation.zip)
 -   [Step 2 - Load the Sensor Data into HDFS](#step1.2)
 -   [Summary](#summary-lab1)
 -   [Further Reading](#further-reading)
@@ -32,7 +32,7 @@ A single physical machine gets saturated with its storage capacity as the data g
 
 ## Step 1 - Download and Extract Sensor Data Files <a id="step1.1"></a>
 
-1.  Download the sample sensor data contained in a compressed (.zip) folder here:  [**Geolocation.zip**](https://app.box.com/HadoopCrashCourseData)
+1.  Download the sample sensor data contained in a compressed (.zip) folder here:  [**Geolocation.zip**](assets/datasets/Geolocation.zip)
 2.  Save the **Geolocation.zip** file to your computer, then extract the files. You should see a Geolocation folder that contains the following files:
     -   **geolocation.csv** – This is the collected geolocation data from the trucks. It contains records showing _truck location, date, time, type of event, speed, etc_.
     -   **trucks.csv** – This is data was exported from a relational database and it shows information on _truck models, driverid, truckid, and aggregated mileage info_.
