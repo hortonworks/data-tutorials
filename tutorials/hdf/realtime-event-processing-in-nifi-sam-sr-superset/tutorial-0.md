@@ -6,7 +6,7 @@ experience: Advanced
 persona: Data Scientist & Analyst
 source: Hortonworks
 use case: Streaming
-technology: Apache NiFi, Apache Storm, Apache Kafka, Stream Analytics Manager, Schema Registry, Apache SuperSet, Druid
+technology: Apache NiFi, Apache Storm, Apache Kafka, Streaming Analytics Manager, Schema Registry, Apache SuperSet, Druid
 release: hdf-3.0.1.1
 environment: Sandbox
 product: HDF
@@ -17,7 +17,7 @@ series: HDF > Develop with Hadoop > Real World Examples
 
 ## Introduction
 
-In this tutorial, you will learn how to deploy the modern real-time streaming application. This application serves as a reference framework for developing a big data pipeline, complete with a broad range of use cases and powerful reusable core components. You will explore the NiFi Dataflow application, Kafka topics, schemas, SAM topology and the visualization slices from Superset.
+In this tutorial, you will learn how to deploy a modern real-time streaming application. This application serves as a reference framework for developing a big data pipeline, complete with a broad range of use cases and powerful reusable core components. You will explore the NiFi Dataflow application, Kafka topics, schemas, SAM topology and the visualization slices from Superset.
 
 ## Prerequisites
 

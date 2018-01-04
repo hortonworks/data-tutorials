@@ -10,7 +10,7 @@ technology: Apache Ambari
 release: hdp-2.6.0
 environment: Sandbox
 product: HDP
-series: HDP > Hadoop Administration > Hortonworks Sandbox 
+series: HDP > Hadoop Administration > Hortonworks Sandbox
 ---
 
 # Configuring Yarn Capacity Scheduler with Apache Ambari
@@ -155,7 +155,7 @@ yarn.scheduler.capacity.root.queues=Support,Marketing,Engineering
 yarn.scheduler.capacity.root.unfunded.capacity=50
 ~~~
 
-Copy and paste the above policy in the `Capacity Scheduler` textbox from Ambari:
+Replace the content, above, in the `Capacity Scheduler` textbox from Ambari:
 
 ![copy_paste_policy](assets/copy_paste_policy.png)
 
