@@ -82,6 +82,10 @@ In the same way you started Kafka above, start other required services (in order
 3. Ambari Infra
 4. Atlas
 
+### Enable Atlas Webhook for sqoop and storm
+
+
+
 ### 2.2: Stop Services
 
 Stop some services like **Spark, Oozie, Flume and Zeppelin** which are not required in this tutorial. Turn On the **Maintenance mode** also.
@@ -113,7 +117,7 @@ Run the following command to get to the scripts for the tutorial.
 ~~~
 mkdir crosscomponent_demo
 cd crosscomponent_demo
-wget https://raw.githubusercontent.com/hortonworks/data-tutorials/master/tutorials/hdp/hdp-2.5/cross-component-lineage-with-apache-atlas-across-apache-sqoop-hive-kafka-storm/assets/crosscomponent_scripts.zip
+wget https://github.com/james94/data-tutorials/raw/master/tutorials/hdp/cross-component-lineage-with-apache-atlas-across-apache-sqoop-hive-kafka-storm/assets/crosscomponent_scripts.zip
 unzip crosscomponent_scripts.zip
 cd crosscomponent_scripts/sqoop-demo
 ~~~
