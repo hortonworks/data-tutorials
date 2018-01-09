@@ -89,6 +89,7 @@ When we learned the process of building a dataflow, we crossed paths with many o
 | `Flow Controller` | `Acts as a Broker to facilitate the exchange of FlowFiles between processors.` |
 | `Process Group` | `Enables the creation of new components based on the composition of processors, funnels, etc.` |
 | `Data Provenance` | `History of actions that occur on the data as it moves throughout the flow. Enables users to check the data from any processor or component while the FlowFiles move throughout the dataflow.` |
+| `Controller Service` | A package of configuration parameters and code doing something in the background: Tells record processors how to interpret data, establishes connection parameters to external services (databases, APIs), sends statistics about NiFi to a monitoring service and sharing a state with cache services. |
 
 ## NiFi Architecture
 
