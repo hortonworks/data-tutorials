@@ -10,7 +10,7 @@ title: Kafka in Trucking IoT Use Case
 -   [What is Kafka](#what-is-kafka)
 -   [Architectural Overview](#architectural-overview)
 -   [Benefits of Kafka](#benefits-of-kafka)
--   [Next: Kafka in Action](#next:-kafka-in-action)
+-   [Next: Kafka in Action](#next-kafka-in-action)
 
 ## The IoT Use Case
 

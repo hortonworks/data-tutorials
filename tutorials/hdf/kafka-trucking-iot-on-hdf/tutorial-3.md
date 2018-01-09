@@ -16,7 +16,7 @@ We now know the role that Kafka plays in this Trucking IoT system. Let's take a 
 - [Starting the Consumer to Receive Messages](#starting-the-consumer-to-receive-messages)
 - [Summary](#summary)
 - [Further Reading](#further-reading)
-- [Appendix: Kafka Extra Operations](#appendix:-kafka-extra-operations)
+- [Appendix: Kafka Extra Operations](#appendix-kafka-extra-operations)
 
 ## Kafka Components
 
