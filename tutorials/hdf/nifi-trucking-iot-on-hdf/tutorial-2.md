@@ -12,7 +12,7 @@ Let's walk through NiFi's place in the demo.
 
 - [Environment Setup](#environment-setup)
 - [Deploy the NiFi DataFlow](#deploy-the-nifi-dataflow)
-- [Next: Building a NiFi DataFlow](#next:-building-a-nifi-dataflow)
+- [Next: Building a NiFi DataFlow](#next-building-a-nifi-dataflow)
 
 ## Environment Setup
 

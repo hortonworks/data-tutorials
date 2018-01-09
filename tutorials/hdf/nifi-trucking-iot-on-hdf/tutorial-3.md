@@ -16,10 +16,10 @@ We are aware of the role NiFi plays in this Trucking IoT application. Let's dive
 - [Building GetTruckingData](#building-gettruckingdata)
 - [Configuring RouteOnAttribute](#configuring-routeonattribute)
 - [Building EnrichTruckData](#building-enrichtruckdata)
-- [Configuring ConvertRecord: TruckData](#configuring-convertrecord:-truckdata)
-- [Configuring ConvertRecord: TrafficData](#configuring-convertrecord:-rrafficdata)
-- [Configuring PublishKafka_0_10: TruckData](#configuring-publishkafka_0_10:-TruckData)
-- [Configuring PublishKafka_0_10: TrafficData](#configuring-publishkafka_0_10:-trafficdata)
+- [Configuring ConvertRecord: TruckData](#configuring-convertrecord-truckdata)
+- [Configuring ConvertRecord: TrafficData](#configuring-convertrecord-rrafficdata)
+- [Configuring PublishKafka_0_10: TruckData](#configuring-publishkafka_0_10-TruckData)
+- [Configuring PublishKafka_0_10: TrafficData](#configuring-publishkafka_0_10-trafficdata)
 - [Summary](#summary)
 
 ## NiFi Components
