@@ -20,7 +20,7 @@ If ((docker ps -a | Select-String sandbox-hdp) -ne $null) {
 }
 Else {
     Write-Host "Running HDP Sandbox for the first time..."
-    docker run -v hadoop:/hadoop --name sandbox-hdp --hostname "sandbox.hortonworks.com" --privileged -d `
+    docker run --name sandbox-hdp --hostname "sandbox-hdp.hortonworks.com" --privileged -d `
     -p 1111:111 `
     -p 1000:1000 `
     -p 1100:1100 `
@@ -111,15 +111,37 @@ Else {
 
 Write-Host "Starting processes on the HDP Sandbox..."
 
-docker exec -d sandbox-hdp make --makefile /usr/lib/hue/tools/start_scripts/start_deps.mf  -B Startup -j -i | Out-Host
-docker exec -d sandbox-hdp nohup su - hue -c '/bin/bash /usr/lib/tutorials/tutorials_app/run/run.sh' |  Out-Host
+docker exec -t sandbox-hdp /bin/sh -c "echo '127.0.0.1 sandbox.hortonworks.com' >> /etc/hosts"
+docker exec -t sandbox-hdp /bin/sh -c "chown -R mysql:mysql /var/lib/mysql"
+docker exec -d sandbox-hdp service mysqld start
+docker exec -d sandbox-hdp service postgresql start
+docker exec -t sandbox-hdp ambari-server start
+docker exec -t sandbox-hdp ambari-agent start
+docker exec -t sandbox-hdp /bin/sh -c "rm -f /usr/hdp/current/oozie-server/libext/falcon-oozie-el-extension-*"
+docker exec -t sandbox-hdp /bin/sh -c "chown -R hdfs:hadoop /hadoop/hdfs"
+docker exec -d sandbox-hdp /bin/sh -c "/etc/init.d/shellinaboxd start"
+
+
+echo "Waiting for ambari agent to connect" | Out-Host
+docker exec -t sandbox-hdp /bin/sh -c " until curl --silent -u raj_ops:raj_ops -H 'X-Requested-By:ambari' -i -X GET  http://localhost:8080/api/v1/clusters/Sandbox/hosts/sandbox-hdp.hortonworks.com/host_components/ZOOKEEPER_SERVER | grep state | grep -v desired | grep INSTALLED; do sleep 5; echo -n .; done;"
+
+echo "Waiting for ambari services to start"| Out-Host
+docker exec -t sandbox-hdp /bin/sh -c "until curl --silent --user raj_ops:raj_ops -X PUT -H 'X-Requested-By: ambari'  -d '{\""RequestInfo\"":{\""context\"":\""_PARSE_.START.HDFS\"",\""operation_level\"":{\""level\"":\""SERVICE\"",\""cluster_name\"":\""Sandbox\"",\""service_name\"":\""HDFS\""}},\""Body\"":{\""ServiceInfo\"":{\""state\"":\""STARTED\""}}}' http://localhost:8080/api/v1/clusters/Sandbox/services/HDFS | grep -i accept >/dev/null; do echo -n .; sleep 5; done;"
+
+docker exec -t sandbox-hdp /bin/sh -c "until curl --silent --user raj_ops:raj_ops -X PUT -H 'X-Requested-By: ambari' -d '{\""RequestInfo\"":{\""context\"":\""_PARSE_.START.ALL_SERVICES\"",\""operation_level\"":{\""level\"":\""CLUSTER\"",\""cluster_name\"":\""Sandbox\""}},\""Body\"":{\""ServiceInfo\"":{\""state\"":\""STARTED\""}}}' http://localhost:8080/api/v1/clusters/Sandbox/services | grep -i accept > /dev/null; do sleep 5; echo -n .; done;"
+
+docker exec -t sandbox-hdp /bin/sh -c "until /usr/bin/curl --silent --user raj_ops:raj_ops -H 'X-Requested-By: ambari' \""http://localhost:8080/api/v1/clusters/Sandbox/requests?to=end&page_size=10&fields=Requests\"" | tail -n 27 | grep COMPLETED | grep COMPLETED > /dev/null; do echo -n .; sleep 1; done;"
+
+docker exec -d sandbox-hdp su - hue -c "/bin/bash /usr/lib/tutorials/tutorials_app/run/run.sh &>/dev/null" | Out-Host
+docker exec -d sandbox-hdp su - hue -c "/bin/bash /usr/lib/hue/tools/start_scripts/update-tutorials.sh &>/dev/null" | Out-Host
 docker exec -d sandbox-hdp touch /usr/hdp/current/oozie-server/oozie-server/work/Catalina/localhost/oozie/SESSIONS.ser | Out-Host
 docker exec -d sandbox-hdp chown oozie:hadoop /usr/hdp/current/oozie-server/oozie-server/work/Catalina/localhost/oozie/SESSIONS.ser | Out-Host
 docker exec -d sandbox-hdp /etc/init.d/tutorials start | Out-Host
 docker exec -d sandbox-hdp /etc/init.d/splash | Out-Host
-docker exec -d sandbox-hdp /etc/init.d/shellinaboxd start | Out-Host
+echo "" | Out-Host
+echo "Started Hortonworks HDP container" | Out-Host
 
-Write-Host "HDP Sandbox is good to do.  Press any key to continue..."
+Write-Host "HDP services are up and running. Press any key to continue..."
 $x = $host.UI.RawUI.ReadKey("NoEcho,IncludeKeyDown")
 
 return
