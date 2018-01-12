@@ -36,6 +36,9 @@ Let's begin our Hadoop journey...
 -   [Explore Sandbox in Azure](#explore-sandbox-in-azure)
 -   [Further Reading](#further-reading)
 -   [Appendix A: Reference Sheet](#appendix-a-reference-sheet)
+    -   [Login Credentials](#login-credentials)
+    -   [Sandbox Version](#sandbox-version)
+    -   [Admin Password Reset](#admin-password-reset)
 -   [Appendix B: Troubleshoot](#appendix-b-troubleshoot)
 
 ## Environment setup

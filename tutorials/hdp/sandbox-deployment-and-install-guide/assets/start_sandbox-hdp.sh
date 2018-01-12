@@ -88,13 +88,13 @@ sandbox-hdp /usr/sbin/sshd -D
 fi
 docker exec -t sandbox-hdp /bin/sh -c 'echo "127.0.0.1 sandbox.hortonworks.com" >> /etc/hosts'
 docker exec -t sandbox-hdp /bin/sh -c 'chown -R mysql:mysql /var/lib/mysql'
-docker exec -d sandbox-hdp service mysqld start
-docker exec -d sandbox-hdp service postgresql start
+docker exec -t sandbox-hdp service mysqld start
+docker exec -t sandbox-hdp service postgresql start
 docker exec -t sandbox-hdp ambari-server start
 docker exec -t sandbox-hdp ambari-agent start
 docker exec -t sandbox-hdp /bin/sh -c 'rm -f /usr/hdp/current/oozie-server/libext/falcon-oozie-el-extension-*'
 docker exec -t sandbox-hdp /bin/sh -c 'chown -R hdfs:hadoop /hadoop/hdfs'
-docker exec -d sandbox-hdp /etc/init.d/shellinaboxd start
+docker exec -t sandbox-hdp /etc/init.d/shellinaboxd start
 
 
 echo "Waiting for ambari agent to connect"
@@ -111,7 +111,7 @@ docker exec -t sandbox-hdp su - hue -c '/bin/bash /usr/lib/tutorials/tutorials_a
 docker exec -t sandbox-hdp su - hue -c '/bin/bash /usr/lib/hue/tools/start_scripts/update-tutorials.sh &>/dev/null'
 docker exec -t sandbox-hdp touch /usr/hdp/current/oozie-server/oozie-server/work/Catalina/localhost/oozie/SESSIONS.ser
 docker exec -t sandbox-hdp chown oozie:hadoop /usr/hdp/current/oozie-server/oozie-server/work/Catalina/localhost/oozie/SESSIONS.ser
-docker exec -d sandbox-hdp /etc/init.d/tutorials start
-docker exec -d sandbox-hdp /etc/init.d/splash
+docker exec -t sandbox-hdp /etc/init.d/tutorials start
+docker exec -t sandbox-hdp /etc/init.d/splash
 echo ""
 echo "Started Hortonworks HDP container"
