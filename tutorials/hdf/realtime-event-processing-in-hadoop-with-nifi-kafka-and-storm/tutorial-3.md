@@ -57,7 +57,7 @@ NiFi’s web interface consists of 5 components to build data flows: The **compo
 We can begin to build a data flow by adding, configuring and connecting the processors. We will also troubleshoot common problems that occur when creating data flows.
 By the end of the IoT Tutorial Series, you will have built the following dataflow. Refer back to this image if you want to replicate the processors positions on the graph:
 
-![dataflow_withKafka_running_iot](assets/lab1-kafka/dataflow_withKafka_running_iot.png)
+![nifi_dataflow_iot](assets/nifi_dataflow_iot.jpg)
 
 **Figure 1:** This [IoT_Lab_Series_DataFlow.xml](https://raw.githubusercontent.com/james94/tutorials/hdp/assets/realtime-event-processing-with-hdf/IoT_Lab_Series_DataFlow.xml) dataflow performs System Interaction, Splitting and Aggregation, Attribute Extraction, Routing and Mediation and Data Egress/Sending Data.
 
@@ -115,14 +115,12 @@ If you would like to read more about configuring and connecting processors, refe
 | Property  | Value  |
 |---|---|
 | **Command**  | **sh**  |
-| Command Arguments  | `/root/iot-truck-streaming/stream-simulator/generate.sh`  |
+| Command Arguments  | `/home/nifi/iot-truck-streaming/stream-simulator/generate.sh`  |
 | Batch Duration  | 10 sec  |
 
 **Command** instructs processor on what type of command to run
 **Command Arguments** inform processor which particular directory to look for script files
 **Batch Duration** instructs processor to run a task every 10 seconds
-
-![executeProcess_properties_config](assets/lab0-nifi/executeProcess_properties_config.png)
 
 **Figure 1:** ExecuteProcess Configuration Property Tab Window
 
@@ -230,11 +228,10 @@ If you would like to read more about configuring and connecting processors, refe
 
 | Property  | Value  |
 |---|---|
-| **Directory**  | `/root/nifi_output/truck_events`  |
+| **Directory**  | `/home/nifi/nifi_output/truck_events`  |
 
 **Directory** instructs processor which directory to store the output data files
 
-![putfile_properties_truck_events_config_nifi_iot](assets/lab0-nifi/putfile_properties_truck_events_config_nifi_iot.png)
 
 **Figure 5:** PutFile(truck_events) Configuration Property Tab Window
 
@@ -250,9 +247,8 @@ Table 7: Update PutFile(logs) Property Values
 
 | Property  | Value  |
 |---|---|
-| **Directory**  | `/root/nifi_output/log_data`  |
+| **Directory**  | `/home/nifi/nifi_output/log_data`  |
 
-![putfile_properties_config_logs_nifi_iot](assets/lab0-nifi/putfile_properties_config_logs_nifi_iot.png)
 
 **Figure 6:** PutFile(logs) Configuration Property Tab Window
 
@@ -267,17 +263,17 @@ We added, configured and connected all processors, your NiFi DataFlow should loo
 
 1\. The processors are valid since the warning symbols disappeared. Notice the processors have a stop symbol ![stop_symbol_nifi_iot](assets/lab0-nifi/stop_symbol_nifi_iot.png) in the upper left corner and are ready to run. To select all processors, hold down the shift-key and drag your mouse across the entire data flow. This step is important if you have different dataflows on the same graph.
 
-![dataflow_selected_nifi_iot](assets/lab0-nifi/dataflow_selected_nifi_iot.png)
+![dataflow_selected_nifi_iot](assets/nifi_dataflow_iot.jpg)
 
 2\. Now all processors are selected, go to the actions toolbar and click the start button ![start_button_nifi_iot](assets/lab0-nifi/start_button_nifi_iot.png). Your screen should look like the following:
 
-![run_dataflow_nifi_iot](assets/lab0-nifi/run_dataflow_nifi_iot.png)
+![run_dataflow_nifi_iot](assets/lab0-nifi/run_dataflow_nifi_iot.jpg)
 
 Note: To run the DataFlow again, you will need to copy & paste the ExecuteProcess processor onto the graph, then delete the old one, and connect the new one to the splittext processor. You will need to repeat this process each time you want to run the DataFlow. This step will ensure dataflow flows through each processor. Currently,the ExecuteProcess processor is getting a patch to fix this problem.
 
 3\. To quickly see what the processors are doing and the information on their faces, right click on the graph, click the **refresh status** button ![refresh_nifi_iot](assets/lab0-nifi/refresh_nifi_iot.png)
 
-> Note: On each processor face, the In, Read/Write and Out all have data increasing.
+> Note: On each processor face, the In, Read/Write and Out all have data increasing. Also you may see PutFile with a red warning symbol on the top right of the processor, in our case, it was just alerting us that the folder it was saving data too already existed, but you should still be able to see data being saved.
 
 ### 5.1 Check Data Stored In Correct Directory
 
@@ -285,10 +281,10 @@ To check that the log and truck event data were written to the correct directory
 
 ### 5.2 Verify Logs Stored In log_data Directory
 
-1\. Navigate to through directory path: `/root/nifi_output/log_data`, view the files and open two random files to verify only log data is being sent to this directory.
+1\. Navigate to through directory path: `/home/nifi/nifi_output/log_data`, view the files and open two random files to verify only log data is being sent to this directory.
 
 ~~~
-cd /root/nifi_output/nifi_output/log_data
+cd /home/nifi/nifi_output/log_data
 ls
 cat 28863080789498
 ~~~
@@ -300,10 +296,10 @@ Once the file is opened, you should obtain similar output as below:
 
 ### 5.3 Verify Events Stored In truck_events Directory
 
-1\. Navigate to truck events directory: `/root/nifi_output/truck_events`, view the files. Open two random file to verify only event data is being sent to this directory.
+1\. Navigate to truck events directory: `/home/nifi/nifi_output/truck_events`, view the files. Open two random file to verify only event data is being sent to this directory.
 
 ~~~
-cd /root/nifi_output/truck_events
+cd /home/nifi/nifi_output/truck_events
 ls
 cat 28918091050702
 ~~~

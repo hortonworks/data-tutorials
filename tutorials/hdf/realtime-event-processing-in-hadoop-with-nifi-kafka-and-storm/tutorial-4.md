@@ -61,7 +61,7 @@ ssh root@sandbox.hortonworks.com -p 2222
 Use the `kafka-topics.sh` script (which should be in your PATH), create a new topic named `truck_events`:
 
 ~~~bash
-[root@sandbox ~]# kafka-topics.sh --create --zookeeper sandbox.hortonworks.com:2181 --replication-factor 1 --partitions 2 --topic truck_events
+[root@sandbox ~]# ./kafka-topics.sh --create --zookeeper sandbox.hortonworks.com:2181 --replication-factor 1 --partitions 2 --topic truck_events
 ~~~
 
 If the `kafka-topics.sh` script is not in your PATH and you get a command not found error, then change directories to where the Kafka scripts are installed:
@@ -105,7 +105,7 @@ In the previous tutorial, we stored the truck event data into a file. Now we can
 
 #### 2.1 Add PutKafka Processor
 
-1\. Drag the processor icon onto your graph. Add the **PutKafka** processor.
+1\. Drag the processor icon onto your graph. Add the **PutKafka** processor. Select **merged** for the relationship, then click **Add**.
 
 2\. Right click on the Putkafka processor, click on **configure**.
 
@@ -141,7 +141,7 @@ You should obtain a similar dataflow as the following:
 
 > Note: If there is a warning symbol after updating the PutKafka, verify that the property values are correct. Check **3**. in case you need to review the values changed.
 
-6\. Let’s start our Hortonworks DataFlow to see a real live stream of truck event data be read from NiFi and written to a Kafka cluster. In the **actions** toolbar, hit the **start** button.
+6\. Let’s start our NiFi DataFlow to see a real live stream of truck event data be read from NiFi and written to a Kafka cluster. In the **actions** toolbar, hit the **start** button.
 
 ![dataflow_withKafka_running_iot](assets/lab1-kafka/dataflow_withKafka_running_iot.png)
 

@@ -1,9 +1,1141 @@
-<?xml version="1.0" encoding="UTF-8" standalone="yes"?><template><description>ExecuteProcess, SplitText, UpdateAttribute: generate data, split each line of the data into a separate FlowFile and give each FlowFile a unique name.
+<?xml version="1.0" ?>
+<template encoding-version="1.1">
+  <description>ExecuteProcess, SplitText, UpdateAttribute: generate data, split each line of the data into a separate FlowFile and give each FlowFile a unique name.
 
-RouteOnContent -&gt; MergeContent(truck_events), PutFile(truck_events), PutKafka:
-Filters the truck event data to an appropriate processor, which sends that to data to a specific directory and Kafka.
+RouteOnContent, MergeContent(truck_events), PutFile(truck_events):
+Filters the truck event data to an appropriate processor, which sends that to data to a specific directory.
 
-RouteOnContent -&gt; MergeContent(logs), PutFile(logs):
-Filters all the log data from the stream simulator and sends that data to a specific directory.</description><name>IoT_Lab_Series_DataFlow</name><snippet><connections><id>19e49941-b49d-4c2c-84bc-f12de40032d9</id><parentGroupId>8ddf43a6-3066-49e7-af46-633818e91699</parentGroupId><backPressureDataSizeThreshold>0 MB</backPressureDataSizeThreshold><backPressureObjectThreshold>0</backPressureObjectThreshold><destination><groupId>8ddf43a6-3066-49e7-af46-633818e91699</groupId><id>ca0510bd-6698-49d0-a9ef-630b9fc14b13</id><type>PROCESSOR</type></destination><flowFileExpiration>0 sec</flowFileExpiration><labelIndex>1</labelIndex><name></name><selectedRelationships>merged</selectedRelationships><source><groupId>8ddf43a6-3066-49e7-af46-633818e91699</groupId><id>1d896905-4e51-4ed9-a5cf-f79280ab64f9</id><type>PROCESSOR</type></source><zIndex>0</zIndex></connections><connections><id>49231fd9-5d26-43b6-99c6-ff168db377f4</id><parentGroupId>8ddf43a6-3066-49e7-af46-633818e91699</parentGroupId><backPressureDataSizeThreshold>0 MB</backPressureDataSizeThreshold><backPressureObjectThreshold>0</backPressureObjectThreshold><destination><groupId>8ddf43a6-3066-49e7-af46-633818e91699</groupId><id>9be04804-8fb7-4e6a-9255-460531a862bf</id><type>PROCESSOR</type></destination><flowFileExpiration>0 sec</flowFileExpiration><labelIndex>1</labelIndex><name></name><selectedRelationships>success</selectedRelationships><source><groupId>8ddf43a6-3066-49e7-af46-633818e91699</groupId><id>76896015-c29a-44e6-addf-302f8471b548</id><type>PROCESSOR</type></source><zIndex>0</zIndex></connections><connections><id>7b06a53a-9b34-4367-9801-a0ddec7fe789</id><parentGroupId>8ddf43a6-3066-49e7-af46-633818e91699</parentGroupId><backPressureDataSizeThreshold>0 MB</backPressureDataSizeThreshold><backPressureObjectThreshold>0</backPressureObjectThreshold><destination><groupId>8ddf43a6-3066-49e7-af46-633818e91699</groupId><id>5ff6622b-fc93-4968-af2e-9a13fa09578d</id><type>PROCESSOR</type></destination><flowFileExpiration>0 sec</flowFileExpiration><labelIndex>1</labelIndex><name></name><selectedRelationships>merged</selectedRelationships><source><groupId>8ddf43a6-3066-49e7-af46-633818e91699</groupId><id>1d896905-4e51-4ed9-a5cf-f79280ab64f9</id><type>PROCESSOR</type></source><zIndex>0</zIndex></connections><connections><id>f7b897f7-7566-4378-95e8-8646dd608068</id><parentGroupId>8ddf43a6-3066-49e7-af46-633818e91699</parentGroupId><backPressureDataSizeThreshold>0 MB</backPressureDataSizeThreshold><backPressureObjectThreshold>0</backPressureObjectThreshold><destination><groupId>8ddf43a6-3066-49e7-af46-633818e91699</groupId><id>f18b0efc-ada5-40c6-afee-9d25079a9726</id><type>PROCESSOR</type></destination><flowFileExpiration>0 sec</flowFileExpiration><labelIndex>1</labelIndex><name></name><selectedRelationships>unmatched</selectedRelationships><source><groupId>8ddf43a6-3066-49e7-af46-633818e91699</groupId><id>a30f10e2-f253-4d70-bdbb-7c34a3a20073</id><type>PROCESSOR</type></source><zIndex>0</zIndex></connections><connections><id>000999cc-dbc0-4b30-b0c1-669801218b0d</id><parentGroupId>8ddf43a6-3066-49e7-af46-633818e91699</parentGroupId><backPressureDataSizeThreshold>0 MB</backPressureDataSizeThreshold><backPressureObjectThreshold>0</backPressureObjectThreshold><destination><groupId>8ddf43a6-3066-49e7-af46-633818e91699</groupId><id>a30f10e2-f253-4d70-bdbb-7c34a3a20073</id><type>PROCESSOR</type></destination><flowFileExpiration>0 sec</flowFileExpiration><labelIndex>1</labelIndex><name></name><selectedRelationships>success</selectedRelationships><source><groupId>8ddf43a6-3066-49e7-af46-633818e91699</groupId><id>6b62f016-dd50-4e7b-9261-e3bea8aca7f6</id><type>PROCESSOR</type></source><zIndex>0</zIndex></connections><connections><id>8f196717-845b-478c-8aed-986e31df18bf</id><parentGroupId>8ddf43a6-3066-49e7-af46-633818e91699</parentGroupId><backPressureDataSizeThreshold>0 MB</backPressureDataSizeThreshold><backPressureObjectThreshold>0</backPressureObjectThreshold><destination><groupId>8ddf43a6-3066-49e7-af46-633818e91699</groupId><id>1d896905-4e51-4ed9-a5cf-f79280ab64f9</id><type>PROCESSOR</type></destination><flowFileExpiration>0 sec</flowFileExpiration><labelIndex>1</labelIndex><name></name><selectedRelationships>search_for_truck_event_data</selectedRelationships><source><groupId>8ddf43a6-3066-49e7-af46-633818e91699</groupId><id>a30f10e2-f253-4d70-bdbb-7c34a3a20073</id><type>PROCESSOR</type></source><zIndex>0</zIndex></connections><connections><id>cb50e87b-611a-462f-836e-82c57e79b4d8</id><parentGroupId>8ddf43a6-3066-49e7-af46-633818e91699</parentGroupId><backPressureDataSizeThreshold>0 MB</backPressureDataSizeThreshold><backPressureObjectThreshold>0</backPressureObjectThreshold><destination><groupId>8ddf43a6-3066-49e7-af46-633818e91699</groupId><id>6b62f016-dd50-4e7b-9261-e3bea8aca7f6</id><type>PROCESSOR</type></destination><flowFileExpiration>0 sec</flowFileExpiration><labelIndex>1</labelIndex><name></name><selectedRelationships>splits</selectedRelationships><source><groupId>8ddf43a6-3066-49e7-af46-633818e91699</groupId><id>9be04804-8fb7-4e6a-9255-460531a862bf</id><type>PROCESSOR</type></source><zIndex>0</zIndex></connections><connections><id>88d70393-b765-437c-b3f9-4cbc4724ea54</id><parentGroupId>8ddf43a6-3066-49e7-af46-633818e91699</parentGroupId><backPressureDataSizeThreshold>0 MB</backPressureDataSizeThreshold><backPressureObjectThreshold>0</backPressureObjectThreshold><destination><groupId>8ddf43a6-3066-49e7-af46-633818e91699</groupId><id>f9adc78c-23a7-4e3f-9cbb-12cd201ddc6f</id><type>PROCESSOR</type></destination><flowFileExpiration>0 sec</flowFileExpiration><labelIndex>1</labelIndex><name></name><selectedRelationships>merged</selectedRelationships><source><groupId>8ddf43a6-3066-49e7-af46-633818e91699</groupId><id>f18b0efc-ada5-40c6-afee-9d25079a9726</id><type>PROCESSOR</type></source><zIndex>0</zIndex></connections><processors><id>9be04804-8fb7-4e6a-9255-460531a862bf</id><parentGroupId>8ddf43a6-3066-49e7-af46-633818e91699</parentGroupId><position><x>1599.0</x><y>668.0</y></position><config><bulletinLevel>WARN</bulletinLevel><comments></comments><concurrentlySchedulableTaskCount>1</concurrentlySchedulableTaskCount><defaultConcurrentTasks><entry><key>TIMER_DRIVEN</key><value>1</value></entry><entry><key>EVENT_DRIVEN</key><value>0</value></entry><entry><key>CRON_DRIVEN</key><value>1</value></entry></defaultConcurrentTasks><defaultSchedulingPeriod><entry><key>TIMER_DRIVEN</key><value>0 sec</value></entry><entry><key>CRON_DRIVEN</key><value>* * * * * ?</value></entry></defaultSchedulingPeriod><descriptors><entry><key>Line Split Count</key><value><description>The number of lines that will be added to each split file (excluding the header, if the Header Line Count property is greater than 0).</description><displayName>Line Split Count</displayName><dynamic>false</dynamic><name>Line Split Count</name><required>true</required><sensitive>false</sensitive><supportsEl>false</supportsEl></value></entry><entry><key>Header Line Count</key><value><defaultValue>0</defaultValue><description>The number of lines that should be considered part of the header; the header lines will be duplicated to all split files</description><displayName>Header Line Count</displayName><dynamic>false</dynamic><name>Header Line Count</name><required>true</required><sensitive>false</sensitive><supportsEl>false</supportsEl></value></entry><entry><key>Remove Trailing Newlines</key><value><allowableValues><displayName>true</displayName><value>true</value></allowableValues><allowableValues><displayName>false</displayName><value>false</value></allowableValues><defaultValue>true</defaultValue><description>Whether to remove newlines at the end of each split file. This should be false if you intend to merge the split files later. If this is set to 'true' and a FlowFile is generated that contains only 'empty lines' (i.e., consists only of &#xD; and 
- characters), the FlowFile will not be emitted. Note, however, that if the Header Line Count is greater than 0, the resultant FlowFile will never be empty as it will consist of the header lines, so a FlowFile may be emitted that contians only the header lines.</description><displayName>Remove Trailing Newlines</displayName><dynamic>false</dynamic><name>Remove Trailing Newlines</name><required>true</required><sensitive>false</sensitive><supportsEl>false</supportsEl></value></entry></descriptors><lossTolerant>false</lossTolerant><penaltyDuration>30 sec</penaltyDuration><properties><entry><key>Line Split Count</key><value>1</value></entry><entry><key>Header Line Count</key></entry><entry><key>Remove Trailing Newlines</key><value>false</value></entry></properties><runDurationMillis>0</runDurationMillis><schedulingPeriod>0 sec</schedulingPeriod><schedulingStrategy>TIMER_DRIVEN</schedulingStrategy><yieldDuration>1 sec</yieldDuration></config><name>SplitText</name><relationships><autoTerminate>true</autoTerminate><description>If a file cannot be split for some reason, the original file will be routed to this destination and nothing will be routed elsewhere</description><name>failure</name></relationships><relationships><autoTerminate>true</autoTerminate><description>The original input file will be routed to this destination when it has been successfully split into 1 or more files</description><name>original</name></relationships><relationships><autoTerminate>false</autoTerminate><description>The split files will be routed to this destination when an input file is successfully split into 1 or more split files</description><name>splits</name></relationships><state>STOPPED</state><style/><supportsEventDriven>true</supportsEventDriven><supportsParallelProcessing>true</supportsParallelProcessing><type>org.apache.nifi.processors.standard.SplitText</type></processors><processors><id>f18b0efc-ada5-40c6-afee-9d25079a9726</id><parentGroupId>8ddf43a6-3066-49e7-af46-633818e91699</parentGroupId><position><x>2535.0</x><y>667.0</y></position><config><bulletinLevel>WARN</bulletinLevel><comments></comments><concurrentlySchedulableTaskCount>1</concurrentlySchedulableTaskCount><defaultConcurrentTasks><entry><key>TIMER_DRIVEN</key><value>1</value></entry><entry><key>EVENT_DRIVEN</key><value>0</value></entry><entry><key>CRON_DRIVEN</key><value>1</value></entry></defaultConcurrentTasks><defaultSchedulingPeriod><entry><key>TIMER_DRIVEN</key><value>0 sec</value></entry><entry><key>CRON_DRIVEN</key><value>* * * * * ?</value></entry></defaultSchedulingPeriod><descriptors><entry><key>Merge Strategy</key><value><allowableValues><description>Generates 'bins' of FlowFiles and fills each bin as full as possible. FlowFiles are placed into a bin based on their size and optionally their attributes (if the &lt;Correlation Attribute&gt; property is set)</description><displayName>Bin-Packing Algorithm</displayName><value>Bin-Packing Algorithm</value></allowableValues><allowableValues><description>Combines fragments that are associated by attributes back into a single cohesive FlowFile. If using this strategy, all FlowFiles must have the attributes &lt;fragment.identifier&gt;, &lt;fragment.count&gt;, and &lt;fragment.index&gt; or alternatively (for backward compatibility purposes) &lt;segment.identifier&gt;, &lt;segment.count&gt;, and &lt;segment.index&gt;. All FlowFiles with the same value for &quot;fragment.identifier&quot; will be grouped together. All FlowFiles in this group must have the same value for the &quot;fragment.count&quot; attribute. All FlowFiles in this group must have a unique value for the &quot;fragment.index&quot; attribute between 0 and the value of the &quot;fragment.count&quot; attribute.</description><displayName>Defragment</displayName><value>Defragment</value></allowableValues><defaultValue>Bin-Packing Algorithm</defaultValue><description>Specifies the algorithm used to merge content. The 'Defragment' algorithm combines fragments that are associated by attributes back into a single cohesive FlowFile. The 'Bin-Packing Algorithm' generates a FlowFile populated by arbitrarily chosen FlowFiles</description><displayName>Merge Strategy</displayName><dynamic>false</dynamic><name>Merge Strategy</name><required>true</required><sensitive>false</sensitive><supportsEl>false</supportsEl></value></entry><entry><key>Merge Format</key><value><allowableValues><description>A bin of FlowFiles will be combined into a single TAR file. The FlowFiles' &lt;path&gt; attribute will be used to create a directory in the TAR file if the &lt;Keep Paths&gt; property is set to true; otherwise, all FlowFiles will be added at the root of the TAR file. If a FlowFile has an attribute named &lt;tar.permissions&gt; that is 3 characters, each between 0-7, that attribute will be used as the TAR entry's 'mode'.</description><displayName>TAR</displayName><value>TAR</value></allowableValues><allowableValues><description>A bin of FlowFiles will be combined into a single ZIP file. The FlowFiles' &lt;path&gt; attribute will be used to create a directory in the ZIP file if the &lt;Keep Paths&gt; property is set to true; otherwise, all FlowFiles will be added at the root of the ZIP file. The &lt;Compression Level&gt; property indicates the ZIP compression to use.</description><displayName>ZIP</displayName><value>ZIP</value></allowableValues><allowableValues><description>A bin of FlowFiles will be combined into a single Version 3 FlowFile Stream</description><displayName>FlowFile Stream, v3</displayName><value>FlowFile Stream, v3</value></allowableValues><allowableValues><description>A bin of FlowFiles will be combined into a single Version 2 FlowFile Stream</description><displayName>FlowFile Stream, v2</displayName><value>FlowFile Stream, v2</value></allowableValues><allowableValues><description>A bin of FlowFiles will be combined into a single Version 1 FlowFile Package</description><displayName>FlowFile Tar, v1</displayName><value>FlowFile Tar, v1</value></allowableValues><allowableValues><description>The contents of all FlowFiles will be concatenated together into a single FlowFile</description><displayName>Binary Concatenation</displayName><value>Binary Concatenation</value></allowableValues><allowableValues><description>The Avro contents of all FlowFiles will be concatenated together into a single FlowFile</description><displayName>Avro</displayName><value>Avro</value></allowableValues><defaultValue>Binary Concatenation</defaultValue><description>Determines the format that will be used to merge the content.</description><displayName>Merge Format</displayName><dynamic>false</dynamic><name>Merge Format</name><required>true</required><sensitive>false</sensitive><supportsEl>false</supportsEl></value></entry><entry><key>Attribute Strategy</key><value><allowableValues><displayName>Keep Only Common Attributes</displayName><value>Keep Only Common Attributes</value></allowableValues><allowableValues><displayName>Keep All Unique Attributes</displayName><value>Keep All Unique Attributes</value></allowableValues><defaultValue>Keep Only Common Attributes</defaultValue><description>Determines which FlowFile attributes should be added to the bundle. If 'Keep All Unique Attributes' is selected, any attribute on any FlowFile that gets bundled will be kept unless its value conflicts with the value from another FlowFile. If 'Keep Only Common Attributes' is selected, only the attributes that exist on all FlowFiles in the bundle, with the same value, will be preserved.</description><displayName>Attribute Strategy</displayName><dynamic>false</dynamic><name>Attribute Strategy</name><required>true</required><sensitive>false</sensitive><supportsEl>false</supportsEl></value></entry><entry><key>Correlation Attribute Name</key><value><description>If specified, like FlowFiles will be binned together, where 'like FlowFiles' means FlowFiles that have the same value for this Attribute. If not specified, FlowFiles are bundled by the order in which they are pulled from the queue.</description><displayName>Correlation Attribute Name</displayName><dynamic>false</dynamic><name>Correlation Attribute Name</name><required>false</required><sensitive>false</sensitive><supportsEl>true</supportsEl></value></entry><entry><key>Minimum Number of Entries</key><value><defaultValue>1</defaultValue><description>The minimum number of files to include in a bundle</description><displayName>Minimum Number of Entries</displayName><dynamic>false</dynamic><name>Minimum Number of Entries</name><required>true</required><sensitive>false</sensitive><supportsEl>false</supportsEl></value></entry><entry><key>Maximum Number of Entries</key><value><description>The maximum number of files to include in a bundle. If not specified, there is no maximum.</description><displayName>Maximum Number of Entries</displayName><dynamic>false</dynamic><name>Maximum Number of Entries</name><required>false</required><sensitive>false</sensitive><supportsEl>false</supportsEl></value></entry><entry><key>Minimum Group Size</key><value><defaultValue>0 B</defaultValue><description>The minimum size of for the bundle</description><displayName>Minimum Group Size</displayName><dynamic>false</dynamic><name>Minimum Group Size</name><required>true</required><sensitive>false</sensitive><supportsEl>false</supportsEl></value></entry><entry><key>Maximum Group Size</key><value><description>The maximum size for the bundle. If not specified, there is no maximum.</description><displayName>Maximum Group Size</displayName><dynamic>false</dynamic><name>Maximum Group Size</name><required>false</required><sensitive>false</sensitive><supportsEl>false</supportsEl></value></entry><entry><key>Max Bin Age</key><value><description>The maximum age of a Bin that will trigger a Bin to be complete. Expected format is &lt;duration&gt; &lt;time unit&gt; where &lt;duration&gt; is a positive integer and time unit is one of seconds, minutes, hours</description><displayName>Max Bin Age</displayName><dynamic>false</dynamic><name>Max Bin Age</name><required>false</required><sensitive>false</sensitive><supportsEl>false</supportsEl></value></entry><entry><key>Maximum number of Bins</key><value><defaultValue>100</defaultValue><description>Specifies the maximum number of bins that can be held in memory at any one time</description><displayName>Maximum number of Bins</displayName><dynamic>false</dynamic><name>Maximum number of Bins</name><required>true</required><sensitive>false</sensitive><supportsEl>false</supportsEl></value></entry><entry><key>Delimiter Strategy</key><value><allowableValues><description>The values of Header, Footer, and Demarcator will be retrieved from the contents of a file</description><displayName>Filename</displayName><value>Filename</value></allowableValues><allowableValues><description>The values of Header, Footer, and Demarcator will be specified as property values</description><displayName>Text</displayName><value>Text</value></allowableValues><defaultValue>Filename</defaultValue><description>Determines if Header, Footer, and Demarcator should point to files containing the respective content, or if the values of the properties should be used as the content.</description><displayName>Delimiter Strategy</displayName><dynamic>false</dynamic><name>Delimiter Strategy</name><required>true</required><sensitive>false</sensitive><supportsEl>false</supportsEl></value></entry><entry><key>Header File</key><value><description>Filename specifying the header to use. If not specified, no header is supplied. This property is valid only when using the binary-concatenation merge strategy; otherwise, it is ignored.</description><displayName>Header</displayName><dynamic>false</dynamic><name>Header File</name><required>false</required><sensitive>false</sensitive><supportsEl>true</supportsEl></value></entry><entry><key>Footer File</key><value><description>Filename specifying the footer to use. If not specified, no footer is supplied. This property is valid only when using the binary-concatenation merge strategy; otherwise, it is ignored.</description><displayName>Footer</displayName><dynamic>false</dynamic><name>Footer File</name><required>false</required><sensitive>false</sensitive><supportsEl>true</supportsEl></value></entry><entry><key>Demarcator File</key><value><description>Filename specifying the demarcator to use. If not specified, no demarcator is supplied. This property is valid only when using the binary-concatenation merge strategy; otherwise, it is ignored.</description><displayName>Demarcator</displayName><dynamic>false</dynamic><name>Demarcator File</name><required>false</required><sensitive>false</sensitive><supportsEl>true</supportsEl></value></entry><entry><key>Compression Level</key><value><allowableValues><displayName>0</displayName><value>0</value></allowableValues><allowableValues><displayName>1</displayName><value>1</value></allowableValues><allowableValues><displayName>2</displayName><value>2</value></allowableValues><allowableValues><displayName>3</displayName><value>3</value></allowableValues><allowableValues><displayName>4</displayName><value>4</value></allowableValues><allowableValues><displayName>5</displayName><value>5</value></allowableValues><allowableValues><displayName>6</displayName><value>6</value></allowableValues><allowableValues><displayName>7</displayName><value>7</value></allowableValues><allowableValues><displayName>8</displayName><value>8</value></allowableValues><allowableValues><displayName>9</displayName><value>9</value></allowableValues><defaultValue>1</defaultValue><description>Specifies the compression level to use when using the Zip Merge Format; if not using the Zip Merge Format, this value is ignored</description><displayName>Compression Level</displayName><dynamic>false</dynamic><name>Compression Level</name><required>true</required><sensitive>false</sensitive><supportsEl>false</supportsEl></value></entry><entry><key>Keep Path</key><value><allowableValues><displayName>true</displayName><value>true</value></allowableValues><allowableValues><displayName>false</displayName><value>false</value></allowableValues><defaultValue>false</defaultValue><description>If using the Zip or Tar Merge Format, specifies whether or not the FlowFiles' paths should be included in their entry names; if using other merge strategy, this value is ignored</description><displayName>Keep Path</displayName><dynamic>false</dynamic><name>Keep Path</name><required>true</required><sensitive>false</sensitive><supportsEl>false</supportsEl></value></entry></descriptors><lossTolerant>false</lossTolerant><penaltyDuration>30 sec</penaltyDuration><properties><entry><key>Merge Strategy</key></entry><entry><key>Merge Format</key></entry><entry><key>Attribute Strategy</key></entry><entry><key>Correlation Attribute Name</key></entry><entry><key>Minimum Number of Entries</key><value>50</value></entry><entry><key>Maximum Number of Entries</key><value>70</value></entry><entry><key>Minimum Group Size</key></entry><entry><key>Maximum Group Size</key></entry><entry><key>Max Bin Age</key></entry><entry><key>Maximum number of Bins</key></entry><entry><key>Delimiter Strategy</key></entry><entry><key>Header File</key></entry><entry><key>Footer File</key></entry><entry><key>Demarcator File</key></entry><entry><key>Compression Level</key></entry><entry><key>Keep Path</key></entry></properties><runDurationMillis>0</runDurationMillis><schedulingPeriod>0 sec</schedulingPeriod><schedulingStrategy>TIMER_DRIVEN</schedulingStrategy><yieldDuration>1 sec</yieldDuration></config><name>MergeContent(logs)</name><relationships><autoTerminate>true</autoTerminate><description>If the bundle cannot be created, all FlowFiles that would have been used to created the bundle will be transferred to failure</description><name>failure</name></relationships><relationships><autoTerminate>false</autoTerminate><description>The FlowFile containing the merged content</description><name>merged</name></relationships><relationships><autoTerminate>true</autoTerminate><description>The FlowFiles that were used to create the bundle</description><name>original</name></relationships><state>STOPPED</state><style/><supportsEventDriven>false</supportsEventDriven><supportsParallelProcessing>true</supportsParallelProcessing><type>org.apache.nifi.processors.standard.MergeContent</type></processors><processors><id>a30f10e2-f253-4d70-bdbb-7c34a3a20073</id><parentGroupId>8ddf43a6-3066-49e7-af46-633818e91699</parentGroupId><position><x>2157.0</x><y>482.0</y></position><config><bulletinLevel>WARN</bulletinLevel><comments></comments><concurrentlySchedulableTaskCount>1</concurrentlySchedulableTaskCount><defaultConcurrentTasks><entry><key>TIMER_DRIVEN</key><value>1</value></entry><entry><key>EVENT_DRIVEN</key><value>0</value></entry><entry><key>CRON_DRIVEN</key><value>1</value></entry></defaultConcurrentTasks><defaultSchedulingPeriod><entry><key>TIMER_DRIVEN</key><value>0 sec</value></entry><entry><key>CRON_DRIVEN</key><value>* * * * * ?</value></entry></defaultSchedulingPeriod><descriptors><entry><key>Match Requirement</key><value><allowableValues><displayName>content must match exactly</displayName><value>content must match exactly</value></allowableValues><allowableValues><displayName>content must contain match</displayName><value>content must contain match</value></allowableValues><defaultValue>content must match exactly</defaultValue><description>Specifies whether the entire content of the file must match the regular expression exactly, or if any part of the file (up to Content Buffer Size) can contain the regular expression in order to be considered a match</description><displayName>Match Requirement</displayName><dynamic>false</dynamic><name>Match Requirement</name><required>true</required><sensitive>false</sensitive><supportsEl>false</supportsEl></value></entry><entry><key>Character Set</key><value><defaultValue>UTF-8</defaultValue><description>The Character Set in which the file is encoded</description><displayName>Character Set</displayName><dynamic>false</dynamic><name>Character Set</name><required>true</required><sensitive>false</sensitive><supportsEl>false</supportsEl></value></entry><entry><key>Content Buffer Size</key><value><defaultValue>1 MB</defaultValue><description>Specifies the maximum amount of data to buffer in order to apply the regular expressions. If the size of the FlowFile exceeds this value, any amount of this value will be ignored</description><displayName>Content Buffer Size</displayName><dynamic>false</dynamic><name>Content Buffer Size</name><required>true</required><sensitive>false</sensitive><supportsEl>false</supportsEl></value></entry><entry><key>search_for_truck_event_data</key><value><description></description><displayName>search_for_truck_event_data</displayName><dynamic>true</dynamic><name>search_for_truck_event_data</name><required>false</required><sensitive>false</sensitive><supportsEl>true</supportsEl></value></entry></descriptors><lossTolerant>false</lossTolerant><penaltyDuration>30 sec</penaltyDuration><properties><entry><key>Match Requirement</key><value>content must contain match</value></entry><entry><key>Character Set</key></entry><entry><key>Content Buffer Size</key></entry><entry><key>search_for_truck_event_data</key><value>(Normal)|(Overspeed)|(Lane Departure)|(Unsafe tail distance)|(Unsafe following distance)</value></entry></properties><runDurationMillis>0</runDurationMillis><schedulingPeriod>0 sec</schedulingPeriod><schedulingStrategy>TIMER_DRIVEN</schedulingStrategy><yieldDuration>1 sec</yieldDuration></config><name>RouteOnContent</name><relationships><autoTerminate>false</autoTerminate><description></description><name>search_for_truck_event_data</name></relationships><relationships><autoTerminate>false</autoTerminate><description>FlowFiles that do not match any of the user-supplied regular expressions will be routed to this relationship</description><name>unmatched</name></relationships><state>STOPPED</state><style/><supportsEventDriven>true</supportsEventDriven><supportsParallelProcessing>true</supportsParallelProcessing><type>org.apache.nifi.processors.standard.RouteOnContent</type></processors><processors><id>76896015-c29a-44e6-addf-302f8471b548</id><parentGroupId>8ddf43a6-3066-49e7-af46-633818e91699</parentGroupId><position><x>1601.0</x><y>474.0</y></position><config><bulletinLevel>WARN</bulletinLevel><comments></comments><concurrentlySchedulableTaskCount>1</concurrentlySchedulableTaskCount><defaultConcurrentTasks><entry><key>TIMER_DRIVEN</key><value>1</value></entry><entry><key>EVENT_DRIVEN</key><value>0</value></entry><entry><key>CRON_DRIVEN</key><value>1</value></entry></defaultConcurrentTasks><defaultSchedulingPeriod><entry><key>TIMER_DRIVEN</key><value>0 sec</value></entry><entry><key>CRON_DRIVEN</key><value>* * * * * ?</value></entry></defaultSchedulingPeriod><descriptors><entry><key>Command</key><value><description>Specifies the command to be executed; if just the name of an executable is provided, it must be in the user's environment PATH.</description><displayName>Command</displayName><dynamic>false</dynamic><name>Command</name><required>true</required><sensitive>false</sensitive><supportsEl>false</supportsEl></value></entry><entry><key>Command Arguments</key><value><description>The arguments to supply to the executable delimited by white space. White space can be escaped by enclosing it in double-quotes.</description><displayName>Command Arguments</displayName><dynamic>false</dynamic><name>Command Arguments</name><required>false</required><sensitive>false</sensitive><supportsEl>false</supportsEl></value></entry><entry><key>Batch Duration</key><value><description>If the process is expected to be long-running and produce textual output, a batch duration can be specified so that the output will be captured for this amount of time and a FlowFile will then be sent out with the results and a new FlowFile will be started, rather than waiting for the process to finish before sending out the results</description><displayName>Batch Duration</displayName><dynamic>false</dynamic><name>Batch Duration</name><required>false</required><sensitive>false</sensitive><supportsEl>false</supportsEl></value></entry><entry><key>Redirect Error Stream</key><value><allowableValues><displayName>true</displayName><value>true</value></allowableValues><allowableValues><displayName>false</displayName><value>false</value></allowableValues><defaultValue>false</defaultValue><description>If true will redirect any error stream output of the process to the output stream. This is particularly helpful for processes which write extensively to the error stream or for troubleshooting.</description><displayName>Redirect Error Stream</displayName><dynamic>false</dynamic><name>Redirect Error Stream</name><required>false</required><sensitive>false</sensitive><supportsEl>false</supportsEl></value></entry><entry><key>Argument Delimiter</key><value><defaultValue> </defaultValue><description>Delimiter to use to separate arguments for a command [default: space]. Must be a single character.</description><displayName>Argument Delimiter</displayName><dynamic>false</dynamic><name>Argument Delimiter</name><required>true</required><sensitive>false</sensitive><supportsEl>false</supportsEl></value></entry></descriptors><lossTolerant>false</lossTolerant><penaltyDuration>30 sec</penaltyDuration><properties><entry><key>Command</key><value>sh</value></entry><entry><key>Command Arguments</key><value>/root/iot-truck-streaming/stream-simulator/generate.sh</value></entry><entry><key>Batch Duration</key><value>10 sec</value></entry><entry><key>Redirect Error Stream</key></entry><entry><key>Argument Delimiter</key></entry></properties><runDurationMillis>0</runDurationMillis><schedulingPeriod>1 sec</schedulingPeriod><schedulingStrategy>TIMER_DRIVEN</schedulingStrategy><yieldDuration>1 sec</yieldDuration></config><name>ExecuteProcess</name><relationships><autoTerminate>false</autoTerminate><description>All created FlowFiles are routed to this relationship</description><name>success</name></relationships><state>STOPPED</state><style/><supportsEventDriven>false</supportsEventDriven><supportsParallelProcessing>true</supportsParallelProcessing><type>org.apache.nifi.processors.standard.ExecuteProcess</type></processors><processors><id>5ff6622b-fc93-4968-af2e-9a13fa09578d</id><parentGroupId>8ddf43a6-3066-49e7-af46-633818e91699</parentGroupId><position><x>1981.0</x><y>864.0</y></position><config><bulletinLevel>WARN</bulletinLevel><comments></comments><concurrentlySchedulableTaskCount>1</concurrentlySchedulableTaskCount><defaultConcurrentTasks><entry><key>TIMER_DRIVEN</key><value>1</value></entry><entry><key>EVENT_DRIVEN</key><value>0</value></entry><entry><key>CRON_DRIVEN</key><value>1</value></entry></defaultConcurrentTasks><defaultSchedulingPeriod><entry><key>TIMER_DRIVEN</key><value>0 sec</value></entry><entry><key>CRON_DRIVEN</key><value>* * * * * ?</value></entry></defaultSchedulingPeriod><descriptors><entry><key>Directory</key><value><description>The directory to which files should be written. You may use expression language such as /aa/bb/${path}</description><displayName>Directory</displayName><dynamic>false</dynamic><name>Directory</name><required>true</required><sensitive>false</sensitive><supportsEl>true</supportsEl></value></entry><entry><key>Conflict Resolution Strategy</key><value><allowableValues><displayName>replace</displayName><value>replace</value></allowableValues><allowableValues><displayName>ignore</displayName><value>ignore</value></allowableValues><allowableValues><displayName>fail</displayName><value>fail</value></allowableValues><defaultValue>fail</defaultValue><description>Indicates what should happen when a file with the same name already exists in the output directory</description><displayName>Conflict Resolution Strategy</displayName><dynamic>false</dynamic><name>Conflict Resolution Strategy</name><required>true</required><sensitive>false</sensitive><supportsEl>false</supportsEl></value></entry><entry><key>Create Missing Directories</key><value><allowableValues><displayName>true</displayName><value>true</value></allowableValues><allowableValues><displayName>false</displayName><value>false</value></allowableValues><defaultValue>true</defaultValue><description>If true, then missing destination directories will be created. If false, flowfiles are penalized and sent to failure.</description><displayName>Create Missing Directories</displayName><dynamic>false</dynamic><name>Create Missing Directories</name><required>true</required><sensitive>false</sensitive><supportsEl>false</supportsEl></value></entry><entry><key>Maximum File Count</key><value><description>Specifies the maximum number of files that can exist in the output directory</description><displayName>Maximum File Count</displayName><dynamic>false</dynamic><name>Maximum File Count</name><required>false</required><sensitive>false</sensitive><supportsEl>false</supportsEl></value></entry><entry><key>Last Modified Time</key><value><description>Sets the lastModifiedTime on the output file to the value of this attribute.  Format must be yyyy-MM-dd'T'HH:mm:ssZ.  You may also use expression language such as ${file.lastModifiedTime}.</description><displayName>Last Modified Time</displayName><dynamic>false</dynamic><name>Last Modified Time</name><required>false</required><sensitive>false</sensitive><supportsEl>true</supportsEl></value></entry><entry><key>Permissions</key><value><description>Sets the permissions on the output file to the value of this attribute.  Format must be either UNIX rwxrwxrwx with a - in place of denied permissions (e.g. rw-r--r--) or an octal number (e.g. 644).  You may also use expression language such as ${file.permissions}.</description><displayName>Permissions</displayName><dynamic>false</dynamic><name>Permissions</name><required>false</required><sensitive>false</sensitive><supportsEl>true</supportsEl></value></entry><entry><key>Owner</key><value><description>Sets the owner on the output file to the value of this attribute.  You may also use expression language such as ${file.owner}.</description><displayName>Owner</displayName><dynamic>false</dynamic><name>Owner</name><required>false</required><sensitive>false</sensitive><supportsEl>true</supportsEl></value></entry><entry><key>Group</key><value><description>Sets the group on the output file to the value of this attribute.  You may also use expression language such as ${file.group}.</description><displayName>Group</displayName><dynamic>false</dynamic><name>Group</name><required>false</required><sensitive>false</sensitive><supportsEl>true</supportsEl></value></entry></descriptors><lossTolerant>false</lossTolerant><penaltyDuration>30 sec</penaltyDuration><properties><entry><key>Directory</key><value>/root/nifi_output/truck_events</value></entry><entry><key>Conflict Resolution Strategy</key></entry><entry><key>Create Missing Directories</key></entry><entry><key>Maximum File Count</key></entry><entry><key>Last Modified Time</key></entry><entry><key>Permissions</key></entry><entry><key>Owner</key></entry><entry><key>Group</key></entry></properties><runDurationMillis>0</runDurationMillis><schedulingPeriod>0 sec</schedulingPeriod><schedulingStrategy>TIMER_DRIVEN</schedulingStrategy><yieldDuration>1 sec</yieldDuration></config><name>PutFile(truck_events)</name><relationships><autoTerminate>true</autoTerminate><description>Files that could not be written to the output directory for some reason are transferred to this relationship</description><name>failure</name></relationships><relationships><autoTerminate>true</autoTerminate><description>Files that have been successfully written to the output directory are transferred to this relationship</description><name>success</name></relationships><state>STOPPED</state><style/><supportsEventDriven>false</supportsEventDriven><supportsParallelProcessing>true</supportsParallelProcessing><type>org.apache.nifi.processors.standard.PutFile</type></processors><processors><id>6b62f016-dd50-4e7b-9261-e3bea8aca7f6</id><parentGroupId>8ddf43a6-3066-49e7-af46-633818e91699</parentGroupId><position><x>1600.0</x><y>866.0</y></position><config><bulletinLevel>WARN</bulletinLevel><comments></comments><concurrentlySchedulableTaskCount>1</concurrentlySchedulableTaskCount><defaultConcurrentTasks><entry><key>TIMER_DRIVEN</key><value>1</value></entry><entry><key>EVENT_DRIVEN</key><value>0</value></entry><entry><key>CRON_DRIVEN</key><value>1</value></entry></defaultConcurrentTasks><defaultSchedulingPeriod><entry><key>TIMER_DRIVEN</key><value>0 sec</value></entry><entry><key>CRON_DRIVEN</key><value>* * * * * ?</value></entry></defaultSchedulingPeriod><descriptors><entry><key>Delete Attributes Expression</key><value><description>Regular expression for attributes to be deleted from flowfiles.</description><displayName>Delete Attributes Expression</displayName><dynamic>false</dynamic><name>Delete Attributes Expression</name><required>false</required><sensitive>false</sensitive><supportsEl>true</supportsEl></value></entry><entry><key>filename</key><value><description></description><displayName>filename</displayName><dynamic>true</dynamic><name>filename</name><required>false</required><sensitive>false</sensitive><supportsEl>true</supportsEl></value></entry></descriptors><lossTolerant>false</lossTolerant><penaltyDuration>30 sec</penaltyDuration><properties><entry><key>Delete Attributes Expression</key></entry><entry><key>filename</key><value>${UUID()}</value></entry></properties><runDurationMillis>0</runDurationMillis><schedulingPeriod>0 sec</schedulingPeriod><schedulingStrategy>TIMER_DRIVEN</schedulingStrategy><yieldDuration>1 sec</yieldDuration></config><name>UpdateAttribute</name><relationships><autoTerminate>false</autoTerminate><description>All FlowFiles are routed to this relationship</description><name>success</name></relationships><state>STOPPED</state><style/><supportsEventDriven>true</supportsEventDriven><supportsParallelProcessing>true</supportsParallelProcessing><type>org.apache.nifi.processors.attributes.UpdateAttribute</type></processors><processors><id>f9adc78c-23a7-4e3f-9cbb-12cd201ddc6f</id><parentGroupId>8ddf43a6-3066-49e7-af46-633818e91699</parentGroupId><position><x>2553.0</x><y>482.0</y></position><config><bulletinLevel>WARN</bulletinLevel><comments></comments><concurrentlySchedulableTaskCount>1</concurrentlySchedulableTaskCount><defaultConcurrentTasks><entry><key>TIMER_DRIVEN</key><value>1</value></entry><entry><key>EVENT_DRIVEN</key><value>0</value></entry><entry><key>CRON_DRIVEN</key><value>1</value></entry></defaultConcurrentTasks><defaultSchedulingPeriod><entry><key>TIMER_DRIVEN</key><value>0 sec</value></entry><entry><key>CRON_DRIVEN</key><value>* * * * * ?</value></entry></defaultSchedulingPeriod><descriptors><entry><key>Directory</key><value><description>The directory to which files should be written. You may use expression language such as /aa/bb/${path}</description><displayName>Directory</displayName><dynamic>false</dynamic><name>Directory</name><required>true</required><sensitive>false</sensitive><supportsEl>true</supportsEl></value></entry><entry><key>Conflict Resolution Strategy</key><value><allowableValues><displayName>replace</displayName><value>replace</value></allowableValues><allowableValues><displayName>ignore</displayName><value>ignore</value></allowableValues><allowableValues><displayName>fail</displayName><value>fail</value></allowableValues><defaultValue>fail</defaultValue><description>Indicates what should happen when a file with the same name already exists in the output directory</description><displayName>Conflict Resolution Strategy</displayName><dynamic>false</dynamic><name>Conflict Resolution Strategy</name><required>true</required><sensitive>false</sensitive><supportsEl>false</supportsEl></value></entry><entry><key>Create Missing Directories</key><value><allowableValues><displayName>true</displayName><value>true</value></allowableValues><allowableValues><displayName>false</displayName><value>false</value></allowableValues><defaultValue>true</defaultValue><description>If true, then missing destination directories will be created. If false, flowfiles are penalized and sent to failure.</description><displayName>Create Missing Directories</displayName><dynamic>false</dynamic><name>Create Missing Directories</name><required>true</required><sensitive>false</sensitive><supportsEl>false</supportsEl></value></entry><entry><key>Maximum File Count</key><value><description>Specifies the maximum number of files that can exist in the output directory</description><displayName>Maximum File Count</displayName><dynamic>false</dynamic><name>Maximum File Count</name><required>false</required><sensitive>false</sensitive><supportsEl>false</supportsEl></value></entry><entry><key>Last Modified Time</key><value><description>Sets the lastModifiedTime on the output file to the value of this attribute.  Format must be yyyy-MM-dd'T'HH:mm:ssZ.  You may also use expression language such as ${file.lastModifiedTime}.</description><displayName>Last Modified Time</displayName><dynamic>false</dynamic><name>Last Modified Time</name><required>false</required><sensitive>false</sensitive><supportsEl>true</supportsEl></value></entry><entry><key>Permissions</key><value><description>Sets the permissions on the output file to the value of this attribute.  Format must be either UNIX rwxrwxrwx with a - in place of denied permissions (e.g. rw-r--r--) or an octal number (e.g. 644).  You may also use expression language such as ${file.permissions}.</description><displayName>Permissions</displayName><dynamic>false</dynamic><name>Permissions</name><required>false</required><sensitive>false</sensitive><supportsEl>true</supportsEl></value></entry><entry><key>Owner</key><value><description>Sets the owner on the output file to the value of this attribute.  You may also use expression language such as ${file.owner}.</description><displayName>Owner</displayName><dynamic>false</dynamic><name>Owner</name><required>false</required><sensitive>false</sensitive><supportsEl>true</supportsEl></value></entry><entry><key>Group</key><value><description>Sets the group on the output file to the value of this attribute.  You may also use expression language such as ${file.group}.</description><displayName>Group</displayName><dynamic>false</dynamic><name>Group</name><required>false</required><sensitive>false</sensitive><supportsEl>true</supportsEl></value></entry></descriptors><lossTolerant>false</lossTolerant><penaltyDuration>30 sec</penaltyDuration><properties><entry><key>Directory</key><value>/root/nifi_output/log_data</value></entry><entry><key>Conflict Resolution Strategy</key></entry><entry><key>Create Missing Directories</key></entry><entry><key>Maximum File Count</key></entry><entry><key>Last Modified Time</key></entry><entry><key>Permissions</key></entry><entry><key>Owner</key></entry><entry><key>Group</key></entry></properties><runDurationMillis>0</runDurationMillis><schedulingPeriod>0 sec</schedulingPeriod><schedulingStrategy>TIMER_DRIVEN</schedulingStrategy><yieldDuration>1 sec</yieldDuration></config><name>PutFile(logs)</name><relationships><autoTerminate>true</autoTerminate><description>Files that could not be written to the output directory for some reason are transferred to this relationship</description><name>failure</name></relationships><relationships><autoTerminate>true</autoTerminate><description>Files that have been successfully written to the output directory are transferred to this relationship</description><name>success</name></relationships><state>STOPPED</state><style/><supportsEventDriven>false</supportsEventDriven><supportsParallelProcessing>true</supportsParallelProcessing><type>org.apache.nifi.processors.standard.PutFile</type></processors><processors><id>ca0510bd-6698-49d0-a9ef-630b9fc14b13</id><parentGroupId>8ddf43a6-3066-49e7-af46-633818e91699</parentGroupId><position><x>2392.0</x><y>864.0</y></position><config><bulletinLevel>WARN</bulletinLevel><comments></comments><concurrentlySchedulableTaskCount>1</concurrentlySchedulableTaskCount><defaultConcurrentTasks><entry><key>TIMER_DRIVEN</key><value>1</value></entry><entry><key>EVENT_DRIVEN</key><value>0</value></entry><entry><key>CRON_DRIVEN</key><value>1</value></entry></defaultConcurrentTasks><defaultSchedulingPeriod><entry><key>TIMER_DRIVEN</key><value>0 sec</value></entry><entry><key>CRON_DRIVEN</key><value>* * * * * ?</value></entry></defaultSchedulingPeriod><descriptors><entry><key>Known Brokers</key><value><description>A comma-separated list of known Kafka Brokers in the format &lt;host&gt;:&lt;port&gt;</description><displayName>Known Brokers</displayName><dynamic>false</dynamic><name>Known Brokers</name><required>true</required><sensitive>false</sensitive><supportsEl>false</supportsEl></value></entry><entry><key>Topic Name</key><value><description>The Kafka Topic of interest</description><displayName>Topic Name</displayName><dynamic>false</dynamic><name>Topic Name</name><required>true</required><sensitive>false</sensitive><supportsEl>true</supportsEl></value></entry><entry><key>Partition Strategy</key><value><allowableValues><description>Messages will be assigned partitions in a round-robin fashion, sending the first message to Partition 1, the next Partition to Partition 2, and so on, wrapping as necessary.</description><displayName>Round Robin</displayName><value>Round Robin</value></allowableValues><allowableValues><description>Messages will be assigned to random partitions.</description><displayName>Random</displayName><value>Random Robin</value></allowableValues><allowableValues><description>The &lt;Partition&gt; property will be used to determine the partition. All messages within the same FlowFile will be assigned to the same partition.</description><displayName>User-Defined</displayName><value>User-Defined</value></allowableValues><defaultValue>Round Robin</defaultValue><description>Specifies how messages should be partitioned when sent to Kafka</description><displayName>Partition Strategy</displayName><dynamic>false</dynamic><name>Partition Strategy</name><required>true</required><sensitive>false</sensitive><supportsEl>false</supportsEl></value></entry><entry><key>Partition</key><value><description>Specifies which Kafka Partition to add the message to. If using a message delimiter, all messages in the same FlowFile will be sent to the same partition. If a partition is specified but is not valid, then all messages within the same FlowFile will use the same partition but it remains undefined which partition is used.</description><displayName>Partition</displayName><dynamic>false</dynamic><name>Partition</name><required>false</required><sensitive>false</sensitive><supportsEl>true</supportsEl></value></entry><entry><key>Kafka Key</key><value><description>The Key to use for the Message</description><displayName>Kafka Key</displayName><dynamic>false</dynamic><name>Kafka Key</name><required>false</required><sensitive>false</sensitive><supportsEl>true</supportsEl></value></entry><entry><key>Delivery Guarantee</key><value><allowableValues><description>FlowFile will be routed to success after successfully writing the content to a Kafka node, without waiting for a response. This provides the best performance but may result in data loss.</description><displayName>Best Effort</displayName><value>0</value></allowableValues><allowableValues><description>FlowFile will be routed to success if the message is received by a single Kafka node, whether or not it is replicated. This is faster than &lt;Guarantee Replicated Delivery&gt; but can result in data loss if a Kafka node crashes</description><displayName>Guarantee Single Node Delivery</displayName><value>1</value></allowableValues><allowableValues><description>FlowFile will be routed to failure unless the message is replicated to the appropriate number of Kafka Nodes according to the Topic configuration</description><displayName>Guarantee Replicated Delivery</displayName><value>all</value></allowableValues><defaultValue>0</defaultValue><description>Specifies the requirement for guaranteeing that a message is sent to Kafka</description><displayName>Delivery Guarantee</displayName><dynamic>false</dynamic><name>Delivery Guarantee</name><required>true</required><sensitive>false</sensitive><supportsEl>false</supportsEl></value></entry><entry><key>Message Delimiter</key><value><description>Specifies the delimiter (interpreted in its UTF-8 byte representation) to use for splitting apart multiple messages within a single FlowFile. If not specified, the entire content of the FlowFile will be used as a single message. If specified, the contents of the FlowFile will be split on this delimiter and each section sent as a separate Kafka message. Note that if messages are delimited and some messages for a given FlowFile are transferred successfully while others are not, the messages will be split into individual FlowFiles, such that those messages that were successfully sent are routed to the 'success' relationship while other messages are sent to the 'failure' relationship.</description><displayName>Message Delimiter</displayName><dynamic>false</dynamic><name>Message Delimiter</name><required>false</required><sensitive>false</sensitive><supportsEl>true</supportsEl></value></entry><entry><key>Max Buffer Size</key><value><defaultValue>5 MB</defaultValue><description>The maximum amount of data to buffer in memory before sending to Kafka</description><displayName>Max Buffer Size</displayName><dynamic>false</dynamic><name>Max Buffer Size</name><required>true</required><sensitive>false</sensitive><supportsEl>false</supportsEl></value></entry><entry><key>Max Record Size</key><value><defaultValue>1 MB</defaultValue><description>The maximum size that any individual record can be.</description><displayName>Max Record Size</displayName><dynamic>false</dynamic><name>Max Record Size</name><required>true</required><sensitive>false</sensitive><supportsEl>false</supportsEl></value></entry><entry><key>Communications Timeout</key><value><defaultValue>30 secs</defaultValue><description>The amount of time to wait for a response from Kafka before determining that there is a communications error</description><displayName>Communications Timeout</displayName><dynamic>false</dynamic><name>Communications Timeout</name><required>true</required><sensitive>false</sensitive><supportsEl>false</supportsEl></value></entry><entry><key>Async Batch Size</key><value><defaultValue>200</defaultValue><description>The number of messages to send in one batch. The producer will wait until either this number of messages are ready to send or &quot;Queue Buffering Max Time&quot; is reached. NOTE: This property will be ignored unless the 'Message Delimiter' property is specified.</description><displayName>Batch Size</displayName><dynamic>false</dynamic><name>Async Batch Size</name><required>true</required><sensitive>false</sensitive><supportsEl>false</supportsEl></value></entry><entry><key>Queue Buffering Max Time</key><value><defaultValue>5 secs</defaultValue><description>Maximum time to buffer data before sending to Kafka. For example a setting of 100 ms will try to batch together 100 milliseconds' worth of messages to send at once. This will improve throughput but adds message delivery latency due to the buffering.</description><displayName>Queue Buffering Max Time</displayName><dynamic>false</dynamic><name>Queue Buffering Max Time</name><required>true</required><sensitive>false</sensitive><supportsEl>false</supportsEl></value></entry><entry><key>Compression Codec</key><value><allowableValues><description>Compression will not be used for any topic.</description><displayName>None</displayName><value>none</value></allowableValues><allowableValues><description>Compress messages using GZIP</description><displayName>GZIP</displayName><value>gzip</value></allowableValues><allowableValues><description>Compress messages using Snappy</description><displayName>Snappy</displayName><value>snappy</value></allowableValues><defaultValue>none</defaultValue><description>This parameter allows you to specify the compression codec for all data generated by this producer.</description><displayName>Compression Codec</displayName><dynamic>false</dynamic><name>Compression Codec</name><required>true</required><sensitive>false</sensitive><supportsEl>false</supportsEl></value></entry><entry><key>Client Name</key><value><description>Client Name to use when communicating with Kafka</description><displayName>Client Name</displayName><dynamic>false</dynamic><name>Client Name</name><required>true</required><sensitive>false</sensitive><supportsEl>false</supportsEl></value></entry></descriptors><lossTolerant>false</lossTolerant><penaltyDuration>30 sec</penaltyDuration><properties><entry><key>Known Brokers</key><value>sandbox.hortonworks.com:6667</value></entry><entry><key>Topic Name</key><value>truck_events</value></entry><entry><key>Partition Strategy</key></entry><entry><key>Partition</key></entry><entry><key>Kafka Key</key></entry><entry><key>Delivery Guarantee</key></entry><entry><key>Message Delimiter</key><value>
-</value></entry><entry><key>Max Buffer Size</key></entry><entry><key>Max Record Size</key></entry><entry><key>Communications Timeout</key></entry><entry><key>Async Batch Size</key></entry><entry><key>Queue Buffering Max Time</key></entry><entry><key>Compression Codec</key></entry><entry><key>Client Name</key><value>truck_events_client</value></entry></properties><runDurationMillis>0</runDurationMillis><schedulingPeriod>0 sec</schedulingPeriod><schedulingStrategy>TIMER_DRIVEN</schedulingStrategy><yieldDuration>1 sec</yieldDuration></config><name>PutKafka</name><relationships><autoTerminate>true</autoTerminate><description>Any FlowFile that cannot be sent to Kafka will be routed to this Relationship</description><name>failure</name></relationships><relationships><autoTerminate>true</autoTerminate><description>Any FlowFile that is successfully sent to Kafka will be routed to this Relationship</description><name>success</name></relationships><state>STOPPED</state><style/><supportsEventDriven>false</supportsEventDriven><supportsParallelProcessing>true</supportsParallelProcessing><type>org.apache.nifi.processors.kafka.PutKafka</type></processors><processors><id>1d896905-4e51-4ed9-a5cf-f79280ab64f9</id><parentGroupId>8ddf43a6-3066-49e7-af46-633818e91699</parentGroupId><position><x>2143.0</x><y>667.0</y></position><config><bulletinLevel>WARN</bulletinLevel><comments></comments><concurrentlySchedulableTaskCount>1</concurrentlySchedulableTaskCount><defaultConcurrentTasks><entry><key>TIMER_DRIVEN</key><value>1</value></entry><entry><key>EVENT_DRIVEN</key><value>0</value></entry><entry><key>CRON_DRIVEN</key><value>1</value></entry></defaultConcurrentTasks><defaultSchedulingPeriod><entry><key>TIMER_DRIVEN</key><value>0 sec</value></entry><entry><key>CRON_DRIVEN</key><value>* * * * * ?</value></entry></defaultSchedulingPeriod><descriptors><entry><key>Merge Strategy</key><value><allowableValues><description>Generates 'bins' of FlowFiles and fills each bin as full as possible. FlowFiles are placed into a bin based on their size and optionally their attributes (if the &lt;Correlation Attribute&gt; property is set)</description><displayName>Bin-Packing Algorithm</displayName><value>Bin-Packing Algorithm</value></allowableValues><allowableValues><description>Combines fragments that are associated by attributes back into a single cohesive FlowFile. If using this strategy, all FlowFiles must have the attributes &lt;fragment.identifier&gt;, &lt;fragment.count&gt;, and &lt;fragment.index&gt; or alternatively (for backward compatibility purposes) &lt;segment.identifier&gt;, &lt;segment.count&gt;, and &lt;segment.index&gt;. All FlowFiles with the same value for &quot;fragment.identifier&quot; will be grouped together. All FlowFiles in this group must have the same value for the &quot;fragment.count&quot; attribute. All FlowFiles in this group must have a unique value for the &quot;fragment.index&quot; attribute between 0 and the value of the &quot;fragment.count&quot; attribute.</description><displayName>Defragment</displayName><value>Defragment</value></allowableValues><defaultValue>Bin-Packing Algorithm</defaultValue><description>Specifies the algorithm used to merge content. The 'Defragment' algorithm combines fragments that are associated by attributes back into a single cohesive FlowFile. The 'Bin-Packing Algorithm' generates a FlowFile populated by arbitrarily chosen FlowFiles</description><displayName>Merge Strategy</displayName><dynamic>false</dynamic><name>Merge Strategy</name><required>true</required><sensitive>false</sensitive><supportsEl>false</supportsEl></value></entry><entry><key>Merge Format</key><value><allowableValues><description>A bin of FlowFiles will be combined into a single TAR file. The FlowFiles' &lt;path&gt; attribute will be used to create a directory in the TAR file if the &lt;Keep Paths&gt; property is set to true; otherwise, all FlowFiles will be added at the root of the TAR file. If a FlowFile has an attribute named &lt;tar.permissions&gt; that is 3 characters, each between 0-7, that attribute will be used as the TAR entry's 'mode'.</description><displayName>TAR</displayName><value>TAR</value></allowableValues><allowableValues><description>A bin of FlowFiles will be combined into a single ZIP file. The FlowFiles' &lt;path&gt; attribute will be used to create a directory in the ZIP file if the &lt;Keep Paths&gt; property is set to true; otherwise, all FlowFiles will be added at the root of the ZIP file. The &lt;Compression Level&gt; property indicates the ZIP compression to use.</description><displayName>ZIP</displayName><value>ZIP</value></allowableValues><allowableValues><description>A bin of FlowFiles will be combined into a single Version 3 FlowFile Stream</description><displayName>FlowFile Stream, v3</displayName><value>FlowFile Stream, v3</value></allowableValues><allowableValues><description>A bin of FlowFiles will be combined into a single Version 2 FlowFile Stream</description><displayName>FlowFile Stream, v2</displayName><value>FlowFile Stream, v2</value></allowableValues><allowableValues><description>A bin of FlowFiles will be combined into a single Version 1 FlowFile Package</description><displayName>FlowFile Tar, v1</displayName><value>FlowFile Tar, v1</value></allowableValues><allowableValues><description>The contents of all FlowFiles will be concatenated together into a single FlowFile</description><displayName>Binary Concatenation</displayName><value>Binary Concatenation</value></allowableValues><allowableValues><description>The Avro contents of all FlowFiles will be concatenated together into a single FlowFile</description><displayName>Avro</displayName><value>Avro</value></allowableValues><defaultValue>Binary Concatenation</defaultValue><description>Determines the format that will be used to merge the content.</description><displayName>Merge Format</displayName><dynamic>false</dynamic><name>Merge Format</name><required>true</required><sensitive>false</sensitive><supportsEl>false</supportsEl></value></entry><entry><key>Attribute Strategy</key><value><allowableValues><displayName>Keep Only Common Attributes</displayName><value>Keep Only Common Attributes</value></allowableValues><allowableValues><displayName>Keep All Unique Attributes</displayName><value>Keep All Unique Attributes</value></allowableValues><defaultValue>Keep Only Common Attributes</defaultValue><description>Determines which FlowFile attributes should be added to the bundle. If 'Keep All Unique Attributes' is selected, any attribute on any FlowFile that gets bundled will be kept unless its value conflicts with the value from another FlowFile. If 'Keep Only Common Attributes' is selected, only the attributes that exist on all FlowFiles in the bundle, with the same value, will be preserved.</description><displayName>Attribute Strategy</displayName><dynamic>false</dynamic><name>Attribute Strategy</name><required>true</required><sensitive>false</sensitive><supportsEl>false</supportsEl></value></entry><entry><key>Correlation Attribute Name</key><value><description>If specified, like FlowFiles will be binned together, where 'like FlowFiles' means FlowFiles that have the same value for this Attribute. If not specified, FlowFiles are bundled by the order in which they are pulled from the queue.</description><displayName>Correlation Attribute Name</displayName><dynamic>false</dynamic><name>Correlation Attribute Name</name><required>false</required><sensitive>false</sensitive><supportsEl>true</supportsEl></value></entry><entry><key>Minimum Number of Entries</key><value><defaultValue>1</defaultValue><description>The minimum number of files to include in a bundle</description><displayName>Minimum Number of Entries</displayName><dynamic>false</dynamic><name>Minimum Number of Entries</name><required>true</required><sensitive>false</sensitive><supportsEl>false</supportsEl></value></entry><entry><key>Maximum Number of Entries</key><value><description>The maximum number of files to include in a bundle. If not specified, there is no maximum.</description><displayName>Maximum Number of Entries</displayName><dynamic>false</dynamic><name>Maximum Number of Entries</name><required>false</required><sensitive>false</sensitive><supportsEl>false</supportsEl></value></entry><entry><key>Minimum Group Size</key><value><defaultValue>0 B</defaultValue><description>The minimum size of for the bundle</description><displayName>Minimum Group Size</displayName><dynamic>false</dynamic><name>Minimum Group Size</name><required>true</required><sensitive>false</sensitive><supportsEl>false</supportsEl></value></entry><entry><key>Maximum Group Size</key><value><description>The maximum size for the bundle. If not specified, there is no maximum.</description><displayName>Maximum Group Size</displayName><dynamic>false</dynamic><name>Maximum Group Size</name><required>false</required><sensitive>false</sensitive><supportsEl>false</supportsEl></value></entry><entry><key>Max Bin Age</key><value><description>The maximum age of a Bin that will trigger a Bin to be complete. Expected format is &lt;duration&gt; &lt;time unit&gt; where &lt;duration&gt; is a positive integer and time unit is one of seconds, minutes, hours</description><displayName>Max Bin Age</displayName><dynamic>false</dynamic><name>Max Bin Age</name><required>false</required><sensitive>false</sensitive><supportsEl>false</supportsEl></value></entry><entry><key>Maximum number of Bins</key><value><defaultValue>100</defaultValue><description>Specifies the maximum number of bins that can be held in memory at any one time</description><displayName>Maximum number of Bins</displayName><dynamic>false</dynamic><name>Maximum number of Bins</name><required>true</required><sensitive>false</sensitive><supportsEl>false</supportsEl></value></entry><entry><key>Delimiter Strategy</key><value><allowableValues><description>The values of Header, Footer, and Demarcator will be retrieved from the contents of a file</description><displayName>Filename</displayName><value>Filename</value></allowableValues><allowableValues><description>The values of Header, Footer, and Demarcator will be specified as property values</description><displayName>Text</displayName><value>Text</value></allowableValues><defaultValue>Filename</defaultValue><description>Determines if Header, Footer, and Demarcator should point to files containing the respective content, or if the values of the properties should be used as the content.</description><displayName>Delimiter Strategy</displayName><dynamic>false</dynamic><name>Delimiter Strategy</name><required>true</required><sensitive>false</sensitive><supportsEl>false</supportsEl></value></entry><entry><key>Header File</key><value><description>Filename specifying the header to use. If not specified, no header is supplied. This property is valid only when using the binary-concatenation merge strategy; otherwise, it is ignored.</description><displayName>Header</displayName><dynamic>false</dynamic><name>Header File</name><required>false</required><sensitive>false</sensitive><supportsEl>true</supportsEl></value></entry><entry><key>Footer File</key><value><description>Filename specifying the footer to use. If not specified, no footer is supplied. This property is valid only when using the binary-concatenation merge strategy; otherwise, it is ignored.</description><displayName>Footer</displayName><dynamic>false</dynamic><name>Footer File</name><required>false</required><sensitive>false</sensitive><supportsEl>true</supportsEl></value></entry><entry><key>Demarcator File</key><value><description>Filename specifying the demarcator to use. If not specified, no demarcator is supplied. This property is valid only when using the binary-concatenation merge strategy; otherwise, it is ignored.</description><displayName>Demarcator</displayName><dynamic>false</dynamic><name>Demarcator File</name><required>false</required><sensitive>false</sensitive><supportsEl>true</supportsEl></value></entry><entry><key>Compression Level</key><value><allowableValues><displayName>0</displayName><value>0</value></allowableValues><allowableValues><displayName>1</displayName><value>1</value></allowableValues><allowableValues><displayName>2</displayName><value>2</value></allowableValues><allowableValues><displayName>3</displayName><value>3</value></allowableValues><allowableValues><displayName>4</displayName><value>4</value></allowableValues><allowableValues><displayName>5</displayName><value>5</value></allowableValues><allowableValues><displayName>6</displayName><value>6</value></allowableValues><allowableValues><displayName>7</displayName><value>7</value></allowableValues><allowableValues><displayName>8</displayName><value>8</value></allowableValues><allowableValues><displayName>9</displayName><value>9</value></allowableValues><defaultValue>1</defaultValue><description>Specifies the compression level to use when using the Zip Merge Format; if not using the Zip Merge Format, this value is ignored</description><displayName>Compression Level</displayName><dynamic>false</dynamic><name>Compression Level</name><required>true</required><sensitive>false</sensitive><supportsEl>false</supportsEl></value></entry><entry><key>Keep Path</key><value><allowableValues><displayName>true</displayName><value>true</value></allowableValues><allowableValues><displayName>false</displayName><value>false</value></allowableValues><defaultValue>false</defaultValue><description>If using the Zip or Tar Merge Format, specifies whether or not the FlowFiles' paths should be included in their entry names; if using other merge strategy, this value is ignored</description><displayName>Keep Path</displayName><dynamic>false</dynamic><name>Keep Path</name><required>true</required><sensitive>false</sensitive><supportsEl>false</supportsEl></value></entry></descriptors><lossTolerant>false</lossTolerant><penaltyDuration>30 sec</penaltyDuration><properties><entry><key>Merge Strategy</key></entry><entry><key>Merge Format</key></entry><entry><key>Attribute Strategy</key></entry><entry><key>Correlation Attribute Name</key></entry><entry><key>Minimum Number of Entries</key><value>50</value></entry><entry><key>Maximum Number of Entries</key><value>70</value></entry><entry><key>Minimum Group Size</key></entry><entry><key>Maximum Group Size</key></entry><entry><key>Max Bin Age</key></entry><entry><key>Maximum number of Bins</key></entry><entry><key>Delimiter Strategy</key></entry><entry><key>Header File</key></entry><entry><key>Footer File</key></entry><entry><key>Demarcator File</key></entry><entry><key>Compression Level</key></entry><entry><key>Keep Path</key></entry></properties><runDurationMillis>0</runDurationMillis><schedulingPeriod>0 sec</schedulingPeriod><schedulingStrategy>TIMER_DRIVEN</schedulingStrategy><yieldDuration>1 sec</yieldDuration></config><name>MergeContent(truck_events)</name><relationships><autoTerminate>true</autoTerminate><description>If the bundle cannot be created, all FlowFiles that would have been used to created the bundle will be transferred to failure</description><name>failure</name></relationships><relationships><autoTerminate>false</autoTerminate><description>The FlowFile containing the merged content</description><name>merged</name></relationships><relationships><autoTerminate>true</autoTerminate><description>The FlowFiles that were used to create the bundle</description><name>original</name></relationships><state>STOPPED</state><style/><supportsEventDriven>false</supportsEventDriven><supportsParallelProcessing>true</supportsParallelProcessing><type>org.apache.nifi.processors.standard.MergeContent</type></processors></snippet><timestamp>06/03/2016 02:53:35 UTC</timestamp></template>
+RouteOnContent, MergeContent(logs), PutFile(logs):
+Filters all the log data from the stream simulator and sends that data to a specific directory.&lt;/description&gt;
+  &lt;groupId&gt;90e748c3-015a-1000-f68d-292036f42e8f</description>
+  <groupId>90e748c3-015a-1000-f68d-292036f42e8f</groupId>
+  <name>IoT_Lab_Series_DataFlow</name>
+  <snippet>
+    <connections>
+      <id>8b7bfd27-546f-3a16-0000-000000000000</id>
+      <parentGroupId>225026b9-7e78-35c2-0000-000000000000</parentGroupId>
+      <backPressureDataSizeThreshold>0 MB</backPressureDataSizeThreshold>
+      <backPressureObjectThreshold>0</backPressureObjectThreshold>
+      <destination>
+        <groupId>225026b9-7e78-35c2-0000-000000000000</groupId>
+        <id>e91819f4-74de-3e56-0000-000000000000</id>
+        <type>PROCESSOR</type>
+      </destination>
+      <flowFileExpiration>0 sec</flowFileExpiration>
+      <labelIndex>1</labelIndex>
+      <name></name>
+      <selectedRelationships>unmatched</selectedRelationships>
+      <source>
+        <groupId>225026b9-7e78-35c2-0000-000000000000</groupId>
+        <id>3871232c-76a8-35f3-0000-000000000000</id>
+        <type>PROCESSOR</type>
+      </source>
+      <zIndex>0</zIndex>
+    </connections>
+    <connections>
+      <id>8be1a578-b259-3d25-0000-000000000000</id>
+      <parentGroupId>225026b9-7e78-35c2-0000-000000000000</parentGroupId>
+      <backPressureDataSizeThreshold>0 MB</backPressureDataSizeThreshold>
+      <backPressureObjectThreshold>0</backPressureObjectThreshold>
+      <destination>
+        <groupId>225026b9-7e78-35c2-0000-000000000000</groupId>
+        <id>3871232c-76a8-35f3-0000-000000000000</id>
+        <type>PROCESSOR</type>
+      </destination>
+      <flowFileExpiration>0 sec</flowFileExpiration>
+      <labelIndex>1</labelIndex>
+      <name></name>
+      <selectedRelationships>success</selectedRelationships>
+      <source>
+        <groupId>225026b9-7e78-35c2-0000-000000000000</groupId>
+        <id>d031454e-2de5-3cb8-0000-000000000000</id>
+        <type>PROCESSOR</type>
+      </source>
+      <zIndex>0</zIndex>
+    </connections>
+    <connections>
+      <id>92737423-830c-3fc0-0000-000000000000</id>
+      <parentGroupId>225026b9-7e78-35c2-0000-000000000000</parentGroupId>
+      <backPressureDataSizeThreshold>0 MB</backPressureDataSizeThreshold>
+      <backPressureObjectThreshold>0</backPressureObjectThreshold>
+      <destination>
+        <groupId>225026b9-7e78-35c2-0000-000000000000</groupId>
+        <id>0cb74bd5-f0a7-3f6a-0000-000000000000</id>
+        <type>PROCESSOR</type>
+      </destination>
+      <flowFileExpiration>0 sec</flowFileExpiration>
+      <labelIndex>1</labelIndex>
+      <name></name>
+      <selectedRelationships>merged</selectedRelationships>
+      <source>
+        <groupId>225026b9-7e78-35c2-0000-000000000000</groupId>
+        <id>2da90358-ea06-3a34-0000-000000000000</id>
+        <type>PROCESSOR</type>
+      </source>
+      <zIndex>0</zIndex>
+    </connections>
+    <connections>
+      <id>119fa370-cfad-309f-0000-000000000000</id>
+      <parentGroupId>225026b9-7e78-35c2-0000-000000000000</parentGroupId>
+      <backPressureDataSizeThreshold>0 MB</backPressureDataSizeThreshold>
+      <backPressureObjectThreshold>0</backPressureObjectThreshold>
+      <destination>
+        <groupId>225026b9-7e78-35c2-0000-000000000000</groupId>
+        <id>2da90358-ea06-3a34-0000-000000000000</id>
+        <type>PROCESSOR</type>
+      </destination>
+      <flowFileExpiration>0 sec</flowFileExpiration>
+      <labelIndex>1</labelIndex>
+      <name></name>
+      <selectedRelationships>search_for_truck_event_data</selectedRelationships>
+      <source>
+        <groupId>225026b9-7e78-35c2-0000-000000000000</groupId>
+        <id>3871232c-76a8-35f3-0000-000000000000</id>
+        <type>PROCESSOR</type>
+      </source>
+      <zIndex>0</zIndex>
+    </connections>
+    <connections>
+      <id>604cecbe-a977-3b9b-0000-000000000000</id>
+      <parentGroupId>225026b9-7e78-35c2-0000-000000000000</parentGroupId>
+      <backPressureDataSizeThreshold>0 MB</backPressureDataSizeThreshold>
+      <backPressureObjectThreshold>0</backPressureObjectThreshold>
+      <destination>
+        <groupId>225026b9-7e78-35c2-0000-000000000000</groupId>
+        <id>8164dac2-df1a-3677-0000-000000000000</id>
+        <type>PROCESSOR</type>
+      </destination>
+      <flowFileExpiration>0 sec</flowFileExpiration>
+      <labelIndex>1</labelIndex>
+      <name></name>
+      <selectedRelationships>success</selectedRelationships>
+      <source>
+        <groupId>225026b9-7e78-35c2-0000-000000000000</groupId>
+        <id>bb0d6e5d-a541-3a14-0000-000000000000</id>
+        <type>PROCESSOR</type>
+      </source>
+      <zIndex>0</zIndex>
+    </connections>
+    <connections>
+      <id>6326a872-a0dd-3543-0000-000000000000</id>
+      <parentGroupId>225026b9-7e78-35c2-0000-000000000000</parentGroupId>
+      <backPressureDataSizeThreshold>0 MB</backPressureDataSizeThreshold>
+      <backPressureObjectThreshold>0</backPressureObjectThreshold>
+      <destination>
+        <groupId>225026b9-7e78-35c2-0000-000000000000</groupId>
+        <id>d031454e-2de5-3cb8-0000-000000000000</id>
+        <type>PROCESSOR</type>
+      </destination>
+      <flowFileExpiration>0 sec</flowFileExpiration>
+      <labelIndex>1</labelIndex>
+      <name></name>
+      <selectedRelationships>splits</selectedRelationships>
+      <source>
+        <groupId>225026b9-7e78-35c2-0000-000000000000</groupId>
+        <id>8164dac2-df1a-3677-0000-000000000000</id>
+        <type>PROCESSOR</type>
+      </source>
+      <zIndex>0</zIndex>
+    </connections>
+    <connections>
+      <id>6712ad6d-941e-3685-0000-000000000000</id>
+      <parentGroupId>225026b9-7e78-35c2-0000-000000000000</parentGroupId>
+      <backPressureDataSizeThreshold>0 MB</backPressureDataSizeThreshold>
+      <backPressureObjectThreshold>0</backPressureObjectThreshold>
+      <destination>
+        <groupId>225026b9-7e78-35c2-0000-000000000000</groupId>
+        <id>0016405e-6592-3058-0000-000000000000</id>
+        <type>PROCESSOR</type>
+      </destination>
+      <flowFileExpiration>0 sec</flowFileExpiration>
+      <labelIndex>1</labelIndex>
+      <name></name>
+      <selectedRelationships>merged</selectedRelationships>
+      <source>
+        <groupId>225026b9-7e78-35c2-0000-000000000000</groupId>
+        <id>e91819f4-74de-3e56-0000-000000000000</id>
+        <type>PROCESSOR</type>
+      </source>
+      <zIndex>0</zIndex>
+    </connections>
+    <processors>
+      <id>8164dac2-df1a-3677-0000-000000000000</id>
+      <parentGroupId>225026b9-7e78-35c2-0000-000000000000</parentGroupId>
+      <position>
+        <x>0.0</x>
+        <y>194.0</y>
+      </position>
+      <bundle>
+        <artifact>nifi-standard-nar</artifact>
+        <group>org.apache.nifi</group>
+        <version>1.2.0.3.0.2.0-76</version>
+      </bundle>
+      <config>
+        <bulletinLevel>WARN</bulletinLevel>
+        <comments></comments>
+        <concurrentlySchedulableTaskCount>1</concurrentlySchedulableTaskCount>
+        <descriptors>
+          <entry>
+            <key>Line Split Count</key>
+            <value>
+              <name>Line Split Count</name>
+            </value>
+          </entry>
+          <entry>
+            <key>Maximum Fragment Size</key>
+            <value>
+              <name>Maximum Fragment Size</name>
+            </value>
+          </entry>
+          <entry>
+            <key>Header Line Count</key>
+            <value>
+              <name>Header Line Count</name>
+            </value>
+          </entry>
+          <entry>
+            <key>Header Line Marker Characters</key>
+            <value>
+              <name>Header Line Marker Characters</name>
+            </value>
+          </entry>
+          <entry>
+            <key>Remove Trailing Newlines</key>
+            <value>
+              <name>Remove Trailing Newlines</name>
+            </value>
+          </entry>
+        </descriptors>
+        <executionNode>ALL</executionNode>
+        <lossTolerant>false</lossTolerant>
+        <penaltyDuration>30 sec</penaltyDuration>
+        <properties>
+          <entry>
+            <key>Line Split Count</key>
+            <value>1</value>
+          </entry>
+          <entry>
+            <key>Maximum Fragment Size</key>
+          </entry>
+          <entry>
+            <key>Header Line Count</key>
+            <value>0</value>
+          </entry>
+          <entry>
+            <key>Header Line Marker Characters</key>
+          </entry>
+          <entry>
+            <key>Remove Trailing Newlines</key>
+            <value>false</value>
+          </entry>
+        </properties>
+        <runDurationMillis>0</runDurationMillis>
+        <schedulingPeriod>0 sec</schedulingPeriod>
+        <schedulingStrategy>TIMER_DRIVEN</schedulingStrategy>
+        <yieldDuration>1 sec</yieldDuration>
+      </config>
+      <name>SplitText</name>
+      <relationships>
+        <autoTerminate>true</autoTerminate>
+        <name>failure</name>
+      </relationships>
+      <relationships>
+        <autoTerminate>true</autoTerminate>
+        <name>original</name>
+      </relationships>
+      <relationships>
+        <autoTerminate>false</autoTerminate>
+        <name>splits</name>
+      </relationships>
+      <style></style>
+      <type>org.apache.nifi.processors.standard.SplitText</type>
+    </processors>
+    <processors>
+      <id>bb0d6e5d-a541-3a14-0000-000000000000</id>
+      <parentGroupId>225026b9-7e78-35c2-0000-000000000000</parentGroupId>
+      <position>
+        <x>2.0</x>
+        <y>0.0</y>
+      </position>
+      <bundle>
+        <artifact>nifi-standard-nar</artifact>
+        <group>org.apache.nifi</group>
+        <version>1.2.0.3.0.2.0-76</version>
+      </bundle>
+      <config>
+        <bulletinLevel>WARN</bulletinLevel>
+        <comments></comments>
+        <concurrentlySchedulableTaskCount>1</concurrentlySchedulableTaskCount>
+        <descriptors>
+          <entry>
+            <key>Command</key>
+            <value>
+              <name>Command</name>
+            </value>
+          </entry>
+          <entry>
+            <key>Command Arguments</key>
+            <value>
+              <name>Command Arguments</name>
+            </value>
+          </entry>
+          <entry>
+            <key>Batch Duration</key>
+            <value>
+              <name>Batch Duration</name>
+            </value>
+          </entry>
+          <entry>
+            <key>Redirect Error Stream</key>
+            <value>
+              <name>Redirect Error Stream</name>
+            </value>
+          </entry>
+          <entry>
+            <key>Argument Delimiter</key>
+            <value>
+              <name>Argument Delimiter</name>
+            </value>
+          </entry>
+        </descriptors>
+        <executionNode>ALL</executionNode>
+        <lossTolerant>false</lossTolerant>
+        <penaltyDuration>30 sec</penaltyDuration>
+        <properties>
+          <entry>
+            <key>Command</key>
+            <value>sh</value>
+          </entry>
+          <entry>
+            <key>Command Arguments</key>
+            <value>/home/nifi/iot-truck-streaming/stream-simulator/generate.sh</value>
+          </entry>
+          <entry>
+            <key>Batch Duration</key>
+            <value>10 sec</value>
+          </entry>
+          <entry>
+            <key>Redirect Error Stream</key>
+            <value>false</value>
+          </entry>
+          <entry>
+            <key>Argument Delimiter</key>
+            <value> </value>
+          </entry>
+        </properties>
+        <runDurationMillis>0</runDurationMillis>
+        <schedulingPeriod>1 sec</schedulingPeriod>
+        <schedulingStrategy>TIMER_DRIVEN</schedulingStrategy>
+        <yieldDuration>1 sec</yieldDuration>
+      </config>
+      <name>ExecuteProcess</name>
+      <relationships>
+        <autoTerminate>false</autoTerminate>
+        <name>success</name>
+      </relationships>
+      <style></style>
+      <type>org.apache.nifi.processors.standard.ExecuteProcess</type>
+    </processors>
+    <processors>
+      <id>d031454e-2de5-3cb8-0000-000000000000</id>
+      <parentGroupId>225026b9-7e78-35c2-0000-000000000000</parentGroupId>
+      <position>
+        <x>1.0</x>
+        <y>392.0</y>
+      </position>
+      <bundle>
+        <artifact>nifi-update-attribute-nar</artifact>
+        <group>org.apache.nifi</group>
+        <version>1.2.0.3.0.2.0-76</version>
+      </bundle>
+      <config>
+        <bulletinLevel>WARN</bulletinLevel>
+        <comments></comments>
+        <concurrentlySchedulableTaskCount>1</concurrentlySchedulableTaskCount>
+        <descriptors>
+          <entry>
+            <key>Delete Attributes Expression</key>
+            <value>
+              <name>Delete Attributes Expression</name>
+            </value>
+          </entry>
+          <entry>
+            <key>Store State</key>
+            <value>
+              <name>Store State</name>
+            </value>
+          </entry>
+          <entry>
+            <key>Stateful Variables Initial Value</key>
+            <value>
+              <name>Stateful Variables Initial Value</name>
+            </value>
+          </entry>
+          <entry>
+            <key>filename</key>
+            <value>
+              <name>filename</name>
+            </value>
+          </entry>
+        </descriptors>
+        <executionNode>ALL</executionNode>
+        <lossTolerant>false</lossTolerant>
+        <penaltyDuration>30 sec</penaltyDuration>
+        <properties>
+          <entry>
+            <key>Delete Attributes Expression</key>
+          </entry>
+          <entry>
+            <key>Store State</key>
+            <value>Do not store state</value>
+          </entry>
+          <entry>
+            <key>Stateful Variables Initial Value</key>
+          </entry>
+          <entry>
+            <key>filename</key>
+            <value>${UUID()}</value>
+          </entry>
+        </properties>
+        <runDurationMillis>0</runDurationMillis>
+        <schedulingPeriod>0 sec</schedulingPeriod>
+        <schedulingStrategy>TIMER_DRIVEN</schedulingStrategy>
+        <yieldDuration>1 sec</yieldDuration>
+      </config>
+      <name>UpdateAttribute</name>
+      <relationships>
+        <autoTerminate>false</autoTerminate>
+        <name>success</name>
+      </relationships>
+      <style></style>
+      <type>org.apache.nifi.processors.attributes.UpdateAttribute</type>
+    </processors>
+    <processors>
+      <id>e91819f4-74de-3e56-0000-000000000000</id>
+      <parentGroupId>225026b9-7e78-35c2-0000-000000000000</parentGroupId>
+      <position>
+        <x>936.0</x>
+        <y>193.0</y>
+      </position>
+      <bundle>
+        <artifact>nifi-standard-nar</artifact>
+        <group>org.apache.nifi</group>
+        <version>1.2.0.3.0.2.0-76</version>
+      </bundle>
+      <config>
+        <bulletinLevel>WARN</bulletinLevel>
+        <comments></comments>
+        <concurrentlySchedulableTaskCount>1</concurrentlySchedulableTaskCount>
+        <descriptors>
+          <entry>
+            <key>Merge Strategy</key>
+            <value>
+              <name>Merge Strategy</name>
+            </value>
+          </entry>
+          <entry>
+            <key>Merge Format</key>
+            <value>
+              <name>Merge Format</name>
+            </value>
+          </entry>
+          <entry>
+            <key>Attribute Strategy</key>
+            <value>
+              <name>Attribute Strategy</name>
+            </value>
+          </entry>
+          <entry>
+            <key>Correlation Attribute Name</key>
+            <value>
+              <name>Correlation Attribute Name</name>
+            </value>
+          </entry>
+          <entry>
+            <key>mergecontent-metadata-strategy</key>
+            <value>
+              <name>mergecontent-metadata-strategy</name>
+            </value>
+          </entry>
+          <entry>
+            <key>Minimum Number of Entries</key>
+            <value>
+              <name>Minimum Number of Entries</name>
+            </value>
+          </entry>
+          <entry>
+            <key>Maximum Number of Entries</key>
+            <value>
+              <name>Maximum Number of Entries</name>
+            </value>
+          </entry>
+          <entry>
+            <key>Minimum Group Size</key>
+            <value>
+              <name>Minimum Group Size</name>
+            </value>
+          </entry>
+          <entry>
+            <key>Maximum Group Size</key>
+            <value>
+              <name>Maximum Group Size</name>
+            </value>
+          </entry>
+          <entry>
+            <key>Max Bin Age</key>
+            <value>
+              <name>Max Bin Age</name>
+            </value>
+          </entry>
+          <entry>
+            <key>Maximum number of Bins</key>
+            <value>
+              <name>Maximum number of Bins</name>
+            </value>
+          </entry>
+          <entry>
+            <key>Delimiter Strategy</key>
+            <value>
+              <name>Delimiter Strategy</name>
+            </value>
+          </entry>
+          <entry>
+            <key>Header File</key>
+            <value>
+              <name>Header File</name>
+            </value>
+          </entry>
+          <entry>
+            <key>Footer File</key>
+            <value>
+              <name>Footer File</name>
+            </value>
+          </entry>
+          <entry>
+            <key>Demarcator File</key>
+            <value>
+              <name>Demarcator File</name>
+            </value>
+          </entry>
+          <entry>
+            <key>Compression Level</key>
+            <value>
+              <name>Compression Level</name>
+            </value>
+          </entry>
+          <entry>
+            <key>Keep Path</key>
+            <value>
+              <name>Keep Path</name>
+            </value>
+          </entry>
+        </descriptors>
+        <executionNode>ALL</executionNode>
+        <lossTolerant>false</lossTolerant>
+        <penaltyDuration>30 sec</penaltyDuration>
+        <properties>
+          <entry>
+            <key>Merge Strategy</key>
+            <value>Bin-Packing Algorithm</value>
+          </entry>
+          <entry>
+            <key>Merge Format</key>
+            <value>Binary Concatenation</value>
+          </entry>
+          <entry>
+            <key>Attribute Strategy</key>
+            <value>Keep Only Common Attributes</value>
+          </entry>
+          <entry>
+            <key>Correlation Attribute Name</key>
+          </entry>
+          <entry>
+            <key>mergecontent-metadata-strategy</key>
+            <value>Do Not Merge Uncommon Metadata</value>
+          </entry>
+          <entry>
+            <key>Minimum Number of Entries</key>
+            <value>50</value>
+          </entry>
+          <entry>
+            <key>Maximum Number of Entries</key>
+            <value>70</value>
+          </entry>
+          <entry>
+            <key>Minimum Group Size</key>
+            <value>0 B</value>
+          </entry>
+          <entry>
+            <key>Maximum Group Size</key>
+          </entry>
+          <entry>
+            <key>Max Bin Age</key>
+          </entry>
+          <entry>
+            <key>Maximum number of Bins</key>
+            <value>5</value>
+          </entry>
+          <entry>
+            <key>Delimiter Strategy</key>
+            <value>Filename</value>
+          </entry>
+          <entry>
+            <key>Header File</key>
+          </entry>
+          <entry>
+            <key>Footer File</key>
+          </entry>
+          <entry>
+            <key>Demarcator File</key>
+          </entry>
+          <entry>
+            <key>Compression Level</key>
+            <value>1</value>
+          </entry>
+          <entry>
+            <key>Keep Path</key>
+            <value>false</value>
+          </entry>
+        </properties>
+        <runDurationMillis>0</runDurationMillis>
+        <schedulingPeriod>0 sec</schedulingPeriod>
+        <schedulingStrategy>TIMER_DRIVEN</schedulingStrategy>
+        <yieldDuration>1 sec</yieldDuration>
+      </config>
+      <name>MergeContent(logs)</name>
+      <relationships>
+        <autoTerminate>true</autoTerminate>
+        <name>failure</name>
+      </relationships>
+      <relationships>
+        <autoTerminate>false</autoTerminate>
+        <name>merged</name>
+      </relationships>
+      <relationships>
+        <autoTerminate>true</autoTerminate>
+        <name>original</name>
+      </relationships>
+      <style></style>
+      <type>org.apache.nifi.processors.standard.MergeContent</type>
+    </processors>
+    <processors>
+      <id>0016405e-6592-3058-0000-000000000000</id>
+      <parentGroupId>225026b9-7e78-35c2-0000-000000000000</parentGroupId>
+      <position>
+        <x>954.0</x>
+        <y>8.0</y>
+      </position>
+      <bundle>
+        <artifact>nifi-standard-nar</artifact>
+        <group>org.apache.nifi</group>
+        <version>1.2.0.3.0.2.0-76</version>
+      </bundle>
+      <config>
+        <bulletinLevel>WARN</bulletinLevel>
+        <comments></comments>
+        <concurrentlySchedulableTaskCount>1</concurrentlySchedulableTaskCount>
+        <descriptors>
+          <entry>
+            <key>Directory</key>
+            <value>
+              <name>Directory</name>
+            </value>
+          </entry>
+          <entry>
+            <key>Conflict Resolution Strategy</key>
+            <value>
+              <name>Conflict Resolution Strategy</name>
+            </value>
+          </entry>
+          <entry>
+            <key>Create Missing Directories</key>
+            <value>
+              <name>Create Missing Directories</name>
+            </value>
+          </entry>
+          <entry>
+            <key>Maximum File Count</key>
+            <value>
+              <name>Maximum File Count</name>
+            </value>
+          </entry>
+          <entry>
+            <key>Last Modified Time</key>
+            <value>
+              <name>Last Modified Time</name>
+            </value>
+          </entry>
+          <entry>
+            <key>Permissions</key>
+            <value>
+              <name>Permissions</name>
+            </value>
+          </entry>
+          <entry>
+            <key>Owner</key>
+            <value>
+              <name>Owner</name>
+            </value>
+          </entry>
+          <entry>
+            <key>Group</key>
+            <value>
+              <name>Group</name>
+            </value>
+          </entry>
+        </descriptors>
+        <executionNode>ALL</executionNode>
+        <lossTolerant>false</lossTolerant>
+        <penaltyDuration>30 sec</penaltyDuration>
+        <properties>
+          <entry>
+            <key>Directory</key>
+            <value>/home/nifi/nifi_output/log_data</value>
+          </entry>
+          <entry>
+            <key>Conflict Resolution Strategy</key>
+            <value>fail</value>
+          </entry>
+          <entry>
+            <key>Create Missing Directories</key>
+            <value>true</value>
+          </entry>
+          <entry>
+            <key>Maximum File Count</key>
+          </entry>
+          <entry>
+            <key>Last Modified Time</key>
+          </entry>
+          <entry>
+            <key>Permissions</key>
+          </entry>
+          <entry>
+            <key>Owner</key>
+          </entry>
+          <entry>
+            <key>Group</key>
+          </entry>
+        </properties>
+        <runDurationMillis>0</runDurationMillis>
+        <schedulingPeriod>0 sec</schedulingPeriod>
+        <schedulingStrategy>TIMER_DRIVEN</schedulingStrategy>
+        <yieldDuration>1 sec</yieldDuration>
+      </config>
+      <name>PutFile(logs)</name>
+      <relationships>
+        <autoTerminate>true</autoTerminate>
+        <name>failure</name>
+      </relationships>
+      <relationships>
+        <autoTerminate>true</autoTerminate>
+        <name>success</name>
+      </relationships>
+      <style></style>
+      <type>org.apache.nifi.processors.standard.PutFile</type>
+    </processors>
+    <processors>
+      <id>0cb74bd5-f0a7-3f6a-0000-000000000000</id>
+      <parentGroupId>225026b9-7e78-35c2-0000-000000000000</parentGroupId>
+      <position>
+        <x>382.0</x>
+        <y>390.0</y>
+      </position>
+      <bundle>
+        <artifact>nifi-standard-nar</artifact>
+        <group>org.apache.nifi</group>
+        <version>1.2.0.3.0.2.0-76</version>
+      </bundle>
+      <config>
+        <bulletinLevel>WARN</bulletinLevel>
+        <comments></comments>
+        <concurrentlySchedulableTaskCount>1</concurrentlySchedulableTaskCount>
+        <descriptors>
+          <entry>
+            <key>Directory</key>
+            <value>
+              <name>Directory</name>
+            </value>
+          </entry>
+          <entry>
+            <key>Conflict Resolution Strategy</key>
+            <value>
+              <name>Conflict Resolution Strategy</name>
+            </value>
+          </entry>
+          <entry>
+            <key>Create Missing Directories</key>
+            <value>
+              <name>Create Missing Directories</name>
+            </value>
+          </entry>
+          <entry>
+            <key>Maximum File Count</key>
+            <value>
+              <name>Maximum File Count</name>
+            </value>
+          </entry>
+          <entry>
+            <key>Last Modified Time</key>
+            <value>
+              <name>Last Modified Time</name>
+            </value>
+          </entry>
+          <entry>
+            <key>Permissions</key>
+            <value>
+              <name>Permissions</name>
+            </value>
+          </entry>
+          <entry>
+            <key>Owner</key>
+            <value>
+              <name>Owner</name>
+            </value>
+          </entry>
+          <entry>
+            <key>Group</key>
+            <value>
+              <name>Group</name>
+            </value>
+          </entry>
+        </descriptors>
+        <executionNode>ALL</executionNode>
+        <lossTolerant>false</lossTolerant>
+        <penaltyDuration>30 sec</penaltyDuration>
+        <properties>
+          <entry>
+            <key>Directory</key>
+            <value>/home/nifi/nifi_output/truck_events</value>
+          </entry>
+          <entry>
+            <key>Conflict Resolution Strategy</key>
+            <value>fail</value>
+          </entry>
+          <entry>
+            <key>Create Missing Directories</key>
+            <value>true</value>
+          </entry>
+          <entry>
+            <key>Maximum File Count</key>
+          </entry>
+          <entry>
+            <key>Last Modified Time</key>
+          </entry>
+          <entry>
+            <key>Permissions</key>
+          </entry>
+          <entry>
+            <key>Owner</key>
+          </entry>
+          <entry>
+            <key>Group</key>
+          </entry>
+        </properties>
+        <runDurationMillis>0</runDurationMillis>
+        <schedulingPeriod>0 sec</schedulingPeriod>
+        <schedulingStrategy>TIMER_DRIVEN</schedulingStrategy>
+        <yieldDuration>1 sec</yieldDuration>
+      </config>
+      <name>PutFile(truck_events)</name>
+      <relationships>
+        <autoTerminate>true</autoTerminate>
+        <name>failure</name>
+      </relationships>
+      <relationships>
+        <autoTerminate>true</autoTerminate>
+        <name>success</name>
+      </relationships>
+      <style></style>
+      <type>org.apache.nifi.processors.standard.PutFile</type>
+    </processors>
+    <processors>
+      <id>2da90358-ea06-3a34-0000-000000000000</id>
+      <parentGroupId>225026b9-7e78-35c2-0000-000000000000</parentGroupId>
+      <position>
+        <x>544.0</x>
+        <y>193.0</y>
+      </position>
+      <bundle>
+        <artifact>nifi-standard-nar</artifact>
+        <group>org.apache.nifi</group>
+        <version>1.2.0.3.0.2.0-76</version>
+      </bundle>
+      <config>
+        <bulletinLevel>WARN</bulletinLevel>
+        <comments></comments>
+        <concurrentlySchedulableTaskCount>1</concurrentlySchedulableTaskCount>
+        <descriptors>
+          <entry>
+            <key>Merge Strategy</key>
+            <value>
+              <name>Merge Strategy</name>
+            </value>
+          </entry>
+          <entry>
+            <key>Merge Format</key>
+            <value>
+              <name>Merge Format</name>
+            </value>
+          </entry>
+          <entry>
+            <key>Attribute Strategy</key>
+            <value>
+              <name>Attribute Strategy</name>
+            </value>
+          </entry>
+          <entry>
+            <key>Correlation Attribute Name</key>
+            <value>
+              <name>Correlation Attribute Name</name>
+            </value>
+          </entry>
+          <entry>
+            <key>mergecontent-metadata-strategy</key>
+            <value>
+              <name>mergecontent-metadata-strategy</name>
+            </value>
+          </entry>
+          <entry>
+            <key>Minimum Number of Entries</key>
+            <value>
+              <name>Minimum Number of Entries</name>
+            </value>
+          </entry>
+          <entry>
+            <key>Maximum Number of Entries</key>
+            <value>
+              <name>Maximum Number of Entries</name>
+            </value>
+          </entry>
+          <entry>
+            <key>Minimum Group Size</key>
+            <value>
+              <name>Minimum Group Size</name>
+            </value>
+          </entry>
+          <entry>
+            <key>Maximum Group Size</key>
+            <value>
+              <name>Maximum Group Size</name>
+            </value>
+          </entry>
+          <entry>
+            <key>Max Bin Age</key>
+            <value>
+              <name>Max Bin Age</name>
+            </value>
+          </entry>
+          <entry>
+            <key>Maximum number of Bins</key>
+            <value>
+              <name>Maximum number of Bins</name>
+            </value>
+          </entry>
+          <entry>
+            <key>Delimiter Strategy</key>
+            <value>
+              <name>Delimiter Strategy</name>
+            </value>
+          </entry>
+          <entry>
+            <key>Header File</key>
+            <value>
+              <name>Header File</name>
+            </value>
+          </entry>
+          <entry>
+            <key>Footer File</key>
+            <value>
+              <name>Footer File</name>
+            </value>
+          </entry>
+          <entry>
+            <key>Demarcator File</key>
+            <value>
+              <name>Demarcator File</name>
+            </value>
+          </entry>
+          <entry>
+            <key>Compression Level</key>
+            <value>
+              <name>Compression Level</name>
+            </value>
+          </entry>
+          <entry>
+            <key>Keep Path</key>
+            <value>
+              <name>Keep Path</name>
+            </value>
+          </entry>
+        </descriptors>
+        <executionNode>ALL</executionNode>
+        <lossTolerant>false</lossTolerant>
+        <penaltyDuration>30 sec</penaltyDuration>
+        <properties>
+          <entry>
+            <key>Merge Strategy</key>
+            <value>Bin-Packing Algorithm</value>
+          </entry>
+          <entry>
+            <key>Merge Format</key>
+            <value>Binary Concatenation</value>
+          </entry>
+          <entry>
+            <key>Attribute Strategy</key>
+            <value>Keep Only Common Attributes</value>
+          </entry>
+          <entry>
+            <key>Correlation Attribute Name</key>
+          </entry>
+          <entry>
+            <key>mergecontent-metadata-strategy</key>
+            <value>Do Not Merge Uncommon Metadata</value>
+          </entry>
+          <entry>
+            <key>Minimum Number of Entries</key>
+            <value>50</value>
+          </entry>
+          <entry>
+            <key>Maximum Number of Entries</key>
+            <value>70</value>
+          </entry>
+          <entry>
+            <key>Minimum Group Size</key>
+            <value>0 B</value>
+          </entry>
+          <entry>
+            <key>Maximum Group Size</key>
+          </entry>
+          <entry>
+            <key>Max Bin Age</key>
+          </entry>
+          <entry>
+            <key>Maximum number of Bins</key>
+            <value>5</value>
+          </entry>
+          <entry>
+            <key>Delimiter Strategy</key>
+            <value>Filename</value>
+          </entry>
+          <entry>
+            <key>Header File</key>
+          </entry>
+          <entry>
+            <key>Footer File</key>
+          </entry>
+          <entry>
+            <key>Demarcator File</key>
+          </entry>
+          <entry>
+            <key>Compression Level</key>
+            <value>1</value>
+          </entry>
+          <entry>
+            <key>Keep Path</key>
+            <value>false</value>
+          </entry>
+        </properties>
+        <runDurationMillis>0</runDurationMillis>
+        <schedulingPeriod>0 sec</schedulingPeriod>
+        <schedulingStrategy>TIMER_DRIVEN</schedulingStrategy>
+        <yieldDuration>1 sec</yieldDuration>
+      </config>
+      <name>MergeContent(truck_events)</name>
+      <relationships>
+        <autoTerminate>true</autoTerminate>
+        <name>failure</name>
+      </relationships>
+      <relationships>
+        <autoTerminate>false</autoTerminate>
+        <name>merged</name>
+      </relationships>
+      <relationships>
+        <autoTerminate>true</autoTerminate>
+        <name>original</name>
+      </relationships>
+      <style></style>
+      <type>org.apache.nifi.processors.standard.MergeContent</type>
+    </processors>
+    <processors>
+      <id>3871232c-76a8-35f3-0000-000000000000</id>
+      <parentGroupId>225026b9-7e78-35c2-0000-000000000000</parentGroupId>
+      <position>
+        <x>558.0</x>
+        <y>8.0</y>
+      </position>
+      <bundle>
+        <artifact>nifi-standard-nar</artifact>
+        <group>org.apache.nifi</group>
+        <version>1.2.0.3.0.2.0-76</version>
+      </bundle>
+      <config>
+        <bulletinLevel>WARN</bulletinLevel>
+        <comments></comments>
+        <concurrentlySchedulableTaskCount>1</concurrentlySchedulableTaskCount>
+        <descriptors>
+          <entry>
+            <key>Match Requirement</key>
+            <value>
+              <name>Match Requirement</name>
+            </value>
+          </entry>
+          <entry>
+            <key>Character Set</key>
+            <value>
+              <name>Character Set</name>
+            </value>
+          </entry>
+          <entry>
+            <key>Content Buffer Size</key>
+            <value>
+              <name>Content Buffer Size</name>
+            </value>
+          </entry>
+          <entry>
+            <key>search_for_truck_event_data</key>
+            <value>
+              <name>search_for_truck_event_data</name>
+            </value>
+          </entry>
+        </descriptors>
+        <executionNode>ALL</executionNode>
+        <lossTolerant>false</lossTolerant>
+        <penaltyDuration>30 sec</penaltyDuration>
+        <properties>
+          <entry>
+            <key>Match Requirement</key>
+            <value>content must contain match</value>
+          </entry>
+          <entry>
+            <key>Character Set</key>
+            <value>UTF-8</value>
+          </entry>
+          <entry>
+            <key>Content Buffer Size</key>
+            <value>1 MB</value>
+          </entry>
+          <entry>
+            <key>search_for_truck_event_data</key>
+            <value>(Normal)|(Overspeed)|(Lane Departure)|(Unsafe tail distance)|(Unsafe following distance)</value>
+          </entry>
+        </properties>
+        <runDurationMillis>0</runDurationMillis>
+        <schedulingPeriod>0 sec</schedulingPeriod>
+        <schedulingStrategy>TIMER_DRIVEN</schedulingStrategy>
+        <yieldDuration>1 sec</yieldDuration>
+      </config>
+      <name>RouteOnContent</name>
+      <relationships>
+        <autoTerminate>false</autoTerminate>
+        <name>search_for_truck_event_data</name>
+      </relationships>
+      <relationships>
+        <autoTerminate>false</autoTerminate>
+        <name>unmatched</name>
+      </relationships>
+      <style></style>
+      <type>org.apache.nifi.processors.standard.RouteOnContent</type>
+    </processors>
+  </snippet>
+  <timestamp>01/18/2018 22:40:17 UTC</timestamp>
+</template>

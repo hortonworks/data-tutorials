@@ -10,7 +10,7 @@ In this tutorial, we are going to set up all the services required to run the Co
 
 ## Prerequisites
 
-- Downloaded and Installed latest [Hortonworks Sandbox](https://hortonworks.com/products/hortonworks-sandbox/#install)
+- Downloaded and Installed latest [HDF Sandbox](https://hortonworks.com/products/hortonworks-sandbox/#install)
 - If you are new to the sandbox shell, refer to [Learning the Ropes of the Hortonworks Sandbox](https://hortonworks.com/tutorial/learning-the-ropes-of-the-hortonworks-sandbox/)
 - We recommend you have some experience with Java Concepts, Syntax and OOP, refer to this [Intro to Java Programming Course](https://www.udacity.com/course/intro-to-java-programming--cs046) if you are interested in building a strong foundation.
 - Memory must be at least 8GB RAM, preferably 4 processor cores, else errors may occur in fourth tutorial
@@ -189,15 +189,16 @@ ssh root@sandbox.hortonworks.com -p 2222
 code and configuration properties required for storm to deploy the topology.
 
 ~~~
-cd ~
+cd /home/nifi
 git clone -b hdp25experiment https://github.com/james94/iot-truck-streaming
+chown -R nifi:hadoop iot-truck-streaming/
 ~~~
 
 7\. Navigate to the iot-truck-streaming folder, which is the location where the
 appropriate storm configuration files reside for configuring our topology.
 
 ~~~
-cd ~/iot-truck-streaming
+cd /home/nifi/iot-truck-streaming
 ~~~
 
 8\. Since we are at the base of our project, let’s export our storm demo
@@ -244,7 +245,7 @@ ssh root@sandbox.hortonworks.com -p 2222
 so we can activate the simulator by shell or NiFi later. Execute the command:
 
 ~~~
-cd ~/iot-truck-streaming
+cd /home/nifi/iot-truck-streaming
 ./setup/bin/install_maven.sh
 ~~~
 
@@ -278,7 +279,7 @@ You should see message data generated. The data in the image includes logs as ca
 
 ![generate_sh_data](assets/lab0-nifi/generateSH_data_logs_truckevents_iot.png)
 
-> Note: generate.sh runs java source code located at `iot-truck-streaming/stream-simulator/src/main/java/com/hortonworks/streaming/impl/collectors/StdOutEventCollector.java`. If you would like to see modify/run the code.
+> Note: generate.sh runs java source code located at `/home/nifi/iot-truck-streaming/stream-simulator/src/main/java/com/hortonworks/streaming/impl/collectors/StdOutEventCollector.java`. If you would like to see modify/run the code.
 
 ## Section 5: Setup Intellij IDE Locally and Run Topologies on Sandbox  <a id="setup-intellij-locally"></a>
 
