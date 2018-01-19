@@ -5,12 +5,12 @@ tutorial-id: 820
 experience: Advanced
 persona: Data Scientist & Analyst
 source: Hortonworks
-use case: Streaming
-technology: Apache NiFi, MiNiFi, Raspberry Pi, Hortonworks Connected Data Architecture, Zookeeper, HBase, Phoenix, Zeppelin, IoT, Weather]
-release: hdp-2.6.1, hdf-3.0.0
+use case: Internet of Things
+technology: Apache NiFi, MiNiFi, Raspberry Pi, Apache Zookeeper, Apache HBase, Apache Phoenix
+release: hdp-2.6.4, hdf-3.0.2
 environment: Sandbox
-product: HDF, HDP
-series: HDF > Develop with Hadoop > Real World Examples, HDF > Hadoop for Data Scientists & Analysts > Real World Examples, HDP > Develop with Hadoop > Real World Examples, HDP > Hadoop for Data Scientists & Analysts > Real World Examples
+product: HDF
+series: HDF > Hadoop for Data Scientists & Analysts > Real World Examples
 ---
 
 # Analyze IoT Weather Station Data via Connected Data Architecture
