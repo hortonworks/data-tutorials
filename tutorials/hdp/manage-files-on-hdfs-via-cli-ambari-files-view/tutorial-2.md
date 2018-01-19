@@ -12,7 +12,7 @@ In the previous tutorial, we learned to manage files on the Hadoop Distributed F
 
 ## Prerequisites
 
--   Downloaded and Installed latest [Hortonworks Sandbox](https://hortonworks.com/products/hortonworks-sandbox/#install)
+-   Downloaded and Installed latest [HDP Sandbox](https://hortonworks.com/downloads/#sandbox)
 -   If you're planning to deploy your sandbox on Azure, refer to this tutorial: [Deploying the Sandbox on Azure](https://hortonworks.com/hadoop-tutorial/deploying-hortonworks-sandbox-on-microsoft-azure/)
 -   [Learning the Ropes of the Hortonworks Sandbox](https://hortonworks.com/hadoop-tutorial/learning-the-ropes-of-the-hortonworks-sandbox/)
 -   Allow yourself around **1 hour** to complete this tutorial.
@@ -26,11 +26,9 @@ Open a terminal on your local machine, copy and paste the commands to download t
 ~~~
 cd ~/Downloads
 # download sf-salaries-2011-2013
-wget
-https://raw.githubusercontent.com/hortonworks/data-tutorials/893ba0221e2c76c91e9e2baa030323a42abcdf09/tutorials/hdp/hdp-2.5/manage-files-on-hdfs-via-cli-ambari-files-view/assets/sf-salary-datasets/sf-salaries-2011-2013.csv
+wget https://github.com/hortonworks/data-tutorials/raw/master/tutorials/hdp/manage-files-on-hdfs-via-cli-ambari-files-view/assets/sf-salary-datasets/sf-salaries-2011-2013.csv
 # download sf-salaries-2014
-wget
-https://raw.githubusercontent.com/hortonworks/data-tutorials/893ba0221e2c76c91e9e2baa030323a42abcdf09/tutorials/hdp/hdp-2.5/manage-files-on-hdfs-via-cli-ambari-files-view/assets/sf-salary-datasets/sf-salaries-2014.csv
+wget https://github.com/hortonworks/data-tutorials/raw/master/tutorials/hdp/manage-files-on-hdfs-via-cli-ambari-files-view/assets/sf-salary-datasets/sf-salaries-2014.csv
 mkdir sf-salary-datasets
 mv sf-salaries-2011-2013.csv sf-salaries-2014.csv sf-salary-datasets/
 ~~~
@@ -157,7 +155,7 @@ Copy file or directories recursively means all the directory's files and subdire
 
 ## Summary
 
-Congratulations! We just learned to use the Files View to manage our **sf-salaries-2011-2013.csv** and **sf-salaries-2014.csv** dataset files in HDFS. We learned to create, upload and list the the contents in our directories. We also acquired the skills to download files from HDFS to our local file system and explored a few advanced features of HDFS file management.
+Congratulations! We just learned to use the Files View to manage our **sf-salaries-2011-2013.csv** and **sf-salaries-2014.csv** dataset files in HDFS. We learned to create, upload and list the contents in our directories. We also acquired the skills to download files from HDFS to our local file system and explored a few advanced features of HDFS file management.
 
 ## Further Reading
 

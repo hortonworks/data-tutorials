@@ -11,7 +11,7 @@ title: Manage Files on HDFS with the Command Line
 In this tutorial, we will walk through many of the common of the basic Hadoop Distributed File System (HDFS) commands you will need to manage files on HDFS. The particular datasets we will utilize to learn HDFS file management are San Francisco salaries from 2011-2014.
 
 ## Prerequisites
--   Downloaded and Installed latest [Hortonworks Sandbox](https://hortonworks.com/products/hortonworks-sandbox/#install)
+-   Downloaded and Installed latest [HDP Sandbox](https://hortonworks.com/downloads/#sandbox)
 -   If you're planning to deploy your sandbox on Azure, refer to this tutorial: [Deploying the Sandbox on Azure](https://hortonworks.com/hadoop-tutorial/deploying-hortonworks-sandbox-on-microsoft-azure/)
 -   [Learning the Ropes of the Hortonworks Sandbox](https://hortonworks.com/hadoop-tutorial/learning-the-ropes-of-the-hortonworks-sandbox/)
 -   Allow yourself around **1 hour** to complete this tutorial.
@@ -26,15 +26,15 @@ We will download **sf-salaries-2011-2013.csv** and **sf-salaries-2014.csv** data
 ssh root@127.0.0.1 -p 2222
 ~~~
 
-> Note: If your on VMware or Azure, insert your appropriate ip address in place of 127.0.0.1. Azure users will need to replace port 2222 with 22.
+> Note: If you're on VMware or Azure, insert your appropriate IP address in place of 127.0.0.1. Azure users will need to replace port 2222 with 22.
 
 2\. Copy and paste the commands to download the **sf-salaries-2011-2013.csv** and **sf-salaries-2014.csv** files. We will use them while we learn file management operations.
 
 ~~~
 # download sf-salaries-2011-2013
-wget https://raw.githubusercontent.com/hortonworks/data-tutorials/893ba0221e2c76c91e9e2baa030323a42abcdf09/tutorials/hdp/hdp-2.5/manage-files-on-hdfs-via-cli-ambari-files-view/assets/sf-salary-datasets/sf-salaries-2011-2013.csv
+wget https://github.com/hortonworks/data-tutorials/raw/master/tutorials/hdp/manage-files-on-hdfs-via-cli-ambari-files-view/assets/sf-salary-datasets/sf-salaries-2011-2013.csv
 # download sf-salaries-2014
-wget https://raw.githubusercontent.com/hortonworks/data-tutorials/893ba0221e2c76c91e9e2baa030323a42abcdf09/tutorials/hdp/hdp-2.5/manage-files-on-hdfs-via-cli-ambari-files-view/assets/sf-salary-datasets/sf-salaries-2014.csv
+wget https://github.com/hortonworks/data-tutorials/raw/master/tutorials/hdp/manage-files-on-hdfs-via-cli-ambari-files-view/assets/sf-salary-datasets/sf-salaries-2014.csv
 ~~~
 
 ![sf_salary_datasets](assets/sf_salary_datasets.png)
@@ -44,7 +44,7 @@ wget https://raw.githubusercontent.com/hortonworks/data-tutorials/893ba0221e2c76
 -   [Step 2: Find Out Space Utilization in a HDFS Directory](#find-out-space-utilization-in-a-hdfs-directory)
 -   [Step 3: Download Files From HDFS to Local File System](#download-files-hdfs-to-local-file-system)
 -   [Step 4: Explore Two Advanced Features](#explore-two-advanced-features)
--   [Step 5: Use Help Command to access Hadoop Command Manual](#use-help-command-access-hadoop-command-manual)
+-   [Step 5: Use Help Command to Access Hadoop Command Manual](#use-help-command-access-hadoop-command-manual)
 -   [Summary](#summary)
 -   [Further Reading](#further-reading)
 
@@ -84,7 +84,7 @@ exit
 
 ### hdfs dfs -mkdir:
 
-*   Takes the path uri's as an argument and creates a directory or multiple directories.
+*   Takes the path URI's as an argument and creates a directory or multiple directories.
 
 ~~~
 # Usage:
@@ -130,7 +130,7 @@ exit
 
 ~~~
 # Usage:
-        # hdfs dfs -du URI
+    # hdfs dfs -du URI
 # Example:
         hdfs dfs -du  /user/hadoop/ /user/hadoop/sf-salaries-2011-2013/sf-salaries-2011-2013.csv
 ~~~
@@ -156,7 +156,7 @@ exit
 
 *   Takes a source directory file or files as input and concatenates files in src into the local destination file.
 *   Concatenates files in the same directory or from multiple directories as long as we specify their location and outputs them to the local file system, as can be seen in the **Usage** below.
-*   Let's concatenate the san francisco salaries from two separate directory and output them to our local filesystem. Our result will be the salaries from 2014 are appended below the last row of 2011-2013.
+*   Let's concatenate the San Francisco salaries from two separate directories and output them to our local filesystem. Our result will be the salaries from 2014 which are appended below the last row of 2011-2013.
 
 ~~~
 # Usage:
