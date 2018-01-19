@@ -6,8 +6,8 @@ experience: Beginner
 persona: Administrator
 source: Hortonworks
 use case: Single View
-technology: Apache Ambari, Apache Storm, Apache Superset, Apache NiFi, Schema Registry, Stream Analytics Manager
-release: hdf-3.0.1.1
+technology: Apache Ambari, Apache Storm, Apache Superset, Apache NiFi, Schema Registry, Streaming Analytics Manager
+release: hdf-3.0.2
 environment: Sandbox
 product: HDF
 series: HDF > Develop with Hadoop > Hello World
