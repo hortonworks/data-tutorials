@@ -48,13 +48,15 @@ Then click on `Configs` tab and search `atlas.hook.hive.synchronous` in the filt
 
 ![search_hive_config](assets/search_hive_config.png)
 
-This property takes a boolean value and specifies whether to run the Atlas-Hive hook synchronously or not. By default, it is false, change it to `true` so that you can capture the lineage for hive operations. Click `Save` after you make the change.
+This property takes a boolean value and specifies whether to run the Atlas-Hive hook synchronously or not. By default, it is false, change it to `true` so that you can capture the lineage for hive operations.
 
-![save_hive_config](assets/save_hive_config.png)
+![save_hive_config](assets/save_hive_config.jpg)
 
-Write **Atlas-hive hook enabled** in the prompt and then proceed with saving the change. You have to Restart Hive now. Click on `Restart` and then `Restart All Affected`.
+Next search `hive.warehouse.subdir.inherit.perms` in the filter text box. This property takes a boolean value too. By default it is set to `true`, change it to `false` to avoid **AccessControlException** since HDP 2.5 and up comes with a patch for [BUG-55664](https://hortonworks.jira.com/browse/BUG-55664) that adds HIVE_WAREHOUSE_INHERIT_PERMS, which was not part of HDP 2.4. Thus, the hive table directories permissions will be derived from dfs umask.
 
-![restart_hive](assets/restart_hive.png)
+![hive_warehouse_perms_config](assets/hive_warehouse_perms_config.jpg)
+
+Click `Save` after you make the change. Write **Atlas-hive hook enabled** in the prompt and then proceed with saving the change. You have to Restart Hive now. Click on `Restart` and then `Restart All Affected`.
 
 ## 2: Start Kafka, Storm, HBase, Ambari Infra and Atlas <a id="start-services"></a>
 
@@ -140,6 +142,18 @@ cat 001-setup-mysql.sql | mysql -u root -p
 
 ### 3.4: Run the SQOOP Job
 
+Before we run the sqoop job, let's **configure the Atlas Sqoop Hook** via commands:
+
+~~~
+cp /etc/atlas/conf/atlas-application.properties /etc/sqoop/conf
+ln -s /usr/hdp/2.6.4.0-71/atlas/hook/sqoop/*.jar /usr/hdp/2.6.4.0-71/sqoop/lib/
+~~~
+
+- cp copies atlas configuration properties to sqoop configuration directory
+- ln links atlas sqoop-hook library to sqoop library folder
+
+If you want to read up on Sqoop Hook from the documentation, visit [Sqoop Atlas Bridge](http://atlas.apache.org/Bridge-Sqoop.html).
+
 Run the below command in your terminal. It is a **sqoop import** command to transfer the data from mysql table **test_table_sqoop1** to the hive table **test_hive_table1**. The hive table do not have to be pre-created, it would be created on fly.
 
 ~~~
@@ -169,24 +183,24 @@ cat 003-ctas-hive.sql | beeline -u "jdbc:hive2://localhost:10000/default" -n hiv
 
 ### 3.6: View ATLAS UI for the lineage
 
-Click on http://127.0.0.1:21000. Credentials are:
+Click on http://sandbox-hdp.hortonworks.com:21000. Credentials are:
 
 User name - **holger_gov**
 Password - **holger_gov**
 
 ![atlas_login](assets/atlas_login.png)
 
-Click on `Search` tab and type **cur_hive_table1**
+Click on `Search by Text` and type **cur_hive_table1**
 
-![search_hive_table](assets/search_hive_table.png)
+![search_hive_table](assets/search_hive_table.jpg)
 
 You will see the lineage like given below. You can hover at each one of them to see the operations performed:
 
-![hive_lineage](assets/hive_lineage.png)
+![hive_lineage](assets/hive_lineage.jpg)
 
 ## 4: Kafka – Storm Lineage <a id="kafka-storm-lineage"></a>
 
-The following steps will show the lineage of data between Kafka topic **my-topic-01** to Storm topology **storm-demo-topology-01**, which stores the output in the HDFS folder (/user/storm/storm-hdfs-test).
+The following steps will show the lineage of data between Kafka topic **my-topic-01** to Storm topology **storm-demo-topology-01**, which stores the output in the HDFS folder (`/user/storm/storm-hdfs-test`).
 
 ### 4.1: Create a Kafka topic to be used in the demo
 
