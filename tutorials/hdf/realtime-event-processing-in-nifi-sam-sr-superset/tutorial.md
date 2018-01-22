@@ -31,7 +31,8 @@ In this tutorial, you will learn how to deploy a modern real-time streaming appl
 - [Step 1: Explore Dataflow Application](#step-1-explore-dataflow-application)
 - [Step 2: View Schema Registry](#step-2-view-schema-registry)
 - [Step 3: Analyze Stream Analytics Application](#step-3-analyze-stream-analytics-application)
-- [Step 4: Visualize Trucking Data Via Superset](#step-4-visualize-trucking-data-via-superset)
+- [Step 4: View the Storm Engine that Powers SAM](#step-4-view-the-storm-engine-that-powers-sam)
+- [Step 5: Visualize Trucking Data Via Superset](#step-5-visualize-trucking-data-via-superset)
 - [Summary](#summary)
 - [Further Reading](#further-reading)
 - [Appendix A: Trucking IoT Github Repo](#appendix-a-trucking-iot-github-repo)
@@ -48,7 +49,15 @@ Druid is an open source analytics database developed for business intelligence q
 
 ### Stream Analytics Manager (SAM)
 
-Stream Analytics Manager is a drag and drop program that enables stream processing developers to build data topologies within minutes compared to traditional practice of writing several lines of code. Now users can configure and optimize how they want each component or processor to perform computations on the data. They can perform windowing, joining multiple streams together and other data manipulation. SAM currently supports the stream processing engine known as Apache Storm, but it will later support other engines such as Spark and Flink. At that time, it will be the users choice on which stream processing engine they want to choose.
+Stream Analytics Manager is a drag and drop program that enables stream processing developers to build data topologies within minutes compared to traditional practice of writing several lines of code. A topology is a **directed acyclic graph (DAG)** of processors. Now users can configure and optimize how they want each component or processor to perform computations on the data. They can perform windowing, joining multiple streams together and other data manipulation. SAM currently supports the stream processing engine known as Apache Storm, but it will later support other engines such as Spark and Flink. At that time, it will be the users choice on which stream processing engine they want to choose.
+
+### Apache Storm
+
+Apache Storm is the current backend computational processing engine for Stream Analytics Manager. After the user builds their SAM topology, all the actually processing of data happens in a Storm topology, which is also a **DAG**, but is comprised of spouts and bolts with streams of tuples representing the edges.
+
+A **spout** ingests the data usually from a Kafka Topic into the topology while **bolts** do all the processing. Thus, all the same components from the SAM topology are represented in the Storm topology, but as appropriate spouts and bolts.
+
+Storm is the Open Source distributed, reliable, fault-tolerant system that handles real time analytics, scoring machine learning models, continuous static computations and enforcing Extract, Transform and Load (ETL) paradigms.
 
 ### Schema Registry
 
@@ -80,7 +89,7 @@ The Trucking IoT data comes from a truck events simulator that is ingested by Ap
 
 All controller services referencing **HortonworksSchemaRegistry** will also be enabled. Head back to the NiFi Dataflow.
 
-7\. Select all the processors in the NiFi Dataflow and click on the start button ![nifi_start](assets/images/nifi_start.jpg).
+7\. Press `command+A` or `control+A` to select all the processors in the NiFi Dataflow and click on the start button ![nifi_start](assets/images/nifi_start.jpg).
 
 ![nifi-to-2kafka-2schemas](assets/images/nifi-to-2kafka-2schemas.jpg)
 
@@ -168,7 +177,15 @@ A window will appear asking if you want to continue deployment, choose Ok.
 
 ![trucking_iot_sam_topology](assets/images/trucking_iot_sam_topology.jpg)
 
-Overview of the **7 processors** in the SAM topology:
+**Overview of the SAM Canvas:**
+
+- My Applications: Different Topology Projects
+- 1st Left Sidebar: My Applications, Dashboard, Schema Registry, Model Registry, Configuration
+- 2nd Left Sidebar: Different stream components (source, processor, sink)
+- Gear Icon: configure topology settings
+- Status Icon: Start or Stop Topology
+
+**Overview of SAM topology:**
 
 - **TruckingDataTraffic** source data of "trucking_data_traffic" kafka topic
 
@@ -184,9 +201,31 @@ Overview of the **7 processors** in the SAM topology:
 
 - **Data-Lake-HDFS** store violation events into HDFS
 
-### Step 4: Visualize Trucking Data Via Superset
+### Step 4: View the Storm Engine that Powers SAM
 
-1\. Open Ambari at `http://sandbox-hdf.hortonworks.com:8080/`
+1\. From Ambari, go to the **views 9 selector** icon and select **Storm View**.
+
+![storm_view_dashboard](assets/images/storm_view_dashboard.jpg)
+
+2\. Click on Topology Name: **streamline-1-Trucking-IoT-Demo**.
+
+![storm_topology](assets/images/storm_topology.jpg)
+
+**Overview of the Storm View**
+
+You can see the total number of **Emitted** `(2081)` and **Transferred** `(3719)` tuples after `10m 0s` under **TOPOLOGY STATS** for the entire topology. You can also see individual emitted and transferred tuples for each individual Spout and Bolt in the topology increase. If we hover over one of the spouts or bolts on the graph, we can see how much data they process and their latency.
+
+- Topology Summary
+- Topology Stats
+- Topology Static Visualization
+- Spout
+- Bolts
+- Topology Configuration
+
+### Step 5: Visualize Trucking Data Via Superset
+
+1\. Open Ambari at `http://sandbox-hdf.hortonworks.com:8080/`. User credentials are `username/password = admin/admin`
+
 
 2\. Turn on the HDFS, YARN, Druid and Superset services and make sure to turn off maintenance mode.
 
