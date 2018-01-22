@@ -1,5 +1,5 @@
 ---
-title: Real-Time Event Processing In NiFi, SAM, Schema Registry and SuperSet (Mac/Linux)
+title: Real-Time Event Processing In NiFi, SAM, Schema Registry and SuperSet
 author: James Medel
 tutorial-id: 830
 experience: Advanced
