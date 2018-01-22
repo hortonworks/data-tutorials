@@ -7,7 +7,7 @@ persona: Data Scientist & Analyst
 source: Hortonworks
 use case: Streaming
 technology: Apache NiFi, Apache Storm, Apache Kafka, Streaming Analytics Manager, Schema Registry, Apache SuperSet, Druid
-release: hdf-3.0.1.1
+release: hdf-3.0.2
 environment: Sandbox
 product: HDF
 series: HDF > Develop with Hadoop > Real World Examples
