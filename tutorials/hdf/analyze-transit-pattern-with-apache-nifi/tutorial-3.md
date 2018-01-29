@@ -6,7 +6,7 @@ title: Build a NiFi Process Group to Simulate NextBus API
 
 ## Introduction
 
-You will build a portion of the NiFi DataFlow in a process group to simulate the NextBus API transit feed and check the data generating from the simulator.
+You will build a NiFi DataFlow and package it into a process group to simulate the NextBus API transit feed and check the data generating from the simulator.
 
 ![sf_ocean_view_route_nifi_streaming](assets/tutorial-3-build-a-nifi-process-group-to-simulate-nextbus-api/live_stream_sf_muni_nifi_learning_ropes.png)
 

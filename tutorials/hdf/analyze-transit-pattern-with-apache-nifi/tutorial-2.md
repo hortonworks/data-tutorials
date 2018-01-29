@@ -22,40 +22,29 @@ With the HDF Sandbox, Apache NiFi comes preinstalled in the Ambari Stack and pre
 
 ### Step 1: Open HDF Splash Page
 
-1\. Open `sandbox-hdf.hortonworks.com:8888` with your favorite web browser:
+1\. Open `sandbox-hdf.hortonworks.com:1080` with your favorite web browser:
 
-![hdf_splash_screen](assets/tutorial-2-launch-nifi-html-ui/hdf_splash_screen.png)
+![hdf_splash_screen](assets/tutorial-2-launch-nifi-html-ui/hdf_splash_screen.jpg)
 
-**Figure 1:** HDF Splash Page
-
-If this is your first time starting NiFi, refer to **Approach 1** to launch NiFi HTML UI from Ambari.
-Else go to **Approach 2** to quickly launch NiFi HTML UI via HDF Splash Screen.
+Choose either approach to access NiFi UI.
 
 ### Approach 1: Access NiFi HTML UI via Ambari Dashboard
 
 1\. Select the **LAUNCH DASHBOARD** button
 
-2\. Login to Ambari UI with credentials (admin/admin).
+2\. Type `admin/admin` to login to Ambari.
 
 ![login_ambari_ui.png](assets/tutorial-2-launch-nifi-html-ui/approach-1-ambari/login_ambari_ui.png)
-
-**Figure 2:** Ambari Login Page
 
 3\. Verify the NiFi Service is running, it should have a green check mark:
 
 ![verify_nifi_running.png](assets/tutorial-2-launch-nifi-html-ui/approach-1-ambari/verify_nifi_running.png)
 
-**Figure 3:** NiFi is Running Indicated by Green Check Symbol
-
 4\. Select the **NiFi Service**, click on **Quick Links** dropdown and press the **NiFi UI**:
 
-![open-nifi-ui-via-ambari.png](assets/tutorial-2-launch-nifi-html-ui/approach-1-ambari/open-nifi-ui-via-ambari.png)
-
-**Figure 4:** Launch NiFi UI from Ambari Quick Link
+![open-nifi-ui-via-ambari.png](assets/tutorial-2-launch-nifi-html-ui/approach-1-ambari/open-nifi-ui-via-ambari.jpg)
 
 ![open_nifi_html_interface.png](assets/tutorial-2-launch-nifi-html-ui/approach-1-ambari/open_nifi_html_interface.png)
-
-**Figure 5:** NiFi HTML UI
 
 ### Approach 2: Launch NiFi HTML UI from HDF Splash Quick Links
 
@@ -65,11 +54,7 @@ Else go to **Approach 2** to quickly launch NiFi HTML UI via HDF Splash Screen.
 
 ![splash_nifi_quicklink](assets/tutorial-2-launch-nifi-html-ui/approach-2-splash/splash_nifi_quicklink.png)
 
-**Figure 6:** Go to UI NiFi 1.2.0
-
 ![open_nifi_html_interface.png](assets/tutorial-2-launch-nifi-html-ui/approach-2-splash/open_nifi_html_interface.png)
-
-**Figure 7:** NiFi HTML UI
 
 ## Summary
 
