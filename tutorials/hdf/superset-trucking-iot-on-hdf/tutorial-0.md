@@ -3,11 +3,11 @@ title: Superset in Trucking IoT on HDF
 author: James Medel
 tutorial-id: 808
 experience: Beginner
-persona: Data Science
+persona: Data Analyst
 source: Hortonworks
 use case: Data Visualization
 technology: Apache Superset
-release: hdf-3.0
+release: hdf-3.0.2
 environment: Sandbox
 product: HDF
 series: HDF > Hadoop For Data Scientists & Analysts > Real World Examples
@@ -17,9 +17,15 @@ series: HDF > Hadoop For Data Scientists & Analysts > Real World Examples
 
 ## Introduction
 
-This tutorial will cover core concepts of Data Visualization and the role Superset plays in an environment in which clearly communicating the information about the data visually is important.
+Superset is a Business Intelligence tool packaged with many features for designing, maintaining and enabling the storytelling of data through meaningful data visualizations. The trucking company you work at has a Trucking IoT Application that processes the truck and traffic data it receives from sensors, but the businesses leaders are not able to make sense of the data. They hired you as a Data Visualization Analyst to tell a story through visualizing this application's data, such as how the traffic congestion levels impact truck driver performance, which ultimately affect the company. Therefore, your communication of your insights to business leaders will influence them to take action based on your recommendations.
 
-We will create data visualization slices to clearly communicate the insight found from large volumes of data that originated from the trucking dataset.
+## Objective
+
+The tutorial series breaks down into two modules:
+
+In the **lesson**, you will learn the essential concepts of Data Visualization and start thinking about how you can apply them in the Trucking IoT Application. Then the second half of this lesson will introduce what, why, when and how to use Superset.
+
+In the **tutorial**, you will apply the knowledge learned in the lesson module to design visualizations of the data using Superset.
 
 ## Prerequisites
 
@@ -28,5 +34,9 @@ We will create data visualization slices to clearly communicate the insight foun
 
 ## Outline
 
-- **Superset in Trucking IoT Use Case** - Learn about the role Superset plays within the real-world use case and core concepts of Data Visualization
-- **Visualize Trucking Data** - Create Superset Visualization slices to illustrate different visual data representations of the demo's trucking dataset
+- **Lesson: Data Visualization & Superset** - Covers the fundamental concepts of Data Visualization and Superset.
+- **Tutorial: Visualize Trucking Data** - Shows how to visualize data using Superset.
+
+## Tutorial Reference Application
+
+This tutorial series uses our **[Trucking IoT Application](https://github.com/orendain/trucking-iot/tree/hadoop-summit-2017)** comprised of multiple subprojects. You will build the Superset visualization subproject.
