@@ -9,13 +9,13 @@ title: Lesson - Data Visualization & Superset
 To understand the importance of Data Visualization, began brainstorming on the some visualizations you can use to communicate messages about the trucking data and become familiar with the Superset.
 
 > **Note**: Most of this information comes from
-[Udacity - Data Visualization with Tableau](https://www.udacity.com/course/data-visualization-in-tableau--ud1006), [Wikipedia](https://en.wikipedia.org/wiki/Data_visualization) and the [Apache Superset](https://superset.incubator.apache.org/) website.
+[Udacity - Data Visualization with Tableau](https://www.udacity.com/course/data-visualization-in-tableau--ud1006), [Udacity - Data Visualization and D3.js](https://www.udacity.com/course/data-visualization-and-d3js--ud507), [Udacity - Intro to Data Science](https://www.udacity.com/course/intro-to-data-science--ud359), [Wikipedia](https://en.wikipedia.org/wiki/Data_visualization) and the [Apache Superset](https://superset.incubator.apache.org/) website.
 
 ## Outline
 
--   [Introduction to Data Visualization](#introduction-to-data-visualization)
 -   [What is Data Visualization?](#what-is-data-visualization?)
 -   [Why use Data Visualization?](#why-use-data-visualization?)
+-   [Why mention Data Types?](#why-mention-data-types?)
 -   [Characteristics of Effective Visualization](#characteristics-of-effective-visualization)
 -   [Graphs Used to Communicate Messages about Data](#common-graphs-used-to-communicate-messages-about-data)
 -   [Apply Human Perception to Design an Intuitive Graph](#apply-human-perception-to-Design-an-intuitive-graph)
@@ -29,7 +29,14 @@ To understand the importance of Data Visualization, began brainstorming on the s
 ## What is Data Visualization?
 
 ~~~
-"Data visualization is a study of the visual representation of data." - Wikipedia
+"Data visualization is about conveying a story or an idea as
+efficiently as possible. Its often said that a picture is worth
+a thousand words. Data visualization works the same way. Data
+scientists use data visualization to explore patterns in their
+data and ultimately convey results."
+ - Ryan Orban (Udacity Instructor - Data Visualization and D3.js,
+   Lesson 1: Visualization Fundamentals, 1. What is Data
+   Visualization?)
 ~~~
 
 Many people view it as an art and science, which is has various applications:
@@ -75,24 +82,29 @@ The effect of:
 
 The above example reinforces why we should use data visualization over displaying numbers. Graphics allow us to clearly see deviations or patterns in the data while tables and summary statistics do not.
 
-## Data Visualization Terminology
+## Why mention Data Types?
 
-These terms origin is from Statistics, there are **two types of data** that every Data Visualization Engineer/Scientist should be familiar with:
+**Data types** concepts are utilized when creating or recreating visualizations. We must understand the different kinds of data types found in data visualizations:
 
-- 1\. Categorical: The nature of data is described by text labels, often will be seen in qualitative (non-numerical) data.
-    - Age, Name
+1\. **Quantitative Data** - are any variables with exact numbers, which can be discrete or continuous.
+  - _Discrete_ is a variable that is countable
+    - Examples of names: units sold, number of languages spoken, number of emails, you received
+  - _Continuous_ is a variable that is within a range
+    - Examples of names: time, height, weight, money, interest rates, temperature
 
-- 2\. Quantitative: Numerical measures.
-    - "25" denotes the age in years
+2\. **Qualitative Data** - are any variables with a label or category
+  - _Categorical (Nominal)_ is a variable that labels or categorizes data into groups
+    - Examples of names: gender, hair color, country, industry, cat breed
+  - _Ordinal (Ordered)_ is a variable that ranks categories
+    - Examples of names: rankings, class_difficulty, survey questions like "How do you feel about hedgehogs?"
+      - 1\. I love them
+      - 2\. negative
+      - 3\. neutral
+      - 4\. positive
 
-There are also **two main information display types**:
-
-- 1\. Table: Rows and Columns that contain quantitative data with categorical labels. Mainly for looking up values.
-    - Categorical columns may contain qualitative or quantitative data
-    - Rows represent one unique sample with attributes, such as a person
-
-- 2\. Graph: Shows the relationships among data and portrays values encoded as visual objects
-    - lines, bars, points
+~~~
+Credit: Udacity Course - Data Visualization with Tableau, Lesson 1: Data Visualization Fundamentals
+~~~
 
 ## Characteristics of Effective Visualization
 
