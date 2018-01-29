@@ -1,104 +1,89 @@
 ---
-title: Superset in Trucking IoT Use Case
+title: Lesson: Data Visualization & Superset
 ---
 
-# Superset in Trucking IoT Use Case
+# Lesson: Data Visualization & Superset
+
+## Objective
+
+To understand the importance of Data Visualization, began brainstorming on the some visualizations you can use to communicate messages about the trucking data and become familiar with the Superset.
+
+> **Note**: Most of this information comes from
+[Udacity - Data Visualization with Tableau](https://www.udacity.com/course/data-visualization-in-tableau--ud1006), [Wikipedia](https://en.wikipedia.org/wiki/Data_visualization) and the [Apache Superset](https://superset.incubator.apache.org/) website.
 
 ## Outline
 
--   [The IoT Use Case](#the-iot-use-case)
--   [Why Data Visualization](#why-data-visualization)
--   [Principles of Effective Visualization](#principles-of-effective-visualization)
+-   [Introduction to Data Visualization](#introduction-to-data-visualization)
+-   [What is Data Visualization?](#what-is-data-visualization?)
+-   [Why use Data Visualization?](#why-use-data-visualization?)
+-   [Characteristics of Effective Visualization](#characteristics-of-effective-visualization)
 -   [Graphs Used to Communicate Messages about Data](#common-graphs-used-to-communicate-messages-about-data)
 -   [Apply Human Perception to Design an Intuitive Graph](#apply-human-perception-to-Design-an-intuitive-graph)
--   [Terminology in Visualization](#terminology-in-visualization)
 -   [History of Data Visualization](#history-of-data-visualization)
--   [Why Superset](#why-superset)
+-   [Why use Superset](#why-superset)
 -   [Superset Terminology](#superset-terminology)
 -   [Next: Superset in Action](#next-superset-in-action)
 
-## The IoT Use Case
+## Introduction to Data Visualization
 
-To learn more about the Trucking IoT Use Case, visit [The IoT Use Case Sub Section](https://hortonworks.com/hadoop-tutorial/trucking-iot-hdf/#the-iot-use-case) from the "Trucking IoT on HDF" tutorial.
+## What is Data Visualization?
 
-What is Superset's role in the Trucking IoT Application?
+~~~
+"Data visualization is a study of the visual representation of data." - Wikipedia
+~~~
 
-- Visually predict truck breakdowns and visually analyze driver habits on separate maps all to prevent drivers from getting into accidents
+Many people view it as an art and science, which is has various applications:
 
-## Why Data Visualization
+- [Infographics](https://en.wikipedia.org/wiki/Infographic)
+- [Information Visualization](https://en.wikipedia.org/wiki/Information_visualization)
+- [Scientific Visualization](https://en.wikipedia.org/wiki/Scientific_visualization)
+- [Exploratory Data Analysis](https://en.wikipedia.org/wiki/Exploratory_data_analysis)
+- [Statistical Graphics](https://en.wikipedia.org/wiki/Statistical_graphics)
 
-Effective visualization makes complex data accessible, understandable and usable. Thus, users can analyze and make decisions about data that affect the people and environment around them, such as companies, schools, climate, renewable resources, etc.
+## Why use Data Visualization?
 
-## Principles of Effective Visualization
+We should use data visualization rather than representing the data as numbers because humans are more adept at interpreting the relationship in the data when they see it directly as a graph.
 
-There are principles or **characteristics of effective graphical displays** that should be applied to visualizing data, so it is clearly and efficiently communicated to users:
+**Data Visualization & Human Perception**
 
-- 1\.  Know your audience
-- 2\.  Show data
-- 3\.  Avoid distorting the message from data
-- 4\.  Present several numbers in an acute space
-- 5\.  Make large datasets clear
-- 6\.  Make distinct parts of data viewable to the eyes
-- 7\.  Serve a clear purpose: description, exploration, tabulation or decoration
-- 8\.  Integrate statistical and verbal descriptions with the dataset
-- 9\.  Persuade the user to concentrate on the data topic (substance) rather than the technology
-- 10\. Design graphics that are intuitive without any extra explanation from a report
-- 11\. Design graphics that demonstrate the key message of the data
+Data visualization helps our brain perceive data. According to Physicist Tor Norretrander, _eye sight_ takes up majority of space from the _bandwidth of our senses_ and can process information at the speed of computer networks or ethernet cables illustrated by the following diagram (Udacity Course - Data Visualization with Tableau, Lesson 1: Data Visualization Fundamentals).
 
-By applying these principles, you prevent creating misleading graphs, so the **message** from the dataset is accurately revealed to the user.
+![bandwidth_of_our_senses](assets/bandwidth_of_our_senses.png)
 
-## Common Graphs Used to Communicate Messages about Data
+`Hand drawn diagram based on "Udacity Course - Data Visualization with Tableau, Lesson 1: Data Visualization Fundamentals, 3. Why use data visualization"`
 
-As you experiment with ways to effectively visualize data, graphs you may want to utilize to communicate quantitative **messages** about your use case (Trucking IoT) include:
+**Anscombe's Descriptive Statistics vs Graphs**
 
-> Note: **try to make all the examples relate to the trucking iot dataset**
+Statistician Francis Anscombe setup the scenario in which he had 4 datasets with eleven points (x,y) that had the same descriptive statistics: mean, variance, correlation coefficient and line of best fit. Without data visualization, it would appear the datasets have no major differences as indicated by the table.
 
-- 1\. Time Series: Single captured over a period of time.
-    - **Ex:** _Line Chart_ can show the congestion level on a particular route over the span of weekdays, months, years, etc. The following line chart illustrates this information.
+![anscombe_quartet_table](assets/anscombe_quartet_table.jpg)
 
-![time-series](assets/time-series.png)
+`Credit: Wikipedia - Anscombe's Quartet Page`
 
-- 2\. Ranking: Categorical subdivisions ranked in ascending or descending order.
-    - **Ex:** _Bar Chart_ can rank in ascending order traffic congestion level (the measure) by route (the category) during a single period. The following bar chart illustrates this information.
+**Anscombe's Quartet** suggests to always plot your data rather than depend on descriptive statistics. In the case of the table above with the 4 datasets, the summary statistics did not differ, but the graphs do.
 
-![ranking](assets/ranking.png)
+![anscombe_quartet_graphs](assets/anscombe_quartet_graphs.jpg)
 
-- 3\. Part-to-whole: Categorical subdivisions measured as a ratio to the whole (percentage of 100%).
-    - **Ex:** _Pie Chart or Bar Chart_ can show the percentage of violation events by truck drivers: **Lane Departure**, **Unsafe Follow Distance**, **Speeding**, **Unsafe Tail Distance** as a ratio to the whole. The following pie chart illustrates this information.
+`Credit: Wikipedia - Anscombe's Quartet Page`
 
-![part-to-whole](assets/part-to-whole.png)
+What can we see from the graphs that throw off our summary statistics?
 
-- 4\. Deviation: Categorical subdivisions compared against a reference.
-    - **Ex:** _Bar Chart_ can show the actual vs budget expenses for several business departments over a time period.
+The effect of:
 
-- 5\. Frequency Distribution: Shows the observations of a variable for a given interval.
-    - **Ex:** _Histogram or/and Box Plot_
-        - _Histogram_ can show the traffic congestion levels in the data for `Des Moines to Chicago` and `Saint Louis to Chicago` during foggy, windy or rainy day. The following histogram illustrates this information.
-        - _Box Plot_ can visualize the statistics about the traffic congestion levels on these routes: median, quartiles, outliers, etc.
+- Curvatures
+- Outliers
 
-![histogram-freq-dist](assets/histogram-freq-dist.png)
+The above example reinforces why we should use data visualization over displaying numbers. Graphics allow us to clearly see deviations or patterns in the data while tables and summary statistics do not.
 
-- 6\. Correlation: Comparison between two variables (x,y) to determine if they move in the same or opposite directions.
-    - **Ex:** _Scatterplot_ can plot unemployment (x) and inflation (y) for a sample of months.
-
-- 7\. Geographical or Geospatial: Comparison of a variable across a map or layout.
-    - **Ex:** _Cartogram_ can show the number of persons on various floors of a building.
-
-As you experiment with ways to visualize data to communicate meaningful messages and correlations, you will dabble into **Exploratory Data Analysis**, which is providing insight about the dataset through trial and error.
-
-## Apply Human Perception to Design an Intuitive Graph
-
-Human perception and cognition knowledge is essential for communicating the **message** you want to get across from the graph because all visualizations are created for human consumption. Human perception is the way humans visually process information. Thus, human visual processing involves detecting changes and making comparisons between quantities, sizes, shapes and variations in lightness. As long as **properties of symbolic data** are mapped to **visual properties represented by that data**, humans are able to browse through large volumes of data efficiently. Hence, data visualization allows the user to perform data explorations.
-
-## Terminology in Visualization
+## Data Visualization Terminology
 
 These terms origin is from Statistics, there are **two types of data** that every Data Visualization Engineer/Scientist should be familiar with:
 
 - 1\. Categorical: The nature of data is described by text labels, often will be seen in qualitative (non-numerical) data.
-    - **Ex:** Age, Name
+    - Age, Name
 
 - 2\. Quantitative: Numerical measures.
-    - **Ex:** "25" denotes the age in years
+    - "25" denotes the age in years
 
 There are also **two main information display types**:
 
@@ -107,7 +92,70 @@ There are also **two main information display types**:
     - Rows represent one unique sample with attributes, such as a person
 
 - 2\. Graph: Shows the relationships among data and portrays values encoded as visual objects
-    - **Ex:** lines, bars, points
+    - lines, bars, points
+
+## Characteristics of Effective Visualization
+
+~~~
+"Graphical displays should:
+
+1. Show the data
+2. Induce the viewer to think about the substance rather than about methodology,
+graphic design, the technology of graphic production or something else
+3. Avoid distorting what the data has to say
+4. Present many numbers in a small space
+5. Make large data sets coherent
+6. Encourage the eye to compare different pieces of data
+7. Reveal the data at several levels of detail, from a broad overview to the
+fine structure
+8. Serve a reasonably clear purpose: description, exploration, tabulation or
+decoration
+9. Be closely integrated with the statistical and verbal descriptions of a data
+set.
+
+Graphics reveal data." - Wikipedia
+~~~
+
+## Common Graphs Used to Communicate Messages about Data
+
+As you experiment with ways to effectively visualize data, graphs you may want to utilize to communicate quantitative **messages** about your use case (Trucking IoT) include:
+
+- 1\. Time Series: Single variable captured over a period of time.
+    - _Line Chart_ can show the congestion level on a particular route over the span of weekdays, months, years, etc.
+
+![time-series](assets/time-series.png)
+
+- 2\. Ranking: Categorical subdivisions ranked in ascending or descending order.
+    - _Bar Chart_ can rank in ascending order traffic congestion level (the measure) by route (the category) during a single period.
+
+![ranking](assets/ranking.png)
+
+- 3\. Part-to-whole: Categorical subdivisions measured as a ratio to the whole (percentage of 100%).
+    - _Pie Chart or Bar Chart_ can show the percentage of violation events by truck drivers: **Lane Departure**, **Unsafe Follow Distance**, **Speeding**, **Unsafe Tail Distance** as a ratio to the whole.
+
+![part-to-whole](assets/part-to-whole.png)
+
+- 4\. Deviation: Categorical subdivisions compared against a reference.
+    - _Bar Chart_ can show the actual vs budget expenses for several business departments over a time period.
+
+- 5\. Frequency Distribution: Shows the observations of a variable for a given interval.
+    - _Histogram or/and Box Plot_
+        - _Histogram_ can show the traffic congestion levels in the data for `Des Moines to Chicago` and `Saint Louis to Chicago` during foggy, windy or rainy day. The following histogram illustrates this information.
+        - _Box Plot_ can visualize the statistics about the traffic congestion levels on these routes: median, quartiles, outliers, etc.
+
+![histogram-freq-dist](assets/histogram-freq-dist.png)
+
+- 6\. Correlation: Comparison between two variables (x,y) to determine if they move in the same or opposite directions.
+    - _Scatterplot_ can plot unemployment (x) and inflation (y) for a sample of months.
+
+- 7\. Geographical or Geospatial: Comparison of a variable across a map or layout.
+    - _Cartogram_ can show the number of persons on various floors of a building.
+
+As you experiment with ways to visualize data to communicate meaningful messages and correlations, you will dabble into **Exploratory Data Analysis**, which is providing insight about the dataset through trial and error.
+
+## Apply Human Perception to Design an Intuitive Graph
+
+Human perception and cognition knowledge is essential for communicating the **message** you want to get across from the graph because all visualizations are created for human consumption. Human perception is the way humans visually process information. Thus, human visual processing involves detecting changes and making comparisons between quantities, sizes, shapes and variations in lightness. As long as **properties of symbolic data** are mapped to **visual properties represented by that data**, humans are able to browse through large volumes of data efficiently. Hence, data visualization allows the user to perform data explorations.
 
 ## History of Data Visualization
 
@@ -120,6 +168,8 @@ Fermat teamed up with Blaise Pascal and their work on **statistics and probabili
 ## Why Superset
 
 Superset has an easy to use interface for exploring and visualizing data with integration for various databases (we'll use Druid). Superset has a rich set of visualizations and gives the user the ability to create dashboards to categorize your data tables. Superset also allows users to create visualization slices, which represent the actual visualization of the data table, and select the appropriate dashboard for your slice. Superset is enterprise-ready, extensible and has a high granularity security/permission model that allows intricate rules on who can access individual features and the dataset.
+
+- Visually predict truck breakdowns and visually analyze driver habits on separate maps all to prevent drivers from getting into accidents
 
 ## Superset Terminology
 
