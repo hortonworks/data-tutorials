@@ -1,5 +1,5 @@
 ---
-title: Lesson: Data Visualization & Superset
+title: Lesson - Data Visualization & Superset
 ---
 
 # Lesson: Data Visualization & Superset

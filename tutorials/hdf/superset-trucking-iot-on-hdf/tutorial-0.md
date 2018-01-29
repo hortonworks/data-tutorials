@@ -34,8 +34,8 @@ In the **tutorial**, you will apply the knowledge learned in the lesson module t
 
 ## Outline
 
-- **Lesson: Data Visualization & Superset** - Covers the fundamental concepts of Data Visualization and Superset.
-- **Tutorial: Visualize Trucking Data** - Shows how to visualize data using Superset.
+- **Lesson - Data Visualization & Superset** - Covers the fundamental concepts of Data Visualization and Superset.
+- **Tutorial - Visualize Trucking Data** - Shows how to visualize data using Superset.
 
 ## Tutorial Reference Application
 
