@@ -13,15 +13,15 @@ You will build a portion of the NiFi DataFlow in a process group to parse for **
 
 ## Outline
 
-- [Approach 1: Manually Build ParseTransitEvents Process Group (PG)](#approach-1-manually-build-parsetransitevents-process-group)
-- [Step 1: Create a Process Group](#step-1-create-process-group)
+- [Approach 1: Manually Build ParseTransitEvents Process Group (PG)](#approach-1-manually-build-parsetransitevents-process-group-pg)
+- [Step 1: Create a Process Group (PG)](#step-1-create-a-process-group-pg)
 - [Step 2: Add an Input Port to Ingest Data Into this PG](#step-2-add-an-input-port-to-ingest-data-into-this-pg)
 - [Step 3: Add EvaluateXPath to Extract the Timestamp for Transit Observation](#step-3-add-evaluatexpath-to-extract-the-timestamp-for-transit-observation)
 - [Step 4: Add SplitXml to Split A FlowFile into Multiple Separate FlowFiles](#step-4-add-splitxml-to-split-a-flowfile-into-multiple-separate-flowfiles)
 - [Step 5: Add EvaluateXPath to Extract Transit Observations](#step-5-add-evaluatexpath-to-extract-transit-observations)
 - [Step 6: Add an Output Port to Route Data Outside this PG](#step-6-add-an-output-port-to-route-data-outside-this-pg)
-- [Step 7: Connect SimulateXmlTransitEvents to ParseTransitEvents](#step-7-connect-simulatexmltransitEvents-to-parseTransitevents)
-- [Step 8: Verify ParseTransitEvents Extracts Values From SimulateXmlTransitEvents](#step-7-verify-evaluatexpath-is-extracting-values-from-xml)
+- [Step 7: Connect SimulateXmlTransitEvents to ParseTransitEvents](#step-7-connect-simulatexmltransitevents-to-parsetransitevents)
+- [Step 8: Verify ParseTransitEvents Extracts Values From SimulateXmlTransitEvents](#step-8-verify-parsetransitevents-extracts-values-from-simulatexmltransitevents)
 - [Approach 2: Import ParseTransitEvents Process Group](#approach-2-import-parsetransitevents-process-group)
 - [Summary](#summary)
 - [Further Reading](#further-reading)

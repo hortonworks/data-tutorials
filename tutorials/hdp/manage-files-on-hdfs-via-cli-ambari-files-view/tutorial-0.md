@@ -27,5 +27,6 @@ This tutorial walks through commonly used commands to manage files through the c
 
 ## Outline
 
--   Manage Files on HDFS with the Command Line
--   Manage Files on HDFS with Ambari Files View
+-   [Manage Files on HDFS with the Command Line](https://hortonworks.com/tutorial/manage-files-on-hdfs-via-cli-ambari-files-view/section/1/)
+-   [Manage Files on HDFS with Ambari Files View](https://hortonworks.com/tutorial/manage-files-on-hdfs-via-cli-ambari-files-view/section/2/)
+-   [Manage Files on S3 with Hadoop S3A Client](https://hortonworks.com/tutorial/manage-files-on-hdfs-via-cli-ambari-files-view/section/3/)

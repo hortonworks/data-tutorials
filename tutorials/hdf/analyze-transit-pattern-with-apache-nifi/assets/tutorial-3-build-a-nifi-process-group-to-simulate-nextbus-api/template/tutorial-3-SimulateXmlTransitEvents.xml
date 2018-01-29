@@ -452,7 +452,7 @@
             <properties>
               <entry>
                 <key>Directory</key>
-                <value>/sandbox/tutorial-id/640/nifi/output/rawtransitevents</value>
+                <value>/sandbox/tutorial-files/640/nifi/output/rawtransitevents</value>
               </entry>
               <entry>
                 <key>Conflict Resolution Strategy</key>
@@ -591,7 +591,7 @@
             <properties>
               <entry>
                 <key>Input Directory</key>
-                <value>/sandbox/tutorial-id/640/nifi/input</value>
+                <value>/sandbox/tutorial-files/640/nifi/input</value>
               </entry>
               <entry>
                 <key>File Filter</key>

@@ -18,12 +18,12 @@ You will build a NiFi DataFlow and package it into a process group to simulate t
 ## Outline
 
 - [Approach 1: Build SimulateXmlTransitEvents Process Group](#approach-1-build-simulatexmltransitevents-process-group)
-- [Step 1: Create a Process Group](#step-1-create-process-group)
+- [Step 1: Create a Process Group](#step-1-create-a-process-group)
 - [Step 2: Add GetFile to Ingest NextBus Data Seed](#step-2-add-getfile-to-ingest-nextbus-data-seed)
 - [Step 3: Add UnpackContent to Decompress the Zipped Data](#step-3-add-unpackcontent-to-decompress-the-zipped-data)
 - [Step 4: Add ControlRate to Regulate Data Flow Speed](#step-4-add-controlrate-to-regulate-data-flow-speed)
-- [Step 5: Add Output Port for External Component Connection](#step-5-add-output-port-for-external-component-connection)
-- [Approach 2: Import SimulateXmlTransitEvents Process Group](#approach-2-import-simulatexmltransitevents-process-group)
+- [Step 5: Add UpdateAttribute to Make Each FlowFile Name Unique](#step-5-add-updateattribute-to-make-each-flowfile-name-unique)
+- [Approach 2: Import NiFi SimulateXmlTransitEvents Process Group](#approach-2-import-nifi-simulatexmltransitevents-process-group)
 - [Summary](#summary)
 - [Further Reading](#further-reading)
 
@@ -228,13 +228,13 @@ If you prefer to build the dataflow manually step-by-step, continue on to **Appr
 
 2\. Let the flow run for about 1 minute, then stop the flow by hitting the **stop** button.
 
-3\. Launch Sandbox Web Shell Client via HDF Splash Screen from **[Advanced HDF SB Quick Links](http://sandbox-hdf.hortonworks.com:8888)** Link.
+3\. Launch Sandbox Web Shell Client via HDF Splash Screen from **[Advanced HDF SB Quick Links](http://sandbox-hdf.hortonworks.com:1080)** Link.
 
 ![web_shell_client_sb_quick_link](assets/tutorial-3-build-a-nifi-process-group-to-simulate-nextbus-api/web_shell_client_sb_quick_link.png)
 
 **Figure 11:** SB Quick Link for Web Shell Client
 
-> Note: Username is "admin", initial password is "hadoop". You will be prompted to write the current password again, then set a new password.
+> Note: Username is "root", initial password is "hadoop". You will be prompted to write the current password again, then set a new password.
 
 ![web_shell_client](assets/tutorial-3-build-a-nifi-process-group-to-simulate-nextbus-api/web_shell_client.png)
 
@@ -298,7 +298,7 @@ Congratulations! You just built a NiFi **SimulateXmlTransitEvents** process grou
 ### Further Reading
 
 - [Process Group](https://nifi.apache.org/docs/nifi-docs/html/user-guide.html#process_group_anatomy)
-- [GetFile](https://nifi.apache.org/docs/nifi-docs/components/org.apache.nifi/nifi-standard-nar/1.3.0/org.apache.nifi.processors.standard.GetFile/index.html)
-- [UnpackContent](https://nifi.apache.org/docs/nifi-docs/components/org.apache.nifi/nifi-standard-nar/1.3.0/org.apache.nifi.processors.standard.UnpackContent/index.html)
-- [ControlRate](https://nifi.apache.org/docs/nifi-docs/components/org.apache.nifi/nifi-standard-nar/1.3.0/org.apache.nifi.processors.standard.ControlRate/index.html)
+- [GetFile](https://nifi.apache.org/docs/nifi-docs/components/org.apache.nifi/nifi-standard-nar/1.5.0/org.apache.nifi.processors.standard.GetFile/index.html)
+- [UnpackContent](https://nifi.apache.org/docs/nifi-docs/components/org.apache.nifi/nifi-standard-nar/1.5.0/org.apache.nifi.processors.standard.UnpackContent/index.html)
+- [ControlRate](https://nifi.apache.org/docs/nifi-docs/components/org.apache.nifi/nifi-standard-nar/1.5.0/org.apache.nifi.processors.standard.ControlRate/index.html)
 - Under "Adding Components to the Canvas," head to [Output Port](https://nifi.apache.org/docs/nifi-docs/html/user-guide.html#adding-components-to-the-canvas)

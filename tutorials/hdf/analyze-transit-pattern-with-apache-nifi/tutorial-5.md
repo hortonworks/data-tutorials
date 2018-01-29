@@ -14,9 +14,9 @@ With the transit data being pulled from NextBus API simulator, it shows location
 ## Outline
 
 - [Google Places API Basics](#google-places-api-basics)
-- [Approach 1: Manually Build ValidateGeoEnrichedTransitData Process Group (PG)](#approach-1-manually-build-ValidateGeoEnrichedTransitData-process-group)
-- [Step 1: Obtain API Key for NiFi's InvokeHTTP Processor](#step-1-obtain-api-key-nifi-invokehttp-processor)
-- [Step 2: Create Process Group and Label For It](#step-2-create-process-group-label-for-it)
+- [Approach 1: Manually Build ValidateGeoEnrichedTransitData Process Group (PG)](#approach-1-manually-build-validategeoenrichedtransitdata-process-group-pg)
+- [Step 1: Obtain API Key for NiFi's InvokeHTTP Processor](#step-1-obtain-api-key-for-nifis-invokehttp-processor)
+- [Step 2: Create Process Group and Label For It](#step-2-create-process-group-and-label-for-it)
 - [Step 3: Add an Input Port to Ingest Data Into this PG](#step-3-add-an-input-port-to-ingest-data-into-this-pg)
 - [Step 4: Add RouteOnAttribute to Validate NextBus Simulator Data](#step-4-add-routeonattribute-to-validate-nextbus-simulator-data)
 - [Step 5: Add InvokeHTTP to Pull GeoEnriched Data from Google Places API](#step-5-add-invokehttp-to-pull-geoenriched-data-from-google-places-api)

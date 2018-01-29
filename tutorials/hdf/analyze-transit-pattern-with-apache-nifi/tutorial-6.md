@@ -13,16 +13,16 @@ You will build a new process group called **StoreTransitEventsAsJSONToDisk** to 
 
 ## Outline
 
-- [Approach 1: Manually Build StoreTransitEventsAsJSONToDisk Process Group (PG) ](#approach-1-manually-build-simple-nifi-flow)
-- [Step 1: Create a Process Group and Label For It](#step-1-create-a-process-group-and-label-for-it)
+- [Approach 1: Manually Build StoreTransitEventsAsJSONToDisk Process Group (PG) ](#approach-1-manually-build-storetransiteventsasjsontodisk-process-group-pg)
+- [Step 1: Create Process Group and Label For It](#step-1-create-process-group-and-label-for-it)
 - [Step 2: Add an Input Port to Ingest Data Into this PG](#step-2-add-an-input-port-to-ingest-data-into-this-pg)
 - [Step 3: Add AttributesToJSON to Represent FlowFile Attributes As JSON](#step-3-add-attributestojson-to-represent-flowfile-attributes-as-json)
 - [Step 4: Add MergeContent to Combine Multiple FlowFiles Together](#step-4-add-mergecontent-to-combine-multiple-flowfiles-together)
 - [Step 5: Add UpdateAttribute to Make Each FlowFile Name Unique](#step-5-add-updateattribute-to-make-each-flowfile-name-unique)
 - [Step 6: Add PutFile to Store Data to Local File System](#step-6-add-putfile-to-store-data-to-local-file-system)
 - [Step 7: Connect ValidateGeoEnrichedTransitData to StoreDataAsJSONToDisk](#step-7-connect-validategeoenrichedtransitdata-to-storedataasjsontodisk)
-- [Step 8: Run the NiFi DataFlow](#step-8-run-the-nifi-dataflow-6)
-- [Step 9: Check Data By NiFi's Data Provenance](#step-9-check-data-by-nifi's-data-provenance)
+- [Step 8: Run the NiFi DataFlow](#step-8-run-the-nifi-dataflow)
+- [Step 9: Check Data By NiFi's Data Provenance](#step-9-check-data-by-nifis-data-provenance)
 - [Approach 2: Import StoreTransitEventsAsJSONToDisk Process Group](#approach-2-import-simple-nifi-flow)
 - [Summary](#summary)
 
