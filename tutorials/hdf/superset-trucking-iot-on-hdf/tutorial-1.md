@@ -86,13 +86,13 @@ The above example reinforces why we should use data visualization over displayin
 
 **Data types** concepts are utilized when creating or recreating visualizations. We must understand the different kinds of data types found in data visualizations:
 
-1\. **Quantitative Data** - are any variables with exact numbers, which can be discrete or continuous.
+1\. **Quantitative Data** - are any variables with exact numbers, which can be discrete or continuous variables.
   - _Discrete_ is a variable that is countable
     - Examples of names: units sold, number of languages spoken, number of emails, you received
   - _Continuous_ is a variable that is within a range
     - Examples of names: time, height, weight, money, interest rates, temperature
 
-2\. **Qualitative Data** - are any variables with a label or category
+2\. **Qualitative Data** - are any variables with a label or category, which can be categorical or ordinal variables.
   - _Categorical (Nominal)_ is a variable that labels or categorizes data into groups
     - Examples of names: gender, hair color, country, industry, cat breed
   - _Ordinal (Ordered)_ is a variable that ranks categories
