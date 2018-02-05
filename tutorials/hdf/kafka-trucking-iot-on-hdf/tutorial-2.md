@@ -29,7 +29,16 @@ A NiFi simulator generates data of two types: TruckData and TrafficData as a CSV
 From the terminal, we can see the two Kafka Topics that have been created:
 
 ~~~
-/usr/hdp/2.6.3.0-235/kafka/bin/kafka-topics.sh --list --zookeeper localhost:2181
+/usr/hdf/3.1.0.0-564/kafka/bin/kafka-topics.sh --list --zookeeper localhost:2181
+~~~
+
+Results:
+
+~~~
+Output:
+
+trucking_data_traffic
+trucking_data_truck
 ~~~
 
 ## View Data in Kafka Topics
@@ -39,16 +48,18 @@ As messages are persisted into the Kafka Topics from the producer, you can see t
 View Data for Kafka Topic: **trucking_data_truck**:
 
 ~~~
-/usr/hdp/2.6.3.0-235/kafka/bin/kafka-console-consumer.sh --zookeeper localhost:2181 --topic trucking_data_truck --from-beginning
+/usr/hdf/3.1.0.0-564/kafka/bin/kafka-console-consumer.sh --zookeeper localhost:2181 --topic trucking_data_truck --from-beginning
 ~~~
 
 View Data for Kafka Topic: **trucking_data_traffic**:
 
 ~~~
-/usr/hdp/2.6.3.0-235/kafka/bin/kafka-console-consumer.sh --zookeeper localhost:2181 --topic trucking_data_traffic --from-beginning
+/usr/hdp/3.1.0.0-564/kafka/bin/kafka-console-consumer.sh --zookeeper localhost:2181 --topic trucking_data_traffic --from-beginning
 ~~~
 
 As you can see Kafka acts as a robust queue that receives data and allows for it to be transmitted to other systems.
+
+> Note: You may notice the is data encoded in a format we cannot read, this format is necessary for Schema Registry. The reason we are using Schema Registry is because we need it for Stream Analytics Manager to pull data from Kafka.
 
 ## Next: Learn Basic Operations of Kafka
 
