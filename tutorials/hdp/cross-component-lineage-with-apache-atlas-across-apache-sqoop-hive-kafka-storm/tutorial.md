@@ -122,7 +122,7 @@ Run the following command to get to the scripts for the tutorial.
 ~~~
 mkdir crosscomponent_demo
 cd crosscomponent_demo
-wget https://github.com/james94/data-tutorials/raw/master/tutorials/hdp/cross-component-lineage-with-apache-atlas-across-apache-sqoop-hive-kafka-storm/assets/crosscomponent_scripts.zip
+wget https://github.com/hortonworks/data-tutorials/raw/master/tutorials/hdp/cross-component-lineage-with-apache-atlas-across-apache-sqoop-hive-kafka-storm/assets/crosscomponent_scripts.zip
 unzip crosscomponent_scripts.zip
 cd crosscomponent_scripts/sqoop-demo
 ~~~
