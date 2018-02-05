@@ -25,6 +25,7 @@ This tutorial walks through the steps for creating data in Apache Hive through A
 
 - [Download Hortonworks Sandbox](https://hortonworks.com/downloads/#sandbox)
 - Complete the [Learning the Ropes of the Hortonworks Sandbox tutorial,](https://hortonworks.com/hadoop-tutorial/learning-the-ropes-of-the-hortonworks-sandbox/) you will need it for logging into Ambari.
+- 10 GB RAM
 
 ## Outline
 
@@ -103,6 +104,8 @@ We need a script for creating a MySQL table, then importing the table using Sqoo
 
 First access the Sandbox Web Shell Client at `sandbox-hdp.hortonworks.com:4200`. The first time password for root user is `hadoop`.
 
+Alternatively, you could "ssh" into the sandbox from your terminal or Windows Ubuntu Shell. `ssh root@localhost -p 2222`.
+
 Text you should see on your screen looks similar:
 
 ~~~
@@ -146,7 +149,7 @@ Before we run the sqoop job, let's **configure the Atlas Sqoop Hook** via comman
 
 ~~~
 cp /etc/atlas/conf/atlas-application.properties /etc/sqoop/conf
-ln -s /usr/hdp/2.6.4.0-71/atlas/hook/sqoop/*.jar /usr/hdp/2.6.4.0-71/sqoop/lib/
+ln -s /usr/hdp/2.6.4.0-91/atlas/hook/sqoop/*.jar /usr/hdp/2.6.4.0-91/sqoop/lib/
 ~~~
 
 - cp copies atlas configuration properties to sqoop configuration directory
@@ -243,6 +246,14 @@ You can view the source for this at https://github.com/yhemanth/storm-samples
 
 ### 4.4: Run the Storm Job
 
+Before we run the deploy the Storm Topology, we need to enable Atlas Hook in Storm Configs.
+
+1\. **Navigate to Ambari UI**, click on **Storm**, then **Configs**.
+
+2\. Search for `storm.atlas.hook` and to the right of "Enable Atlas Hook," **check the box**. Then save the configuration as **enable storm atlas hook**, click save.
+
+![enable_storm_atlas_hook](assets/enable_storm_atlas_hook.jpg)
+
 Run the following command:
 
 ~~~
@@ -257,11 +268,11 @@ sh 004-run-storm-job.sh
 
 Go to the Atlas UI http://localhost:21000/. Search for: **kafka_topic** this time and Click on: `my-topic-01`
 
-![search_kafka_topic](assets/search_kafka_topic.png)
+![search_kafka_topic](assets/search_kafka_topic.jpg)
 
 Scroll down and you will see a lineage of all the operations from Kafka to Storm.
 
-![kafka_storm_lineage](assets/kafka_storm_lineage.png)
+![kafka_storm_lineage](assets/kafka_storm_lineage.jpg)
 
 ## Summary <a id="summary"></a>
 
