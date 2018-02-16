@@ -46,7 +46,7 @@ When choosing an interpreter, click the "..." button and select Create VirtualEn
 
 ![intellij3](assets/intellij3.png)
 
-You should now have an empty project called HelloSpark. To get PyCharm to recognize Spark code and enable type-ahead we will need to register Spark with our Python interpreter. We can use SCP to copy the latest version of the source code we need from the sandbox to our local machine. The default password is hadoop as of sandbox version 2.6.
+You should now have an empty project called HelloSpark. To get PyCharm to recognize Spark code and enable type-ahead we will need to register Spark with our Python interpreter. We can use SCP to copy the latest version of the source code we need from the sandbox to our local machine. The default password is Hadoop.
 
 ```
 scp -P 2222 root@sandbox.hortonworks.com:/usr/hdp/current/spark2-client/python/lib/pyspark.zip ~/HelloSpark/

@@ -48,7 +48,7 @@ Now that we have an idea of Kafka's capabilities, let's explore its different co
 
 ## Creating Two Kafka Topics
 
-Initially when building this demo, we verified Zookeeper was running cause Kafka uses Zookeeper. If Zookeeper was off, we ran the command or turned on it from Ambari:
+Initially when building this demo, we verified Zookeeper was running because Kafka uses Zookeeper. If Zookeeper was off, we ran the command or turned on it from Ambari:
 
 ~~~
 /usr/hdf/3.1.0.0-564/kafka/bin/zookeeper-server-start.sh config/zookeeper.properties
@@ -72,7 +72,7 @@ We created two Kafka Topics: **trucking_data_truck** and **trucking_data_traffic
 /usr/hdf/3.1.0.0-564/kafka/bin/kafka-topics.sh --create --zookeeper sandbox-hdf.hortonworks.com:2181 --replication-factor 1 --partition 10 --topic trucking_data_traffic
 ~~~
 
-Two Kafka Topics were created with ten partitions and a single partition each. When topics are created, the Kafka boker terminal sends a notification and it can be found in the log for the created topic: "/tmp/kafka-logs/"
+Two Kafka Topics were created with ten partitions and a single partition each. When topics are created, the Kafka broker terminal sends a notification and it can be found in the log for the created topic: "/tmp/kafka-logs/"
 
 ## Starting the Producer to Send Messages
 

@@ -10,7 +10,7 @@ In this tutorial, we are going to set up all the services required to run the Co
 
 ## Prerequisites
 
-- Downloaded and Installed latest [HDF Sandbox](https://hortonworks.com/products/hortonworks-sandbox/#install)
+- Downloaded and Installed latest [Hortonworks DataFlow (HDF) Sandbox](https://hortonworks.com/products/hortonworks-sandbox/#install)
 - If you are new to the sandbox shell, refer to [Learning the Ropes of the Hortonworks Sandbox](https://hortonworks.com/tutorial/learning-the-ropes-of-the-hortonworks-sandbox/)
 - We recommend you have some experience with Java Concepts, Syntax and OOP, refer to this [Intro to Java Programming Course](https://www.udacity.com/course/intro-to-java-programming--cs046) if you are interested in building a strong foundation.
 - Memory must be at least 8GB RAM, preferably 4 processor cores, else errors may occur in fourth tutorial

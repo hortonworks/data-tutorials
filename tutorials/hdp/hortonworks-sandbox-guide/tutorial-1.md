@@ -1,8 +1,8 @@
 ---
-title: Sandbox Docs - HDP 2.6.3
+title: Sandbox Docs - HDP 2.6.4
 ---
 
-# Sandbox Docs - HDP 2.6.3
+# Sandbox Docs - HDP 2.6.4
 
 ## Outline
 
@@ -21,30 +21,24 @@ title: Sandbox Docs - HDP 2.6.3
 
 ## Release Notes
 
-November 2017
+February 2018
 
--   Md5 VMware Virtual Appliance - **05194191ca17d36f1167cb238795a4d5**
--   Md5 Virtualbox Virtual Appliance - **2c5cca94a4d6fd1e8383abd930646f2a**
--   Md5 Docker - **684d01736b1e323c55abe73d540a05bb**
+-   Md5 VMware Virtual Appliance - **9ae7becfa0442f66f1dac1ef88477d2f**
+-   Md5 VirtualBox Virtual Appliance - **f2803fdbefab3d2044f8e04957b89090**
+-   Md5 Docker - (Linux/Mac) **b14f4538147851c51b26d9da37ab931c**, (Windows) **ae377d7dddeb26c89912059a1bf696af**
 -   HDP Stack and Ambari: The Sandbox uses the following versions of Ambari and HDP stack. Please use the following release note links provided to view Ambari and HDP stack specific information.
-    -   [HDP 2.6.3 Product Release Notes](https://docs.hortonworks.com/HDPDocuments/HDP2/HDP-2.6.3/bk_release-notes/content/ch_relnotes.html)
-    -   [Ambari 2.6 Release Notes](https://docs.hortonworks.com/HDPDocuments/Ambari-2.6.0.0/bk_ambari-release-notes/content/ch_relnotes-ambari-2.6.0.0.html)
+    -   [HDP 2.6.4 Product Release Notes](https://docs.hortonworks.com/HDPDocuments/HDP2/HDP-2.6.4/bk_release-notes/content/ch_relnotes.html)
+    -   [Ambari 2.6.1 Release Notes](https://docs.hortonworks.com/HDPDocuments/Ambari-2.6.1.0/bk_ambari-release-notes/content/ch_relnotes-ambari-2.6.1.0.html)
 
 
 ## Behavior Changes
 
--   New splash page
-    -   Removed Falcon
-    -   Added Workflow Manager
-
+-   Updated start script to display startup information so as to be more transparent
+-   Updated kernel to fix specter and meltdown bugs: 4.4.114-1.el7.elrepo.x86_64
 
 ## Known Issues
 
--   Unable to stop/restart Oozie service using ambari
-    -   Works from the command line
--   Atlas Schema Tab Doesn't Appear, So Not Able to Assign Specific Hive Columns an Tag
--   HBase RPC Bindings not configured out of box
-
+-   Zeppelin interface on port 9995 may require clearing browser cache on some browsers
 
 ## Limitations
 
@@ -60,18 +54,18 @@ This is a list of common limitations along with their workarounds.
 
 Operating System and Java versions that the Sandbox has installed.
 -   OS Version (docker container)
-    -   CentOS release 6.8 (Final)
+    -   CentOS release 6.9 (Final)
     -   Java Version (docker container)
-    -   openjdk version “1.8.0_111”
-    -   OpenJDK Runtime Environment (build 1.8.0_111-b15)
-    -   OpenJDK 64-Bit Server VM (build 25.111-b15, mixed mode)
+    -   openjdk version “1.8.0_161”
+    -   OpenJDK Runtime Environment (build 1.8.0_161-b14)
+    -   OpenJDK 64-Bit Server VM (build 25.161-b14, mixed mode)
     -   Updated from previous version
 -   OS Version (Hosting Virtual Machine)
     -   CentOS Linux release 7.2.1511 (Core)
 
 Image File Sizes:
--   VMware - 10.6 GB
--   Virtualbox - 10.4 GB
+-   VMware - 9.9 GB
+-   VirtualBox - 9.7 GB
 -   Docker - 12.5 GB
 
 
@@ -79,7 +73,7 @@ Image File Sizes:
 
 These are a list of databases used within Sandbox along with the corresponding HDP components that use them.
 
--   Ambari: postgres
+-   Ambari: Postgres
 -   Hive Metastore : Mysql
 -   Ranger: Mysql
 -   Oozie: derby (embedded)
@@ -95,9 +89,7 @@ These components are offered by the Hortonworks distribution, but not included i
 
 ### Newly Added HDP Supported Packages
 
-These are packages that have recently been included into the Sandbox for this release.
--   Workflow Manager
-
+-   none
 
 ## HDP Services Started Automatically on Startup
 
@@ -113,7 +105,7 @@ When the virtual machine is booted up, the following services are started. If no
     -   NameNode - org.apache.hadoop.hdfs.server.namenode.NameNode
     -   DataNode - org.apache.hadoop.hdfs.server.datanode.DataNode
 -   Nfs
-    -   Portmap - Unlike the other processes that are launched by hdfs user, these are run as root user.
+    -   Portmap - Unlike the other processes that are launched by HDFS user, these are run as root user.
     -   The nfs process doesn’t show up as a name for jps output
 -   HIVE
     -   RunJar - webhcat - org.apache.hadoop.util.RunJar Run as hcat user
@@ -141,7 +133,7 @@ When the virtual machine is booted up, the following services are started. If no
 
 ## HDP Services Not Started Automatically on Startup
 
-Because of the limited resources avaialble in the sandbox virtual machine environment, the following services are in maintenance mode and will not automatically start. To fully use these services, you must allocate more memory to the sandbox virtual machine. If you want these services to automatically start, turn off maintenance mode. The processes are listed with their main class.
+Because of the limited resources available in the sandbox virtual machine environment, the following services are in maintenance mode and will not automatically start. To fully use these services, you must allocate more memory to the sandbox virtual machine. If you want these services to automatically start, turn off maintenance mode. The processes are listed with their main class.
 
 -   Ambari Infra
 -   Ambari Metrics
@@ -175,6 +167,7 @@ Because of the limited resources avaialble in the sandbox virtual machine enviro
 
 
 ## Further Reading
--   <https://hortonworks.com/press-releases/hortonworks-leads-industry-performance-customer-choice-hdp-2-6/>
--   <https://hortonworks.com/products/data-center/hdp/>
--   <https://docs.hortonworks.com/HDPDocuments/HDP2/HDP-2.6.3/index.html>
+
+-   [Hortonworks Leads Industry Performance Customer Choice HDP 2.6](https://hortonworks.com/press-releases/hortonworks-leads-industry-performance-customer-choice-hdp-2-6)
+-   [Hortonworks Data Platform (HDP)](https://hortonworks.com/products/data-center/hdp)
+-   [HDP Documentation](https://docs.hortonworks.com/HDPDocuments/HDP2/HDP-2.6.4/index.html)

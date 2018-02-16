@@ -13,7 +13,7 @@ product: HDF
 series: HDF > Develop with Hadoop > Real World Examples
 ---
 
-# Kafka in Trucking IoT on HDF
+# Kafka in Trucking IoT on Hortonworks DataFlow (HDF)
 
 ## Introduction
 
@@ -27,6 +27,6 @@ We will create Kafka Topics (category queues) for handling large volumes of data
 
 ## Outline
 
-- **Kafka in Trucking IoT Use Case** - Understand the role Kafka plays within real-world use case
-- **Explore Kafka in the Demo** - Gain an understanding of Kafka Topics used in the demo and explore commands for exploring the data in Kafka
-- **Learn Basic Operations of Kafka** - Dive into Kafka and learn basic operations in Kafka
+- [Kafka in Trucking IoT Use Case](https://hortonworks.com/tutorial/kafka-in-trucking-iot-on-hdf/section/1/) - Understand the role Kafka plays within real-world use case
+- [Explore Kafka in the Demo](https://hortonworks.com/tutorial/kafka-in-trucking-iot-on-hdf/section/2/)- Gain an understanding of Kafka Topics used in the demo and explore commands for exploring the data in Kafka
+- [Learn Basic Operations of Kafka](https://hortonworks.com/tutorial/kafka-in-trucking-iot-on-hdf/section/3/)- Dive into Kafka and learn basic operations in Kafka

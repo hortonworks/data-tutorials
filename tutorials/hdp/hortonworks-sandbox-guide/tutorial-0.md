@@ -22,7 +22,7 @@ Welcome to the Hortonworks Sandbox!  Look at the attached sections for sandbox d
 
 ## Outline
 
-1.  [Sandbox Docs - HDP 2.6.3](https://hortonworks.com/tutorial/hortonworks-sandbox-guide/section/1/)
-2.  [Sandbox Docs - HDF 2.1](https://hortonworks.com/tutorial/hortonworks-sandbox-guide/section/2/)
-3.  [Sandbox Port Forwards - HDP 2.6.3](https://hortonworks.com/tutorial/hortonworks-sandbox-guide/section/3/)
-4.  [Sandbox Port Forwards - HDF 2.1](https://hortonworks.com/tutorial/hortonworks-sandbox-guide/section/4/)
+1.  [Sandbox Docs - HDP 2.6.4](https://hortonworks.com/tutorial/hortonworks-sandbox-guide/section/1/)
+2.  [Sandbox Docs - HDF 3.1](https://hortonworks.com/tutorial/hortonworks-sandbox-guide/section/2/)
+3.  [Sandbox Port Forwards - HDP 2.6.4](https://hortonworks.com/tutorial/hortonworks-sandbox-guide/section/3/)
+4.  [Sandbox Port Forwards - HDF 3.1](https://hortonworks.com/tutorial/hortonworks-sandbox-guide/section/4/)

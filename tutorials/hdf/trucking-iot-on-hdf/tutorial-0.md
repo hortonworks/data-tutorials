@@ -16,7 +16,7 @@ We will build a Storm topology from the ground up and demonstrate a full data pi
 
 ## Prerequisites
 
--   [HDF 2.1 Sandbox Installed](https://hortonworks.com/downloads/#sandbox)
+-   [Hortonworks DataFlow (HDF) Sandbox Installed](https://hortonworks.com/downloads/#sandbox)
 
 
 ## Outline

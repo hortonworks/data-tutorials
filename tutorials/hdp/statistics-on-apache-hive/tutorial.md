@@ -173,7 +173,7 @@ Notice anything different?
 
 ## Compare Plans
 
-No statisitcs:
+No statistics:
 
 ![explain-stats](assets/explain-nostats.png)
 
@@ -186,9 +186,9 @@ As your queries become more complex, you need to make a habit of computing stati
 
 ## Summary
 
-Congratulations in completng this tutorial. You should see the benefits of generating statistics for tables and columns.
+Congratulations in completing this tutorial. You should see the benefits of generating statistics for tables and columns.
 
 ## Further Reading
 
 -   [Cost-based optimization in Hive](https://cwiki.apache.org/confluence/display/Hive/Cost-based+optimization+in+Hive)
--   [Apache Hive Performance Tuning](https://docs.hortonworks.com/HDPDocuments/HDP2/HDP-2.6.0/bk_hive-performance-tuning/content/ch_hive-perf-tuning-intro.html)
+-   [Apache Hive Performance Tuning](https://docs.hortonworks.com/HDPDocuments/HDP2/HDP-2.6.4/bk_hive-performance-tuning/content/ch_hive-perf-tuning-intro.html)

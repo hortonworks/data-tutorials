@@ -62,85 +62,77 @@ Select the **Advanced** tab and adjust the dedicated memory to **at least 8GB of
 
 **Load Sandbox Into Docker**
 
-After you've [downloaded the sandbox](https://hortonworks.com/downloads/#sandbox), open a console/terminal and issue the following command to load the sandbox image:
+-   Download latest scripts [Hortonworks Data Platform (HDP) for Docker](https://hortonworks.com/downloads/#sandbox).
 
--   ```docker load -i <sandbox-docker-image-path>```
+[![download-sandbox-hdp-docker](assets/download-sandbox-hdp-docker.jpg)](https://hortonworks.com/downloads/#sandbox)
 
-Make sure the image was imported successfully - run the following command:
+Naming convention for scripts are:
 
--   ```docker images```
+-   For Linux/Mac: **start-sandbox-hdp-standalone_{version}.sh**
+-   For Windows: **start-sandbox-hdp-standalone_{version}.ps1**
 
-You should see **sandbox-hdp** on the list.
-
-![docker images](assets/docker-images.jpg)
-
-**Start HDP Sandbox**
-
-Download one of the following scripts and save it somewhere on your computer.
-
--   For Linux/Mac: Use this [start_sandbox-hdp.sh](assets/start_sandbox-hdp.sh)
--   For Windows: Use this [start_sandbox-hdp.ps1](assets/start_sandbox-hdp.ps1)
-
-Run the script you just downloaded.  It will setup and start the sandbox for you, creating the sandbox docker container in the process if necessary.
+>Note: You will need to run script every time you want to restart the sandbox. It will setup and start the sandbox for you, creating the sandbox docker container in the process if necessary.
 
 Linux/Mac:
 
 ~~~
-cd /path/to/start_sandbox-script
-sh start_sandbox-hdp.sh
+cd /path/to/script
+sh start-sandbox-hdp-standalone_{version}.sh
 ~~~
 
 Windows Powershell:
 
 ~~~
-cd /path/to/start_sandbox-script
-powershell -ExecutionPolicy ByPass -File start_sandbox-hdp.ps1
+cd /path/to/script
+powershell -ExecutionPolicy ByPass -File start-sandbox-hdp-standalone_{version}.ps1
 ~~~
 
-You should see something like the following after script completion:
+The script output will be similar to:
 
-![docker-start-sandbox-output](assets/docker-start-sandbox-output.jpg)
-
-or
-
-![docker-start-sandbox-output-win](assets/docker-start-sandbox-output-win.jpg)
+![docker_start_sandbox-hdp](assets/docker-start-sandbox-output.jpg)
 
 **Stop HDP Sandbox**
 
-Linux/Mac/Windows:
-
-When you want to shutdown your sandbox, run the following command:
+When you want to stop/shutdown your HDP sandbox, run the following command:
 
 ~~~
 docker stop {sandbox-container-hdp}
 ~~~
 
+**Start HDP Sandbox**
+
+When you want to re-start your sandbox, re-run the script as you did above.
+
 ### For HDF Sandbox
 
 **Install/Deploy/Start HDF Sandbox**
 
-Download one of the following scripts and save it somewhere on your computer.
+-   Download latest scripts [Hortonworks DataFlow (HDF) for Docker](https://hortonworks.com/downloads/#sandbox).
 
--   For Linux/Mac: Use this [sandbox-hdf-deploy.sh](assets/sandbox-hdf-deploy.sh)
--   For Windows: Use this [sandbox-hdf-deploy.ps1](assets/sandbox-hdf-deploy.ps1)
+[![download-sandbox-hdf-docker](assets/download-sandbox-hdf-docker.jpg)](https://hortonworks.com/downloads/#sandbox)
 
-Run the script you just downloaded one time.  It will setup and start the sandbox for you, creating the sandbox docker container in the process if necessary.
+Naming convention for scripts are:
+
+-   For Linux/Mac: **deploy-sandbox-hdf-standalone_{version}.sh**
+-   For Windows: **deploy-sandbox-hdf-standalone_{version}.ps1**
+
+>Note: You only need to run script once. It will setup and start the sandbox for you, creating the sandbox docker container in the process if necessary.
 
 Linux/Mac:
 
 ~~~
-cd /path/to/start_sandbox-script
-sh sandbox-hdf-deploy.sh
+cd /path/to/script
+sh deploy-sandbox-hdf-standalone_{version}.sh
 ~~~
 
 Windows Powershell:
 
 ~~~
-cd /path/to/start_sandbox-script
-powershell -ExecutionPolicy ByPass -File sandbox-hdf-deploy.ps1
+cd /path/to/script
+powershell -ExecutionPolicy ByPass -File deploy-sandbox-hdf-standalone_{version}.ps1
 ~~~
 
-You should see something like the following after script completion:
+You should see something similar to the following:
 
 ![docker_start_sandbox-hdf](assets/docker_start_sandbox-hdf.jpg)
 

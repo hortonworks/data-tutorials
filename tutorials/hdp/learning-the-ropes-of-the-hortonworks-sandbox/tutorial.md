@@ -213,7 +213,7 @@ ambari-agent restart
 ## Further Reading
 
 -   [Hadoop Tutorial - Getting Started with HDP](https://hortonworks.com/tutorial/hadoop-tutorial-getting-started-with-hdp/)
--   [HDP Documentation](https://docs.hortonworks.com/HDPDocuments/HDP2/HDP-2.6.3/index.html)
+-   [HDP Documentation](https://docs.hortonworks.com/HDPDocuments/HDP2/HDP-2.6.4/index.html)
 -   [Hortonworks Documentation](http://docs.hortonworks.com/)
 
 ## Appendix A: Reference Sheet

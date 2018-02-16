@@ -29,7 +29,7 @@ In the **tutorial**, you will apply the knowledge learned in the lesson module t
 
 ## Prerequisites
 
-- [HDF Sandbox Installed](https://hortonworks.com/downloads/#sandbox)
+- [Hortonworks DataFlow (HDF) Sandbox Installed](https://hortonworks.com/downloads/#sandbox)
 - 10 GB RAM provided to HDF Sandbox, your local machine should have at least 3 - 6 GB RAM left to stay stable
 
 ## Outline

@@ -228,7 +228,7 @@ If you prefer to build the dataflow manually step-by-step, continue on to **Appr
 
 2\. Let the flow run for about 1 minute, then stop the flow by hitting the **stop** button.
 
-3\. Launch Sandbox Web Shell Client via HDF Splash Screen from **[Advanced HDF SB Quick Links](http://sandbox-hdf.hortonworks.com:1080)** Link.
+3\. Launch Sandbox Web Shell Client via Hortonworks DataFlow (HDF) Splash Screen from **[Advanced HDF SB Quick Links](http://sandbox-hdf.hortonworks.com:1080)** Link.
 
 ![web_shell_client_sb_quick_link](assets/tutorial-3-build-a-nifi-process-group-to-simulate-nextbus-api/web_shell_client_sb_quick_link.png)
 

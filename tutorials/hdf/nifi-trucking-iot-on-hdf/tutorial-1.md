@@ -7,7 +7,7 @@ title: NiFi in Trucking IoT Use Case
 ## Outline
 
 - [The IoT Use Case](#the-iot-use-case)
-- [What is NiFi](#what-is-nifi)
+- [What is NiFi?](#what-is-nifi)
 - [Architectural Overview](#architectural-overview)
 - [Benefits of NiFi](#benefits-of-nifi)
 - [Next: NiFi in Action](#next-nifi-in-action)
@@ -20,7 +20,7 @@ What is NiFi's role in this Stream Processing Application?
 
 - NiFi acts as the producer that ingests data from the truck and traffic IoT devices, does simple event processing on the data, so that it can be split into TruckData and TrafficData that can be sent as messages to two Kafka topics.
 
-## What is NiFi
+## What is NiFi?
 
 To learn about what NiFi is, visit [What is Apache NiFi?](https://hortonworks.com/tutorial/analyze-transit-patterns-with-apache-nifi/section/1/#what-is-apache-nifi) from our Analyze Transit Patterns with Apache NiFi concepts tutorial.
 

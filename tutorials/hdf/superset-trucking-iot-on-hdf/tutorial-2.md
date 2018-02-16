@@ -20,7 +20,7 @@ We know the role data visualization plays in data science applications. Let's us
 
 ## Environment Setup
 
-We will be working in the `trucking-iot` project. If you have the latest HDF Sandbox installed, then the demo comes preinstalled. If not or you do not already have it setup, then refer to [Setup Demo on existing HDF/HDP](https://github.com/orendain/trucking-iot/tree/hadoop-summit-2017#setup-on-existing-hdf-hdp).
+We will be working in the `trucking-iot` project. If you have the latest Hortonworks DataFlow (HDF) Sandbox installed, then the demo comes preinstalled. If not or you do not already have it setup, then refer to [Setup Demo on existing HDF/HDP](https://github.com/orendain/trucking-iot/tree/hadoop-summit-2017#setup-on-existing-hdf-hdp).
 
 Visit [Real-Time Event Processing In NiFi, SAM, Schema Registry and SuperSet](https://hortonworks.com/tutorial/real-time-event-processing-in-nifi-sam-schema-registry-and-superset/#step-5-visualize-trucking-data-via-superset), follow Steps 1 - 4. Skip Step 5 from the tutorial in the link because we will go more in depth on creating Superset Visualization slices in this tutorial.
 

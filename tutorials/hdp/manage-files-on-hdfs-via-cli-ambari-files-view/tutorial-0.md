@@ -23,7 +23,7 @@ This tutorial walks through commonly used commands to manage files through the c
 
 ## Prerequisites
 
--   Downloaded and Installed [Hortonworks Sandbox](https://hortonworks.com/downloads/#sandbox)
+-   Downloaded and Installed [HDP Sandbox](https://hortonworks.com/downloads/#sandbox)
 
 ## Outline
 

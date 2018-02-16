@@ -22,7 +22,7 @@ Let's walk through the demo and get an understanding for the data pipeline befor
 
 ## Environment Setup
 
-SSH into your HDF environment and download the corresponding demo project.
+SSH into your Hortonworks DataFlow (HDF) environment and download the corresponding demo project.
 
 ```
 git clone https://github.com/orendain/trucking-iot-demo-2

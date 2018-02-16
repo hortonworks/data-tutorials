@@ -12,13 +12,13 @@ We are aware of the role NiFi plays in this Trucking IoT application. Let's dive
 
 - [NiFi Components](#nifi-components)
 - [Environment Setup](#environment-setup)
-- [Starting to Build a NiFi DataFlow](#starting-to-build-a-nifi-dataFlow)
+- [Starting to Build a NiFi DataFlow](#starting-to-build-a-nifi-dataflow)
 - [Building GetTruckingData](#building-gettruckingdata)
 - [Configuring RouteOnAttribute](#configuring-routeonattribute)
 - [Building EnrichTruckData](#building-enrichtruckdata)
 - [Configuring ConvertRecord: TruckData](#configuring-convertrecord-truckdata)
-- [Configuring ConvertRecord: TrafficData](#configuring-convertrecord-rrafficdata)
-- [Configuring PublishKafka_0_10: TruckData](#configuring-publishkafka_0_10-TruckData)
+- [Configuring ConvertRecord: TrafficData](#configuring-convertrecord-trafficdata)
+- [Configuring PublishKafka_0_10: TruckData](#configuring-publishkafka_0_10-truckdata)
 - [Configuring PublishKafka_0_10: TrafficData](#configuring-publishkafka_0_10-trafficdata)
 - [Summary](#summary)
 
@@ -28,7 +28,7 @@ Now we have a general sense of the power of NiFi. Check out the [Core Concepts o
 
 ## Environment Setup
 
-We will be working in the `trucking-iot` project. If you have the latest HDF Sandbox installed, then the demo comes preinstalled. If not or you do not already have it setup, then refer to [Setup Demo on existing HDF/HDP](https://github.com/orendain/trucking-iot/tree/hadoop-summit-2017#setup-on-existing-hdf-hdp).
+We will be working in the `trucking-iot` project. If you have the latest Hortonworks DataFlow (HDF) Sandbox installed, then the demo comes preinstalled. If not or you do not already have it setup, then refer to [Setup Demo on existing HDF/HDP](https://github.com/orendain/trucking-iot/tree/hadoop-summit-2017#setup-on-existing-hdf-hdp).
 
 ## Starting to Build a NiFi DataFlow
 
