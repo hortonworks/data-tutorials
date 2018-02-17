@@ -51,25 +51,48 @@ Now that we have an idea of Kafka's capabilities, let's explore its different co
 Initially when building this demo, we verified Zookeeper was running because Kafka uses Zookeeper. If Zookeeper was off, we ran the command or turned on it from Ambari:
 
 ~~~
-/usr/hdf/3.1.0.0-564/kafka/bin/zookeeper-server-start.sh config/zookeeper.properties
+/usr/hdf/current/kafka-broker/bin/zookeeper-server-start.sh config/zookeeper.properties
 ~~~
 
 We then started the Kafka Broker via Ambari or command:
 
 ~~~
-/usr/hdf/3.1.0.0-564/kafka/bin/kafka-server-start.sh config/server.properties
+/usr/hdf/current/kafka-broker/bin/kafka-server-start.sh config/server.properties
 ~~~
 
 If you wanted to see the daemons that were running, type `jps`
 
+~~~
+Example of Output:
+
+2306 drpc
+932 AmbariServer
+2469 core
+2726 logviewer
+3848 NiFiRegistry
+5201 StreamlineApplication
+3602 NiFi
+3026 TlsToolkitMain
+18194 Jps
+1684 Kafka
+3829 RunNiFiRegistry
+2649 Supervisor
+1530 RegistryApplication
+4762 LogSearch
+4987 LogFeeder
+3581 RunNiFi
+4383 jar
+1375 QuorumPeerMain
+~~~
+
 We created two Kafka Topics: **trucking_data_truck** and **trucking_data_traffic** using the following commands:
 
 ~~~
-/usr/hdf/3.1.0.0-564/kafka/bin/kafka-topics.sh --create --zookeeper sandbox-hdf.hortonworks.com:2181 --replication-factor 1 --partition 10 --topic trucking_data_truck
+/usr/hdf/current/kafka-broker/bin/kafka-topics.sh --create --zookeeper sandbox-hdf.hortonworks.com:2181 --replication-factor 1 --partition 10 --topic trucking_data_truck
 ~~~
 
 ~~~
-/usr/hdf/3.1.0.0-564/kafka/bin/kafka-topics.sh --create --zookeeper sandbox-hdf.hortonworks.com:2181 --replication-factor 1 --partition 10 --topic trucking_data_traffic
+/usr/hdf/current/kafka-broker/bin/kafka-topics.sh --create --zookeeper sandbox-hdf.hortonworks.com:2181 --replication-factor 1 --partition 10 --topic trucking_data_traffic
 ~~~
 
 Two Kafka Topics were created with ten partitions and a single partition each. When topics are created, the Kafka broker terminal sends a notification and it can be found in the log for the created topic: "/tmp/kafka-logs/"
@@ -107,7 +130,7 @@ Congratulations! You now know about the role Kafka plays in the demo application
 If you need to modify a Kafka Topic, then run the following command:
 
 ~~~
-/usr/hdf/3.1.0.0-564/kafka/bin/kafka-topics.sh --zookeeper localhost:2181 --alter --topic topic-name --partitions X
+/usr/hdf/current/kafka-broker/bin/kafka-topics.sh --zookeeper localhost:2181 --alter --topic topic-name --partitions X
 ~~~
 
 Account for your topic-name will be different and the amount of partitions you want to add.
@@ -117,5 +140,5 @@ Account for your topic-name will be different and the amount of partitions you w
 If you need to delete a Kafka Topic, run the following command:
 
 ~~~
-/usr/hdf/3.1.0.0-564/kafka/bin/kafka-topics.sh --zookeeper localhost:2181 --delete --topic topic_name
+/usr/hdf/current/kafka-broker/bin/kafka-topics.sh --zookeeper localhost:2181 --delete --topic topic_name
 ~~~
