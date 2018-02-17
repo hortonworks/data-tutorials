@@ -1,5 +1,5 @@
 ---
-title: Kafka in Trucking IoT Use Case
+title: Kafka Messaging System Fundamentals
 ---
 
 # Kafka Messaging System Fundamentals
