@@ -2,49 +2,55 @@
 title: Kafka in Trucking IoT Use Case
 ---
 
-# Kafka in Trucking IoT Use Case
+# Kafka Messaging System Fundamentals
+
+## Objective
+
+To understand the concepts behind **messaging systems** in **distributed systems**, and how to use them to pass on information between the **producer** (publisher, sender) to the **consumer** (subscriber, receiver). In this example, you will learn about **Kafka**.
 
 ## Outline
 
--   [The IoT Use Case](#the-iot-use-case)
+-   [What is a Messaging System?](#what-is-a-messaging-system?)
+-   [Point to Point System](#point-to-point-system)
+-   [Publish-Subscribe System](#publish-subscribe-system)
 -   [What is Kafka](#what-is-kafka)
 -   [Architectural Overview](#architectural-overview)
 -   [Benefits of Kafka](#benefits-of-kafka)
 -   [Next: Kafka in Action](#next-kafka-in-action)
 
-## The IoT Use Case
+## What is a Messaging System?
 
-To learn more about the Trucking IoT Use Case, visit [The IoT Use Case Sub Section](https://hortonworks.com/hadoop-tutorial/trucking-iot-hdf/#the-iot-use-case) from the "Trucking IoT on HDF" tutorial.
+Messaging systems transfer data between client applications. One application produces the data, such as reading from sensors embedded on vehicles and the other application receives the data, processes it to be ready to be visualized to show the characteristics about the drivers driving behavior who drive those vehicles. As you can see each application developer can focus on writing code to analyze the data and not worry about how to share the data. There are two messaging systems used in this scenario, **point to point** and **publish subscribe**. The system most often used is _publish subscribe_, but we will look at both.
 
-What is Kafka role in this Stream Processing Application?
+## Point to Point System
 
-- Kafka offers strong durability, so Storm can read data from a topic, process it and write data to databases, another topic, etc.
-
-## What is Kafka
-
-Apache Kafka is an open source publish-subscribe based messaging system responsible for transferring data from one application to another. In messaging systems, there are two types of messaging patterns: point to point and publish-subscribe.
-
-**Point to Point** are messages persisted into a queue
+**Point to Point** are messages transmitted into a queue
 
 ![Point to Point](assets/point-to-point.png)
 
 Key Characteristics of generic figure above:
 
-- a message can be read by only one consumer
-- 1 or more consumer(s) can consume messages in the queue
-- once the message is read, it disappears from the queue
+- producer sends messages into the queue, each message is read by only one consumer
+- once the message is consumed, it vanishes
+- multiple consumers can read messages from the queue
 
-**Publish-Subscribe** are messages persisted into a topic
+## Publish-Subscribe System
+
+**Publish-Subscribe** are messages transmitted into a topic
 
 ![Publish Subscribe](assets/pub-sub.png)
 
-Key Characteristics of generic figure above:
-
-- consumers can subscribe to 1 or more topics and consume all messages in that topic
 - message producers are known as publishers
 - message consumers are known as subscribers
 
-Kafka is a publish subscribe messaging pattern.
+How does the **Pub-Sub** messaging system work?
+
+- publisher sends messages into 1 or more topics
+- subscribers can arrange to receive 1 or more topics, then consume all the messages
+
+## What is Kafka
+
+Apache Kafka is an open source publish-subscribe based messaging system responsible for transferring data from one application to another.
 
 ## Architectural Overview
 
@@ -68,8 +74,6 @@ Reads messages from Kafka Cluster and emits them into the Apache Storm Topology 
 
 To learn more about the Kafka Consumer API Sample Code, visit [Developing Kafka Consumers](https://docs.hortonworks.com/HDPDocuments/HDP2/HDP-2.6.0/bk_kafka-component-guide/content/ch_kafka-development.html)
 
-At a mid level for the Kafka Cluster, our data line looks as follows:
-
 ## Benefits of Kafka
 
 **Reliability**
@@ -82,7 +86,7 @@ At a mid level for the Kafka Cluster, our data line looks as follows:
 
 **Durability**
 
-- "Distributed commit log" which allows messages to be persisted on disk asap
+- "Distributed commit log" which allows messages to continue to exist on disk even after the processes that created that data have ended
 
 **Performance**
 

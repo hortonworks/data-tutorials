@@ -7,7 +7,7 @@ persona: Developer
 source: Hortonworks
 use case: Streaming
 technology: Apache Kafka
-release: hdf-3.0
+release: hdf-3.1
 environment: Sandbox
 product: HDF
 series: HDF > Develop with Hadoop > Real World Examples
@@ -27,6 +27,6 @@ We will create Kafka Topics (category queues) for handling large volumes of data
 
 ## Outline
 
-- [Kafka in Trucking IoT Use Case](https://hortonworks.com/tutorial/kafka-in-trucking-iot-on-hdf/section/1/) - Understand the role Kafka plays within real-world use case
+- [Kafka Messaging System Fundamentals](https://hortonworks.com/tutorial/kafka-in-trucking-iot-on-hdf/section/1/) - Understand the messaging system concepts that apply to Kafka
 - [Explore Kafka in the Demo](https://hortonworks.com/tutorial/kafka-in-trucking-iot-on-hdf/section/2/)- Gain an understanding of Kafka Topics used in the demo and explore commands for exploring the data in Kafka
 - [Learn Basic Operations of Kafka](https://hortonworks.com/tutorial/kafka-in-trucking-iot-on-hdf/section/3/)- Dive into Kafka and learn basic operations in Kafka

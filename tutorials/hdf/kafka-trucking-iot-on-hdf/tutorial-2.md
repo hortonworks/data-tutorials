@@ -16,6 +16,7 @@ While the demo application runs, you will gain an understanding of how Kafka rec
 - [View Data in Kafka Topics](#view-data-in-kafka-topics)
 - [Next: Learn Basic Operations of Kafka](#next-learn-basic-operations-of-kafka)
 
+
 ## Environment Setup
 
 If you have the latest Hortonworks DataFlow (HDF) Sandbox installed, then the demo comes preinstalled. If not or you do not already have it setup, then refer to [Setup Demo on existing HDF/HDP](https://github.com/orendain/trucking-iot/tree/hadoop-summit-2017#setup-on-existing-hdf-hdp).
@@ -33,7 +34,7 @@ A NiFi simulator generates data of two types: TruckData and TrafficData as a CSV
 From the terminal, we can see the two Kafka Topics that have been created:
 
 ~~~
-/usr/hdf/3.1.0.0-564/kafka/bin/kafka-topics.sh --list --zookeeper localhost:2181
+/usr/hdf/current/kafka-broker/bin/kafka-topics.sh --list --zookeeper localhost:2181
 ~~~
 
 Results:
@@ -53,13 +54,13 @@ As messages are persisted into the Kafka Topics from the producer, you can see t
 View Data for Kafka Topic: **trucking_data_truck**:
 
 ~~~
-/usr/hdf/3.1.0.0-564/kafka/bin/kafka-console-consumer.sh --zookeeper localhost:2181 --topic trucking_data_truck --from-beginning
+/usr/hdf/current/kafka-broker/bin/kafka-console-consumer.sh --zookeeper localhost:2181 --topic trucking_data_truck --from-beginning
 ~~~
 
 View Data for Kafka Topic: **trucking_data_traffic**:
 
 ~~~
-/usr/hdp/3.1.0.0-564/kafka/bin/kafka-console-consumer.sh --zookeeper localhost:2181 --topic trucking_data_traffic --from-beginning
+/usr/hdf/current/kafka-broker/bin/kafka-console-consumer.sh --zookeeper localhost:2181 --topic trucking_data_traffic --from-beginning
 ~~~
 
 As you can see Kafka acts as a robust queue that receives data and allows for it to be transmitted to other systems.
