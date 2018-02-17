@@ -1,18 +1,18 @@
 ---
-title: Building a NiFi DataFlow
+title: Creating a NiFi DataFlow
 ---
 
-# Building a NiFi DataFlow
+# Creating a NiFi DataFlow
 
 ## Introduction
 
-We are aware of the role NiFi plays in this Trucking IoT application. Let's dive into building processors and configuring processors to learn how to build this NiFi DataFlow.
+We are aware of the role NiFi plays in this Trucking IoT application. Let's analyze the NiFi DataFlow to learn how it was built. Let's dive into the process behind configuring controller services and configuring processors to learn how to build this NiFi DataFlow.
 
 ## Outline
 
 - [NiFi Components](#nifi-components)
-- [Environment Setup](#environment-setup)
 - [Starting to Build a NiFi DataFlow](#starting-to-build-a-nifi-dataflow)
+- [Setting up Schema Registry Controller Service](#setting-up-schema-registry-controller-service)
 - [Building GetTruckingData](#building-gettruckingdata)
 - [Configuring RouteOnAttribute](#configuring-routeonattribute)
 - [Building EnrichTruckData](#building-enrichtruckdata)
@@ -24,19 +24,13 @@ We are aware of the role NiFi plays in this Trucking IoT application. Let's dive
 
 ## NiFi Components
 
-Now we have a general sense of the power of NiFi. Check out the [Core Concepts of NiFi](https://hortonworks.com/tutorial/analyze-transit-patterns-with-apache-nifi/section/1/#the-core-concepts-of-nifi) to learn more about the NiFi Components used in creating a NiFi DataFlow.
-
-## Environment Setup
-
-We will be working in the `trucking-iot` project. If you have the latest Hortonworks DataFlow (HDF) Sandbox installed, then the demo comes preinstalled. If not or you do not already have it setup, then refer to [Setup Demo on existing HDF/HDP](https://github.com/orendain/trucking-iot/tree/hadoop-summit-2017#setup-on-existing-hdf-hdp).
+Check out the [Core Concepts of NiFi](https://hortonworks.com/tutorial/analyze-transit-patterns-with-apache-nifi/section/1/#the-core-concepts-of-nifi) to learn more about the NiFi Components used in creating a NiFi DataFlow.
 
 ## Starting to Build a NiFi DataFlow
 
-Open the NiFi UI at `sandbox-hdf.hortonworks.com:9090/nifi`. The web browser will load the NiFi Canvas where NiFi DataFlows are built. NiFi is a visual command and control platform that allows users or developers to create dataflow applications quickly with little need to write code. We are using NiFi to bridge the gap between data generating from sensor data and our stream application. In the real world scenario, we have MiNiFi agents attached to live truck vehicles that ingest the raw sensor data and send that data to our NiFi application. In NiFi, we will use our GetTruckingData processor to ingest the data that our MiNiFi agents our sending to us.
+## Setting up Schema Registry Controller Service
 
-If you want to go more in-depth on building a NiFi DataFlow for a similar application use case, such as connecting processors, setting configuration parameters, etc, visit [Analyze Transit Patterns with Apache NiFi](https://hortonworks.com/tutorial/analyze-transit-patterns-with-apache-nifi/).
-
-Before we build the dataflow, lets see what the configuration for a schema for our dataflow would look like. Since the schema has already been created, go to the **Operate Pallete**, click on the gear icon, then select **Controller Services** tab.
+As the first step in building the dataflow, we needed to setup NiFi Controller Service called **HortonworksSchemaRegistry**. Go to the **Operate Pallete**, click on the gear icon, then select **Controller Services** tab. To add a new controller service, you would press on the **" + "** icon in the top right of the table. However, since the service has already been created, we will reference it to see how a user would connect NiFi with Schema Registry.
 
 **HortonworksSchemaRegistry**
 
@@ -49,6 +43,8 @@ _Properties Tab of this Controller Service_
 | **Cache Expiration** | **1 hour** |
 
 A schema is used for categorizing the data into separate categories: TruckData and TrafficData will be applied on the data during the use of the **ConvertRecord** processor.
+
+From the configuration in the table above, we can see the **URL** that allows NiFi to interact with Schema Registry, the amount of **cache** that can be sized from the schemas and the amount of time required until the schema **cache expires** and NiFi has to communicate with Schema Registry again.
 
 ## Building GetTruckingData
 

@@ -24,13 +24,15 @@ Your HDF Sandbox should be powered on using your favorite platform.
 
 Let's activate the NiFi dataflow, so it will process the simulated data and push the data into Kafka Topics. Open NiFi at `sandbox-hdf.hortonworks.com:9090/nifi`.
 
-In the **Operate Pallete**, click on the gear icon then click on Controller Services. Let's verify our Controller Services are all enabled as shown in the picture:
+Drag and drop the components **template** icon ![nifi_template](assets/nifi_template.jpg) onto the NiFi canvas. Select `Trucking IoT Demo`, then press **ADD**. Deselect the dataflow, just click anywhere on the canvas.
+
+In the **Operate Pallete** with the hand point upward, expand it if it is closed, click on the gear icon then click on Controller Services gear icon. In Controller Services, click on the **Lighting Bolt** to the right of **HortonworksSchemaRegistry**, for **Scope**, select **Service and referencing componen...**, then press **ENABLE**. Then **CLOSE**. All the Controller Services should be enabled like below:
 
 ![controller-services-en](assets/controller-services-en.jpg)
 
 > Note: If any of your services are disabled, you can enable them by clicking on the lightning bolt symbol on the far right of the table. Controller Services are required to be enabled to successfully run the dataflow.
 
-Let's select the entire dataflow. Hover your mouse onto one of the corners of the dataflow of components. Hold **shift**, then **click on your mouse** and **drag** it to the other corner **to select the entire dataflow**. In the **Operate Pallete,** click on the start button ![start-button](assets/start-button.jpg) and let it run for 1 minute. The red stop symbols ![red-symbol](assets/red-symbol.jpg) at the corner of each component in the dataflow will turn to a green play symbol ![green-symbol](assets/green-symbol.jpg). You should see the numbers in the connection queues change from 0 to a higher number indicating that the data is being processed.
+Let's select the entire dataflow. Hold **command** or **ctrl** and **A** and the whole dataflow will be selected. In the **Operate Pallete,** click on the start button ![start-button](assets/start-button.jpg) and let it run for 1 minute. The red stop symbols ![red-symbol](assets/red-symbol.jpg) at the corner of each component in the dataflow will turn to a green play symbol ![green-symbol](assets/green-symbol.jpg). You should see the numbers in the connection queues change from 0 to a higher number indicating that the data is being processed.
 
 You should see a picture similar to below:
 
