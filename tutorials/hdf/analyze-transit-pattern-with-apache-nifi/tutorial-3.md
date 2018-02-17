@@ -230,13 +230,11 @@ If you prefer to build the dataflow manually step-by-step, continue on to **Appr
 
 3\. Launch Sandbox Web Shell Client via Hortonworks DataFlow (HDF) Splash Screen from **[Advanced HDF SB Quick Links](http://sandbox-hdf.hortonworks.com:1080)** Link.
 
-![web_shell_client_sb_quick_link](assets/tutorial-3-build-a-nifi-process-group-to-simulate-nextbus-api/web_shell_client_sb_quick_link.png)
-
 **Figure 11:** SB Quick Link for Web Shell Client
 
-> Note: Username is "root", initial password is "hadoop". You will be prompted to write the current password again, then set a new password.
+> Note: Username is "root", initial password is "hadoop".
 
-![web_shell_client](assets/tutorial-3-build-a-nifi-process-group-to-simulate-nextbus-api/web_shell_client.png)
+![web_shell_client](assets/tutorial-3-build-a-nifi-process-group-to-simulate-nextbus-api/web_shell_client.jpg)
 
 You have now ssh'd into the HDF Sandbox Server.
 

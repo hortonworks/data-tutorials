@@ -6,7 +6,7 @@ title: Build a NiFi Process Group to Parse Transit Events
 
 ## Introduction
 
-You will build a portion of the NiFi DataFlow in a process group to parse for **timestamp, vehicle location, speed, vehicle ID** and **other data** from a **San Francisco Muni Transit Simulator**.
+You will learn to build a portion of the NiFi DataFlow in a process group to parse data using `XPath Expression Language`for **timestamp, vehicle location, speed, vehicle ID** and **other data** from the **San Francisco Muni Transit Simulator**.
 
 ## Prerequisites
 -   Completed the prior tutorials within this tutorial series
@@ -170,15 +170,25 @@ If you prefer to build the dataflow manually step-by-step, continue on to **Appr
 
 ### Approach 2: Import ParseTransitEvents Process Group
 
-1\. Download the [tutorial-4-ParseTransitEvents.xml](#assets/tutorial-4-build-nifi-process-group-to-parse-transit-events/template/tutorial-4-ParseTransitEvents.xml) template file.
+**Warning: If you Imported the Previous DataFlow, Read these steps first**
 
-2\. Use the template icon ![nifi_template_icon](assets/tutorial-4-build-nifi-process-group-to-parse-transit-events/nifi_template_icon.png) located in the **Operate** Palette.
+1\. In your process group, if there are any **queues** left with data, remove the data. Right click the queue, select **Empty queue**, click **EMPTY**.
 
-3\. **Browse**, find the template file, click **Open** and hit **Upload**.
+2\. Navigate back to the **NiFi Flow** breadcrumb level to delete your flow.
 
-4\. From the **Components Toolbar**, drag the template icon ![nifi_template_icon](assets/tutorial-4-build-nifi-process-group-to-parse-transit-events/add_nifi_template.png) onto the graph and select the **tutorial-4-ParseTransitEvents.xml** template file.
+To delete your previous flow, hold **command** or **ctrl** and press **A** to highlight your dataflow, then press **delete** or **backspace**.
 
-5\. Hit the **start** button ![start_button_nifi_iot](assets/tutorial-4-build-nifi-process-group-to-parse-transit-events/start_button_nifi_iot.png) to activate the dataflow.
+**Import the New DataFlow Template**
+
+3\. Download the [tutorial-4-ParseTransitEvents.xml](#assets/tutorial-4-build-nifi-process-group-to-parse-transit-events/template/tutorial-4-ParseTransitEvents.xml) template file.
+
+4\. Use the template icon ![nifi_template_icon](assets/tutorial-4-build-nifi-process-group-to-parse-transit-events/nifi_template_icon.png) located in the **Operate** Palette.
+
+5\. **Browse**, find the template file, click **Open** and hit **Upload**.
+
+6\. From the **Components Toolbar**, drag the template icon ![nifi_template_icon](assets/tutorial-4-build-nifi-process-group-to-parse-transit-events/add_nifi_template.png) onto the graph and select the **tutorial-4-ParseTransitEvents.xml** template file.
+
+7\. Hit the **start** button ![start_button_nifi_iot](assets/tutorial-4-build-nifi-process-group-to-parse-transit-events/start_button_nifi_iot.png) to activate the dataflow.
 
 ![run_dataflow_lab1_nifi_learn_ropes](assets/tutorial-4-build-nifi-process-group-to-parse-transit-events/started_parsetransitevents_pg.png)
 

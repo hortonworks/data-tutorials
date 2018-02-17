@@ -11,7 +11,7 @@ With the Hortonworks DataFlow (HDF) Sandbox, Apache NiFi comes preinstalled in t
 ## Prerequisites
 -   Completed the prior tutorials within this tutorial series
 -   Downloaded [HDF Sandbox](https://hortonworks.com/products/sandbox/) for VMWare, VirtualBox or Native Docker
--   [Installed and Deployed HDF 3.0 Sandbox](https://hortonworks.com/tutorial/sandbox-deployment-and-install-guide/) for VMWare, VirtualBox or Native Docker
+-   [Installed and Deployed HDF Sandbox](https://hortonworks.com/tutorial/sandbox-deployment-and-install-guide/) for VMWare, VirtualBox or Native Docker
 -   Added HDF Sandbox Hostname to Your Hosts File, refer to [Getting Started with HDF Sandbox](https://hortonworks.com/tutorial/getting-started-with-hdf-sandbox/)
 
 ## Outline
@@ -19,6 +19,8 @@ With the Hortonworks DataFlow (HDF) Sandbox, Apache NiFi comes preinstalled in t
 -   [Approach 1: Access NiFi HTML UI via Ambari Dashboard](#approach-1-access-nifi-html-ui-via-ambari-dashboard)
 -   [Approach 2: Launch NiFi HTML UI from HDF Splash Quick Links](#approach-2-launch-nifi-html-ui-from-hdf-splash-quick-links)
 -   [Summary](#summary)
+
+> Note: For VMware users, you will need to add the auto generated IP address on startup of your virtual machine followed by HDF Sandbox hostname to your hosts file, example `192.168.17.129 sandbox-hdf.hortonworks.com`. On MAC, open `/private/etc/hosts`; LINUX, open `/etc/hosts`; WINDOWS 10, open `C:\Windows\System32\drivers\etc\hosts` as an administrator.
 
 ### Step 1: Open HDF Splash Page
 
@@ -34,17 +36,13 @@ Choose either approach to access NiFi UI.
 
 2\. Type `admin/admin` to login to Ambari.
 
-![login_ambari_ui.png](assets/tutorial-2-launch-nifi-html-ui/approach-1-ambari/login_ambari_ui.png)
+![login_ambari_ui](assets/tutorial-2-launch-nifi-html-ui/approach-1-ambari/login_ambari_ui.png)
 
-3\. Verify the NiFi Service is running, it should have a green check mark:
-
-![verify_nifi_running.png](assets/tutorial-2-launch-nifi-html-ui/approach-1-ambari/verify_nifi_running.png)
-
-4\. Select the **NiFi Service**, click on **Quick Links** dropdown and press the **NiFi UI**:
+3\. Select the **NiFi Service**, click on **Quick Links** dropdown and press the **NiFi UI**:
 
 ![open-nifi-ui-via-ambari.png](assets/tutorial-2-launch-nifi-html-ui/approach-1-ambari/open-nifi-ui-via-ambari.jpg)
 
-![open_nifi_html_interface.png](assets/tutorial-2-launch-nifi-html-ui/approach-1-ambari/open_nifi_html_interface.png)
+![open_nifi_html_interface.png](assets/tutorial-2-launch-nifi-html-ui/approach-1-ambari/open_nifi_html_interface.jpg)
 
 ### Approach 2: Launch NiFi HTML UI from HDF Splash Quick Links
 
@@ -52,10 +50,10 @@ Choose either approach to access NiFi UI.
 
 2\. Hover over the **NiFi 1.2.0** box and select **Go to UI**
 
-![splash_nifi_quicklink](assets/tutorial-2-launch-nifi-html-ui/approach-2-splash/splash_nifi_quicklink.png)
+![splash_nifi_quicklink](assets/tutorial-2-launch-nifi-html-ui/approach-2-splash/splash_nifi_quicklink.jpg)
 
-![open_nifi_html_interface.png](assets/tutorial-2-launch-nifi-html-ui/approach-2-splash/open_nifi_html_interface.png)
+![open_nifi_html_interface.png](assets/tutorial-2-launch-nifi-html-ui/approach-2-splash/open_nifi_html_interface.jpg)
 
 ## Summary
 
-Congratulations! You explored two approaches for launching NiFi UI. You opened the HDF 3.0 Splash Page: Approach 1 was launching the Ambari Dashboard from the "New To HDF path" while Approach 2 was using the NiFi Quick Link from the "Advanced HDF path". Now you are ready to explore the next tutorial to began building our simple dataflow.
+Congratulations! You explored two approaches for launching NiFi UI. You opened the HDF Splash Page: Approach 1 was launching the Ambari Dashboard from the "New To HDF path" while Approach 2 was using the NiFi Quick Link from the "Advanced HDF path". Now you are ready to explore the next tutorial to began building our simple dataflow.

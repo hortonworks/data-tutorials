@@ -153,9 +153,31 @@ There is another configuration element for Back Pressure called **Back Pessure D
 
 ## Approach 2: Import NextBusAPIIntegration NiFi Flow
 
-1\. Download the [tutorial-7-ingest-live-nextbus-api.xml](#assets/tutorial-7-integrate-nextbus-api-to-pull-in-transit-live-feed/template/tutorial-7-ingest-live-nextbus-api.xml) template file. Then import the template file into NiFi.
+**Warning: If you Imported the Previous DataFlow, Read these steps first**
 
-2\. Hit the **start** button ![start_button_nifi](assets/tutorial-7-integrate-nextbus-api-to-pull-in-transit-live-feed/start_button_nifi.png) to activate the dataflow.
+1\. In your process group, if there are any **queues** left with data, remove the data. Right click the queue, select **Empty queue**, click **EMPTY**.
+
+2\. Navigate back to the **NiFi Flow** breadcrumb level to delete your flow.
+
+To delete your previous flow, hold **command** or **ctrl** and press **A** to highlight your dataflow, then press **delete** or **backspace**.
+
+**Import the New DataFlow Template**
+
+3\. Download the [tutorial-7-ingest-live-nextbus-api.xml](assets/tutorial-7-integrate-nextbus-api-to-pull-in-transit-live-feed/template/tutorial-7-ingest-live-nextbus-api.xml) template file. Then import the template file into NiFi.
+
+4\. Use the **upload template** icon ![upload_nifi_template](assets/tutorial-6-build-a-nifi-process-group-to-store-data-as-json/nifi_template_icon.png) located in the Operate Palette.
+
+5\. **Browse**, find the template file, click **Open** and hit **Upload**.
+
+6\. From the **Components Toolbar**, drag the **add template** icon ![add_nifi_template](assets/tutorial-6-build-a-nifi-process-group-to-store-data-as-json/add_nifi_template.png) onto the graph and select the **tutorial-6-StoreDataAsJSONToDisk.xml** template file.
+
+**Warning 2: If you didn't Obtain Google API Key, then follow the steps**
+
+7\. Refer to **Step 1** in **Approach 1** from the **Validate the GeoEnriched Data Tutorial** to obtain the Google API key and set up **Google Places API: HTTP URL**.
+
+8\. Once you have your own Google Places API Key, go into the ValidateGeoEnrichedTransitData process group, replace the **InvokeHTTP** processor's **Remote URL** property value with the new **Google Places API: HTTP URL** value.
+
+9\. Hit the **start** button ![start_button_nifi](assets/tutorial-7-integrate-nextbus-api-to-pull-in-transit-live-feed/start_button_nifi.png) to activate the dataflow.
 
 ![live_stream_ingestion_flow](assets/tutorial-7-integrate-nextbus-api-to-pull-in-transit-live-feed/live_stream_ingestion_flow.png)
 

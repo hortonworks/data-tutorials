@@ -7,7 +7,7 @@ persona: Data Scientist & Analyst
 source: Hortonworks
 use case: Flow Management
 technology: Apache NiFi
-release: hdf-3.0.0
+release: hdf-3.1.0
 environment: Sandbox
 product: HDF
 series: HDF > Develop with Hadoop > Hello World

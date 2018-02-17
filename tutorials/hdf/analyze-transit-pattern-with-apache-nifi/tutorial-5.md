@@ -84,7 +84,7 @@ Now you have the API Key parameter for our HTTP request. We also have the other 
 https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${Latitude},${Longitude}&radius=500&type=neighborhood&key=AIzaSyDY3asGAq-ArtPl6J2v7kcO_YSRYrjTFug
 ~~~
 
-> Note: Your **API Key** will be different than the one in the URL above.
+> Note: Your **API Key** will be different than the one in the URL above. You will need to use the **ONE** you get from Google Places API Web Service.
 
 ### Step 2: Create Process Group and Label For It
 
@@ -255,13 +255,31 @@ Inside the **ValidateGeoEnrichedTransitData** process group, we will inspect **V
 
 ## Approach 2: Import Enriched NiFi Flow Via Places API
 
-1\. Download the [tutorial-5-ValidateGeoEnrichedTransitData.xml](assets/tutorial-5-build-a-nifi-process-group-to-validate-the-geoenriched-data/nifi-template/tutorial-5-ValidateGeoEnrichedTransitData.xml) template file. Then upload the template file into NiFi.
+**Warning 1: If you Imported the Previous DataFlow, Read these steps first**
 
-2\. Refer to **Step 1** in **Approach 1** to obtain the Google API key and set up **Google Places API: HTTP URL**.
+1\. In your process group, if there are any **queues** left with data, remove the data. Right click the queue, select **Empty queue**, click **EMPTY**.
 
-3\. Replace the **InvokeHTTP** processor's **Remote URL** property value with the new **Google Places API: HTTP URL** value.
+2\. Navigate back to the **NiFi Flow** breadcrumb level to delete your flow.
 
-4\. Hit the **start** button ![start_button_nifi_iot](assets/tutorial-5-build-a-nifi-process-group-to-validate-the-geoenriched-data/start_button_nifi_iot.png). to activate the dataflow.
+To delete your previous flow, hold **command** or **ctrl** and press **A** to highlight your dataflow, then press **delete** or **backspace**.
+
+**Import the New DataFlow Template**
+
+3\. Download the [tutorial-5-ValidateGeoEnrichedTransitData.xml](assets/tutorial-5-build-a-nifi-process-group-to-validate-the-geoenriched-data/template/tutorial-5-ValidateGeoEnrichedTransitData.xml) template file. Then upload the template file into NiFi.
+
+4\. Use the template icon ![nifi_template_icon](assets/tutorial-4-build-nifi-process-group-to-parse-transit-events/nifi_template_icon.png) located in the **Operate** Palette.
+
+5\. **Browse**, find the template file, click **Open** and hit **Upload**.
+
+6\. From the **Components Toolbar**, drag the template icon ![nifi_template_icon](assets/tutorial-4-build-nifi-process-group-to-parse-transit-events/add_nifi_template.png) onto the graph and select the **tutorial-4-ParseTransitEvents.xml** template file.
+
+**Warning 2: If you didn't Obtain Google API Key, then follow the steps**
+
+7\. Refer to **Step 1** in **Approach 1** to obtain the Google API key and set up **Google Places API: HTTP URL**.
+
+8\. Replace the **InvokeHTTP** processor's **Remote URL** property value with the new **Google Places API: HTTP URL** value.
+
+9\. Hit the **start** button ![start_button_nifi_iot](assets/tutorial-5-build-a-nifi-process-group-to-validate-the-geoenriched-data/start_button_nifi_iot.png). to activate the dataflow.
 
 ![complete_dataflow_lab2_geoEnrich](assets/tutorial-5-build-a-nifi-process-group-to-validate-the-geoenriched-data/ValidateGeoEnrichedTransitData_pg.png)
 
