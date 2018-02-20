@@ -23,6 +23,8 @@ If you have the latest Hortonworks DataFlow (HDF) Sandbox installed, then the de
 
 Open a terminal on your local machine and access the sandbox through the shell-in-a-box method. Please visit [Learning the Ropes of the Hortonworks Sandbox](https://hortonworks.com/tutorial/learning-the-ropes-of-the-hortonworks-sandbox/#environment-setup) to review this method.
 
+Before we can perform Kafka operations on the data, we must first have data in Kafka, so let's run the NiFi DataFlow Application. Refer to the steps in this module: **[Run NiFi in the Trucking IoT Demo](https://hortonworks.com/tutorial/nifi-in-trucking-iot-on-hdf/section/2/)**, then you will be ready to explore Kafka.
+
 Turn Kafka component on if it's not already on through Ambari.
 
 ## Persist Data Into Kafka Topics
