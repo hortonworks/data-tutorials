@@ -124,9 +124,11 @@ SAM will load the canvas, so you can start building your application.
 
 **SOURCE**
 
-1\. Add 2 KAFKA source components onto the canvas.
+1\. Add 2 KAFKA source components onto the canvas as shown in **Figure 1**.
 
 ![kafka_source_components](assets/images/kafka_source_components.jpg)
+
+**Figure 1: Kafka Source Components**
 
 2\. Configure both components. Double click on one of the components, their configuration window will appear. When you are done, click OK.
 
@@ -333,6 +335,8 @@ RULE connection to HDFS SINK, HDFS sink configuration
 Once all the components have been configured and connected, your topology will look similar as **Figure 2**:
 
 ![sam-topology](assets/images/sam-topology.jpg)
+
+**Figure 2: SAM Topology**
 
 **Fast SINK Approach:**
 
