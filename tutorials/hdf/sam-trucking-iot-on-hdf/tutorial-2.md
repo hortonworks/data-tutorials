@@ -55,11 +55,16 @@ Both components are accessible from the **Components** tab.
 
 1\. Open Service Pool
 
-2\. Insert your Ambari Cluster URL as shown in **Figure 1** in the field next to AUTO ADD:
+2\. Insert your Ambari Cluster URL in the field next to AUTO ADD. The definition of what you need to insert and here is an example after replacing ambari_host, port and CLUSTER_NAME with the required information.
 
-![ambari-url](assets/images/ambari-url.jpg)
+~~~
+Definition:
 
-**Figure 1: Ambari Cluster URL**
+http://ambari_host:port/api/v1/clusters/CLUSTER_NAME
+
+Example:
+http://sandbox-hdf.hortonworks.com:8080/api/v1/clusters/Sandbox
+~~~
 
 > Note: CLUSTER_NAME can be found in Ambari UI under admin(user)->Manage Ambari->Versions->Cluster
 
