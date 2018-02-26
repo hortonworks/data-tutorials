@@ -17,25 +17,24 @@ series: HDP > Develop with Hadoop > Apache Spark
 
 ## Introduction
 
-This tutorial will teach you how to set up a full development environment for developing and debugging Spark applications. For this tutorial we'll be using Java, but Spark also supports development with Java, Python, and R. The Scala version of this tutorial can be found [here](https://hortonworks.com/tutorial/setting-up-a-spark-development-environment-with-scala/), and the Python version [here](https://hortonworks.com/tutorial/setting-up-a-spark-development-environment-with-python/). We'll be using IntelliJ as our IDE, and since we're using Java we'll use Maven as our build manager. By the end of the tutorial, you'll know how to set up IntelliJ, how to use Maven to manage dependencies, how to package and deploy your Spark application to a cluster, and how to connect your live program to a debugger.
+This tutorial will teach you how to set up a full development environment for developing and debugging Spark applications. For this tutorial we'll be using Java, but Spark also supports development with [Scala](https://hortonworks.com/tutorial/setting-up-a-spark-development-environment-with-scala/), [Python](https://hortonworks.com/tutorial/setting-up-a-spark-development-environment-with-python/), and R.
+
+ We'll be using IntelliJ as our IDE, and since we're using Java we'll use Maven as our build manager. By the end of the tutorial, you'll know how to set up IntelliJ, how to use Maven to manage dependencies, how to package and deploy your Spark application to a cluster, and how to connect your live program to a debugger.
 
 ## Prerequisites
 
--   Download the [Hortonworks Sandbox](https://hortonworks.com/downloads/)
+-   Installed [Hortonworks Data Platform (HDP) Sandbox](https://hortonworks.com/downloads/#sandbox)
+-   Installed [IntelliJ IDEA](https://www.jetbrains.com/) with Maven (dependency manager)
+-   Installed [Java](https://java.com/)
 
 ## Outline
 
--   [Installing Prerequisites](#installing-prerequisites)
 -   [Creating a new IntelliJ Project](#creating-a-new-intellij-project)
 -   [Maven](#maven)
 -   [Create a Spark Application](#create-a-spark-application)
 -   [Deploying to the Sandbox](#deploying-to-the-sandbox)
 -   [Deploying to the Cloud](#deploying-to-the-cloud)
 -   [Live Debugging](#live-debugging)
-
-## Installing Prerequisites
-
-Before starting this tutorial make sure you've installed the IntelliJ IDE, the Java programming language and the dependency manager Maven.
 
 ## Creating a new IntelliJ Project
 

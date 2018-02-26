@@ -62,7 +62,7 @@ Select the **Advanced** tab and adjust the dedicated memory to **at least 8GB of
 
 **Load Sandbox Into Docker**
 
--   Download latest scripts [Hortonworks Data Platform (HDP) for Docker](https://hortonworks.com/downloads/#sandbox).
+-   Download latest scripts [Hortonworks Data Platform (HDP) for Docker](https://hortonworks.com/downloads/#sandbox) and decompress **zip** file.
 
 [![download-sandbox-hdp-docker](assets/download-sandbox-hdp-docker.jpg)](https://hortonworks.com/downloads/#sandbox)
 
@@ -107,7 +107,7 @@ When you want to re-start your sandbox, re-run the script as you did above.
 
 **Install/Deploy/Start HDF Sandbox**
 
--   Download latest scripts [Hortonworks DataFlow (HDF) for Docker](https://hortonworks.com/downloads/#sandbox).
+-   Download latest scripts [Hortonworks DataFlow (HDF) for Docker](https://hortonworks.com/downloads/#sandbox) and decompress **zip** file.
 
 [![download-sandbox-hdf-docker](assets/download-sandbox-hdf-docker.jpg)](https://hortonworks.com/downloads/#sandbox)
 
