@@ -8,7 +8,7 @@ title: Lesson - Stream Processing & SAM
 
 ## Outline
 
-- [Introduction to Stream Processing](#introduction-to-stream processing)
+- [Introduction to Stream Processing](#introduction-to-stream-processing)
 - [Streaming Analytics Manager](#streaming-analytics-manager)
 
 ## Introduction to Stream Processing
