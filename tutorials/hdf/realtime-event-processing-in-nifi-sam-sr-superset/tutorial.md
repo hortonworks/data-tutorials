@@ -159,7 +159,7 @@ Overview of the essential **schemas** in the Schema Registry:
 
 1\. Open Stream Analytics Manager (SAM) at `http://sandbox-hdf.hortonworks.com:7777/`
 
-2\. Click on the **Trucking-IoT-Demo** SAM topology square:
+2\. Instead of clicking on the **Trucking-IoT-Demo** SAM topology square, we will need to [download the latest sam topology](assets/templates/sam_topology/Trucking-IoT-Demo-V2.json) and then import it since the previous topology is incompatible with the latest HDF.
 
 ![sam_home](assets/images/sam_home.jpg)
 
