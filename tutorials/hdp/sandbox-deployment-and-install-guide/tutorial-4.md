@@ -107,6 +107,7 @@ Host azureSandbox (or any other host alias)
   User <your-specified-azure-username-here>
   HostName <your-azure-public-ip-here>
   LocalForward 8080 127.0.0.1:8080
+  LocalForward 8088 127.0.0.1:8088
   LocalForward 8888 127.0.0.1:8888
   LocalForward 9995 127.0.0.1:9995
   LocalForward 9996 127.0.0.1:9996
@@ -136,6 +137,7 @@ We want to add a forwarded port.  In the "**Source port**" field, enter `8080`. 
 
 ```
 8080 -> 127.0.0.1:8080
+8088 -> 127.0.0.1:8088
 8888 -> 127.0.0.1:8888
 9995 -> 127.0.0.1:9995
 9996 -> 127.0.0.1:9996

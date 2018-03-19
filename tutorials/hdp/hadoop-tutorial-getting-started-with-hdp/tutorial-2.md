@@ -71,7 +71,7 @@ Both files are uploaded to HDFS as shown in the Files View UI:
 
 ![uploaded_files_lab1](assets/uploaded_files_lab1.png)
 
-You can also perform the following operations on a file or folder by clicking on the entity's row: **Open**, **Rename**, **Permissions**, **Delete**, **Copy**, **Move**, **Download** and **concatenate**.
+You can also perform the following operations on a file or folder by clicking on the entity's row: **Open**, **Rename**, **Permissions**, **Delete**, **Copy**, **Move**, **Download** and **Concatenate**.
 
 ### Set Write Permissions to Write to data Folder
 

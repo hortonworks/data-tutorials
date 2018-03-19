@@ -68,10 +68,10 @@ Take a few minutes to explore the various Hive View sub-features.
 
 In rare occasions, you may need to modify Hive settings. Although you have the option of modifying settings through Ambari, this is a quick and simple way to make changes without having to restart Hive services. In this example, we will configure the hive execution engine to use **tez** (which is the default). You may want to try map reduce (**mr**) - do you see a difference when executing a query?
 
-1.  Click on settings tab, referred to as number 6 in the interface above.
+1.  Click on settings tab, referred to as number 6 in the interface above
 2.  Click on **+Add New**
 3.  Click on the KEY dropdown menu and choose ```hive.execution.engine```
-4.  Set the value to ```tez```.
+4.  Set the value to ```tez```
 
 When you are done experimenting with this setting, delete it by clicking on the **Delete** button.
 
@@ -281,11 +281,11 @@ Some **key resources** to **learn more about vectorization** and some of the **k
 
 ## Step 4: Analyze the Trucks Data <a id="analyze-truck-data"></a>
 
-Next we will be using Hive, Pig and Zeppelin to analyze derived data from the geolocation and trucks tables.  The business objective is to better understand the risk the company is under from fatigue of drivers, over-used trucks, and the impact of various trucking events on risk.   In order to accomplish this, we will apply a series of transformations to the source data, mostly though SQL, and use Pig or Spark to calculate risk.   In the last lab on Data Visualization, we will be using _Zeppelin_ to **generate a series of charts to better understand risk**.
+Next we will be using Hive, Pig and Zeppelin to analyze derived data from the geolocation and trucks tables.  The business objective is to better understand the risk the company is under from fatigue of drivers, over-used trucks, and the impact of various trucking events on risk.   In order to accomplish this, we will apply a series of transformations to the source data, mostly though SQL, and use Pig or Spark to calculate risk. In the last lab on Data Visualization, we will be using _Zeppelin_ to **generate a series of charts to better understand risk**.
 
 ![Lab2_21](assets/Lab2_211.png)
 
-Let’s get started with the first transformation.   We want to **calculate the miles per gallon for each truck**. We will start with our _truck data table_.  We need to _sum up all the miles and gas columns on a per truck basis_. Hive has a series of functions that can be used to reformat a table. The keyword [LATERAL VIEW](https://cwiki.apache.org/confluence/display/Hive/LanguageManual+LateralView) is how we invoke things. The **stack function** allows us to _restructure the data into 3 columns_ labeled rdate, gas and mile (ex: 'june13', june13_miles, june13_gas) that make up a maximum of 54 rows. We pick truckid, driverid, rdate, miles, gas from our original table and add a calculated column for mpg (miles/gas).  And then we will **calculate average mileage**.
+Let’s get started with the first transformation. We want to **calculate the miles per gallon for each truck**. We will start with our _truck data table_.  We need to _sum up all the miles and gas columns on a per truck basis_. Hive has a series of functions that can be used to reformat a table. The keyword [LATERAL VIEW](https://cwiki.apache.org/confluence/display/Hive/LanguageManual+LateralView) is how we invoke things. The **stack function** allows us to _restructure the data into 3 columns_ labeled rdate, gas and mile (ex: 'june13', june13_miles, june13_gas) that make up a maximum of 54 rows. We pick truckid, driverid, rdate, miles, gas from our original table and add a calculated column for mpg (miles/gas).  And then we will **calculate average mileage**.
 
 ### Create Table truck_mileage From Existing Trucking Data
 

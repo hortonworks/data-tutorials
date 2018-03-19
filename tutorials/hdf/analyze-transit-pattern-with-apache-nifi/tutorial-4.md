@@ -180,7 +180,7 @@ To delete your previous flow, hold **command** or **ctrl** and press **A** to hi
 
 **Import the New DataFlow Template**
 
-3\. Download the [tutorial-4-ParseTransitEvents.xml](#assets/tutorial-4-build-nifi-process-group-to-parse-transit-events/template/tutorial-4-ParseTransitEvents.xml) template file.
+3\. Download the [tutorial-4-ParseTransitEvents.xml](#assets/tutorial-4-build-nifi-process-group-to-parse-transit-events/template/tutorial-4-parsetransitevents.xml) template file.
 
 4\. Use the template icon ![nifi_template_icon](assets/tutorial-4-build-nifi-process-group-to-parse-transit-events/nifi_template_icon.png) located in the **Operate** Palette.
 

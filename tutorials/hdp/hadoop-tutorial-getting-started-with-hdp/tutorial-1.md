@@ -24,19 +24,21 @@ In this tutorial, we will explore important concepts that will strengthen your f
 
 ## 1. Concept: Hadoop & HDP <a id="concepts-hadoop-hdp"></a>
 
-In this module you will learn about Apache Hadoop and what makes it scale to large data sets. We will also talk about various components of the Hadoop ecosystem that make Apache Hadoop enterprise ready in the form of Hortonworks Data Platform (HDP) distribution. This module discusses Apache Hadoop and its capabilities as a data platform. The core of Hadoop and its surrounding ecosystem solution vendors provide enterprise requirements to integrate alongside Data Warehouses and other enterprise data systems. These are steps towards the implementation of a modern data architecture, and towards delivering an enterprise ‘Data Lake’
+In this module you will learn about Apache Hadoop and what makes it scale to large data sets. We will also talk about various components of the Hadoop ecosystem that make Apache Hadoop enterprise ready in the form of Hortonworks Data Platform (HDP) distribution. This module discusses Apache Hadoop and its capabilities as a data platform. The core of Hadoop and its surrounding ecosystem solution vendors provide enterprise requirements to integrate alongside Data Warehouses and other enterprise data systems. These are steps towards the implementation of a modern data architecture, and towards delivering an enterprise ‘Data Lake’.
 
 ### 1.1 Goals of this module
 
--   Understanding Hadoop.
+-   Understanding Hadoop
 -   Understanding five pillars of HDP
--   Understanding HDP components and their purpose.
+-   Understanding HDP components and their purpose
 
 ### 1.2 Apache Hadoop
 
 Apache Hadoop is an open source framework for distributed storage and processing of large sets of data on commodity hardware. Hadoop enables businesses to quickly gain insight from massive amounts of structured and unstructured data. Numerous Apache Software Foundation projects make up the services required by an enterprise to deploy, integrate and work with Hadoop. Refer to the blog reference below for more information on Hadoop.
 
--   Hortonworks Blog : [Understanding Hadoop 2.0](https://hortonworks.com/blog/understanding-hadoop-2-0/)
+-   Hortonworks Blog :
+    - [Understanding Hadoop 2.0](https://hortonworks.com/blog/understanding-hadoop-2-0/)
+    - [How Apache Hadoop 3 Adds Value Over Apache Hadoop 2.0](https://hortonworks.com/blog/hadoop-3-adds-value-hadoop-2/)
 
 The base Apache Hadoop framework is composed of the following modules:
 
@@ -113,10 +115,10 @@ The Namenode actively monitors the number of replicas of a block. When a replica
 
 The NameNode does not directly send requests to DataNodes. It sends instructions to the DataNodes by replying to heartbeats sent by those DataNodes. The instructions include commands to:
 
--   replicate blocks to other nodes,
--   remove local block replicas,
+-   replicate blocks to other nodes
+-   remove local block replicas
 -   re-register and send an immediate block report, or
--   shut down the node.
+-   shut down the node
 
 ![HDFS_2](assets/HDFS_2.png)
 
@@ -142,7 +144,7 @@ The biggest limitation with MapReduce programming is that map and reduce jobs ar
 
 ### 3.1 Goals of the Module
 
--   Understanding Map and Reduce jobs.
+-   Understanding Map and Reduce jobs
 -   Understanding YARN
 
 ### [3.2 Apache MapReduce](https://hortonworks.com/hadoop/mapreduce/)
@@ -330,7 +332,7 @@ Since Pig Latin scripts can be graphs (instead of requiring a single output) it 
 The user can run Pig in two modes, using either the “pig” command or the “java” command:
 
 -   **MapReduce Mode.** This is the default mode, which requires access to a Hadoop cluster. The cluster may be a pseudo- or fully distributed one.
--   **Local Mode.** With access to a single machine, all files are installed and run using a local host and file system
+-   **Local Mode.** With access to a single machine, all files are installed and run using a local host and file system.
 
 #### 4.4.4 Ambari Pig User Views on Hortonworks Sandbox
 

@@ -38,7 +38,7 @@ The cloud is an alternative environment for deploying Hortonworks Sandbox in cas
 
 The Hortonworks Sandbox can be installed in a myriad of virtualization/containerization platforms. Jump to the tutorial for the platform that you prefer.  This documentation applies to both HDP and HDF sandboxes.
 
-1.  **Deploying Hortonworks Sandbox on VirtualBox**
-2.  **Deploying Hortonworks Sandbox on VMWare**
-3.  **Deploying Hortonworks Sandbox on Docker**
-4.  **Deploying Hortonworks Sandbox on Microsoft Azure**
+1.  [Deploying Hortonworks Sandbox on VirtualBox](https://hortonworks.com/tutorial/sandbox-deployment-and-install-guide/section/1/)
+2.  [Deploying Hortonworks Sandbox on VMWare](https://hortonworks.com/tutorial/sandbox-deployment-and-install-guide/section/2/)
+3.  [Deploying Hortonworks Sandbox on Docker](https://hortonworks.com/tutorial/sandbox-deployment-and-install-guide/section/3/)
+4.  [Deploying Hortonworks Sandbox on Microsoft Azure](https://hortonworks.com/tutorial/sandbox-deployment-and-install-guide/section/4/)

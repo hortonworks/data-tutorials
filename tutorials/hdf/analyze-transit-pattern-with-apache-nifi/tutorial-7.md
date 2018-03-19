@@ -13,17 +13,17 @@ You will learn to perform **rest calls** against the **NextBus API** to retrieve
 
 ## Outline
 
-- [Approach 1: Manually Integrate NextBus API into NiFi Flow](#approach-1-manually-build-live-vehicle-routes-nifi-flow)
+- [Approach 1: Manually Integrate NextBus API into NiFi Flow](#approach-1-manually-integrate-nextbus-api-into-nifi-flow)
 - [NextBus Live Feed API Basics](#nextbus-live-feed-api-basics)
 - [Step 1: Add GetHTTP to Make Rest Calls and Ingest Data via NextBus API](#step-1-add-gethttp-to-make-rest-calls-and-ingest-data-via-nextbus-api)
-- [Step 2: Modify PutFile in StoreDataAsJSONToDisk Process Group](#step-2-modify-putfile-in-storedataasjsontodisk-process-groupp)
+- [Step 2: Modify PutFile in StoreDataAsJSONToDisk Process Group](#step-2-modify-putfile-in-storedataasjsontodisk-process-group)
 - [Step 3: Run the NiFi DataFlow](#step-3-run-the-nifi-dataflow)
 - [Step 4: Explore Back Pressure for NextBus API Rest Calls](#step-4-explore-back-pressure-for-nextbus-api-rest-calls)
-- [Approach 2: Import Live Vehicle Routes NiFi Flow](#approach-2-import-live-vehicle-routes-nifi-flow)
+- [Approach 2: Import NextBusAPIIntegration NiFi Flow](#approach-2-import-nextbusapiintegration-nifi-flow)
 - [Summary](#summary)
 - [Further Reading](#further-reading)
 
-If you prefer to build the dataflow manually step-by-step, continue on to **Approach 1**. Else if you want to see the NiFi flow in action within minutes, refer to **Approach 2**.
+If you prefer to build the dataflow manually step-by-step, continue on to [Approach 1]((#approach-1-manually-integrate-nextbus-api-into-nifi-flow)). Else if you want to see the NiFi flow in action within minutes, refer to [Approach 2](##approach-2-import-nextbusapiintegration-nifi-flow).
 
 You will need to understand NextBus API, so that it will be easier to incorporate this API's data into the NiFi flow, which will be built in **Approach 1**.
 
@@ -169,11 +169,11 @@ To delete your previous flow, hold **command** or **ctrl** and press **A** to hi
 
 5\. **Browse**, find the template file, click **Open** and hit **Upload**.
 
-6\. From the **Components Toolbar**, drag the **add template** icon ![add_nifi_template](assets/tutorial-6-build-a-nifi-process-group-to-store-data-as-json/add_nifi_template.png) onto the graph and select the **tutorial-6-StoreDataAsJSONToDisk.xml** template file.
+6\. From the **Components Toolbar**, drag the **add template** icon ![add_nifi_template](assets/tutorial-6-build-a-nifi-process-group-to-store-data-as-json/add_nifi_template.png) onto the graph and select the **tutorial-7-ingest-live-nextbus-api.xml** template file.
 
 **Warning 2: If you didn't Obtain Google API Key, then follow the steps**
 
-7\. Refer to **Step 1** in **Approach 1** from the **Validate the GeoEnriched Data Tutorial** to obtain the Google API key and set up **Google Places API: HTTP URL**.
+7\. Refer to [Step 1](#step-1-obtain-api-key-for-nifis-invokehttp-processor) in **Approach 1** from the **Validate the GeoEnriched Data Tutorial** to obtain the Google API key and set up **Google Places API: HTTP URL**.
 
 8\. Once you have your own Google Places API Key, go into the ValidateGeoEnrichedTransitData process group, replace the **InvokeHTTP** processor's **Remote URL** property value with the new **Google Places API: HTTP URL** value.
 

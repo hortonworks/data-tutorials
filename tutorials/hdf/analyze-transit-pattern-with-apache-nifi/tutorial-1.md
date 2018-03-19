@@ -11,7 +11,7 @@ The concepts section is tailored toward enriching your hands-on experience in th
 ## Outline
 
 - [What is Apache NiFi?](#what-is-apache-nifi)
-- [Who Uses NiFi, and for what?](#who-uses-nifi-and-for-what)
+- [Who Uses NiFi, and for What?](#who-uses-nifi-and-for-what)
 - [Understand NiFi DataFlow Build Process](#understand-nifi-dataflow-build-process)
 - [The Core Concepts of NiFi](#the-core-concepts-of-nifi)
 - [NiFi Architecture](#nifi-architecture)
@@ -22,7 +22,7 @@ The concepts section is tailored toward enriching your hands-on experience in th
 
 [Apache NiFi](https://nifi.apache.org/docs/nifi-docs/html/overview.html#what-is-apache-nifi) is an open source tool for automating and managing the flow of data between systems (Databases, Sensors, Data Lakes, Data Platforms). In the tutorial, we will use NiFi to process the flow of data between sensors, web services (NextBus and Google Places API), various locations and our local file system.
 
-## Who Uses NiFi, and for what?
+## Who Uses NiFi, and for What?
 
 NiFi is used for **data ingestion** to pull data into NiFi, from numerous different data sources and create FlowFiles. For the tutorial, GetFile, GetHTTP, InvokeHTTP are processors you will use to stream data into NiFi from the local file system and ingest data from the internet. Once the data is ingested, as the DataFlow Manager (DFM), the user, you will create 2 process groups or sections of the dataflow that handle a particular purpose in data preprocessing. A process group is a complex processor composed of multiple processors. You will create a **Data Management** process group to monitor and obtain feedback about the current status of the NiFi DataFlow. You will use bulletins to troubleshoot problems in the dataflow. Bulletins are located on the processor and the management toolbar. They provide a tool-tip of the time, severity and message of the alert. While the data is managed, you will create **Data Enrichment** process group to enhance, refine and improve the quality of data to make it meaningful and valuable for users. NiFi enables users to filter out unnecessary information from data to make easier to understand. You will use NiFi to geographically enrich real-time data to show neighborhoods nearby locations as the locations change.
 

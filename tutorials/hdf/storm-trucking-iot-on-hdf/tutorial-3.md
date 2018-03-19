@@ -2,7 +2,7 @@
 title: Building a Storm Topology
 ---
 
-# Trucking IoT on HDF
+# Storm in Trucking IoT on HDF
 
 ## Building a Storm Topology
 
@@ -21,9 +21,10 @@ We now know the role that Storm plays in this Trucking IoT system.  Let's dive i
 -   [Building a Custom Bolt](#building-a-custom-bolt)
 -   [Building a Tumbling Windowed Bolt](#building-a-tumbling-windowed-bolt)
 -   [Building a Sliding Windowed Bolt](#building-a-sliding-windowed-bolt)
+-   [Building Another Custom Bolt](#building-another-custom-bolt)
 -   [Building a Kafka Bolt](#building-a-kafka-bolt)
 -   [Creating the Topology](#creating-the-topology)
--   [Next: Deploying the Storm topology](#next:-deploying-the-storm-topology)
+-   [Next: Deploying the Storm topology](#next-deploying-the-storm-topology)
 
 
 ## Storm Components
@@ -41,13 +42,13 @@ Now that we have a general idea of the power of Storm, let's look at its differe
 
 ##  Environment Setup
 
-We will be working with the `trucking-iot-demo-1` project that you downloaded in previous sections.  Feel free to download the project again on your local environment so you can open it with your favorite text editor or IDE.
+We will be working with the `trucking-iot-demo-storm-on-scala` project that you downloaded in previous sections.  Feel free to download the project again on your local environment so you can open it with your favorite text editor or IDE.
 
 ```
-git clone https://github.com/orendain/trucking-iot-demo-1
+git clone https://github.com/orendain/trucking-iot-demo-storm-on-scala
 ```
 
-> Alternatively, if you would prefer not to download the code, and simply follow along, you may view this project directly on [GitHub](https://github.com/orendain/trucking-iot-demo-2/tree/master/trucking-storm-topology/src/main/scala/com/orendainx/hortonworks/trucking/storm).
+> Alternatively, if you would prefer not to download the code, and simply follow along, you may view this project directly on [GitHub](https://github.com/orendain/trucking-iot-demo-storm-on-scala/tree/master/src/main/scala/com/orendainx/trucking/storm).
 
 
 ## Topology Build and Submit Overview
@@ -83,11 +84,6 @@ Let's dive into the `buildTopology` method to see exactly how to build a topolog
 ```
 // Builder to perform the construction of the topology.
 implicit val builder = new TopologyBuilder()
-
-// Configurations used for Kafka components
-val zkHosts = new ZkHosts(config.getString(Config.STORM_ZOOKEEPER_SERVERS))
-val zkRoot = config.getString(Config.STORM_ZOOKEEPER_ROOT)
-val groupId = config.getString("kafka.group-id")
 ```
 
 We start by creating an instance of `TopologyBuilder`, which exposes an easy-to-use Java API for putting together a topology.  Next, we pull in some values from our configuration file (`application.conf`).
@@ -96,33 +92,37 @@ We start by creating an instance of `TopologyBuilder`, which exposes an easy-to-
 ## Building a Kafka Spout
 
 ```
-/*
- * Build a Kafka spout for ingesting enriched truck data
+/* Construct a record translator that defines how to extract and turn a Kafka ConsumerRecord into a list of objects to be emitted
  */
+lazy val truckRecordTranslator = new Func[ConsumerRecord[String, String], java.util.List[AnyRef]] {
+  def apply(record: ConsumerRecord[String, String]) = new Values("EnrichedTruckData", record.value())
+}
 
-// Name of the Kafka topic to connect to
-val truckTopic = config.getString("kafka.truck-data.topic")
-
-// Create a Spout configuration object and apply the scheme for the data that will come through this spout
-val truckSpoutConfig = new SpoutConfig(zkHosts, truckTopic, zkRoot, groupId)
-truckSpoutConfig.scheme = new SchemeAsMultiScheme(new BufferToStringScheme("EnrichedTruckData"))
-
-// Force the spout to ignore where it left off during previous runs (for demo purposes)
-truckSpoutConfig.ignoreZkOffsets = true
+/* In order, the following snippet of code does the following:
+ *
+ * Configure a KafkaSpout to connect to a particular set of bootstrap servers, naming the spout "trucking_data_traffic"
+ *
+ * Set the record translator to the one defined above.  The two values that the record translator outputs we are naming "dataType" and "data", respectively.
+ *
+ * Configure the spout to poll the Kafka topic starting from the earliest (i.e. oldest) possible data available.  In other words, ingests the entire Kafka topic.
+ *
+ * Set the groupID to the character "g"
+ *
+ * Build the KafkaSpoutConfig object following these configurations.
+ */
+val truckSpoutConfig: KafkaSpoutConfig[String, String] = KafkaSpoutConfig.builder(config.getString("kafka.bootstrap-servers"), "trucking_data_truck")
+  .setRecordTranslator(truckRecordTranslator, new Fields("dataType", "data"))
+  .setFirstPollOffsetStrategy(KafkaSpoutConfig.FirstPollOffsetStrategy.EARLIEST)
+  .setGroupId("g")
+  .build()
 ```
 
-In order to build a `KafkaSpout`, we first need to decide what Kafka topic will be read from, where it exists, and exactly how we want to ingest that data in our topology.  This is where a `SpoutConfig` comes in handy.
+In order to build a `KafkaSpout`, we first need to decide what Kafka topic will be read from, where it exists, and exactly how we want to ingest that data in our topology.  This is where the above `KafkaSpoutConfig` comes in handy.
 
-This `SpoutConfig` method takes in a list of Kafka ZooKeeper servers as a string ("sandbox-hdf.hortonworks.com:6667" in our case), the name of the Kafka topic to subscribe to, the ZooKeeper root and a group id (the id of the kafka consumer group property).
-
-> Note: This tutorial demonstrates using Storm 1.0.2.  As of Storm 1.1.0, however, there are additions that make defining components even easier with even less boilerplate.
-
-Our `BufferToStringScheme` class defines how the spout converts a data from a Kafka topic into a Storm Tuple.  To look at the innerworkings of this class, check out `BufferToStringScheme.scala`.  This class produces a Tuple where the first field is the type of the data, "EnrichedTruckData", and the second is the record itself (a CSV string record).
-
-Now that we have a SpoutConfig, we use it to build a KafkaSpout and place it in the topology.
+Now that we have a KafkaSpoutConfig, we use it to build a KafkaSpout and place it in the topology.
 
 ```
-// Create a spout with the specified configuration, and place it in the topology blueprint
+// Create a spout with the specified configuration, with only 1 instance of this bolt running in parallel, and place it in the topology blueprint
 builder.setSpout("enrichedTruckData", new KafkaSpout(truckSpoutConfig), 1)
 ```
 
@@ -131,17 +131,25 @@ Remember that `builder` refers to the `TopologyBuilder`.  We're creating a new `
 
 ## Building a Custom Bolt
 
-Excellent, we now have a way to ingest our CSV-delimited strings from Kafka topics and into our Storm topology.  We now need a way to unpackage these strings into Java objects so we can more easily interact with them.
+Great, we now have a way to ingest our CSV-delimited strings from Kafka topics and into our Storm topology.  We now need a way to unpackage these strings into Java objects so we can more easily interact with them.
 
-Let's go ahead and build a custom Storm Bolt for this purpose.  We'll call it CSVStringToObjectBolt.  But first, let's see how this new custom bolt will fit into our topology blueprint.
+Let's go ahead and build a custom Storm Bolt for this purpose.  We'll call it `CSVStringToObjectBolt`.  But first, let's see how this new custom bolt will fit into our topology blueprint.
 
 ```
+/* Build a bolt for creating JVM objects from the ingested strings
+ *
+ * Our custom bolt, CSVStringToObjectBolt, is given the bolt id of "unpackagedData".  Storm is told to assign only
+ * a single task for this bolt (i.e. create only 1 instance of this bolt in the cluster).
+ *
+ * ShuffleGrouping shuffles data flowing in from the specified spouts evenly across all instances of the newly
+ * created bolt (which is only 1 in this example)
+ */
 builder.setBolt("unpackagedData", new CSVStringToObjectBolt(), 1)
   .shuffleGrouping("enrichedTruckData")
   .shuffleGrouping("trafficData")
 ```
 
-We create a new CSVStringToObjectBolt bolt, and tell spot to assign only a single task for this bolt (i.e. create only 1 instance of this bolt in the cluster).  We name it "unpackagedData".
+We create a new CSVStringToObjectBolt bolt, and tell Storm to assign only a single task for this bolt (i.e. create only 1 instance of this bolt in the cluster).  We name it "unpackagedData".
 
 `ShuffleGrouping` shuffles data flowing in from the specified spouts evenly across all instances of the newly created bolt.
 
@@ -197,18 +205,21 @@ That's it!  We've just seen how to build a custom Storm bolt from scratch.
 
 Let's get back to our KafkaToKafka class and look at what other components we're adding downstream of the CSVStringToObjectBolt.
 
-So now, we have KafkaSpouts ingesting in CSV strings from Kafaka topics and a bolt that creating Java objects from these CSV strings.  The next step in our process is to join these two types of Java objects into one.
+We now have KafkaSpouts ingesting in CSV strings from Kafka topics and a bolt that creating Java objects from these CSV strings.  The next step in our process is to join these two types of Java objects into one.
 
 ```
-/*
- * Build a windowed bolt for joining two types of Tuples into one
- */
+ /* Create a tumbling windowed bolt using our custom TruckAndTrafficJoinBolt, which houses the logic for how to
+  * merge the different Tuples.
+  *
+  * A tumbling window with a duration means the stream of incoming Tuples are partitioned based on the time
+  * they were processed (think of a traffic light, allowing all vehicles to pass but only the ones that get there
+  * by the time the light turns red).  All tuples that made it within the window are then processed all at once
+  * in the TruckAndTrafficJoinBolt.
+  */
+ val joinBolt = new TruckAndTrafficJoinBolt().withTumblingWindow(new BaseWindowedBolt.Duration(20, SECONDS))
 
-int windowDuration = config.getInt(Config.TOPOLOGY_BOLTS_WINDOW_LENGTH_DURATION_MS);
-
-BaseWindowedBolt joinBolt = new TruckAndTrafficJoinBolt().withTumblingWindow(new BaseWindowedBolt.Duration(windowDuration, MILLISECONDS));
-
-builder.setBolt("joinedData", joinBolt, 1).globalGrouping("unpackagedData");
+ // GlobalGrouping suggests all data from "unpackagedData" component go to a single one of the bolt's tasks
+ builder.setBolt("joinedData", joinBolt, 1).globalGrouping("unpackagedData")
 ```
 
 Here, we create a tumbling windowed bolt using our custom TruckAndTrafficJoinBolt, which houses the logic for how to merge the different Tuples.  This bolt processes both `EnrichedTruckData` and `TrafficData` and joins them to emit instances of `EnrichedTruckAndTrafficData`.
@@ -223,32 +234,41 @@ We'll take a look at how to build a custom windowed bolt in the next section.
 Now that we have successfully joined data coming in from two streams, let's perform some windowed analytics on this data.
 
 ```
-// The size of the window, in number of Tuples.
-val intervalCount = config.getInt(Config.TOPOLOGY_BOLTS_SLIDING_INTERVAL_COUNT)
+/*
+ * Build a bolt to generate driver stats from the Tuples in the stream.
+ */
 
-val statsBolt = new DataWindowingBolt().withWindow(new BaseWindowedBolt.Count(intervalCount))
+/* Creates a sliding windowed bolt using our custom DataWindowindBolt, which is responsible for reducing a list
+ * of recent Tuples(data) for a particular driver into a single datatype.  This data is used for machine learning.
+ *
+ * This sliding windowed bolt with a tuple count of 10 means we always process the last 10 tuples in the
+ * specified bolt.  The window slides over by one, dropping the oldest, every time a new tuple is processed.
+ */
+val statsBolt = new DataWindowingBolt().withWindow(new BaseWindowedBolt.Count(10))
 ```
 
-Creates a sliding windowed bolt using our custom DataWindowindBolt, which is responsible for reducing a list of recent Tuples(data) for a particular driver into a single datatype.  This data is used for machine learning.
+Creates a sliding windowed bolt using our custom DataWindowingBolt, which is responsible for reducing a list of recent Tuples(data) for a particular driver into a single datatype.  This data is used for machine learning.
 
 This sliding windowed bolt with a tuple count as a length means we always process the last 'N' tuples in the specified bolt.  The window slides over by one, dropping the oldest, each time a new tuple is processed.
 
+The next step is to build a bolt and then place in the topology blueprint connected to the "joinedData" stream.
+
 ```
-builder.setBolt("windowedDriverStats", statsBolt, 1).fieldsGrouping("joinedData", new Fields("driverId"))
+builder.setBolt("windowedDriverStats", statsBolt, 1).shuffleGrouping("joinedData")
 ```
 
-Build a bolt and then place it in the topology blueprint connected to the "joinedData" stream.
 
-Create 5 tasks for this bolt, to ease the load for any single instance of this bolt.  FieldsGrouping partitions the stream of tuples by the fields specified.  Tuples with the same driverId will always go to the same task.  Tuples with different driverIds may go to different tasks.
-
-
-## Building a Kafka Bolt
+## Building Another Custom Bolt
 
 Before we push our Storm-processed data back out to Kafka, we want to serialize the Java objects we've been working with into string form.
 
 ```
+/* Build bolts to serialize data into a CSV string.
+ *
+ * The first bolt ingests tuples from the "joinedData" bolt, which streams instances of EnrichedTruckAndTrafficData.
+ * The second bolt ingests tuples from the "joinedData" bolt, which streams instances of WindowedDriverStats.
+ */
 builder.setBolt("serializedJoinedData", new ObjectToCSVStringBolt()).shuffleGrouping("joinedData")
-
 builder.setBolt("serializedDriverStats", new ObjectToCSVStringBolt()).shuffleGrouping("windowedDriverStats")
 ```
 
@@ -256,10 +276,12 @@ These bolts, `ObjectToCSVStringBolt` are inverse to our previous custom bolt, `C
 
 Now, we have two streams emitting string data: "serializedJoinedData" which is the result of the two joined streams, and "serializedDriverStats", which is the result of windowed analytics we performed.
 
-Now, we build KafkaBolts to push data from these streams into Kafka topics.  We start by defining some Kafka properties:
+
+## Building a Kafka Bolt
+
+We now build KafkaBolts to push data from these streams into Kafka topics.  We start by defining some Kafka properties:
 
 ```
-// Define properties to pass along to the KafkaBolt
 val kafkaBoltProps = new Properties()
 kafkaBoltProps.setProperty(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, config.getString("kafka.bootstrap-servers"))
 kafkaBoltProps.setProperty(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, config.getString("kafka.key-serializer"))
@@ -270,11 +292,9 @@ Next, we build a KafkaBolt:
 
 ```
 val truckingKafkaBolt = new KafkaBolt()
-  .withTopicSelector(new DefaultTopicSelector(config.getString("kafka.joined-data.topic")))
+  .withTopicSelector(new DefaultTopicSelector("trucking_data_joined"))
   .withTupleToKafkaMapper(new FieldNameBasedTupleToKafkaMapper("key", "data"))
   .withProducerProperties(kafkaBoltProps)
-
-builder.setBolt("joinedDataToKafka", truckingKafkaBolt, 1).shuffleGrouping("serializedJoinedData")
 ```
 
 `withTopicSelector` specifies the Kafka topic to drop entries into.
@@ -282,6 +302,12 @@ builder.setBolt("joinedDataToKafka", truckingKafkaBolt, 1).shuffleGrouping("seri
 `withTupleToKafkaMapper` is passed an instance of `FieldNameBasedTupleToKafkaMapper`, which tells the bolt which fields of a Tuple the data to pass in is stored as.
 
 `withProducerProperties` takes in properties to set itself up with.
+
+Finally, we drop this bolt into the rest of the topology.
+
+```
+builder.setBolt("joinedDataToKafka", truckingKafkaBolt, 1).shuffleGrouping("serializedJoinedData")
+```
 
 
 ## Creating the Topology

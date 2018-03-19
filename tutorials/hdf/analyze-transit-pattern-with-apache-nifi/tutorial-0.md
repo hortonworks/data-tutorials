@@ -47,12 +47,12 @@ In this tutorial, we work with San Francisco MUNI Transit agency data, gathered 
 
 The tutorial consists of seven sections:
 
-1. **NiFi DataFlow Automation Concepts** - Explore the fundamentals of Data Flow Management with NiFi: Core Concepts, Architecture, etc
-2. **Launch NiFi HTML UI** - Launch your NiFi HTML User Interface (UI). Get NiFi up and running on Hortonworks DataFlow Sandbox.
-3. **Build a NiFi Process Group to Simulate NextBus API** - Simulate the NextBus API live feed with a data seed and check the data generating from the simulator.
-4. **Build a NiFi Process Group to Parse Transit Events** - Parse the XML file for transit observations(vehicle location, speed, vehicle ID, etc).
-5. **Build a NiFi Process Group to Validate the GeoEnriched Data** - Integrate Google Places API to bring more meaningful geographic insights and validate them.
-6. **Build a NiFi Process Group to Store Data As JSON** - Convert XML to JSON data format and store into file on local file system.
-7. **Ingest Live Vehicle Routes via NextBus API** - Ingest NextBus's live stream data for San Francisco MUNI agency.
+1. [NiFi DataFlow Automation Concepts](https://hortonworks.com/tutorial/analyze-transit-patterns-with-apache-nifi/section/1/) - Explore the fundamentals of Data Flow Management with NiFi: Core Concepts, Architecture, etc
+2. [Launch NiFi HTML UI](https://hortonworks.com/tutorial/analyze-transit-patterns-with-apache-nifi/section/2/) - Launch your NiFi HTML User Interface (UI). Get NiFi up and running on the HDF Sandbox.
+3. [Build a NiFi Process Group to Simulate NextBus API](https://hortonworks.com/tutorial/analyze-transit-patterns-with-apache-nifi/section/3/) - Simulate the NextBus API live feed with a data seed and check the data generating from the simulator.
+4. [Build a NiFi Process Group to Parse Transit Events](https://hortonworks.com/tutorial/analyze-transit-patterns-with-apache-nifi/section/4/) - Parse the XML file for transit observations(vehicle location, speed, vehicle ID, etc).
+5. [Build a NiFi Process Group to Validate the GeoEnriched Data](https://hortonworks.com/tutorial/analyze-transit-patterns-with-apache-nifi/section/5/) - Integrate Google Places API to bring more meaningful geographic insights and validate them.
+6. [Build a NiFi Process Group to Store Data As JSON](https://hortonworks.com/tutorial/analyze-transit-patterns-with-apache-nifi/section/6/) - Convert XML to JSON data format and store into file on local file system.
+7. [Ingest Live Vehicle Routes via NextBus API](https://hortonworks.com/tutorial/analyze-transit-patterns-with-apache-nifi/section/7/) - Ingest NextBus's live stream data for San Francisco MUNI agency.
 
 Each tutorial provides step by step instructions, so that you can complete the learning objectives and tasks associate with it. You are also provided with a dataflow template for each tutorial that you can use for verification. Each tutorial builds on the previous.

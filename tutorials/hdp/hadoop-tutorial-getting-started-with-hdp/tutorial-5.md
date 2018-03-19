@@ -8,7 +8,7 @@ title: Spark - Risk Factor
 
 ## Introduction
 
-In this tutorial we will introduce Apache Spark. In the earlier section of the lab you have learned how to load data into HDFS and then manipulate it using Hive. We are using the Truck sensor data to better understand risk associated with every driver. This section will teach you how to compute risk using Apache spark.
+In this tutorial we will introduce Apache Spark. In the earlier section of the lab you have learned how to load data into HDFS and then manipulate it using Hive. We are using the Truck sensor data to better understand risk associated with every driver. This section will teach you how to compute risk using Apache Spark.
 
 ## Prerequisites
 
@@ -83,7 +83,7 @@ For improved Hive integration, [ORC file](https://hortonworks.com/blog/orcfile-i
 
 ### Import sql libraries:
 
-If you have gone through Pig section, you have to drop the table riskfactor so that you can populate it again using Spark. Copy and paste the following code into your Zeppelin notebook, then click the play button. Alternatively, press `shift+enter` to run the code.
+If you have gone through the Pig section, you have to drop the table `riskfactor` so that you can populate it again using Spark. Copy and paste the following code into your Zeppelin notebook, then click the play button. Alternatively, press `shift+enter` to run the code.
 
 ~~~scala
 %jdbc(hive) show tables
@@ -259,7 +259,7 @@ val risk_factor_spark = hiveContext.sql("select driverid, occurance, totmiles, t
 
 ![Lab4_14](assets/calculate_riskfactor_hello_hdp_lab4.png)
 
-*   The resulting data set will give us total miles and total non normal events and what is a risk for a particular driver. Register this filtered table as a temporary table so that subsequent SQL queries can be applied to it.
+*   The resulting data set will give us total miles and total non-normal events and what is a risk for a particular driver. Register this filtered table as a temporary table so that subsequent SQL queries can be applied to it.
 
 ~~~scala
 %spark2
@@ -298,7 +298,7 @@ hiveContext.sql("show tables").show()
 
 ### Convert data into ORC table
 
-Before we load the data into hive table that we created above, we will have to convert our data file into ORC format too.
+Before we load the data into Hive table that we created above, we will have to convert our data file into ORC format too.
 
 ~~~scala
 %spark2
@@ -340,13 +340,13 @@ Execute a select query to verify your table has been successfully stored. You ca
 val hiveContext = new org.apache.spark.sql.SparkSession.Builder().getOrCreate()
 ~~~
 
-**Shows tables in the default hive database**
+**Shows tables in the default Hive database**
 
 ~~~scala
 hiveContext.sql("show tables").show()
 ~~~
 
-**Select all rows and columns from tables, stores hive script into variable
+**Select all rows and columns from tables, stores Hive script into variable
 and registers variables as RDD**
 
 ~~~scala
@@ -413,7 +413,7 @@ hiveContext.sql("create table riskfactor as select * from finalresults").toDF()
 
 ## Summary
 
-Congratulations! Let’s summarize the spark coding skills and knowledge we acquired to compute risk factor associated with every driver. Apache Spark is efficient for computation because of its **in-memory data processing engine**. We learned how to integrate hive with spark by creating a **Hive Context**. We used our existing data from Hive to create an **RDD**. We learned to perform **RDD transformations and actions** to create new datasets from existing RDDs. These new datasets include filtered, manipulated and processed data. After we computed **risk factor**, we learned to load and save data into Hive as **ORC**.
+Congratulations! Let’s summarize the Spark coding skills and knowledge we acquired to compute the risk factor associated with every driver. Apache Spark is efficient for computation because of its **in-memory data processing engine**. We learned how to integrate Hive with Spark by creating a **Hive Context**. We used our existing data from Hive to create an **RDD**. We learned to perform **RDD transformations and actions** to create new datasets from existing RDDs. These new datasets include filtered, manipulated and processed data. After we computed **risk factor**, we learned to load and save data into Hive as **ORC**.
 
 ## Further Reading
 

@@ -23,10 +23,10 @@ You will build a new process group called **StoreTransitEventsAsJSONToDisk** to 
 - [Step 7: Connect ValidateGeoEnrichedTransitData to StoreDataAsJSONToDisk](#step-7-connect-validategeoenrichedtransitdata-to-storedataasjsontodisk)
 - [Step 8: Run the NiFi DataFlow](#step-8-run-the-nifi-dataflow)
 - [Step 9: Check Data By NiFi's Data Provenance](#step-9-check-data-by-nifis-data-provenance)
-- [Approach 2: Import StoreTransitEventsAsJSONToDisk Process Group](#approach-2-import-simple-nifi-flow)
+- [Approach 2: Import StoreTransitEventsAsJSONToDisk Process Group](#approach-2-storetransiteventasjsontodisk-process-group)
 - [Summary](#summary)
 
-If you prefer to build the dataflow manually step-by-step, continue on to **Approach 1**. Else if you want to see the NiFi flow in action within minutes, refer to **Approach 2**.
+If you prefer to build the dataflow manually step-by-step, continue on to [Approach 1](#approach-1-manually-build-storetransiteventsasjsontodisk-process-group-pg). Else if you want to see the NiFi flow in action within minutes, refer to [Approach 2](#approach-2-storetransiteventasjsontodisk-process-group).
 
 ### Approach 1: Manually Build StoreTransitEventsAsJSONToDisk Process Group (PG)
 
@@ -218,7 +218,7 @@ To delete your previous flow, hold **command** or **ctrl** and press **A** to hi
 
 **Warning 2: If you didn't Obtain Google API Key, then follow the steps**
 
-7\. Refer to **Step 1** in **Approach 1** from the **Validate the GeoEnriched Data Tutorial** to obtain the Google API key and set up **Google Places API: HTTP URL**.
+7\. Refer to [Step 1](#step-1-obtain-api-key-for-nifis-invokehttp-processor) in **Approach 1** from the **Validate the GeoEnriched Data Tutorial** to obtain the Google API key and set up **Google Places API: HTTP URL**.
 
 8\. Once you have your own Google Places API Key, go into the ValidateGeoEnrichedTransitData process group, replace the **InvokeHTTP** processor's **Remote URL** property value with the new **Google Places API: HTTP URL** value.
 

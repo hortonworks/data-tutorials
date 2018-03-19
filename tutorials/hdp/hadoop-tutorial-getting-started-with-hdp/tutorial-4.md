@@ -292,13 +292,13 @@ At this point we now have our truck average miles per gallon table (`avg_mileage
 
 ## Summary
 
-Congratulations! Let’s summarize the Pig commands we learned in this tutorial to compute risk factor analysis on the geolocation and truck data. We learned to use Pig to access the data from Hive using the **LOAD {hive_table} …HCatLoader()** script. Therefore, we were able to perform the **filter**, **foreach**, **group**, **join**, and **store {hive_table} …HCatStorer()** scripts to manipulate, transform and process this data. To review these bold pig latin operators, view the [Pig Latin Basics](http://pig.apache.org/docs/r0.14.0/basic.html), which contains documentation on each operator.
+Congratulations! Let’s summarize the Pig commands we learned in this tutorial to compute risk factor analysis on the geolocation and truck data. We learned to use Pig to access the data from Hive using the **LOAD {hive_table} …HCatLoader()** script. Therefore, we were able to perform the **filter**, **foreach**, **group**, **join**, and **store {hive_table} …HCatStorer()** scripts to manipulate, transform and process this data. To review these bold Pig Latin operators, view the [Pig Latin Basics](http://pig.apache.org/docs/r0.14.0/basic.html), which contains documentation on each operator.
 
 ## Further Reading
 
-Strengthen your foundation of pig latin and reinforce why this scripting platform is benficial for processing and analyzing massive data sets with these resources:
+Strengthen your foundation of Pig Latin and reinforce why this scripting platform is beneficial for processing and analyzing massive data sets with these resources:
 
--   To practice more pig programming, visit [Pig Tutorials](https://hortonworks.com/tutorials/?filters=apache-pig)
+-   To practice more Pig programming, visit [Pig Tutorials](https://hortonworks.com/tutorials/?filters=apache-pig)
 -   [Apache Pig](https://hortonworks.com/hadoop/pig/)
 -   [Programming Pig](http://www.amazon.com/Programming-Pig-Alan-Gates/dp/1449302645/ref=sr_1_2?ie=UTF8&qid=1455994738&sr=8-2&keywords=pig+latin&refinements=p_72%3A2661618011)
 -   [HDP DEVELOPER: APACHE PIG AND HIVE](https://hortonworks.com/training/class/hadoop-2-data-analysis-pig-hive/)

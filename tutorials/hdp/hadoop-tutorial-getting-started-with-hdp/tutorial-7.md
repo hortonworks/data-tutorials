@@ -8,7 +8,7 @@ title: Data Reporting with Microsoft Excel for Windows
 
 ## Introduction
 
-In this tutorial, using Microsoft Excel 2016 for Windows and Power View, we'll visulaize data from previous sections of this tutorial. You may use other Businiess Intellegence (BI) tools of your choice.
+In this tutorial, using Microsoft Excel 2016 for Windows and Power View, we'll visualize data from previous sections of this tutorial. You may use other Business Intelligence (BI) tools of your choice.
 
 ## Prerequisites
 

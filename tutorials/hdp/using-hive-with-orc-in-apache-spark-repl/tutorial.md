@@ -116,7 +116,7 @@ Normally, we would have directly loaded the data in the ORC table we created abo
 With the command below we instantiate an RDD:
 
 ~~~ java
-val yahoo_stocks = sc.textFile("hdfs://sandbox.hortonworks.com:8020/tmp/yahoo_stocks.csv")
+val yahoo_stocks = sc.textFile("/tmp/yahoo_stocks.csv")
 ~~~
 
 To preview data in `yahoo_stocks` type:
@@ -200,7 +200,7 @@ stockprice.registerTempTable("yahoo_stocks_temp")
 Now that our schema’s RDD with data has a name, we can use Spark SQL commands to query it. Remember the table below is not a Hive table, it is just a RDD we are querying with SQL.
 
 ~~~ java
-val results = sqlContext.sql("SELECT * FROM yahoo_stocks_temp")
+val results = spark.sqlContext.sql("SELECT * FROM yahoo_stocks_temp")
 ~~~
 
 The resultset returned from the Spark SQL query is now loaded in the `results` RDD. Let’s pretty print it out on the command line.
@@ -220,7 +220,7 @@ results.write.format("orc").save("yahoo_stocks_orc")
 To store results in a hive directory rather than user directory, use this path instead:
 
 ~~~ bash
-/apps/hive/warehouse/yahoo_stocks_orc
+results.write.format("orc").save("/apps/hive/warehouse/yahoo_stocks_orc")
 ~~~
 
 ### Reading the ORC file

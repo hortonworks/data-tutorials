@@ -58,7 +58,7 @@ Click on a Notebook tab at the top left and select **Create new note**. Name you
 
 ### Visualize finalresults Data in Tabular Format
 
-In the previous Spark and Pig tutorials you already created a table finalresults or riskfactor which gives the risk factor associated with every driver. We will use the data we generated in this table to visualize which drivers have the highest risk factor. We will use the jdbc hive interpreter to write queries in Zeppelin.
+In the previous Spark and Pig tutorials you already created a table `finalresults` or `riskfactor` which gives the risk factor associated with every driver. We will use the data we generated in this table to visualize which drivers have the highest risk factor. We will use the jdbc Hive interpreter to write queries in Zeppelin.
 
 1) Copy and paste the code below into your Zeppelin note.
 
@@ -83,7 +83,7 @@ Each one will display a different type of chart depending on the data that is re
 
 ![charts_tab_under_query_lab6](assets/charts_tab_jdbc_lab6.png)
 
-2\. After clicking on a chart, we can view extra advanced settings to tailor the view of the data we want
+2\. After clicking on a chart, we can view extra advanced settings to tailor the view of the data we want.
 
 ![Chart Advanced Settings](assets/bar_graph_zeppelin_lab6.png)
 
@@ -121,7 +121,7 @@ The chart should look similar to the following.
 
 ![Scatter Plot Graph](assets/visualize_cities_highest_driver_riskfactor_lab6.png)
 
-You can hover over the highest point to determine which driver has highest risk factor and where the live.
+You can hover over the highest point to determine which driver has the highest risk factor and in which cities.
 
 ## Summary
 

@@ -2,7 +2,7 @@
 title: Running the Demo
 ---
 
-# Trucking IoT on HDF
+# Storm in Trucking IoT on HDF
 
 ## Running the Demo
 
@@ -16,8 +16,8 @@ Let's walk through the demo and get an understanding for the data pipeline befor
 -   [Environment Setup](#environment-setup)
 -   [Generate Sensor Data](#generate-sensor-data)
 -   [Deploy the Storm Topology](#deploy-the-storm-topology)
--   [Visualize the Processed Data](#visualize-the-processed-data)
--   [Next: Building a Storm Topology](#next:-building-a-storm-topology)
+-   [Verify the Processed Data](#verify-the-processed-data)
+-   [Next: Building a Storm Topology](#next-building-a-storm-topology)
 
 
 ## Environment Setup
@@ -25,16 +25,9 @@ Let's walk through the demo and get an understanding for the data pipeline befor
 SSH into your Hortonworks DataFlow (HDF) environment and download the corresponding demo project.
 
 ```
-git clone https://github.com/orendain/trucking-iot-demo-2
+git clone https://github.com/orendain/trucking-iot-demo-storm-on-scala
+cd trucking-iot-demo-storm-on-scala
 ```
-
-Run the automated setup script to download and prepare necessary dependencies.
-```
-cd trucking-iot-demo-2
-./scripts/setup.sh
-```
-
-> Note: The script assumes that Kafka and Storm services are started within Ambari and that the Ambari login credentials are admin/admin.
 
 
 ## Generate Sensor Data
@@ -57,16 +50,28 @@ The demo application leverages a very robust data simulator, which generates dat
 
 Start the data generator by executing the appropriate script:
 ```
-./scripts/run-simulator.sh
+scripts/run-simulator.sh
 ```
 
+
+Let's wait for the simulator to finish generating data.  Once that's done, we can look at the data that was generated and stored in Kafka:
+
+> Note: "Ctrl + c" to exit out from the Kafka command.
+
+```
+/usr/hdf/current/kafka-broker/bin/kafka-console-consumer.sh --bootstrap-server sandbox-hdf.hortonworks.com:6667 --from-beginning --topic trucking_data_truck
+```
+and
+```
+/usr/hdf/current/kafka-broker/bin/kafka-console-consumer.sh --bootstrap-server sandbox-hdf.hortonworks.com:6667 --from-beginning --topic trucking_data_traffic
+```
 
 ## Deploy the Storm Topology
 
 With simulated data now being pumped into Kafka topics, we power up Storm and process this data.  In a separate terminal window, run the following command:
 
 ```
-./scripts/deploy-topology.sh
+scripts/deploy-prebuilt-topology.sh
 ```
 
 > Note: We'll cover what exactly a "topology" is in the next section.
@@ -76,17 +81,16 @@ Here is a slightly more in-depth look at the steps Storm is taking in processing
 ![General Storm Process](assets/storm-flow-overview.jpg)
 
 
-## Visualize the Processed Data
+## Verify the Processed Data
 
-With the data now fully processed by Storm and published back into accessible Kafka topics, it's time to visualize some of our handiwork.  Start up the included reactive web application, which subscribes to a Kafka topic that processed data is stored in and renders these merged and processed truck and traffic data points on a map.
+With the data now fully processed by Storm and published back into accessible Kafka topics, it's time to verify our handiwork.  Run the following command to list the joined set of data.
 
 ```
-./scripts/start-web-application.sh
+/usr/hdf/current/kafka-broker/bin/kafka-console-consumer.sh --bootstrap-server sandbox-hdf.hortonworks.com:6667 --from-beginning --topic trucking_data_joined
 ```
 
-Bring up the web application by accessing it through your broswer at: `sandbox.hortonworks.com:15500`
-
+Nice!  Our topology joined data from two separate streams of data.
 
 ## Next: Building a Storm Topology
 
-Now that we know how Storm fits into this data pipeline and what type of ETL work it is performing, let's dive into the actual code and see exactly how it is built.
+Now that we know how Storm fits into this data pipeline and what type of work it is performing, let's dive into the actual code and see exactly how it is built.

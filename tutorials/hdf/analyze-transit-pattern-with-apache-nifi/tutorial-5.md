@@ -30,7 +30,7 @@ With the transit data being pulled from NextBus API simulator, it shows location
 - [Summary](#summary)
 - [Further Reading](#further-reading)
 
-If you prefer to build the dataflow manually step-by-step, continue on to **Approach 1**. Else if you want to see the NiFi flow in action within minutes, refer to **Approach 2**.
+If you prefer to build the dataflow manually step-by-step, continue on to [Approach 1](#step-1-obtain-api-key-for-nifis-invokehttp-processor). Else if you want to see the NiFi flow in action within minutes, refer to [Approach 2](#step-2-create-process-group-and-label-for-it).
 
 You will need to understand Google Places API, so that it will be easier to incorporate this API's data into the NiFi flow, which will be built in **Approach 1**.
 
@@ -271,11 +271,11 @@ To delete your previous flow, hold **command** or **ctrl** and press **A** to hi
 
 5\. **Browse**, find the template file, click **Open** and hit **Upload**.
 
-6\. From the **Components Toolbar**, drag the template icon ![nifi_template_icon](assets/tutorial-4-build-nifi-process-group-to-parse-transit-events/add_nifi_template.png) onto the graph and select the **tutorial-4-ParseTransitEvents.xml** template file.
+6\. From the **Components Toolbar**, drag the template icon ![nifi_template_icon](assets/tutorial-4-build-nifi-process-group-to-parse-transit-events/add_nifi_template.png) onto the graph and select the **tutorial-5-ValidateGeoEnrichedTransitData.xml** template file.
 
 **Warning 2: If you didn't Obtain Google API Key, then follow the steps**
 
-7\. Refer to **Step 1** in **Approach 1** to obtain the Google API key and set up **Google Places API: HTTP URL**.
+7\. Refer to [Step 1](#step-1-obtain-api-key-for-nifis-invokehttp-processor) in **Approach 1** to obtain the Google API key and set up **Google Places API: HTTP URL**.
 
 8\. Replace the **InvokeHTTP** processor's **Remote URL** property value with the new **Google Places API: HTTP URL** value.
 
