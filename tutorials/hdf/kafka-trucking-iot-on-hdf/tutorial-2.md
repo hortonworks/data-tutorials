@@ -21,7 +21,7 @@ While the demo application runs, you will gain an understanding of how Kafka rec
 
 If you have the latest Hortonworks DataFlow (HDF) Sandbox installed, then the demo comes preinstalled. If not or you do not already have it setup, then refer to [Setup Demo on existing HDF/HDP](https://github.com/orendain/trucking-iot/tree/hadoop-summit-2017#setup-on-existing-hdf-hdp).
 
-Open a terminal on your local machine and access the sandbox through the shell-in-a-box method. Please visit [Learning the Ropes of the Hortonworks Sandbox](https://hortonworks.com/tutorial/learning-the-ropes-of-the-hortonworks-sandbox/#environment-setup) to review this method.
+Open a terminal on your local machine and access the sandbox through the shell-in-a-box method. Please visit [Learning the Ropes of the HDP Sandbox](https://hortonworks.com/tutorial/learning-the-ropes-of-the-hortonworks-sandbox/#environment-setup) to review this method.
 
 Before we can perform Kafka operations on the data, we must first have data in Kafka, so let's run the NiFi DataFlow Application. Refer to the steps in this module: **[Run NiFi in the Trucking IoT Demo](https://hortonworks.com/tutorial/nifi-in-trucking-iot-on-hdf/section/2/)**, then you will be ready to explore Kafka.
 

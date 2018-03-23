@@ -10,7 +10,7 @@ technology: Apache NiFi, Apache Storm, Apache Kafka, Streaming Analytics Manager
 release: hdf-3.0.2
 environment: Sandbox
 product: HDF
-series: HDF > Develop with Hadoop > Real World Examples
+series: HDF > Develop Data Flow & Streaming Applications > Hello World
 ---
 
 # Real-Time Event Processing In NiFi, SAM, Schema Registry and Superset

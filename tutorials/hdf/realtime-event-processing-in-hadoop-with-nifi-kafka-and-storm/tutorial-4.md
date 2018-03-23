@@ -12,7 +12,7 @@ title: Capture Real Time Event Stream with Apache Kafka
 -  Tutorial 0: Set Up Simulator, Apache Services and IDE Environment
 -  Tutorial 1: Ingest, Route and Land Real Time Events with Apache NiFi
 -  Downloaded and Installed latest [Hortonworks Sandbox](https://hortonworks.com/products/hortonworks-sandbox/#install)
--  You will need admin privileges for this tutorial, refer to [Learning the Ropes of the Hortonworks Sandbox](https://hortonworks.com/tutorial/learning-the-ropes-of-the-hortonworks-sandbox/) to setup your Ambari admin password
+-  You will need admin privileges for this tutorial, refer to [Learning the Ropes of the HDP Sandbox](https://hortonworks.com/tutorial/learning-the-ropes-of-the-hortonworks-sandbox/) to setup your Ambari admin password
 -  Memory must be at least 8GB RAM, preferably 4 processor cores, else errors may occur in third tutorial
 
 ## Outline

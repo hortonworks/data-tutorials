@@ -11,7 +11,7 @@ Apache NiFi can collect and transport data from numerous sources and provide int
 ## Prerequisites
 - Tutorial 0: Set Up Simulator, Apache Services and IDE Environment
 - Downloaded and Installed latest [Hortonworks Sandbox](https://hortonworks.com/products/hortonworks-sandbox/#install)
-- If you are new to the sandbox shell, refer to [Learning the Ropes of the Hortonworks Sandbox](https://hortonworks.com/tutorial/learning-the-ropes-of-the-hortonworks-sandbox/)
+- If you are new to the sandbox shell, refer to [Learning the Ropes of the HDP Sandbox](https://hortonworks.com/tutorial/learning-the-ropes-of-the-hortonworks-sandbox/)
 
 ## Outline
 - [Apache NiFi](#apache-nifi-lab0)

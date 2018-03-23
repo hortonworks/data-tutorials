@@ -10,7 +10,7 @@ technology: Apache Solr, Apache Hive, Apache NiFi, Apache Ambari, Apache Zeppeli
 release: hdp-2.6.0
 environment: Sandbox
 product: HDP
-series: HDP > Develop with Hadoop > Real World Examples, HDP > Hadoop for Data Scientists & Analysts > Real World Examples
+series: HDP > Develop with Hadoop > Real World Examples, HDF > Develop Data Flow & Streaming Applications > Real World Examples
 ---
 
 
@@ -38,7 +38,7 @@ Finally, we will use [Apache Zeppelin](https://hortonworks.com/hadoop/zeppelin/)
 ## Prerequisites
 
 - Downloaded and Installed the [Hortonworks Sandbox with HDP](https://hortonworks.com/hdp/downloads/)
-- [Learning the Ropes of the Hortonworks Sandbox](https://hortonworks.com/tutorial/learning-the-ropes-of-the-hortonworks-sandbox/)
+- [Learning the Ropes of the HDP Sandbox](https://hortonworks.com/tutorial/learning-the-ropes-of-the-hortonworks-sandbox/)
 - [Deploying Hortonworks Sandbox on Microsoft Azure](https://hortonworks.com/tutorial/sandbox-deployment-and-install-guide/section/4/)
 
 ## Outline
@@ -437,7 +437,7 @@ Next, you'll need to SSH into the sandbox again and run the following two comman
 ~~~
 
 
-After the commands complete let's go to the Hive view. Head over to [http://sandbox.hortonworks.com:8080](http://sandbox.hortonworks.com:8080/). Login into Ambari. Refer to [Learning the Ropes of the Hortonworks Sandbox](https://hortonworks.com/tutorial/learning-the-ropes-of-the-hortonworks-sandbox/) if you need assistance with logging into Ambari.
+After the commands complete let's go to the Hive view. Head over to [http://sandbox.hortonworks.com:8080](http://sandbox.hortonworks.com:8080/). Login into Ambari. Refer to [Learning the Ropes of the HDP Sandbox](https://hortonworks.com/tutorial/learning-the-ropes-of-the-hortonworks-sandbox/) if you need assistance with logging into Ambari.
 > **Note:** login credentials are `maria_dev/maria_dev` (Virtualbox), else `azure/azure` (Azure). Use the dropdown menu at the top to get to the Hive view.
 
 Enter **Hive View 2.0**. Execute the following command to create a table for the tweets

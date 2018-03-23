@@ -1,5 +1,5 @@
 ---
-title: Learning the Ropes of the Hortonworks Sandbox
+title: Learning the Ropes of the HDP Sandbox
 author: Edgar Orendain
 tutorial-id: 160
 experience: Beginner
@@ -13,7 +13,7 @@ product: HDP
 series: HDP > Develop with Hadoop > Hello World
 ---
 
-# Learning the Ropes of the Hortonworks Sandbox
+# Learning the Ropes of the HDP Sandbox
 
 ## Introduction
 

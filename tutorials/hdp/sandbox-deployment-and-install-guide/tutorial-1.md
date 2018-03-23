@@ -48,5 +48,5 @@ Welcome to the Hortonworks Sandbox!
 
 ## Further Reading
 
--   Follow-up with the tutorial: [Learning the Ropes of the Hortonworks Sandbox](https://hortonworks.com/tutorial/learning-the-ropes-of-the-hortonworks-sandbox)
+-   Follow-up with the tutorial: [Learning the Ropes of the HDP Sandbox](https://hortonworks.com/tutorial/learning-the-ropes-of-the-hortonworks-sandbox)
 -   [Browse all tutorials available on the Hortonworks site](https://hortonworks.com/tutorials/)

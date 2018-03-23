@@ -26,7 +26,7 @@ This tutorial assumes that you are running an HDP Sandbox.
 Please ensure you complete the prerequisites before proceeding with this tutorial.
 
 -   Downloaded and Installed the [Hortonworks Sandbox](https://hortonworks.com/products/sandbox/)
--   Reviewed [Learning the Ropes of the Hortonworks Sandbox](https://hortonworks.com/tutorial/learning-the-ropes-of-the-hortonworks-sandbox/)
+-   Reviewed [Learning the Ropes of the HDP Sandbox](https://hortonworks.com/tutorial/learning-the-ropes-of-the-hortonworks-sandbox/)
 
 ## Pi Example
 

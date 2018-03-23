@@ -24,7 +24,7 @@ This tutorial walks through the steps for creating data in Apache Hive through A
 ## Prerequisites
 
 - [Download Hortonworks Sandbox](https://hortonworks.com/downloads/#sandbox)
-- Complete the [Learning the Ropes of the Hortonworks Sandbox tutorial,](https://hortonworks.com/hadoop-tutorial/learning-the-ropes-of-the-hortonworks-sandbox/) you will need it for logging into Ambari.
+- Complete the [Learning the Ropes of the HDP Sandbox tutorial,](https://hortonworks.com/hadoop-tutorial/learning-the-ropes-of-the-hortonworks-sandbox/) you will need it for logging into Ambari.
 - 10 GB RAM
 
 ## Outline
@@ -109,9 +109,9 @@ Alternatively, you could "ssh" into the sandbox from your terminal or Windows Ub
 Text you should see on your screen looks similar:
 
 ~~~
-sandbox login: root                                                                 
-root@sandbox.hortonworks.com's password:                                            
-Last login: Fri Jan  5 06:05:29 2018 from 10.0.2.2                                  
+sandbox login: root
+root@sandbox.hortonworks.com's password:
+Last login: Fri Jan  5 06:05:29 2018 from 10.0.2.2
 [root@sandbox-hdp ~]#
 ~~~
 

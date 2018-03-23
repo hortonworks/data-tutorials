@@ -28,7 +28,7 @@ We will describe how to ingest data into HDFS, to create tables and perform quer
 ## Prerequisites
 
 -   Downloaded and Installed [Hortonworks Sandbox](https://hortonworks.com/downloads/#sandbox)
--   Completed [Learning the Ropes of the Hortonworks Sandbox](https://hortonworks.com/tutorial/learning-the-ropes-of-the-hortonworks-sandbox/) tutorial
+-   Completed [Learning the Ropes of the HDP Sandbox](https://hortonworks.com/tutorial/learning-the-ropes-of-the-hortonworks-sandbox/) tutorial
 
 
 ## Outline

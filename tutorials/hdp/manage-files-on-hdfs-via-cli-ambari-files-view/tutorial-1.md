@@ -13,7 +13,7 @@ In this tutorial, we will walk through many of the common of the basic Hadoop Di
 ## Prerequisites
 -   Downloaded and Installed latest [HDP Sandbox](https://hortonworks.com/downloads/#sandbox)
 -   If you're planning to deploy your sandbox on Azure, refer to this tutorial: [Deploying the Sandbox on Azure](https://hortonworks.com/hadoop-tutorial/deploying-hortonworks-sandbox-on-microsoft-azure/)
--   [Learning the Ropes of the Hortonworks Sandbox](https://hortonworks.com/hadoop-tutorial/learning-the-ropes-of-the-hortonworks-sandbox/)
+-   [Learning the Ropes of the HDP Sandbox](https://hortonworks.com/hadoop-tutorial/learning-the-ropes-of-the-hortonworks-sandbox/)
 -   Allow yourself around **1 hour** to complete this tutorial.
 
 ### Download San Francisco Salary Related Datasets

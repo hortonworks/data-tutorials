@@ -26,7 +26,7 @@ This tutorial is a part of series of hands-on tutorials to get you started with 
 
 -   Downloaded and installed latest [Hortonworks Sandbox](https://hortonworks.com/products/hortonworks-sandbox/#install)
 
--   Reviewed [Learning the Ropes of the Hortonworks Sandbox](https://hortonworks.com/tutorial/learning-the-ropes-of-the-hortonworks-sandbox/)
+-   Reviewed [Learning the Ropes of the HDP Sandbox](https://hortonworks.com/tutorial/learning-the-ropes-of-the-hortonworks-sandbox/)
 
 ## Outline
 

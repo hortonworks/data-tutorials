@@ -66,7 +66,7 @@ If you haven't already, login to Ambari (operations console) using `maria_dev`/`
 
 E.g. on a VirtualBox Sandbox, Ambari would be accessible at http://127.0.0.1:8080.
 
-Note: If you're new to the HDP Sandbox environment, make sure to review [Learning the Ropes of the Hortonworks Sandbox](https://hortonworks.com/tutorial/learning-the-ropes-of-the-hortonworks-sandbox/).
+Note: If you're new to the HDP Sandbox environment, make sure to review [Learning the Ropes of the HDP Sandbox](https://hortonworks.com/tutorial/learning-the-ropes-of-the-hortonworks-sandbox/).
 
 ![scr1-login](assets/scr1-login.png)
 

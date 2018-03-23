@@ -12,7 +12,7 @@ With the Hortonworks DataFlow (HDF) Sandbox, Apache NiFi comes preinstalled in t
 -   Completed the prior tutorials within this tutorial series
 -   Downloaded [HDF Sandbox](https://hortonworks.com/products/sandbox/) for VMWare, VirtualBox or Native Docker
 -   [Installed and Deployed HDF Sandbox](https://hortonworks.com/tutorial/sandbox-deployment-and-install-guide/) for VMWare, VirtualBox or Native Docker
--   Added HDF Sandbox Hostname to Your Hosts File, refer to [Getting Started with HDF Sandbox](https://hortonworks.com/tutorial/getting-started-with-hdf-sandbox/)
+-   Added HDF Sandbox Hostname to Your Hosts File, refer to [Learning the Ropes of the HDF sandbox](https://hortonworks.com/tutorial/getting-started-with-hdf-sandbox/)
 
 ## Outline
 -   [Step 1: Open HDF Splash Page](#step-1-open-hdf-splash-page)

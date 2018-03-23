@@ -20,7 +20,7 @@ In this tutorial, we will build a solution to ingest real time streaming data in
 - Tutorial 1: Ingest, Route and Land Real Time Events with Apache NiFi
 - Tutorial 2: Capture Real Time Events with Apache Kafka
 - Downloaded and Installed [Hortonworks Sandbox](https://hortonworks.com/products/hortonworks-sandbox/#install)
-- [Learning the Ropes of the Hortonworks Sandbox](https://hortonworks.com/tutorial/learning-the-ropes-of-the-hortonworks-sandbox/)
+- [Learning the Ropes of the HDP Sandbox](https://hortonworks.com/tutorial/learning-the-ropes-of-the-hortonworks-sandbox/)
 - [Hive Quick Start](https://hbase.apache.org/book.html#quickstart)
 
 ## Outline

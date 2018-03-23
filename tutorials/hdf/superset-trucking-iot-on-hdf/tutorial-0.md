@@ -10,7 +10,7 @@ technology: Apache Superset
 release: hdf-3.0.2
 environment: Sandbox
 product: HDF
-series: HDF > Hadoop For Data Scientists & Analysts > Real World Examples
+series: HDF > Develop Data Flow & Streaming Applications > Hello World
 ---
 
 # Superset in Trucking IoT on HDF

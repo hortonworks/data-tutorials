@@ -71,7 +71,7 @@ Keep in mind, that you will need **8GB** of memory dedicated for the virtual mac
 
 2a. Download and Install [HDP Sandbox](https://hortonworks.com/downloads/#sandbox)
 
-2b. Review [Learning the Ropes of the Hortonworks Sandbox](https://hortonworks.com/tutorial/learning-the-ropes-of-the-hortonworks-sandbox/)
+2b. Review [Learning the Ropes of the HDP Sandbox](https://hortonworks.com/tutorial/learning-the-ropes-of-the-hortonworks-sandbox/)
 
 #### Review Zeppelin Tutorial
 

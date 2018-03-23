@@ -11,7 +11,7 @@ In this tutorial, we are going to set up all the services required to run the Co
 ## Prerequisites
 
 - Downloaded and Installed latest [Hortonworks DataFlow (HDF) Sandbox](https://hortonworks.com/products/hortonworks-sandbox/#install)
-- If you are new to the sandbox shell, refer to [Learning the Ropes of the Hortonworks Sandbox](https://hortonworks.com/tutorial/learning-the-ropes-of-the-hortonworks-sandbox/)
+- If you are new to the sandbox shell, refer to [Learning the Ropes of the HDP Sandbox](https://hortonworks.com/tutorial/learning-the-ropes-of-the-hortonworks-sandbox/)
 - We recommend you have some experience with Java Concepts, Syntax and OOP, refer to this [Intro to Java Programming Course](https://www.udacity.com/course/intro-to-java-programming--cs046) if you are interested in building a strong foundation.
 - Memory must be at least 8GB RAM, preferably 4 processor cores, else errors may occur in fourth tutorial
 - For windows users, to run linux terminal commands in these tutorials, download [Git Bash](https://openhatch.org/missions/windows-setup/install-git-bash).
@@ -88,7 +88,7 @@ push it into it's topology(dataflow).
 
 #### 1.1 Access Ambari
 
-If you haven't reset your Ambari admin password, refer to Section **[2.2 SETUP AMBARI ADMIN PASSWORD MANUALLY](https://hortonworks.com/tutorial/learning-the-ropes-of-the-hortonworks-sandbox/#setup-ambari-admin-password)** from Learning the Ropes of the Hortonworks Sandbox. Login to Ambari to activate Kafka. Enter the URL in your browser `http://sandbox.hortonworks.com:8080`
+If you haven't reset your Ambari admin password, refer to Section **[2.2 SETUP AMBARI ADMIN PASSWORD MANUALLY](https://hortonworks.com/tutorial/learning-the-ropes-of-the-hortonworks-sandbox/#setup-ambari-admin-password)** from Learning the Ropes of the HDP Sandbox. Login to Ambari to activate Kafka. Enter the URL in your browser `http://sandbox.hortonworks.com:8080`
 
 ![login_page_ambari](assets/lab1-kafka/login_page_ambari.png)
 

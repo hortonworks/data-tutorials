@@ -10,7 +10,7 @@ technology: Apache NiFi, MiNiFi, Raspberry Pi, Apache Zookeeper, Apache HBase, A
 release: hdp-2.6.4, hdf-3.0.2
 environment: Sandbox
 product: HDF
-series: HDF > Hadoop for Data Scientists & Analysts > Real World Examples
+series: HDF > Develop Data Flow & Streaming Applications > Real World Examples
 ---
 
 # Analyze IoT Weather Station Data via Connected Data Architecture

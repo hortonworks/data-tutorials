@@ -31,7 +31,7 @@ Standard SQL provides ACID operations through INSERT, UPDATE, DELETE, transactio
 ## Prerequisites
 
 -   [Download Hortonworks Sandbox](https://hortonworks.com/downloads/#sandbox)
--   Complete the [Learning the Ropes of the Hortonworks Sandbox tutorial,](https://hortonworks.com/tutorial/learning-the-ropes-of-the-hortonworks-sandbox/) you will need it for logging into Ambari.
+-   Complete the [Learning the Ropes of the HDP Sandbox tutorial,](https://hortonworks.com/tutorial/learning-the-ropes-of-the-hortonworks-sandbox/) you will need it for logging into Ambari.
 
 ## Outline
 

@@ -10,7 +10,7 @@ In this tutorial, you will strengthen your foundation of technologies used in re
 
 ## Prerequisites
 - Downloaded and Installed the latest [Hortonworks Sandbox](https://hortonworks.com/products/hortonworks-sandbox/#install)
-- [Learning the Ropes of the Hortonworks Sandbox](https://hortonworks.com/tutorial/learning-the-ropes-of-the-hortonworks-sandbox/)
+- [Learning the Ropes of the HDP Sandbox](https://hortonworks.com/tutorial/learning-the-ropes-of-the-hortonworks-sandbox/)
 
 ## Outline
 - [1st Concept: Apache NiFi](#concepts-apache-nifi)

@@ -10,7 +10,7 @@ technology: Apache NiFi
 release: hdf-3.1.0
 environment: Sandbox
 product: HDF
-series: HDF > Develop with Hadoop > Hello World
+series: HDF > Develop Data Flow & Streaming Applications > Real World Examples
 ---
 
 

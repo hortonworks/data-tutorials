@@ -175,7 +175,7 @@ If you want to remove the Sandbox Docker image, issue the following command afte
 
 ## Further Reading
 
--   Follow-up with the tutorial: [Learning the Ropes of the Hortonworks Sandbox](https://hortonworks.com/tutorial/learning-the-ropes-of-the-hortonworks-sandbox)
+-   Follow-up with the tutorial: [Learning the Ropes of the HDP Sandbox](https://hortonworks.com/tutorial/learning-the-ropes-of-the-hortonworks-sandbox)
 -   [Browse all tutorials available on the Hortonworks site](https://hortonworks.com/tutorials/)
 
 ### Appendix A: Troubleshooting

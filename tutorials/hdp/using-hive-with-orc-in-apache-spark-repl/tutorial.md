@@ -33,7 +33,7 @@ Spark SQL uses the Spark engine to execute SQL queries either on data sets persi
 This tutorial is a part of series of hands-on tutorials to get you started with HDP using Hortonworks sandbox. Please ensure you complete the prerequisites before proceeding with this tutorial.
 
 -   Download and Install [Hortonworks Sandbox](https://hortonworks.com/products/sandbox/)
--   Review [Learning the Ropes of the Hortonworks Sandbox](https://hortonworks.com/tutorial/learning-the-ropes-of-the-hortonworks-sandbox/)
+-   Review [Learning the Ropes of the HDP Sandbox](https://hortonworks.com/tutorial/learning-the-ropes-of-the-hortonworks-sandbox/)
 
 This tutorial will be using Spark 1.6.x. API syntax for all the examples.
 
