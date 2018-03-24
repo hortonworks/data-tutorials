@@ -187,14 +187,14 @@ Enter the following properties for the first Kafka Source you opened:
 | SLIDING INTERVAL | 1 |
 | SLIDING INTERVAL | Seconds |
 | OUTPUT FIELDS | eventTime as `eventTime`, truckId as `truckId` |
-| OUTPUT FIELDS | driverId as `driverId`, truckId as `truckId` |
+| OUTPUT FIELDS | driverId as `driverId`, truckId as `driverName` |
 | OUTPUT FIELDS | routeId as `routeId`, routeName as `routeName` |
 | OUTPUT FIELDS | latitude as `latitude`, longitude as `longitude` |
 | OUTPUT FIELDS | speed as `speed`, eventType as `eventType` |
 | OUTPUT FIELDS | foggy as `foggy`, rainy as `rainy` |
 | OUTPUT FIELDS | windy as `windy`, congestionanLevel as `congestionLevel` |
 
-Once you click OK for the JOIN processor configuration, its bubbles change to green. Now connect JOIN processor to the RULE processor. Enter the following properties:
+6\. Once you click OK for the JOIN processor configuration, its bubbles change to green. Now connect JOIN processor to the RULE processor. Enter the following properties:
 
 | RULE    | Properties     |
 | :------------- | :------------- |
@@ -212,7 +212,7 @@ Query Preview:
 eventType <> 'Normal'
 ~~~
 
-Once you click OK, the new rule will appear in the table of rules for the RULE processor. Click OK again to save your configuration. Now connect RULE processor to the AGGREGATE processor. FilterEvents-AGGREGATE window will appear, select OK. Enter the following properties:
+7\. Once you click OK, the new rule will appear in the table of rules for the RULE processor. Click OK again to save your configuration. Now connect RULE processor to the AGGREGATE processor. FilterEvents-AGGREGATE window will appear, select OK. Enter the following properties:
 
 | AGGREGATE    | Properties     |
 | :------------- | :------------- |
@@ -234,152 +234,143 @@ Once you click OK, the new rule will appear in the table of rules for the RULE p
 
 Once you click OK, the configuration has been confirmed.
 
-**Slow SINK Approach:** HDF to HDP SINK: For this section, it requires we have two separate laptops running, two separate virtual machines running or two separate Docker containers running with one having HDF and the other having HDP, then we configure each machine to be able to communicat and then we will be able to push data from SAM to Druid or HDFS. The following configuration tables hold the information you would add for Druid and HDFS sink components.
+8\. There are few initial steps you must do to store data into two new Kafka topics, create the new topics: `trucking_violations` and `trucking_avg_speed`, then go into Schema Registry and create two new schemas that associate with these two new topics. To learn how to create Kafka topics, refer to our **[Learn Basic Operations of Kafka](https://hortonworks.com/tutorial/kafka-in-trucking-iot-on-hdf/section/3/)**. To learn how to create Schemas in Schema Registry, refer to Appendix.
 
-If you go with the Slow SINK Approach route, visit the Appendix to learn how to make the appropriate configurations so HDF Sandbox instance can communicate with an HDP Sandbox instance.
+9\. When you run the Kafka list topics command, you should see the following two new topics:
 
-**Fast SINK Approach:** Kafka SINK: since HDF already comes with Kafka, we can use it to push data from one cluster to another Kafka cluster. We just need to create two extra Kafka topics.
+~~~
+trucking_violations
+trucking_avg_speed
+~~~
 
-**Slow SINK Approach:**
+10\. Create two new schemas for `trucking_violations` and `trucking_avg_speed` in Hortonworks' Schema Registry UI: `http://sandbox-hdf.hortonworks.com:7788/`.
 
-**HDF to HDP SINK**
+11\. Click the " + " button. Write the following information in the "Add New Schema" window:
 
-6\. Add 4 sink components: DRUID, HDFS, HDFS and DRUID onto the canvas.
+**Trucking Violations Schema**
 
-7\. Connect the AGGREGATE processor to the DRUID sink, then connect it to the HDFS sink. Enter the following configurations for each SINK component:
+~~~
+Name: trucking_violations
 
-AGGREGATE connection to DRUID SINK, DRUID sink configuration
+Description: data illustrates trucking violations
 
-| DRUID SINK 1   | Properties     |
-| :------------- | :------------- |
-| **Tab** | **REQUIRED** |
-| Name       | ToDruidStore2       |
-| NAME OF THE INDEXING SERVICE | druid/overlord |
-| SERVICE DISCOVERY PATH | /druid/discovery |
-| DATASOURCE NAME | average-speed-cube-01 |
-| ZOOKEEPER CONNECT STRING | sandbox-hdp.hortonworks.com:2181 |
-| DIMENSIONS | driverId, speed, rainy |
-| DIMENSIONS | windy, foggy, routeId, speed_AVG |
-| TIMESTAMP FIELD NAME | processingTime |
-| WINDOW PERIOD | PT3M |
-| INDEX RETRY PERIOD | PT3M |
-| SEGMENT GRANULARITY| MINUTE |
-| QUERY GRANULARITY | MINUTE |
-| **Tab** | **OPTIONAL** |
-| BATCH SIZE | 50 |
-| LINGER MILLIS | 100 |
-| **BOX** | **Aggregator Info** (Click the Add Symbol) |
-| AGGREGATOR INFO | Count Aggregator |
-| NAME | cnt |
+Type: Avro schema provider
 
-AGGREGATE connection to HDFS SINK, HDFS sink configuration
+Schema Group: Kafka
 
-| HDFS SINK 1   | Properties     |
-| :------------- | :------------- |
-| **Tab** | **REQUIRED** |
-| Name       | ToDataLake2      |
-| HDFS URL | hdfs://sandbox-hdp.hortonworks.com:8020 |
-| PATH | /apps/trucking/average-speed |
-| FLUSH COUNT | 1000 |
-| ROTATION POLICY | File Size Based Rotation |
-| ROTATION SIZE MULTIPLIER | 500 |
-| ROTATION SIZE UNIT | KB |
-| OUTPUT FIELDS | driverId, routeId, speed |
-| OUTPUT FIELDS | foggy, rainy, speed_AVG, windy |
+Compatibility: Backward
 
-8\. Connect the RULE processor to the second DRUID SINK, then connect it to the second HDFS SINK. A FilterEvents-DRUID/HDFS-1 will appear, click OK. Enter the following configurations for each SINK component:
+Evolve: Checkmark
 
-RULE connection to DRUID SINK, DRUID sink configuration
+Schema Text: 
 
-| DRUID SINK 2   | Properties     |
-| :------------- | :------------- |
-| **Tab** | **REQUIRED** |
-| Name       | ToDruidStore1       |
-| NAME OF THE INDEXING SERVICE | druid/overlord |
-| SERVICE DISCOVERY PATH | /druid/discovery |
-| DATASOURCE NAME | violation-events-cube-01 |
-| ZOOKEEPER CONNECT STRING | sandbox-hdp.hortonworks.com:2181 |
-| DIMENSIONS | eventTime, routeId, congestionLevel |
-| DIMENSIONS | truckId, driverId, driverName |
-| DIMENSIONS | routeName, latitude, longitude, speed |
-| DIMENSIONS | eventType, foggy, rainy, windy |
-| TIMESTAMP FIELD NAME | processingTime |
-| WINDOW PERIOD | PT3M |
-| INDEX RETRY PERIOD | PT3M |
-| SEGMENT GRANULARITY| MINUTE |
-| QUERY GRANULARITY | MINUTE |
-| **Tab** | **OPTIONAL** |
-| BATCH SIZE | 50 |
-| LINGER MILLIS | 100 |
-| **BOX** | **Aggregator Info** (Click the Add Symbol) |
-| AGGREGATOR INFO | Count Aggregator |
-| NAME | cnt |
+{
+    "type" : "record",
+    "namespace" : "com.orendainx.hortonworks.trucking",
+    "name" : "TruckViolations",
+    "fields" : [
+        { "name" : "eventTime" , "type" : "long" },
+        { "name" : "routeId" , "type" : "int" },
+        { "name" : "congestionLevel" , "type" : "int" },
+        { "name" : "truckId" , "type" : "int" },
+        { "name" : "speed" , "type" : "int" },
+        { "name" : "eventType" , "type" : "string" },
+        { "name" : "windy" , "type" : "boolean" },
+        { "name" : "rainy" , "type" : "boolean" },
+        { "name" : "foggy" , "type" : "boolean" },
+        { "name" : "longitude" , "type" : "double" }, 
+        { "name" : "latitude" , "type" : "double" },
+        { "name" : "routeName" , "type" : "string" },
+        { "name" : "driverId" , "type" : "int" },
+        { "name" : "driverName" , "type" : "string" }                             
+    ]
+}
 
-RULE connection to HDFS SINK, HDFS sink configuration
+~~~
 
-| HDFS SINK 2   | Properties     |
-| :------------- | :------------- |
-| **Tab** | **REQUIRED** |
-| Name       | ToDataLake1      |
-| HDFS URL | hdfs://sandbox-hdp.hortonworks.com:8020 |
-| PATH | /apps/trucking/violation-events |
-| FLUSH COUNT | 1000 |
-| ROTATION POLICY | File Size Based Rotation |
-| ROTATION SIZE MULTIPLIER | 500 |
-| ROTATION SIZE UNIT | KB |
-| OUTPUT FIELDS | eventTime, routeId, congestionLevel |
-| OUTPUT FIELDS | truckId, speed, eventType, windy |
-| OUTPUT FIELDS | rainy, foggy, longitude, latitude |
-| OUTPUT FIELDS | routeName, driverId, driverName |
+**Trucking Average Speed Schema**
 
-Once all the components have been configured and connected, your topology will look similar as **Figure 2**:
+~~~
+Name: trucking_avg_speed
 
-![sam-topology](assets/images/sam-topology.jpg)
+Description: data illustrates drivers average speed
 
-**Figure 2: SAM Topology**
+Type: Avro schema provider
 
-**Fast SINK Approach:**
+Schema Group: Kafka
 
-There are few initial steps you must do to store data into two new Kafka topics, create the new topics: `average_speed` and `violation_events`, then go into Schema Registry and create two new schemas that associate with these two new topics. To learn how to create Kafka topics, refer to our **[Learn Basic Operations of Kafka](https://hortonworks.com/tutorial/kafka-in-trucking-iot-on-hdf/section/3/)**. To learn how to create Schemas in Schema Registry, refer to Appendix.
+Compatibility: Backward
 
-6\. Add 2 KAFKA SINK components onto the canvas.
+Evolve: Checkmark
+
+Schema Text: 
+
+{
+    "type" : "record",
+    "namespace" : "com.orendainx.hortonworks.trucking",
+    "name" : "TruckingAvgSpeed",
+    "fields" : [
+        { "name" : "driverId" , "type" : "int" },
+        { "name" : "routeId" , "type" : "int" },
+        { "name" : "speed" , "type" : "int" },
+        { "name" : "foggy" , "type" : "boolean" },
+        { "name" : "rainy" , "type" : "boolean" },
+        { "name" : "speed_AVG" , "type" : "double" },
+        { "name" : "windy" , "type" : "boolean" }
+    ]
+}
+
+~~~
+
+12\. Add 2 KAFKA SINK components onto the canvas.
+
+Connect AverageSpeed processor to Kafka Sink 1 (ToAvgSpeed). Configure the processor with the following property values:
 
 | KAFKA SINK 1   | Properties     |
 | :------------- | :------------- |
 | **Tab** | **REQUIRED** |
-| Name       | ToAvgSpeedTopic     |
+| Name       | ToAvgSpeed     |
 | CLUSTER NAME | Sandbox |
-| Kafka Topic | average_speed |
+| Kafka Topic | trucking_avg_speed |
+| Writer Schema Version | 1 |
+| Security Protocol | PLAINTEXT |
+| Bootstrap Servers | sandbox-hdf.hortonworks.com:6667 |
+
+Click OK to confirm configuration.
+
+Connect ViolationEvents processor to Kafka Sink 2 (ToViolationEvents). Configure the processor with the following property values:
 
 | KAFKA SINK 2  | Properties     |
 | :------------- | :------------- |
 | **Tab** | **REQUIRED** |
-| Name       | ToViolationEventsTopic     |
+| Name       | ToViolationEvents     |
 | CLUSTER NAME | Sandbox |
-| Kafka Topic | violation_events |
+| Kafka Topic | trucking_violations |
+| Writer Schema Version | 1 |
+| Security Protocol | PLAINTEXT |
+| Bootstrap Servers | sandbox-hdf.hortonworks.com:6667 |
 
+Click OK to confirm configuration.
+
+After building the SAM topology, you can deploy it by pressing the green arrow:
+
+![trucking_iot_topology](assets/images/trucking_iot_topology.jpg)
+
+You will see the status shows not running, once you run it the following window "Are you sure want to continue with this configuration?" will appear, make sure to configure it with the following properties:
+
+| Application Configuration  |    |
+| :------------- | :------------- |
+| **General** | **Values** |
+| NUMBER OF WORKERS       | 1     |
+| NUMBER OF ACKERS | 1 |
+| TOPOLOGY MESSAGE TIMEOUT (SECONDS) | 30 |
+| TOPOLOGY WORKER JVM OPTIONS | -Xmx1000m |
+| NUMBER OF EVENT SAMPLING TASKS | 1 |
+
+Click OK to cnfirm configuration.
+
+![trucking_iot_topology_deployed](assets/images/trucking_iot_topology_deployed.jpg)
 
 ## Summary
 
 Congratulations you just built a SAM topology. You learned how to pull in data from the source that supplies it, such as Kafka, using Kafka source component. You used Join, Rule and Aggregate processors to do processing on the data. You also used Kafka Sink components to store data into Kafka topics. In the next tutorial you will connect HDF and HDP Sandboxes via SAM, Druid and HDFS.
-
-## Further Reading
-
-## Appendix A: HDF and HDP Sandbox Communication
-
-## Appendix B: Create Schemas in Schema Registry
-
-To store data into Kafka, we need Schemas in Schema Registry that associate with our Kafka topics. So, we must create a schema per Kafka Topic.
-
-1\. Open Schema Registry at `http://sandbox-hdf.hortonworks.com:7788/`
-
-2\. Add a new schema, click the Add button top right. Enter the following information for each new schema according to the appropriate table:
-
-| Add New Schema  | Properties     |
-| :------------- | :------------- |
-| NAME | trucking_violations:v |
-
-
-| Add New Schema  | Properties     |
-| :------------- | :------------- |
-| NAME | trucking_avg_speed:v |
