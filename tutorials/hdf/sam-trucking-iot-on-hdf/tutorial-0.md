@@ -21,8 +21,6 @@ This tutorial covers the core concepts of Streaming Analytics Manager (SAM) and 
 
 We will create a SAM topology to ingest streams of data from Apache Kafka into our stream application, do some complex processing and store the data into Druid and HDFS.
 
-Since Druid and HDFS are not available on HDF, we will also do some HDF and HDP administration work to make it possible to transfer data between the two single node clusters.
-
 ## Prerequisites
 
 - [Hortonworks DataFlow (HDF) Sandbox Installed](https://hortonworks.com/downloads/#sandbox)
