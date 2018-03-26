@@ -41,13 +41,13 @@ Login credentials `username/password = admin/admin`.
 
 Before we can create the SAM topology, we need to start the producer to store data into the queues that SAM will pull data from.
 
-4\. Open NiFi at `http://sandbox-hdf.hortonworks.com:9090/nifi/`
+3\. Open NiFi at `http://sandbox-hdf.hortonworks.com:9090/nifi/`
 
-5\. Drag the template icon to the left of the pencil onto the canvas. Choose the default option.
+4\. Drag the template icon to the left of the pencil onto the canvas. Choose the default option.
 
-6\. In the Operate panel, select the gear icon. Click on the lighting symbol, for Scope, select Service and referencing components, then Enable and close.
+5\. In the Operate panel, select the gear icon. Click on the lighting symbol, for Scope, select Service and referencing components, then Enable and close.
 
-7\. Press control (command) and A to select entire nifi flow and in the Operate panel, press start.
+6\. Press control (command) and A to select entire nifi flow and in the Operate panel, press start.
 
 ![nifi_producer](assets/images/nifi_producer.jpg)
 
