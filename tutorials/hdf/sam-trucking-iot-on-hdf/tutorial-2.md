@@ -75,7 +75,7 @@ Both components are accessible from the **Components** tab.
 
 2\. In the AUTO ADD field is where you insert your Ambari Cluster URL. The information you must include is as follows, you would take the definition and overwrite it to be your Ambari URL:
 
-~~~
+~~~bash
 Definition:
 
 http://ambari_host:port/api/v1/clusters/CLUSTER_NAME
@@ -100,19 +100,19 @@ The result after adding the Ambari Cluster URL will be that SAM retrieves all Am
 
 3\. Named the Environment. In our case, we chose the name:
 
-~~~
+~~~bash
 SandboxEnvironment
 ~~~
 
 4\. Provide a description. In our case, we wrote:
 
-~~~
+~~~bash
 SandboxEnvironment
 ~~~
 
 5\. Select Services. We selected all services:
 
-~~~
+~~~bash
 Kafka, Storm, Ambari Infra, Zookeeper
 ~~~
 
@@ -130,7 +130,7 @@ A quick recap, we just explored the pre-exising service pool and environment for
 
 The Add Application window will appear, enter the following information:
 
-~~~
+~~~bash
 Name: Trucking-IoT-Demo
 
 Environment: SandboxEnvironment
@@ -202,7 +202,7 @@ Compatibility: Backward
 
 Evolve: Checkmark
 
-Schema Text: 
+Schema Text:
 
 {
     "type" : "record",
@@ -218,14 +218,13 @@ Schema Text:
         { "name" : "windy" , "type" : "boolean" },
         { "name" : "rainy" , "type" : "boolean" },
         { "name" : "foggy" , "type" : "boolean" },
-        { "name" : "longitude" , "type" : "double" }, 
+        { "name" : "longitude" , "type" : "double" },
         { "name" : "latitude" , "type" : "double" },
         { "name" : "routeName" , "type" : "string" },
         { "name" : "driverId" , "type" : "int" },
         { "name" : "driverName" , "type" : "string" }                             
     ]
 }
-
 ~~~
 
 When you verify the information is entered, confirm adding the new schema and click OK.
@@ -245,7 +244,7 @@ Compatibility: Backward
 
 Evolve: Checkmark
 
-Schema Text: 
+Schema Text:
 
 {
     "type" : "record",
@@ -261,7 +260,6 @@ Schema Text:
         { "name" : "windy" , "type" : "boolean" }
     ]
 }
-
 ~~~
 
 ![schemas_kafka_sinks](assets/images/schemas_kafka_sinks.jpg)
@@ -318,7 +316,7 @@ When you are done, click OK.
 
 > Note: If you are not able to choose a Kafka Topic, it could be that Kafka is powered off. Verify that the service is on, you can do so by checking the service in the Ambari Dashboard.
 
-When you are done, click OK. 
+When you are done, click OK.
 
 **PROCESSOR**
 
@@ -356,7 +354,7 @@ When you are done, click OK.
 | OUTPUT FIELDS | foggy as `foggy`, rainy as `rainy` |
 | OUTPUT FIELDS | windy as `windy`, congestionanLevel as `congestionLevel` |
 
-6\. Once you click OK for the JOIN processor configuration, its bubbles change to green. Now connect JOIN processor to the RULE processor. 
+6\. Once you click OK for the JOIN processor configuration, its bubbles change to green. Now connect JOIN processor to the RULE processor.
 
 ![join_rule_connect](assets/images/join_rule_connect.jpg)
 
@@ -380,7 +378,7 @@ eventType <> 'Normal'
 
 ![rule_condition](assets/images/rule_condition.jpg)
 
-7\. Once you click OK, the new rule will appear in the table of rules for the RULE processor. Click OK again to save your configuration. Now connect RULE processor to the AGGREGATE processor. 
+7\. Once you click OK, the new rule will appear in the table of rules for the RULE processor. Click OK again to save your configuration. Now connect RULE processor to the AGGREGATE processor.
 
 FilterEvents-AGGREGATE window will appear, select OK. Enter the following properties for the AGGREGATE processor:
 
