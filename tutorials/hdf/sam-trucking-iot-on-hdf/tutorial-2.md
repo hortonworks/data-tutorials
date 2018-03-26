@@ -19,12 +19,10 @@ Skills you will gain:
 ## Outline
 
 - [Environment Setup](#environment-setup)
-- [Create a SAM topology](#create-a-sam-topology)
+- [Add a New SAM topology](#add-a-new-sam-topology)
 - [Building the SAM Topology](#building-the-sam-topology)
 - [Summary](#summary)
 - [Further Reading](#further-reading)
-- [Appendix A: HDF and HDP Sandbox Communication](#appendix-a-hdf-and-hdp-sandbox-communication)
-- [Appendix B: Create Schemas in Schema Registry](#appendix-b-create-schemas-in-schema-registry)
 
 ## Environment Setup
 
@@ -53,7 +51,7 @@ Before we can create the SAM topology, we need to start the producer to store da
 
 > Note: If you want to learn more about how to build the NiFi Flow, refer to [NiFi in Trucking IoT](https://hortonworks.com/tutorial/nifi-in-trucking-iot-on-hdf/) tutorial.
 
-## Create a SAM topology
+## Add a New SAM topology
 
 Now we have a data source for SAM to pull in data, we will build the Trucking IoT SAM topology.
 
@@ -264,15 +262,15 @@ Schema Text:
 
 ![schemas_kafka_sinks](assets/images/schemas_kafka_sinks.jpg)
 
-With these two new schemas, we can transport data between kafka queues.
+With these two new schemas, we can transport data between Kafka queues.
 
 When you verify the information is entered, confirm adding the new schema and click OK.
 
-> Note: for more information on how Schemas being registered into Schema Registry and the architecture works, visit [Schema Registry in Trucking IoT on HDF](https://hortonworks.com/tutorial/schema-registry-in-trucking-iot-on-hdf/)
+**Note:** For more information on how Schemas being registered into Schema Registry and the architecture works, visit [Schema Registry in Trucking IoT on HDF](https://hortonworks.com/tutorial/schema-registry-in-trucking-iot-on-hdf/)
 
 You may be wondering, why do we need Kafka topics and schemas? When we use Kafka Source components, we need a Kafka topic (queue) to pull in data from. The same idea can be applied for Kafka Sinks, but instead we store data into the queue. The schemas are needed to complement Kafka to provide data verification.
 
-Let's began designing and creating our topology!
+Lets began designing and creating our topology!
 
 **SOURCE**
 
@@ -324,7 +322,7 @@ When you are done, click OK.
 
 ![join_rule_aggregate](assets/images/join_rule_aggregate.jpg)
 
-4\. The two Kafka sources have green bubbles on their rightside edge, click, hold and drag to connect to the JOIN processor's grey bubble located on its leftside edge.
+4\. The two Kafka sources have green bubbles on their rightside edge, click, hold and drag to connect to the JOIN processors grey bubble located on its leftside edge.
 
 ![connection](assets/images/connection.jpg)
 
