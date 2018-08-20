@@ -1,6 +1,6 @@
 ---
 title: Setting up a Spark Development Environment with Java
-author: Robert Hryniewicz
+author: sandbox-team
 tutorial-id: 802
 experience: Intermediate
 persona: Data Scientist & Analyst
@@ -23,68 +23,83 @@ This tutorial will teach you how to set up a full development environment for de
 
 ## Prerequisites
 
--   Installed [Hortonworks Data Platform (HDP) Sandbox](https://hortonworks.com/downloads/#sandbox)
--   Installed [IntelliJ IDEA](https://www.jetbrains.com/) with Maven (dependency manager)
--   Installed [Java](https://java.com/)
+- Installed and deployed [Hortonworks Data Platform (HDP) Sandbox](https://hortonworks.com/downloads/#sandbox)
+- [Learning the Ropes of HDP Sandbox](https://hortonworks.com/tutorial/learning-the-ropes-of-the-hortonworks-sandbox/)
+- Installed [IntelliJ IDEA](https://www.jetbrains.com/idea/)
+- Installed [Maven](https://maven.apache.org/install.html) dependency manager
+- Installed [Java](https://java.com/en/download/)
 
 ## Outline
 
--   [Creating a new IntelliJ Project](#creating-a-new-intellij-project)
--   [Maven](#maven)
--   [Create a Spark Application](#create-a-spark-application)
--   [Deploying to the Sandbox](#deploying-to-the-sandbox)
--   [Deploying to the Cloud](#deploying-to-the-cloud)
--   [Live Debugging](#live-debugging)
+- [Creating a new IntelliJ Project](#creating-a-new-intellij-project)
+- [Maven Configuration](#maven-configuration)
+- [Create a Spark Application](#create-a-spark-application)
+- [Deploying to the Sandbox](#deploying-to-the-sandbox)
+- [Deploying to the Cloud](#deploying-to-the-cloud)
+- [Live Debugging](#live-debugging)
+- [Summary](#summary)
+- [Further Reading](#further-reading)
 
 ## Creating a new IntelliJ Project
 
->Note: Instructions may vary based on operating system.
+> NOTE: Instructions may vary based on operating system. On this tutorial we will be using IntelliJ Version: 2018.2.1 on MAC OSX High Sierra.
 
-Create a new project by selecting **File** -> **New** -> **Project**:
--   select **Maven**
--   click **Next**
+Create a new project by selecting **File** > **New** > **Project**:
 
-![intellij2](assets/intellij2.jpg)
+select **Maven** > click **Next**
+
+![intellij-new-java-project](assets/intellij-new-java-project.jpg)
 
 Name your project as follows:
--   GroupId: `Hortonworks`
--   ArtifactId: `SparkTutorial`
--   click **Next**
 
-![intellij3](assets/intellij3.jpg)
+- GroupId: `Hortonworks`
+- ArtifactId: `SparkTutorial`
+- Version: `1.0-SNAPSHOT`
+
+then click **Next** to continue.
+
+![intellij-new-project-name-artifact](assets/intellij-new-project-name-artifact.jpg)
+
+Finally, select your project name and location. These fields should be auto-populated so let's run the defaults:
+
+![intellij-new-project-finish](assets/intellij-new-project-finish.jpg)
 
 IntelliJ should make a new project with a default directory structure. It may take a minute or two to generate all the folders.
 
-![intellij4](assets/intellij4.png)
+![intellij-auto-folders](assets/intellij-auto-folders.jpg)
 
 Let's break down the project structure.
--   .idea: These are IntelliJ configuration files.
--   src: Source Code. Most of your code should go into the main directory. The test folder should be reserved for test scripts.
--   target: When you compile your project it will go here.
--   pom.xml: The Maven configuration file. We'll show you how to use this file to import third party libraries and documentation.
+
+- .idea: These are IntelliJ configuration files.
+- src: Source Code. Most of your code should go into the main directory. The test folder should be reserved for test scripts.
+- target: When you compile your project it will go here.
+- pom.xml: The Maven configuration file. We'll show you how to use this file to import third party libraries and documentation.
 
 Before we continue, let's verify a few IntelliJ settings:
 
 1\. Verify that **import Maven projects automatically** is **ON**.
--   Preferences -> Build, Execution, Deployment -> Build Tools -> Maven -> Importing
 
-![intellij_mavenimport](assets/intellij_mavenimport.jpg)
+- Preferences > Build, Execution, Deployment > Build Tools > Maven > Importing
+
+![intellij-maven-auto-import](assets/intellij-maven-auto-import.jpg)
 
 2\. Verify **Project SDK** and **Project language level** are set to Java version:
--   File -> Project Structure -> Project
 
-![intellij_projectversion](assets/intellij_projectversion.jpg)
+- File > Project Structure > Project
+
+![intellij_projectversion](assets/intellij-project-version.jpg)
 
 3\. Verify **Language level** is set to Java version:
--   File -> Project Structure -> Modules
 
-![intellij_moduleversion](assets/intellij_moduleversion.jpg)
+- File > Project Structure > Modules
 
-## Maven
+![intellij_moduleversion](assets/intellij-module-version.jpg)
+
+## Maven Configuration
 
 Before we start writing a Spark Application, we'll want to import the Spark libraries and documentation into IntelliJ. To perform this we're going to use Maven. This is necessary if we want IntelliJ to recognize Spark code. To import the Spark libraries we're going to use the dependency manager Maven. Add the following lines to the file pom.xml:
 
-```
+~~~xml
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
@@ -117,7 +132,7 @@ Before we start writing a Spark Application, we'll want to import the Spark libr
     </dependencies>
 
 </project>
-```
+~~~
 
 After you save the file, IntelliJ will automatically import the libraries and documentation needed to run Spark.
 
@@ -129,36 +144,38 @@ Later we'll want Spark to retrieve this file from HDFS (Hadoop Distributed File 
 
 To upload to HDFS, first make sure the sandbox is up and running.
 
--   Navigate to [sandbox-hdp.hortonworks.com:8080](http://sandbox-hdp.hortonworks.com:8080)
--   Login using username/password as **maria_dev** / **maria_dev**
--   Once you've logged into Ambari Manager, mouse over the drop-down menu on the upper-right hand corner and click on **Files View**.
--   Open the **tmp** folder and click the **upload** button in the upper-right corner to upload the file. Make sure it's named **shakespeare.txt**.
+- Navigate to [sandbox-hdp.hortonworks.com:8080](http://sandbox-hdp.hortonworks.com:8080)
+- Login using username/password as **maria_dev** / **maria_dev**
+- Once you've logged into Ambari Manager, mouse over the drop-down menu on the upper-right hand corner and click on **Files View**.
+- Open the **tmp** folder and click the **upload** button in the upper-right corner to upload the file. Make sure it's named **shakespeare.txt**.
 
-![select-files-view](assets/select-files-view.jpg)
+![select-files-view](assets/265-files-view.jpg)
 
 Now we're ready to create our application. In your IDE open the folder **src/main/resources**, which should have been generated automatically for you. Place **shakespeare.txt** there.
 
 Next, select folder **src/main/java**:
--   right-click on folder and select **New** -> **Java Class**
--   name the class: `Main.java`
 
-![intellij5](assets/intellij5.jpg)
+- right-click on folder and select **New** > **Java Class**
+- name the class: `Main.java`
+
+![new-java-class](assets/new-java-class.jpg)
 
 Copy this into your new file:
 
-```
+~~~java
 public class Main {
 
     public static void main(String[] args) {
         System.out.println("Hello World");
     }
 }
-```
+~~~
+
 Now go to the "Run" drop down menu at the top of your IDE and select run. Then select Main. If everything is set up correctly, the IDE should print "Hello World".
 
 Now that we know the environment is set up correctly, replace the file with this code:
 
-```
+~~~java
 package Hortonworks.SparkTutorial;
 import org.apache.spark.api.java.JavaPairRDD;
 import org.apache.spark.api.java.JavaSparkContext;
@@ -190,15 +207,19 @@ public class Main {
     }
 
 }
-```
+~~~
 
-As before, click Run -> Run to run the file. This should run the Spark job and print the frequency of each word that appears in Shakespeare.
+As before, click Run > Run to run the file. This should run the Spark job and print the frequency of each word that appears in Shakespeare.
+
+The files created by your program are found in the directory specified in the code above, in our case we used **/tmp/shakespeareWordCount**.
+
+![part-one-word-count](assets/part-one-word-count.jpg)
 
 Notice we've set this line:
 
-```
+~~~java
 setMaster("local")
-```
+~~~
 
 This tells Spark to run locally using this computer, rather than in distributed mode. To run Spark against multiple machines, we would need to change this value to YARN. We'll see how to do this later.
 
@@ -211,21 +232,28 @@ In the next two sections we'll learn how to deploy distributed Spark application
 In this section we'll be deploying against the Hortonworks sandbox. Although we're still running Spark on a single machine, we'll be using HDFS and YARN (a cluster resource manager). This will be a closer approximation of running a full distributed cluster over what we've done previously.
 
 The first thing we want to do is change this line:
-```
+
+~~~java
 JavaRDD<String> textFile = sc.textFile("src/main/resources/shakespeare.txt");
-```
+~~~
+
 to this:
-```
+
+~~~java
 JavaRDD<String> textFile = sc.textFile("hdfs:///tmp/shakespeare.txt");
-```
+~~~
+
 and this:
-```
+
+~~~java
 counts.saveAsTextFile("/tmp/shakespeareWordCount");
-```
+~~~
+
 to this:
-```
+
+~~~java
 counts.saveAsTextFile("hdfs:///tmp/shakespeareWordCount");
-```
+~~~
 
 This tells Spark to read and write to HDFS instead of locally. Make sure to save the file.
 
@@ -233,27 +261,29 @@ Next, we're going to package this code into a compiled jar file that can be depl
 
 Open up a terminal and cd to the directory that contains **pom.xml**. Run **mvn package**. This will create a compiled jar called "SparkTutorial-1.0-SNAPSHOT.jar" in the folder **target**.
 
->Note: if the **mvn** command does not work - make sure you installed **Maven** successfully.
+> NOTE: if the **mvn** command does not work - make sure you installed **Maven** successfully.
 
 Copy the assembly over to the sandbox:
 
-```
+~~~bash
 scp -P 2222 ./target/SparkTutorial-1.0-SNAPSHOT.jar root@sandbox-hdp.hortonworks.com:/root
-```
+~~~
 
 Open a second terminal window and ssh into the sandbox:
-```
+
+~~~bash
 ssh -p 2222 root@sandbox-hdp.hortonworks.com
-```
+~~~
 
 Use **spark-submit** to run our code. We need to specify the main class, the jar to run, and the run mode (local or cluster):
 
-```
+~~~bash
 spark-submit --class "Hortonworks.SparkTutorial.Main" --master local ./SparkTutorial-1.0-SNAPSHOT.jar
-```
+~~~
 
 Your console should print the frequency of each word that appears in Shakespeare, like this:
-```
+
+~~~html
 ...
 (comutual,1)
 (ban-dogs,1)
@@ -273,7 +303,8 @@ Your console should print the frequency of each word that appears in Shakespeare
 (call'd,162)
 (lecherous,2)
 ...
-```
+~~~
+
 Additionally, if you open the File View in Ambari you should see results under /tmp/shakespeareWordCount. This shows the results have also been stored in HDFS.
 
 ## Deploying to the Cloud
@@ -283,19 +314,22 @@ In this section we'll learn how to deploy our code to a real cluster. If you don
 These services are designed to let you quickly spin up a cluster for a few hours (perhaps on cheaper spot instances), run a series of jobs, then spin the cluster back down to save money. If you want a permanent installation of Hadoop that will run for months without being shutdown, you should download [Hortonworks Data Platform](https://hortonworks.com/downloads/#data-platform) and install on your servers.
 
 After setting up a cluster the process of deploying our code is similar to deploying to the sandbox. We need to scp the jar to the cluster:
-```
+
+~~~bash
 scp -P 2222 -i "key.pem" ./target/SparkTutorial-1.0-SNAPSHOT.jar root@[ip address of a master node]:root
-```
+~~~
 
 Then open a second terminal window and ssh into the master node:
-```
+
+~~~bash
 ssh -p 2222 -i "key.pem" root@[ip address of a master node]
-```
+~~~
 
 Then use **spark-submit** to run our code:
-```
+
+~~~bash
 spark-submit --class "Hortonworks.SparkTutorial.Main"  --master yarn --deploy-mode client ./SparkTutorial-1.0-SNAPSHOT.jar
-```
+~~~
 
 Notice that we specified the parameters **--master yarn** instead of **--master local**. **--master yarn** means we want Spark to run in a distributed mode rather than on a single machine, and we want to rely on YARN (a cluster resource manager) to fetch available machines to run the job. If you aren't familiar with YARN, it is especially important if you want to run several jobs simultaneously on the same cluster. When configured properly, a YARN queue will provide different users or process a quota of cluster resources they're allowed to use. It also provides mechanisms for allowing a job to take full use of the cluster when resources are available and scaling existing jobs down when additional users or jobs begin to submit jobs.
 
@@ -309,25 +343,37 @@ In this section we'll learn how to connect a running Spark program to a debugger
 
 On the machine where you plan on submitting your Spark job, run this line from the terminal:
 
-```
+~~~bash
 export SPARK_JAVA_OPTS=-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=8086
-```
+~~~
 
-This will let you attach a debugger at port 8086. You'll need to make sure port 8086 is able to receive inbound connections. Then in IntelliJ go to Run -> Edit Configurations:
+This will let you attach a debugger at port 8086. You'll need to make sure port 8086 is able to receive inbound connections. Then in IntelliJ go to Run > Edit Configurations:
 
-![intellij6](assets/intellij6.png)
+![intellij-edit-configurations](assets/intellij-edit-configurations.jpg)
 
-Then click the + button at the upper-left and add a new remote configuration. Fill the host and port fields with your host ip address and 8086.
+Then click the + button at the upper-left and add a new remote configuration. Fill the host and port fields with your host ip address and use port **8086**.
 
-![intellij7](assets/intellij7.png)
+![intellij-live-debug-address](assets/intellij-live-debug-address.jpg)
 
 If you run this debug configuration from your IDE immediately after submitting your Spark job, the debugger will attach and Spark will stop at breakpoints.
 
-> Note: To resubmit the word count code we must first remove the directory created earlier. Use the command `hdfs dfs -rm -r /tmp/shakespeareWordCount` on the sandbox shell to remove the old directory.
+> NOTE: To resubmit the word count code we must first remove the directory created earlier. Use the command `hdfs dfs -rm -r /tmp/shakespeareWordCount` on the sandbox shell to remove the old directory.
 
 Submit the spark job on the sandbox shell again and debug on your IDE immediately after executing the **spark-submit** command.
+
 Remember that to run your code we used the following command: `spark-submit --class "Hortonworks.SparkTutorial.Main"  --master yarn --deploy-mode client ./SparkTutorial-1.0-SNAPSHOT.jar`
 
 ![spark-submit-debug](assets/spark-submit-debug.jpg)
 
 You can also inspect the values of live variables within your program. This is invaluable when trying to pin down bugs in your code.
+
+## Summary
+
+We have installed the needed dependencies and Integrated Developing Environment needed to develop and deploy your code to the sandbox, we also learned how easy it can be to deploy your code to the cloud or an external cluster. Additionally, we enabled live code debugging to fix bugs and improve your code in a realistic setting.
+
+## Further Reading
+
+- [Setting up a Spark Development Environment with Python](https://hortonworks.com/tutorial/setting-up-a-spark-development-environment-with-python/)
+- [Setting up a Spark Development Environment with Scala](https://hortonworks.com/tutorial/setting-up-a-spark-development-environment-with-scala/)
+- [Hortonworks Community Connection (HCC)](https://community.hortonworks.com/spaces/85/data-science.html?type=question)
+- [Spark Tutorials](https://hortonworks.com/tutorials/?tab=product-hdp&filters=apache-spark)

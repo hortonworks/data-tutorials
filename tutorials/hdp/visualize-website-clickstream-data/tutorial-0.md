@@ -42,7 +42,7 @@ In this tutorial, we will focus on the “path optimization” use case. Specifi
 
 ## Prerequisites
 
--   Installed the [HDP 2.6 Sandbox](https://hortonworks.com/downloads/#sandbox)
+-   Installed the [Latest HDP Sandbox](https://hortonworks.com/downloads/#sandbox)
 -   Have sample retail data already loaded [by completing this tutorial](https://hortonworks.com/tutorial/loading-and-querying-data-with-hadoop/)
 
 

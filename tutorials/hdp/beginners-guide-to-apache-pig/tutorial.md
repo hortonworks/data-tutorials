@@ -7,7 +7,7 @@ persona: Developer
 source: Hortonworks
 use case: Data Discovery
 technology: Apache Ambari, Apache Pig
-release: hdp-2.6.0
+release: hdp-2.6.5
 environment: Sandbox
 product: HDP
 series: HDP > Hadoop for Data Scientists & Analysts > Introduction to Data Analysis with Hadoop
@@ -70,7 +70,7 @@ Once you have the file you will need to unzip the file into a directory. We will
 
 Select the `HDFS Files view` from the Off-canvas menu at the top. That is the `views menu`. The HDFS Files view allows you to view the Hortonworks Data Platform(HDP) file store. The HDP file system is separate from the local file system.
 
-![select_files_view](assets/select_files_view.png)
+![select_files_view](assets/files-view.jpg)
 
 Navigate to `/user/maria_dev` or a path of your choice, click `Upload` and `Browse`, which brings up a dialog box where you can select the `drivers.csv` file from your computer. Upload the `truck_event_text_partition.csv` file in the same way. When finished, notice that both files are now in HDFS.
 
@@ -80,7 +80,7 @@ Navigate to `/user/maria_dev` or a path of your choice, click `Upload` and `Brow
 
 Open the Pig interface by clicking the `Pig View` in the `views menu`.
 
-![select_pig_view](assets/select_pig_view.png)
+![select_pig_view](assets/select-pig-view.jpg)
 
 On the left we can choose between our saved `Pig Scripts`, `UDFs` and the `Pig Jobs` executed in the past. To the right of this menu bar we see our saved Pig Scripts.
 

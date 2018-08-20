@@ -10,7 +10,7 @@ technology: Apache Spark
 release: hdp-2.6.0
 environment: Sandbox
 product: HDP
-series: HDP > Develop with Hadoop > Apache Spark
+series: HDP > Hadoop for Data Scientists & Analysts > Real World Examples
 ---
 
 

@@ -77,7 +77,7 @@ If you prefer to build the dataflow manually step-by-step, continue on to **Appr
 
 - **Last_Time** is a FlowFile Attribute and XPath expression that retrieves value of time node in the XML file
 
-![evaluateXPath_config_property_tab_window](assets/tutorial-4-build-nifi-process-group-to-parse-transit-events/evaluateXPath_config_property_tab_window.png)
+![evaluateXPath_config_property_tab_window](assets/tutorial-4-build-nifi-process-group-to-parse-transit-events/evaluateXPath_config_property_tab_window.jpg)
 
 **Figure 2:** EvaluateXPath Configuration Property Tab Window
 
@@ -148,7 +148,7 @@ If you prefer to build the dataflow manually step-by-step, continue on to **Appr
 
 ![SimulateXmlTransitEvents_to_ParseTransitEvents](assets/tutorial-4-build-nifi-process-group-to-parse-transit-events/parsetransitevents_pg.png)
 
-**Figure 6:** Connection of **SimulateXmlTransitEvents** and **ParseTransitEvents** PG
+**Figure 6:** Connection of **SimulateXmlTransitEvents** and **ParseTransitEvents** process group.
 
 ### Step 8: Verify ParseTransitEvents Extracts Values From SimulateXmlTransitEvents
 
@@ -156,13 +156,13 @@ If you prefer to build the dataflow manually step-by-step, continue on to **Appr
 
 ![parsetransitevents_pg](assets/tutorial-4-build-nifi-process-group-to-parse-transit-events/started_parsetransitevents_pg.png)
 
-2\. Enter the **ParseTransitEvents** PG. Right click on the **ExtractTransitObservations** processor, select **Data Provenance**.
+2\. Double click on **ParseTransitEvents** process group. Right click on the **ExtractTransitObservations** processor, select **Data Provenance**.
 
 ![extracttransitobservations_data_provenance](assets/tutorial-4-build-nifi-process-group-to-parse-transit-events/extracttransitobservations_data_provenance.png)
 
 3\. View any event by selecting the view provenance event icon ![i_symbol_nifi](assets/tutorial-4-build-nifi-process-group-to-parse-transit-events/i_symbol_nifi_lab1.png)
 
-4\. Click on the **Attributes** tab. Select **Show modified attributes only** to display only the attributes being parsed with **XPath expression language**. As long as you see values mapped to their attribute name, you have verified the processor is extracting xml data from the flowfile successfully.
+4\. Pick a row from the list of events, click on the "i" to the left of that row. Then click on the **Attributes** tab. Select **Show modified attributes only** to display only the attributes being parsed with **XPath expression language**. As long as you see values mapped to their attribute name, you have verified the processor is extracting XML data from the flowfile successfully.
 
 ![verify_evaluateXPath_extracts_data](assets/tutorial-4-build-nifi-process-group-to-parse-transit-events/verify_evaluateXPath_extracts_data.png)
 
@@ -180,7 +180,7 @@ To delete your previous flow, hold **command** or **ctrl** and press **A** to hi
 
 **Import the New DataFlow Template**
 
-3\. Download the [tutorial-4-ParseTransitEvents.xml](#assets/tutorial-4-build-nifi-process-group-to-parse-transit-events/template/tutorial-4-parsetransitevents.xml) template file.
+3\. Download the [tutorial-4-ParseTransitEvents.xml](assets/tutorial-4-build-nifi-process-group-to-parse-transit-events/template/tutorial-4-ParseTransitEvents.xml) template file.
 
 4\. Use the template icon ![nifi_template_icon](assets/tutorial-4-build-nifi-process-group-to-parse-transit-events/nifi_template_icon.png) located in the **Operate** Palette.
 

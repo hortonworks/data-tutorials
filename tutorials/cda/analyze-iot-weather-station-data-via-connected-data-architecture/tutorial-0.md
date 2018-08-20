@@ -44,7 +44,8 @@ By the end of this tutorial series, you will acquire the fundamental knowledge t
 
 ## Bill of Materials:
 
-- [IoT Weather Station Hardware Kit](http://a.co/8FNMlUu)
+- Raspberry Pi 3 Essentials Kit - On-board WiFi and Bluetooth Connectivity
+- Raspberry Pi Sense Hat
 
 ## Hardware Requirements
 

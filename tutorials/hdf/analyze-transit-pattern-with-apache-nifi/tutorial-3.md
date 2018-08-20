@@ -82,7 +82,7 @@ If you prefer to build the dataflow manually step-by-step, continue on to **Appr
 
 - **Keep Source File** source files in directory remain after all data is ingested
 
-5\. Once each property is updated, enter the **Scheduling** tab, add the configuration information listed in **Table 2**.
+5\. Once each property is updated, go to the **Scheduling** tab, add the configuration information listed in **Table 2**.
 
 **Table 2:** Update **GetFile** Scheduling Tab
 
@@ -110,7 +110,7 @@ If you prefer to build the dataflow manually step-by-step, continue on to **Appr
 
 ![connection_window_checkbox](assets/tutorial-3-build-a-nifi-process-group-to-simulate-nextbus-api/connection_window_checkbox.png)
 
-**Figure 4:** Connection Window for GetFile -> UnpackContent. **success** checkbox checked.
+**Figure 4:** "Create Connection" Window for GetFile -> "UnpackContent" -> **success** checkbox checked.
 
 3\. Open the **UnpackContent** processor configuration **properties** tab. Add the properties listed in **Table 3** to update the processor's appropriate properties.
 
@@ -224,7 +224,7 @@ If you prefer to build the dataflow manually step-by-step, continue on to **Appr
 
 ### Step 8: Check Data Stored to Local File System Via Web Shell Client
 
-1\. With the nifi dataflow unselected, hit the **start** button ![start_button_nifi_iot](assets/tutorial-4-build-nifi-process-group-to-parse-transit-events/start_button_nifi_iot.png) located in the Operate Palette to activate the **SimulateXmlTransitEvents** process group dataflow.
+1\. With the NiFi DataFlow unselected, hit the **start** button ![start_button_nifi_iot](assets/tutorial-4-build-nifi-process-group-to-parse-transit-events/start_button_nifi_iot.png) located in the Operate Palette to activate the **SimulateXmlTransitEvents** process group dataflow.
 
 2\. Let the flow run for about 1 minute, then stop the flow by hitting the **stop** button.
 
@@ -241,7 +241,7 @@ You have now ssh'd into the HDF Sandbox Server.
 4\. Navigate to the output directory in which the transit data is being written to:
 
 ~~~bash
-cd /sandbox/tutorial-files/640/nifi/output/rawtransitevents
+cd /sandbox/tutorial-files/640/nifi/output/rawtransitevents?
 ~~~
 
 5\. Run the `ls` command to list files in the current directory:

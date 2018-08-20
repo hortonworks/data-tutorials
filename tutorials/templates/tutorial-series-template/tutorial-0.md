@@ -2,7 +2,7 @@
 
 ## Introduction
 
-Introduce the topic and the overall goals and objectives of the tutorial series.
+Introduce the topic, the overall goals and objectives of the tutorial series.
 
 After this tutorial series, you will:
 -   Understand how to deploy HDP in a cluster environment.

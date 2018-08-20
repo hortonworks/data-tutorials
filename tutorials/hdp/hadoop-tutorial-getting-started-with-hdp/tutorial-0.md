@@ -1,6 +1,6 @@
 ---
 title: Hadoop Tutorial – Getting Started with HDP
-author: Edgar Orendain
+author: tutorials-team
 tutorial-id: 100
 experience: Beginner
 persona: Developer

@@ -42,16 +42,26 @@ Choose either approach to access NiFi UI.
 
 ![open-nifi-ui-via-ambari.png](assets/tutorial-2-launch-nifi-html-ui/approach-1-ambari/open-nifi-ui-via-ambari.jpg)
 
+4\. The NiFi UI comes with a default Trucking-IoT NiFiFlow as seen on the image below. To delete the default NiFiFlow and work with a new canvas select the NiFiFlow (cltr+A for Mac) then right click and select delete.
+
+![delete_trucking_iot_nififlow](assets/tutorial-2-launch-nifi-html-ui/approach-1-ambari/trucking_iot_delete_flow.jpg)
+
+Sample of a clean NiFi Canvas:
 ![open_nifi_html_interface.png](assets/tutorial-2-launch-nifi-html-ui/approach-1-ambari/open_nifi_html_interface.jpg)
 
 ### Approach 2: Launch NiFi HTML UI from HDF Splash Quick Links
 
 1\. Select the **QUICK LINKS** button
 
-2\. Hover over the **NiFi 1.2.0** box and select **Go to UI**
+2\. Hover over the **NiFi** box and select **Go to UI**
 
 ![splash_nifi_quicklink](assets/tutorial-2-launch-nifi-html-ui/approach-2-splash/splash_nifi_quicklink.jpg)
 
+3\. The NiFi UI comes with a default Trucking-IoT NiFiFlow as seen on the image below. To delete the default NiFiFlow and work with a new canvas select the NiFiFlow (cltr+A for Mac) then right click and select delete.
+
+![delete_trucking_iot_nififlow](assets/tutorial-2-launch-nifi-html-ui/approach-1-ambari/trucking_iot_delete_flow.jpg)
+
+Sample of a clean NiFi Canvas:
 ![open_nifi_html_interface.png](assets/tutorial-2-launch-nifi-html-ui/approach-2-splash/open_nifi_html_interface.jpg)
 
 ## Summary

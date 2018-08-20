@@ -125,8 +125,20 @@ Validate Transit Data for empty values`.
 
 | Property  | Value  |
 |:---|---:|
-| `ValidateTransitObservations`  | `${Direction_of_Travel:isEmpty():not():and(${Last_Time:isEmpty():not()}):and(${Latitude:isEmpty():not()}):and(${Longitude:isEmpty():not()}):and(${Vehicle_ID:isEmpty():not()}):and(${Vehicle_Speed:equals('0'):not()})}`  |
+| `ValidateTransitObservations`  | `${Direction_of_Travel:isEmpty():not():and(${Last_Time:isEmpty():not()}):and(${Latitude:isEmpty():not()}):and(${Longitude:isEmpty():not()}):and(${Vehicle_ID:isEmpty():not()}):and(${Vehicle_Speed:equals('0'):not()})}`|
 
+~~~
+Note: If after completing step 3 your processor shows a triangle with an exclamation mark stating that the **ValidateTransitObservations** is invalid, copy and paste the following into the value section of the property tab.
+
+${Direction_of_Travel:isEmpty():not():and(
+	${Last_Time:isEmpty():not()}):and(
+		${Latitude:isEmpty():not()}):and(
+			${Longitude:isEmpty():not()}):and(
+				${Vehicle_ID:isEmpty():not()}):and(
+					${Vehicle_Speed:equals('0'):not()}
+)}
+
+~~~
 **Filter_Attributes** uses the FlowFile Attribute key values obtained from XPath Expressions to filter out any FlowFiles that either have at least one empty Attribute value or the speed attribute value equals 0. Else the FlowFiles are passed to the remaining processors.
 
 4\. Open the processor config **Settings** tab, change the name from RouteOnAttribute to `ValidateNextBusData`. under Auto terminate relationships, check the **unmatched** checkbox. Click **Apply**.
@@ -191,6 +203,12 @@ Validate Transit Data for empty values`.
 |:---|---:|
 | `ValidateGooglePlacesData`  | `${city:isEmpty():not():and(${neighborhoods_nearby:isEmpty():not()})}`  |
 
+~~~
+Note: If after completing step 2 your processor shows a triangle with an exclamation mark stating that the **ValidateGooglePLacesData** is invalid, copy and paste into the value section of the property tab.
+
+${city:isEmpty():not():and(
+	${neighborhoods_nearby:isEmpty():not()})}
+~~~
 **ValidateGooglePlacesData** uses the FlowFile Attribute values obtained from JSON Path Expressions to filter out any FlowFiles that have at least one empty Attribute value. Else the FlowFiles are passed to the remaining processors.
 
 3\. Navigate to the **Settings** tab, change the name from RouteOnAttribute to `ValidateGooglePlacesData`. Under Auto terminate relationships check the **unmatched** checkbox. Click **Apply** button.
@@ -199,11 +217,11 @@ Validate Transit Data for empty values`.
 
 1\. Add the **Output Port** ![output_port](assets/tutorial-5-build-a-nifi-process-group-to-validate-the-geoenriched-data/output_port.png) component onto the NiFi canvas. Name it `SendGeoEnrichedTranistEvents`.
 
-2\. Connect **ValidateGooglePlacesData** to **SendGeoEnrichedTranistEvents** output port. When the Create Connection window appears, verify **ValidateGooglePlacesData** checkbox is checked, if not check it. Click Add.
+2\. Connect **ValidateGooglePlacesData** to **SendGeoEnrichedTransitEvents** output port. When the Create Connection window appears, verify **ValidateGooglePlacesData** checkbox is checked, if not check it. Click Add.
 
 ![ParseTransitEvents_dataflow_pg](assets/tutorial-5-build-a-nifi-process-group-to-validate-the-geoenriched-data/RouteOnAttribute_to_SendGeoEnrichedTranistEvents.png)
 
-**Figure 5:** Connect **ValidateGooglePlacesData** to **SendGeoEnrichedTranistEvents**
+**Figure 5:** Connect **ValidateGooglePlacesData** to **SendGeoEnrichedTransitEvents**
 
 ### Step 9: Connect ParseTransitEvents to ValidateGeoEnrichedTransitData
 
