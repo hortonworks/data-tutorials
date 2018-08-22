@@ -73,6 +73,7 @@ val spark = SparkSession
       .getOrCreate()
 ```
 
+
 Spark 2.0 also introduced a new API for streaming called Structured Streaming. One advantage of  Structured Streaming versus the older streaming API is for its ability to send incremental updates to its output data stores. For example, suppose we wanted to stream in tweets and record the average sentiment for each word for every five minute window. In previous versions of Spark Streaming it's possible to build a rolling aggregate for each word and send these to an external data store, like HBase or MySQL. However, if a tweet arrives late there was no way for Spark to update the aggregates sent to the data store. With Structured Streaming Spark can be setup to remember the aggregates for some time after they've been sent, and if late data arrives, it can retrieve the aggregate and send an update to the external data store.
 
 Loading our model from HDFS is done in one line:
