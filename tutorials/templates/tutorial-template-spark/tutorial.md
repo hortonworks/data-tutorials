@@ -36,6 +36,7 @@ Ine thing that all of these tutorials will have in common are these two prerequi
 - [Concepts](#concepts)
 - [Section Title 1](#section-title-1)
 - [Section Title 2](#section-title-2)
+- [Import the Zeppelin Notebook](#import-the-zeppelin-notebook)
 - [Summary](#summary)
 - [Further Reading](#further-reading)
 - [Appendix A: Troubleshoot](#appendix-a-troubleshoot)

@@ -364,7 +364,7 @@ Finally, let's map data read from *people.json* to a *Person* class. The mapping
 
 ~~~ bash
 val path = "/tmp/people.json"
-val people = spark.read.json(path).as[Person] // Creates a DataFrame
+val people = spark.read.json(path).as[Person] // Creates a DataSet
 ~~~
 
 To view contents of people DataFrame type:
