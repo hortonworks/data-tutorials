@@ -1,18 +1,17 @@
 ---
 title: Analyze Transit Patterns with Apache NiFi
-author: James Medel
+author: sandbox-team
 tutorial-id: 640
 experience: Intermediate
 persona: Data Scientist & Analyst
 source: Hortonworks
 use case: Flow Management
 technology: Apache NiFi
-release: hdf-3.1.0
+release: hdf-3.1.1
 environment: Sandbox
 product: HDF
 series: HDF > Develop Data Flow & Streaming Applications > Real World Examples
 ---
-
 
 # Analyze Transit Patterns with Apache NiFi
 
@@ -27,6 +26,7 @@ For the purposes of this tutorial, assume that a city planning board is evaluati
 The goal of this tutorial is to provide you with an opportunity to interact with Apache NiFi features while building a dataflow. You do not need programming experience or flow-based programming syntax and feature knowledge to successfully complete this tutorial.
 
 The learning objectives of this tutorial are to:
+
 - Understand Apache NiFi fundamentals
 - Introduce NiFi’s HTML user interface
 - Introduce NiFi processor configuration, relationships, data provenance, and documentation
@@ -37,8 +37,7 @@ The learning objectives of this tutorial are to:
 
 ## Prerequisites
 
-- Downloaded [Hortonworks DataFlow (HDF) Sandbox](https://hortonworks.com/products/sandbox/) for VMware, VirtualBox or Native Docker
-- [Installed and Deployed HDF Sandbox](https://hortonworks.com/tutorial/sandbox-deployment-and-install-guide/) for VMWare, VirtualBox or Native Docker
+- Downloaded and Installed the [Hortonworks DataFlow (HDF) Sandbox](https://hortonworks.com/products/sandbox/)
 - For Windows 10 users, use [Ubuntu bash shell](https://www.windowscentral.com/how-install-bash-shell-command-line-windows-10) or Sandbox Web Shell Client
 
 ## Outline

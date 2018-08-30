@@ -13,7 +13,8 @@ You will build a NiFi DataFlow and package it into a process group to simulate t
 **Figure 1:** Here is a visualization of the transit data you will be ingesting into NiFi.
 
 ## Prerequisites
--   Completed the prior tutorials within this tutorial series
+
+- Completed the prior tutorials within this tutorial series
 
 ## Outline
 
@@ -236,7 +237,7 @@ If you prefer to build the dataflow manually step-by-step, continue on to **Appr
 
 ![web_shell_client](assets/tutorial-3-build-a-nifi-process-group-to-simulate-nextbus-api/web_shell_client.jpg)
 
-You have now ssh'd into the HDF Sandbox Server.
+You have now SSH'd into the HDF Sandbox Server.
 
 4\. Navigate to the output directory in which the transit data is being written to:
 

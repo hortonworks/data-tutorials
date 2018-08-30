@@ -9,7 +9,8 @@ title: Integrate NextBus API To Pull In Transit Live Feed
 You will learn to perform **rest calls** against the **NextBus API** to retrieve transit data. You will replace the SimulateXmlTransitEvents Process Group data seed with a new processor that pulls in live stream data from **San Francisco Muni Agency** on route **OceanView** into the NiFi DataFlow.
 
 ## Prerequisites
--   Completed the prior tutorials within this tutorial series
+
+- Completed the prior tutorials within this tutorial series
 
 ## Outline
 
@@ -35,7 +36,7 @@ NextBus Live Feed provides the public with live information regarding passenger 
 
 After viewing the Live Feed Documentation, we created the following URL for the GetHTTP processor:
 
-~~~
+~~~text
 http://webservices.nextbus.com/service/publicXMLFeed?command=vehicleLocations&a=sf-muni&r=M&t=0
 ~~~
 
@@ -77,7 +78,7 @@ You will replace the **SimulateXmlTransitEvents** Process Group with **GetHTTP**
 **Table 1:** Update GetHTTP Properties Tab
 
 | Property  | Value  |
-|:---|---:|
+|:---|:---|
 | `URL`  | `http://webservices.nextbus.com/service/publicXMLFeed?command=vehicleLocations&a=sf-muni&r=M&t=0` |
 | `Filename`  | `live_transit_data_${now():format("HHmmssSSS")}.xml` |
 
@@ -94,7 +95,7 @@ You will change the directory PutFile writes data to since data is coming in fro
 **Table 2:** Update PutFile Properties Tab
 
 | Property  | Value  |
-|:---|---:|
+|:---|:---|
 | `Directory`  | `/sandbox/tutorial-files/640/nifi/output/live_transit_data` |
 
 **Directory** is changed to a new location for the real-time data coming in from NextBus live stream.
@@ -109,7 +110,7 @@ Now that we added NextBus San Francisco Muni Live Stream Ingestion to our datafl
 
 ![live_stream_ingestion_flow](assets/tutorial-7-integrate-nextbus-api-to-pull-in-transit-live-feed/live_stream_ingestion_flow.png)
 
-2\. Let's verify the data sent to the output directory is correct. Open the Data Provenance for the **PutFile** processor located in **StoreDataAsJSONToDisk** PG. Select **Provenance Event** and **View** its content.
+2\. Let's verify the data sent to the output directory is correct. Open the Data Provenance for the **PutFile** processor located in **StoreDataAsJSONToDisk** PG. Select **View Data Provenance** and **View** its content.
 
 Did you receive neighborhoods similar to the image below?
 
@@ -119,9 +120,9 @@ Did you receive neighborhoods similar to the image below?
 
 Back pressure allows us to specify the amount of data allowed to exist in the queue before the component that is the source of connection is no longer scheduled to run.
 
-For example, let's see what happens when **GetHTTP** processor runs at the fastest possible rate it can execute tasks.
+For example, let's see what happens when **IngestNextBusXMLData** processor runs at the fastest possible rate it can execute tasks.
 
-1\. Configure **GetHTTP** under **Scheduling** tab, change **Run Schedule = 0**.
+1\. Configure **IngestNextBusXMLData** under **Scheduling** tab, change **Run Schedule = 0**.
 
 ![update_gethttp_scheduling](assets/tutorial-7-integrate-nextbus-api-to-pull-in-transit-live-feed/update_gethttp_scheduling.jpg)
 

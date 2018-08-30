@@ -9,7 +9,8 @@ title: Build a NiFi Process Group to Parse Transit Events
 You will learn to build a portion of the NiFi DataFlow in a process group to parse data using `XPath Expression Language`for **timestamp, vehicle location, speed, vehicle ID** and **other data** from the **San Francisco Muni Transit Simulator**.
 
 ## Prerequisites
--   Completed the prior tutorials within this tutorial series
+
+- Completed the prior tutorials within this tutorial series
 
 ## Outline
 

@@ -6,19 +6,20 @@ title: Launch NiFi HTML UI
 
 ## Introduction
 
-With the Hortonworks DataFlow (HDF) Sandbox, Apache NiFi comes preinstalled in the Ambari Stack and preconfigured out of the box to utilize many of its features. In the tutorial, it shows you how to access the NiFi HTML UI in one of two ways: use the HDF Splash Screen Page "Advanced Quick Links" or Ambari UI "Quick Links".
+With the Hortonworks DataFlow (HDF) Sandbox, Apache NiFi comes pre-installed in the Ambari Stack and pre-configured out of the box to utilize many of its features. In the tutorial, it shows you how to access the NiFi HTML UI in one of two ways: use the HDF Splash Screen Page "Advanced Quick Links" or Ambari UI "Quick Links".
 
 ## Prerequisites
--   Completed the prior tutorials within this tutorial series
--   Downloaded [HDF Sandbox](https://hortonworks.com/products/sandbox/) for VMWare, VirtualBox or Native Docker
--   [Installed and Deployed HDF Sandbox](https://hortonworks.com/tutorial/sandbox-deployment-and-install-guide/) for VMWare, VirtualBox or Native Docker
--   Added HDF Sandbox Hostname to Your Hosts File, refer to [Learning the Ropes of the HDF sandbox](https://hortonworks.com/tutorial/getting-started-with-hdf-sandbox/)
+
+- Completed the prior tutorials within this tutorial series
+- Downloaded and Installed the [Hortonworks DataFlow (HDF) Sandbox](https://hortonworks.com/products/sandbox/)
+- Added HDF Sandbox Hostname to Your Hosts File, refer to [Learning the Ropes of the HDF sandbox](https://hortonworks.com/tutorial/getting-started-with-hdf-sandbox/)
 
 ## Outline
--   [Step 1: Open HDF Splash Page](#step-1-open-hdf-splash-page)
--   [Approach 1: Access NiFi HTML UI via Ambari Dashboard](#approach-1-access-nifi-html-ui-via-ambari-dashboard)
--   [Approach 2: Launch NiFi HTML UI from HDF Splash Quick Links](#approach-2-launch-nifi-html-ui-from-hdf-splash-quick-links)
--   [Summary](#summary)
+
+- [Step 1: Open HDF Splash Page](#step-1-open-hdf-splash-page)
+- [Approach 1: Access NiFi HTML UI via Ambari Dashboard](#approach-1-access-nifi-html-ui-via-ambari-dashboard)
+- [Approach 2: Launch NiFi HTML UI from HDF Splash Quick Links](#approach-2-launch-nifi-html-ui-from-hdf-splash-quick-links)
+- [Summary](#summary)
 
 > Note: For VMware users, you will need to add the auto generated IP address on startup of your virtual machine followed by HDF Sandbox hostname to your hosts file, example `192.168.17.129 sandbox-hdf.hortonworks.com`. On MAC, open `/private/etc/hosts`; LINUX, open `/etc/hosts`; WINDOWS 10, open `C:\Windows\System32\drivers\etc\hosts` as an administrator.
 

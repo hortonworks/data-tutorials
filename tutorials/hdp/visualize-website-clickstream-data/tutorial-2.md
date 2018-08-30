@@ -8,20 +8,17 @@ title: Visualize Log Data with Microsoft Excel
 
 In this section, we will use Microsoft Excel to access refined clickstream data.
 
-
 ## Prerequisites
 
--   Have installed the [Hortonworks ODBC driver for Apache Hive](https://hortonworks.com/downloads/#addons) (check [the driver documentation](https://hortonworks.com/wp-content/uploads/2016/08/Hortonworks-Hive-ODBC-Driver-User-Guide.pdf) for help with installation)
--   Have sample retail data already loaded [by completing this tutorial](https://hortonworks.com/tutorial/loading-data-into-the-hortonworks-sandbox)
--   Have a version of Excel with Power View (i.e. Excel 2013), which is currently only offered for Windows computers.
-
+- Have installed the [Hortonworks ODBC driver for Apache Hive](https://hortonworks.com/downloads/#addons) (check [Getting Started with HDP Tutorial](https://hortonworks.com/tutorial/hadoop-tutorial-getting-started-with-hdp/section/7/) for help with installation)
+- Have sample retail data already loaded [by completing this tutorial](https://hortonworks.com/tutorial/loading-data-into-the-hortonworks-sandbox)
+- Have a version of Excel with Power View (i.e. Excel 2013), which is currently only offered for Windows computers.
 
 ## Outline
 
--   [Import Data From Apache Hive](#import-data-from-apache-hive)
--   [Visualize Data Using Power View](#visualize-data-using-power-view)
--   [Summary](#summary)
-
+- [Import Data From Apache Hive](#import-data-from-apache-hive)
+- [Visualize Data Using Power View](#visualize-data-using-power-view)
+- [Summary](#summary)
 
 ## Import Data From Apache Hive
 
@@ -59,16 +56,15 @@ The imported query data appears in the Excel workbook.
 
 Now that we have successfully imported Hortonworks Sandbox data into Microsoft Excel, we can use Excel's Power View feature to analyze and visualize the data.
 
-
 ## Visualize Data Using Power View
 
 Data visualization can help you optimize your website and convert more visits into sales and revenue. In this section we will:
 
--   Analyze the clickstream data by location
--   Filter the data by product category
--   Graph the website user data by age and gender
--   Pick a target customer segment
--   Identify web pages with the highest bounce rates
+- Analyze the clickstream data by location
+- Filter the data by product category
+- Graph the website user data by age and gender
+- Pick a target customer segment
+- Identify web pages with the highest bounce rates
 
 In the Excel workbook with the imported webloganalytics data, select **Insert > Power View** to open a new Power View report.
 
@@ -116,9 +112,9 @@ Now let’s look at the clothing data by age and gender so we can optimize our c
 
 To set up the data, set the following fields and filters:
 
--   In the Power View Fields area, select **ip** and **age**. All of the other fields should be unselected.
--   Drag **category** from the Power View Fields area into the Filters area, then select the **clothing** checkbox.
--   Drag **gender** from the Power View Fields area into the Filters area, then select the **M** (male) checkbox.
+- In the Power View Fields area, select **ip** and **age**. All of the other fields should be unselected.
+- Drag **category** from the Power View Fields area into the Filters area, then select the **clothing** checkbox.
+- Drag **gender** from the Power View Fields area into the Filters area, then select the **M** (male) checkbox.
 
 After setting these fields and filters, select **Column Chart > Clustered Column** in the top menu.
 
@@ -134,11 +130,11 @@ Let’s assume that our data includes information about website pages (URLs) wit
 
 To set up the data, set the following fields and filters:
 
--   Drag **age** from the Power View Fields area into the Filters area, then drag the sliders to set the age range from 22 to 30.
--   Drag **gender** from the Power View Fields area into the Filters area, then select the **M** (male) checkbox.
--   Drag **country** from the Power View Fields area into the Filters area, then select the **usa** checkbox.
--   In the Power View Fields area, select **url**. All of the other fields should be unselected.
--   In the Power View Fields area, move the pointer over **url**, click the down-arrow, and then select **Add to Table as Count.**
+- Drag **age** from the Power View Fields area into the Filters area, then drag the sliders to set the age range from 22 to 30.
+- Drag **gender** from the Power View Fields area into the Filters area, then select the **M** (male) checkbox.
+- Drag **country** from the Power View Fields area into the Filters area, then select the **usa** checkbox.
+- In the Power View Fields area, select **url**. All of the other fields should be unselected.
+- In the Power View Fields area, move the pointer over **url**, click the down-arrow, and then select **Add to Table as Count.**
 
 After setting these fields and filters, select **Column Chart > Clustered Column** in the top menu.
 
@@ -151,7 +147,6 @@ The chart shows that we should focus on optimizing four of our website pages for
 You can use the controls in the upper left corner of the map to sort by Count of URL in ascending order.
 
 ![URLs for Age Group Sorted](assets/excel-urls-for-age-group-sorted.jpg)
-
 
 ## Summary
 

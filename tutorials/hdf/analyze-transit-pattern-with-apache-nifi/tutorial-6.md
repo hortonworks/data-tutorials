@@ -9,11 +9,12 @@ title: Build a NiFi Process Group to Store Data As JSON
 You will build a new process group called **StoreTransitEventsAsJSONToDisk** to take the FlowFile attributes, write them to a new FlowFile's content as JSON representation. You will then store these FlowFiles to the local filesystem.
 
 ## Prerequisites
--   Completed the prior tutorials within this tutorial series
+
+- Completed the prior tutorials within this tutorial series
 
 ## Outline
 
-- [Approach 1: Manually Build StoreTransitEventsAsJSONToDisk Process Group (PG) ](#approach-1-manually-build-storetransiteventsasjsontodisk-process-group-pg)
+- [Approach 1: Manually Build StoreTransitEventsAsJSONToDisk Process Group (PG)](#approach-1-manually-build-storetransiteventsasjsontodisk-process-group-pg)
 - [Step 1: Create Process Group and Label For It](#step-1-create-process-group-and-label-for-it)
 - [Step 2: Add an Input Port to Ingest Data Into this PG](#step-2-add-an-input-port-to-ingest-data-into-this-pg)
 - [Step 3: Add AttributesToJSON to Represent FlowFile Attributes As JSON](#step-3-add-attributestojson-to-represent-flowfile-attributes-as-json)
@@ -23,7 +24,7 @@ You will build a new process group called **StoreTransitEventsAsJSONToDisk** to 
 - [Step 7: Connect ValidateGeoEnrichedTransitData to StoreDataAsJSONToDisk](#step-7-connect-validategeoenrichedtransitdata-to-storedataasjsontodisk)
 - [Step 8: Run the NiFi DataFlow](#step-8-run-the-nifi-dataflow)
 - [Step 9: Check Data By NiFi's Data Provenance](#step-9-check-data-by-nifis-data-provenance)
-- [Approach 2: Import StoreTransitEventsAsJSONToDisk Process Group](#approach-2-storetransiteventasjsontodisk-process-group)
+- [Approach 2: Import StoreTransitEventsAsJSONToDisk Process Group](#approach-2-import-storetransiteventasjsontodisk-process-group)
 - [Summary](#summary)
 
 If you prefer to build the dataflow manually step-by-step, continue on to [Approach 1](#approach-1-manually-build-storetransiteventsasjsontodisk-process-group-pg). Else if you want to see the NiFi flow in action within minutes, refer to [Approach 2](#approach-2-storetransiteventasjsontodisk-process-group).
@@ -172,7 +173,7 @@ If you prefer to build the dataflow manually step-by-step, continue on to [Appro
 
 ### Step 9: Check Data By NiFi's Data Provenance
 
-1\. Before we go see **PutFile**, we must double-click on **StoreDataAsJSONToDisk**. Right click on the PutFile processor. Select `Data Provenance`.
+1\. Before we go see **PutFile**, we must double-click on **StoreDataAsJSONToDisk**. Right click on the PutFile processor. Select `View Data Provenance`.
 
 NiFi searches for provenance events. The window will load with events, select any event. An event is a FlowFile that passes through a processor and the data that is viewable at that particular time.
 
