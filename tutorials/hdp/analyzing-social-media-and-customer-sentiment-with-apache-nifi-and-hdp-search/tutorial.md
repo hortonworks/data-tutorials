@@ -217,9 +217,7 @@ service ntpd start
 
 If the PutHDFS processor reports an LZOCodec error, you need to open the HDFS configuration tab in Ambari and delete all references to LZOCodec. Restarting HDFS and NiFi after making these changes should fix this issue. The potential issues that may come up after running the NiFi flow have been prevented, so let's bring in the NiFi flow.
 
-The first thing you'll need to do here is download the NiFi data flow template for the [Twitter Dashboard here](https://raw.githubusercontent.com/hortonworks/data-tutorials/master/tutorials/hdp/analyzing-social-media-and-customer-sentiment-with-apache-nifi-and-hdp-search/assets/Twitter_JSON_Flow.xml)
-
-Then you'll need to import the template you just downloaded into NiFi.
+The first thing you'll need to do here is download the NiFi dataflow template for the [Twitter Dashboard here](https://raw.githubusercontent.com/hortonworks/data-tutorials/master/tutorials/hdp/analyzing-social-media-and-customer-sentiment-with-apache-nifi-and-hdp-search/assets/Twitter_JSON_Flow.xml)
 
 Import the template by clicking `Templates` icon in the right of the Operate box.
 
