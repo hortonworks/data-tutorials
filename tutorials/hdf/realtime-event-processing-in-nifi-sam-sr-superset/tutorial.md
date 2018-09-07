@@ -1,6 +1,6 @@
 ---
 title: Real-Time Event Processing In NiFi, SAM, Schema Registry and SuperSet
-author: James Medel
+author: sandbox-team
 tutorial-id: 830
 experience: Advanced
 persona: Data Scientist & Analyst
@@ -257,15 +257,30 @@ http://sandbox-hdp.hortonworks.com:8080/api/v1/clusters/Sandbox
 ~~~
 
 and then click AUTO ADD.
-> Note: Use the credentials `raj_ops/raj_ops` to sign in.
 
-You should now see services from the HDP Sandbox on the Service Pool Dashboard to the right of the HDF Sandbox Service Pool. We have now shared the web address of where SAM can find the services for the HDP Ambari Stack.
+2\. There will be a popup screen asking for username/password as seen below:
+
+![service_pool_credentials](assets/images/service_pool_credentials.jpg)
+
+Use your **admin** credentials to sign in.
+
+**Table 1**: Ambari Login credentials
+
+| Username | Password |
+|:---:|:---:|
+| admin | **setup process |
+
+> [Setup Ambari Admin Password Manually](https://hortonworks.com/tutorial/learning-the-ropes-of-the-hortonworks-sandbox/#admin-password-reset)
+
+You should now see services from the HDP Sandbox on the  SAM Service Pool Dashboard to the right of the HDF Sandbox Service Pool. We have now shared the web address of where SAM can find the services for the HDP Ambari Stack as seen on the image below:
+
+![hdp_sandbox_service_pool](assets/images/hdp_sandbox_service_pool.jpg)
 
 ### Create a multi-node Environment
 
 With SAM environments, we can select the services that we want our SAM application to have access to. So, we will add the necessary services from HDF and HDP Service Pools and create a multi-node environment from those services.
 
-1\. Head to the Configuration dropdown, select **Environment**.
+1\. Head to the Configuration dropdown, select **Environments**.
 
 Click on the green plus symbol to create a new environment, add the following:
 
@@ -276,14 +291,18 @@ DESCRIPTION: HDF and HDP Services Selected for CDA
 
 SELECT SERVICES:
 
-HDF on the Right Side:
+HDF:
 
 KAFKA, STORM, ZOOKEEPER
 
-HDP on the Left Side:
+HDP:
 
 DRUID, HBASE, HDFS, HIVE
 ~~~
+
+The configurations should look like this:
+
+![create_multi_node_environment](assets/images/create_multi_node_environment.jpg)
 
 Now that these configurations are complete, we are ready to import and run our SAM topology for CDA.
 

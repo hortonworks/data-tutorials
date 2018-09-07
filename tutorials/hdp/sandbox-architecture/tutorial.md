@@ -17,7 +17,7 @@ series: HDP > Hadoop Administration > Hortonworks Sandbox
 
 ## Introduction
 
-This tutorial will explain the current Hortonworks Sandbox architecture, starting in HDP 2.6.5 a new Sandbox structure is introduced making it possible to instantiate two single node clusters (i.e. HDP and HDF) within a single Sandbox with the purpose of combining the best features of the Data-At-Rest and Data-In-Motion methodologies in a single environment. Have a look at the graphical representation of the Sandbox below, it shows where the Sandbox exists in relation to the outside world, the instance depicted is of the Connected Data Architecure (CDA) if you are not yet familiarized with the concept of CDA do not worry, we will review it at a later section.
+This tutorial will explain the current Hortonworks Sandbox architecture, starting in HDP 2.6.5 a new Sandbox structure is introduced making it possible to instantiate two single node clusters (i.e. HDP and HDF) within a single Sandbox with the purpose of combining the best features of the Data-At-Rest and Data-In-Motion methodologies in a single environment. Have a look at the graphical representation of the Sandbox below, it shows where the Sandbox exists in relation to the outside world, the instance depicted is of the Connected Data Architecture (CDA) if you are not yet familiarized with the concept of CDA do not worry, we will review it at a later section.
 
 ![cda-architecture](assets/cda-architecture.jpg)
 
@@ -92,7 +92,7 @@ If you would like to visualize the running Sandbox container and proxy you you m
 
 ### Native Docker Sandbox
 
-The Sandbox may also run using Docker which is native to the host operating system; for example, rather than running a VM to instantiate the containers you may directly interact with the docker daemon. In the Docker architecure for the Sandbox you directly interact with Docker environment as your native operating system is the host for the Sandboxes.
+The Sandbox may also run using Docker which is native to the host operating system; for example, rather than running a VM to instantiate the containers you may directly interact with the docker daemon. In the Docker architecture for the Sandbox you directly interact with Docker environment as your native operating system is the host for the Sandboxes.
 
 If you are using VMWare or VirtualBox you may log on to both the Sandbox or the host, here is a complete list of the TCP open ports for SSH services:
 
