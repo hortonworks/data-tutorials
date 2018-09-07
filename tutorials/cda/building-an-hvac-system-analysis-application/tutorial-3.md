@@ -38,10 +38,11 @@ bash nifi-auto-deploy.sh
 
 Open HDF **NiFi UI** at `http://sandbox-hdf.hortonworks.com:9090/nifi`.
 
+You will see the NiFi template was uploaded, imported and started.
+
 ![started_acquirehvacdata_pg](assets/images/started_hvac_flow.jpg)
 
-You will see the NiFi template was uploaded, imported and started.
-To learn more about the script, check out the appendix A.
+Once NiFi writes your sensor data to HDFS, which you can check quickly by looking at the PutHDFS processors inside the process group, you can turn off the process group by holding **control + mouse click** on the **AcquireHVACData** process group, then choose **stop** option.
 
 ## Approach 2: Import NiFi Flow via UI
 
@@ -64,6 +65,8 @@ Add Template called **acquire-hvac-data**.
 Start the NiFi flow. Hold **control + mouse click** on the **AcquireHVACData** process group, then click the **start** option.
 
 ![started_acquirehvacdata_pg](assets/images/started_hvac_flow.jpg)
+
+Once NiFi writes your sensor data to HDFS, which you can check quickly by looking at the PutHDFS processors inside the process group, you can turn off the process group by holding **control + mouse click** on the **AcquireHVACData** process group, then choose **stop** option.
 
 ## Approach 3: Build a NiFi AcquireHVACData Process Group
 
