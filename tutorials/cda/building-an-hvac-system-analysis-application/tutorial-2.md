@@ -40,15 +40,6 @@ wget [setup-hdp.sh](application/setup/shell/setup-hdp.sh)
 bash setup-hdp.sh
 ~~~
 
-**Option 2:**
-
-On Native Docker running on mac or linux:
-
-~~~bash
-wget [setup.sh](application/setup/shell/setup.sh)
-bash setup.sh
-~~~
-
 Once the script finishes, you are now ready to move onto the next phase of development (the next tutorial), acquiring the data using NiFi.
 
 ## Approach 2: Manually Setup Development Platforms via CLI
