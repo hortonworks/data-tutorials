@@ -397,7 +397,7 @@ Store hvac_building and hvac_temperature data to HDFS</description>
                             </entry>
                             <entry>
 <key>Directory</key>
-<value>/sandbox/sensor/hvac_tempature</value>
+<value>/sandbox/sensor/hvac_temperature</value>
                             </entry>
                             <entry>
 <key>Conflict Resolution Strategy</key>
