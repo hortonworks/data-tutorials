@@ -45,7 +45,7 @@ Sometimes, it's a good idea to include a concepts section to go over core concep
 - The section can be used as a reference for terminology brought up throughout the tutorial.
 - By the way, this is an example of a list.  Feel free to copy/paste this for your own use.
 - Use a single space for lists, not tabs.
-  - Also, a sublist.
+  - Also, a sub-list.
 
 ## Section Title 1
 
