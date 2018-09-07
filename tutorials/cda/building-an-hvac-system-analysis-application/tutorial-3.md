@@ -31,17 +31,17 @@ You have been brought onto the project as a Data Engineer with the following res
 
 Open HDF **sandbox web shell client** at `http://sandbox-hdf.hortonworks.com:4200/` with login `root/hadoop`.
 
-Extract the **Process Group ID** in the **Operate Panel**:
-
-![process_group_id](assets/images/process_group_id.jpg)
-
-For example, `Process Group ID="90e748c3-015a-1000-f68d-292036f42e8f"`. Your ID maybe different, you will need it to run the script.
-
 ~~~bash
-PROCESS_GROUP_ID="<your-process-group-id>"
-wget [nifi-auto-deploy.sh](application/development/shell/nifi-auto-deploy.sh)
-bash nifi-auto-deploy.sh $PROCESS_GROUP_ID
+wget https://raw.githubusercontent.com/james94/data-tutorials/master/tutorials/cda/building-an-hvac-system-analysis-application/application/development/shell/nifi-auto-deploy.sh
+bash nifi-auto-deploy.sh
 ~~~
+
+Open HDF **NiFi UI** at `http://sandbox-hdf.hortonworks.com:9090/nifi`.
+
+![started_acquirehvacdata_pg](/assets/images/started_acquirehvacdata_pg.jpg)
+
+You will see the NiFi template was uploaded, imported and started.
+To learn more about the script, check out the appendix A.
 
 ## Approach 2: Import NiFi Flow via UI
 
