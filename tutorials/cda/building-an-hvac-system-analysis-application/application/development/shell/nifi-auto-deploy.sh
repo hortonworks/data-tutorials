@@ -19,7 +19,8 @@ HDF="hdf-sandbox"
 mkdir -p /sandbox/tutorial-files/310/nifi/templates/
 
 # Download NiFi Flow Template
-wget [acquire-hvac-data.xml](application/development/nifi-template/acquire-hvac-data.xml)
+wget https://raw.githubusercontent.com/james94/data-tutorials/master/tutorials/cda/building-an-hvac-system-analysis-application/application/development/nifi-template/acquire-hvac-data.xml \
+-O /sandbox/tutorial-files/310/nifi/templates/acquire-hvac-data.xml
 # Upload and Import NiFi Template
 # Ref: https://community.hortonworks.com/questions/154138/in-apache-nifi-rest-api-what-is-difference-between.html
 # From NiFi Canvas, Store Process ID
