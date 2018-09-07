@@ -28,7 +28,7 @@ following operations to setup the services needed for application development:
 Open the HDF sandbox web shell client at `http://sandbox-hdf.hortonworks.com:4200` with login `root/hadoop`.
 
 ~~~bash
-wget [setup-hdf.sh](application/setup/shell/setup-hdf.sh)
+wget https://raw.githubusercontent.com/james94/data-tutorials/master/tutorials/cda/building-an-hvac-system-analysis-application/application/setup/shell/setup-hdf.sh
 bash setup-hdf.sh
 ~~~
 
