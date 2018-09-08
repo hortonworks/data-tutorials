@@ -16,7 +16,11 @@ HDP_CLUSTER_NAME="Sandbox"
 HDP_HOST="sandbox-hdp.hortonworks.com"
 AMBARI_CREDENTIALS=$HDP_AMBARI_USER:$HDP_AMBARI_PASS
 
-echo "Setting up HDP Sandbox Environment for Spark Data Analysis..."
+echo "Setting up HDP Sandbox Development Environment"
+
+# Updating the permissions on the directory to prevent issue from occurring
+# when trying to access the directory
+-u hdfs hdfs dfs -chmod -R 777 /tmp
 
 # TODO: Check that service exists
 echo "Turning off Spark's maintenance mode via Ambari"
