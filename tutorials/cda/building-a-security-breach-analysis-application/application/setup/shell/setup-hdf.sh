@@ -58,7 +58,7 @@ function wait()
 echo "Setting up HDF Sandbox Environment for NiFi flow development..."
 echo "Downloading GeoLite DB for NiFi"
 GEODB_NIFI_DIR="/sandbox/tutorial-files/200/nifi"
-mkdir -p $GEODB_NIFI_DIR/input/GeoFile $GEODB_NIFI_DIR/templates
+mkdir -p $GEODB_NIFI_DIR/input/GeoFile
 chmod 777 -R $GEODB_NIFI_DIR
 wget http://geolite.maxmind.com/download/geoip/database/GeoLite2-City.tar.gz \
 -O $GEODB_NIFI_DIR/input/GeoFile/GeoLite2-City.tar.gz
@@ -73,11 +73,9 @@ wait $HDF NIFI "INSTALLED"
 
 echo "Existing flow on NiFi canvas backed up to flow.xml.gz.bak"
 mv /var/lib/nifi/conf/flow.xml.gz /var/lib/nifi/conf/flow.xml.gz.bak
-echo "Downloading NiFi WebServerLogs.xml Template and Importing NiFi flow"
+echo "Downloading NiFi WebServerLogs.xml Template"
 wget https://raw.githubusercontent.com/hortonworks/data-tutorials/cf9f67737c3f1677b595673fc685670b44d9890f/tutorials/hdp/hdp-2.5/refine-and-visualize-server-log-data/assets/WebServerLogs.xml \
 -O $GEODB_NIFI_DIR/templates/WebServerLogs.xml
-gzip $GEODB_NIFI_DIR/templates/WebServerLogs.xml
-cp -f $GEODB_NIFI_DIR/templates/WebServerLogs.xml.gz /var/lib/nifi/conf/flow.xml.gz
 
 echo "Starting NiFi via Ambari"
 curl -u $AMBARI_CREDENTIALS -H "X-Requested-By: ambari" -X PUT -d '{"RequestInfo":
