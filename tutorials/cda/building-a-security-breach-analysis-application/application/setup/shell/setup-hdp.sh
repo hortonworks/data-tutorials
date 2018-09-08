@@ -9,16 +9,18 @@
 # Setup Spark Service on HDP Sandbox:
 # Turn off Spark's maintenance mode via Ambari
 
+HDP="hdp-sandbox"
 HDP_AMBARI_USER="raj_ops"
 HDP_AMBARI_PASS="raj_ops"
 HDP_CLUSTER_NAME="Sandbox"
 HDP_HOST="sandbox-hdp.hortonworks.com"
-HDP="hdp-sandbox"
+AMBARI_CREDENTIALS=$HDP_AMBARI_USER:$HDP_AMBARI_PASS
 
 echo "Setting up HDP Sandbox Environment for Spark Data Analysis..."
+
+# TODO: Check that service exists
 echo "Turning off Spark's maintenance mode via Ambari"
-AMBARI_CREDENTIALS=$HDP_AMBARI_USER:$HDP_AMBARI_PASS
 curl -k -u $AMBARI_CREDENTIALS -H "X-Requested-By:ambari" -i -X PUT -d \
 '{"RequestInfo": {"context":"Turn off Maintenance for SPARK"}, "Body":
 {"ServiceInfo": {"maintenance_state":"OFF"}}}' \
-http://$HDP_HOST:8080/api/v1/clusters/$HDP_CLUSTER_NAME/services/SPARK
+http://$HDP_HOST:8080/api/v1/clusters/$HDP_CLUSTER_NAME/services/SPARK2

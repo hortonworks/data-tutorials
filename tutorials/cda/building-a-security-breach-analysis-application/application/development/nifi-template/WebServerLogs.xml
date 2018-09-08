@@ -427,7 +427,7 @@
         <properties>
           <entry>
             <key>Geo Database File</key>
-            <value>/tmp/nifi/GeoFile/GeoLite2-City.mmdb</value>
+            <value>/sandbox/tutorial-files/200/nifi/input/GeoFile/GeoLite2-City_20180905/GeoLite2-City.mmdb</value>
           </entry>
           <entry>
             <key>IP Address Attribute</key>
