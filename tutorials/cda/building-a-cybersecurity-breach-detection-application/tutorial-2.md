@@ -26,8 +26,6 @@ wget https://raw.githubusercontent.com/james94/data-tutorials/master/tutorials/c
 bash setup-hdf.sh
 ~~~
 
-_Testing setup-hdf.sh_ - does it work?
-
 Open the HDP Sandbox Web Shell Client at `http://sandbox-hdp.hortonworks.com:4200` with login `root/hadoop`. After login, you will be prompted to change the password.
 
 - **Setup Spark**:
