@@ -15,13 +15,10 @@ HDF_CLUSTER_NAME="Sandbox"
 HDF_HOST="sandbox-hdf.hortonworks.com"
 HDF="hdf-sandbox"
 
-NIFI_TEMPLATE_PATH="/sandbox/tutorial-files/200/nifi/templates/WebServerLogs.xml"
-
-# Create sandbox directory path for HVAC NiFi template
-mkdir -p /sandbox/tutorial-files/200/nifi/templates/
+NIFI_TEMPLATE_PATH="/sandbox/tutorial-files/200/nifi/templates/AcquireNASAServerLogs.xml"
 
 # Download NiFi Flow Template
-wget https://raw.githubusercontent.com/james94/data-tutorials/master/tutorials/cda/building-a-security-breach-analysis-application/application/development/nifi-template/WebServerLogs.xml \
+wget https://raw.githubusercontent.com/james94/data-tutorials/master/tutorials/cda/building-a-cybersecurity-breach-detection-application/application/development/nifi-template/AcquireNASAServerLogs.xml \
 -O $NIFI_TEMPLATE_PATH
 
 # Searches for OLD GeoLite2-City.mmdb file path in NiFi template file, then replaces OLD path with NEW path
@@ -43,7 +40,7 @@ curl -iv -F template=@"$NIFI_TEMPLATE_PATH" -X POST http://$HDF_HOST:9090/nifi-a
 
 echo "Importing NiFi flow"
 # Uses grep to store HVAC Template Process Group ID into Variable
-TEMPLATE_ID=$(curl -s -X GET http://$HDF_HOST:9090/nifi-api/flow/templates | grep -Po "{\"uri\":\".*\/templates\/\K[0-9a-z_\-]*(?=.*WebServerLogs)")
+TEMPLATE_ID=$(curl -s -X GET http://$HDF_HOST:9090/nifi-api/flow/templates | grep -Po "{\"uri\":\".*\/templates\/\K[0-9a-z_\-]*(?=.*AcquireNASAServerLogs)")
 curl -i -X POST -H 'Content-Type:application/json' -d '{"originX": 2.0,"originY": 3.0,"templateId": "'$TEMPLATE_ID'"}' http://$HDF_HOST:9090/nifi-api/process-groups/$ROOT_PROCESS_GROUP_ID/template-instance
 
 echo "Starting the NiFi Process Group"
