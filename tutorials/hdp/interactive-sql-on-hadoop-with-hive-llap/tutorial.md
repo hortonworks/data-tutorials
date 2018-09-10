@@ -1,13 +1,13 @@
 ---
 title: Interactive SQL on Hadoop with Hive LLAP
-author: George Rueda de Leon
+author: tutorials-team
 tutorial-id: 720
 experience: Intermediate
 persona: Data Scientist & Analyst
 source: Hortonworks
 use case: EDW Optimization
 technology: Apache Ambari, Apache Hive, Tableau
-release: hdp-2.6.0
+release: hdp-2.6.5
 environment: Sandbox
 product: HDP
 series: HDP > Develop with Hadoop > Hello World, HDP > Develop with Hadoop > Apache Hive
@@ -35,10 +35,10 @@ The goal of this tutorial is to learn how to enable interactive SQL query perfor
 
 ## Prerequisites
 
--   This tutorial requires [HDP Sandbox](https://hortonworks.com/downloads/#sandbox).
+-   Downloaded and deployed the [Hortonworks Data Platform (HDP)](https://hortonworks.com/downloads/#sandbox) Sandbox
 -   Must have installed [Hortonworks ODBC Driver for Apache Hive](https://hortonworks.com/downloads/#addons)
--   Must have installed [Tableau](https://www.tableau.com/). For this tutorial, we’re using Tableau version 10.2.
--   This tutorial assumes you have a **16GB** memory (or more) computer and does its best to maximize available resources. Working on the sandbox is limited. If you’re looking to try Hive LLAP at big data scales, check out [Fast Analytics in the Cloud with Hive LLAP](https://hortonworks.com/tutorial/fast-analytics-in-the-cloud-with-hive-llap/).
+-   Must have installed [Tableau](https://www.tableau.com/). For this tutorial, we’re using Tableau version 2018.2.0 (20182.18.0627.2230) 64-bit on Mac.
+-   This tutorial assumes you have a computer with **16GB** memory (or more). Working on the sandbox is limited. If you’re looking to try Hive LLAP at big data scales, check out [Fast Analytics in the Cloud with Hive LLAP](https://hortonworks.com/tutorial/fast-analytics-in-the-cloud-with-hive-llap/).
 -   This tutorial requires making some configurations to the Sandbox and allocating additional resources. In order to run this tutorial you will need to be able to allocate **11 GB RAM** to the Sandbox virtual machine.
 -   If you are not familiar with HDP Sandbox, the following tutorial provides an introduction:
 [Learning the Ropes of the HDP Sandbox](https://hortonworks.com/tutorial/learning-the-ropes-of-the-hortonworks-sandbox/)
@@ -66,7 +66,7 @@ When you import the Sandbox in VirtualBox, change the Appliance settings to incr
 
 ### Enable Ambari Admin Login
 
-We need to change the Sandbox configuration using Ambari to enable LLAP. This requires us to first [reset Ambari admin password](https://hortonworks.com/tutorial/learning-the-ropes-of-the-hortonworks-sandbox/#setup-ambari-admin-password) and then logon.
+We need to change the Sandbox configuration using Ambari to enable LLAP. This requires us to first [reset Ambari admin password](https://hortonworks.com/tutorial/learning-the-ropes-of-the-hortonworks-sandbox/#admin-password-reset) and then logon.
 
 > NOTE: Confirm you can log into Ambari as **admin** before continuing.
 
@@ -74,7 +74,7 @@ We need to change the Sandbox configuration using Ambari to enable LLAP. This re
 
 The Sandbox ships with a few small tables, but to get a more substantial feel of LLAP we can generate a larger dataset. This part is optional and if you’re in a hurry you can skip it. For this demo we will generate 2 GB of data based on the standard TPC-H benchmark. To simplify things, all data generation and loading are handled by a single bundle you can download and run on your Sandbox.
 
-To get started, [log into the console](http://127.0.0.1:4200/), then follow these steps:
+To get started, login to [shell-in-a-box](http://sandbox-hdp.hortonworks.com:4200/), then follow these steps:
 
 1\. Log in to the console as root.
 
@@ -87,7 +87,7 @@ su - hive
 3\. Download the data generator bundle:
 
 ~~~
-wget  https://github.com/cartershanklin/sandbox-datagen/raw/master/datagen.tgz
+wget https://github.com/hortonworks/data-tutorials/raw/master/tutorials/hdp/interactive-sql-on-hadoop-with-hive-llap/assets/datagen.tgz
 ~~~
 
 4\. Extract the bundle:
@@ -112,13 +112,11 @@ This step will take up to a few minutes.
 
 ### Stop Services We Don’t Need
 
-Ambari enables a number of HDP services we don’t need to try Hive LLAP. Since LLAP relies heavily on caching and in-memory processing we will stop these to free memory to improve performance.
-
-When you first login you will see these services. If the services show up as yellow rather than green, wait a moment until you see green checkmarks next to these services.
+The HDP sandbox comes with many services enabled, some of which we do not need to try Hive LLAP. Since LLAP relies heavily on caching and in-memory processing, we will stop some services to free memory and improve performance.
 
 ![initial_services](assets/initial_services.png)
 
-To free up a bit more resources, let's stop the following services that are not needed for this tutorial:
+Login Ambari using **raj_ops** and stop the following services that are not needed for this tutorial:
 
 -   Oozie
 -   Flume
@@ -130,7 +128,7 @@ For every service (i.e. Oozie):
 
 ![service_actions](assets/service_actions.png)
 
-2\.  Select **Turn On Maintenance Mode** for the serice you are stopping.
+2\.  Select **Turn On Maintenance Mode** for the service you are stopping.
 
 ![final_services](assets/final_services.png)
 
@@ -138,7 +136,7 @@ For every service (i.e. Oozie):
 
 We need to make sure we have sufficient memory in **YARN** to take advantage of Hive LLAP in-memory processing.
 
--   select **YARN** -> **Configs** -> **Setings**
+-   select **YARN** -> **Configs** -> **Settings**
 -   set "Minimum Container Size (memory)" to **512 MB**
 -   set "Maximum Container Size (memory)" to **4096 MB**
 
@@ -148,11 +146,11 @@ We need to make sure we have sufficient memory in **YARN** to take advantage of 
 -   Confirm Dependent Configurations by pressing **OK**
 -   Confirm Configurations by pressing **Proceed Anyway**
 
-> Important: Must restart YARN before continuing. **Restart** -> **Restart All Affected**.
+> Important: Restart affected services before continuing. For example, YARN, **Restart** -> **Restart All Affected**.
 
 ### Enable and Configure Interactive Query (Hive LLAP)
 
-Enabling Hive LLAP is a simple and require the following modifications. Start with **Ambari** -> **Hive** -> **Configs** -> **Settings**:
+Enabling Hive LLAP is simple and require the following modifications. Start with **Ambari** -> **Hive** -> **Configs** -> **Settings**:
 
 1.  Set **Enable Interactive Query** to **Yes**
 2.  Set **ACID Transactions** to **On**
@@ -168,13 +166,13 @@ Enabling Hive LLAP is a simple and require the following modifications. Start wi
 
 ## 2. Connect with a BI Tool and Run Queries <a id="connect_with_bi_tool"></a>
 
-Now we’re ready to connect a BI Tool to LLAP and try things out. This demo will use Tableau. If you prefer another tool you should adapt these instructions to your choice.
+Now we’re ready to connect a BI Tool to LLAP and try things out. This demo will use Tableau. If you prefer another tool you should adopt these instructions to your choice.
 
 ### Download and Install the ODBC driver
 
 As a prerequisite, you should already have installed the latest [Hortonworks ODBC Driver for Apache Hive](https://hortonworks.com/downloads/#addons).
 
-If you are on Windows: Create a DSN using the ODBC Driver Manager and point it to host `127.0.0.1`, port 10500, use Username/Password authentication with the credentials `hive/hive`.
+If you are on Windows: Create a DSN using the ODBC Driver Manager and point it to host `sandbox-hdp.hortonworks.com`, port 10500, use Username/Password authentication with the credentials `hive/hive`.
 
 ![odbc_driver_setup](assets/odbc_driver_setup.png)
 
@@ -188,7 +186,7 @@ Start Tableau, connect “To a server” -> More Servers -> Hortonworks Hadoop H
 
 When prompted, connect using:
 
--   Server: **127.0.0.1**
+-   Server: **sandbox-hdp.hortonworks.com**
 -   Port: **10500**
 -   Type: **HiveServer2**
 -   Authentication: **User Name and Password**
@@ -196,7 +194,7 @@ When prompted, connect using:
 -   Username: **hive**
 -   Password: **hive**
 
-![hortonworks_hive_connection](assets/hortonworks_hive_connection.png)
+![hortonworks-hive-connection](assets/hortonworks-hive-connection.jpg)
 
 Next click `Select Schema` and click the magnifying glass to show available schema.
 
@@ -204,7 +202,7 @@ Next click `Select Schema` and click the magnifying glass to show available sche
 
 Select `foodmart` and click the magnifying glass to reveal all tables.
 
-![select_foodmart](assets/select_foodmart.png)
+![select-foodmart](assets/select-foodmart.jpg)
 
 -   Drag **sales_fact_dec_1998** to the workspace.
 -   Drag **product** to the workspace.
@@ -219,7 +217,7 @@ Click on **Sheet 1** to work on new worksheet.
 
 The model we've created will help us visualize products that produced the most sales. We can explore this data interactively. Let’s create a horizontal bar graph as described below:
 
-![bar_chart](assets/bar_chart.png)
+![bar-chart](assets/bar-chart.jpg)
 
 To reproduce this chart:
 
@@ -231,8 +229,8 @@ To reproduce this chart:
 
 4\. Drag the **Store Sales** from Measures to Filters ![](assets/icon_Filters.png).
 
--   Select **Sum**, then press Next.
--   Set `Range of values` between 1450 and 1600.
+-   Select **Sum**, then press **Next**
+-   Set `Range of values` between 206 and 300, then press **OK**
 -   Select **Show filter**
 
 ![show_filter](assets/show_filter.png)
@@ -243,7 +241,7 @@ To reproduce this chart:
 
 The result should look like:
 
-![top_product](assets/top_product.png)
+![top-product](assets/top-product.jpg)
 
 Your visualization should now look like the diagram above. You can continue to explore this dataset interactively if you want. For example, you can adjust the **SUM(Store Sales) slider** to interactively modify which sales you want to see.
 
@@ -259,7 +257,7 @@ First we optimize the dataset for analytics. This means 3 things:
 
 3\. We create primary and foreign keys for the dataset. This allows BI tools to do what’s called “join elimination” to greatly improve performance.
 
-To load the data, navigate back to `http://127.0.0.1:4200/` and run:
+To load the data, navigate back to [shell-in-a-box](http://sandbox-hdp.hortonworks.com:4200/) and run:
 
 ~~~
 su - hive
@@ -269,7 +267,7 @@ sh load_data.sh
 
 This process will take a couple of minutes. After it’s complete, connect Tableau to the llap schema and show all tables.
 
-![llap_schema](assets/llap_schema.png)
+![llap-schema](assets/llap-schema.jpg)
 
 There are 8 total tables here and for a realistic experience we should load all of them with the appropriate associations. Here’s the load order and associations you should make:
 
@@ -317,7 +315,7 @@ HDP includes some nice new ways to debug and diagnose Hive and Tez jobs.
 
 First let’s look at the Tez View:
 
-![click_tez_view](assets/click_tez_view.png)
+![click-tez-view](assets/click-tez-view.jpg)
 
 Here you’ll see a screen that includes all the queries that have been run through Hive:
 
