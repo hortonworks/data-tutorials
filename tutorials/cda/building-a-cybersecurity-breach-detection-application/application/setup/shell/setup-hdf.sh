@@ -56,16 +56,27 @@ function wait()
 }
 
 echo "Setting up HDF Sandbox Environment for NiFi flow development..."
-echo "Downloading GeoLite DB for NiFi"
+echo "Creating File Path to GeoLite DB and NASALogs for NiFi"
 GEODB_NIFI_DIR="/sandbox/tutorial-files/200/nifi"
 mkdir -p $GEODB_NIFI_DIR/input/GeoFile
+mkdir -p $GEODB_NIFI_DIR/input/NASALogs
+mkdir -p $GEODB_NIFI_DIR/templates
 chmod 777 -R $GEODB_NIFI_DIR
+echo "Downloading and Extracting GeoLite DB for NiFi"
 wget http://geolite.maxmind.com/download/geoip/database/GeoLite2-City.tar.gz \
 -O $GEODB_NIFI_DIR/input/GeoFile/GeoLite2-City.tar.gz
 tar -zxvf $GEODB_NIFI_DIR/input/GeoFile/GeoLite2-City.tar.gz \
 -C $GEODB_NIFI_DIR/input/GeoFile/
+rm -rf $GEODB_NIFI_DIR/input/GeoFile/GeoLite2-City.tar.gz
+echo "Downloading and Extracting NASALogs for month of August 1995"
+wget ftp://ita.ee.lbl.gov/traces/NASA_access_log_Aug95.gz \
+-O $GEODB_NIFI_DIR/input/NASALogs/NASA_access_log_Aug95.gz
+gunzip -c $GEODB_NIFI_DIR/input/NASALogs/NASA_access_log_Aug95.gz \
+> $GEODB_NIFI_DIR/input/NASALogs/NASA_access_log_Aug95
+rm -rf $GEODB_NIFI_DIR/input/NASALogs/NASA_access_log_Aug95.gz
 
 echo "Stopping NiFi via Ambari"
+#TODO: Check for status code for 400, then resolve issue
 curl -u $AMBARI_CREDENTIALS -H "X-Requested-By: ambari" -X PUT -d '{"RequestInfo":
 {"context": "Stop NiFi"}, "ServiceInfo": {"state": "INSTALLED"}}' \
 http://$HDF_HOST:8080/api/v1/clusters/$HDF_CLUSTER_NAME/services/NIFI
