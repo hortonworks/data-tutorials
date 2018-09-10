@@ -18,11 +18,8 @@ AMBARI_CREDENTIALS=$HDP_AMBARI_USER:$HDP_AMBARI_PASS
 
 echo "Setting up HDP Sandbox Development Environment"
 
-# Updating the permissions on the directory to prevent issue from occurring
-# when trying to access the directory
--u hdfs hdfs dfs -chmod -R 777 /tmp
-
-# TODO: Check that service exists
+# TODO: Check that service exists via ambari rest call
+# TODO: Check if service is in maintenance mode via ambari rest call
 echo "Turning off Spark's maintenance mode via Ambari"
 curl -k -u $AMBARI_CREDENTIALS -H "X-Requested-By:ambari" -i -X PUT -d \
 '{"RequestInfo": {"context":"Turn off Maintenance for SPARK"}, "Body":
