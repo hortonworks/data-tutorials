@@ -77,6 +77,8 @@ rm -rf $GEODB_NIFI_DIR/input/NASALogs/NASA_access_log_Aug95.gz
 
 echo "Stopping NiFi via Ambari"
 #TODO: Check for status code for 400, then resolve issue
+# List Services in HDF Stack
+# curl -u $AMBARI_CREDENTIALS -H "X-Requested-By: ambari" -X GET http://$HDF_HOST:8080/api/v1/clusters/$HDF_CLUSTER_NAME/services/
 curl -u $AMBARI_CREDENTIALS -H "X-Requested-By: ambari" -X PUT -d '{"RequestInfo":
 {"context": "Stop NiFi"}, "ServiceInfo": {"state": "INSTALLED"}}' \
 http://$HDF_HOST:8080/api/v1/clusters/$HDF_CLUSTER_NAME/services/NIFI
