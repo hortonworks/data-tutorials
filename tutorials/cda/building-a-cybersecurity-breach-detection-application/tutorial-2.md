@@ -22,7 +22,7 @@ Open the HDF Sandbox Web Shell Client at `http://sandbox-hdf.hortonworks.com:420
 - **Setup NiFi**:
 
 ~~~bash
-wget https://raw.githubusercontent.com/james94/data-tutorials/master/tutorials/cda/building-a-security-breach-analysis-application/application/setup/shell/setup-hdf.sh
+wget https://github.com/james94/data-tutorials/raw/master/tutorials/cda/building-a-cybersecurity-breach-detection-application/application/setup/shell/setup-hdf.sh
 bash setup-hdf.sh
 ~~~
 
@@ -31,7 +31,7 @@ Open the HDP Sandbox Web Shell Client at `http://sandbox-hdp.hortonworks.com:420
 - **Setup Spark**:
 
 ~~~bash
-wget https://raw.githubusercontent.com/james94/data-tutorials/master/tutorials/cda/building-a-security-breach-analysis-application/application/setup/shell/setup-hdp.sh
+wget https://github.com/james94/data-tutorials/raw/master/tutorials/cda/building-a-cybersecurity-breach-detection-application/application/setup/shell/setup-hdp.sh
 bash setup-hdp.sh
 ~~~
 
