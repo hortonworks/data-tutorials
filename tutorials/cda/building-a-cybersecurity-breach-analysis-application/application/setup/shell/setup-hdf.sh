@@ -86,9 +86,6 @@ wait $HDF NIFI "INSTALLED"
 
 echo "Existing flow on NiFi canvas backed up to flow.xml.gz.bak"
 mv /var/lib/nifi/conf/flow.xml.gz /var/lib/nifi/conf/flow.xml.gz.bak
-echo "Downloading NiFi WebServerLogs.xml Template"
-wget https://raw.githubusercontent.com/hortonworks/data-tutorials/cf9f67737c3f1677b595673fc685670b44d9890f/tutorials/hdp/hdp-2.5/refine-and-visualize-server-log-data/assets/WebServerLogs.xml \
--O $GEODB_NIFI_DIR/templates/WebServerLogs.xml
 
 echo "Starting NiFi via Ambari"
 curl -u $AMBARI_CREDENTIALS -H "X-Requested-By: ambari" -X PUT -d '{"RequestInfo":
