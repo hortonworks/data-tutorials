@@ -1,3 +1,7 @@
+---
+title: Setting up the environment
+---
+
 # Tag Based Policies with Apache Ranger and Apache Atlas
 
 ## Setting up the environment

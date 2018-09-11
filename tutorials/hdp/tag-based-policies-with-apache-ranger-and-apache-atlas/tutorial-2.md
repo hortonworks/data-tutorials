@@ -1,3 +1,7 @@
+---
+title: Assigning Tag Based policies with Atlas
+---
+
 # Tag Based Policies with Apache Ranger and Apache Atlas
 
 ## Assigning Tag Based Policies with Atlas
