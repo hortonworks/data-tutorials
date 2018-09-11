@@ -378,7 +378,8 @@ sed -i.bak 's/<str>EEE MMM d HH:mm:ss Z yyyy<\/str>/        <str>EEE MMM d HH:mm
 # Exiting Solr user
 exit
 
-echo ""
+echo "Modifying SOLRS default.json, so SOLR can connect to Banana Dashboard"
 BANANA_DASHBOARD_PATH=/opt/lucidworks-hdpsearch/solr/server/solr-webapp/webapp/banana/app/dashboards
 mv $BANANA_DASHBOARD_PATH/default.json $BANANA_DASHBOARD_PATH/default.json.orig
-wget https://github.com/james94/data-tutorials/raw/master/tutorials/cda/building-a-customer-sentiment-analysis-application/application/setup/conf-solr/default.json
+wget https://github.com/james94/data-tutorials/raw/master/tutorials/cda/building-a-customer-sentiment-analysis-application/application/setup/conf-solr/default.json \
+-O $BANANA_DASHBOARD_PATH/default.json
