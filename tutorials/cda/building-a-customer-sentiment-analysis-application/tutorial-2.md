@@ -148,28 +148,23 @@ On the CentOS7 server **HDP** runs on:
 - **Setup Spark**: imports the Sentiment Analysis Zeppelin notebook and clones the Spark Structured Streaming application.
 - **Setup Solr**: verifies Ambari Infra is stopped, then adds the Solr service to the HDP cluster, adds the Solr Components, reads and applies 6 Solr Ambari Configurations to the HDP Cluster for proper Solr functionality, adds the Solr host component to the master domain name server and installs Solr to the HDP cluster. Copies over Solr configsets to tweets_config folder, then adjusts solrconfig.xml, so Solr can recognize tweet's timestamp format. Backups default.json to default.json.origin and replaces with default.json that is able to connect to Solr's Banana dashboard.
 
-There are two options to run this script from **sandbox-host** or **Native Docker host**.
+Open the HDF Sandbox Web Shell Client at `http://sandbox-hdf.hortonworks.com:4200` with login `root/hadoop`.
 
-**Option 1:**
-
-On VirtualBox and VMware sandbox-host, the login credentials are user/pass = `root/hadoop` to SSH into the server.
+- **Setup NiFi**:
 
 ~~~bash
-ssh root@sandbox-host -p 2122
-wget [setup.sh](application/setup/shell/setup.sh)
-bash setup.sh
+wget [setup-hdf.sh](link)
+bash setup-hdf.sh
 ~~~
 
-**Option 2:**
+Open the HDP Sandbox Web Shell Client at `http://sandbox-hdp.hortonworks.com:4200` with login `root/hadoop`. After login, you will be prompted to change the password.
 
-On Native Docker running on mac or linux:
+- **Setup Spark**:
 
 ~~~bash
-wget [setup.sh](application/setup/shell/setup.sh)
-bash setup.sh
+wget [setup-hdp.sh](link)
+bash setup-hdp.sh
 ~~~
-
-Once the script finishes, you are now ready to move onto the next phase of development (the next tutorial), acquiring the data using NiFi.
 
 ## Approach 2: Manually Setup Development Platforms via CLI
 
