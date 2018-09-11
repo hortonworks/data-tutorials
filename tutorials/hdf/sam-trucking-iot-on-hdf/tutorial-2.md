@@ -9,6 +9,7 @@ title: Create a SAM Topology
 We are now familiar with the role stream processing plays in data science/engineering applications. Let's use Streaming Analytics Manager (SAM) to create stream topology.
 
 Skills you will gain:
+
 - Create a Service Pool, an Environment, and a SAM Application
 - Create Schemas in Schema Registry needed for SAM Application
 - Build, deploy and export a SAM topology
@@ -66,7 +67,7 @@ Now we have a data source for SAM to pull in data, we will build the Trucking Io
 
 ### Setup SAM
 
-We need to setup SAM by creating a **service pool** and **environment** for our application. Since we are using the HDF Sandbox, it comes preloaded with an already created service pool and environment, so we will show you how you would create these two components if you had deployed a fresh HDF Platform that had no reference applications.
+We need to setup SAM by creating a **service pool** and **environment** for our application. Since we are using the HDF Sandbox, it comes pre-loaded with an already created service pool and environment, so we will show you how you would create these two components if you had deployed a fresh HDF Platform that had no reference applications.
 
 > Note: this section is less hands on because we already have the required components setup. If you want to skip this part, then you can head to **Add an Application** section.
 
@@ -101,7 +102,7 @@ The result after adding the Ambari Cluster URL will be that SAM retrieves all Am
 
 1\. Open Environment
 
-2\. On the top right of the page, you would click the plus button to add a new environment. When adding the enviroment for Trucking IoT application, we performed the following actions.
+2\. On the top right of the page, you would click the plus button to add a new environment. When adding the environment for Trucking IoT application, we performed the following actions.
 
 3\. Name the Environment. In our case, we chose the name:
 
@@ -127,7 +128,7 @@ Kafka, Storm, Ambari Infra, Zookeeper
 
 ### Add an Application
 
-A quick recap, we just explored the pre-exising service pool and environment for the Trucking IoT SAM application we will build. The topology, you will build from scratch. Let's become SAM Developers.
+A quick recap, we just explored the pre-existing service pool and environment for the Trucking IoT SAM application we will build. The topology, you will build from scratch. Let's become SAM Developers.
 
 1\. Click on the SAM Logo in the top right corner to enter the My Applications page.
 
@@ -162,8 +163,8 @@ Before we start adding components to the canvas, lets verify our Kafka topics an
 Output you should see:
 
 ~~~bash
-trucking_data_driverstats                                     
-trucking_data_joined                                           
+trucking_data_driverstats
+trucking_data_joined
 trucking_data_traffic
 trucking_data_truck_enriched
 ~~~
@@ -183,7 +184,6 @@ If you don't see the topics listed above, then create them:
 # trucking_data_truck_enriched
 /usr/hdf/current/kafka-broker/bin/kafka-topics.sh --create --zookeeper localhost:2181 --replication-factor 1 --partitions 10 --topic trucking_data_truck_enriched
 ~~~
-
 
 **Note:** For more information on how Schemas are being registered into Schema Registry and the architecture works, visit [Schema Registry in Trucking IoT on HDF](https://hortonworks.com/tutorial/schema-registry-in-trucking-iot-on-hdf/)
 
@@ -287,7 +287,7 @@ Enter the following properties:
 | Add New Rule `Create Query`       | Select operations `NOT_EQUAL`       |
 | Add New Rule `Create Query`       | Select field name - Type `Normal`       |
 
-~~~
+~~~bash
 Query Preview:
 
 eventType <> 'Normal'
@@ -297,7 +297,7 @@ eventType <> 'Normal'
 
 7\. Once you click OK, the new rule will appear in the table of rules for the RULE processor. Click OK again to save your configuration. Now connect RULE processor to the AGGREGATE processor.
 
-FilterEvents-AGGREGATE window will appear, select OK. Enter the following properties for the AGGREGATE processor:
+TimeSeriesAnalysis-AGGREGATE window will appear, select OK. Enter the following properties for the AGGREGATE processor:
 
 | AGGREGATE    | Properties     |
 | :------------- | :------------- |
@@ -328,13 +328,11 @@ FilterEvents-AGGREGATE window will appear, select OK. Enter the following proper
 | AGGREGATE FUNCTION | SUM |
 | OUTPUT | totalViolations |
 
-
-
 Once you click OK, the configuration has been confirmed.
 
 8\. Add 2 KAFKA SINK components onto the canvas.
 
-Connect AverageSpeed processor to Kafka Sink 1 (ToAvgSpeed). Configure the processor with the following property values:
+Connect TimeSeriesAnalysis processor to Kafka Sink 1 (ToDriverStats). Configure the processor with the following property values:
 
 | KAFKA SINK 1   | Properties     |
 | :------------- | :------------- |
@@ -348,7 +346,7 @@ Connect AverageSpeed processor to Kafka Sink 1 (ToAvgSpeed). Configure the proce
 
 Click OK to confirm configuration.
 
-Connect ViolationEvents processor to Kafka Sink 2 (ToViolationEvents). Configure the processor with the following property values:
+Connect FilterNormalEvents processor to Kafka Sink 2 (ToDataJoined). Configure the processor with the following property values:
 
 | KAFKA SINK 2  | Properties     |
 | :------------- | :------------- |
@@ -388,10 +386,10 @@ Lets open web shell client: `http://sandbox-hdf.hortonworks.com:4200`
 Lets check the data in our Kafka Sink topics:
 
 ~~~bash
-# trucking_violations
+# trucking_data_driverstats
 /usr/hdf/current/kafka-broker/bin/kafka-console-consumer.sh --zookeeper localhost:2181 --topic trucking_data_driverstats --from-beginning
 
-# trucking_avg_speed
+# trucking_data_joined
 /usr/hdf/current/kafka-broker/bin/kafka-console-consumer.sh --zookeeper localhost:2181 --topic trucking_data_joined --from-beginning
 ~~~
 

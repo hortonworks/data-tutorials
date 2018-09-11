@@ -1,6 +1,6 @@
 ---
 title: SAM in Trucking IoT on HDF
-author: James Medel
+author: sandbox-team
 tutorial-id: 810
 experience: Beginner
 persona: Developer
@@ -32,4 +32,4 @@ We will create a SAM topology to ingest streams of data from Apache Kafka into o
 
 ## Tutorial Reference Application
 
-This tutorial series uses our **[Trucking IoT Application](https://github.com/orendain/trucking-iot/tree/hadoop-summit-2017)** comprised of multiple subprojects. You will build the SAM topology application subproject.
+This tutorial series uses our **[Trucking IoT Application](https://github.com/orendain/trucking-iot/tree/hadoop-summit-2017)** comprised of multiple sub-projects. You will build the SAM topology application su-bproject.
