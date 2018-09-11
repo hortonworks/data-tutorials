@@ -75,6 +75,7 @@ gunzip -c $GEODB_NIFI_DIR/input/NASALogs/NASA_access_log_Aug95.gz \
 > $GEODB_NIFI_DIR/input/NASALogs/NASA_access_log_Aug95
 rm -rf $GEODB_NIFI_DIR/input/NASALogs/NASA_access_log_Aug95.gz
 
+echo "Cleaning Up NiFi Canvas for NiFi Developer to build Cybersecurity Breach Analysis Flow..."
 echo "Stopping NiFi via Ambari"
 #TODO: Check for status code for 400, then resolve issue
 # List Services in HDF Stack
