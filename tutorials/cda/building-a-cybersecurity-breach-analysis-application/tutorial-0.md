@@ -1,5 +1,5 @@
 ---
-title: Building a Security Breach Analysis Application
+title: Building a Cybersecurity Breach Analysis Application
 author: sandbox-team
 tutorial-id: 200
 experience: Intermediate
@@ -13,7 +13,7 @@ product: HDP
 series: HDP > Hadoop for Data Engineers & Data Scientists > Real World Examples, HDF > Develop Data Flow & Streaming Applications > Real World Examples
 ---
 
-# Building a Security Breach Analysis Application
+# Building a Cybersecurity Breach Analysis Application
 
 ## Introduction
 
@@ -56,7 +56,7 @@ The tutorial series consists of the following tutorial modules:
 
 3\. **Acquiring NASA Server Log Data**: NASA 2 months of Historical Data ingested by NiFi and stored to HDFS
 
-4\. **Cleaning the Raw NASA Data**: Hive.
+4\. **Cleaning the Raw NASA Log Data**: Hive.
 Show insight of how we are cleaning the data using Zeppelin.
 
-5\. **Visualizing NASA Network Traffic Activities**: Spark. Perform data analysis on NASA Server Logs to find the _Most Frequent Hosts_ - keep count per ip address, _Response Codes_ - keep record of the count per response code, _Type of Extensions_ - gather count of the type of file formats, _Network Traffic per Location_ - visualize location hits are coming from
+5\. **Visualizing NASA Log Data**: Spark. Perform data analysis on NASA Server Logs to find the _Most Frequent Hosts_ - keep count per ip address, _Response Codes_ - keep record of the count per response code, _Type of Extensions_ - gather count of the type of file formats, _Network Traffic per Location_ - visualize location hits are coming from
