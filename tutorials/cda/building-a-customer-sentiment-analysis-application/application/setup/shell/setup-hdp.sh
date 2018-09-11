@@ -294,6 +294,57 @@ function install_service()
 }
 
 echo "Setting up HDP Sandbox Development Environment for Hive, Spark and Solr Data Analysis"
+
+echo "Setting Up Maven needed for Compiling and Installing Hive JSON-Serde Lib"
+wget http://repos.fedorapeople.org/repos/dchen/apache-maven/epel-apache-maven.repo -O /etc/yum.repos.d/epel-apache-maven.repo
+yum install -y apache-maven
+mvn -version
+
+echo "Setting up Hive JSON-Serde Libary"
+git clone https://github.com/rcongiu/Hive-JSON-Serde
+cd Hive-JSON-Serde
+# Compile JsonSerDe source to create JsonSerDe library jar file
+mvn -Phdp23 clean package
+# Give JsonSerDe library jar file to Hive and Hive2 library
+cp json-serde/target/json-serde-1.3.9-SNAPSHOT-jar-with-dependencies.jar /usr/hdp/2.6.5.0-292/hive/lib
+cp json-serde/target/json-serde-1.3.9-SNAPSHOT-jar-with-dependencies.jar /usr/hdp/2.6.5.0-292/hive2/lib
+# Restart (stop/start) Hive via Ambari REST Call
+wait_for_service_to_stop $HDP "HIVE"
+wait_for_service_to_start $HDP "HIVE"
+cd ~/
+
+echo "Setting up HDFS for Hive Tweet Data"
+HIVE_HDFS_TWEET_STAGING="/sandbox/tutorial-files/770/hive/tweets_staging"
+HIVE_HDFS_TABLES="/sandbox/tutorial-files/770/hive/data/tables"
+su hdfs
+# Create hive/tweets_staging hdfs directory ahead of time for hive
+hdfs dfs -mkdir -p $HIVE_HDFS_TWEET_STAGING
+# Change HDFS ownership of tweets_staging dir to maria_dev
+hdfs dfs -chown -R maria_dev $HIVE_HDFS_TWEET_STAGING
+# Change HDFS tweets_staging dir permissions to everyone
+hdfs dfs -chmod -R 777 $HIVE_HDFS_TWEET_STAGING
+# Create new /tmp/data/tables directory inside /tmp dir
+hdfs dfs -mkdir -p $HIVE_HDFS_TABLES
+# Set permissions for tables dir
+hdfs dfs -chmod 777 $HIVE_HDFS_TABLES
+# Inside tables parent dir, create time_zone_map dir
+hdfs dfs -mkdir $HIVE_HDFS_TABLES/time_zone_map
+# Inside tables parent dir, create dictionary dir
+hdfs dfs -mkdir $HIVE_HDFS_TABLES/dictionary
+# Download time_zone_map.tsv file on local file system(FS)
+wget https://github.com/james94/data-tutorials/raw/master/tutorials/cda/building-a-customer-sentiment-analysis-application/application/setup/data/time_zone_map.tsv
+# Copy time_zone_map.tsv from local FS to HDFS
+hdfs dfs -put time_zone_map.tsv $HIVE_HDFS_TABLES/time_zone_map/
+# Download dictionary.tsv file on local file system
+wget https://github.com/james94/data-tutorials/raw/master/tutorials/cda/building-a-customer-sentiment-analysis-application/application/setup/data/dictionary.tsv
+# Copy dictionary.tsv from local FS to HDFS
+hdfs dfs -put dictionary.tsv $HIVE_HDFS_TABLES/dictionary/
+
+
+echo "Installing SBT for Spark"
+curl https://bintray.com/sbt/rpm/rpm | sudo tee /etc/yum.repos.d/bintray-sbt-rpm.repo
+yum install -y sbt
+
 echo "Downloading SOLR Config files for SOLR Install for Ambari Install REST API"
 
 SOLR_CFG_DIR="/sandbox/tutorial-files/770/solr"
