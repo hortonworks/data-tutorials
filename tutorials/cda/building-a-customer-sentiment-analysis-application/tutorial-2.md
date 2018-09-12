@@ -6,7 +6,16 @@ title: Setting up the Development Environment
 
 ## Introduction
 
+Our first task for building the Sentiment Analysis application is setting up and
+configuring the development environment. First, we will need to create a Twitter
+Application through Twitter's Developer portal, which will allow us to obtain
+API KEYS and TOKENS needed to connect to Twitter's API data feed. Lastly, we
+will setup and configure services for HDF and HDP Sandbox, so later we can use
+the tools for processing data.
+
 ## Prerequisites
+
+- Enabled Connected Data Architecture
 
 ## Outline
 
@@ -328,4 +337,9 @@ Congratulations! The development environment is setup and configured, so we can 
 
 ## Further Reading
 
-- []
+- [NiFi System Administrator's Guide](https://nifi.apache.org/docs/nifi-docs/html/administration-guide.html)
+- [Hive SerDe Library Doc](https://cwiki.apache.org/confluence/display/Hive/SerDe)
+- [HDFS Commands Guide Doc](https://hadoop.apache.org/docs/r3.0.0/hadoop-project-dist/hadoop-hdfs/HDFSCommands.html)
+- [Setting Up a Spark Development Environment with Scala](https://hortonworks.com/tutorial/setting-up-a-spark-development-environment-with-scala/#sbt)
+- [Administering Ambari](https://docs.hortonworks.com/HDPDocuments/Ambari-2.7.0.0/administering-ambari/content/amb_introducing_ambari_administration.html)
+- [Solr's Banana Installation and Quick Start](https://github.com/lucidworks/banana)
