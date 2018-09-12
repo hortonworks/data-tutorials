@@ -11,13 +11,16 @@ title: Application Development Concepts
 ## Outline
 
 - [Customer Sentiment Analysis](#customer-sentiment-analysis)
-- [Twitter API](https://dev.twitter.com/)
+- [Sentiment Detection]()
+- [Summary](#summary)
+- [Further Reading](#further-reading)
 
-## Twitter API
+## Customer Sentiment Analysis
 
-## Apache Ambari
+## Sentiment Detection
 
-## Apache NiFi
+## Summary
 
-Overview (Done!)
-References ()
+## Further Reading
+
+- [Evaluate Twitter Data to Inform Business Decisions](https://developer.twitter.com/en/use-cases/analyze.html)
