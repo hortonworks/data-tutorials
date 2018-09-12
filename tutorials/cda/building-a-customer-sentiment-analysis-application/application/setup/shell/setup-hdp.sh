@@ -331,6 +331,8 @@ hdfs dfs -chmod 777 $HIVE_HDFS_TABLES
 hdfs dfs -mkdir $HIVE_HDFS_TABLES/time_zone_map
 # Inside tables parent dir, create dictionary dir
 hdfs dfs -mkdir $HIVE_HDFS_TABLES/dictionary
+# Exit HDFS user
+exit
 # Download time_zone_map.tsv file on local file system(FS)
 wget https://github.com/james94/data-tutorials/raw/master/tutorials/cda/building-a-customer-sentiment-analysis-application/application/setup/data/time_zone_map.tsv
 # Copy time_zone_map.tsv from local FS to HDFS
