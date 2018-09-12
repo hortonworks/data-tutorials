@@ -56,7 +56,7 @@ if root_tag == 'template':
   template_name = root.find('name').text
   if template_name == "AcquireTwitterData":
     print "Our name tag signifies this XML is 'AcquireTwitterData' template"
-
+    for processors in root.iter('processors'):
   else:
     print "Our name tag signifies this XML isn't 'AcquireTwitterData' template"
 else:
