@@ -476,7 +476,6 @@ You will be able to see the data NiFi sent to the external process HDFS. The dat
 
 ![view_event_hvac_temperature](assets/images/acquire-twitter-data/view_event_hvac_temperature.jpg)
 
-
 ## Approach 2: Import NiFi AcquireTwitterData via UI
 
 ## Summary
