@@ -315,7 +315,7 @@ echo "Configuring Solr to Recognize Tweet's Timestamp Format"
 # Change to Solr user
 su solr
 cp -r /opt/lucidworks-hdpsearch/solr/server/solr/configsets/data_driven_schema_configs \
-/opt/lucidworks-hdpsearch/solr/server/solr/configsets/tweet_config
+/opt/lucidworks-hdpsearch/solr/server/solr/configsets/tweet_configs
 
 echo "Insert New Config for Solr to Recognize tweet's Timestamp Format"
 sed -i.bak '/<arr name="format">/a   <str>EEE MMM d HH:mm:ss Z yyyy</str>' \
@@ -324,32 +324,20 @@ sed -i.bak '/<arr name="format">/a   <str>EEE MMM d HH:mm:ss Z yyyy</str>' \
 sed -i.bak 's/<str>EEE MMM d HH:mm:ss Z yyyy<\/str>/        <str>EEE MMM d HH:mm:ss Z yyyy<\/str>/' \
 /opt/lucidworks-hdpsearch/solr/server/solr/configsets/tweet_config/conf/solrconfig.xml
 
-# Exiting Solr user
-exit
-
 echo "Modifying SOLRS default.json, so SOLR can connect to Banana Dashboard"
 BANANA_DASHBOARD_PATH=/opt/lucidworks-hdpsearch/solr/server/solr-webapp/webapp/banana/app/dashboards
 mv $BANANA_DASHBOARD_PATH/default.json $BANANA_DASHBOARD_PATH/default.json.orig
 wget https://github.com/james94/data-tutorials/raw/master/tutorials/cda/building-a-customer-sentiment-analysis-application/application/setup/conf-solr/default.json \
 -O $BANANA_DASHBOARD_PATH/default.json
-~~~
 
-### Create Solr Collection
-
-Open HDP Sandbox Web Shell Client at `http://sandbox-hdp.hortonworks.com:4200` with login `root/hadoop`. On first login, you will be prompted to update the password.
-
-We will need to use the following command to create the Solr collection "tweets", so then when we build the NiFi flow in the next tutorial, we will be able to push tweets directly to Solr.
-
-The arguments passed to `solr create` command have the following significance:
-
-- `-c`: indicates the name
-- `-d`: is the config directory
-- `-s`: is the number of shards
-- `-rf`: is the replication factor
-- `-p`: is the port at which Solr is running
-
-~~~bash
+echo "Creating Solr Collection 'tweets'"
+# -c: indicates the name, -d: is the config directory,
+# -s: is the number of shards, -rf: is the replication factor,
+# -p: is the port at which Solr is running
 /opt/lucidworks-hdpsearch/solr/bin/solr create -c tweets -d tweet_configs -s 1 -rf 1 -p 8983
+
+# Exiting Solr user
+exit
 ~~~
 
 ## Summary
