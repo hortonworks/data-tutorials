@@ -436,3 +436,9 @@ BANANA_DASHBOARD_PATH=/opt/lucidworks-hdpsearch/solr/server/solr-webapp/webapp/b
 mv $BANANA_DASHBOARD_PATH/default.json $BANANA_DASHBOARD_PATH/default.json.orig
 wget https://github.com/james94/data-tutorials/raw/master/tutorials/cda/building-a-customer-sentiment-analysis-application/application/setup/conf-solr/default.json \
 -O $BANANA_DASHBOARD_PATH/default.json
+
+echo "Creating Solr Collection 'tweets'"
+# -c: indicates the name, -d: is the config directory,
+# -s: is the number of shards, -rf: is the replication factor,
+# -p: is the port at which Solr is running
+/opt/lucidworks-hdpsearch/solr/bin/solr create -c tweets -d tweet_configs -s 1 -rf 1 -p 8983
