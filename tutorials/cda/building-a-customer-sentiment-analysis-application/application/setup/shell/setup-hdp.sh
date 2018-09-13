@@ -421,7 +421,7 @@ echo "Configuring Solr to Recognize Tweet's Timestamp Format"
 # Change to Solr user
 su solr
 cp -r /opt/lucidworks-hdpsearch/solr/server/solr/configsets/data_driven_schema_configs \
-/opt/lucidworks-hdpsearch/solr/server/solr/configsets/tweet_config
+/opt/lucidworks-hdpsearch/solr/server/solr/configsets/tweet_configs
 
 echo "Insert New Config for Solr to Recognize tweet's Timestamp Format"
 sed -i.bak '/<arr name="format">/a   <str>EEE MMM d HH:mm:ss Z yyyy</str>' \
@@ -429,9 +429,6 @@ sed -i.bak '/<arr name="format">/a   <str>EEE MMM d HH:mm:ss Z yyyy</str>' \
 
 sed -i.bak 's/<str>EEE MMM d HH:mm:ss Z yyyy<\/str>/        <str>EEE MMM d HH:mm:ss Z yyyy<\/str>/' \
 /opt/lucidworks-hdpsearch/solr/server/solr/configsets/tweet_config/conf/solrconfig.xml
-
-# Exiting Solr user
-exit
 
 echo "Modifying SOLRS default.json, so SOLR can connect to Banana Dashboard"
 BANANA_DASHBOARD_PATH=/opt/lucidworks-hdpsearch/solr/server/solr-webapp/webapp/banana/app/dashboards
@@ -444,3 +441,6 @@ echo "Creating Solr Collection 'tweets'"
 # -s: is the number of shards, -rf: is the replication factor,
 # -p: is the port at which Solr is running
 /opt/lucidworks-hdpsearch/solr/bin/solr create -c tweets -d tweet_configs -s 1 -rf 1 -p 8983
+
+# Exiting Solr user
+exit
