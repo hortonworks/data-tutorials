@@ -19,7 +19,7 @@ title: Cleaning the Raw Twitter Data
 
 Open HDP **sandbox web shell client** at `sandbox-hdp.hortonworks.com:4200`.
 
-We will use the Zeppelin REST Call API to import a notebook that uses SparkSQL to analyze NASA's server logs for possible breaches.
+We will use the Zeppelin REST Call API to import a notebook that uses SparkSQL or Hive to analyze Tweets.
 
 ~~~bash
 NOTEBOOK_NAME="Cleaning-Raw-Twitter-Data"
