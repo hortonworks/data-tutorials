@@ -296,7 +296,6 @@ Sqoop
 Oozie
 Falcon
 Storm
-Ambari Infra
 Atlas
 Kafka
 Druid
@@ -318,11 +317,11 @@ cp -r /opt/lucidworks-hdpsearch/solr/server/solr/configsets/data_driven_schema_c
 /opt/lucidworks-hdpsearch/solr/server/solr/configsets/tweet_configs
 
 echo "Insert New Config for Solr to Recognize tweet's Timestamp Format"
-sed -i.bak '/<arr name="format">/a   <str>EEE MMM d HH:mm:ss Z yyyy</str>' \
-/opt/lucidworks-hdpsearch/solr/server/solr/configsets/tweet_config/conf/solrconfig.xml
+sed -i.bak '/<arr name="format">/a<str>EEE MMM d HH:mm:ss Z yyyy</str>' \
+/opt/lucidworks-hdpsearch/solr/server/solr/configsets/tweet_configs/conf/solrconfig.xml
 
 sed -i.bak 's/<str>EEE MMM d HH:mm:ss Z yyyy<\/str>/        <str>EEE MMM d HH:mm:ss Z yyyy<\/str>/' \
-/opt/lucidworks-hdpsearch/solr/server/solr/configsets/tweet_config/conf/solrconfig.xml
+/opt/lucidworks-hdpsearch/solr/server/solr/configsets/tweet_configs/conf/solrconfig.xml
 
 echo "Modifying SOLRS default.json, so SOLR can connect to Banana Dashboard"
 BANANA_DASHBOARD_PATH=/opt/lucidworks-hdpsearch/solr/server/solr-webapp/webapp/banana/app/dashboards
