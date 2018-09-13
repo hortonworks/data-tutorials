@@ -331,6 +331,24 @@ wget https://github.com/james94/data-tutorials/raw/master/tutorials/cda/building
 -O $BANANA_DASHBOARD_PATH/default.json
 ~~~
 
+### Create Solr Collection
+
+Open HDP Sandbox Web Shell Client at `http://sandbox-hdp.hortonworks.com:4200` with login `root/hadoop`. On first login, you will be prompted to update the password.
+
+We will need to use the following command to create the Solr collection "tweets", so then when we build the NiFi flow in the next tutorial, we will be able to push tweets directly to Solr.
+
+The arguments passed to `solr create` command have the following significance:
+
+- `-c`: indicates the name
+- `-d`: is the config directory
+- `-s`: is the number of shards
+- `-rf`: is the replication factor
+- `-p`: is the port at which Solr is running
+
+~~~bash
+/opt/lucidworks-hdpsearch/solr/bin/solr create -c tweets -d tweet_configs -s 1 -rf 1 -p 8983
+~~~
+
 ## Summary
 
 Congratulations! The development environment is setup and configured, so we can began acquiring the customer sentiment data via NiFi ingesting the Twitter API feed.
