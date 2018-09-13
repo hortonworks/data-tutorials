@@ -215,35 +215,35 @@ Open HDP Sandbox Web Shell Client at `http://sandbox-hdp.hortonworks.com:4200` w
 The next set of commands will setup **HDFS** for holding the Tweet data that will be accessed by Hive.
 
 ~~~bash
-echo "Setting up HDFS for Hive Tweet Data"
+echo "Setting up HDFS for Tweet Data"
 su hdfs
-HIVE_HDFS_TWEET_STAGING="/sandbox/tutorial-files/770/hive/tweets_staging"
-HIVE_HDFS_TABLES="/sandbox/tutorial-files/770/hive/data/tables"
-HIVE_LFS_DATA="/sandbox/tutorial-files/770/hive/data"
-# Create hive/tweets_staging hdfs directory ahead of time for hive
-hdfs dfs -mkdir -p $HIVE_HDFS_TWEET_STAGING
+HDFS_TWEET_STAGING="/sandbox/tutorial-files/770/tweets_staging"
+HDFS_TABLES="/sandbox/tutorial-files/770/data/tables"
+LFS_DATA="/sandbox/tutorial-files/770/data"
+# Create tweets_staging hdfs directory ahead of time for hive
+hdfs dfs -mkdir -p $HDFS_TWEET_STAGING
 # Change HDFS ownership of tweets_staging dir to maria_dev
-hdfs dfs -chown -R maria_dev $HIVE_HDFS_TWEET_STAGING
+hdfs dfs -chown -R maria_dev $HDFS_TWEET_STAGING
 # Change HDFS tweets_staging dir permissions to everyone
-hdfs dfs -chmod -R 777 $HIVE_HDFS_TWEET_STAGING
-# Create new /tmp/data/tables directory inside /tmp dir
-hdfs dfs -mkdir -p $HIVE_HDFS_TABLES
+hdfs dfs -chmod -R 777 $HDFS_TWEET_STAGING
+# Create new /data/tables directory inside /tmp dir
+hdfs dfs -mkdir -p $HDFS_TABLES
 # Set permissions for tables dir
-hdfs dfs -chmod 777 $HIVE_HDFS_TABLES
+hdfs dfs -chmod 777 $HDFS_TABLES
 # Inside tables parent dir, create time_zone_map dir
-hdfs dfs -mkdir $HIVE_HDFS_TABLES/time_zone_map
+hdfs dfs -mkdir $HDFS_TABLES/time_zone_map
 # Inside tables parent dir, create dictionary dir
-hdfs dfs -mkdir $HIVE_HDFS_TABLES/dictionary
+hdfs dfs -mkdir $HDFS_TABLES/dictionary
 # HDFS User creates local file system directory
-mkdir -p $HIVE_LFS_DATA
+mkdir -p $LFS_DATA
 # Download time_zone_map.tsv file on local file system(FS)
-wget https://github.com/james94/data-tutorials/raw/master/tutorials/cda/building-a-customer-sentiment-analysis-application/application/setup/data/time_zone_map.tsv -O $HIVE_LFS_DATA/time_zone_map.tsv
+wget https://github.com/james94/data-tutorials/raw/master/tutorials/cda/building-a-customer-sentiment-analysis-application/application/setup/data/time_zone_map.tsv -O $LFS_DATA/time_zone_map.tsv
 # Copy time_zone_map.tsv from local FS to HDFS
-hdfs dfs -put $HIVE_LFS_DATA/time_zone_map.tsv $HIVE_HDFS_TABLES/time_zone_map/
+hdfs dfs -put $LFS_DATA/time_zone_map.tsv $HDFS_TABLES/time_zone_map/
 # Download dictionary.tsv file on local file system
-wget https://github.com/james94/data-tutorials/raw/master/tutorials/cda/building-a-customer-sentiment-analysis-application/application/setup/data/dictionary.tsv -O $HIVE_LFS_DATA/dictionary.tsv
+wget https://github.com/james94/data-tutorials/raw/master/tutorials/cda/building-a-customer-sentiment-analysis-application/application/setup/data/dictionary.tsv -O $LFS_DATA/dictionary.tsv
 # Copy dictionary.tsv from local FS to HDFS
-hdfs dfs -put $HIVE_LFS_DATA/dictionary.tsv $HIVE_HDFS_TABLES/dictionary/
+hdfs dfs -put $LFS_DATA/dictionary.tsv $HDFS_TABLES/dictionary/
 # Exit HDFS user
 exit
 ~~~
