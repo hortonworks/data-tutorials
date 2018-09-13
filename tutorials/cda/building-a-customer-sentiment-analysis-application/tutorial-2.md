@@ -201,7 +201,7 @@ cp json-serde/target/json-serde-1.3.9-SNAPSHOT-jar-with-dependencies.jar /usr/hd
 cd ~/
 ~~~
 
-For the updates in **Hive** to take effect, we need to restart it, so it can access Hive-JSON-Serde library. Open Ambari at `http://sandbox-hdp.hortonworks.com:8080` with login `raj_ops/raj_ops`.
+For the updates in **Hive** to take effect, we need to restart it, so it can access Hive-JSON-Serde library. **Open Ambari** at `http://sandbox-hdp.hortonworks.com:8080` with login `raj_ops/raj_ops`.
 
 Click the **Hive** service from Ambari stack of services, press **Service Actions**
 dropdown, select **Restart All**.
@@ -216,9 +216,10 @@ The next set of commands will setup **HDFS** for holding the Tweet data that wil
 
 ~~~bash
 echo "Setting up HDFS for Hive Tweet Data"
+su hdfs
 HIVE_HDFS_TWEET_STAGING="/sandbox/tutorial-files/770/hive/tweets_staging"
 HIVE_HDFS_TABLES="/sandbox/tutorial-files/770/hive/data/tables"
-su hdfs
+HIVE_LFS_DATA="/sandbox/tutorial-files/770/hive/data"
 # Create hive/tweets_staging hdfs directory ahead of time for hive
 hdfs dfs -mkdir -p $HIVE_HDFS_TWEET_STAGING
 # Change HDFS ownership of tweets_staging dir to maria_dev
@@ -233,16 +234,18 @@ hdfs dfs -chmod 777 $HIVE_HDFS_TABLES
 hdfs dfs -mkdir $HIVE_HDFS_TABLES/time_zone_map
 # Inside tables parent dir, create dictionary dir
 hdfs dfs -mkdir $HIVE_HDFS_TABLES/dictionary
+# HDFS User creates local file system directory
+mkdir -p $HIVE_LFS_DATA
+# Download time_zone_map.tsv file on local file system(FS)
+wget https://github.com/james94/data-tutorials/raw/master/tutorials/cda/building-a-customer-sentiment-analysis-application/application/setup/data/time_zone_map.tsv -O $HIVE_LFS_DATA/time_zone_map.tsv
+# Copy time_zone_map.tsv from local FS to HDFS
+hdfs dfs -put $HIVE_LFS_DATA/time_zone_map.tsv $HIVE_HDFS_TABLES/time_zone_map/
+# Download dictionary.tsv file on local file system
+wget https://github.com/james94/data-tutorials/raw/master/tutorials/cda/building-a-customer-sentiment-analysis-application/application/setup/data/dictionary.tsv -O $HIVE_LFS_DATA/dictionary.tsv
+# Copy dictionary.tsv from local FS to HDFS
+hdfs dfs -put $HIVE_LFS_DATA/dictionary.tsv $HIVE_HDFS_TABLES/dictionary/
 # Exit HDFS user
 exit
-# Download time_zone_map.tsv file on local file system(FS)
-wget https://github.com/james94/data-tutorials/raw/master/tutorials/cda/building-a-customer-sentiment-analysis-application/application/setup/data/time_zone_map.tsv
-# Copy time_zone_map.tsv from local FS to HDFS
-hdfs dfs -put time_zone_map.tsv $HIVE_HDFS_TABLES/time_zone_map/
-# Download dictionary.tsv file on local file system
-wget https://github.com/james94/data-tutorials/raw/master/tutorials/cda/building-a-customer-sentiment-analysis-application/application/setup/data/dictionary.tsv
-# Copy dictionary.tsv from local FS to HDFS
-hdfs dfs -put dictionary.tsv $HIVE_HDFS_TABLES/dictionary/
 ~~~
 
 ### Setup Spark Service
