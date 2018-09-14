@@ -47,10 +47,10 @@ ssh root@sandbox-hdp.hortonworks.com -p 2222
 cd Downloads
 
 #Download geolocation.csv
-wget https://raw.githubusercontent.com/hortonworks/data-tutorials/master/tutorials/hdp/manage-files-on-hdfs-via-cli-ambari-files-view/assets/drivers-datasets%20/geolocation.csv
+wget https://github.com/hortonworks/data-tutorials/raw/master/tutorials/hdp/manage-files-on-hdfs-via-cli-ambari-files-view/assets/drivers-datasets/geolocation.csv
 
 #Download trucks.csv
-wget https://raw.githubusercontent.com/hortonworks/data-tutorials/master/tutorials/hdp/manage-files-on-hdfs-via-cli-ambari-files-view/assets/drivers-datasets%20/trucks.csv
+wget https://github.com/hortonworks/data-tutorials/raw/master/tutorials/hdp/manage-files-on-hdfs-via-cli-ambari-files-view/assets/drivers-datasets/trucks.csv
 
 #Create directory for drivers-datasets
 mkdir drivers-datasets
