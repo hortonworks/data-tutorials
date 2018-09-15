@@ -176,11 +176,27 @@ dropdown, select **Restart All**.
 
 A Background Operation Running window will pop up with **Restart all components for NiFi** progress bar loading and turning green once the restart is successful.
 
+### Setup Kafka Service
+
+We will need to create a Kafka topic on HDF for Spark to stream data into from HDP.
+
+~~~bash
+/usr/hdf/current/kafka-broker/bin/kafka-topics.sh --create --zookeeper sandbox-hdf.hortonworks.com:2181 --replication-factor 1 --partitions 10 --topic tweetsSentiment
+~~~
+
 ### Setting Up HDP Sandbox for Application Development
 
-### Setup Hive Service
-
 Open HDP Sandbox Web Shell Client at `http://sandbox-hdp.hortonworks.com:4200` with login `root/hadoop`. On first login, you will be prompted to update the password.
+
+### Setup Kafka Service
+
+We will need to create a Kafka topic on HDP for NiFi to publish messages to in the queue.
+
+~~~bash
+/usr/hdp/current/kafka-broker/bin/kafka-topics.sh --create --zookeeper sandbox-hdp.hortonworks.com:2181 --replication-factor 1 --partitions 10 --topic tweets
+~~~
+
+### Setup Hive Service
 
 The first set of commands will setup **Hive**, so we can create, read and write to tables built on top of JSON data by installing maven, downloading Hive-JSON-Serde library and compiling that library.
 
@@ -209,8 +225,6 @@ dropdown, select **Restart All**.
 A Background Operation Running window will pop up with **Restart all components for Hive** progress bar loading and turning green once the restart is successful.
 
 ### Setup HDFS Service
-
-Open HDP Sandbox Web Shell Client at `http://sandbox-hdp.hortonworks.com:4200` with login `root/hadoop`. On first login, you will be prompted to update the password.
 
 The next set of commands will setup **HDFS** for holding the Tweet data that will be accessed by Hive.
 
@@ -249,8 +263,6 @@ exit
 ~~~
 
 ### Setup Spark Service
-
-Open HDP Sandbox Web Shell Client at `http://sandbox-hdp.hortonworks.com:4200` with login `root/hadoop`. On first login, you will be prompted to update the password.
 
 For **Spark** Structured Streaming, we will need to leverage SBT package manager. The commands below install SBT.
 
