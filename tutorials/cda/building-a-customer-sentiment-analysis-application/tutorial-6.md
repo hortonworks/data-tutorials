@@ -8,6 +8,12 @@ title: Visualizing the Classification Model in Real-Time
 
 ## Prerequisites
 
+- Enabled Connected Data Architecture
+- Setup the Development Environment
+- Acquired Twitter Data
+- Cleaned Raw Twitter Data
+- Built a Sentiment Classification Model
+
 ## Outline
 
 
