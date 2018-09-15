@@ -126,3 +126,8 @@ mv /var/lib/nifi/conf/flow.xml.gz /var/lib/nifi/conf/flow.xml.gz.bak
 
 echo "Starting NiFi via Ambari"
 wait_for_service_to_start $HDF NIFI
+
+echo "Starting Kafka in case it is off"
+wait_for_service_to_start $HDF KAFKA
+echo "Creating and registering Kafka topic 'tweetsSentiment'"
+/usr/hdf/current/kafka-broker/bin/kafka-topics.sh --create --zookeeper sandbox-hdf.hortonworks.com:2181 --replication-factor 1 --partitions 10 --topic tweetsSentiment
