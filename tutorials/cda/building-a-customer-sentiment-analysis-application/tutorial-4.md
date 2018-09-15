@@ -6,7 +6,7 @@ title: Cleaning the Raw Twitter Data
 
 ## Introduction
 
-LOAD DATA INTO SPARK, CLEAN RECORDS, TRANSFORM DATA
+Our next objective is to **load the tweet data** that NiFi stored in HDFS into Spark. We will **clean the records** to prevent bias in the model. We will **label our data**, so later our model that we create in next phase of development will be able to learn between happy and sad. We will **transform the data** into a feature vector (feature array) since Gradient Boosting model expects that format for the input.
 
 ## Prerequisites
 
@@ -19,6 +19,18 @@ LOAD DATA INTO SPARK, CLEAN RECORDS, TRANSFORM DATA
 - [Further Reading](#further-reading)
 
 ## Approach 1: Write Spark Code to Clean Raw Twitter Data
+
+You will create a Zeppelin Notebook that uses Scala Spark to clean the raw decahose stream of tweets and refine it to be used in creating the sentiment classification model.
+
+### Create Zeppelin Notebook for Cleansing Data
+
+Open Zeppelin UI at `http://sandbox-hdp.hortonworks.com:9995`.
+
+Create a new note.
+
+Add name `Cleaning-Raw-Twitter-Data`.
+
+Now the notebook is created and we will start writing the code to clean the data.
 
 ### Configuration
 
@@ -131,7 +143,7 @@ labeledTweets.take(10).foreach(x => println(x))
 
 ### Transform Data
 
-Gradient Boosting expects as input a vector (feature array) of fixed length, so we need a way to convert our tweets into some numeric vector that represents that tweet. To learn more about the algorithms used for the transpformation follow along in the **tutorial page (EXTERNAL LINK)**.
+Gradient Boosting expects as input a vector (feature array) of fixed length, so we need a way to convert our tweets into some numeric vector that represents that tweet. To learn more about the algorithms used for the transformation follow along in the **tutorial page (EXTERNAL LINK)**.
 
 ~~~scala
 val hashingTF = new HashingTF(2000)
@@ -172,5 +184,7 @@ bash zeppelin-auto-deploy.sh $NOTEBOOK_NAME
 ~~~
 
 ## Summary
+
+Congratulations! Reflecting on the steps we took to refine the data: **loaded the data** from HDFS into Spark, **cleaned the records** that didn't contain happy or sad to prevent a bias in the model, **labeled tweets** as 1 for happy and 0 for sad to teach the model to differentiate between happy versus sad and **transformed the data** into a vector of fixed length since Gradient Boosting expects that format as input. The twitter data has been preprocessed and is ready for the next phase of development, which is building the machine learning model.
 
 ## Further Reading
