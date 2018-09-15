@@ -347,6 +347,19 @@ hdfs dfs -put $LFS_DATA/time_zone_map.tsv $HDFS_TABLES/time_zone_map/
 wget https://github.com/james94/data-tutorials/raw/master/tutorials/cda/building-a-customer-sentiment-analysis-application/application/setup/data/dictionary.tsv -O $LFS_DATA/dictionary.tsv
 # Copy dictionary.tsv from local FS to HDFS
 hdfs dfs -put $LFS_DATA/dictionary.tsv $HDFS_TABLES/dictionary/
+
+LFS_TWEETS_PACKAGED_PATH="/sandbox/tutorial-files/770/tweets"
+# Download Tweets pre-packaged tweets
+mkdir $LFS_TWEETS_PACKAGED_PATH
+rm -rf $LFS_TWEETS_PACKAGED_PATH/*
+cd $LFS_TWEETS_PACKAGED_PATH
+wget https://github.com/james94/data-tutorials/raw/master/tutorials/cda/building-a-customer-sentiment-analysis-application/application/setup/data/tweets.zip -O $LFS_TWEETS_PACKAGED_PATH/tweets.zip
+unzip $LFS_TWEETS_PACKAGED_PATH/tweets.zip
+rm -rf $LFS_TWEETS_PACKAGED_PATH/tweets.zip
+# Remove existing (if any) copy of data from HDFS. You could do this with Ambari file view.
+hdfs dfs -rm -r -f $HDFS_TWEET_STAGING/* -skipTrash
+# Move downloaded JSON file from local storage to HDFS
+hdfs dfs -put $LFS_TWEETS_PACKAGED_PATH/* $HDFS_TWEET_STAGING
 # Exit HDFS user
 exit
 
