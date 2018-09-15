@@ -10,6 +10,10 @@ Our next objective is to **load the tweet data** that NiFi stored in HDFS into S
 
 ## Prerequisites
 
+- Enabled Connected Data Architecture
+- Setup the Development Environment
+- Acquired Twitter Data
+
 ## Outline
 
 - [Approach 1: Write Spark Code to Clean Raw Twitter Data](#approach-1-write-spark-code-to-clean-raw-twitter-data)
