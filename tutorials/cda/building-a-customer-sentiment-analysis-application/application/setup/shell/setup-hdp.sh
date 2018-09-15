@@ -293,7 +293,12 @@ function install_service()
   fi
 }
 
-echo "Setting up HDP Sandbox Development Environment for Hive, Spark and Solr Data Analysis"
+echo "Setting up HDP Sandbox Development Environment for Kafka, Hive, Spark and Solr Data Analysis"
+
+echo "Starting Kafka in case it is off"
+wait_for_service_to_start $HDP KAFKA
+echo "Creating and registering Kafka topic 'tweets'"
+/usr/hdp/current/kafka-broker/bin/kafka-topics.sh --create --zookeeper sandbox-hdp.hortonworks.com:2181 --replication-factor 1 --partitions 10 --topic tweets
 
 echo "Setting Up Maven needed for Compiling and Installing Hive JSON-Serde Lib"
 wget http://repos.fedorapeople.org/repos/dchen/apache-maven/epel-apache-maven.repo -O /etc/yum.repos.d/epel-apache-maven.repo
