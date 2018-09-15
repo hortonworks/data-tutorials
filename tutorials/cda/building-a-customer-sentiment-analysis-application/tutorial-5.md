@@ -6,11 +6,14 @@ title: Building a Sentiment Classification Model
 
 ## Introduction
 
-This tutorial will teach you how to build sentiment analysis algorithms with Apache Spark. We will be doing data transformation using Scala and Apache Spark 2, and we will be classifying tweets as happy or sad using a Gradient Boosting algorithm. Although this tutorial is focused on sentiment analysis, Gradient Boosting is a versatile technique that can be applied to many classification problems. You should be able to reuse this code to classify text in many other ways, such as spam or not spam, news or not news, provided you can create enough labeled examples with which to train a model.
-
-SPLIT INTO TRAINING AND VALIDATION SETS, BUILD THE MODEL
+Our next objective is to build the sentiment classification model using our cleaned twitter dataset. First we must train our machine learning model by separating our data into a training set and validation set. Next we can choose Gradient Boosting to build our model. We will then evaluate our model to see how well it did against training and test set. In the evaluation, we will attempt to adjust the parameters of the model to see if we can increase the model's accuracy at how well it differentiates between happy and sad tweets. Once the model has configured for maximum accuracy, we will export it into HDFS for production use.
 
 ## Prerequisites
+
+- Enabled Connected Data Architecture
+- Setup the Development Environment
+- Acquired Twitter Data
+- Cleaned Raw Twitter Data
 
 ## Outline
 
@@ -185,5 +188,7 @@ curl -X POST http://$HDP_HOST:9995/api/notebook/import \
 ~~~
 
 ## Summary
+
+Congratulations! You learned how to build a sentiment classification model using SparkML's Gradient Boosting. Reviewing the process we took: separated the data into a training set and validation set, evaluated the model for accuracy, configured the model for maximum accuracy and exported it into HDFS for later use with Spark Streaming.
 
 ## Further Reading
