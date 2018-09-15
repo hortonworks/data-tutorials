@@ -154,7 +154,7 @@ Open HDF Sandbox Web Shell Client at `http://sandbox-hdf.hortonworks.com:4200` w
 The following shell code synchronizes CentOS7 System Clock with UTC, which HDF Sandbox runs on and is needed for NiFi's GetTwitter processor. By updating the CentOS7 System Clock, we will avoid running into
 authorization errors when connecting to the Twitter API Feed through GetTwitter processor.
 
-The second part of the code cleans up the NiFi flow that is already prebuilt into HDF Sandbox by backing up the flow and removing it.
+The second part of the code cleans up the NiFi flow that is already prebuilt into HDF Sandbox by backing up the flow and removing it. Copy and paste the code line by line into the web shell.
 
 ~~~bash
 echo "Synchronizing CentOS7 System Clock with UTC for GetTwitter Processor"
@@ -169,14 +169,16 @@ echo "Existing flow on NiFi canvas backed up to flow.xml.gz.bak"
 mv /var/lib/nifi/conf/flow.xml.gz /var/lib/nifi/conf/flow.xml.gz.bak
 ~~~
 
-For the changes in NiFi to take effect, we need to restart NiFi. Open Ambari at `http://sandbox-hdf.hortonworks.com:8080` with login `admin/admin`.
+For the changes in NiFi to take effect, we need to **restart NiFi**. Open Ambari at `http://sandbox-hdf.hortonworks.com:8080` with login `admin/admin`.
 
-Click the NiFi service from Ambari stack of services, press **Service Actions**
+Click the **NiFi service** from Ambari stack of services, press **Service Actions**
 dropdown, select **Restart All**.
 
 A Background Operation Running window will pop up with **Restart all components for NiFi** progress bar loading and turning green once the restart is successful.
 
 ### Setup Kafka Service
+
+If Kafka is off, make sure to turn it on from Ambari.
 
 We will need to create a Kafka topic on HDF for Spark to stream data into from HDP.
 
@@ -190,6 +192,8 @@ Open HDP Sandbox Web Shell Client at `http://sandbox-hdp.hortonworks.com:4200` w
 
 ### Setup Kafka Service
 
+If Kafka is off, make sure to turn it on from Ambari at `http://sandbox-hdp.hortonworks.com:8080` with login `raj_ops/raj_ops`.
+
 We will need to create a Kafka topic on HDP for NiFi to publish messages to in the queue.
 
 ~~~bash
@@ -198,7 +202,7 @@ We will need to create a Kafka topic on HDP for NiFi to publish messages to in t
 
 ### Setup Hive Service
 
-The first set of commands will setup **Hive**, so we can create, read and write to tables built on top of JSON data by installing maven, downloading Hive-JSON-Serde library and compiling that library.
+The first set of commands will setup **Hive**, so we can create, read and write to tables built on top of JSON data by installing maven, downloading Hive-JSON-Serde library and compiling that library. Copy and paste the code line by line in the web shell.
 
 ~~~bash
 echo "Setting Up Maven needed for Compiling and Installing Hive JSON-Serde Lib"
@@ -217,7 +221,7 @@ cp json-serde/target/json-serde-1.3.9-SNAPSHOT-jar-with-dependencies.jar /usr/hd
 cd ~/
 ~~~
 
-For the updates in **Hive** to take effect, we need to restart it, so it can access Hive-JSON-Serde library. **Open Ambari** at `http://sandbox-hdp.hortonworks.com:8080` with login `raj_ops/raj_ops`.
+For the updates in **Hive** to take effect, we need to **restart Hive**, so it can access Hive-JSON-Serde library. **Open Ambari** at `http://sandbox-hdp.hortonworks.com:8080` with login `raj_ops/raj_ops`.
 
 Click the **Hive** service from Ambari stack of services, press **Service Actions**
 dropdown, select **Restart All**.
@@ -226,7 +230,7 @@ A Background Operation Running window will pop up with **Restart all components 
 
 ### Setup HDFS Service
 
-The next set of commands will setup **HDFS** for holding the Tweet data that will be accessed by Hive.
+The next set of commands will setup **HDFS** for holding the Tweet data that will be accessed by Spark. We will create tweets folder that will hold a zipped file. This data will be copied over to HDFS where it will be later loaded by Spark to refine the historical data for creating a machine learning model. Run the code line by line in your web shell.
 
 ~~~bash
 echo "Setting up HDFS for Tweet Data"
@@ -258,13 +262,28 @@ hdfs dfs -put $LFS_DATA/time_zone_map.tsv $HDFS_TABLES/time_zone_map/
 wget https://github.com/james94/data-tutorials/raw/master/tutorials/cda/building-a-customer-sentiment-analysis-application/application/setup/data/dictionary.tsv -O $LFS_DATA/dictionary.tsv
 # Copy dictionary.tsv from local FS to HDFS
 hdfs dfs -put $LFS_DATA/dictionary.tsv $HDFS_TABLES/dictionary/
+
+LFS_TWEETS_PACKAGED_PATH="/sandbox/tutorial-files/770/tweets"
+# Download Tweets pre-packaged tweets
+mkdir $LFS_TWEETS_PACKAGED_PATH
+rm -rf $LFS_TWEETS_PACKAGED_PATH/*
+cd $LFS_TWEETS_PACKAGED_PATH
+wget https://github.com/james94/data-tutorials/raw/master/tutorials/cda/building-a-customer-sentiment-analysis-application/application/setup/data/tweets.zip -O $LFS_TWEETS_PACKAGED_PATH/tweets.zip
+unzip $LFS_TWEETS_PACKAGED_PATH/tweets.zip
+rm -rf $LFS_TWEETS_PACKAGED_PATH/tweets.zip
+# Remove existing (if any) copy of data from HDFS. You could do this with Ambari file view.
+hdfs dfs -rm -r -f $HDFS_TWEET_STAGING/* -skipTrash
+# Move downloaded JSON file from local storage to HDFS
+hdfs dfs -put $LFS_TWEETS_PACKAGED_PATH/* $HDFS_TWEET_STAGING
 # Exit HDFS user
 exit
 ~~~
 
+
+
 ### Setup Spark Service
 
-For **Spark** Structured Streaming, we will need to leverage SBT package manager. The commands below install SBT.
+For **Spark** Structured Streaming, we will need to leverage SBT package manager. The commands below install SBT. Run the code line by line in the web shell.
 
 ~~~bash
 curl https://bintray.com/sbt/rpm/rpm | sudo tee /etc/yum.repos.d/bintray-sbt-rpm.repo
