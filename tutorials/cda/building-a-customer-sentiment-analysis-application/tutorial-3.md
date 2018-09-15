@@ -610,11 +610,11 @@ Start the NiFi flow. Hold **control + mouse click** on the **AcquireTwitterData*
 
 ![started_acquiretwitterdata_pg](assets/images/acquire-twitter-data/started_acquiretwitterdata_pg.jpg)
 
-Once NiFi writes your sensor data to HDFS, which you can check quickly by looking at the PutHDFS processors inside the process group, you can turn off the process group by holding **control + mouse click** on the **AcquireTwitterData** process group, then choose **stop** option.
+Once NiFi writes tweet data to HDFS and Kafka, you can check the provenance events quickly by looking at the PutHDFS or PublishKafka_0_10 processor inside the **AcquireTwitterData** process group and once enough data has been stored, you can turn off the process group by holding **control + mouse click** on the **AcquireTwitterData** process group, then choose **stop** option.
 
 ## Summary
 
-Congratulations! The development environment is setup and configured, so we can began acquiring the customer sentiment data via NiFi ingesting the Twitter API feed.
+Congratulations! You built one dataflow **AcquireTwitterData** using NiFi to acquire Tweet sentiment data from Twitter's **[Decahose stream](https://developer.twitter.com/en/docs/tweets/sample-realtime/overview/streaming-likes)** API. The data pipeline filters for tweets before publishing messages into **Kafka topic 'tweets'**, which is picked up by the external service Spark. The data pipeline also updates the flowfile content in JSON with key value pairs to represent the sentiment data, merges multiple flowfiles together before storing into **HDFS**. The other dataflow **StreamTweetsToSolr** ingests Kafka messages and streams the content to Solr.
 
 ## Further Reading
 
