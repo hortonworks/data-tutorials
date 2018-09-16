@@ -10,6 +10,8 @@ Security breaches happen. And when they do, your server logs may be your best li
 
 ## Prerequisites
 
+- Read overview of tutorial series
+
 ## Outline
 
 - [Server Log Data]
