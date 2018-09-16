@@ -17,7 +17,10 @@ HDP_HOST="sandbox-hdp.hortonworks.com"
 AMBARI_CREDENTIALS=$HDP_AMBARI_USER:$HDP_AMBARI_PASS
 
 echo "Setting up HDP Sandbox Development Environment"
-
+tee -a /etc/resolv.conf << EOF
+# Google's Public DNS
+nameserver 8.8.8.8
+EOF
 # TODO: Check that service exists via ambari rest call
 # TODO: Check if service is in maintenance mode via ambari rest call
 echo "Turning off Spark's maintenance mode via Ambari"
