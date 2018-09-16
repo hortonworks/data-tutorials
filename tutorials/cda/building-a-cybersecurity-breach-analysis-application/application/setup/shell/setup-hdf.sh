@@ -56,6 +56,10 @@ function wait()
 }
 
 echo "Setting up HDF Sandbox Environment for NiFi flow development..."
+tee -a /etc/resolv.conf << EOF
+# Google's Public DNS
+nameserver 8.8.8.8
+EOF
 echo "Creating File Path to GeoLite DB and NASALogs for NiFi"
 GEODB_NIFI_DIR="/sandbox/tutorial-files/200/nifi"
 mkdir -p $GEODB_NIFI_DIR/input/GeoFile
