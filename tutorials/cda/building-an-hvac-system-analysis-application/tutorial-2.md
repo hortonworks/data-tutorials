@@ -19,6 +19,8 @@ Our objective in this part of building the HVAC system analysis application is t
 - [Summary](#summary)
 - [Further Reading](#further-readings)
 
+Before starting **Approach 1** or **Approach 2**, wait for HDF sandbox to start up, once **all services** indicated by **Background Operation Running** in Ambari Dashboard have finished starting at `http://sandbox-hdf.hortonowrks.com:8080` with login `admin/admin`, then enter the NiFi UI and import the NiFi template.
+
 ## Approach 1: Manually Setup Development Platforms via CLI
 
 ### Setting up HDF
