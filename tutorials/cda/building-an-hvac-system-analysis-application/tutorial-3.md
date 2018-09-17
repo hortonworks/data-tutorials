@@ -10,65 +10,18 @@ You have been brought onto the project as a Data Engineer with the following res
 
 ## Prerequisites
 
-- Enabled CDA for your appropriate system.
+- Enabled CDA for your appropriate system
+- Set up the Development Environment
 
 ## Outline
 
-- [Approach 1: Auto Deploy NiFi Flow via REST Call](#approach-1-auto-deploy-nifi-flow-via-rest-call)
-- [Approach 2: Import NiFi Flow via UI](#approach-2-import-nifi-flow-via-ui)
-- [Approach 3: Build a NiFi AcquireHVACData Process Group](#approach-3-build-a-nifi-acquirehvacdata-process-group)
-    - [Ingest Sensor Data Source](#ingest-sensor-data-source)
-    - [Decompress Content of FlowFile](#decompress-content-of-flowfile)
-    - [Split the Source Into Two Flows](#split-the-source-into-two-flows)
-    - [Store the Data Into Storage](#store-the-data-into-storage)
-    - [Start Process Group Flow to Acquire Data](#start-process-group-flow-to-acquire-data)
-    - [Verify NiFi Stored Data](#verify-nifi-stored-data)
+- [Approach 1: Build a NiFi Flow to Acquire HVAC Sensor Data](#approach-1-Build-a-nifi-flow-to-acquire-hvac-sensor-data)
+- [Approach 2: Import NiFi AcquireHVACData Process Group via UI](#approach-2-import-nifi-acquirehvacdata-process-group-via-ui)
+- [Approach 3: Auto Deploy NiFi Flow via REST Call](#approach-3-auto-deploy-nifi-flow-via-rest-call)
 - [Summary](#summary)
 - [Further Reading](#further-reading)
-- [Appendix A: NiFi Reference](#appendix-a-nifi-reference)
 
-## Approach 1: Auto Deploy NiFi Flow via REST Call
-
-Open HDF **sandbox web shell client** at `http://sandbox-hdf.hortonworks.com:4200/` with login `root/hadoop`.
-
-~~~bash
-wget https://raw.githubusercontent.com/james94/data-tutorials/master/tutorials/cda/building-an-hvac-system-analysis-application/application/development/shell/nifi-auto-deploy.sh
-bash nifi-auto-deploy.sh
-~~~
-
-Open HDF **NiFi UI** at `http://sandbox-hdf.hortonworks.com:9090/nifi`.
-
-You will see the NiFi template was uploaded, imported and started.
-
-![started_acquirehvacdata_pg](assets/images/started_hvac_flow.jpg)
-
-Once NiFi writes your sensor data to HDFS, which you can check quickly by looking at the PutHDFS processors inside the process group, you can turn off the process group by holding **control + mouse click** on the **AcquireHVACData** process group, then choose **stop** option.
-
-## Approach 2: Import NiFi Flow via UI
-
-Download the NiFi template [acquire-hvac-data.xml](application/development/nifi-template/acquire-hvac-data.xml) to your local computer.
-
-After starting your sandbox, open HDF **NiFi UI** at `http://sandbox-hdf.hortonworks.com:9090/nifi`.
-
-Open the Operate panel if not already open, then press the **Upload Template** icon ![upload](assets/images/upload.jpg).
-
-Press on Select Template icon ![search_template](assets/images/search_template.jpg).
-
-The file browser on your local computer will appear, find **acquire-hvac-data.xml** template you just downloaded, then press **Open**, then press **UPLOAD**.
-
-You should receive a notification that the **Template successfully imported.** Press OK to acknowledge.
-
-Drop the **Template** icon ![template](assets/images/template.jpg) onto the NiFi canvas.
-
-Add Template called **acquire-hvac-data**.
-
-Start the NiFi flow. Hold **control + mouse click** on the **AcquireHVACData** process group, then click the **start** option.
-
-![started_acquirehvacdata_pg](assets/images/started_hvac_flow.jpg)
-
-Once NiFi writes your sensor data to HDFS, which you can check quickly by looking at the PutHDFS processors inside the process group, you can turn off the process group by holding **control + mouse click** on the **AcquireHVACData** process group, then choose **stop** option.
-
-## Approach 3: Build a NiFi AcquireHVACData Process Group
+## Approach 1: Build a NiFi AcquireHVACData Process Group
 
 After starting your sandbox, open HDF **NiFi UI** at `http://sandbox-hdf.hortonworks.com:9090/nifi`.
 
@@ -296,15 +249,51 @@ You will be able to see the data NiFi sent to the external process HDFS. The dat
 
 ![view_event_hvac_temperature](assets/images/view_event_hvac_temperature.jpg)
 
+## Approach 2: Import NiFi AcquireHVACData Process Group via UI
+
+Download the NiFi template [acquire-hvac-data.xml](application/development/nifi-template/acquire-hvac-data.xml) to your local computer.
+
+After starting your sandbox, open HDF **NiFi UI** at `http://sandbox-hdf.hortonworks.com:9090/nifi`.
+
+Open the Operate panel if not already open, then press the **Upload Template** icon ![upload](assets/images/upload.jpg).
+
+Press on Select Template icon ![search_template](assets/images/search_template.jpg).
+
+The file browser on your local computer will appear, find **acquire-hvac-data.xml** template you just downloaded, then press **Open**, then press **UPLOAD**.
+
+You should receive a notification that the **Template successfully imported.** Press OK to acknowledge.
+
+Drop the **Template** icon ![template](assets/images/template.jpg) onto the NiFi canvas.
+
+Add Template called **acquire-hvac-data**.
+
+Start the NiFi flow. Hold **control + mouse click** on the **AcquireHVACData** process group, then click the **start** option.
+
+![started_acquirehvacdata_pg](assets/images/started_hvac_flow.jpg)
+
+Once NiFi writes your sensor data to HDFS, which you can check quickly by looking at the PutHDFS processors inside the process group, you can turn off the process group by holding **control + mouse click** on the **AcquireHVACData** process group, then choose **stop** option.
+
+## Approach 3: Auto Deploy NiFi Flow via REST Call
+
+Open HDF **sandbox web shell client** at `http://sandbox-hdf.hortonworks.com:4200/` with login `root/hadoop`.
+
+~~~bash
+wget https://raw.githubusercontent.com/james94/data-tutorials/master/tutorials/cda/building-an-hvac-system-analysis-application/application/development/shell/nifi-auto-deploy.sh
+bash nifi-auto-deploy.sh
+~~~
+
+Open HDF **NiFi UI** at `http://sandbox-hdf.hortonworks.com:9090/nifi`.
+
+You will see the NiFi template was uploaded, imported and started.
+
+![started_acquirehvacdata_pg](assets/images/started_hvac_flow.jpg)
+
+Once NiFi writes your sensor data to HDFS, which you can check quickly by looking at the PutHDFS processors inside the process group, you can turn off the process group by holding **control + mouse click** on the **AcquireHVACData** process group, then choose **stop** option.
+
 ## Summary
 
-
+Congratulations! You have now created a data pipeline to ingest the data from the sensors embedded on HVAC machine systems, prepared the data to be in a readable format for external services to do data analysis. In the next portion of the data pipeline, you will use Apache Hive to perform cleaning and analysis on the data.
 
 ## Further Reading
 
-
-## Appendix A: NiFi Reference
-
-### Remove a NiFi Dataflow via UI
-
-Remove a NiFi flow currently on the NiFi canvas by pressing **command + A** or **control + A** and then **delete** or **backspace**.
+- [Apache NiFi User Guide](https://nifi.apache.org/docs/nifi-docs/html/user-guide.html)
