@@ -17,9 +17,10 @@ series: HDP > Hadoop for Data Engineers & Data Scientists > Real World Examples,
 
 ## Introduction
 
-
+Hortonworks Connected Data Platform can be used to to acquire, clean and visualize data from heating, ventilation, and air conditioning (HVAC) machine systems to maintain optimal office building temperatures and minimize expenses.
 
 ## Big Data Technologies used to develop the Application:
+
 - Historical HVAC Sensor Data
 - [HDF Sandbox](https://hortonworks.com/products/data-platforms/hdf/)
     - [Apache Ambari](https://ambari.apache.org/)
@@ -32,7 +33,10 @@ series: HDP > Hadoop for Data Engineers & Data Scientists > Real World Examples,
 
 ## Goals and Objectives
 
-
+- Learn to write a shell script to automate development environment setup
+- Learn to build a NiFi flow to acquire HVAC machine sensor data
+- Learn to write Hive scripts to clean the HVAC machine sensor data and prepare it for visualization
+- Learn to visualize HVAC machine sensor data in Zeppelin
 
 ## Prerequisites
 
@@ -58,3 +62,7 @@ The tutorial series consists of the following tutorial modules:
 Show insight of how we are cleaning the data using Zeppelin.
 
 5\. **Visualizing HVAC Systems with Extreme Temperature**: Spark. Perform data analysis on HVAC sensor data to find the _HVAC Temperature Ranges By Country_ - keep count of HOT, COLD, NORMAL ranges per country, _HVAC Extreme HOT Units_ - keep count of machines with HOT temperature, _HVAC Extreme COLD Units_ - keep count of machines with COLD temperature.
+
+## Further Reading
+
+- [Demo Video: Analyzing Sensor Data](https://www.youtube.com/watch?v=Op_5MmG7hIw)
