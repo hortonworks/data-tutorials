@@ -6,18 +6,27 @@ title: Cleaning Raw HVAC Data
 
 ## Introduction
 
+You will learn to clean HVAC data into a useful format. You will gain a practical experience with creating Hive tables that run on ORC files for fast and efficient data processing. You will gain insight to writing Hive scripts that enrich our data to reveal to us when temperature is at a cold, normal or hot state. Additionally, you will learn to write Hive queries on the data to determine which particular buildings are associated with these temperature states.
+
 ## Prerequisites
+
+- Enabled CDA for your appropriate system
+- Set up the Development Environment
+- Acquired HVAC Sensor Data
 
 ## Outline
 
+- [Clean Raw HVAC Sensor Data](#approach-1-clean-raw-hvac-sensor-data)
 - [Upload HVAC Sensor Data into Tables](#upload-hvac-sensor-data-into-tables)
 - [Refine the Raw Sensor Data](#refine-the-raw-sensor-data)
 - [Summary](#summary)
 - [Further Reading](#further-reading)
 
-## Upload HVAC Sensor Data into Tables
+## Clean Raw HVAC Sensor Data
 
 Open Ambari UI at `http://sandbox-hdp.hortonworks.com:8080` and login with `maria_dev/maria_dev`.
+
+### Upload HVAC Sensor Data into Tables
 
 Use the **views dropdown menu** and choose **Hive View 2**.
 
@@ -71,7 +80,7 @@ Select File Format, Select File Source
 Enter HDFS Path for HVAC.csv:
 
 ~~~bash
-/sandbox/sensor/hvac_building/building.csv
+/sandbox/sensor/hvac_temperature/HVAC.csv
 ~~~
 
 ![hive_hvac_csv_file_format_source](assets/images/hive_hvac_csv_file_format_source.jpg)
@@ -107,13 +116,36 @@ IF((targettemp - actualtemp) < -5, '1', 0))
 AS extremetemp from hvac;
 ~~~
 
+What's this query does?
+
+- Creates a new table **hvac_temperatures** and copies data from the **hvac** table
+- On the Query Results page, use the slider to scroll to the right. You will notice that two new attributes appear in the **hvac_temperatures** table
+
+What are the two new attributes?
+
+- **temprange** and **extremetemp**
+
 works? **YES**
+
+
+
+<!-- Add picture for HDP 3.0-->
 
 ~~~sql
 select * from hvac_temperatures limit 10;
 ~~~
 
+What does the data in the **temprange** column indicate about the actual temperature?
+
+- **NORMAL** – within 5 degrees of the target temperature.
+- **COLD** – more than five degrees colder than the target temperature.
+- **HOT** – more than 5 degrees warmer than the target temperature.
+
 works? **YES**
+
+<!-- Add picture for HDP3.0-->
+
+Now we will create a table that combines hvac_temperatures and buildings table.
 
 ~~~sql
 create table if not exists hvac_building
@@ -123,12 +155,27 @@ from building b join hvac_temperatures h on b.buildingid = h.buildingid;
 
 works? **YES**
 
+Which tables is **hvac_building’s** data coming from?
+
+- **hvac_temperature** and **buildings**
+
+<!-- Add picture for HDP3.0-->
+
+Once the query is successfully executed, use the database explorer to load a sample of the data from the new `hvac_building`
+
 ~~~sql
 select * from hvac_building limit 10;
 ~~~
 
 works? **YES**
 
+<!-- Add picture for HDP3.0-->
+
 ## Summary
 
+We've successfully refined the data into a useful format. We learned to create Hive tables that run on ORC files for fast and efficient data processing. We learned to write Hive scripts to enrich our data to reveal to us when temperature is at a cold, normal or hot state. Additionally, we used the data to bring us insight into which particular buildings are associated with these temperature states. Our next step is to use different reporting tools to analyze the results.
+
 ## Further Reading
+
+- [How can I upload ORC files to Hive?](https://community.hortonworks.com/questions/47594/how-can-i-upload-ocr-files-to-hive.html)
+- [Optimizing Hive queries for ORC formatted tables](https://community.hortonworks.com/articles/68631/optimizing-hive-queries-for-orc-formatted-tables.html)
