@@ -6,24 +6,107 @@ title: Setting up the Development Environment
 
 ## Introduction
 
+Our objective in this part of building the HVAC system analysis application is to setup the development environment, so we can began acquiring the data, cleaning it and visualizing keep aspects of it to show insight to our clients. We will clean up the NiFi canvas on HDF, so we start fresh with no pre-existing dataflows.
+
 ## Prerequisites
+
+- Enabled CDA for your appropriate system.
 
 ## Outline
 
-- [Approach 1: Automatically Setup Development Platforms](#approach-1-automatically-setup-development-platforms)
-- [Approach 2: Manually Setup Development Platforms via CLI](#approach-2-manually-setup-development-platforms-via-cli)
+- [Approach 1: Manually Setup Development Platforms via CLI](#approach-1-manually-setup-development-platforms-via-cli)
+- [Approach 2: Automatically Setup Development Platforms](#approach-2-automatically-setup-development-platforms)
 - [Summary](#summary)
 - [Further Reading](#further-readings)
 
-## Approach 1: Automatically Setup Development Platforms
+## Approach 1: Manually Setup Development Platforms via CLI
 
-Download the two setup scripts for HDF and HDP sandbox to prepare the services
-to be used to develop the HVAC System Analysis Application. They perform the
-following operations to setup the services needed for application development:
+### Setting up HDF
 
-- **Setup NiFi**:
+~~~bash
+#!/bin/bash
+# Adding Public DNS to resolve msg: unable to resolv s3.amazonaws.com
+# https://forums.aws.amazon.com/thread.jspa?threadID=125056
+tee -a /etc/resolve.conf << EOF
+# Google Public DNS
+nameserver 8.8.8.8
+EOF
 
-- **Setup HDP?**:
+##
+# Purpose: HDF Sandbox comes with a prebuilt NiFi flow, which causes user to be
+# pulled away from building the HVAC System Analysis Application.
+#
+# Potential Solution: Backup prebuilt NiFi flow and call it a different name.
+##
+
+HDF_AMBARI_USER="admin"
+HDF_AMBARI_PASS="admin"
+HDF_CLUSTER_NAME="Sandbox"
+HDF_HOST="sandbox-hdf.hortonworks.com"
+HDF="hdf-sandbox"
+AMBARI_CREDENTIALS=$HDF_AMBARI_USER:$HDF_AMBARI_PASS
+
+# Ambari REST Call Function: waits on service action completing
+
+# Start Service in Ambari Stack and wait for it
+# $1: HDF or HDP
+# $2: Service
+# $3: Status - STARTED or INSTALLED, but OFF
+function wait()
+{
+  if [[ $1 == "hdp-sandbox" ]]
+  then
+    finished=0
+    while [ $finished -ne 1 ]
+    do
+      ENDPOINT="http://$HDP_HOST:8080/api/v1/clusters/$HDP_CLUSTER_NAME/services/$2"
+      AMBARI_CREDENTIALS="$HDP_AMBARI_USER:$HDP_AMBARI_PASS"
+      str=$(curl -s -u $AMBARI_CREDENTIALS $ENDPOINT)
+      if [[ $str == *"$3"* ]] || [[ $str == *"Service not found"* ]]
+      then
+        finished=1
+      fi
+        sleep 3
+    done
+  elif [[ $1 == "hdf-sandbox" ]]
+  then
+    finished=0
+    while [ $finished -ne 1 ]
+    do
+      ENDPOINT="http://$HDF_HOST:8080/api/v1/clusters/$HDF_CLUSTER_NAME/services/$2"
+      AMBARI_CREDENTIALS="$HDF_AMBARI_USER:$HDF_AMBARI_PASS"
+      str=$(curl -s -u $AMBARI_CREDENTIALS $ENDPOINT)
+      if [[ $str == *"$3"* ]] || [[ $str == *"Service not found"* ]]
+      then
+        finished=1
+      fi
+        sleep 3
+    done
+  else
+    echo "ERROR: Didn't Wait for Service, need to choose appropriate sandbox HDF or HDP"
+  fi
+}
+
+# Stop NiFi first, then backup prebuilt NiFi flow, then start NiFi for
+# changes to take effect
+
+echo "Stopping NiFi via Ambari"
+curl -u $AMBARI_CREDENTIALS -H "X-Requested-By: ambari" -X PUT -d '{"RequestInfo":
+{"context": "Stop NiFi"}, "ServiceInfo": {"state": "INSTALLED"}}' \
+http://$HDF_HOST:8080/api/v1/clusters/$HDF_CLUSTER_NAME/services/NIFI
+wait $HDF NIFI "INSTALLED"
+
+echo "Prebuilt flow on NiFi canvas backed up to flow.xml.gz.bak"
+mv /var/lib/nifi/conf/flow.xml.gz /var/lib/nifi/conf/flow.xml.gz.bak
+
+echo "Starting NiFi via Ambari"
+curl -u $AMBARI_CREDENTIALS -H "X-Requested-By: ambari" -X PUT -d '{"RequestInfo":
+{"context": "Start NiFi"}, "ServiceInfo": {"state": "STARTED"}}' \
+http://$HDF_HOST:8080/api/v1/clusters/$HDF_CLUSTER_NAME/services/NIFI
+wait $HDF NIFI "STARTED"
+~~~
+
+## Approach 2: Automatically Setup Development Platforms
 
 Open the HDF sandbox web shell client at `http://sandbox-hdf.hortonworks.com:4200` with login `root/hadoop`.
 
@@ -32,37 +115,14 @@ wget https://raw.githubusercontent.com/james94/data-tutorials/master/tutorials/c
 bash setup-hdf.sh
 ~~~
 
-Open the HDP sandbox web shell client at `http://sandbox-hdp.hortonworks.com:4200` with initial login `root/hadoop`,
-once the password is entered, CentOS7 will prompt you to enter a new password. Note: write your new password down.
-
-~~~bash
-wget [setup-hdp.sh](application/setup/shell/setup-hdp.sh)
-bash setup-hdp.sh
-~~~
-
 Once the script finishes, you are now ready to move onto the next phase of development (the next tutorial), acquiring the data using NiFi.
-
-## Approach 2: Manually Setup Development Platforms via CLI
-
-## Setup Data-In-Motion Platform
-
-Apache NiFi is a service that runs on Hortonworks DataFlow (HDF) Platform. HDF handles data-in-motion using flow management, stream processing and stream analytics. We will do some configurations, so later we can focus on building the NiFi dataflow application.
-
-### Setting up NiFi
-
-~~~bash
-#!/bin/bash
-
-# Adding Public DNS to resolve msg: unable to resolv s3.amazonaws.com
-# https://forums.aws.amazon.com/thread.jspa?threadID=125056
-tee -a /etc/resolve.conf << EOF
-# Google Public DNS
-nameserver 8.8.8.8
-EOF
-~~~
-
-## Setup the Data-At-Rest Platform
 
 ## Summary
 
+Congratulations! You now have the development environment ready to start building the HVAC system analysis application. The services needed for the application development have been setup, so we can began building the data pipeline.
+
 ## Further Reading
+
+- [NiFi Rest API](https://nifi.apache.org/docs/nifi-docs/rest-api/index.html)
+- [Ambari Rest API](https://github.com/apache/ambari/blob/trunk/ambari-server/docs/api/v1/index.md)
+- [Learning the bash Shell: Unix Shell Programming](https://www.amazon.com/Learning-bash-Shell-Programming-Nutshell/dp/0596009658)
