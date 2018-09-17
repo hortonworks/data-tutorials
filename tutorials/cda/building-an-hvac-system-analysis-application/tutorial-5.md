@@ -6,7 +6,14 @@ title: Visualizing HVAC Systems with Extreme Temperature
 
 ## Introduction
 
+You will learn to gain more insights on your data by visualizing certain key attributes using Apache Zeppelin. You will to learn to visualize a graph that shows the countries that have the most extreme temperature and the amount of **NORMAL** events there are compared to **HOT** and **COLD**. You will also learn to see which HVAC units result in the most `extremetemp` readings.
+
 ## Prerequisites
+
+- Enabled CDA for your appropriate system
+- Set up the Development Environment
+- Acquired HVAC Sensor Data
+- Cleaned Raw HVAC Data
 
 ## Outline
 
@@ -15,90 +22,89 @@ title: Visualizing HVAC Systems with Extreme Temperature
 
 ## Visualize Temperature Ranges of Countries
 
-Create a new note called `HVAC Data Analysis`.
+1\. Access Zeppelin at `sandbox-hdp.hortonworks.com:9995`
 
-Configuration for Hive is done by placing hive-site.xml, core-site.xml and
-hdfs-site.xml files into `/etc/spark2/conf/` directory.
+From here we’re going to need to create a new Zeppelin Notebook. Notebooks in Zeppelin is how we differentiate reports from one another.
 
-Spark SQL will be used to read and write data stored in Hive.
+2\. Hover over **Notebook**. Use the dropdown menu and **Create a new note**.
 
-To work with Hive:
-1\. Instantiate SparkSession with Hive support
+![](assets/lab2-visualize-data-via-zeppelin/zeppelin_dashboard.png)
 
-2\. Include connectivity to a persistent Hive metastore, support for Hive serdes, Hive UDFs
+3\. Name the note `HVAC Analysis Report` and then **Create Note**.
 
-Note: When not configured by hive-site.xml, context auto creates metastore_db
-in current directory and creates directory configured by spark.sql.warehouse.dir
-, which defaults to directory spark-warehouse in current directory Spark app is started
+![](assets/lab2-visualize-data-via-zeppelin/create_zeppelin_notebook.png)
 
-Note: hive.metastore.warehouse.dir property in hive-site.xml is deprecated since
-Spark 2.0.0, so use spark.sql.warehouse.dir to specify the default location of
-database in warehouse
-Note: You may need to grant write privilege to the user who starts Spark application.
+We will use the Hive interpreter to run Hive queries and visualize the results in Zeppelin.
 
-~~~js
-%spark2
-//Import Hive Dependencies
-import java.io.File
-import org.apache.spark.sql.{Row, SaveMode, SparkSession}
+4\. To access the Hive interpreter for this note, we must insert `%jdbc(hive)` at the top of the note. Everything afterwards will be interpreted as a Hive query.
 
-val hiveWarehouseLocation = "hdfs://sandbox-hdp.hortonworks.com:8020/apps/hive/warehouse/"
+![](assets/lab2-visualize-data-via-zeppelin/zeppelin_hvac_analysis_report_notebook.png)
 
-//Creating SparkSession with Hive Support
-val spark = SparkSession
-  .builder()
-  .appName("Spark Analysis on Hive Tables") //Sets name for app, shown in web ui
-  .config("spark.sql.warehouse.dir", hiveWarehouseLocation)
-  .enableHiveSupport() //includes connectivity to Hive metastore, serdes, UDFs
-  .getOrCreate() //if no existing SparkSession creates new one based on options set in builder
-~~~
-
-3\. Perform SparkSQL query against Hive table hvac_building selecting country, extremetemp and temprange.
-
-~~~js
-%spark2
-import spark.implicits._
-import spark.sql
-
-// Queries are expressed in HiveQL
-sql("SELECT country, extremetemp, temprange FROM hvac_building").show()
-~~~
-
-4\. Visualize a bar graph of the HVAC data with country being on the X-axis and SUM of extremetemp per country being on the Y-axis.
-
-~~~js
-%spark2
+5\. Type the following query into the note, then run it by clicking the **Run** arrow or by using the shortcut **Shift+Enter**.
 
 ~~~
+%jdbc(hive)
 
-
-5\. Visualize a bar graph of the HVAC data with country being on the X-axis, COUNT the extremetemp per country and group temprange into categories of HOT, COLD and NORMAL.
-
-~~~js
-%spark2
-
+select country, extremetemp, temprange from hvac_building
 ~~~
 
+![](assets/lab2-visualize-data-via-zeppelin/load_hvac_building_data_zeppelin.png)
 
-## Visualize HVAC Systems with Extreme Temperature
+Now that the query is run, let’s visualize the data with a chart.
 
-~~~js
-%spark2
-display(sql("SELECT hvacproduct, extremetemp FROM hvac_building"))
+6\. Select the bar graph chart button located just under the query.
+
+7\. Click **settings** to open up more advanced settings for creating the chart.
+
+![](assets/lab2-visualize-data-via-zeppelin/visualize_hvac_buiding_data_bargraph.png)
+
+8\. Here you will experiment with different values and columns to customize data that is illustrated in your visualization.
+
+-   Arrange the fields according to the following image.
+-   Drag the field `temprange` into the **groups** box.
+-   Click **SUM** on `extremetemp` and change it to **COUNT**.
+-   Make sure that `country` is the only field under **Keys**.
+
+![](assets/lab2-visualize-data-via-zeppelin/customize_bar_graph_settings_hvac_building_zeppelin.png)
+
+You've just customized your chart’s settings to portray the countries and their temperature from cold, normal to hot using Apache Zeppelin.
+
+![](assets/lab2-visualize-data-via-zeppelin/countries_most_extrm_temp_zeppelin.png)
+
+-   From the chart above we can see which countries have the most extreme temperature and how many **NORMAL** events there are compared to **HOT** and **COLD**.
+
+## Visualize HVAC System Models in Buildings
+
+Is it possible to figure out which buildings might need HVAC upgrades, and which do not? Let’s determine that answer in the steps ahead...
+
+-   Let's try creating one more note to visualize which types of HVAC systems result in the least amount of `extremetemp` readings.
+
+9\. Paste the following query into the blank Zeppelin note following the chart we made previously.
+
+~~~
+%jdbc(hive)
+
+select hvacproduct, extremetemp from hvac_building
 ~~~
 
-> Illustrate hvac_building table view of hvacproduct and temprange columns
+10\. Use **Shift+Enter** to run the note.
 
-Visualize each hvacproduct with a COUNT of their extremetemp in a bar graph.
+![](assets/lab2-visualize-data-via-zeppelin/load_hvacproduct_extrmtemp_hvacblding_data.png)
 
-~~~js
+11\. Arrange the fields according to the following image so we can recreate the chart below.
 
-~~~
+-   Make sure that `hvacproduct` is in the **Keys** box.
+-   Make sure that `extremetemp` is in the **Values** box and that it is set to **COUNT**.
+
+![](assets/lab2-visualize-data-via-zeppelin/customize_show_mostextrm_readings_hvac.png)
+
+-   Now we can see which HVAC units result in the most `extremetemp` readings. Thus we can make a more informed decision when purchasing new HVAC systems.
 
 ## Summary
 
+We’ve successfully gained more insights on our data by visualizing certain key attributes using Apache Zeppelin. We learned to visualize a graph that shows the countries that have the most extreme temperature and the amount of **NORMAL** events there are compared to **HOT** and **COLD**. We learned to see which HVAC units result in the most `extremetemp` readings.
+
 ## Further Reading
 
-- [Spark SQL Applied to Existing Hive Tables](https://spark.apache.org/docs/latest/sql-programming-guide.html#hive-tables)
-- [SparkSession.Builder API Doc](https://spark.apache.org/docs/2.3.0/api/java/org/apache/spark/sql/SparkSession.Builder.html#Builder--)
-- [Connect Spark to Hive Metastore](https://stackoverflow.com/questions/31980584/how-to-connect-to-a-hive-metastore-programmatically-in-sparksql)
+-   [How to create Map Visualization in Apache Zeppelin](https://community.hortonworks.com/questions/78430/how-to-create-map-visualization-in-apache-zeppelin.html)
+-   [Using Angular within Apache Zeppelin to create custom visualizations](https://community.hortonworks.com/articles/75834/using-angular-within-apache-zeppelin-to-create-cus.html)
