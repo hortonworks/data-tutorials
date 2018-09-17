@@ -30,9 +30,9 @@ You will create a Zeppelin Notebook that uses Scala Spark to clean the raw decah
 
 Open Zeppelin UI at `http://sandbox-hdp.hortonworks.com:9995`.
 
-Create a new note.
+1\. Create new note.
 
-Add name `Cleaning-Raw-Twitter-Data`.
+Insert note name as `Cleaning-Raw-Twitter-Data`, then press **Create Note**.
 
 Now the notebook is created and we will start writing the code to clean the data.
 
@@ -62,7 +62,7 @@ hdfs dfs -put /sandbox/tutorial-files/770/tweets/* /sandbox/tutorial-files/770/t
 
 ### Load data into Spark
 
-Lets load the tweets into Spark SQL and take a look at them.
+Lets load the tweets into Spark SQL and take a look at them. Copy and paste the Scala Spark code into Zeppelin notebook:
 
 ~~~scala
 import org.apache.spark._
