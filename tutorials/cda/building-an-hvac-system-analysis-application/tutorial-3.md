@@ -251,6 +251,8 @@ You will be able to see the data NiFi sent to the external process HDFS. The dat
 
 ## Approach 2: Import NiFi AcquireHVACData Process Group via UI
 
+Wait for HDP sandbox to start up, once **all services** indicated by **Background Operation Running** in Ambari Dashboard have finished starting at `http://sandbox-hdp.hortonowrks.com:8080` with login `raj_ops/raj_ops`, then enter the NiFi UI and import the NiFi template.
+
 Download the NiFi template [acquire-hvac-data.xml](application/development/nifi-template/acquire-hvac-data.xml) to your local computer.
 
 After starting your sandbox, open HDF **NiFi UI** at `http://sandbox-hdf.hortonworks.com:9090/nifi`.
@@ -274,6 +276,8 @@ Start the NiFi flow. Hold **control + mouse click** on the **AcquireHVACData** p
 Once NiFi writes your sensor data to HDFS, which you can check quickly by looking at the PutHDFS processors inside the process group, you can turn off the process group by holding **control + mouse click** on the **AcquireHVACData** process group, then choose **stop** option.
 
 ## Approach 3: Auto Deploy NiFi Flow via REST Call
+
+Wait for HDP sandbox to start up, once **all services** indicated by **Background Operation Running** in Ambari Dashboard have finished starting at `http://sandbox-hdp.hortonowrks.com:8080` with login `raj_ops/raj_ops`, then enter the web shell client and run the following code.
 
 Open HDF **sandbox web shell client** at `http://sandbox-hdf.hortonworks.com:4200/` with login `root/hadoop`.
 
