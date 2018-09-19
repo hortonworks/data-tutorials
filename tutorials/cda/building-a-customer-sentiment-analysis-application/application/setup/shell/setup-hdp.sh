@@ -321,38 +321,16 @@ cd ~/
 echo "Setting up HDFS for Tweet Data"
 su hdfs
 HDFS_TWEET_STAGING="/sandbox/tutorial-files/770/tweets_staging"
-HDFS_TABLES="/sandbox/tutorial-files/770/data/tables"
-LFS_DATA="/sandbox/tutorial-files/770/data"
+LFS_TWEETS_PACKAGED_PATH="/sandbox/tutorial-files/770/tweets"
 # Create tweets_staging hdfs directory ahead of time for hive
 hdfs dfs -mkdir -p $HDFS_TWEET_STAGING
 # Change HDFS ownership of tweets_staging dir to maria_dev
 hdfs dfs -chown -R maria_dev $HDFS_TWEET_STAGING
 # Change HDFS tweets_staging dir permissions to everyone
 hdfs dfs -chmod -R 777 $HDFS_TWEET_STAGING
-# Create new /data/tables directory inside /tmp dir
-hdfs dfs -mkdir -p $HDFS_TABLES
-# Set permissions for tables dir
-hdfs dfs -chmod 777 $HDFS_TABLES
-# Inside tables parent dir, create time_zone_map dir
-hdfs dfs -mkdir $HDFS_TABLES/time_zone_map
-# Inside tables parent dir, create dictionary dir
-hdfs dfs -mkdir $HDFS_TABLES/dictionary
-# HDFS User creates local file system directory
-mkdir -p $LFS_DATA
-# Download time_zone_map.tsv file on local file system(FS)
-wget https://github.com/james94/data-tutorials/raw/master/tutorials/cda/building-a-customer-sentiment-analysis-application/application/setup/data/time_zone_map.tsv -O $LFS_DATA/time_zone_map.tsv
-# Copy time_zone_map.tsv from local FS to HDFS
-hdfs dfs -put $LFS_DATA/time_zone_map.tsv $HDFS_TABLES/time_zone_map/
-# Download dictionary.tsv file on local file system
-wget https://github.com/james94/data-tutorials/raw/master/tutorials/cda/building-a-customer-sentiment-analysis-application/application/setup/data/dictionary.tsv -O $LFS_DATA/dictionary.tsv
-# Copy dictionary.tsv from local FS to HDFS
-hdfs dfs -put $LFS_DATA/dictionary.tsv $HDFS_TABLES/dictionary/
-
-LFS_TWEETS_PACKAGED_PATH="/sandbox/tutorial-files/770/tweets"
 # Download Tweets pre-packaged tweets
-mkdir $LFS_TWEETS_PACKAGED_PATH
+mkdir -p $LFS_TWEETS_PACKAGED_PATH
 rm -rf $LFS_TWEETS_PACKAGED_PATH/*
-cd $LFS_TWEETS_PACKAGED_PATH
 wget https://github.com/james94/data-tutorials/raw/master/tutorials/cda/building-a-customer-sentiment-analysis-application/application/setup/data/tweets.zip -O $LFS_TWEETS_PACKAGED_PATH/tweets.zip
 unzip $LFS_TWEETS_PACKAGED_PATH/tweets.zip
 rm -rf $LFS_TWEETS_PACKAGED_PATH/tweets.zip
@@ -390,7 +368,7 @@ done
 echo "Installing SOLR via Ambari Install REST API Calls"
 # Verify "Ambari Infra Solr" isn't running before installing
 INFRA_STATE=$(check_service_state $HDP AMBARI_INFRA)
-if [[ $INFRA_STATE == *"STARTED" ]]
+if [[ $INFRA_STATE == *"STARTED"* ]]
 then
   # Since Ambari Infra is STARTED, we need to turn it off before installing Apache SOLR Standalone
   wait_for_service_to_stop $HDP AMBARI_INFRA
