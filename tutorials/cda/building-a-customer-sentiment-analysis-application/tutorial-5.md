@@ -25,19 +25,31 @@ Our next objective is to build the sentiment classification model using our clea
 
 ## Approach 1: Implement a Sentiment Classification Model
 
+### Create Zeppelin Notebook for Building the Model
+
+Open Zeppelin UI at `http://sandbox-hdp.hortonworks.com:9995`.
+
+1\. Create new note.
+
+Insert note name as `Building-Sentiment-Classification-Model`, then press **Create Note**.
+
+Now the notebook is created and we will start writing the code to build the model for the data.
+
 ### Split into Training and Validation Sets
 
 When training any machine learning model you want to separate your data into a training set and a validation set. Click here to find out why we do it and how.
 
 **Fixing overfitting:**
 
-If you see that your validation accuracy is very low compared to your training accuracy, you can fix this overfitting by either increasing the size of your training data or by decreasing the number of parameters in your model.
+If you see that your validation accuracy is very low compared to your training accuracy, you can fix this overfitting by either increasing the size of your training data or by decreasing the number of parameters in your model. Copy and paste the Scala Spark code into Zeppelin notebook:
 
 ~~~scala
 // Split the data into training and validation sets (30% held out for validation testing)
 val splits = input_labeled.randomSplit(Array(0.7, 0.3))
 val (trainingData, validationData) = (splits(0), splits(1))
 ~~~
+
+![split_train_validation](assets/images/building-sentiment-classification-model/split_train_validation.jpg)
 
 ### Build the Model
 
@@ -54,6 +66,8 @@ boostingStrategy.treeStrategy.setMaxDepth(5)
 
 val model = GradientBoostedTrees.train(trainingData, boostingStrategy)
 ~~~
+
+![gradient_boosting_classification](assets/images/building-sentiment-classification-model/gradient_boosting_classification.jpg)
 
 ### Evaluate Model
 
@@ -135,6 +149,10 @@ println("Test Error Validation Set: " + testErr)
 
 Lets take some time to reflect on our result back at the **tutorial page (EXTERNAL LINK)**.
 
+![evaluate_model_p1](assets/images/building-sentiment-classification-model/evaluate_model_p1.jpg)
+
+![evaluate_model_p2](assets/images/building-sentiment-classification-model/evaluate_model_p2.jpg)
+
 ### Taking a closer look
 
 Let's take some time to evaluate how our model did by dissecting the data at the individual tweet level.
@@ -151,6 +169,8 @@ val predictions = sample.map { point =>
 predictions.take(100).foreach(x => println("label: " + x._1 + " prediction: " + x._2 + " text: " + x._3.mkString(" ")))
 ~~~
 
+![evaluate_model_at_tweet_level](assets/images/building-sentiment-classification-model/evaluate_model_at_tweet_level.jpg)
+
 Once you've trained your first model, you should go back and tweak the model parameters to see if you can increase model accuracy. In this case, try tweaking the depth of each tree and the number of iterations over the training data. You could also let the model see a greater percentage of happy tweets than unhappy tweets to see if that improves prediction accuracy for happy tweets.
 
 ### Exporting the Model
@@ -161,13 +181,37 @@ Once your model is as accurate as you can make it, you can export it for product
 model.save(sc, "hdfs:///sandbox/tutorial-files/770/tweets/RandomForestModel")
 ~~~
 
+![export_model](assets/images/building-sentiment-classification-model/export_model.jpg)
+
 You've now seen how to build a sentiment analysis model. The techniques you've seen here can be applied to other text classification models besides sentiment analysis. Try analyzing other keywords besides happy and sad and see what results you get.
 
 ~~~scala
 println(model.predict(hashingTF.transform("To this cute little happy sunshine who never fails to bright up my day with his sweet lovely smiles ".split(" ").toSeq)))
 ~~~
 
+![others_besides_happysad](assets/images/building-sentiment-classification-model/others_besides_happysad.jpg)
+
 ## Approach 2: Import Zeppelin Notebook via Zeppelin UI
+
+Open HDP **Zeppelin UI** at `sandbox-hdp.hortonworks.com:9995`.
+
+1\. Click **Import note**. Select **Add from URL**.
+
+Insert the following URL cause we are going to import **Building-Sentiment-Classification-Model** notebook:
+
+~~~bash
+https://<github-url>/Building-Sentiment-Classification-Model.json
+~~~
+
+Click **Import Note**.
+
+Your notebook **Building-Sentiment-Classification-Model** should be a part of the list of notebooks now.
+
+![sentiment-classification-model-added-list](assets/images/cleaning-raw-nasa-log-data/sentiment-classification-model-added-list.jpg)
+
+Click on notebook **Building-Sentiment-Classification-Model**. Then press the **play** button for all paragraphs to be executed. The **play** button is near the title of this notebook at the top of the webpage.
+
+Now we are finished cleaning the Twitter data. We can head to the summary to review how we cleaned the data and prepared it to be ready for visualization.
 
 ## Approach 3: Auto Deploy Zeppelin Notebook via REST Call
 
@@ -176,15 +220,9 @@ Open HDP **sandbox web shell client** at `sandbox-hdp.hortonworks.com:4200`.
 We will use the Zeppelin REST Call API to import a notebook that uses SparkSQL to analyze NASA's server logs for possible breaches.
 
 ~~~bash
-NOTEBOOK_NAME="Sentiment%20Analysis.json"
+NOTEBOOK_NAME="Building-Sentiment-Classification-Model"
 wget https://github.com/james94/data-tutorials/raw/master/tutorials/cda/building-a-cybersecurity-breach-detection-application/application/development/shell/zeppelin-auto-deploy.sh
 bash zeppelin-auto-deploy.sh $NOTEBOOK_NAME
-
-## will create a script from the following code
-wget https://raw.githubusercontent.com/hortonworks/data-tutorials/master/tutorials/hdp/sentiment-analysis-with-apache-spark/assets/Sentiment%20Analysis.json
-# Import Sentiment Analysis Notebook to Zeppelin
-curl -X POST http://$HDP_HOST:9995/api/notebook/import \
--d @'Sentiment%20Analysis.json'
 ~~~
 
 ## Summary
