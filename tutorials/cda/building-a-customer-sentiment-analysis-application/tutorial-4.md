@@ -40,26 +40,6 @@ Now the notebook is created and we will start writing the code to clean the data
 
 Before starting this model you should make sure HDFS and Spark2 are started and the shell interpreter is binded to this notebook.
 
-### Download Tweets pre-packaged tweets
-
-~~~bash
-#!/bin/bash
-# Download Tweets pre-packaged tweets
-mkdir /sandbox/tutorial-files/770/tweets
-rm -rf /sandbox/tutorial-files/770/tweets/*
-cd /sandbox/tutorial-files/770/tweets
-wget https://raw.githubusercontent.com/hortonworks/data-tutorials/master/tutorials/hdp/sentiment-analysis-with-apache-spark/assets/tweets.zip -O /sandbox/tutorial-files/770/tweets/tweets.zip
-unzip /sandbox/tutorial-files/770/tweets/tweets.zip
-rm /sandbox/tutorial-files/770/tweets/tweets.zip
-
-# Remove existing (if any) copy of data from HDFS. You could do this with Ambari file view.
-hdfs dfs -mkdir /sandbox/tutorial-files/770/tweets_staging/
-hdfs dfs -rm -r -f /sandbox/tutorial-files/770/tweets_staging/* -skipTrash
-
-# Move downloaded JSON file from local storage to HDFS
-hdfs dfs -put /sandbox/tutorial-files/770/tweets/* /sandbox/tutorial-files/770/tweets_staging
-~~~
-
 ### Load data into Spark
 
 Lets load the tweets into Spark SQL and take a look at them. Copy and paste the Scala Spark code into Zeppelin notebook:
@@ -84,6 +64,8 @@ import scala.util.{Success, Try}
     tweetDF.show()
 ~~~
 
+![load_data_into_spark](assets/images/cleaning-the-raw-twitter-data/load_data_into_spark.jpg)
+
 ### Clean Records
 
 In the following paragraphs we'll **clean-up (EXTERNAL LINK)** the data to prevent bias in the model.
@@ -105,6 +87,8 @@ val smallest = Math.min(countHappy, countUnhappy).toInt
 //Create a dataset with equal parts happy and unhappy messages
 var tweets = happyMessages.limit(smallest).unionAll(unhappyMessages.limit(smallest))
 ~~~
+
+![clean_records](assets/images/cleaning-the-raw-twitter-data/clean_records.jpg)
 
 ### Label the Data
 
@@ -139,11 +123,15 @@ var labeledTweets = goodBadRecords.filter((_.isSuccess)).map(_.get)
 println("total records with successes: " + labeledTweets.count())
 ~~~
 
+![label_records](assets/images/cleaning-the-raw-twitter-data/label_records.jpg)
+
 Let's take a look at our progress.
 
 ~~~scala
 labeledTweets.take(10).foreach(x => println(x))
 ~~~
+
+![label_records_progress](assets/images/cleaning-the-raw-twitter-data/label_records_progress.jpg)
 
 ### Transform Data
 
@@ -158,11 +146,15 @@ val input_labeled = (labeledTweets.map(
   .map(x => new LabeledPoint((x._1).toDouble, x._2)))
 ~~~
 
+![transform_to_feature_array](assets/images/cleaning-the-raw-twitter-data/transform_to_feature_array.jpg)
+
 Let's take a look at how our vectors are hashed.
 
 ~~~scala
 input_labeled.take(10).foreach(println)
 ~~~
+
+![how_vectors_hashed](assets/images/cleaning-the-raw-twitter-data/how_vectors_hashed.jpg)
 
 As you can see, we've converted each tweet into a vector of integers. This will work great for a machine learning model, but we want to preserve some tweets in a form we can read.
 
@@ -173,7 +165,29 @@ var sample = (labeledTweets.take(1000).map(
   .map(x => (new LabeledPoint((x._1).toDouble, x._2), x._3)))
 ~~~
 
+![sample1000tweets](assets/images/cleaning-the-raw-twitter-data/sample1000tweets.jpg)
+
 ## Approach 2: Import Zeppelin Notebook via Zeppelin UI
+
+Open HDP **Zeppelin UI** at `sandbox-hdp.hortonworks.com:9995`.
+
+1\. Click **Import note**. Select **Add from URL**.
+
+Insert the following URL cause we are going to import **Cleaning-Raw-Twitter-Data** notebook:
+
+~~~bash
+https://<github-url>/Cleaning-Raw-Twitter-Data.json
+~~~
+
+Click **Import Note**.
+
+Your notebook **Cleaning-Raw-Twitter-Data** should be a part of the list of notebooks now.
+
+![cleaning-raw-twitter-data-added-list](assets/images/cleaning-raw-nasa-log-data/cleaning-raw-nasa-log-data-added-list.jpg)
+
+Click on notebook **Cleaning-Raw-Twitter-Data**. Then press the **play** button for all paragraphs to be executed. The **play** button is near the title of this notebook at the top of the webpage.
+
+Now we are finished cleaning the Twitter data. We can head to the summary to review how we cleaned the data and prepared it to be ready for visualization.
 
 ## Approach 3: Auto Deploy Zeppelin Notebook via REST Call
 
