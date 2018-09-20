@@ -2,11 +2,13 @@
 
 ##
 # Script sets up HDF services used in Building an HVAC System Analysis Application
+# Author: James Medel
+# Email: jamesmedel94@gmail.com
 ##
 
 ##
-# Purpose: NiFi GetHTTP will run into ERROR cause it can't resolve
-# S3 Domain Name Server (DNS)
+# Purpose of the following section of Code:
+# NiFi GetHTTP will run into ERROR cause it can't resolve S3 Domain Name Server (DNS)
 #
 # Potential Solution: Append Google Public DNS to CentOS7 /etc/resolve.conf
 # CentOS7 is the OS of the server NiFi runs on. Google Public DNS is able to
@@ -22,14 +24,15 @@ nameserver 8.8.8.8
 EOF
 
 ##
-# Purpose: HDF Sandbox comes with a prebuilt NiFi flow, which causes user to be
+# Purpose of the following section of Code:
+# HDF Sandbox comes with a prebuilt NiFi flow, which causes user to be
 # pulled away from building the HVAC System Analysis Application.
 #
 # Potential Solution: Backup prebuilt NiFi flow and call it a different name.
 ##
 
-HDF_AMBARI_USER="admin"
-HDF_AMBARI_PASS="admin"
+HDF_AMBARI_USER="$1"  # $1: Expects user to pass "Ambari User" into the file
+HDF_AMBARI_PASS="$2"  # $2: Expects user to pass "Ambari Admin Password" into the file
 HDF_CLUSTER_NAME="Sandbox"
 HDF_HOST="sandbox-hdf.hortonworks.com"
 HDF="hdf-sandbox"
@@ -43,7 +46,7 @@ AMBARI_CREDENTIALS=$HDF_AMBARI_USER:$HDF_AMBARI_PASS
 # $3: Status - STARTED or INSTALLED, but OFF
 function wait()
 {
-  if [[ $1 == "hdp-sandbox" ]]
+  if [[ $1 == "hdp-sandbox" ]] 
   then
     finished=0
     while [ $finished -ne 1 ]
