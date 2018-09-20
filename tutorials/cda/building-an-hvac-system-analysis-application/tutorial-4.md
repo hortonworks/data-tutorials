@@ -51,7 +51,7 @@ Create database **hvac_sensors**:
 CREATE DATABASE IF NOT EXISTS hvac_sensors;
 ~~~
 
-After the query creates the database **hvac_sensors** table, you will receive the following message: **Query executed successfully. Affected rows : -1.**.
+![create_database_hvac_sensors](assets/images/cleaning-raw-hvac-data/create_database_hvac_sensors.jpg)
 
 Verify the **hvac_sensors** database was created successfully:
 
@@ -86,7 +86,7 @@ LOCATION '/sandbox/sensor/hvac_building'
 TBLPROPERTIES("skip.header.line.count"="1");
 ~~~
 
-After the query creates the external **hvac_sensors.building_csv** table, you will receive the following message: **Query executed successfully. Affected rows : -1.**.
+![create_external_table_building_csv](assets/images/cleaning-raw-hvac-data/create_external_table_building_csv.jpg)
 
 We created an external table **building_csv** into database **hvac_sensors**, we used backticks characters for each attribute to avoid running into reserved keyword issues with Hive, told Hive to store the data in the table as a textfile, and told Hive the original building.csv data is located in directory `/sandbox/sensor/hvac_building`. We first created an external table to keep the original data safe from being deleted if the table were to get deleted.
 
@@ -116,7 +116,7 @@ COMMENT 'Building holds HVAC product'
 STORED AS ORC;
 ~~~
 
-After the query creates the internal **hvac_sensors.building** table, you will receive the following message: **Query executed successfully. Affected rows : -1.**.
+![create_internal_table_building](assets/images/cleaning-raw-hvac-data/create_internal_table_building.jpg)
 
 With the internal table created, we can copy the external table data into this internal hive table.
 
@@ -125,7 +125,7 @@ With the internal table created, we can copy the external table data into this i
 INSERT OVERWRITE TABLE hvac_sensors.building SELECT * FROM hvac_sensors.building_csv;
 ~~~
 
-After the query successfully copies the data from the external building_csv table to the internal building table, you will receive the following message: **Query executed successfully. Affected rows : -1.**.
+![copy_ext_building_data_to_int_table](assets/images/cleaning-raw-hvac-data/copy_ext_building_data_to_int_table.jpg)
 
 For verification that the data was copied successfully, like we did earlier, we can use **select** query to show us the 5 first rows of the data.
 
@@ -162,7 +162,7 @@ LOCATION '/sandbox/sensor/hvac_machine'
 TBLPROPERTIES("skip.header.line.count"="1");
 ~~~
 
-After the query creates the external **hvac_sensors.hvac_machine_csv** table, you will receive the following message: **Query executed successfully. Affected rows : -1.**.
+![create_external_table_hvac_machine_csv](assets/images/cleaning-raw-hvac-data/create_external_table_hvac_machine_csv.jpg)
 
 Let's verify the import was successfully by printing a sample of the first 5 rows:
 
@@ -192,7 +192,7 @@ COMMENT 'hvac_machine holds data on attributes of the machine'
 STORED AS ORC;
 ~~~
 
-After the query creates the internal **hvac_sensors.hvac_machine** table, you will receive the following message: **Query executed successfully. Affected rows : -1.**.
+![create_internal_table_hvac_machine](assets/images/cleaning-raw-hvac-data/create_internal_table_hvac_machine.jpg)
 
 With the internal table created, we can copy the external table data into this internal hive table.
 
@@ -201,7 +201,7 @@ With the internal table created, we can copy the external table data into this i
 INSERT OVERWRITE TABLE hvac_sensors.hvac_machine SELECT * FROM hvac_sensors.hvac_machine_csv;
 ~~~
 
-After the query successfully copies the data from the external hvac_machine_csv table to the internal hvac_machine table, you will receive the following message: **Query executed successfully. Affected rows : -1.**.
+![copy_ext_hvac_machine_data_to_int_table](assets/images/cleaning-raw-hvac-data/copy_ext_hvac_machine_data_to_int_table.jpg)
 
 Now let's verify that the data was copied from the external table to the internal table successfully using **select**.
 
@@ -241,7 +241,7 @@ What are the two new attributes?
 
 - **temprange** and **extremetemp**
 
-After the query successfully creates the **hvac_sensors.hvac_temperatures**, you will receive the following message: **Query executed successfully. Affected rows : -1.**.
+![created_table_hvac_temperatures](assets/images/cleaning-raw-hvac-data/created_table_hvac_temperatures.jpg)
 
 Let's load 10 rows from the **hvac_temperatures** table:
 
@@ -270,6 +270,8 @@ FROM hvac_sensors.building b JOIN hvac_sensors.hvac_temperatures h ON b.building
 Which tables is **hvac_sensors.hvac_building** data coming from?
 
 - **hvac_temperature** and **buildings**
+
+![created_table_hvac_building](assets/images/cleaning-raw-hvac-data/created_table_hvac_building.jpg)
 
 After the query successfully creates the **hvac_sensors.hvac_building**, you will receive the following message: **Query executed successfully. Affected rows : -1.**.
 
