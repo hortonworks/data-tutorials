@@ -43,7 +43,9 @@ We will be using shell commands to setup the required services in our data-in-mo
 
 Open the **HDF web shell client** located at [http://sandbox-hdf.hortonworks.com:4200](http://sandbox-hdf.hortonworks.com:4200).
 
-Prior to copying and pasting all the following shell code, replace the following line of code `HDF_AMBARI_PASS="<Your-Ambari-Admin-Password>"` with the password you created for Ambari Admin user. For example, if our Ambari Admin password was set to `yellowHadoop`, then the line of code would look as follows: `HDF_AMBARI_PASS="yellowHadoop"`
+Prior to copying and pasting all the following shell code line by line, replace the following line of code `HDF_AMBARI_PASS="<Your-Ambari-Admin-Password>"` with the password you created for Ambari Admin user. For example, if our Ambari Admin password was set to `yellowHadoop`, then the line of code would look as follows: `HDF_AMBARI_PASS="yellowHadoop"`
+
+Copy and paste the following shell code line by line in HDF web shell:
 
 ~~~bash
 #!/bin/bash
@@ -128,7 +130,7 @@ http://$HDF_HOST:8080/api/v1/clusters/$HDF_CLUSTER_NAME/services/NIFI
 wait $HDF NIFI "STARTED"
 ~~~
 
-Open the **HDP web shell client** located at [http://sandbox-hdp.hortonworks.com:4200](http://sandbox-hdp.hortonworks.com:4200). Copy and paste the following code to HDP web shell.
+Open the **HDP web shell client** located at [http://sandbox-hdp.hortonworks.com:4200](http://sandbox-hdp.hortonworks.com:4200). Copy and paste the following code to HDP web shell line by line.
 
 ~~~bash
 #!/bin/bash
@@ -136,8 +138,8 @@ Open the **HDP web shell client** located at [http://sandbox-hdp.hortonworks.com
 # allow read-write-execute permissions for the owner, group, and any other users
 
 su hdfs
-hdfs dfs -mkdir -p /sandbox/
-hdfs dfs -chmod -R 777 /sandbox/
+hdfs dfs -mkdir -p /sandbox/sensor/hvac_building/ /sandbox/sensor/hvac_machine
+hdfs dfs -chmod -R 777 /sandbox/sensor/hvac_building/ /sandbox/sensor/hvac_machine
 exit
 ~~~
 
