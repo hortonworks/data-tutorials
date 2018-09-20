@@ -6,7 +6,7 @@ title: Acquiring HVAC Sensor Data
 
 ## Introduction
 
-You have been brought onto the project as a Data Engineer with the following responsibilities: acquire the HVAC sensor data feed, split the feed into two separate flows and store them into their respective locations in storage.
+You have been brought onto the project as a Data Engineer with the following responsibilities: acquire the HVAC sensor data feed, split the feed into two separate flows and store them into their respective locations in storage. You have been tasked with using [Apache NiFi](https://nifi.apache.org/docs.html) to build this portion of the data pipeline.
 
 ## Prerequisites
 
