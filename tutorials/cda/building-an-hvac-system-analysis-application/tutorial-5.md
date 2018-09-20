@@ -1,12 +1,12 @@
 ---
-title: Visualizing HVAC Systems with Extreme Temperature
+title: Visualizing Sensor Data From HVAC Machine Systems
 ---
 
-# Visualizing HVAC Systems with Extreme Temperature
+# Visualizing Sensor Data From HVAC Machine Systems
 
 ## Introduction
 
-You will learn to gain more insights on your data by visualizing certain key attributes using Apache Zeppelin. You will to learn to visualize a graph that shows the countries that have the most extreme temperature and the amount of **NORMAL** events there are compared to **HOT** and **COLD**. You will also learn to see which HVAC units result in the most `extremetemp` readings.
+Your next objective is to act as a Data Analyst and use Apache Zeppelin built-in visualization tools to provide insights on your data, such as illustrating which countries have the most extreme temperature and the amount of **NORMAL** events there are compared to **HOT** and **COLD**. You will also illustrate which HVAC units result in the most `extremetemp` readings.
 
 ## Prerequisites
 
