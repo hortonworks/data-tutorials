@@ -16,17 +16,16 @@ Your next objective as a Data Engineer is to use Hive Query Language similar to 
 
 ## Outline
 
-- [Clean Raw HVAC Sensor Data](#approach-1-clean-raw-hvac-sensor-data)
+- [Upload HVAC Sensor Data into Tables](#upload-hvac-sensor-data-into-tables)
+- [Refine the Raw Sensor Data](#refine-the-raw-sensor-data)
 - [Summary](#summary)
 - [Further Reading](#further-reading)
 
-## Clean Raw HVAC Sensor Data
+## Upload HVAC Sensor Data into Tables
 
 Open Ambari UI at `http://sandbox-hdp.hortonworks.com:8080` and login with `maria_dev/maria_dev`.
 
 Before we can get to cleaning the data with Apache Hive, we need to upload the HVAC sensor data into Hive Tables.
-
-### Upload HVAC Sensor Data into Tables
 
 There are a few different ways to import CSV data into Hive Tables. We can use Data Analytics Studio, Zeppelin's JDBC Hive interpreter or Hive shell. We will use Zeppelin's JDBC Hive interpreter to transfer our HVAC sensor data into Hive Tables.
 
