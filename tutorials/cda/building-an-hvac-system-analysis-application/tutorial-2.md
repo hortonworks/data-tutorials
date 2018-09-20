@@ -39,7 +39,9 @@ In **approach 1**, you will manually run the code line by line to setup the deve
 
 ### Setting up HDF
 
-We will be using shell commands to setup the required services in our data-in-motion platform from the HDF sandbox web shell client located at [http://sandbox-hdf.hortonworks.com:4200](http://sandbox-hdf.hortonworks.com:4200). Web shell client login is `root/hadoop`, if this login is your first to the web shell client, then you will be prompted to reset your password, make sure to remember it.
+We will be using shell commands to setup the required services in our data-in-motion and data-at-rest platforms from the sandbox web shell clients.
+
+Open the **HDF web shell client** located at [http://sandbox-hdf.hortonworks.com:4200](http://sandbox-hdf.hortonworks.com:4200). Web shell client login is `root/hadoop`, if this login is your first to the web shell client, then you will be prompted to reset your password, make sure to remember it.
 
 Prior to copying and pasting all the following shell code, replace the following line of code `HDF_AMBARI_PASS="<Your-Ambari-Admin-Password>"` with the password you created for Ambari Admin user. For example, if our Ambari Admin password was set to `yellowHadoop`, then the line of code would look as follows: `HDF_AMBARI_PASS="yellowHadoop"`
 
@@ -126,19 +128,43 @@ http://$HDF_HOST:8080/api/v1/clusters/$HDF_CLUSTER_NAME/services/NIFI
 wait $HDF NIFI "STARTED"
 ~~~
 
+Open the **HDP web shell client** located at [http://sandbox-hdp.hortonworks.com:4200](http://sandbox-hdp.hortonworks.com:4200). Copy and paste the following code to HDP web shell.
+
+~~~bash
+#!/bin/bash
+# Creates /sandbox directory in HDFS
+# allow read-write-execute permissions for the owner, group, and any other users
+
+su hdfs
+hdfs dfs -mkdir -p /sandbox/
+hdfs dfs -chmod -R 777 /sandbox/
+exit
+~~~
+
 Now that the development environment is setup, you can move onto the summary.
 
 ## Approach 2: Automatically Setup Development Platforms
 
-We will download and execute a shell script to automate the setup of our data-in-motion platform from the HDF sandbox web shell client located at [http://sandbox-hdf.hortonworks.com:4200](http://sandbox-hdf.hortonworks.com:4200). Web shell client login is `root/hadoop`, if this login is your first to the web shell client, then you will be prompted to reset your password, make sure to remember it.
+We will download and execute a shell script to automate the setup of our data-in-motion and data-at-rest platforms from the sandbox web shell clients.
+
+Open **HDF web shell client** located at [http://sandbox-hdf.hortonworks.com:4200](http://sandbox-hdf.hortonworks.com:4200). Web shell client login is `root/hadoop`, if this login is your first to the web shell client, then you will be prompted to reset your password, make sure to remember it.
 
 Prior to executing the shell script, replace the following line of shell code `AMBARI_USER_PASSWORD="<Your-Ambari-Admin-Password>"` with the password you created for Ambari Admin user. For example, if our Ambari Admin password was set to `yellowHadoop`, then the line of code would look as follows: `AMBARI_USER_PASSWORD="yellowHadoop"`
+
+Copy and paste the following code to HDF web shell with your updated change:
 
 ~~~bash
 AMBARI_USER="admin"
 AMBARI_USER_PASSWORD="<Your-Ambari-Admin-Password>"
 wget https://raw.githubusercontent.com/james94/data-tutorials/master/tutorials/cda/building-an-hvac-system-analysis-application/application/setup/shell/setup-hdf.sh
 bash setup-hdf.sh $AMBARI_USER $AMBARI_USER_PASSWORD
+~~~
+
+Open **HDP web shell client** located at [http://sandbox-hdp.hortonworks.com:4200](http://sandbox-hdp.hortonworks.com:4200). Copy and paste the following code to HDP web shell:
+
+~~~bash
+wget https://raw.githubusercontent.com/james94/data-tutorials/master/tutorials/cda/building-an-hvac-system-analysis-application/application/setup/shell/setup-hdp.sh
+bash setup-hdp.sh
 ~~~
 
 Now that the development environment is setup, you can move onto the summary.
