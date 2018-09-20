@@ -6,7 +6,7 @@ title: Setting up the Development Environment
 
 ## Introduction
 
-Our objective in this part of building the HVAC system analysis application is to setup the development environment, so we can began acquiring the data, cleaning it and visualizing keep aspects of it to show insight to our clients. We will clean up the NiFi canvas on HDF, so we start fresh with no pre-existing dataflows.
+Our objective in this part of building the HVAC system analysis application is to setup the development environment by shell code, so we can jump to acquiring the data, cleaning it and visualizing keep aspects of it to show insight to our clients. We will clean up the NiFi canvas on HDF, so we start fresh with no pre-existing dataflows.
 
 ## Prerequisites
 
@@ -15,6 +15,7 @@ Our objective in this part of building the HVAC system analysis application is t
 ## Outline
 
 - [Check these Two Areas Prior to Starting Approach 1 or Approach 2](#check-these-two-areas-prior-to-starting-approach-1-or-approach-2)
+- [Overview of Shell Code Used in Both Approaches](#overview-of-shell-code-used-in-both-approaches)
 - [Approach 1: Manually Setup Development Platforms via CLI](#approach-1-manually-setup-development-platforms-via-cli)
 - [Approach 2: Automatically Setup Development Platforms](#approach-2-automatically-setup-development-platforms)
 - [Summary](#summary)
@@ -29,6 +30,10 @@ If this configuration hasn't been done, which in the demo we use `sandbox-hdf.ho
 **Have all the required services for HDF sandbox started up?**
 
 If unsure, you can login to Ambari at [http://sandbox-hdf.hortonowrks.com:8080](http://sandbox-hdf.hortonowrks.com:8080). If you haven't setup Ambari `admin` password, refer to the link: [admin-password-reset](https://hortonworks.com/tutorial/learning-the-ropes-of-the-hortonworks-sandbox/#admin-password-reset) cause you will need the password for performing Ambari REST API Calls and operating on services in the Ambari UI. The Ambari Dashboard will **Background Operations Running window**, which is accessible by the gear icon at the top right of Ambari. From there, you should see **Start All Services** with a green progress bar near it.
+
+## Overview of Shell Code Used in Both Approaches
+
+In **approach 1**, you will manually run the code line by line to setup the development environment. Yet in **approach 2**, you will download and execute a shell script to automate development environment setup. The shell code `tee -a <file> << EOF ... EOF` appends Google's Public DNS to `/etc/resolve.conf` to translate a variety of hostnames to IP addresses. The problem that this configuration potentially solves is using Google's Public DNS to translate `s3.amazonaws.com` to an IP address that services in the application can use to get data. The next couple lines of code initialize variables that will be used in the Ambari REST API Calls. The `wait()` function waits for Ambari services on HDF or HDP to stop or start. The two `curl` commands are used for sending JSON data by Ambari REST API Calls to tell the Ambari Server to overwrite the existing NiFi service state to INSTALLED (means STOPPED) or STARTED. First we tell Ambari we want to STOP the NiFi service. Next we backup and remove the pre-existing NiFi flow to clean the NiFi canvas, so we can do development. Lastly, we tell Ambari to START the NiFi service for the changes to take effect.
 
 ## Approach 1: Manually Setup Development Platforms via CLI
 
@@ -121,6 +126,8 @@ http://$HDF_HOST:8080/api/v1/clusters/$HDF_CLUSTER_NAME/services/NIFI
 wait $HDF NIFI "STARTED"
 ~~~
 
+Now that the development environment is setup, you can move onto the summary.
+
 ## Approach 2: Automatically Setup Development Platforms
 
 We will download and execute a shell script to automate the setup of our data-in-motion platform from the HDF sandbox web shell client located at [http://sandbox-hdf.hortonworks.com:4200](http://sandbox-hdf.hortonworks.com:4200). Web shell client login is `root/hadoop`, if this login is your first to the web shell client, then you will be prompted to reset your password, make sure to remember it.
@@ -134,7 +141,7 @@ wget https://raw.githubusercontent.com/james94/data-tutorials/master/tutorials/c
 bash setup-hdf.sh $AMBARI_USER $AMBARI_USER_PASSWORD
 ~~~
 
-Once the script finishes, you are now ready to move onto the next phase of development (the next tutorial), acquiring the data using NiFi.
+Now that the development environment is setup, you can move onto the summary.
 
 ## Summary
 
