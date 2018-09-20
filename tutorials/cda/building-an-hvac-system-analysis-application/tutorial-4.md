@@ -38,6 +38,8 @@ Click **Create new note**.
 
 Insert **Note Name** as `Cleaning-Raw-HVAC-Data`, then click **Create**.
 
+![created_zeppelin_cleaning_raw_hvac_data.jpg](assets/images/cleaning-raw-hvac-data/created_zeppelin_cleaning_raw_hvac_data.jpg)
+
 ### Create Database HVAC Sensor Data
 
 Copy and paste the following Hive code into Zeppelin:
