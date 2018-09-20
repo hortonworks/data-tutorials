@@ -37,11 +37,11 @@ First we need to select the columns from `hvac_sensors.hvac_building` table that
 SELECT country, extremetemp, temprange FROM hvac_sensors.hvac_building LIMIT 1000;
 ~~~
 
-![load_hvac_building_temp_per_country](assets/visualizing-hvac-machine-sensor-data/load_hvac_building_temp_per_country.jpg)
+![load_hvac_building_temp_per_country](assets/images/visualizing-hvac-machine-sensor-data/load_hvac_building_temp_per_country.jpg)
 
 Select the **bar chart** button located just under the query to change the table visualization to bar chart.
 
-![load_hvac_building_temp_per_country_barchart](assets/visualizing-hvac-machine-sensor-data/load_hvac_building_temp_per_country_barchart.jpg)
+![load_hvac_building_temp_per_country_barchart](assets/images/visualizing-hvac-machine-sensor-data/load_hvac_building_temp_per_country_barchart.jpg)
 
 Let's further configure this chart, click **settings** to open up more available fields.
 
@@ -50,7 +50,7 @@ Let's further configure this chart, click **settings** to open up more available
 -   Click **SUM** on `extremetemp` and change it to **COUNT**.
 -   Make sure that `country` is the only field under **Keys**.
 
-![customize_bargraph_fields_hvac_building](assets/visualizing-hvac-machine-sensor-data/customize_bargraph_fields_hvac_building.jpg)
+![customize_bargraph_fields_hvac_building](assets/images/visualizing-hvac-machine-sensor-data/customize_bargraph_fields_hvac_building.jpg)
 
 From the chart above we can see the countries that HVAC Buildings come from that have the most extreme temperature indicated by a count for ***extremetemp*** associated with ***temprange level*** for **NORMAL** events there are compared to **HOT** and **COLD**.
 
@@ -68,14 +68,14 @@ Copy and paste the Hive query into the next Zeppelin note:
 select hvacproduct, extremetemp from hvac_building
 ~~~
 
-![load_hvac_product_temp_in_building](assets/visualizing-hvac-machine-sensor-data/load_hvac_product_temp_in_building.jpg)
+![load_hvac_product_temp_in_building](assets/images/visualizing-hvac-machine-sensor-data/load_hvac_product_temp_in_building.jpg)
 
 Arrange the fields according to the following image so we can recreate the chart below.
 
 -   Make sure that `hvacproduct` is in the **Keys** box.
 -   Make sure that `extremetemp` is in the **Values** box and that it is set to **COUNT**.
 
-![load_hvac_products_extremetemp_barchart](assets/visualizing-hvac-machine-sensor-data/load_hvac_products_extremetemp_barchart.jpg)
+![load_hvac_products_extremetemp_barchart](assets/images/visualizing-hvac-machine-sensor-data/load_hvac_products_extremetemp_barchart.jpg)
 
 Now we can see which HVAC units result in the most `extremetemp` readings. Thus we can make a more informed decision when purchasing new HVAC systems.
 
