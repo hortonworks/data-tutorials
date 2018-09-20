@@ -245,9 +245,19 @@ Press on **i** icon on the left row to view details about a provenance event. Ch
 
 ![provenance_event](assets/images/provenance_event.jpg)
 
-You will be able to see the data NiFi sent to the external process HDFS. The data below shows hvac_temperature dataset.
+You will be able to see the data NiFi sent to the external process HDFS via NiFi's data provenance. The data below shows hvac dataset.
 
 ![view_event_hvac_temperature](assets/images/view_event_hvac_temperature.jpg)
+
+Let's verify that the data is actually present in **HDFS** from Ambari **Files View**. Login to HDP Ambari at [http://sandbox-hdp.hortonowrks.com:8080](http://sandbox-hdp.hortonowrks.com:8080).
+
+Click the Ambari Views selector at the top right corner, then click **Files View**.
+
+By entering the path: `/sandbox/sensor/hvac_building`, you should be able to view the `.csv` data for **building.csv**. The HVAC.csv is in the hvac_temperature folder.
+
+![hvac_building_in_hdfs](assets/images/hvac_building_in_hdfs.jpg)
+
+The **building.csv** data does look distorted, but when we clean it further with Apache Hive, it will be formatted appropriately in a table.
 
 ## Approach 2: Import NiFi AcquireHVACData Process Group via UI
 
