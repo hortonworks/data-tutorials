@@ -14,16 +14,29 @@ Our objective in this part of building the HVAC system analysis application is t
 
 ## Outline
 
+- [Check these Two Areas Prior to Starting Approach 1 or Approach 2](#check-these-two-areas-prior-to-starting-approach-1-or-approach-2)
 - [Approach 1: Manually Setup Development Platforms via CLI](#approach-1-manually-setup-development-platforms-via-cli)
 - [Approach 2: Automatically Setup Development Platforms](#approach-2-automatically-setup-development-platforms)
 - [Summary](#summary)
 - [Further Reading](#further-readings)
 
-Before starting **Approach 1** or **Approach 2**, wait for HDF sandbox to start up, once **all services** indicated by **Background Operation Running** in Ambari Dashboard have finished starting at `http://sandbox-hdf.hortonowrks.com:8080` with login `admin/admin`, then enter the NiFi UI and import the NiFi template.
+## Check these Two Areas Prior to Starting Approach 1 or Approach 2
+
+**Is our environment setup to map sandbox IP to desired hostname in hosts file?**
+
+If this configuration hasn't been done, which in the demo we use `sandbox-hdf.hortonworks` and `sandbox-hdp.hortonworks.com` mapped to sandbox IP `127.0.0.1`, then for more guidance refer to the link: [environment setup](https://hortonworks.com/tutorial/learning-the-ropes-of-the-hortonworks-sandbox/#environment-setup).
+
+**Have all the required services for HDF sandbox started up?**
+
+If unsure, you can login to Ambari at [http://sandbox-hdf.hortonowrks.com:8080](http://sandbox-hdf.hortonowrks.com:8080). If you haven't setup Ambari `admin` password, refer to the link: [admin-password-reset](https://hortonworks.com/tutorial/learning-the-ropes-of-the-hortonworks-sandbox/#admin-password-reset) cause you will need the password for performing Ambari REST API Calls and operating on services in the Ambari UI. The Ambari Dashboard will **Background Operations Running window**, which is accessible by the gear icon at the top right of Ambari. From there, you should see **Start All Services** with a green progress bar near it.
 
 ## Approach 1: Manually Setup Development Platforms via CLI
 
 ### Setting up HDF
+
+We will be using shell commands to setup the required services in our data-in-motion platform from the HDF sandbox web shell client located at [http://sandbox-hdf.hortonworks.com:4200](http://sandbox-hdf.hortonworks.com:4200). Web shell client login is `root/hadoop`, if this login is your first to the web shell client, then you will be prompted to reset your password, make sure to remember it.
+
+Prior to copying and pasting all the following shell code, replace the following line of code `HDF_AMBARI_PASS="<Your-Ambari-Admin-Password>"` with the password you created for Ambari Admin user. For example, if our Ambari Admin password was set to `yellowHadoop`, then the line of code would look as follows: `HDF_AMBARI_PASS="yellowHadoop"`
 
 ~~~bash
 #!/bin/bash
@@ -42,7 +55,7 @@ EOF
 ##
 
 HDF_AMBARI_USER="admin"
-HDF_AMBARI_PASS="admin"
+HDF_AMBARI_PASS="<Your-Ambari-Admin-Password>"
 HDF_CLUSTER_NAME="Sandbox"
 HDF_HOST="sandbox-hdf.hortonworks.com"
 HDF="hdf-sandbox"
@@ -110,11 +123,15 @@ wait $HDF NIFI "STARTED"
 
 ## Approach 2: Automatically Setup Development Platforms
 
-Open the HDF sandbox web shell client at `http://sandbox-hdf.hortonworks.com:4200` with login `root/hadoop`.
+We will download and execute a shell script to automate the setup of our data-in-motion platform from the HDF sandbox web shell client located at [http://sandbox-hdf.hortonworks.com:4200](http://sandbox-hdf.hortonworks.com:4200). Web shell client login is `root/hadoop`, if this login is your first to the web shell client, then you will be prompted to reset your password, make sure to remember it.
+
+Prior to executing the shell script, replace the following line of shell code `AMBARI_USER_PASSWORD="<Your-Ambari-Admin-Password>"` with the password you created for Ambari Admin user. For example, if our Ambari Admin password was set to `yellowHadoop`, then the line of code would look as follows: `AMBARI_USER_PASSWORD="yellowHadoop"`
 
 ~~~bash
+AMBARI_USER="admin"
+AMBARI_USER_PASSWORD="<Your-Ambari-Admin-Password>"
 wget https://raw.githubusercontent.com/james94/data-tutorials/master/tutorials/cda/building-an-hvac-system-analysis-application/application/setup/shell/setup-hdf.sh
-bash setup-hdf.sh
+bash setup-hdf.sh $AMBARI_USER $AMBARI_USER_PASSWORD
 ~~~
 
 Once the script finishes, you are now ready to move onto the next phase of development (the next tutorial), acquiring the data using NiFi.
