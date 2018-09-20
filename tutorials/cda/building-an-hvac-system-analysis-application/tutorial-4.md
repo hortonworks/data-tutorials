@@ -35,7 +35,7 @@ Click on **Zeppelin Notebook** service in Ambari stack, in the box on the rights
 
 Click **Create new note**.
 
-Insert **Note Name** as `Cleaning-Raw-HVAC-Data`, then click **Create**.
+Insert **Note Name** as `Cleaning-Raw-HVAC-Data`, select `jdbc` for default interpreter, then click **Create**.
 
 ![created_zeppelin_cleaning_raw_hvac_data.jpg](assets/images/cleaning-raw-hvac-data/created_zeppelin_cleaning_raw_hvac_data.jpg)
 
@@ -43,7 +43,7 @@ Insert **Note Name** as `Cleaning-Raw-HVAC-Data`, then click **Create**.
 
 Copy and paste the following Hive code into Zeppelin:
 
-Create database **hvac_sensors**:
+Create database **hvac_sensors**. Copy and paste the Hive query, press **shift + enter** to execute the code:
 
 ~~~sql
 %jdbc(hive)

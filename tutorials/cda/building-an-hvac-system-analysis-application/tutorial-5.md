@@ -17,88 +17,67 @@ Your next objective is to act as a Data Analyst and use Apache Zeppelin built-in
 
 ## Outline
 
-- [Visualize Temperature Ranges of Countries](#visualize-temperature-ranges-of-countries)
-- [Visualize HVAC Systems with Extreme Temperature](#visualize-buildings-with-extreme-temperature)
+- [Visualize HVAC_Building Temperature Characteristics Per Country](#visualize-hvac-building-temperature-characteristics-per-country)
+- [Visualize HVAC Products with Extreme Temperature in Buildings](#visualize-hvac-products-with-extreme-temperature-in-buildings)
 
-## Visualize Temperature Ranges of Countries
+## Visualize HVAC_Building Temperature Characteristics Per Country
 
-1\. Access Zeppelin at `sandbox-hdp.hortonworks.com:9995`
+Click on **Zeppelin Notebook** service in Ambari stack, in the box on the rightside called **Quick Links**, click on **[Zeppelin UI](http://sandbox-hdp.hortonworks.com:9995/)**.
 
-From here we’re going to need to create a new Zeppelin Notebook. Notebooks in Zeppelin is how we differentiate reports from one another.
+Click **Create new note**.
 
-2\. Hover over **Notebook**. Use the dropdown menu and **Create a new note**.
+Insert **Note Name** as `Visualizing-HVAC-Machine-Sensor-Data`, select `jdbc` for default interpreter, then click **Create**.
 
-![](assets/lab2-visualize-data-via-zeppelin/zeppelin_dashboard.png)
+We will use the JDBC Hive interpreter to run Hive queries and visualize the results.
 
-3\. Name the note `HVAC Analysis Report` and then **Create Note**.
+First we need to select the columns from `hvac_sensors.hvac_building` table that will illustrate hvac_building **country** location, whether **temperature** in a hvac_building is extreme and what the **temprange** level is for an hvac_building. Copy and paste the Hive query:
 
-![](assets/lab2-visualize-data-via-zeppelin/create_zeppelin_notebook.png)
-
-We will use the Hive interpreter to run Hive queries and visualize the results in Zeppelin.
-
-4\. To access the Hive interpreter for this note, we must insert `%jdbc(hive)` at the top of the note. Everything afterwards will be interpreted as a Hive query.
-
-![](assets/lab2-visualize-data-via-zeppelin/zeppelin_hvac_analysis_report_notebook.png)
-
-5\. Type the following query into the note, then run it by clicking the **Run** arrow or by using the shortcut **Shift+Enter**.
-
-~~~
+~~~sql
 %jdbc(hive)
-
-select country, extremetemp, temprange from hvac_building
+SELECT country, extremetemp, temprange FROM hvac_sensors.hvac_building LIMIT 1000;
 ~~~
 
-![](assets/lab2-visualize-data-via-zeppelin/load_hvac_building_data_zeppelin.png)
+![load_hvac_building_temp_per_country](assets/visualizing-hvac-machine-sensor-data/load_hvac_building_temp_per_country.jpg)
 
-Now that the query is run, let’s visualize the data with a chart.
+Select the **bar chart** button located just under the query to change the table visualization to bar chart.
 
-6\. Select the bar graph chart button located just under the query.
+![load_hvac_building_temp_per_country_barchart](assets/visualizing-hvac-machine-sensor-data/load_hvac_building_temp_per_country_barchart.jpg)
 
-7\. Click **settings** to open up more advanced settings for creating the chart.
-
-![](assets/lab2-visualize-data-via-zeppelin/visualize_hvac_buiding_data_bargraph.png)
-
-8\. Here you will experiment with different values and columns to customize data that is illustrated in your visualization.
+Let's further configure this chart, click **settings** to open up more available fields.
 
 -   Arrange the fields according to the following image.
 -   Drag the field `temprange` into the **groups** box.
 -   Click **SUM** on `extremetemp` and change it to **COUNT**.
 -   Make sure that `country` is the only field under **Keys**.
 
-![](assets/lab2-visualize-data-via-zeppelin/customize_bar_graph_settings_hvac_building_zeppelin.png)
+![customize_bargraph_fields_hvac_building](assets/visualizing-hvac-machine-sensor-data/customize_bargraph_fields_hvac_building.jpg)
 
-You've just customized your chart’s settings to portray the countries and their temperature from cold, normal to hot using Apache Zeppelin.
+From the chart above we can see the countries that HVAC Buildings come from that have the most extreme temperature indicated by a count for ***extremetemp*** associated with ***temprange level*** for **NORMAL** events there are compared to **HOT** and **COLD**.
 
-![](assets/lab2-visualize-data-via-zeppelin/countries_most_extrm_temp_zeppelin.png)
-
--   From the chart above we can see which countries have the most extreme temperature and how many **NORMAL** events there are compared to **HOT** and **COLD**.
-
-## Visualize HVAC System Models in Buildings
+## Visualize HVAC Products with Extreme Temperature in Buildings
 
 Is it possible to figure out which buildings might need HVAC upgrades, and which do not? Let’s determine that answer in the steps ahead...
 
--   Let's try creating one more note to visualize which types of HVAC systems result in the least amount of `extremetemp` readings.
+Let's create one more note to visualize which types of HVAC systems result in the least amount of `extremetemp` readings.
 
-9\. Paste the following query into the blank Zeppelin note following the chart we made previously.
+Copy and paste the Hive query into the next Zeppelin note:
 
-~~~
+~~~sql
 %jdbc(hive)
 
 select hvacproduct, extremetemp from hvac_building
 ~~~
 
-10\. Use **Shift+Enter** to run the note.
+![load_hvac_product_temp_in_building](assets/visualizing-hvac-machine-sensor-data/load_hvac_product_temp_in_building.jpg)
 
-![](assets/lab2-visualize-data-via-zeppelin/load_hvacproduct_extrmtemp_hvacblding_data.png)
-
-11\. Arrange the fields according to the following image so we can recreate the chart below.
+Arrange the fields according to the following image so we can recreate the chart below.
 
 -   Make sure that `hvacproduct` is in the **Keys** box.
 -   Make sure that `extremetemp` is in the **Values** box and that it is set to **COUNT**.
 
-![](assets/lab2-visualize-data-via-zeppelin/customize_show_mostextrm_readings_hvac.png)
+![load_hvac_products_extremetemp_barchart](assets/visualizing-hvac-machine-sensor-data/load_hvac_products_extremetemp_barchart.jpg)
 
--   Now we can see which HVAC units result in the most `extremetemp` readings. Thus we can make a more informed decision when purchasing new HVAC systems.
+Now we can see which HVAC units result in the most `extremetemp` readings. Thus we can make a more informed decision when purchasing new HVAC systems.
 
 ## Summary
 
