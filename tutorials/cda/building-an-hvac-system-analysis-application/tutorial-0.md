@@ -3,7 +3,7 @@ title: Building an HVAC System Analysis Application
 author: sandbox-team
 tutorial-id: 310
 experience: Intermediate
-persona: Data Engineer, Data Scientist
+persona: Data Engineer, Data Analyst
 source: Hortonworks
 use case: Data Discovery
 technology: Apache Ambari, Apache NiFi, Apache Hive, Apache Zeppelin
@@ -61,7 +61,7 @@ The tutorial series consists of the following tutorial modules:
 4\. **Cleaning Raw HVAC Data**: Hive.
 Show insight of how we are cleaning the data using Zeppelin.
 
-5\. **Visualizing HVAC Systems with Extreme Temperature**: Spark. Perform data analysis on HVAC sensor data to find the _HVAC Temperature Ranges By Country_ - keep count of HOT, COLD, NORMAL ranges per country, _HVAC Extreme HOT Units_ - keep count of machines with HOT temperature, _HVAC Extreme COLD Units_ - keep count of machines with COLD temperature.
+5\. **Visualizing Sensor Data From HVAC Machine Systems**: Spark. Perform data analysis on HVAC sensor data to find the _HVAC Temperature Ranges By Country_ - keep count of HOT, COLD, NORMAL ranges per country, _HVAC Extreme HOT Units_ - keep count of machines with HOT temperature, _HVAC Extreme COLD Units_ - keep count of machines with COLD temperature.
 
 ## Further Reading
 
