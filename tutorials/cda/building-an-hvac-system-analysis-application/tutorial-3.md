@@ -296,7 +296,7 @@ Once NiFi writes your sensor data to HDFS, which you can check quickly by lookin
 
 ## Summary
 
-Congratulations! You have now created a data pipeline to ingest the data from the sensors embedded on HVAC machine systems, prepared the data to be in a readable format for external services to do data analysis. In the next portion of the data pipeline, you will use Apache Hive to perform cleaning and analysis on the data.
+Congratulations! You have now added a NiFi dataflow to the data pipeline to ingest the data from the sensors embedded on HVAC machine systems, prepared the data to be in a readable format for external services to do data analysis. In the next portion of the data pipeline, you will use Apache Hive to perform cleaning and analysis on the data.
 
 ## Further Reading
 
