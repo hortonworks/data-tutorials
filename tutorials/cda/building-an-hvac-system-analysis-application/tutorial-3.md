@@ -221,7 +221,7 @@ Press the **+** button to add a user defined property for routing property name 
 | Property | Value     |
 | :------------- | :------------- |
 | Hadoop Configuration Resources       | `/etc/hadoop/conf/core-site.xml,/etc/hadoop/conf/hdfs-site.xml` |
-| **Directory**       | `/sandbox/sensor/hvac_temperature` |
+| **Directory**       | `/sandbox/sensor/hvac_machine` |
 | **Conflict Resolution Strategy**       | `fail` |
 | **Compression codec**       | `NONE` |
 
