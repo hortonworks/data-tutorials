@@ -6,7 +6,7 @@ title: Cleaning Raw HVAC Data
 
 ## Introduction
 
-You will learn to clean HVAC data into a useful format. You will gain a practical experience with creating Hive tables that run on ORC files for fast and efficient data processing. You will gain insight to writing Hive scripts that enrich our data to reveal to us when temperature is at a cold, normal or hot state. Additionally, you will learn to write Hive queries on the data to determine which particular buildings are associated with these temperature states.
+Your next objective as a Data Engineer is to use Hive Query Language similar to SQL to clean HVAC sensor data from HVAC machines and HVAC buildings into a useful format using Apache Zeppelin's JDBC Hive Interpreter. You will gain a practical experience with creating Hive tables that run on ORC files for fast and efficient data processing. You will gain insight to writing Hive scripts that enrich our data to reveal to us when temperature is at a cold, normal or hot state. Additionally, you will learn to write Hive queries on the data to determine which particular buildings are associated with these temperature states.
 
 ## Prerequisites
 
@@ -17,8 +17,6 @@ You will learn to clean HVAC data into a useful format. You will gain a practica
 ## Outline
 
 - [Clean Raw HVAC Sensor Data](#approach-1-clean-raw-hvac-sensor-data)
-- [Upload HVAC Sensor Data into Tables](#upload-hvac-sensor-data-into-tables)
-- [Refine the Raw Sensor Data](#refine-the-raw-sensor-data)
 - [Summary](#summary)
 - [Further Reading](#further-reading)
 
@@ -26,76 +24,191 @@ You will learn to clean HVAC data into a useful format. You will gain a practica
 
 Open Ambari UI at `http://sandbox-hdp.hortonworks.com:8080` and login with `maria_dev/maria_dev`.
 
+Before we can get to cleaning the data with Apache Hive, we need to upload the HVAC sensor data into Hive Tables.
+
 ### Upload HVAC Sensor Data into Tables
 
-Use the **views dropdown menu** and choose **Hive View 2**.
+There are a few different ways to import CSV data into Hive Tables. We can use Data Analytics Studio, Zeppelin's JDBC Hive interpreter or Hive shell. We will use Zeppelin's JDBC Hive interpreter to transfer our HVAC sensor data into Hive Tables.
 
-There are a few different ways to import CSV data into Hive Tables. We will use Hive's Upload Table tool to transfer our HVAC sensor data into Hive Tables.
+### Open Zeppelin UI from Ambari
 
-### Upload HVAC Building Data into Hive Table
+Click on **Zeppelin Notebook** service in Ambari stack, in the box on the rightside called **Quick Links**, click on **[Zeppelin UI](http://sandbox-hdp.hortonworks.com:9995/)**.
 
-Press **+ NEW TABLE**, select **UPLOAD TABLE**.
+Click **Create new note**.
 
-Under **Select File Format**, check the box **Is first row header?**.
-Under **Select File Source**, choose **Upload from HDFS**.
+Insert **Note Name** as `Cleaning-Raw-HVAC-Data`, then click **Create**.
 
-Enter HDFS Path:
+### Create Database HVAC Sensor Data
 
-- building.csv path
+Copy and paste the following Hive code into Zeppelin:
 
-~~~bash
-/sandbox/sensor/hvac_building/building.csv
+Create database **hvac_sensors**:
+
+~~~sql
+%jdbc(hive)
+CREATE DATABASE IF NOT EXISTS hvac_sensors;
 ~~~
 
-![hive_building_csv_file_format_source](assets/images/hive_building_csv_file_format_source.jpg)
+After the query creates the database **hvac_sensors** table, you will receive the following message: **Query executed successfully. Affected rows : -1.**.
 
-Now press **Preview** to see what your table will look like:
+Verify the **hvac_sensors** database was created successfully:
 
-![hive_building_csv_preview](assets/images/hive_building_csv_preview.jpg)
-
-Now verify the Hive table prior to being created, look at the table name and under COLUMNS tab verify table columns and column data types are what you want.
-
-Table name should appear as `building`.
-
-Column names should appear as `BuildingID`, `BuildingMgr`, `BuildingAge`, `HVACproduct` and `Country`.
-
-Data type should appear as `INT`, `STRING`, `INT`, `STRING`, `STRING`. If there is a data type that doesn't seem appropriate for the column name to left of it, then feel free to change it to what you feel is appropriate.
-
-![verify_hive_table_prior_created](assets/images/verify_hive_table_prior_created.jpg)
-
-Look at the Advanced tab for the Hive table. Verify the Add File Format is **ORC**. We are using ORC cause we can get better performance with Hive especially faster query time with larger datasets.
-
-![verify_hive_table_advanced](assets/images/verify_hive_table_advanced.jpg)
-
-Press **+ Create** to finish the upload of the building.csv dataset.
-
-Your newly formed Hive **building** ORC table is accessible from Hive TABLES tab.
-
-![newly_created_building_table](assets/images/newly_created_building_table.jpg)
-
-### Upload HVAC Temperature Data into Hive Table
-
-Select File Format, Select File Source
-
-Enter HDFS Path for HVAC.csv:
-
-~~~bash
-/sandbox/sensor/hvac_temperature/HVAC.csv
+~~~sql
+%jdbc(hive)
+SHOW DATABASES;
 ~~~
 
-![hive_hvac_csv_file_format_source](assets/images/hive_hvac_csv_file_format_source.jpg)
+![show_databases](assets/images/cleaning-raw-hvac-data/show_databases.jpg)
 
-Press Preview to see what the Hive Table will look like:
+### Upload HVAC Building CSV Data into Hive Table
 
-![hive_hvac_csv_preview](assets/images/hive_hvac_csv_preview.jpg)
+The process of uploading the building.csv data into Hive requires that we create an external table to verify that Hive has access to the data, but doesn't own the original CSV data to keep it safe from being deleted in case the external table were to be deleted. Next we create an internal table called building, which is in ORC format and we move the data from the external table to the internal table, so data is owned by Hive, but the original CSV data is still safe.
 
-After previewing the table, scroll down to check the table name, column name and data type fields.
+### Create External Hive Table
 
-![verify_hive_hvac_table](assets/images/verify_hive_hvac_table.jpg)
+First we will create an external table referencing the HVAC building CSV data.
 
-Also check the advanced tab for this table. Verify the Add File Format is **ORC**. Then press **+ Create**. Your newly formed Hive **hvac** ORC table is accessible from Hive TABLES tab.
+~~~sql
+%jdbc(hive)
+CREATE EXTERNAL TABLE IF NOT EXISTS hvac_sensors.building_csv (
+    `BuildingID` INT,
+    `BuildingMgr` STRING,
+    `BuildingAge` INT,
+    `HVACproduct` STRING,
+    `Country` STRING
+)
+ROW FORMAT DELIMITED
+FIELDS TERMINATED BY ','
+STORED AS TEXTFILE
+LOCATION '/sandbox/sensor/hvac_building'
+TBLPROPERTIES("skip.header.line.count"="1");
+~~~
 
-![newly_created_hvac_table](assets/images/newly_created_hvac_table.jpg)
+After the query creates the external **hvac_sensors.building_csv** table, you will receive the following message: **Query executed successfully. Affected rows : -1.**.
+
+We created an external table **building_csv** into database **hvac_sensors**, we used backticks characters for each attribute to avoid running into reserved keyword issues with Hive, told Hive to store the data in the table as a textfile, and told Hive the original building.csv data is located in directory `/sandbox/sensor/hvac_building`. We first created an external table to keep the original data safe from being deleted if the table were to get deleted.
+
+Next we will verify the import was successful by printing a sample of the first 5 rows:
+
+~~~sql
+%jdbc(hive)
+SELECT * FROM hvac_sensors.building_csv LIMIT 5;
+~~~
+
+![load_external_building_csv_data](assets/images/cleaning-raw-hvac-data/load_external_building_csv_data.jpg)
+
+### Create Internal Hive Table to Copy Over External Table Data
+
+Now we will create an internal hive table. We also have more file format options as storage for the data in the table, we will use **Apache ORC format** since it provides great compression and excellent performance.
+
+~~~sql
+%jdbc(hive)
+CREATE TABLE IF NOT EXISTS hvac_sensors.building (
+  `BuildingID` INT,
+  `BuildingMgr` STRING,
+  `BuildingAge` INT,
+  `HVACproduct` STRING,
+  `Country` STRING
+)
+COMMENT 'Building holds HVAC product'
+STORED AS ORC;
+~~~
+
+After the query creates the internal **hvac_sensors.building** table, you will receive the following message: **Query executed successfully. Affected rows : -1.**.
+
+With the internal table created, we can copy the external table data into this internal hive table.
+
+~~~sql
+%jdbc(hive)
+INSERT OVERWRITE TABLE hvac_sensors.building SELECT * FROM hvac_sensors.building_csv;
+~~~
+
+After the query successfully copies the data from the external building_csv table to the internal building table, you will receive the following message: **Query executed successfully. Affected rows : -1.**.
+
+For verification that the data was copied successfully, like we did earlier, we can use **select** query to show us the 5 first rows of the data.
+
+~~~sql
+%jdbc(hive)
+SELECT * FROM hvac_sensors.building LIMIT 5;
+~~~
+
+![load_building_data](assets/images/cleaning-raw-hvac-data/load_building_data.jpg)
+
+### Upload HVAC Machine CSV Data into Hive Table
+
+The process of uploading the HVAC.csv data into Hive is similar to the process we went through earlier with HVAC building.csv. We will perform the same process for HVAC.csv.
+
+### Create External Hive Table
+
+We will create an external Hive table referencing the HVAC machine csv data.
+
+~~~sql
+%jdbc(hive)
+CREATE EXTERNAL TABLE IF NOT EXISTS hvac_sensors.hvac_machine_csv (
+  `Date` STRING,
+  `Time` STRING,
+  `TargetTemp` INT,
+  `ActualTemp` INT,
+  `System` INT,
+  `SystemAge` INT,
+  `BuildingID` INT
+)
+ROW FORMAT DELIMITED
+FIELDS TERMINATED BY ','
+STORED AS TEXTFILE
+LOCATION '/sandbox/sensor/hvac_machine'
+TBLPROPERTIES("skip.header.line.count"="1");
+~~~
+
+After the query creates the external **hvac_sensors.hvac_machine_csv** table, you will receive the following message: **Query executed successfully. Affected rows : -1.**.
+
+Let's verify the import was successfully by printing a sample of the first 5 rows:
+
+~~~sql
+%jdbc(hive)
+SELECT * FROM hvac_sensors.hvac_machine_csv LIMIT 5;
+~~~
+
+![load_external_hvac_machine_csv_data](assets/images/cleaning-raw-hvac-data/load_external_hvac_machine_csv_data.jpg)
+
+### Create Internal Hive Table to Copy Over External Table Data
+
+Now we will create an internal hive table with table file format stored as **Apache ORC format**.
+
+~~~sql
+%jdbc(hive)
+CREATE TABLE IF NOT EXISTS hvac_sensors.hvac_machine (
+  `Date` STRING,
+  `Time` STRING,
+  `TargetTemp` INT,
+  `ActualTemp` INT,
+  `System` INT,
+  `SystemAge` INT,
+  `BuildingID` INT
+)
+COMMENT 'hvac_machine holds data on attributes of the machine'
+STORED AS ORC;
+~~~
+
+After the query creates the internal **hvac_sensors.hvac_machine** table, you will receive the following message: **Query executed successfully. Affected rows : -1.**.
+
+With the internal table created, we can copy the external table data into this internal hive table.
+
+~~~sql
+%jdbc(hive)
+INSERT OVERWRITE TABLE hvac_sensors.hvac_machine SELECT * FROM hvac_sensors.hvac_machine_csv;
+~~~
+
+After the query successfully copies the data from the external hvac_machine_csv table to the internal hvac_machine table, you will receive the following message: **Query executed successfully. Affected rows : -1.**.
+
+Now let's verify that the data was copied from the external table to the internal table successfully using **select**.
+
+~~~sql
+%jdbc(hive)
+SELECT * FROM hvac_sensors.hvac_machine LIMIT 5;
+~~~
+
+![load_hvac_machine_data](assets/images/cleaning-raw-hvac-data/load_hvac_machine_data.jpg)
 
 ## Refine the Raw Sensor Data
 
@@ -106,14 +219,15 @@ We will write Hive scripts to clean the raw sensor data in effort to acquire the
 - Identify which HVAC products are reliable
 
 ~~~sql
-CREATE TABLE hvac_temperatures as
-select *, targettemp - actualtemp as temp_diff,
+%jdbc(hive)
+CREATE TABLE hvac_sensors.hvac_temperatures AS
+SELECT *, targettemp - actualtemp AS temp_diff,
 IF((targettemp - actualtemp) > 5, 'COLD',
 IF((targettemp - actualtemp) < -5, 'HOT', 'NORMAL'))
 AS temprange,
 IF((targettemp - actualtemp) > 5, '1',
 IF((targettemp - actualtemp) < -5, '1', 0))
-AS extremetemp from hvac;
+AS extremetemp FROM hvac_sensors.hvac_machine;
 ~~~
 
 What's this query does?
@@ -125,14 +239,13 @@ What are the two new attributes?
 
 - **temprange** and **extremetemp**
 
-works? **YES**
+After the query successfully creates the **hvac_sensors.hvac_temperatures**, you will receive the following message: **Query executed successfully. Affected rows : -1.**.
 
-
-
-<!-- Add picture for HDP 3.0-->
+Let's load 10 rows from the **hvac_temperatures** table:
 
 ~~~sql
-select * from hvac_temperatures limit 10;
+%jdbc(hive)
+SELECT * FROM hvac_sensors.hvac_temperatures LIMIT 10;
 ~~~
 
 What does the data in the **temprange** column indicate about the actual temperature?
@@ -141,39 +254,35 @@ What does the data in the **temprange** column indicate about the actual tempera
 - **COLD** – more than five degrees colder than the target temperature.
 - **HOT** – more than 5 degrees warmer than the target temperature.
 
-works? **YES**
-
-<!-- Add picture for HDP3.0-->
+![load_hvac_temperature_data](assets/images/cleaning-raw-hvac-data/load_hvac_temperature_data.jpg)
 
 Now we will create a table that combines hvac_temperatures and buildings table.
 
 ~~~sql
-create table if not exists hvac_building
-as select h.*, b.country, b.hvacproduct, b.buildingage, b.buildingmgr
-from building b join hvac_temperatures h on b.buildingid = h.buildingid;
+%jdbc(hive)
+CREATE TABLE IF NOT EXISTS hvac_sensors.hvac_building
+AS SELECT h.*, b.country, b.hvacproduct, b.buildingage, b.buildingmgr
+FROM hvac_sensors.building b JOIN hvac_sensors.hvac_temperatures h ON b.buildingid = h.buildingid;
 ~~~
 
-works? **YES**
-
-Which tables is **hvac_building’s** data coming from?
+Which tables is **hvac_sensors.hvac_building** data coming from?
 
 - **hvac_temperature** and **buildings**
 
-<!-- Add picture for HDP3.0-->
+After the query successfully creates the **hvac_sensors.hvac_building**, you will receive the following message: **Query executed successfully. Affected rows : -1.**.
 
-Once the query is successfully executed, use the database explorer to load a sample of the data from the new `hvac_building`
+Let's load 10 rows from the data from the new `hvac_sensors.hvac_building`
 
 ~~~sql
-select * from hvac_building limit 10;
+%jdbc(hive)
+SELECT * FROM hvac_sensors.hvac_building LIMIT 10;
 ~~~
 
-works? **YES**
-
-<!-- Add picture for HDP3.0-->
+![load_hvac_building_data](assets/images/cleaning-raw-hvac-data/load_hvac_building_data.jpg)
 
 ## Summary
 
-We've successfully refined the data into a useful format. We learned to create Hive tables that run on ORC files for fast and efficient data processing. We learned to write Hive scripts to enrich our data to reveal to us when temperature is at a cold, normal or hot state. Additionally, we used the data to bring us insight into which particular buildings are associated with these temperature states. Our next step is to use different reporting tools to analyze the results.
+You've successfully uploaded the HVAC CSV sensor data to Hive and refined the data into a useful format. You learned to create Hive tables that run on ORC files for fast and efficient data processing. You learned to write Hive scripts to enrich our data to reveal to us when temperature is at a cold, normal or hot state. Additionally, you used the data to bring insight into which particular buildings are associated with these temperature range levels: **NORMAL, HOT OR COLD**. Our next step is to use Zeppelin's other data visualization tools to story tell our the results from the data analysis.
 
 ## Further Reading
 
