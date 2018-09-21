@@ -248,14 +248,9 @@ which can be used for data visualization with external tools, such as Tableau, M
 path_df.registerTempTable("path_df")
 ~~~
 
-Now that the dataframe is registered as a temporary table, we can use the SQL interpreter to transform it into a Hive table.
+Now that the dataframe is registered as a temporary table.
 
-~~~sql
-%sql
-CREATE TABLE path_df AS SELECT * FROM path_df
-~~~
-
-Now we are finished cleaning the NASA Server Log data. We can head to the summary to review how we cleaned the data and prepared it to be ready for visualization.
+shed cleaning the NASA Server Log data. We can head to the summary to review how we cleaned the data and prepared it to be ready for visualization.
 
 ## Approach 2: Import Zeppelin Notebook to Clean NASA Log Data via UI
 
