@@ -19,7 +19,7 @@ HDF_HOST="sandbox-hdf.hortonworks.com"
 NIFI_TEMPLATE_PATH="/sandbox/tutorial-files/200/nifi/templates/AcquireNASAServerLogs.xml"
 
 # Download NiFi Flow Template
-wget https://github.com/james94/data-tutorials/raw/master/tutorials/cda/building-a-cybersecurity-breach-analysis-application/application/development/nifi-template/AcquireNASAServerLogs.xml \
+wget https://github.com/james94/data-tutorials/raw/master/tutorials/cda/building-a-server-log-analysis-application/application/development/nifi-template/AcquireNASAServerLogs.xml \
 -O $NIFI_TEMPLATE_PATH
 
 # Searches for OLD GeoLite2-City.mmdb file path in NiFi template file, then replaces OLD path with NEW path
