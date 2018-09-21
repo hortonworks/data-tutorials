@@ -15,6 +15,8 @@ The appendix lists many of the common components that makeup the HVAC System.
 
 ## Prerequisites
 
+- Read overview on Building an HVAC System Analysis Application
+
 ## Outline
 
 - [HVAC Fundamentals](#hvac-fundamentals)
