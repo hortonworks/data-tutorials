@@ -174,6 +174,9 @@ tee -a /etc/resolv.conf << EOF
 nameserver 8.8.8.8
 EOF
 
+echo "Create Directory for Zeppelin Notebooks"
+mkdir -p /sandbox/tutorial-files/200/zeppelin/notebooks/
+
 echo "Create /sandbox/tutorial-files/200/nifi/"
 echo "Allow read-write-execute permissions to any user, temp solution for nifi"
 # Creates /sandbox directory in HDFS
