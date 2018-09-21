@@ -176,6 +176,7 @@ EOF
 
 echo "Create Directory for Zeppelin Notebooks"
 mkdir -p /sandbox/tutorial-files/200/zeppelin/notebooks/
+chmod -R 777 /sandbox/tutorial-files/200/zeppelin/notebooks/
 
 echo "Create /sandbox/tutorial-files/200/nifi/"
 echo "Allow read-write-execute permissions to any user, temp solution for nifi"
