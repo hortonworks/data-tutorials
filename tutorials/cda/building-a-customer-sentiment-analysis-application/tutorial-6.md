@@ -61,6 +61,52 @@ Select appropriate **sbt version 1.2.3** and **Scala version 2.11.12**. Make sur
 
 Click **finish** to proceed.
 
+### Project folder
+
+Open your **project**, which currently holds **build.properties**.
+
+### build.properties
+
+Verify **build.properties** file contains the appropriate **SBT version**.
+It should match the version you chose when you created the IntelliJ project.
+
+~~~scala
+sbt.version = 1.2.3
+~~~
+
+By adding the **SBT version**, this allows people with different versions of the SBT launcher to build the same project with consistent results.
+
+### plugins.sbt
+
+**What is a Plugin?**
+
+- A plugin adds new setting, which extension to the build definition. In our case,
+we need to add **sbt-assembly** and **sbt-depedency-graph** plugins.
+
+Right click on **project** folder, select **new**, then select **file**.
+Name the file `plugins.sbt`, then click **ok**.
+
+Add the following lines to the file:
+
+~~~scala
+logLevel := Level.Warn
+addSbtPlugin("com.eed3si9n" % "sbt-assembly" % "0.14.7")
+addSbtPlugin("net.virtual-void" % "sbt-dependency-graph" % "0.9.2")
+~~~
+
+What do the keywords in the configuration file for SBT mean?
+
+- **logLevel**: controls the logging level for our project, currently we have enabled debug logging for all tasks in the current project
+- **addSbtPlugin**: allows for you to declare plugin dependency, takes as input the following format ("`IvyModuleID`" % "`ArtifactID`" % `Revision`)
+- **sbt-assembly**: this plugin creates a fat JAR of your project with all its dependencies
+- **sbt-dependency-graph**: this plugin visualizes your project's dependencies
+
+**plugins.sbt Reference:**
+
+- for more information on **logLevel**, refer to [Configure and use logging](https://www.scala-sbt.org/1.x/docs/Howto-Logging.html)
+- for more information on **sbt-assembly** plugin dependency, such as revision used, refer to [sbt-assembly repo - Using Published Plugin](https://github.com/sbt/sbt-assembly)
+- for more information on **sbt-dependency-graph** plugin dependency, such as revision used, refer to [sbt-dependency-graph repo](https://github.com/jrudolph/sbt-dependency-graph)
+
 ### SBT
 
 We will use SBT to import the **Spark libraries** and **Spark Documentation** into IntelliJ. Thus, IntelliJ can recognize Spark code. Add the following lines to the file `build.sbt`:
@@ -118,52 +164,6 @@ What do the keywords in the configuration file for SBT mean?
 - **libraryDependencies** is built-in sbt, for more info look into [libraryDependencies - sbt doc](https://www.scala-sbt.org/1.x/docs/Library-Dependencies.html)
 - **assemblyMergeStrategy** is an sbt plugin, for more info look into [sbt-assembly repo](https://github.com/sbt/sbt-assembly)
 - [Spark Streaming + Kafka 0.10.0 Integration Guide](https://spark.apache.org/docs/latest/streaming-kafka-0-10-integration.html)
-
-### Project folder
-
-Open your **project**, which currently holds **build.properties**.
-
-### build.properties
-
-Verify **build.properties** file contains the appropriate **SBT version**.
-It should match the version you chose when you created the IntelliJ project.
-
-~~~scala
-sbt.version = 1.2.3
-~~~
-
-By adding the **SBT version**, this allows people with different versions of the SBT launcher to build the same project with consistent results.
-
-### plugins.sbt
-
-**What is a Plugin?**
-
-- A plugin adds new setting, which extension to the build definition. In our case,
-we need to add **sbt-assembly** and **sbt-depedency-graph** plugins.
-
-Right click on **project** folder, select **new**, then select **file**.
-Name the file `plugins.sbt`, then click **ok**.
-
-Add the following lines to the file:
-
-~~~scala
-logLevel := Level.Warn
-addSbtPlugin("com.eed3si9n" % "sbt-assembly" % "0.14.7")
-addSbtPlugin("net.virtual-void" % "sbt-dependency-graph" % "0.9.2")
-~~~
-
-What do the keywords in the configuration file for SBT mean?
-
-- **logLevel**: controls the logging level for our project, currently we have enabled debug logging for all tasks in the current project
-- **addSbtPlugin**: allows for you to declare plugin dependency, takes as input the following format ("`IvyModuleID`" % "`ArtifactID`" % `Revision`)
-- **sbt-assembly**: this plugin creates a fat JAR of your project with all its dependencies
-- **sbt-dependency-graph**: this plugin visualizes your project's dependencies
-
-**plugins.sbt Reference:**
-
-- for more information on **logLevel**, refer to [Configure and use logging](https://www.scala-sbt.org/1.x/docs/Howto-Logging.html)
-- for more information on **sbt-assembly** plugin dependency, such as revision used, refer to [sbt-assembly repo - Using Published Plugin](https://github.com/sbt/sbt-assembly)
-- for more information on **sbt-dependency-graph** plugin dependency, such as revision used, refer to [sbt-dependency-graph repo](https://github.com/jrudolph/sbt-dependency-graph)
 
 ### Create Spark Structured Streaming Application
 
