@@ -30,7 +30,7 @@ After starting your sandbox, open HDF **NiFi UI** at `http://sandbox-hdf.hortonw
 
 This capture group ingests NASA's server log data from the month of August 1995, preprocesses the data, stores it into Kafka, HDFS and local file system for later analysis.
 
-Drop the process group icon ![process_group](assets/images/acquire-twitter-data/process_group.jpg) onto the NiFi canvas.
+Drop the process group icon ![process_group](assets/images/acquire-nasa-log-data/process_group.jpg) onto the NiFi canvas.
 
 Insert the Process Group Name: `AcquireNASAServerLogs` or one of your choice, then click **ADD**.
 
