@@ -18,7 +18,7 @@ You have been brought onto the project as a Data Engineer with the following res
 
 - [Approach 1: Clean Raw NASA Log Data with Spark Zeppelin Interpreter](#approach-1-clean-raw-nasa-log-data-with-spark-zeppelin-interpreter)
 - [Approach 2: Import Zeppelin Notebook to Clean NASA Log Data via UI](#approach-2-import-zeppelin-notebook-to-clean-nasa-log-data-via-ui)
-- [Approach 3: Auto Deploy Zeppelin Notebook to Clean NASA Log Data via Script](#approach-3-auto-deploy-zeppelin-notebook-to-clean-nasa-log-data-via-script)
+<!-- - [Approach 3: Auto Deploy Zeppelin Notebook to Clean NASA Log Data via Script](#approach-3-auto-deploy-zeppelin-notebook-to-clean-nasa-log-data-via-script) -->
 - [Summary](#summary)
 - [Further Reading](#further-reading)
 
@@ -274,6 +274,7 @@ Click on notebook **Cleaning-Raw-NASA-Log-Data**. Then press the **play** button
 
 Now we are finished cleaning the NASA Server Log data. We can head to the summary to review how we cleaned the data and prepared it to be ready for visualization.
 
+<!--
 ## Approach 3: Auto Deploy Zeppelin Notebook to Clean NASA Log Data via Script
 
 Open HDP **sandbox web shell client** at [http://sandbox-hdp.hortonworks.com:4200](http://sandbox-hdp.hortonworks.com:4200).
@@ -287,6 +288,8 @@ bash zeppelin-auto-deploy.sh $NOTEBOOK_NAME
 ~~~
 
 Now we are finished cleaning the NASA Server Log data. We can head to the summary to review how we cleaned the data and prepared it to be ready for visualization.
+
+-->
 
 ## Summary
 
