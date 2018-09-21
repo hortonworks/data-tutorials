@@ -161,7 +161,7 @@ Click on notebook **Visualizing-NASA-Log-Data**. Then press the **play** button 
 
 Now we are finished visualizing the NASA Server Log data. We can head to the summary to review how we visualized the data.
 
-## Approach 3: Auto Deploy Zeppelin Notebook via REST Call
+## Approach 3: Auto Deploy Zeppelin Notebook to Visualize NASA Log Data via Script
 
 Open HDP **sandbox web shell client** at [http://sandbox-hdp.hortonworks.com:4200](http://sandbox-hdp.hortonworks.com:4200).
 
