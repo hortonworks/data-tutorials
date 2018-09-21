@@ -20,7 +20,6 @@ You have been brought onto the project as a Data Engineer with the following res
 - [Approach 3: Auto Deploy NiFi Flow via REST Call](#approach-3-auto-deploy-nifi-flow-via-rest-call)
 - [Summary](#summary)
 - [Further Reading](#further-reading)
-- [Appendix A: NiFi Reference](#appendix-a-nifi-reference)
 
 ## Approach 1: Build a NiFi Flow to Acquire NASA Server Logs
 
