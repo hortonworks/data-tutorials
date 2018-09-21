@@ -16,7 +16,7 @@ You have been brought onto the project as a Data Engineer with the following res
 
 ## Outline
 
-- [Approach 1: Clean Raw NASA Log Data with Spark Zeppelin Interpreter](#approach-1-Clean-raw-nasa-log-data-with-spark-zeppelin-interpreter)
+- [Approach 1: Clean Raw NASA Log Data with Spark Zeppelin Interpreter](#approach-1-clean-raw-nasa-log-data-with-spark-zeppelin-interpreter)
 - [Approach 2: Import Zeppelin Notebook to Clean NASA Log Data via UI](#approach-2-import-zeppelin-notebook-to-clean-nasa-log-data-via-ui)
 - [Approach 3: Auto Deploy Zeppelin Notebook to Clean NASA Log Data via Script](#approach-3-auto-deploy-zeppelin-notebook-to-clean-nasa-log-data-via-script)
 - [Summary](#summary)
@@ -24,7 +24,7 @@ You have been brought onto the project as a Data Engineer with the following res
 
 ## Approach 1: Clean Raw NASA Log Data with Spark Zeppelin Interpreter
 
-Open HDP **Zeppelin UI** at `sandbox-hdp.hortonworks.com:9995`.
+Open HDP **Zeppelin UI** at [http://sandbox-hdp.hortonworks.com:9995](http://sandbox-hdp.hortonworks.com:9995).
 
 1\. Click **Create new note**. Insert **Note Name** `Cleaning-Raw-NASA-Log-Data`, then press **Create Note**.
 
@@ -259,7 +259,7 @@ Now we are finished cleaning the NASA Server Log data. We can head to the summar
 
 ## Approach 2: Import Zeppelin Notebook to Clean NASA Log Data via UI
 
-Open HDP **Zeppelin UI** at `sandbox-hdp.hortonworks.com:9995`.
+Open HDP **Zeppelin UI** at [http://sandbox-hdp.hortonworks.com:9995](http://sandbox-hdp.hortonworks.com:9995).
 
 1\. Click **Import note**. Select **Add from URL**.
 
@@ -281,7 +281,7 @@ Now we are finished cleaning the NASA Server Log data. We can head to the summar
 
 ## Approach 3: Auto Deploy Zeppelin Notebook to Clean NASA Log Data via Script
 
-Open HDP **sandbox web shell client** at `sandbox-hdp.hortonworks.com:4200`.
+Open HDP **sandbox web shell client** at [http://sandbox-hdp.hortonworks.com:9995](http://sandbox-hdp.hortonworks.com:9995).
 
 We will use the Zeppelin REST Call API to import a notebook that uses SparkSQL to analyze NASA's server logs for possible breaches.
 
