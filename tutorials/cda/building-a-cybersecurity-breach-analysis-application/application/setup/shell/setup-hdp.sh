@@ -10,8 +10,8 @@
 # Turn off Spark's maintenance mode via Ambari
 
 HDP="hdp-sandbox"
-HDP_AMBARI_USER="raj_ops"
-HDP_AMBARI_PASS="raj_ops"
+HDP_AMBARI_USER="$1" # $1: Expects user to pass "Ambari User" into the file
+HDP_AMBARI_PASS="$2" # $2: Expects user to pass "Ambari Admin Password" into the file
 HDP_CLUSTER_NAME="Sandbox"
 HDP_HOST="sandbox-hdp.hortonworks.com"
 AMBARI_CREDENTIALS=$HDP_AMBARI_USER:$HDP_AMBARI_PASS
