@@ -12,18 +12,28 @@ For this portion of the project as a Data Engineer, you have the following respo
 
 ## Outline
 
+- [Check these Two Areas Prior to Starting Approach 1 or 2](#check-these-two-areas-prior-to-starting-approach-1-or-2)
+- [Overview of Shell Code Used in Both Approaches](#overview-of-shell-code-used-in-both-approaches)
 - [Approach 1: Manually Setup Development Platforms CLI](#approach-1-manually-setup-development-platforms-cli)
 - [Approach 2: Auto Setup Development Platforms](#approach-2-auto-setup-development-platforms)
 - [Summary](#summary)
 - [Further Reading](#further-readings)
 
-## Approach 1: Manually Setup Development Platforms CLI
+## Check these Two Areas Prior to Starting Approach 1 or 2
 
-### Setup HDF
+**Is our environment setup to map sandbox IP to desired hostname in hosts file?**
 
-Open HDF Sandbox Web Shell Client at `http://sandbox-hdf.hortonworks.com:4200` with login `root/hadoop`.
+If this configuration hasn't been done, which in the demo we use `sandbox-hdf.hortonworks` and `sandbox-hdp.hortonworks.com` mapped to sandbox IP `127.0.0.1`, then for more guidance refer to the link: [environment setup](https://hortonworks.com/tutorial/learning-the-ropes-of-the-hortonworks-sandbox/#environment-setup).
 
-Copy and paste the code line by line. Overview of the script:
+**Have all the required services for HDF and HDP sandbox started up?**
+
+If unsure, you can login to HDF Ambari at [http://sandbox-hdf.hortonowrks.com:8080](http://sandbox-hdf.hortonowrks.com:8080). You can also HDP Ambari at [http://sandbox-hdp.hortonowrks.com:8080](http://sandbox-hdp.hortonowrks.com:8080). If you haven't setup Ambari `admin` password, refer to the link: [admin-password-reset](https://hortonworks.com/tutorial/learning-the-ropes-of-the-hortonworks-sandbox/#admin-password-reset) cause you will need the password for performing Ambari REST API Calls and operating on services in the Ambari UI. For resetting Ambari Admin password on HDF, open HDF web shell client at [http://sandbox-hdf.hortonworks.com:4200](http://sandbox-hdf.hortonworks.com:4200). For resetting Ambari Admin password on HDP, open HDP web shell client at [http://sandbox-hdp.hortonworks.com:4200](http://sandbox-hdp.hortonworks.com:4200). With both web shell clients, initial login is `root/hadoop`, if it is your first login, then you will be prompted to reset your password, make sure to remember it. The Ambari Dashboard will **Background Operations Running window**, which is accessible by the gear icon at the top right of Ambari. From there, you should see **Start All Services** with a green progress bar near it. On HDF, verify **NiFi** started. On HDP, verify **HDFS**, **Spark2** and **Zeppelin** started. Otherwise, start them.
+
+## Overview of Shell Code Used in Both Approaches
+
+### HDF Shell Code
+
+**setup-hdf.sh**
 
 - wait function waits for service status to be STARTED or INSTALLED(STOPPED)
 - add Google Public DNS for resolving domain name servers to IP addresses
@@ -31,9 +41,28 @@ Copy and paste the code line by line. Overview of the script:
 - download and extract GeoLite DB and NASA Logs to their appropriate directories
 - stop NiFi, backup & remove existing NiFi flow, start NiFi for updated changes
 
+### HDP Shell Code
+
+**setup-hdp.sh**
+
+- add Google Public DNS for resolving domain name servers to IP addresses
+- turns off Spark's maintenance mode if it is on.
+
+## Approach 1: Manually Setup Development Platforms CLI
+
+### Setting up HDF
+
+We will be using shell commands to setup the required services in our data-in-motion and data-at-rest platforms from the sandbox web shell clients.
+
+Open HDF Sandbox Web Shell Client at [http://sandbox-hdf.hortonworks.com:4200](http://sandbox-hdf.hortonworks.com:4200) with login `root/hadoop`.
+
+Prior to executing the shell script, replace the following line of shell code `AMBARI_USER_PASSWORD="<Your-Ambari-Admin-Password>"` with the password you created for Ambari Admin user. For example, if our Ambari Admin password was set to `yellowHadoop`, then the line of code would look as follows: `AMBARI_USER_PASSWORD="yellowHadoop"`
+
+Copy and paste the code line by line:
+
 ~~~bash
 HDF_AMBARI_USER="admin"
-HDF_AMBARI_PASS="admin"
+HDF_AMBARI_PASS="<Your-Ambari-Admin-Password>"
 HDF_CLUSTER_NAME="Sandbox"
 HDF_HOST="sandbox-hdf.hortonworks.com"
 HDF="hdf-sandbox"
@@ -125,17 +154,14 @@ wait $HDF NIFI "STARTED"
 
 ### Setup HDP
 
-Open HDF Sandbox Web Shell Client at `http://sandbox-hdp.hortonworks.com:4200` with login `root/hadoop`. On first login, you will be prompted to reset your password.
+Open HDF Sandbox Web Shell Client at [http://sandbox-hdp.hortonworks.com:4200](http://sandbox-hdp.hortonworks.com:4200) with login `root/hadoop`. On first login, you will be prompted to reset your password.
 
-Copy and paste the code line by line. Overview of the script:
-
-- add Google Public DNS for resolving domain name servers to IP addresses
-- turns off Spark's maintenance mode if it is on.
+Copy and paste the code line by line:
 
 ~~~bash
 HDP="hdp-sandbox"
-HDP_AMBARI_USER="raj_ops"
-HDP_AMBARI_PASS="raj_ops"
+HDP_AMBARI_USER="admin"
+HDP_AMBARI_PASS="<Your-Ambari-Admin-Password>"
 HDP_CLUSTER_NAME="Sandbox"
 HDP_HOST="sandbox-hdp.hortonworks.com"
 AMBARI_CREDENTIALS=$HDP_AMBARI_USER:$HDP_AMBARI_PASS
@@ -154,22 +180,27 @@ http://$HDP_HOST:8080/api/v1/clusters/$HDP_CLUSTER_NAME/services/SPARK2
 
 ## Approach 2: Auto Setup Development Platforms
 
-Open the HDF Sandbox Web Shell Client at `http://sandbox-hdf.hortonworks.com:4200` with login `root/hadoop`.
+We will download and execute a shell script to automate the setup of our data-in-motion and data-at-rest platforms from the sandbox web shell clients.
 
-- **Setup NiFi**:
+Open the **HDF web shell client** at [http://sandbox-hdf.hortonworks.com:4200](http://sandbox-hdf.hortonworks.com:4200) with login `root/hadoop`.
+After login, you will be prompted to change the password.
+
+Prior to executing the shell script, replace the following line of shell code `AMBARI_USER_PASSWORD="<Your-Ambari-Admin-Password>"` with the password you created for Ambari Admin user. For example, if our Ambari Admin password was set to `yellowHadoop`, then the line of code would look as follows: `AMBARI_USER_PASSWORD="yellowHadoop"`
 
 ~~~bash
+AMBARI_USER="admin"
+AMBARI_USER_PASSWORD="<Your-Ambari-Admin-Password>"
 wget https://github.com/james94/data-tutorials/raw/master/tutorials/cda/building-a-cybersecurity-breach-analysis-application/application/setup/shell/setup-hdf.sh
-bash setup-hdf.sh
+bash setup-hdf.sh $AMBARI_USER $AMBARI_USER_PASSWORD
 ~~~
 
-Open the HDP Sandbox Web Shell Client at `http://sandbox-hdp.hortonworks.com:4200` with login `root/hadoop`. After login, you will be prompted to change the password.
-
-- **Setup Spark**:
+Open the **HDP web shell client** at [http://sandbox-hdp.hortonworks.com:4200](http://sandbox-hdp.hortonworks.com:4200) with login `root/hadoop`. After login, you will be prompted to change the password.
 
 ~~~bash
+AMBARI_USER="admin"
+AMBARI_USER_PASSWORD="<Your-Ambari-Admin-Password>"
 wget https://github.com/james94/data-tutorials/raw/master/tutorials/cda/building-a-cybersecurity-breach-analysis-application/application/setup/shell/setup-hdp.sh
-bash setup-hdp.sh
+bash setup-hdp.sh $AMBARI_USER $AMBARI_USER_PASSWORD
 ~~~
 
 ## Summary
