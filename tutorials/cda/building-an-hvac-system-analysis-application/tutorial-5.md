@@ -17,10 +17,10 @@ Your next objective is to act as a Data Analyst and use Apache Zeppelin built-in
 
 ## Outline
 
-- [Visualize HVAC_Building Temperature Characteristics Per Country](#visualize-hvac-building-temperature-characteristics-per-country)
+- [Visualize HVAC Building Temperature Characteristics Per Country](#visualize-hvac-building-temperature-characteristics-per-country)
 - [Visualize HVAC Products with Extreme Temperature in Buildings](#visualize-hvac-products-with-extreme-temperature-in-buildings)
 
-## Visualize HVAC_Building Temperature Characteristics Per Country
+## Visualize HVAC Building Temperature Characteristics Per Country
 
 Click on **Zeppelin Notebook** service in Ambari stack, in the box on the rightside called **Quick Links**, click on **[Zeppelin UI](http://sandbox-hdp.hortonworks.com:9995/)**.
 
