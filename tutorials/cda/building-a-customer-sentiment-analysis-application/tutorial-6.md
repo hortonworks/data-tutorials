@@ -51,17 +51,17 @@ As you can see, Nifi has a Publish Kafka processor that lets you easily export t
 
 **Create New Project**
 
-![create_new_project](assets/images/deploying-sentiment-classification-model/create_new_project.jpg)
+![create_new_project](assets/images/deploying-a-sentiment-classification-model/create_new_project.jpg)
 
 Select **Scala** with **sbt**, then press next.
 
-![choose_scala_sbt](assets/images/deploying-sentiment-classification-model/choose_scala_sbt.jpg)
+![choose_scala_sbt](assets/images/deploying-a-sentiment-classification-model/choose_scala_sbt.jpg)
 
 Name your project `DeploySentimentModel`
 
 Select appropriate **sbt version 1.2.3** and **Scala version 2.11.12**. Make sure sources are checked to download sources.
 
-![name_sbt_scala_version](assets/images/deploying-sentiment-classification-model/name_sbt_scala_version.jpg)
+![name_sbt_scala_version](assets/images/deploying-a-sentiment-classification-model/name_sbt_scala_version.jpg)
 
 Click **finish** to proceed. Open the **Project** folder.
 
@@ -98,7 +98,7 @@ addSbtPlugin("com.eed3si9n" % "sbt-assembly" % "0.14.7")
 addSbtPlugin("net.virtual-void" % "sbt-dependency-graph" % "0.9.2")
 ~~~
 
-![plugins_sbt_extensions](assets/images/deploying-sentiment-classification-model/plugins_sbt_extensions.jpg)
+![plugins_sbt_extensions](assets/images/deploying-a-sentiment-classification-model/plugins_sbt_extensions.jpg)
 
 If you haven't enabled auto import for sbt projects, you should **Enable-Auto-Import**. Anytime we add more plugins to this file, IntelliJ will allow sbt to auto import them.
 
@@ -153,7 +153,7 @@ assemblyMergeStrategy in assembly := {
 }
 ~~~
 
-![build_definition](assets/images/deploying-sentiment-classification-model/build_definition.jpg)
+![build_definition](assets/images/deploying-a-sentiment-classification-model/build_definition.jpg)
 
 What do the keywords in the configuration file for SBT mean?
 
