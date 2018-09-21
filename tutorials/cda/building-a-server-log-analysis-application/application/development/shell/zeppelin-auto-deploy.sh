@@ -16,7 +16,7 @@ NOTEBOOK_NAME="$1"
 ZEPPELIN_NOTEBOOK_PATH="/sandbox/tutorial-files/200/zeppelin/notebooks/$NOTEBOOK_NAME.json"
 # Download Zeppelin Notebook
 echo "Downloading Zeppelin Notebook: $NOTEBOOK_NAME"
-wget https://github.com/james94/data-tutorials/raw/master/tutorials/cda/building-a-cybersecurity-breach-detection-application/application/development/zeppelin-notebook/$NOTEBOOK_NAME.json \
+wget https://github.com/james94/data-tutorials/raw/master/tutorials/cda/building-a-server-log-analysis-application/application/development/zeppelin-notebook/$NOTEBOOK_NAME.json \
 -O $ZEPPELIN_NOTEBOOK_PATH
 
 # Import Zeppelin Notebook via Zeppelin REST API Call
