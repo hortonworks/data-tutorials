@@ -281,7 +281,7 @@ Now we are finished cleaning the NASA Server Log data. We can head to the summar
 
 ## Approach 3: Auto Deploy Zeppelin Notebook to Clean NASA Log Data via Script
 
-Open HDP **sandbox web shell client** at [http://sandbox-hdp.hortonworks.com:9995](http://sandbox-hdp.hortonworks.com:9995).
+Open HDP **sandbox web shell client** at [http://sandbox-hdp.hortonworks.com:4200](http://sandbox-hdp.hortonworks.com:4200).
 
 We will use the Zeppelin REST Call API to import a notebook that uses SparkSQL to analyze NASA's server logs for possible breaches.
 
