@@ -21,7 +21,7 @@ You have been brought onto the project as a Data Engineer with the following res
 - [Summary](#summary)
 - [Further Reading](#further-reading)
 
-## Approach 1: Build a NiFi AcquireHVACData Process Group
+## Approach 1: Build a NiFi Flow to Acquire HVAC Sensor Data
 
 After starting your sandbox, open HDF **NiFi UI** at `http://sandbox-hdf.hortonworks.com:9090/nifi`.
 
