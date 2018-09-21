@@ -52,17 +52,12 @@ Hortonworks Connected Data Platform can be used to to acquire, clean and visuali
 
 The tutorial series consists of the following tutorial modules:
 
-1\. **Application Development Concepts**
+1\. **Application Development Concepts**: Focus on HVAC fundamentals, common sensors used in HVAC Systems and ways to analyze data from these sensors to understand the status of the HVAC Systems.
 
-2\. **Setting up the Development Environment**: Any Configurations and/or software services that may need to be installed.
+2\. **Setting up the Development Environment**: Any Configurations and/or software services that may need to be installed prior to building the data pipeline and visualization notebook.
 
-3\. **Acquiring HVAC Sensor Data**: 1 month of Historical HVAC Sensor Data  ingested by NiFi and stored to HDFS.
+3\. **Acquiring HVAC Sensor Data**: Create a part of the data pipeline using Apache NiFi to ingest, process and store 1 month of Historical HVAC Sensor Data into HDFS.
 
-4\. **Cleaning Raw HVAC Data**: Hive.
-Show insight of how we are cleaning the data using Zeppelin.
+4\. **Cleaning Raw HVAC Data**: Create the next portion of the data pipeline using Apache Hive to upload the data into Hive tables, so the data can be cleaned and queried to capture valuable insight about the status of HVAC Systems regulating temperature in buildings across various countries.
 
-5\. **Visualizing Sensor Data From HVAC Machine Systems**: Spark. Perform data analysis on HVAC sensor data to find the _HVAC Temperature Ranges By Country_ - keep count of HOT, COLD, NORMAL ranges per country, _HVAC Extreme HOT Units_ - keep count of machines with HOT temperature, _HVAC Extreme COLD Units_ - keep count of machines with COLD temperature.
-
-## Further Reading
-
-- [Demo Video: Analyzing Sensor Data](https://www.youtube.com/watch?v=Op_5MmG7hIw)
+5\. **Visualizing Sensor Data From HVAC Machine Systems**: Perform data analysis on HVAC sensor data to find the _HVAC Temperature Ranges By Country_ - keep count of HOT, COLD, NORMAL ranges per country, _HVAC Extreme HOT Units_ - keep count of machines with HOT temperature, _HVAC Extreme COLD Units_ - keep count of machines with COLD temperature.

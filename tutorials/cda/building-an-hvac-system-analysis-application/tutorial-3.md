@@ -15,13 +15,13 @@ You have been brought onto the project as a Data Engineer with the following res
 
 ## Outline
 
-- [Approach 1: Build a NiFi Flow to Acquire HVAC Sensor Data](#approach-1-Build-a-nifi-flow-to-acquire-hvac-sensor-data)
+- [Approach 1: Build a NiFi Flow to Acquire HVAC Sensor Data](#approach-1-build-a-nifi-flow-to-acquire-hvac-sensor-data)
 - [Approach 2: Import NiFi AcquireHVACData Process Group via UI](#approach-2-import-nifi-acquirehvacdata-process-group-via-ui)
 - [Approach 3: Auto Deploy NiFi Flow via REST Call](#approach-3-auto-deploy-nifi-flow-via-rest-call)
 - [Summary](#summary)
 - [Further Reading](#further-reading)
 
-## Approach 1: Build a NiFi AcquireHVACData Process Group
+## Approach 1: Build a NiFi Flow to Acquire HVAC Sensor Data
 
 After starting your sandbox, open HDF **NiFi UI** at `http://sandbox-hdf.hortonworks.com:9090/nifi`.
 
