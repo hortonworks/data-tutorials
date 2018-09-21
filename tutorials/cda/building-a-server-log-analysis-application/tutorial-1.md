@@ -19,8 +19,8 @@ compliance.
 
 - [Server Log Data](#server-log-data)
 - [NASA Server Logs Dataset](#nasa-server-logs-dataset)
-- [What is Log Analysis?](#what-is-log-analysis?)
-- [How Does Log Analysis Work?](#how-does-log-analysis-work?)
+- [What is Log Analysis?](#what-is-log-analysis)
+- [How Does Log Analysis Work?](#how-does-log-analysis-work)
 - [Use Cases For Log Analysis](#use-cases-for-log-analysis)
 - [Best Practices For Log Analysis](#best-practices-for-log-analysis)
 - [Summary](#summary)
