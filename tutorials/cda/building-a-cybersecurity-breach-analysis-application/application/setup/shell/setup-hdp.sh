@@ -21,6 +21,17 @@ tee -a /etc/resolv.conf << EOF
 # Google's Public DNS
 nameserver 8.8.8.8
 EOF
+
+echo "Create /sandbox/tutorial-files/200/nifi/"
+echo "Allow read-write-execute permissions to any user, temp solution for nifi"
+# Creates /sandbox directory in HDFS
+# allow read-write-execute permissions for the owner, group, and any other users
+
+su hdfs
+hdfs dfs -mkdir -p /sandbox/tutorial-files/200/nifi/
+hdfs dfs -chmod -R 777 /sandbox/tutorial-files/200/nifi/
+exit
+
 # TODO: Check that service exists via ambari rest call
 # TODO: Check if service is in maintenance mode via ambari rest call
 echo "Turning off Spark's maintenance mode via Ambari"
