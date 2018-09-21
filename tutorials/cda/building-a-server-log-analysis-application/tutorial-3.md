@@ -712,7 +712,7 @@ Once NiFi writes your server data to HDFS, which you can check by viewing data p
 Open HDF Sandbox Web Shell Client at [http://sandbox-hdf.hortonworks.com:4200](http://sandbox-hdf.hortonworks.com:4200) with login `root/hadoop`.
 
 ~~~bash
-wget https://github.com/james94/data-tutorials/raw/master/tutorials/cda/building-a-cybersecurity-breach-analysis-application/application/development/shell/nifi-auto-deploy.sh
+wget https://github.com/james94/data-tutorials/raw/master/tutorials/cda/building-a-server-log-analysis-application/application/development/shell/nifi-auto-deploy.sh
 bash nifi-auto-deploy.sh
 ~~~
 
