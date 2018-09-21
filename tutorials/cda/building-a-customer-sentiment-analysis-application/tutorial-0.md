@@ -7,7 +7,7 @@ persona: Data Engineer, Data Scientist
 source: Hortonworks
 use case: Data Discovery
 technology: Apache Solr, Apache Hive, Apache NiFi, Apache Ambari, Apache Zeppelin
-release: hdp-2.6.5, hdf-3.1.1
+release: hdp-3.0.0, hdf-3.2.0
 environment: Sandbox
 product: HDP
 series: HDP > Hadoop for Data Engineers & Data Scientists > Real World Examples, HDF > Develop Data Flow & Streaming Applications > Real World Examples
