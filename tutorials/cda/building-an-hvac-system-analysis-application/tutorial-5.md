@@ -18,7 +18,7 @@ Your next objective is to act as a Data Analyst and use Apache Zeppelin built-in
 ## Outline
 
 - [Visualize HVAC Building Temperature Characteristics Per Country](#visualize-hvac-building-temperature-characteristics-per-country)
-- [Visualize HVAC Products with Extreme Temperature in Buildings](#visualize-hvac-products-with-extreme-temperature-in-buildings)
+- [Visualize Extreme Temperature in Buildings Having HVAC Products](#visualize-extreme-temperature-in-buildings-having-hvac-products)
 
 ## Visualize HVAC Building Temperature Characteristics Per Country
 
@@ -54,7 +54,7 @@ Let's further configure this chart, click **settings** to open up more available
 
 From the chart above we can see the countries that HVAC Buildings come from that have the most extreme temperature indicated by a count for ***extremetemp*** associated with ***temprange level*** for **NORMAL** events there are compared to **HOT** and **COLD**.
 
-## Visualize HVAC Products with Extreme Temperature in Buildings
+## Visualize Extreme Temperature in Buildings Having HVAC Products
 
 Is it possible to figure out which buildings might need HVAC upgrades, and which do not? Let’s determine that answer in the steps ahead...
 
