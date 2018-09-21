@@ -24,7 +24,7 @@ You have been brought onto the project as a Data Engineer with the following res
 
 ## Approach 1: Build a NiFi Flow to Acquire NASA Server Logs
 
-After starting your sandbox, open HDF **NiFi UI** at `http://sandbox-hdf.hortonworks.com:9090/nifi`.
+After starting your sandbox, open HDF **NiFi UI** at [http://sandbox-hdf.hortonworks.com:9090/nifi](http://sandbox-hdf.hortonworks.com:9090/nifi).
 
 ### 1\. Create AcquireNASALogData Process Group
 
@@ -710,14 +710,14 @@ Once NiFi writes your server data to HDFS, which you can check by viewing data p
 
 ## Approach 3: Auto Deploy NiFi Flow via REST Call
 
-Open HDF Sandbox Web Shell Client at `http://sandbox-hdf.hortonworks.com:4200` with login `root/hadoop`.
+Open HDF Sandbox Web Shell Client at [http://sandbox-hdf.hortonworks.com:4200](http://sandbox-hdf.hortonworks.com:4200) with login `root/hadoop`.
 
 ~~~bash
 wget https://github.com/james94/data-tutorials/raw/master/tutorials/cda/building-a-cybersecurity-breach-analysis-application/application/development/shell/nifi-auto-deploy.sh
 bash nifi-auto-deploy.sh
 ~~~
 
-Open HDF **NiFi UI** at `http://sandbox-hdf.hortonworks.com:9090/nifi`. Your NiFi was just uploaded, imported and started.
+Open HDF **NiFi UI** at [http://sandbox-hdf.hortonworks.com:9090/nifi](http://sandbox-hdf.hortonworks.com:9090/nifi). Your NiFi was just uploaded, imported and started.
 
 ## Summary
 
