@@ -17,7 +17,7 @@ You have been brought onto the project as a Data Analyst with the following resp
 
 ## Outline
 
-- [Approach 1: Visualize NASA Log Data with Spark Zeppelin Interpreter](#approach-1-visualize-raw-nasa-log-data-with-spark-zeppelin-interpreter)
+- [Approach 1: Visualize NASA Log Data with Spark Zeppelin Interpreter](#approach-1-visualize-nasa-log-data-with-spark-zeppelin-interpreter)
 - [Approach 2: Import Zeppelin Notebook to Visualize NASA Log Data via UI](#approach-2-import-zeppelin-notebook-to-visualize-nasa-log-data-via-ui)
 - [Approach 3: Auto Deploy Zeppelin Notebook to Visualize NASA Log Data via Script](#approach-3-auto-deploy-zeppelin-notebook-to-visualize-nasa-log-data-via-script)
 - [Summary](#summary)
