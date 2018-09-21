@@ -8,8 +8,8 @@
 # 3. Uploads and Imports New NiFi flow onto canvas via NiFi Rest API
 ##
 
-HDF_AMBARI_USER="admin"
-HDF_AMBARI_PASS="admin"
+HDF_AMBARI_USER="$1" # $1: Expects user to pass "Ambari User" into the file
+HDF_AMBARI_PASS="$2" # $2: Expects user to pass "Ambari Admin Password" into the file
 HDF_CLUSTER_NAME="Sandbox"
 HDF_HOST="sandbox-hdf.hortonworks.com"
 HDF="hdf-sandbox"
