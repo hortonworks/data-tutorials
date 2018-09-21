@@ -39,7 +39,7 @@ team should be cautious about.
     - [Apache NiFi](https://nifi.apache.org/)
 - [HDP Sandbox](https://hortonworks.com/products/data-platforms/hdp/)
     - [Apache Ambari](https://ambari.apache.org/)
-    - [Apache Hadoop - HDFS](http://hadoop.apache.org/docs/r2.7.6/)
+    - [Apache Hadoop - HDFS](https://hadoop.apache.org/docs/r3.1.0/)
     - [Apache Hive](https://hive.apache.org/)
     - [Apache Spark](https://spark.apache.org/)
     - [Apache Zeppelin](https://zeppelin.apache.org/)
