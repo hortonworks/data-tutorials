@@ -1,17 +1,15 @@
 #!/bin/bash
 
+##
+# Author: James Medel
+# Email: jamesmedel94@gmail.com
+##
+
 ###
-#
 # Purpose: Automate importing and starting a Zeppelin Notebook
-#
 ###
 
-HDP="hdp-sandbox"
-HDP_AMBARI_USER="raj_ops"
-HDP_AMBARI_PASS="raj_ops"
-HDP_CLUSTER_NAME="Sandbox"
 HDP_HOST="sandbox-hdp.hortonworks.com"
-AMBARI_CREDENTIALS=$HDP_AMBARI_USER:$HDP_AMBARI_PASS
 
 # Cleaning-Raw-NASA-Log-Data<.json>, Visualizing-NASA-Log-Data<.json>, etc
 NOTEBOOK_NAME="$1"
