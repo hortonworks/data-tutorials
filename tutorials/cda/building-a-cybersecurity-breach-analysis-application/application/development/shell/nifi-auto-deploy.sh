@@ -1,6 +1,11 @@
 #!/bin/bash
 
 ##
+# Author: James Medel
+# Email: jamesmedel94@gmail.com
+##
+
+##
 # Purpose: Automate building and starting the NiFi flow
 # How: The script backups the previous existing NiFi flow if any existed,
 # downloads the NiFi template, uploading the NiFi template via
@@ -9,11 +14,7 @@
 # preprocessing and storing the data let the User turn off the NiFi flow.
 ##
 
-HDF_AMBARI_USER="admin"
-HDF_AMBARI_PASS="admin"
-HDF_CLUSTER_NAME="Sandbox"
 HDF_HOST="sandbox-hdf.hortonworks.com"
-HDF="hdf-sandbox"
 
 NIFI_TEMPLATE_PATH="/sandbox/tutorial-files/200/nifi/templates/AcquireNASAServerLogs.xml"
 
