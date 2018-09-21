@@ -19,7 +19,7 @@ Our objective in this part of building the HVAC system analysis application is t
 - [Approach 1: Manually Setup Development Platforms via CLI](#approach-1-manually-setup-development-platforms-via-cli)
 - [Approach 2: Automatically Setup Development Platforms](#approach-2-automatically-setup-development-platforms)
 - [Summary](#summary)
-- [Further Reading](#further-readings)
+- [Further Reading](#further-reading)
 
 ## Check these Two Areas Prior to Starting Approach 1 or Approach 2
 
