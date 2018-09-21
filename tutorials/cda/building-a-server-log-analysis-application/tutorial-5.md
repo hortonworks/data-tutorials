@@ -26,7 +26,7 @@ You have been brought onto the project as a Data Analyst with the following resp
 
 ## Approach 1: Visualize NASA Log Data with Spark Zeppelin Interpreter
 
-Open HDP **Zeppelin UI** at `sandbox-hdp.hortonworks.com:9995`.
+Open HDP **Zeppelin UI** at [http://sandbox-hdp.hortonworks.com:9995](http://sandbox-hdp.hortonworks.com:9995).
 
 1\. Click **Create new note**. Insert **Note Name** `Visualizing-NASA-Log-Data`, then press **Create Note**.
 
@@ -141,7 +141,7 @@ Now we are finished visualizing the NASA Server Log data. We can head to the sum
 
 ## Approach 2: Import Zeppelin Notebook to Visualize NASA Log Data via UI
 
-Open HDP **Zeppelin UI** at `sandbox-hdp.hortonworks.com:9995`.
+Open HDP **Zeppelin UI** at [http://sandbox-hdp.hortonworks.com:9995](http://sandbox-hdp.hortonworks.com:9995).
 
 1\. Click **Import note**. Select **Add from URL**.
 
@@ -163,7 +163,7 @@ Now we are finished visualizing the NASA Server Log data. We can head to the sum
 
 ## Approach 3: Auto Deploy Zeppelin Notebook via REST Call
 
-Open HDP **sandbox web shell client** at `sandbox-hdp.hortonworks.com:4200`.
+Open HDP **sandbox web shell client** at [http://sandbox-hdp.hortonworks.com:4200](http://sandbox-hdp.hortonworks.com:4200).
 
 We will use the Zeppelin REST Call API to import a notebook that uses SparkSQL to analyze NASA's server logs for possible breaches.
 
