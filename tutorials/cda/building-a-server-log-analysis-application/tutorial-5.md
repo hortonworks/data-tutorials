@@ -148,7 +148,7 @@ Open HDP **Zeppelin UI** at [http://sandbox-hdp.hortonworks.com:9995](http://san
 Insert the following URL cause we are going to import **Visualizing-NASA-Log-Data** notebook:
 
 ~~~bash
-https://raw.githubusercontent.com/james94/data-tutorials/master/tutorials/cda/building-a-cybersecurity-breach-analysis-application/application/development/zeppelin-notebook/Visualizing-NASA-Log-Data.json
+https://raw.githubusercontent.com/james94/data-tutorials/master/tutorials/cda/building-a-server-log-analysis-application/application/development/zeppelin-notebook/Visualizing-NASA-Log-Data.json
 ~~~
 
 Click **Import Note**.
@@ -169,7 +169,7 @@ We will use the Zeppelin REST Call API to import a notebook that uses SparkSQL t
 
 ~~~bash
 NOTEBOOK_NAME="Visualizing-NASA-Log-Data"
-wget https://raw.githubusercontent.com/james94/data-tutorials/master/tutorials/cda/building-a-cybersecurity-breach-analysis-application/application/development/shell/zeppelin-auto-deploy.sh
+wget https://github.com/james94/data-tutorials/raw/master/tutorials/cda/building-a-server-log-analysis-application/application/development/shell/zeppelin-auto-deploy.sh
 bash zeppelin-auto-deploy.sh $NOTEBOOK_NAME
 ~~~
 
