@@ -51,19 +51,23 @@ As you can see, Nifi has a Publish Kafka processor that lets you easily export t
 
 **Create New Project**
 
-Select **Scala** with **sbt**
+![create_new_project](assets/images/deploying-sentiment-classification-model/create_new_project.jpg)
 
-Name your project **DeploySentimentModel**
+Select **Scala** with **sbt**, then press next.
+
+![choose_scala_sbt](assets/images/deploying-sentiment-classification-model/choose_scala_sbt.jpg)
+
+Name your project `DeploySentimentModel`
 
 Select appropriate **sbt version 1.2.3** and **Scala version 2.11.12**. Make sure sources are checked to download sources.
 
-![project-name-deploy-sentiment-model](assets/images/deploying-sentiment-classification-model/project-name-deploy-sentiment-model.jpg)
+![name_sbt_scala_version](assets/images/deploying-sentiment-classification-model/name_sbt_scala_version.jpg)
 
-Click **finish** to proceed.
+Click **finish** to proceed. Open the **Project** folder.
 
 ### Project folder
 
-Open your **project**, which currently holds **build.properties**.
+From **project**, we will verify **build.properties** contains the appropriate **sbt** version. Next we will create a plugins.sbt folder to have **sbt** download the plugins needed to import external libraries.
 
 ### build.properties
 
@@ -94,6 +98,10 @@ addSbtPlugin("com.eed3si9n" % "sbt-assembly" % "0.14.7")
 addSbtPlugin("net.virtual-void" % "sbt-dependency-graph" % "0.9.2")
 ~~~
 
+![plugins_sbt_extensions](assets/images/deploying-sentiment-classification-model/plugins_sbt_extensions.jpg)
+
+If you haven't enabled auto import for sbt projects, you should **Enable-Auto-Import**. Anytime we add more plugins to this file, IntelliJ will allow sbt to auto import them.
+
 What do the keywords in the configuration file for SBT mean?
 
 - **logLevel**: controls the logging level for our project, currently we have enabled debug logging for all tasks in the current project
@@ -109,7 +117,7 @@ What do the keywords in the configuration file for SBT mean?
 
 ### SBT
 
-We will use SBT to import the **Spark libraries** and **Spark Documentation** into IntelliJ. Thus, IntelliJ can recognize Spark code. Add the following lines to the file `build.sbt`:
+We will use SBT to import the **Spark libraries**, **Kafka library**, **Google gson library**, **tyesafe config library** and the **appropriate documentation** into IntelliJ. Thus, IntelliJ can recognize Spark and gson code. Copy and paste the following lines to the file `build.sbt` to overwrite it:
 
 ~~~scala
 name := "DeploySentimentModel"
@@ -127,7 +135,7 @@ libraryDependencies ++= {
     "org.apache.spark"     %% "spark-streaming"         % sparkVer % "provided" withSources(),
     "org.apache.spark"     %% "spark-streaming-kafka-0-10" % sparkVer withSources(),
     "org.apache.spark"     %% "spark-sql-kafka-0-10" % sparkVer withSources(),
-    "org.apache.kafka"     %% "kafka" % "0.10.0" withSources(),
+    "org.apache.kafka"     %% "kafka" % "0.10.2.2" withSources(),
     "com.typesafe" % "config" % "1.3.1",
     "com.google.code.gson" % "gson" % "2.8.0"
   )
@@ -145,7 +153,7 @@ assemblyMergeStrategy in assembly := {
 }
 ~~~
 
-You may get the issue cannot resolve symbol assemblyMergeStrategy.
+![build_definition](assets/images/deploying-sentiment-classification-model/build_definition.jpg)
 
 What do the keywords in the configuration file for SBT mean?
 
@@ -164,6 +172,9 @@ What do the keywords in the configuration file for SBT mean?
 - **libraryDependencies** is built-in sbt, for more info look into [libraryDependencies - sbt doc](https://www.scala-sbt.org/1.x/docs/Library-Dependencies.html)
 - **assemblyMergeStrategy** is an sbt plugin, for more info look into [sbt-assembly repo](https://github.com/sbt/sbt-assembly)
 - [Spark Streaming + Kafka 0.10.0 Integration Guide](https://spark.apache.org/docs/latest/streaming-kafka-0-10-integration.html)
+- If you run into unresolved dependency for a module not found indicated by Build log, then you should refer to link **[mvnrepository](http://mvnrepository.com)** and check each libraryDependency to make sure the build definition line is correct
+
+Now that we configured the Spark Structured Streaming application dependencies, we are ready to start writing the code.
 
 ### Create Spark Structured Streaming Application
 
