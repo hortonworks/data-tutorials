@@ -10,6 +10,8 @@ For this portion of the project as a Data Engineer, you have the following respo
 
 ## Prerequisites
 
+- Enabled CDA for your appropriate system.
+
 ## Outline
 
 - [Check these Two Areas Prior to Starting Approach 1 or 2](#check-these-two-areas-prior-to-starting-approach-1-or-2)
