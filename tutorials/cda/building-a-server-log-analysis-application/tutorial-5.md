@@ -19,7 +19,7 @@ You have been brought onto the project as a Data Analyst with the following resp
 
 - [Approach 1: Visualize NASA Log Data with Spark Zeppelin Interpreter](#approach-1-visualize-nasa-log-data-with-spark-zeppelin-interpreter)
 - [Approach 2: Import Zeppelin Notebook to Visualize NASA Log Data via UI](#approach-2-import-zeppelin-notebook-to-visualize-nasa-log-data-via-ui)
-- [Approach 3: Auto Deploy Zeppelin Notebook to Visualize NASA Log Data via Script](#approach-3-auto-deploy-zeppelin-notebook-to-visualize-nasa-log-data-via-script)
+<!-- - [Approach 3: Auto Deploy Zeppelin Notebook to Visualize NASA Log Data via Script](#approach-3-auto-deploy-zeppelin-notebook-to-visualize-nasa-log-data-via-script) -->
 - [Summary](#summary)
 - [Further Reading](#further-reading)
 
@@ -161,6 +161,8 @@ Click on notebook **Visualizing-NASA-Log-Data**. Then press the **play** button 
 
 Now we are finished visualizing the NASA Server Log data. We can head to the summary to review how we visualized the data.
 
+
+<!--
 ## Approach 3: Auto Deploy Zeppelin Notebook to Visualize NASA Log Data via Script
 
 Open HDP **sandbox web shell client** at [http://sandbox-hdp.hortonworks.com:4200](http://sandbox-hdp.hortonworks.com:4200).
@@ -172,6 +174,8 @@ NOTEBOOK_NAME="Visualizing-NASA-Log-Data"
 wget https://github.com/james94/data-tutorials/raw/master/tutorials/cda/building-a-server-log-analysis-application/application/development/shell/zeppelin-auto-deploy.sh
 bash zeppelin-auto-deploy.sh $NOTEBOOK_NAME
 ~~~
+
+-->
 
 ## Summary
 
