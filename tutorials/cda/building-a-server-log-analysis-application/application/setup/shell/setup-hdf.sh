@@ -1,6 +1,11 @@
 #!/bin/bash
 
 ##
+# Author: James Medel
+# Email: jamesmedel94@gmail.com
+##
+
+##
 # Run script in HDF Sandbox CentOS7
 # Sets up HDF Dev Environment, so User can focus on NiFi Flow Dev
 # 1. Creates GeoFile directory and download in GeoFile DB

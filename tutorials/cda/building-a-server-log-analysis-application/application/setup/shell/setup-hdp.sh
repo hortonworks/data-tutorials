@@ -1,6 +1,11 @@
 #!/bin/bash
 
 ##
+# Author: James Medel
+# Email: jamesmedel94@gmail.com
+##
+
+##
 # Run script in HDP Sandbox CentOS7
 # Sets up HDP Dev Environment, so User can focus on Spark Data Analysis
 # 1. Turns off Spark maintenance mode via Ambari
