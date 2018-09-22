@@ -42,6 +42,14 @@ In the final development phase, you will leverage skills from both roles to visu
 
 ## Goals and Objectives
 
+- Learn to create a Twitter Application using Twitter's Developer Portal to get KEYS and TOKENS for connecting to Twitter's APIs
+- Learn to create a NiFi Dataflow Application that integrates Twitter's Decahose API to ingest tweets, perform some preprocessing, store the data into the Kafka Topic "tweets".
+- Learn to create a NiFi Dataflow Appliction that ingests the Kafka Topic "tweetsSentiment" to stream sentiment tweet data to Solr
+- Learn to build a SparkSQL Application to clean the data and get it into a suitable format for building the sentiment classification model
+- Learn to build a SparkML Application to train and validate a sentiment classfication model using Gradient Boosting
+- Learn to build a Spark Structured Streaming Application to stream the sentiment tweet data from Kafka topic "tweets" on HDP to Kafka topic "tweetsSentiment" on HDF to do real-time data visualization using Solr's Banana Dashboard
+- Learn to do data visualization of sentiment tweet data with Solr's Banana Dashboard
+
 ## Prerequisites
 
 - Downloaded and Installed the latest [Hortonworks HDP Sandbox](https://hortonworks.com/hdp/downloads/)
@@ -56,16 +64,16 @@ In the final development phase, you will leverage skills from both roles to visu
 
 The tutorial series consists of the following tutorial modules:
 
-1\. **Application Development Concepts**
+1\. **Application Development Concepts**: You will be introduced to customer sentiment fundamentals: customer sentiment analysis, ways to perform the data analysis and the various use cases.
 
-2\. **Setting up the Development Environment**: Any Configurations and/or software services that may need to be installed.
+2\. **Setting up the Development Environment**: You will create a Twitter Application in Twitter's Developer Portal for access to KEYS and TOKENS. You will then write a shell code and perform Ambari REST API Calls to setup a development environment.
 
-3\. **Acquiring Twitter Data**: Twitter Dev to NiFi to HDFS
+3\. **Acquiring Twitter Data**: You will build a NiFi dataflow to ingest Twitter data, preprocess it and store it into HDFS along with a Kafka Topic "tweets". The other NiFi dataflow you will build ingests the enriched sentiment tweet data from Kafka topic "tweetsSentiment" and streams the content of the flowfile to Solr.
 
-4\. **Cleaning the Raw Twitter Data**: Hive.
-Show insight of how we are cleaning the data using Zeppelin.
+4\. **Cleaning the Raw Twitter Data**: You will create a Zeppelin notebook and use Zeppelin's Spark Interpreter to clean the raw twitter data in preparation to create the sentiment classification model.
 
-5\. **Building a Sentiment Classification Model**: Scala and Spark2.
-Show insight into how we are classifying the data using Zeppelin.
+5\. **Building a Sentiment Classification Model**: You will create a Zeppelin notebook and use Zeppelin's Spark Interpreter to build a sentiment classification model that classifies tweets as Happy or Sad and exports the model to HDFS.
 
-6\. **Visualizing the Classification Model in Real-Time**: Spark Streaming to Kafka to NiFi to Solr's Banana Dashboard
+6\. **Deploying a Sentiment Classification Model**: You will create a Scala IntelliJ project in which you develop a Spark Structured Streaming application that streams the data from Kafka topic "tweets" on HDP, processes the tweet JSON data by adding sentiment and streaming the data into Kafka topic "tweetsSentiment" on HDF.
+
+7\. **Visualizing the Classification Model in Real-Time**: You will use Solr's Banana Dashboard to visualize the sentiment tweet data with various charts.
