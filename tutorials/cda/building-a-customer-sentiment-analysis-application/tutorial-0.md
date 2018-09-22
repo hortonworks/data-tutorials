@@ -21,9 +21,9 @@ For this project, you will play the part of a Big Data Application Developer who
 
 In the first development phase, you will play the role of **Data Engineer** tasked with acquiring tweet data from Twitter and storing the raw data using Apache NiFi.
 
-In the second development phase, you will play the role of **Data Scientist** tasked with using Apache Spark to build a Machine Learning Sentiment Analysis Classification model to categorize the tweets as happy or sad and then translate the model for storage into HDFS.
+In the second development phase, you will play the role of **Data Scientist** tasked with using Apache Spark to clean the data to preprocess it to be in the proper format, so you can build a Machine Learning Sentiment Analysis Classification model to categorize the tweets as happy or sad and then translate the model for storage into HDFS.
 
-In the final development phase, you will leverage skills from both roles to visualize the sentiment score of each tweet with Solr's Banana Dashboard by using Spark Streaming to send the model into Kafka, which NiFi pulls into it's dataflow to be pushed to Solr.
+In the final development phase, you will leverage skills from both roles to visualize the sentiment score of each tweet with Solr's Banana Dashboard by using Spark Structured Streaming to send the model into Kafka, which NiFi pulls into it's dataflow to be pushed to Solr.
 
 ## Big Data Technologies used to develop the Application:
 
