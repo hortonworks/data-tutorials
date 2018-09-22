@@ -136,8 +136,9 @@ libraryDependencies ++= {
     "org.apache.spark"     %% "spark-streaming-kafka-0-10" % sparkVer withSources(),
     "org.apache.spark"     %% "spark-sql-kafka-0-10" % sparkVer withSources(),
     "org.apache.kafka"     %% "kafka" % "0.10.2.2" withSources(),
-    "com.typesafe" % "config" % "1.3.1",
-    "com.google.code.gson" % "gson" % "2.8.0"
+    "org.jpmml"            % "pmml-model" % "1.4.6",
+    "com.typesafe" % "config" % "1.3.3",
+    "com.google.code.gson" % "gson" % "2.8.5"
   )
 }
 
@@ -174,13 +175,13 @@ What do the keywords in the configuration file for SBT mean?
 - [Spark Streaming + Kafka 0.10.0 Integration Guide](https://spark.apache.org/docs/latest/streaming-kafka-0-10-integration.html)
 - If you run into unresolved dependency for a module not found indicated by Build log, then you should refer to link **[mvnrepository](http://mvnrepository.com)** and check each libraryDependency to make sure the build definition line is correct
 
-Now that we configured the Spark Structured Streaming application dependencies, we are ready to start writing the code.
+Now that we added the Spark Structured Streaming application dependencies, we are ready to start writing the code.
 
 ### Create Spark Structured Streaming Application
 
 ### resources folder
 
-In your project, if the `resources` folder does not exist yet, make a folder under `src/main` called `resources`, and place `application.conf` there.
+In your project, if the `resources` folder does not exist yet, create a folder under `src/main` called `resources`, and create the `application.conf` file there.
 
 ### application.conf
 
@@ -194,9 +195,9 @@ spark {
     KafkaBrokerHDP: "sandbox-hdp.hortonworks.com:6668"
   }
 
-  appName = "SentimentAnalysis"
+  appName = "DeploySentimentModel"
   messageFrequency = 200 //milliseconds
-  modelLocation = "hdfs:///tmp/tweets/RandomForestModel"
+  modelLocation = "hdfs:///sandbox/tutorial-files/770/tweets/RandomForestModel"
 
   kafkaTopics {
     tweetsRaw: "tweets"
@@ -207,7 +208,7 @@ spark {
 
 What configurations are we passing to Scala with this file?
 
-- **kafkaBrokers**: specifies the server location in which each Kafka Broker used in the application listens in on for packets coming into the application.
+- **kafkaBrokers**: specifies the server location in which each Kafka Broker at HDF and HDP used in the application listens in on for packets coming into the application.
 - **appName**: specifies application name
 - **messageFrequency**: how often to send messages
 - **modelLocation**: location our machine learning model resides
@@ -219,13 +220,14 @@ What configurations are we passing to Scala with this file?
 
 ### Collect.scala
 
-Now that we have our configuration.conf file, we will integrate into the **Collect.scala** code file we will write. Copy and paste the following code to the file:
+Now that we have our configuration.conf file, we will reference it in the **Collect.scala** code file that we will implement. Create a **new file** in `src/main/scala` directory called `Collect.scala`. Copy and paste the following code into the file:
 
 ~~~scala
 package main.scala
 
 import java.util.Properties
 
+import scala.util.control.ControlThrowable
 import com.google.gson.{Gson, JsonParser}
 import com.typesafe.config.ConfigFactory
 import org.apache.kafka.clients.producer.{KafkaProducer, ProducerRecord}
@@ -237,11 +239,12 @@ import org.dmg.pmml.True
 import scala.util.Try
 
 case class CollectOptions(
-  kafkaBrokerList: String,
-  tweetsTopic: String,
-  tweetsWithSentimentTopic: String,
-  appName:String,
-  modelLocation:String
+                           kafkaBrokerHDF: String,
+                           kafkaBrokerHDP: String,
+                           tweetsTopic: String,
+                           tweetsWithSentimentTopic: String,
+                           appName:String,
+                           modelLocation:String
                          )
 
 /** Setup Spark Streaming */
@@ -250,7 +253,8 @@ object Collect {
   def main(args: Array[String]) {
 
     val options = new CollectOptions(
-      config.getString("spark.kafkaBrokerList"),
+      config.getString("spark.kafkaBrokers.kafkaBrokerHDF"),
+      config.getString("spark.kafkaBrokers.kafkaBrokerHDP"),
       config.getString("spark.kafkaTopics.tweetsRaw"),
       config.getString("spark.kafkaTopics.tweetsWithSentiment"),
       config.getString("spark.appName"),
@@ -259,7 +263,7 @@ object Collect {
 
     val spark = SparkSession
       .builder
-      .appName("StructuredKafkaWordCount")
+      .appName("DeploySentimentModel")
       .getOrCreate()
     spark.sparkContext.setLogLevel("ERROR")
 
@@ -268,7 +272,7 @@ object Collect {
       try {
         model = GradientBoostedTreesModel.load(spark.sparkContext, options.modelLocation)
       }catch{
-        case unknown => println("Couldn't load Gradient Boosted Model. Have you built it with Zeppelin yet?")
+        case unknown : ControlThrowable => println("Couldn't load Gradient Boosted Model. Have you built it with Zeppelin yet?")
           throw unknown
       }
     }
@@ -280,7 +284,7 @@ object Collect {
     val rawTweets = spark
       .readStream
       .format("kafka")
-      .option("kafka.bootstrap.servers", options.kafkaBrokerList)
+      .option("kafka.bootstrap.servers", options.kafkaBrokerHDP)
       .option("subscribe", options.tweetsTopic)
       .load()
       .selectExpr("CAST(value AS STRING)")
@@ -293,9 +297,9 @@ object Collect {
       val pred = new Predictor(model)//options.modelLocation, context)
       val parser = new JsonParser()
       iter.map(
-      tweet =>
-        //For error handling, we're mapping to a Scala Try and filtering out records with errors.
-        Try {
+        tweet =>
+          //For error handling, we're mapping to a Scala Try and filtering out records with errors.
+          Try {
             val element = parser.parse(tweet).getAsJsonObject
             val msg = element.get("text").getAsString
             val sentiment = pred.predict(msg)
@@ -315,31 +319,31 @@ object Collect {
     //Push back to Kafka
     val kafkaProps = new Properties()
     //props.put("metadata.broker.list",  options.kafkaBrokerList)
-    kafkaProps.put("bootstrap.servers", options.kafkaBrokerList)
+    kafkaProps.put("bootstrap.servers", options.kafkaBrokerHDF)
     kafkaProps.put("key.serializer", "org.apache.kafka.common.serialization.StringSerializer")
     kafkaProps.put("value.serializer", "org.apache.kafka.common.serialization.StringSerializer")
 
     tweetsWithSentiment
       .writeStream
       .foreach(
-      new ForeachWriter[(String)] {
+        new ForeachWriter[(String)] {
 
           //KafkaProducer can't be serialized, so we're creating it locally for each partition.
-        var producer:KafkaProducer[String, String] = null
+          var producer:KafkaProducer[String, String] = null
 
-        override def process(value: (String)) = {
-          val message = new ProducerRecord[String, String](options.tweetsWithSentimentTopic, null,value)
-          println("sending windowed message: " + value)
-          producer.send(message)
-        }
+          override def process(value: (String)) = {
+            val message = new ProducerRecord[String, String](options.tweetsWithSentimentTopic, null,value)
+            println("sending windowed message: " + value)
+            producer.send(message)
+          }
 
-        override def close(errorOrNull: Throwable) = ()
+          override def close(errorOrNull: Throwable) = ()
 
-        override def open(partitionId: Long, version: Long) = {
-          producer = new KafkaProducer[String, String](kafkaProps)
-          true
-        }
-    }).start()
+          override def open(partitionId: Long, version: Long) = {
+            producer = new KafkaProducer[String, String](kafkaProps)
+            true
+          }
+        }).start()
 
     query.awaitTermination()
   }
@@ -347,6 +351,8 @@ object Collect {
 ~~~
 
 ### Predictor.scala
+
+Since we are referencing the Predictor class in **Collect.scala** source file to predict whether the tweet is happy or sad and it hasn't been implemented yet, we will develop **Predictor.scala** source file. Create a new Scala class file in `src/main/scala` directory called `Predictor.scala`. Copy and paste the following code into the file
 
 ~~~scala
 package main.scala
@@ -362,29 +368,30 @@ import org.apache.spark.mllib.linalg.{Vector, Vectors}
   */
 class Predictor(model: GradientBoostedTreesModel){//modelLocation:String, sc:SparkContext) {
 
-//  var model: GradientBoostedTreesModel = null
-//  if(modelLocation != null)
-//    model = GradientBoostedTreesModel.load(sc, modelLocation)
+  //  var model: GradientBoostedTreesModel = null
+  //  if(modelLocation != null)
+  //    model = GradientBoostedTreesModel.load(sc, modelLocation)
 
   /**
     * Returns 1 for happy, 0 for unhappy
     * @param tweet
     * @return
     */
-    def predict(tweet:String): Double ={
-      if(tweet == null || tweet.length == 0)
-        throw new RuntimeException("Tweet is null")
-      val features = vectorize(tweet)
-      return model.predict(features)
-    }
+  def predict(tweet:String): Double ={
+    if(tweet == null || tweet.length == 0)
+      throw new RuntimeException("Tweet is null")
+    val features = vectorize(tweet)
+    return model.predict(features)
+  }
 
-    val hashingTF = new HashingTF(2000)
-    def vectorize(tweet:String):Vector={
-      hashingTF.transform(tweet.split(" ").toSeq)
-    }
+  val hashingTF = new HashingTF(2000)
+  def vectorize(tweet:String):Vector={
+    hashingTF.transform(tweet.split(" ").toSeq)
+  }
 
 }
 ~~~
+
 
 ### Overview of Spark Code to Deploy Model
 
@@ -399,7 +406,6 @@ This will create a single jar file inside the target folder. You can copy this j
 
 ~~~scala
 scp -P 2222 ./target/scala-2.11/SentimentAnalysis-assembly-2.0.0.jar root@sandbox.hortonworks.com:/root
-
 ~~~
 
 Once this has been copied to the sandbox, you want to make sure Kafka, Spark2, Nifi and Solr are turned on. Make sure the Nifi flow is turned on and tweets are flowing to Kafka. You'll also need to create the register the topics with Kafka:
