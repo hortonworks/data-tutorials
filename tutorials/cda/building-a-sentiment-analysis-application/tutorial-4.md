@@ -198,6 +198,7 @@ Your notebook **Cleaning-Raw-Twitter-Data** should be a part of the list of note
 Click on notebook **Cleaning-Raw-Twitter-Data**. Then press the **play** button for all paragraphs to be executed. The **play** button is near the title of this notebook at the top of the webpage.
 
 Now we are finished cleaning the Twitter data. We can head to the summary to review how we cleaned the data and prepared it to be ready for visualization.
+
 <!--
 
 ## Approach 3: Auto Deploy Zeppelin Notebook via REST Call
