@@ -19,7 +19,7 @@ series: HDP > Hadoop for Data Engineers & Data Scientists > Real World Examples,
 
 For this project, you will play the part of a Big Data Application Developer who leverages their skills as a Data Engineer and Data Scientist by using multiple Big Data Technologies provided by Hortonworks Data Flow (HDF) and Hortonworks Data Platform (HDP) to build a Real-Time Sentiment Analysis Application. For the application, you will learn to acquire tweet data from Twitter's Decahose API and send the tweets to the Kafka Topic "tweets" using NiFi. Next you will learn to build Spark Machine Learning Model that classifies the data as happy or sad and export the model to HDFS. However, before building the model, Spark requires the data that builds and trains the model to be in feature array, so you will have to do some data cleansing with SparkSQL. Once the model is built, you will use Spark Structured Streaming to load the model from HDFS, pull in tweets from Kafka topic "tweets", add a sentiment score to the tweet, then stream the data to Kafka topic "tweetsSentiment". Earlier after finishing the NiFi flow, you will build another NiFi flow that ingests data from Kafka topic "tweetsSentiment" and stores the data into Druid. With Druid, you will perform queries to illustrate that the data was stored successfully and also show the sentiment score for tweets.
 
-## Big Data Technologies used to develop the Application:
+### Big Data Technologies used to develop the Application:
 
 - [Twitter API](https://dev.twitter.com/)
 - [HDF Sandbox](https://hortonworks.com/products/data-platforms/hdf/)
@@ -32,7 +32,7 @@ For this project, you will play the part of a Big Data Application Developer who
     - [Apache Spark](https://spark.apache.org/)
     - [Apache Zeppelin](https://zeppelin.apache.org/)
 
-## Goals and Objectives
+### Goals and Objectives
 
 - Learn to create a Twitter Application using Twitter's Developer Portal to get KEYS and TOKENS for connecting to Twitter's APIs
 - Learn to create a NiFi Dataflow Application that integrates Twitter's Decahose API to ingest tweets, perform some preprocessing, store the data into the Kafka Topic "tweets".
@@ -42,7 +42,7 @@ For this project, you will play the part of a Big Data Application Developer who
 - Learn to build a Spark Structured Streaming Application to stream the sentiment tweet data from Kafka topic "tweets" on HDP to Kafka topic "tweetsSentiment" on HDF to do real-time data visualization using Solr's Banana Dashboard
 - Learn to query the sentiment tweet data with Druid Queries
 
-## Prerequisites
+### Prerequisites
 
 - Downloaded and Installed the latest [Hortonworks HDP Sandbox](https://hortonworks.com/hdp/downloads/)
 - Read through [Learning the Ropes of the HDP Sandbox](https://hortonworks.com/tutorial/learning-the-ropes-of-the-hortonworks-sandbox/) to setup hostname mapping to IP address
