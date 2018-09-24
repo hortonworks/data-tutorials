@@ -13,7 +13,9 @@ Our next objective is to build the sentiment classification model using our clea
 - Enabled Connected Data Architecture
 - Setup the Development Environment
 - Acquired Twitter Data
-- Cleaned Raw Twitter Data
+- **Cleaned Raw Twitter Data** - Make sure you executed the Spark code from the
+previous notebook `Cleaning-Raw-Twitter-Data` cause this part of the project is
+dependent on the data being cleaned
 
 ## Outline
 
@@ -38,11 +40,16 @@ Now the notebook is created and we will start writing the code to build the mode
 
 ### Split into Training and Validation Sets
 
-When training any machine learning model you want to separate your data into a training set and a validation set. Click here to find out why we do it and how.
+**When training any machine learning model you want to separate your data into a training set and a validation set.** The training set is what you actually use to build the model, whereas the validation set is used to evaluate the model’s performance afterwards on data that it has never encountered before. This is extremely important, because a model can have very high accuracy when evaluating training data but fail spectacularly when it encounters data it hasn’t seen before.
+
+This situation is called **overfitting**. A good predictive model will build a generalized representation of your data in a way that reflects real things going on in your problem domain, and this generalization gives it predictive power. A model that overfits will instead try to predict the exact answer for each piece of your input data, and in doing so it will fail to generalize. The way we know a model is overfitting is when it has high accuracy on the training dataset but poor or no accuracy when tested against the validation set. This is why it’s important to always test your model against a validation set.
 
 **Fixing overfitting:**
 
-If you see that your validation accuracy is very low compared to your training accuracy, you can fix this overfitting by either increasing the size of your training data or by decreasing the number of parameters in your model. Copy and paste the Scala Spark code into Zeppelin notebook:
+A little overfitting is usually expected and can often be ignored. If you see that your validation accuracy is very low compared to your training accuracy, you can fix this overfitting by either increasing the size of your training data or by decreasing the number of parameters in your model. By decreasing the number of parameters you decrease the model’s ability to memorize large numbers of patterns. This forces it to build a model of your data in general, which makes it represent your problem domain instead of just memorizing your training data.
+
+ Copy and paste the Scala Spark code into Zeppelin notebook to split your data
+ into a training set and a validation set:
 
 ~~~scala
 // Split the data into training and validation sets (30% held out for validation testing)
@@ -55,6 +62,15 @@ val (trainingData, validationData) = (splits(0), splits(1))
 ### Build the Model
 
 This machine learning application uses Gradient Boosting for classification.
+The reason we chose Gradient Boosting for classification over some other model is because it’s easy to use (doesn’t require tons of parameter tuning), and it tends to have a high classification accuracy. For this reason it is frequently used in machine learning competitions.
+
+The tuning parameters we’re using here are:
+-number of iterations (passes over the data)
+-Max Depth of each decision tree
+
+In practice when building machine learning models you usually have to test different settings and combinations of tuning parameters until you find one that works best. For this reason it’s usually best to first train the model on a subset of data or with a small number of iterations. This lets you quickly experiment with different tuning parameter combinations.
+
+This step may take a few minutes on a sandbox VM. If you’re running on a sandbox and it’s taking more than five minutes you may want to stop the process and decrease the number of iterations.
 
 ~~~scala
 val boostingStrategy = BoostingStrategy.defaultParams("Classification")
@@ -75,6 +91,7 @@ val model = GradientBoostedTrees.train(trainingData, boostingStrategy)
 Let's evaluate the model to see how it performed against our training and test set.
 
 ~~~scala
+%spark2
 // Evaluate model on test instances and compute test error
 var labelAndPredsTrain = trainingData.map { point =>
   val prediction = model.predict(point.features)
@@ -154,11 +171,33 @@ Lets take some time to reflect on our result back at the **tutorial page (EXTERN
 
 ![evaluate_model_p2](assets/images/building-sentiment-classification-model/evaluate_model_p2.jpg)
 
+Example taken from the output when the code was executed at the time the image
+above was taken:
+
+~~~
+unhappy messages in Training Set: 1413 happy messages: 1380
+happy % correct: 0.7130434782608696
+unhappy % correct: 0.9072894550601557
+testErr: Double = 0.1886860007160759
+Test Error Training Set: 0.1886860007160759
+
+unhappy messages in Validation Set: 552 happy messages: 519
+happy % correct: 0.6454720616570327
+unhappy % correct: 0.8641304347826086
+testErr: Double = 0.2623716153127918
+Test Error Validation Set: 0.2623716153127918
+~~~
+
+The results show that the model is very good at detecting unhappy messages (86% accuracy), and significantly less adept at identifying happy messages (64% accuracy). To improve this we could provide the model more examples of happy messages to learn from.
+
+Also note that our training accuracy is slightly higher than our validation accuracy. This is an example of slightly overfitting the training data. Since the training accuracy is only slightly higher than the validation accuracy, this is normal and not something we should concerned about. However, if the validation accuracy was significantly worse than the training accuracy it would mean the model had grossly overfit its training data. In that situation, you would want to either increase the amount of data available for training or decrease the number of parameters (the complexity) of the model.
+
 ### Taking a closer look
 
 Let's take some time to evaluate how our model did by dissecting the data at the individual tweet level.
 
 ~~~scala
+%spark2
 //Print some examples and how they scored
 val predictions = sample.map { point =>
   val prediction = model.predict(point._1.features)
@@ -176,9 +215,11 @@ Once you've trained your first model, you should go back and tweak the model par
 
 ### Exporting the Model
 
-Once your model is as accurate as you can make it, you can export it for production use. Models trained with Spark can be easily loaded back into a Spark Streaming workflow for use in production.
+Once your model is as accurate as you can make it, you can export it for production use. Models trained with Spark can be easily loaded back into a Spark Structured
+Streaming workflow for use in production.
 
 ~~~scala
+%spark2
 model.save(sc, "hdfs:///sandbox/tutorial-files/770/tweets/RandomForestModel")
 ~~~
 
@@ -187,6 +228,7 @@ model.save(sc, "hdfs:///sandbox/tutorial-files/770/tweets/RandomForestModel")
 You've now seen how to build a sentiment analysis model. The techniques you've seen here can be applied to other text classification models besides sentiment analysis. Try analyzing other keywords besides happy and sad and see what results you get.
 
 ~~~scala
+%spark2
 println(model.predict(hashingTF.transform("To this cute little happy sunshine who never fails to bright up my day with his sweet lovely smiles ".split(" ").toSeq)))
 ~~~
 
@@ -201,7 +243,7 @@ Open HDP **Zeppelin UI** at `sandbox-hdp.hortonworks.com:9995`.
 Insert the following URL cause we are going to import **Building-Sentiment-Classification-Model** notebook:
 
 ~~~bash
-https://<github-url>/Building-Sentiment-Classification-Model.json
+https://raw.githubusercontent.com/james94/data-tutorials/master/tutorials/cda/building-a-sentiment-analysis-application/application/development/zeppelin-notebook/Building-Sentiment-Classification-Model.json
 ~~~
 
 Click **Import Note**.
@@ -213,6 +255,7 @@ Your notebook **Building-Sentiment-Classification-Model** should be a part of th
 Click on notebook **Building-Sentiment-Classification-Model**. Then press the **play** button for all paragraphs to be executed. The **play** button is near the title of this notebook at the top of the webpage.
 
 Now we are finished cleaning the Twitter data. We can head to the summary to review how we cleaned the data and prepared it to be ready for visualization.
+
 <!--
 
 ## Approach 3: Auto Deploy Zeppelin Notebook via REST Call
@@ -231,6 +274,10 @@ bash zeppelin-auto-deploy.sh $NOTEBOOK_NAME
 
 ## Summary
 
-Congratulations! You learned how to build a sentiment classification model using SparkML's Gradient Boosting. Reviewing the process we took: separated the data into a training set and validation set, evaluated the model for accuracy, configured the model for maximum accuracy and exported it into HDFS for later use with Spark Streaming.
+Congratulations! You learned how to build a sentiment classification model using SparkML's Gradient Boosting. The techniques you’ve seen here can be directly applied to other text classification models, such as spam classification. Later on feel free to try running this code with other keywords besides happy and sad and see what models you can build.
+
+Reviewing the process we took to build the model: separated the data into a training set and validation set, evaluated the model for accuracy, configured the model for maximum accuracy and exported it into HDFS for later use with Spark Streaming.
 
 ## Further Reading
+
+- [Spark Machine Learning Library (MLlib) Guide](https://spark.apache.org/docs/latest/ml-guide.html)
