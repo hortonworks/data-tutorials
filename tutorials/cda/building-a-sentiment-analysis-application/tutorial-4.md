@@ -226,3 +226,6 @@ bash zeppelin-auto-deploy.sh $NOTEBOOK_NAME
 Congratulations! Reflecting on the steps we took to refine the data: **loaded the data** from HDFS into Spark, **cleaned the records** that didn't contain happy or sad to prevent a bias in the model, **labeled tweets** as 1 for happy and 0 for sad to teach the model to differentiate between happy versus sad and **transformed the data** into a vector of fixed length since Gradient Boosting expects that format as input. The twitter data has been preprocessed and is ready for the next phase of development, which is building the machine learning model.
 
 ## Further Reading
+
+- [Spark SQL, DataFrames and Datasets Guide](https://spark.apache.org/docs/latest/sql-programming-guide.html)
+- [RDD Programming Guide](https://spark.apache.org/docs/latest/rdd-programming-guide.html)
