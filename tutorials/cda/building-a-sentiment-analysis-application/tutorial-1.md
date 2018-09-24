@@ -18,7 +18,7 @@ the various sentiment analysis use cases.
 
 ## Outline
 
-- [Sentiment Analysis Fundamentals](#sentiment-analysis)
+- [Sentiment Analysis Fundamentals](#sentiment-analysis-fundamentals)
 - [Summary](#summary)
 - [Further Reading](#further-reading)
 
