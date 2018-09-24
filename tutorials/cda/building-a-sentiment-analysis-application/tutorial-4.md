@@ -72,7 +72,8 @@ Heads up sometimes loading the data can take 26 minutes.
 
 ### Clean Records
 
-In the following paragraphs we'll **clean-up** the data to **prevent bias in the model**.
+In the following code we'll **clean-up** the data to **prevent bias in the model**.
+We want to remove any tweet that doesn’t contain “happy” or “sad”. We’ve also chosen to select an equal number of happy and sad tweets to prevent bias in the model. Since we’ve loaded our data into a Spark DataFrame, we can use SQL-like statements to transform and select our data.
 
 ~~~scala
 %spark2
@@ -97,7 +98,11 @@ var tweets = happyMessages.limit(smallest).unionAll(unhappyMessages.limit(smalle
 
 ### Label the Data
 
-In this paragraph we label the data and force our model to learn the difference between happy and sad.
+**In the following code we label the data and force our model to learn the difference between happy and sad.** Now label each happy tweet as 1 and unhappy tweets as 0. In order to prevent our model from cheating, we’re going to remove the words happy and sad from the tweets. This will force it to infer whether the user is happy or sad by the presence of other words.
+
+Finally, we also split each tweet into a collection of words. For convenience we convert the Spark Dataframe to an RDD which lets you easily transform data using the map function.
+
+We now have a collection of tuples of the form (Int, Seq[String]), where a 1 for the first term indicates happy and 0 indicates sad. The second term is a sequence of words, including emojis. We removed the words happy and sad from the list of words.
 
 ~~~scala
 %spark2
@@ -142,7 +147,9 @@ labeledTweets.take(10).foreach(x => println(x))
 
 ### Transform Data
 
-Gradient Boosting expects as input a vector (feature array) of fixed length, so we need a way to convert our tweets into some numeric vector that represents that tweet. To learn more about the algorithms used for the transformation follow along in the **tutorial page (EXTERNAL LINK)**.
+Gradient Boosting expects as input a vector (feature array) of fixed length, so we need a way to convert our tweets into some numeric vector that represents that tweet. A standard way to do this is to use the [hashing trick](https://en.wikipedia.org/wiki/Feature_hashing), in which we hash each word and index it into a fixed-length array. What we get back is an array that represents the count of each word in the tweet. This approach is called the [bag of words model](https://en.wikipedia.org/wiki/Bag-of-words_model), which means we are representing each sentence or document as a collection of discrete words and ignore grammar or the order in which words appear in a sentence. An alternative approach to bag of words would be to use an algorithm like Doc2Vec or Latent Semantic Indexing, which would use machine learning to build a vector representations of tweets.
+
+In Spark we’re using HashingTF for feature hashing. Note that we’re using an array of size 2000. Since this is smaller than the size of the vocabulary we’ll encounter on Twitter, it means two words with different meaning can be hashed to the same location in the array. Although it would seem this would be an issue, in practice this preserves enough information that the model still works. This is actually one of the strengths of feature hashing, that it allows you to represent a large or growing vocabulary in a fixed amount of space.
 
 ~~~scala
 %spark2
