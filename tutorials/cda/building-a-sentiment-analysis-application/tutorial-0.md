@@ -9,7 +9,7 @@ use case: Data Discovery
 technology: Apache Ambari, Apache NiFi, HDFS, Apache Druid, Apache Spark, Apache Zeppelin
 release: hdp-3.0.0, hdf-3.2.0
 environment: Sandbox
-product: HDP
+product: HDP, HDF
 series: HDP > Hadoop for Data Engineers & Data Scientists > Real World Examples, HDF > Develop Data Flow & Streaming Applications > Real World Examples
 ---
 
