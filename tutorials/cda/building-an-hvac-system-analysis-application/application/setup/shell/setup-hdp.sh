@@ -6,10 +6,9 @@
 ##
 
 ##
-# Script sets up HDP services used in Building an HVAC System Analysis Application
-# Author: James Medel
-# Email: jamesmedel94@gmail.com
+# Sets up HDP services used in Building an HVAC System Analysis Application
 ##
+
 DATE=`date '+%Y-%m-%d %H:%M:%S'`
 LOG_DIR_BASE="/var/log/cda-sb/310/"
 echo "Setting Up HDP Dev Environment for HVAC System Analysis App"

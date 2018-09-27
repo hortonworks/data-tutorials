@@ -6,9 +6,7 @@
 ##
 
 ##
-# Script sets up HDF services used in Building an HVAC System Analysis Application
-# Author: James Medel
-# Email: jamesmedel94@gmail.com
+# Sets up HDF services used in Building an HVAC System Analysis Application
 ##
 
 DATE=`date '+%Y-%m-%d %H:%M:%S'`
