@@ -1,0 +1,259 @@
+{
+  "created_at" : "Mon Sep 24 17:43:46 +0000 2018",
+  "id" : 1044281248301166592,
+  "id_str" : "1044281248301166592",
+  "text" : "Un evento lleno de novidades. 12 Diciembre - Dell Techonologies Forum - Madrid",
+  "source" : "<a href=\"http://twitter.com/download/iphone\" rel=\"nofollow\">Twitter for iPhone</a>",
+  "truncated" : false,
+  "in_reply_to_status_id" : null,
+  "in_reply_to_status_id_str" : null,
+  "in_reply_to_user_id" : null,
+  "in_reply_to_user_id_str" : null,
+  "in_reply_to_screen_name" : null,
+  "user" : {
+    "id" : 718054570,
+    "id_str" : "718054570",
+    "name" : "Isabel Reis",
+    "screen_name" : "IsabelReis19",
+    "location" : "Spain and Portugal",
+    "url" : null,
+    "description" : "Dell EMC Enterprise General Manager for Spain&Portugal",
+    "translator_type" : "none",
+    "protected" : false,
+    "verified" : false,
+    "followers_count" : 743,
+    "friends_count" : 597,
+    "listed_count" : 14,
+    "favourites_count" : 2658,
+    "statuses_count" : 435,
+    "created_at" : "Wed Oct 16 19:53:51 +0000 2013",
+    "utc_offset" : null,
+    "time_zone" : null,
+    "geo_enabled" : true,
+    "lang" : "pt",
+    "contributors_enabled" : false,
+    "is_translator" : false,
+    "profile_background_color" : "00B2B8",
+    "profile_background_image_url" : "http://abs.twimg.com/images/themes/theme4/bg.gif",
+    "profile_background_image_url_https" : "https://abs.twimg.com/images/themes/theme4/bg.gif",
+    "profile_background_tile" : false,
+    "profile_link_color" : "B89F00",
+    "profile_sidebar_border_color" : "FFFFFF",
+    "profile_sidebar_fill_color" : "F6FFD1",
+    "profile_text_color" : "333333",
+    "profile_use_background_image" : true,
+    "profile_image_url" : "http://pbs.twimg.com/profile_images/771485523856752644/wxoYRa_R_normal.jpg",
+    "profile_image_url_https" : "https://pbs.twimg.com/profile_images/771485523856752644/wxoYRa_R_normal.jpg",
+    "profile_banner_url" : "https://pbs.twimg.com/profile_banners/718054570/1497182388",
+    "default_profile" : false,
+    "default_profile_image" : false,
+    "following" : null,
+    "follow_request_sent" : null,
+    "notifications" : null
+  },
+  "geo" : null,
+  "coordinates" : null,
+  "place" : {
+    "id" : "c1430b24da8e9229",
+    "url" : "https://api.twitter.com/1.1/geo/id/c1430b24da8e9229.json",
+    "place_type" : "city",
+    "name" : "Lisboa",
+    "full_name" : "Lisboa, Portugal",
+    "country_code" : "PT",
+    "country" : "Portugal",
+    "bounding_box" : {
+      "type" : "Polygon",
+      "coordinates" : [ [ [ -9.229826, 38.691375 ], [ -9.229826, 38.795853 ], [ -9.090164, 38.795853 ], [ -9.090164, 38.691375 ] ] ]
+    },
+    "attributes" : { }
+  },
+  "contributors" : null,
+  "quoted_status_id" : 1044278545239986177,
+  "quoted_status_id_str" : "1044278545239986177",
+  "quoted_status" : {
+    "created_at" : "Mon Sep 24 17:33:01 +0000 2018",
+    "id" : 1044278545239986177,
+    "id_str" : "1044278545239986177",
+    "text" : "El 12 de Diciembre se celebrará en Madrid la primera edición del congreso \"Dell Technologies Forum\" bajo el lema \"M… https://t.co/UyzlNwVUWg",
+    "display_text_range" : [ 0, 140 ],
+    "source" : "<a href=\"http://twitter.com\" rel=\"nofollow\">Twitter Web Client</a>",
+    "truncated" : true,
+    "in_reply_to_status_id" : null,
+    "in_reply_to_status_id_str" : null,
+    "in_reply_to_user_id" : null,
+    "in_reply_to_user_id_str" : null,
+    "in_reply_to_screen_name" : null,
+    "user" : {
+      "id" : 136201799,
+      "id_str" : "136201799",
+      "name" : "pedro fernandez de c",
+      "screen_name" : "pedrofcm",
+      "location" : "madrid",
+      "url" : null,
+      "description" : "Head of Marketing @DellEMCSpain, father of three, information technology, B2B, digital and experiential marketing enthusiast",
+      "translator_type" : "none",
+      "protected" : false,
+      "verified" : false,
+      "followers_count" : 493,
+      "friends_count" : 454,
+      "listed_count" : 23,
+      "favourites_count" : 388,
+      "statuses_count" : 754,
+      "created_at" : "Fri Apr 23 08:34:40 +0000 2010",
+      "utc_offset" : null,
+      "time_zone" : null,
+      "geo_enabled" : true,
+      "lang" : "es",
+      "contributors_enabled" : false,
+      "is_translator" : false,
+      "profile_background_color" : "C0DEED",
+      "profile_background_image_url" : "http://abs.twimg.com/images/themes/theme1/bg.png",
+      "profile_background_image_url_https" : "https://abs.twimg.com/images/themes/theme1/bg.png",
+      "profile_background_tile" : false,
+      "profile_link_color" : "1DA1F2",
+      "profile_sidebar_border_color" : "C0DEED",
+      "profile_sidebar_fill_color" : "DDEEF6",
+      "profile_text_color" : "333333",
+      "profile_use_background_image" : true,
+      "profile_image_url" : "http://pbs.twimg.com/profile_images/748829326749999104/O2DLK1HA_normal.jpg",
+      "profile_image_url_https" : "https://pbs.twimg.com/profile_images/748829326749999104/O2DLK1HA_normal.jpg",
+      "default_profile" : true,
+      "default_profile_image" : false,
+      "following" : null,
+      "follow_request_sent" : null,
+      "notifications" : null
+    },
+    "geo" : null,
+    "coordinates" : null,
+    "place" : null,
+    "contributors" : null,
+    "is_quote_status" : false,
+    "extended_tweet" : {
+      "full_text" : "El 12 de Diciembre se celebrará en Madrid la primera edición del congreso \"Dell Technologies Forum\" bajo el lema \"Make It Real\". ¡No te lo pierdas! Mas info aqui: https://t.co/ov6Y1Tun0E\n#DellTechForum = Dell + Dell EMC + Pivotal + RSA + SecureWorks + Virtustream + VMware! https://t.co/c39qO06t36",
+      "display_text_range" : [ 0, 273 ],
+      "entities" : {
+        "hashtags" : [ {
+          "text" : "DellTechForum",
+          "indices" : [ 187, 201 ]
+        } ],
+        "urls" : [ {
+          "url" : "https://t.co/ov6Y1Tun0E",
+          "expanded_url" : "https://lnkd.in/dVDi3HH",
+          "display_url" : "lnkd.in/dVDi3HH",
+          "indices" : [ 163, 186 ]
+        } ],
+        "user_mentions" : [ ],
+        "symbols" : [ ],
+        "media" : [ {
+          "id" : 1044274099407769603,
+          "id_str" : "1044274099407769603",
+          "indices" : [ 274, 297 ],
+          "media_url" : "http://pbs.twimg.com/media/Dn4BwrdXUAM4gIl.jpg",
+          "media_url_https" : "https://pbs.twimg.com/media/Dn4BwrdXUAM4gIl.jpg",
+          "url" : "https://t.co/c39qO06t36",
+          "display_url" : "pic.twitter.com/c39qO06t36",
+          "expanded_url" : "https://twitter.com/pedrofcm/status/1044278545239986177/photo/1",
+          "type" : "photo",
+          "sizes" : {
+            "thumb" : {
+              "w" : 150,
+              "h" : 150,
+              "resize" : "crop"
+            },
+            "medium" : {
+              "w" : 1200,
+              "h" : 400,
+              "resize" : "fit"
+            },
+            "large" : {
+              "w" : 1500,
+              "h" : 500,
+              "resize" : "fit"
+            },
+            "small" : {
+              "w" : 680,
+              "h" : 227,
+              "resize" : "fit"
+            }
+          }
+        } ]
+      },
+      "extended_entities" : {
+        "media" : [ {
+          "id" : 1044274099407769603,
+          "id_str" : "1044274099407769603",
+          "indices" : [ 274, 297 ],
+          "media_url" : "http://pbs.twimg.com/media/Dn4BwrdXUAM4gIl.jpg",
+          "media_url_https" : "https://pbs.twimg.com/media/Dn4BwrdXUAM4gIl.jpg",
+          "url" : "https://t.co/c39qO06t36",
+          "display_url" : "pic.twitter.com/c39qO06t36",
+          "expanded_url" : "https://twitter.com/pedrofcm/status/1044278545239986177/photo/1",
+          "type" : "photo",
+          "sizes" : {
+            "thumb" : {
+              "w" : 150,
+              "h" : 150,
+              "resize" : "crop"
+            },
+            "medium" : {
+              "w" : 1200,
+              "h" : 400,
+              "resize" : "fit"
+            },
+            "large" : {
+              "w" : 1500,
+              "h" : 500,
+              "resize" : "fit"
+            },
+            "small" : {
+              "w" : 680,
+              "h" : 227,
+              "resize" : "fit"
+            }
+          }
+        } ]
+      }
+    },
+    "quote_count" : 0,
+    "reply_count" : 0,
+    "retweet_count" : 0,
+    "favorite_count" : 1,
+    "entities" : {
+      "hashtags" : [ ],
+      "urls" : [ {
+        "url" : "https://t.co/UyzlNwVUWg",
+        "expanded_url" : "https://twitter.com/i/web/status/1044278545239986177",
+        "display_url" : "twitter.com/i/web/status/1…",
+        "indices" : [ 117, 140 ]
+      } ],
+      "user_mentions" : [ ],
+      "symbols" : [ ]
+    },
+    "favorited" : false,
+    "retweeted" : false,
+    "possibly_sensitive" : false,
+    "filter_level" : "low",
+    "lang" : "es"
+  },
+  "quoted_status_permalink" : {
+    "url" : "https://t.co/EjiaDyMhgd",
+    "expanded" : "https://twitter.com/pedrofcm/status/1044278545239986177",
+    "display" : "twitter.com/pedrofcm/statu…"
+  },
+  "is_quote_status" : true,
+  "quote_count" : 0,
+  "reply_count" : 0,
+  "retweet_count" : 0,
+  "favorite_count" : 0,
+  "entities" : {
+    "hashtags" : [ ],
+    "urls" : [ ],
+    "user_mentions" : [ ],
+    "symbols" : [ ]
+  },
+  "favorited" : false,
+  "retweeted" : false,
+  "filter_level" : "low",
+  "lang" : "es",
+  "timestamp_ms" : "1537811026059"
+}
