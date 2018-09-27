@@ -14,6 +14,7 @@ echo "Setting Up HDP Dev Environment for HVAC System Analysis App"
 
 # Creates /sandbox directory in HDFS
 # allow read-write-execute permissions for the owner, group, and any other users
+mkdir -p /var/log/cda-sb/310/
 setup_hdfs()
 {
   su hdfs
