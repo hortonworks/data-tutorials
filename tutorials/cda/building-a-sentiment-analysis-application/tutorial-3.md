@@ -274,9 +274,11 @@ Right click on the **StreamTweetsToHBase** process group, select configure. Clic
 
 Insert into the **Filter** field,  `HBase_1_1_2_ClientService` and then press **ADD**.
 
+![hbase_controller_service](assets/images/acquire-twitter-data/hbase_controller_service.jpg)
+
 Select the **gear** icon on the far right. Click on the **Properties** tab. Configure the properties for the controller service:
 
-**Table 27: Scheduling Tab**
+**Table 27: Properties Tab**
 
 | Property | Value     |
 | :------------- | :------------- |
