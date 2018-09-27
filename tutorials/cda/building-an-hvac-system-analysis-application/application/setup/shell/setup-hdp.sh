@@ -11,11 +11,12 @@
 # Email: jamesmedel94@gmail.com
 ##
 DATE=`date '+%Y-%m-%d %H:%M:%S'`
+LOG_DIR_BASE="/var/log/cda-sb/310/"
 echo "Setting Up HDP Dev Environment for HVAC System Analysis App"
 
 # Creates /sandbox directory in HDFS
 # allow read-write-execute permissions for the owner, group, and any other users
-mkdir -p /var/log/cda-sb/310/
+mkdir -p $LOG_DIR_BASE/hdp
 setup_hdfs()
 {
   echo "$DATE INFO: Creating /sandbox/sensor/hvac_building and /sandbox/sensor/hvac_machine"
@@ -29,4 +30,4 @@ setup_hdfs()
 }
 # Log everything, but also output to stdout
 echo "$DATE INFO: Executing setup_hdfs bash function, logging to /var/log/cda-sb/310/setup-hdp.log"
-setup_hdfs | tee -a /var/log/cda-sb/310/setup-hdp.log
+setup_hdfs | tee -a $LOG_DIR_BASE/hdp/setup-hdp.log
