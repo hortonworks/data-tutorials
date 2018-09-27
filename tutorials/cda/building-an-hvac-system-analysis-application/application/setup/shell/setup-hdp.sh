@@ -17,15 +17,13 @@ echo "Setting Up HDP Dev Environment for HVAC System Analysis App"
 mkdir -p /var/log/cda-sb/310/
 setup_hdfs()
 {
-  su hdfs
   echo "INFO: Creating /sandbox/sensor/hvac_building and /sandbox/sensor/hvac_machine"
-  hdfs dfs -mkdir -p /sandbox/sensor/hvac_building/
-  hdfs dfs -mkdir /sandbox/sensor/hvac_machine
-  hdfs dfs -chmod -R 777 /sandbox/sensor/hvac_building/
-  hdfs dfs -chmod -R 777 /sandbox/sensor/hvac_machine
+  sudo -u hdfs hdfs dfs -mkdir -p /sandbox/sensor/hvac_building/
+  sudo -u hdfs hdfs dfs -mkdir /sandbox/sensor/hvac_machine
+  sudo -u hdfs hdfs dfs -chmod -R 777 /sandbox/sensor/hvac_building/
+  sudo -u hdfs hdfs dfs -chmod -R 777 /sandbox/sensor/hvac_machine
   echo "INFO: Checking both directories were created and permissions were set"
-  hdfs dfs -ls /sandbox/sensor
-  exit
+  sudo -u hdfs hdfs dfs -ls /sandbox/sensor
 }
 # Log everything, but also output to stdout
-setup_hdfs 2>&1 | tee -a /var/log/cda-sb/310/setup-hdp.log
+setup_hdfs | tee -a /var/log/cda-sb/310/setup-hdp.log
