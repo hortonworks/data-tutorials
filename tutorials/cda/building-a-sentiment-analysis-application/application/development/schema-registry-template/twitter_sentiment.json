@@ -1,0 +1,12 @@
+{
+   "type" : "record",
+   "name" : "TweetsSentiment",
+   "fields" : [
+      { "name" : "twitterHandle" , "type" : "string" },
+      { "name" : "twitterLanguage" , "type" : "string" },
+      { "name" : "twitterLocation" , "type" : "string" },
+      { "name" : "twitterTweetId" , "type" : "long" },
+      { "name" : "twitterUnixtime" , "type" : "long" },
+      { "name" : "twitterSentiment" , "type" : "double" }
+   ]
+}
