@@ -60,7 +60,7 @@ The tutorial series consists of the following tutorial modules:
 
 2\. **Setting up the Development Environment**: You will create a Twitter Application in Twitter's Developer Portal for access to KEYS and TOKENS. You will then write a shell code and perform Ambari REST API Calls to setup a development environment.
 
-3\. **Acquiring Twitter Data**: You will build a NiFi dataflow to ingest Twitter data, preprocess it and store it into HDFS along with a Kafka Topic "tweets". The other NiFi dataflow you will build ingests the enriched sentiment tweet data from Kafka topic "tweetsSentiment" and streams the content of the flowfile to Solr.
+3\. **Acquiring Twitter Data**: You will build a NiFi dataflow to ingest Twitter data, preprocess it and store it into HDFS along with a Kafka Topic "tweets". The other NiFi dataflow you will build ingests the enriched sentiment tweet data from Kafka topic "tweetsSentiment" and streams the content of the flowfile to HBase.
 
 4\. **Cleaning the Raw Twitter Data**: You will create a Zeppelin notebook and use Zeppelin's Spark Interpreter to clean the raw twitter data in preparation to create the sentiment classification model.
 
@@ -68,4 +68,4 @@ The tutorial series consists of the following tutorial modules:
 
 6\. **Deploying a Sentiment Classification Model**: You will create a Scala IntelliJ project in which you develop a Spark Structured Streaming application that streams the data from Kafka topic "tweets" on HDP, processes the tweet JSON data by adding sentiment and streaming the data into Kafka topic "tweetsSentiment" on HDF.
 
-7\. **Querying the Sentiment Tweets**: You will use Druid to query the sentiment tweet data, verify the data was stored and show the sentiment score for tweets.
+7\. **Visualizing Sentiment Scores**: You will use Zeppelin's Phoenix Interpreter to perform SQL queries against the noSQL HBase table "tweets_sentiment" for the sum of happy and sad tweets and perform visualizations of the results.
