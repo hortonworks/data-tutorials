@@ -150,7 +150,7 @@ If this configuration hasn't been done, which in the demo we use `sandbox-hdf.ho
 
 **Have all the required services for HDF and HDP sandbox started up?**
 
-If unsure, you can login to HDF Ambari at [http://sandbox-hdf.hortonworks.com:8080](http://sandbox-hdf.hortonworks.com:8080). You can also HDP Ambari at [http://sandbox-hdp.hortonworks.com:8080](http://sandbox-hdp.hortonworks.com:8080). If you haven't setup Ambari `admin` password, refer to the link: [admin-password-reset](https://hortonworks.com/tutorial/learning-the-ropes-of-the-hortonworks-sandbox/#admin-password-reset) cause you will need the password for performing Ambari REST API Calls and operating on services in the Ambari UI. For resetting Ambari Admin password on HDF, open HDF web shell client at [http://sandbox-hdf.hortonworks.com:4200](http://sandbox-hdf.hortonworks.com:4200). For resetting Ambari Admin password on HDP, open HDP web shell client at [http://sandbox-hdp.hortonworks.com:4200](http://sandbox-hdp.hortonworks.com:4200). With both web shell clients, initial login is `root/hadoop`, if it is your first login, then you will be prompted to reset your password, make sure to remember it. The Ambari Dashboard will **Background Operations Running window**, which is accessible by the gear icon at the top right of Ambari. From there, you should see **Start All Services** with a green progress bar near it. On **HDF**, verify **NiFi** started. On **HDP**, verify **HDFS**, **Spark2** and **Zeppelin** started. Otherwise, start them.
+If unsure, you can login to HDF Ambari at [http://sandbox-hdf.hortonworks.com:8080](http://sandbox-hdf.hortonworks.com:8080). You can also HDP Ambari at [http://sandbox-hdp.hortonworks.com:8080](http://sandbox-hdp.hortonworks.com:8080). If you haven't setup Ambari `admin` password, refer to the link: [admin-password-reset](https://hortonworks.com/tutorial/learning-the-ropes-of-the-hortonworks-sandbox/#admin-password-reset) cause you will need the password for performing Ambari REST API Calls and operating on services in the Ambari UI. For resetting Ambari Admin password on HDF, open HDF web shell client at [http://sandbox-hdf.hortonworks.com:4200](http://sandbox-hdf.hortonworks.com:4200). For resetting Ambari Admin password on HDP, open HDP web shell client at [http://sandbox-hdp.hortonworks.com:4200](http://sandbox-hdp.hortonworks.com:4200). With both web shell clients, initial login is `root/hadoop`, if it is your first login, then you will be prompted to reset your password, make sure to remember it. The Ambari Dashboard will **Background Operations Running window**, which is accessible by the gear icon at the top right of Ambari. From there, you should see **Start All Services** with a green progress bar near it. On **HDF**, verify **NiFi** started. On **HDP**, verify **HDFS**, **Spark2**, **HBase** and **Zeppelin** started. Otherwise, start them.
 
 ## Manually Setup Development Platforms
 
@@ -276,94 +276,16 @@ curl https://bintray.com/sbt/rpm/rpm | sudo tee /etc/yum.repos.d/bintray-sbt-rpm
 yum install -y sbt
 ~~~
 
-<!--
+### Setup HBase Service
 
-### Setup Solr Service
-
-The final service we will need to setup is Solr. Since Solr isn't installed initially on HDP Sandbox, we will need to install it using Ambari Install Wizard UI.
-
-Run the following shell code in your HDP web shell client:
+For **HBase** since we will be storing streams of data into it from NiFi, we will need to create a table ahead of time, so we wont' have to switch between both applications:
 
 ~~~bash
-
+#!/bin/bash
+# -e: causes echo to process escape sequences, build confirmation into it
+# -n: tells hbase shell this is a non-interactive session
+echo -e "create 'tweets_sentiment','social_media_sentiment'" | hbase shell -n
 ~~~
-
-### Install Solr
-
-1\. Open Ambari at http://sandbox-hdp.hortonworks.com:8080 with login `admin` and the password you set.
-
-2\. From the Ambari **Services** tab on the left side of the UI, click on the **3 squares**, select **+ Add Service** and in the **Choose Services** list, check the box next to **Solr** version **5.5.2.2.5**, then press **Next->**.
-
-3\. In **Assign Masters** window, click **Next->**.
-
-4\. In **Customize Services** window, keep all defaults and click **Next->**.
-
-5\. In **Dependent Configurations** window, keep **Required Changes** by Ambari and click **OK**.
-
-6\. In **Configurations** window, it will show you configurations that Ambari highly recommends, but you can skip them. Press **Proceed Anyway**.
-
-7\. In **Review** window, press **Deploy->**.
-
-8\. In **Install, Start and Test** window, once the progress bar turns green and completes to 100%, press **Next->**.
-
-9\. In **Summary** window, press **Complete->**.
-
-10\. Now we just need to restart all services that have a **restart indicator** next to the service name. When a service is selected, a **orange Restart** button will present, click it, then choose **Restart All Affected** and press **Confirm Restart All**. Restart all affected Services in the following order:
-
-~~~bash
-HDFS
-YARN
-MapReduce2
-Hive
-HBase
-Sqoop
-Oozie
-Falcon
-Storm
-Atlas
-Kafka
-Druid
-~~~
-
-Now all the services affected by the install of Solr should be okay.
-
-### Configure Solr
-
-Open HDP Sandbox Web Shell Client at `http://sandbox-hdp.hortonworks.com:4200` with login `root/hadoop`. On first login, you will be prompted to update the password.
-
-The following code copies **data_driven_schema_configs** directory into **tweet_config** directory. A tweet timestamp format is appended into solrconfig.xml. Finally, the original default.json is backed up and a new one with the proper configurations for establishing a connection between Solr and Banana dasbhoard is downloaded to the location where the original default.json is to replace it.
-
-~~~bash
-echo "Configuring Solr to Recognize Tweet's Timestamp Format"
-# Change to Solr user
-su solr
-cp -r /opt/lucidworks-hdpsearch/solr/server/solr/configsets/data_driven_schema_configs \
-/opt/lucidworks-hdpsearch/solr/server/solr/configsets/tweet_configs
-
-echo "Insert New Config for Solr to Recognize tweet's Timestamp Format"
-sed -i.bak '/<arr name="format">/a<str>EEE MMM d HH:mm:ss Z yyyy</str>' \
-/opt/lucidworks-hdpsearch/solr/server/solr/configsets/tweet_configs/conf/solrconfig.xml
-
-sed -i.bak 's/<str>EEE MMM d HH:mm:ss Z yyyy<\/str>/        <str>EEE MMM d HH:mm:ss Z yyyy<\/str>/' \
-/opt/lucidworks-hdpsearch/solr/server/solr/configsets/tweet_configs/conf/solrconfig.xml
-
-echo "Modifying SOLRS default.json, so SOLR can connect to Banana Dashboard"
-BANANA_DASHBOARD_PATH=/opt/lucidworks-hdpsearch/solr/server/solr-webapp/webapp/banana/app/dashboards
-mv $BANANA_DASHBOARD_PATH/default.json $BANANA_DASHBOARD_PATH/default.json.orig
-wget https://github.com/james94/data-tutorials/raw/master/tutorials/cda/building-a-customer-sentiment-analysis-application/application/setup/conf-solr/default.json \
--O $BANANA_DASHBOARD_PATH/default.json
-
-echo "Creating Solr Collection 'tweets'"
-# -c: indicates the name, -d: is the config directory,
-# -s: is the number of shards, -rf: is the replication factor,
-# -p: is the port at which Solr is running
-/opt/lucidworks-hdpsearch/solr/bin/solr create -c tweets -d tweet_configs -s 1 -rf 1 -p 8983
-
-# Exiting Solr user
-exit
-~~~
-
--->
 
 ## Summary
 

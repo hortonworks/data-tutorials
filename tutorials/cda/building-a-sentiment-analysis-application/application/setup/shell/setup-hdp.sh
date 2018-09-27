@@ -344,11 +344,9 @@ echo "Installing SBT for Spark"
 curl https://bintray.com/sbt/rpm/rpm | sudo tee /etc/yum.repos.d/bintray-sbt-rpm.repo
 yum install -y sbt
 
-echo "Creating Solr Collection 'tweets'"
-# -c: indicates the name, -d: is the config directory,
-# -s: is the number of shards, -rf: is the replication factor,
-# -p: is the port at which Solr is running
-/opt/lucidworks-hdpsearch/solr/bin/solr create -c tweets -d tweet_configs -s 1 -rf 1 -p 8983
+echo "Setting up HBase for Sentiment Score Storage"
+# -e: causes echo to process escape sequences, build confirmation into it
+# -n: tells hbase shell this is a non-interactive session
+echo -e "create 'tweets_sentiment','social_media_sentiment'" | hbase shell -n
 
-# Exiting Solr user
 exit
