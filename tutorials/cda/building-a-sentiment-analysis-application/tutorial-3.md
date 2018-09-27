@@ -123,16 +123,19 @@ table isn't defined, press the plus button **+**.
 | Property | Value     |
 | :------------- | :------------- |
 | **Destination**       | `flowfile-attribute` |
+| **Return Type**       | `json` |
 | twitter.handle       | `$.user.screen_name` |
 | twitter.hashtags       | `$.entities.hashtags[0].text` |
 | twitter.language       | `$.lang` |
 | twitter.location       | `$.user.location` |
 | twitter.msg       | `$.text` |
 | twitter.time       | `$.created_at` |
-| twitter.time_zone       | `$.user.time_zone` |
 | twitter.tweet_id       | `$.id` |
 | twitter.unixtime       | `$.timestamp_ms` |
 | twitter.user       | `$.user.name` |
+| twitter.geo       | `$.geo` |
+| twitter.coordinates       | `$.coordinates` |
+| twitter.place       | `$.place` |
 
 Click **APPLY**.
 
@@ -178,7 +181,7 @@ table isn't defined, press the plus button **+**.
 | Property | Value     |
 | :------------- | :------------- |
 | **Routing Strategy**       | `Route to Property name` |
-| tweet       | `${twitter.msg:isEmpty():not()}` |
+| filterTweetAndLocation       | `${twitter.msg:isEmpty():not():and(${twitter.location:isEmpty():not()})}` |
 
 Click **APPLY**.
 
