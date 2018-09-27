@@ -37,6 +37,9 @@ Select **Scala** with **sbt**, then press next.
 
 Name your project `DeploySentimentModel`
 
+Feel free to use InteliJ's default location for storing the application. The one
+in the following picture was a custom location to store the application.
+
 Select appropriate **sbt version 1.2.3** and **Scala version 2.11.12**. Make sure sources are checked to download sources.
 
 ![name_sbt_scala_version](assets/images/deploying-a-sentiment-classification-model/name_sbt_scala_version.jpg)
@@ -83,7 +86,7 @@ If you haven't enabled auto import for sbt projects, you should **Enable-Auto-Im
 What do the keywords in the configuration file for SBT mean?
 
 - **logLevel**: controls the logging level for our project, currently we have enabled debug logging for all tasks in the current project
-- **addSbtPlugin**: allows for you to declare plugin dependency, takes as input the following format ("`IvyModuleID`" % "`ArtifactID`" % `Revision`)
+- **addSbtPlugin**: allows for you to declare plugin dependency, takes as input the following format ("`IvyModuleID`" % "`ArtifactID`" % "`Revision`")
 - **sbt-assembly**: this plugin creates a fat JAR of your project with all its dependencies
 - **sbt-dependency-graph**: this plugin visualizes your project's dependencies
 
@@ -142,6 +145,7 @@ What do the keywords in the configuration file for SBT mean?
 - **libraryDependencies**: specifies that we want SBT to import the following `Spark libraries` **spark-core, spark-mllib, spark-sql, spark-streaming, spark-streaming-kafka-0-10, spark-sql-kafka-0-10** with associated `sparkVer` **2.3.1**, import the following `Kafka library` **kafka** with associated version **0.10.0**, import the following `typesafe library` **config** with associated version **1.3.1** and import `Google gson library` **gson** with associated version **2.8.0**
 - **Group ID**: Ex: org.apache.spark
 - **Artficate ID**: Ex: spark-core
+- **Revision**: sparkVer = 2.3.1, but you could explicitly write the version number too
 - **%%**: Ex: appends **scala version** to **ArtifactID**
 - **Seq(...)**: used in combination with **++=** to load multiple library dependencies in SBT
 - **assemblyMergeStrategy**: maps `path names` to `merge strategies`, each case pattern uses PathList(...) mapped to MergeStrategy.first, which says pick the first of matching files in the classpath order. Ex: the first case pattern uses `PathList(...)` to pick `org/apache/*` from the first jar.
@@ -159,7 +163,7 @@ Now that we added the Spark Structured Streaming application dependencies, we ar
 
 ### resources folder
 
-In your project, if the `resources` folder does not exist yet, create a folder under `src/main` called `resources`, and create the `application.conf` file there.
+In your project, if the `resources` folder or directory does not exist yet, create a directory under `src/main` called `resources`, and create the `application.conf` file there.
 
 ### application.conf
 
@@ -170,7 +174,7 @@ spark {
 
   kafkaBrokers {
     kafkaBrokerHDF: "sandbox-hdf.hortonworks.com:6667"
-    KafkaBrokerHDP: "sandbox-hdp.hortonworks.com:6668"
+    kafkaBrokerHDP: "sandbox-hdp.hortonworks.com:6667"
   }
 
   appName = "DeploySentimentModel"
@@ -200,7 +204,7 @@ What configurations are we passing to Scala with this file?
 
 ### Collect.scala
 
-Now that we have our configuration.conf file, we will reference it in the **Collect.scala** code file that we will implement. Create a **new file** in `src/main/scala` directory called `Collect.scala`. Copy and paste the following code into the file:
+Now that we have our application.conf file, we will reference it in the **Collect.scala** code file that we will implement. Create a **new file** in `src/main/scala` directory called `Collect.scala`. Copy and paste the following code into the file:
 
 ~~~scala
 package main.scala
@@ -340,7 +344,7 @@ object Collect {
 
 ### Predictor.scala
 
-Since we are referencing the Predictor class in **Collect.scala** source file to predict whether the tweet is happy or sad and it hasn't been implemented yet, we will develop **Predictor.scala** source file. Create a new Scala class file in `src/main/scala` directory called `Predictor.scala`. Copy and paste the following code into the file
+Since we are referencing the Predictor class in **Collect.scala** source file to predict whether the tweet is happy or sad and it hasn't been implemented yet, we will develop **Predictor.scala** source file. Create a new Scala Class file in `src/main/scala` directory called `Predictor` and for **kind**, choose **Class**. Copy and paste the following code into the file
 
 ~~~scala
 package main.scala
@@ -384,29 +388,36 @@ class Predictor(model: GradientBoostedTreesModel){//modelLocation:String, sc:Spa
 
 ### Overview of Spark Code to Deploy Model
 
-To submit the code to Spark we need to compile it and submit it to Spark. Since our code depends on other libraries (like GSON) to run, we ought to package our code with these dependencies into an assembly that can be submitted to Spark. To do this we're using a dependency manager called SBT, which you'll need to install on your machine. (You'll notice we also added this line of code to the plugins.sbt file, which is also required.) Once you've installed it, you can package your code and dependencies into a single jar like this:
+To submit the code to Spark we need to compile it and submit it to Spark. Since our code depends on other libraries (like GSON) to run, we ought to package our code with these dependencies into an assembly that can be submitted to Spark. To do this we're using a dependency manager called SBT, which you'll need to install on your machine, if you haven't done so, refer to the prerequisites. (You'll notice we also added this line of code to the plugins.sbt file, which is also required.) Once you've installed it, you can package your code and dependencies into a single jar. Open your mac/linux terminal or windows git bash on your host machine not virtual machine, then run the following shell code:
 
-~~~scala
-cd DeploySentimentModel
+~~~bash
+cd ~/IdeaProjects/DeploySentimentModel
 sbt clean
 sbt assembly
 ~~~
 
-This will create a single jar file inside the target folder. You can copy this jar into the sandbox like this:
+This will create a single jar file inside the target folder. You can copy this jar into the HDP sandbox like this:
 
 ~~~scala
 scp -P 2222 ./target/scala-2.11/DeploySentimentModel-assembly-1.0.0.jar root@sandbox-hdp.hortonworks.com:/root
 ~~~
 
-Once this has been copied to the sandbox, you want to make sure Kafka, Spark2, NiFi and Solr are turned on. Make sure the NiFi flow is turned on and tweets are flowing to Kafka via NiFi Data Provenance.
+Once this has been copied to the HDP sandbox, you want to make sure **Kafka** is turned on for both HDP and HDF sandboxes, **Spark2 and HBase** is turned on for HDP sandbox and **NiFi** is turned on for HDF sandbox. Make sure the NiFi flow is turned on and tweets are flowing to Kafka via Spark Structured Streaming.
 
-Then use spark-submit to deploy the jar to Spark:
+Open your HDP sandbox web shell at http://sandbox-hdp.hortonworks.com:4200. The login is `root` and the password you set. Then use spark-submit to deploy the jar to Spark:
 
 ~~~scala
 /usr/hdp/current/spark2-client/bin/spark-submit --class "main.scala.Collect" --master local[4] ./DeploySentimentModel-assembly-1.0.0.jar
 ~~~
 
 Here we're deploying the jar on a single machine only by using --master local[4]. In production you want to change these settings to run on Yarn. Once you submit the job you should see output on the terminal as Spark scores each tweet.
+
+![w10_gitbash_spark_stream](assets/images/deploying-a-sentiment-classification-model/w10_gitbash_spark_stream.jpg)
+
+The shell output (running on windows 10 git bash similar for mac/linux terminal)
+illustrates that Spark Structured Streaming Application is pulling in data from
+HDP Kafka topic "tweets" and streaming the tweets with a sentiment score to HDF
+Kafka topic "tweetsSentiment".
 
 ## Summary
 
