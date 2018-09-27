@@ -248,15 +248,14 @@ su hdfs
 HDFS_TWEET_STAGING="/sandbox/tutorial-files/770/tweets_staging"
 LFS_TWEETS_PACKAGED_PATH="/sandbox/tutorial-files/770/tweets"
 mkdir -p $LFS_TWEETS_PACKAGED_PATH
-# Create /sandbox directory and give anyone rwe permissions
-hdfs dfs -mkdir /sandbox
-hdfs dfs -chmod -R 777 /sandbox
 # Create tweets_staging hdfs directory ahead of time for hive
 hdfs dfs -mkdir -p $HDFS_TWEET_STAGING
 # Change HDFS ownership of tweets_staging dir to maria_dev
 hdfs dfs -chown -R maria_dev $HDFS_TWEET_STAGING
 # Change HDFS tweets_staging dir permissions to everyone
 hdfs dfs -chmod -R 777 $HDFS_TWEET_STAGING
+# give anyone rwe permissions to /sandbox/tutorial-files/770
+hdfs dfs -chmod -R 777 /sandbox/tutorial-files/770
 wget https://github.com/james94/data-tutorials/raw/master/tutorials/cda/building-a-sentiment-analysis-application/application/setup/data/tweets.zip -O $LFS_TWEETS_PACKAGED_PATH/tweets.zip
 unzip $LFS_TWEETS_PACKAGED_PATH/tweets.zip -d $LFS_TWEETS_PACKAGED_PATH
 rm -rf $LFS_TWEETS_PACKAGED_PATH/tweets.zip
