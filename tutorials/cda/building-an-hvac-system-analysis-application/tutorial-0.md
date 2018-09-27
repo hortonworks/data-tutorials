@@ -7,7 +7,7 @@ persona: Data Engineer, Data Analyst
 source: Hortonworks
 use case: Data Discovery
 technology: Apache Ambari, Apache NiFi, Apache Hive, Apache Zeppelin
-release: hdp-3.0.0, hdf-3.2.0
+release: hdp-3.0.1, hdf-3.2.0
 environment: Sandbox
 product: HDP
 series: HDP > Hadoop for Data Engineers & Data Scientists > Real World Examples, HDF > Develop Data Flow & Streaming Applications > Real World Examples
@@ -17,7 +17,7 @@ series: HDP > Hadoop for Data Engineers & Data Scientists > Real World Examples,
 
 ## Introduction
 
-Hortonworks Connected Data Platform can be used to to acquire, clean and visualize data from heating, ventilation, and air conditioning (HVAC) machine systems to maintain optimal office building temperatures and minimize expenses.
+Hortonworks Connected Data Platform can be used to acquire, clean and visualize data from heating, ventilation, and air conditioning (HVAC) machine systems to maintain optimal office building temperatures and minimize expenses.
 
 ## Big Data Technologies used to develop the Application:
 
