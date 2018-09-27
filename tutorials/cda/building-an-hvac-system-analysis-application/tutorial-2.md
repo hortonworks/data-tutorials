@@ -14,10 +14,10 @@ Our objective in this part of building the HVAC system analysis application is t
 
 ## Outline
 
-- [Check these Two Areas Prior to Starting Approach 1 or Approach 2](#check-these-two-areas-prior-to-starting-approach-1-or-approach-2)
+- [Check these Two Areas Prior to Starting Approach 1 or 2](#check-these-two-areas-prior-to-starting-approach-1-or-2)
 - [Overview of Shell Code Used in Both Approaches](#overview-of-shell-code-used-in-both-approaches)
-- [Approach 1: Manually Setup Development Platforms via CLI](#approach-1-manually-setup-development-platforms-via-cli)
-- [Approach 2: Automatically Setup Development Platforms](#approach-2-automatically-setup-development-platforms)
+- [Approach 1: Manually Setup Development Environment](#approach-1-manually-setup-development-environment)
+- [Approach 2: Automatically Setup Development Environment](#approach-2-automatically-setup-development-environment)
 - [Summary](#summary)
 - [Further Reading](#further-reading)
 
@@ -29,19 +29,19 @@ If this configuration hasn't been done, which in the demo we use `sandbox-hdf.ho
 
 **Have all the required services for HDF and HDP sandbox started up?**
 
-If unsure, you can login to HDF Ambari at [http://sandbox-hdf.hortonworks.com:8080](http://sandbox-hdf.hortonworks.com:8080). You can also HDP Ambari at [http://sandbox-hdp.hortonworks.com:8080](http://sandbox-hdp.hortonworks.com:8080). If you haven't setup Ambari `admin` password, refer to the link: [admin-password-reset](https://hortonworks.com/tutorial/learning-the-ropes-of-the-hortonworks-sandbox/#admin-password-reset) cause you will need the password for performing Ambari REST API Calls and operating on services in the Ambari UI. For resetting Ambari Admin password on HDF, open HDF web shell client at [http://sandbox-hdf.hortonworks.com:4200](http://sandbox-hdf.hortonworks.com:4200). For resetting Ambari Admin password on HDP, open HDP web shell client at [http://sandbox-hdp.hortonworks.com:4200](http://sandbox-hdp.hortonworks.com:4200). With both web shell clients, initial login is `root/hadoop`, if it is your first login, then you will be prompted to reset your password, make sure to remember it. The Ambari Dashboard will **Background Operations Running window**, which is accessible by the gear icon at the top right of Ambari. From there, you should see **Start All Services** with a green progress bar near it. On HDF, verify **NiFi** started. On HDP, verify **HDFS**, **Hive** and **Zeppelin** started. Otherwise, start them.
+If unsure, you can login to HDF Ambari at http://sandbox-hdf.hortonworks.com:8080. You can also HDP Ambari at http://sandbox-hdp.hortonworks.com:8080. If you haven't setup Ambari `admin` password, refer to the link: [ambari-admin-password-reset](https://hortonworks.com/tutorial/learning-the-ropes-of-the-hortonworks-sandbox/#admin-password-reset) cause you will need the password for performing Ambari REST API Calls and operating on services in the Ambari UI. For resetting Ambari Admin password on HDF, open HDF web shell client at http://sandbox-hdf.hortonworks.com:4200. For resetting Ambari Admin password on HDP, open HDP web shell client at http://sandbox-hdp.hortonworks.com:4200. With both web shell clients, initial login is `root/hadoop`, if it is your first login, then you will be prompted to reset your password, make sure to remember it. The Ambari Dashboard will **Background Operations Running window**, which is accessible by the gear icon at the top right of Ambari. From there, you should see **Start All Services** with a green progress bar near it. On HDF, verify **NiFi** started. On HDP, verify **HDFS**, **Hive** and **Zeppelin** started. Otherwise, start them.
 
 ## Overview of Shell Code Used in Both Approaches
 
 In **approach 1**, you will manually run the code line by line to setup the development environment. Yet in **approach 2**, you will download and execute a shell script to automate development environment setup. The shell code `tee -a <file> << EOF ... EOF` appends Google's Public DNS to `/etc/resolve.conf` to translate a variety of hostnames to IP addresses. The problem that this configuration potentially solves is using Google's Public DNS to translate `s3.amazonaws.com` to an IP address that services in the application can use to get data. The next couple lines of code initialize variables that will be used in the Ambari REST API Calls. The `wait()` function waits for Ambari services on HDF or HDP to stop or start. The two `curl` commands are used for sending JSON data by Ambari REST API Calls to tell the Ambari Server to overwrite the existing NiFi service state to INSTALLED (means STOPPED) or STARTED. First we tell Ambari we want to STOP the NiFi service. Next we backup and remove the pre-existing NiFi flow to clean the NiFi canvas, so we can do development. Lastly, we tell Ambari to START the NiFi service for the changes to take effect.
 
-## Approach 1: Manually Setup Development Platforms via CLI
+## Approach 1: Manually Setup Development Environment
 
 ### Setting up HDF
 
 We will be using shell commands to setup the required services in our data-in-motion and data-at-rest platforms from the sandbox web shell clients.
 
-Open the **HDF web shell client** located at [http://sandbox-hdf.hortonworks.com:4200](http://sandbox-hdf.hortonworks.com:4200).
+Open the **HDF web shell client** located at http://sandbox-hdf.hortonworks.com:4200.
 
 Prior to copying and pasting all the following shell code line by line, replace the following line of code `HDF_AMBARI_PASS="<Your-Ambari-Admin-Password>"` with the password you created for Ambari Admin user. For example, if our Ambari Admin password was set to `yellowHadoop`, then the line of code would look as follows: `HDF_AMBARI_PASS="yellowHadoop"`
 
@@ -130,7 +130,7 @@ http://$HDF_HOST:8080/api/v1/clusters/$HDF_CLUSTER_NAME/services/NIFI
 wait $HDF NIFI "STARTED"
 ~~~
 
-Open the **HDP web shell client** located at [http://sandbox-hdp.hortonworks.com:4200](http://sandbox-hdp.hortonworks.com:4200). Copy and paste the following code to HDP web shell line by line.
+Open the **HDP web shell client** located at http://sandbox-hdp.hortonworks.com:4200. Copy and paste the following code to HDP web shell line by line.
 
 ~~~bash
 #!/bin/bash
@@ -145,7 +145,7 @@ exit
 
 Now that the development environment is setup, you can move onto the summary.
 
-## Approach 2: Automatically Setup Development Platforms
+## Approach 2: Automatically Setup Development Environment
 
 We will download and execute a shell script to automate the setup of our data-in-motion and data-at-rest platforms from the sandbox web shell clients.
 
