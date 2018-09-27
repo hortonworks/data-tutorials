@@ -1,10 +1,16 @@
 #!/bin/bash
 
 ##
+# Author: James Medel
+# Email: jamesmedel94@gmail.com
+##
+
+##
 # Script sets up HDP services used in Building an HVAC System Analysis Application
 # Author: James Medel
 # Email: jamesmedel94@gmail.com
 ##
+echo "Setting Up HDP Dev Environment for HVAC System Analysis App"
 
 # Creates /sandbox directory in HDFS
 # allow read-write-execute permissions for the owner, group, and any other users
