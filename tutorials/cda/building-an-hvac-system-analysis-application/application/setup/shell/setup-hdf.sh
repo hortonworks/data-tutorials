@@ -10,7 +10,8 @@
 # Author: James Medel
 # Email: jamesmedel94@gmail.com
 ##
-echo "Setting Up HDF Dev Environment for HVAC System Analysis App"
+DATE=`date '+%Y-%m-%d %H:%M:%S'`
+echo "$DATE INFO: Setting Up HDF Dev Environment for HVAC System Analysis App"
 
 ##
 # Purpose of the following section of Code:
@@ -24,10 +25,13 @@ echo "Setting Up HDF Dev Environment for HVAC System Analysis App"
 
 # Adding Public DNS to resolve msg: unable to resolv s3.amazonaws.com
 # https://forums.aws.amazon.com/thread.jspa?threadID=125056
+echo "$DATE INFO: Adding Google Public DNS to /etc/resolve.conf"
 tee -a /etc/resolve.conf << EOF
 # Google Public DNS
 nameserver 8.8.8.8
 EOF
+echo "$DATE INFO: Checking Google Public DNS added to /etc/resolve.conf"
+cat /etc/resolve.conf
 
 ##
 # Purpose of the following section of Code:
@@ -37,7 +41,9 @@ EOF
 # Potential Solution: Backup prebuilt NiFi flow and call it a different name.
 ##
 
+echo "$DATE INFO: Setting HDF_AMBARI_USER based on user input"
 HDF_AMBARI_USER="$1"  # $1: Expects user to pass "Ambari User" into the file
+echo "$DATE INFO: Setting HDF_AMBARI_PASS based on user input"
 HDF_AMBARI_PASS="$2"  # $2: Expects user to pass "Ambari Admin Password" into the file
 HDF_CLUSTER_NAME="Sandbox"
 HDF_HOST="sandbox-hdf.hortonworks.com"
@@ -57,13 +63,16 @@ function wait()
     finished=0
     while [ $finished -ne 1 ]
     do
+      echo "$DATE INFO: Waiting for $1 $2 service action to finish"
       ENDPOINT="http://$HDP_HOST:8080/api/v1/clusters/$HDP_CLUSTER_NAME/services/$2"
       AMBARI_CREDENTIALS="$HDP_AMBARI_USER:$HDP_AMBARI_PASS"
       str=$(curl -s -u $AMBARI_CREDENTIALS $ENDPOINT)
       if [[ $str == *"$3"* ]] || [[ $str == *"Service not found"* ]]
       then
+        echo "$DATE INFO: $1 $2 service state is now $3"
         finished=1
       fi
+        echo "$DATE INFO: Still waiting on $1 $2 service action to finish"
         sleep 3
     done
   elif [[ $1 == "hdf-sandbox" ]]
@@ -71,34 +80,39 @@ function wait()
     finished=0
     while [ $finished -ne 1 ]
     do
+      echo "$DATE INFO: Waiting for $1 $2 service action to finish"
       ENDPOINT="http://$HDF_HOST:8080/api/v1/clusters/$HDF_CLUSTER_NAME/services/$2"
       AMBARI_CREDENTIALS="$HDF_AMBARI_USER:$HDF_AMBARI_PASS"
       str=$(curl -s -u $AMBARI_CREDENTIALS $ENDPOINT)
       if [[ $str == *"$3"* ]] || [[ $str == *"Service not found"* ]]
       then
+        echo "$DATE INFO: $1 $2 service state is now $3"
         finished=1
       fi
+        echo "$DATE INFO: Still waiting on $1 $2 service action to finish"
         sleep 3
     done
   else
-    echo "ERROR: Didn't Wait for Service, need to choose appropriate sandbox HDF or HDP"
+    echo "$DATE ERROR: Didn't Wait for Service, sandbox chosen not valid"
   fi
 }
 
 # Stop NiFi first, then backup prebuilt NiFi flow, then start NiFi for
 # changes to take effect
 
-echo "Stopping NiFi via Ambari"
+echo "$DATE INFO: Stopping HDF NiFi Service via Ambari REST Call"
 curl -u $AMBARI_CREDENTIALS -H "X-Requested-By: ambari" -X PUT -d '{"RequestInfo":
 {"context": "Stop NiFi"}, "ServiceInfo": {"state": "INSTALLED"}}' \
 http://$HDF_HOST:8080/api/v1/clusters/$HDF_CLUSTER_NAME/services/NIFI
+echo "$DATE INFO: Waiting on HDF NiFi Service to STOP RUNNING via Ambari REST Call"
 wait $HDF NIFI "INSTALLED"
 
-echo "Prebuilt flow on NiFi canvas backed up to flow.xml.gz.bak"
+echo "$DATE INFO: Prebuilt HDF NiFi Flow removed from NiFi UI, but backed up"
 mv /var/lib/nifi/conf/flow.xml.gz /var/lib/nifi/conf/flow.xml.gz.bak
 
-echo "Starting NiFi via Ambari"
+echo "$DATE INFO: Starting HDF NiFi Service via Ambari REST Call"
 curl -u $AMBARI_CREDENTIALS -H "X-Requested-By: ambari" -X PUT -d '{"RequestInfo":
 {"context": "Start NiFi"}, "ServiceInfo": {"state": "STARTED"}}' \
 http://$HDF_HOST:8080/api/v1/clusters/$HDF_CLUSTER_NAME/services/NIFI
+echo "$DATE INFO: Waiting on HDF NiFi Service to START RUNNING via Ambari REST Call"
 wait $HDF NIFI "STARTED"
