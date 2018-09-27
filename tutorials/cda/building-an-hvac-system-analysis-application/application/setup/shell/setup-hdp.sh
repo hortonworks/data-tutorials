@@ -16,6 +16,11 @@ echo "Setting Up HDP Dev Environment for HVAC System Analysis App"
 # allow read-write-execute permissions for the owner, group, and any other users
 
 su hdfs
-hdfs dfs -mkdir -p /sandbox/sensor/hvac_building/ /sandbox/sensor/hvac_machine
-hdfs dfs -chmod -R 777 /sandbox/sensor/hvac_building/ /sandbox/sensor/hvac_machine
+echo "Creating /sandbox/sensor/hvac_building and /sandbox/sensor/hvac_machine"
+hdfs dfs -mkdir -p /sandbox/sensor/hvac_building/
+hdfs dfs -mkdir /sandbox/sensor/hvac_machine
+hdfs dfs -chmod -R 777 /sandbox/sensor/hvac_building/
+hdfs dfs -chmod -R 777 /sandbox/sensor/hvac_machine
+echo "Checking both directories were created and permissions were set"
+hdfs dfs -ls /sandbox/sensor
 exit
