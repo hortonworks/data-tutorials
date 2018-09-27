@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <template encoding-version="1.2">
-    <description>Consumes data from Kafka and processes the data for storing into HBase</description>
+    <description></description>
     <groupId>15948cf0-0166-1000-f3eb-8baf0c9ac018</groupId>
     <name>StreamTweetsToHBase</name>
     <snippet>
@@ -14,28 +14,7 @@
             <comments></comments>
             <contents>
                 <connections>
-                    <id>11e45c9b-9f27-33da-0000-000000000000</id>
-                    <parentGroupId>6980487d-1f24-382b-0000-000000000000</parentGroupId>
-                    <backPressureDataSizeThreshold>1 GB</backPressureDataSizeThreshold>
-                    <backPressureObjectThreshold>10000</backPressureObjectThreshold>
-                    <destination>
-                        <groupId>6980487d-1f24-382b-0000-000000000000</groupId>
-                        <id>c0efadc8-6f04-3602-0000-000000000000</id>
-                        <type>PROCESSOR</type>
-                    </destination>
-                    <flowFileExpiration>0 sec</flowFileExpiration>
-                    <labelIndex>1</labelIndex>
-                    <name></name>
-                    <selectedRelationships>success</selectedRelationships>
-                    <source>
-                        <groupId>6980487d-1f24-382b-0000-000000000000</groupId>
-                        <id>e217b220-41a3-37da-0000-000000000000</id>
-                        <type>PROCESSOR</type>
-                    </source>
-                    <zIndex>0</zIndex>
-                </connections>
-                <connections>
-                    <id>31972b64-b201-30f7-0000-000000000000</id>
+                    <id>4a7167c0-11cd-3825-0000-000000000000</id>
                     <parentGroupId>6980487d-1f24-382b-0000-000000000000</parentGroupId>
                     <backPressureDataSizeThreshold>1 GB</backPressureDataSizeThreshold>
                     <backPressureObjectThreshold>10000</backPressureObjectThreshold>
@@ -47,7 +26,7 @@
                     <flowFileExpiration>0 sec</flowFileExpiration>
                     <labelIndex>1</labelIndex>
                     <name></name>
-                    <selectedRelationships>routeNonEmptyTime</selectedRelationships>
+                    <selectedRelationships>matched</selectedRelationships>
                     <source>
                         <groupId>6980487d-1f24-382b-0000-000000000000</groupId>
                         <id>8621ae5f-11e0-3dce-0000-000000000000</id>
@@ -56,7 +35,7 @@
                     <zIndex>0</zIndex>
                 </connections>
                 <connections>
-                    <id>38b77652-9b59-31ca-0000-000000000000</id>
+                    <id>b5800059-700a-3e6b-0000-000000000000</id>
                     <parentGroupId>6980487d-1f24-382b-0000-000000000000</parentGroupId>
                     <backPressureDataSizeThreshold>1 GB</backPressureDataSizeThreshold>
                     <backPressureObjectThreshold>10000</backPressureObjectThreshold>
@@ -77,7 +56,28 @@
                     <zIndex>0</zIndex>
                 </connections>
                 <connections>
-                    <id>a3dbd536-9176-3471-0000-000000000000</id>
+                    <id>f9147a46-ab83-374b-0000-000000000000</id>
+                    <parentGroupId>6980487d-1f24-382b-0000-000000000000</parentGroupId>
+                    <backPressureDataSizeThreshold>1 GB</backPressureDataSizeThreshold>
+                    <backPressureObjectThreshold>10000</backPressureObjectThreshold>
+                    <destination>
+                        <groupId>6980487d-1f24-382b-0000-000000000000</groupId>
+                        <id>c0efadc8-6f04-3602-0000-000000000000</id>
+                        <type>PROCESSOR</type>
+                    </destination>
+                    <flowFileExpiration>0 sec</flowFileExpiration>
+                    <labelIndex>1</labelIndex>
+                    <name></name>
+                    <selectedRelationships>success</selectedRelationships>
+                    <source>
+                        <groupId>6980487d-1f24-382b-0000-000000000000</groupId>
+                        <id>e217b220-41a3-37da-0000-000000000000</id>
+                        <type>PROCESSOR</type>
+                    </source>
+                    <zIndex>0</zIndex>
+                </connections>
+                <connections>
+                    <id>ff00b988-cb0d-3c63-0000-000000000000</id>
                     <parentGroupId>6980487d-1f24-382b-0000-000000000000</parentGroupId>
                     <backPressureDataSizeThreshold>1 GB</backPressureDataSizeThreshold>
                     <backPressureObjectThreshold>10000</backPressureObjectThreshold>
@@ -203,8 +203,8 @@
                     <id>660e18e7-72d8-3591-0000-000000000000</id>
                     <parentGroupId>6980487d-1f24-382b-0000-000000000000</parentGroupId>
                     <position>
-                        <x>523.0808410644531</x>
-                        <y>-63.399770736694336</y>
+                        <x>511.5895690917969</x>
+                        <y>-65.48909282684326</y>
                     </position>
                     <bundle>
                         <artifact>nifi-hbase-nar</artifact>
@@ -344,8 +344,8 @@
                     <id>8621ae5f-11e0-3dce-0000-000000000000</id>
                     <parentGroupId>6980487d-1f24-382b-0000-000000000000</parentGroupId>
                     <position>
-                        <x>94.11972045898438</x>
-                        <y>157.57746124267578</y>
+                        <x>68.00323486328125</x>
+                        <y>165.93474578857422</y>
                     </position>
                     <bundle>
                         <artifact>nifi-standard-nar</artifact>
@@ -364,9 +364,9 @@
 </value>
                             </entry>
                             <entry>
-<key>routeNonEmptyTime</key>
+<key>routeIfSentimentAndTimeNonEmpty</key>
 <value>
-    <name>routeNonEmptyTime</name>
+    <name>routeIfSentimentAndTimeNonEmpty</name>
 </value>
                             </entry>
                         </descriptors>
@@ -376,10 +376,10 @@
                         <properties>
                             <entry>
 <key>Routing Strategy</key>
-<value>Route to Property name</value>
+<value>Route to 'match' if all match</value>
                             </entry>
                             <entry>
-<key>routeNonEmptyTime</key>
+<key>routeIfSentimentAndTimeNonEmpty</key>
 <value>${twitter.unixtime:isEmpty():not():and(${twitter.sentiment:isEmpty():not()})}</value>
                             </entry>
                         </properties>
@@ -389,10 +389,10 @@
                         <yieldDuration>1 sec</yieldDuration>
                     </config>
                     <executionNodeRestricted>false</executionNodeRestricted>
-                    <name>FindOnlyTweets</name>
+                    <name>IfTweetsHaveSentimentAndTime</name>
                     <relationships>
                         <autoTerminate>false</autoTerminate>
-                        <name>routeNonEmptyTime</name>
+                        <name>matched</name>
                     </relationships>
                     <relationships>
                         <autoTerminate>true</autoTerminate>
@@ -407,7 +407,7 @@
                     <parentGroupId>6980487d-1f24-382b-0000-000000000000</parentGroupId>
                     <position>
                         <x>66.35594940185547</x>
-                        <y>-65.85134874284267</y>
+                        <y>-66.72189699113369</y>
                     </position>
                     <bundle>
                         <artifact>nifi-standard-nar</artifact>
@@ -497,7 +497,7 @@
                     <id>c0efadc8-6f04-3602-0000-000000000000</id>
                     <parentGroupId>6980487d-1f24-382b-0000-000000000000</parentGroupId>
                     <position>
-                        <x>-400.9064178466797</x>
+                        <x>-400.0358657836914</x>
                         <y>159.36569213867188</y>
                     </position>
                     <bundle>
@@ -713,8 +713,8 @@
                     <id>e217b220-41a3-37da-0000-000000000000</id>
                     <parentGroupId>6980487d-1f24-382b-0000-000000000000</parentGroupId>
                     <position>
-                        <x>-399.0358581542969</x>
-                        <y>-66.49193572998047</y>
+                        <x>-400.77696228027344</x>
+                        <y>-67.36248779296875</y>
                     </position>
                     <bundle>
                         <artifact>nifi-kafka-0-10-nar</artifact>
@@ -898,5 +898,5 @@
             <variables/>
         </processGroups>
     </snippet>
-    <timestamp>09/27/2018 01:37:27 UTC</timestamp>
+    <timestamp>09/27/2018 03:37:54 UTC</timestamp>
 </template>
