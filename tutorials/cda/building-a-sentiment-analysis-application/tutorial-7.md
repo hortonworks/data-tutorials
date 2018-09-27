@@ -29,12 +29,16 @@ WITH SERDEPROPERTIES("hbase.columns.mapping" = ":key,social_media_sentiment:twit
 TBLPROPERTIES("hbase.table.name" = "tweets_sentiment");
 ~~~
 
+![create_hive_mapped_hbase_table](assets/images/visualizing-sentiment-scores/create_hive_mapped_hbase_table.jpg)
+
 Load data from the Hive table:
 
 ~~~sql
 %jdbc(hive)
 SELECT * FROM tweets_sentiment;
 ~~~
+
+![load_hive_tweets_sentiment_table](assets/images/visualizing-sentiment-scores/load_hive_tweets_sentiment_table.jpg)
 
 To see each tweet's sentiment score per language, copy and paste the following query.
 
@@ -43,3 +47,5 @@ To see each tweet's sentiment score per language, copy and paste the following q
 %jdbc(hive)
 SELECT language, sentiment FROM tweets_sentiment;
 ~~~
+
+![load_language_sentiment_score](assets/images/visualizing-sentiment-scores/load_language_sentiment_score.jpg)
