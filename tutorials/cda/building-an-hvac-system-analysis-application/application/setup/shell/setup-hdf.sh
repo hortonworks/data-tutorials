@@ -1,10 +1,16 @@
 #!/bin/bash
 
 ##
+# Author: James Medel
+# Email: jamesmedel94@gmail.com
+##
+
+##
 # Script sets up HDF services used in Building an HVAC System Analysis Application
 # Author: James Medel
 # Email: jamesmedel94@gmail.com
 ##
+echo "Setting Up HDF Dev Environment for HVAC System Analysis App"
 
 ##
 # Purpose of the following section of Code:
@@ -46,7 +52,7 @@ AMBARI_CREDENTIALS=$HDF_AMBARI_USER:$HDF_AMBARI_PASS
 # $3: Status - STARTED or INSTALLED, but OFF
 function wait()
 {
-  if [[ $1 == "hdp-sandbox" ]] 
+  if [[ $1 == "hdp-sandbox" ]]
   then
     finished=0
     while [ $finished -ne 1 ]
