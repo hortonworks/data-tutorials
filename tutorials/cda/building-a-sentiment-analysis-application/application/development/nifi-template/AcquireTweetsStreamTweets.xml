@@ -1,28 +1,47 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <template encoding-version="1.2">
-    <description>Two Process Groups:
-
-One that acquires tweet data and sends it to Kafka HDP and the other consumes kafka HDF messages to stream to solr</description>
-    <groupId>030c3f5d-0166-1000-4e7e-c2fca5ca95d2</groupId>
+    <description></description>
+    <groupId>15948cf0-0166-1000-f3eb-8baf0c9ac018</groupId>
     <name>AcquireTweetsStreamTweets</name>
     <snippet>
         <processGroups>
-            <id>998b7ac3-8410-3a29-0000-000000000000</id>
-            <parentGroupId>f1a841a7-4659-3d12-0000-000000000000</parentGroupId>
+            <id>6980487d-1f24-382b-0000-000000000000</id>
+            <parentGroupId>2128b774-71f2-3c39-0000-000000000000</parentGroupId>
             <position>
                 <x>0.0</x>
-                <y>1.0</y>
+                <y>2.0</y>
             </position>
             <comments></comments>
             <contents>
                 <connections>
-                    <id>e39b04da-3973-3f0d-0000-000000000000</id>
-                    <parentGroupId>998b7ac3-8410-3a29-0000-000000000000</parentGroupId>
+                    <id>4a7167c0-11cd-3825-0000-000000000000</id>
+                    <parentGroupId>6980487d-1f24-382b-0000-000000000000</parentGroupId>
                     <backPressureDataSizeThreshold>1 GB</backPressureDataSizeThreshold>
                     <backPressureObjectThreshold>10000</backPressureObjectThreshold>
                     <destination>
-                        <groupId>998b7ac3-8410-3a29-0000-000000000000</groupId>
-                        <id>3e1d9a2e-f993-31e6-0000-000000000000</id>
+                        <groupId>6980487d-1f24-382b-0000-000000000000</groupId>
+                        <id>660e18e7-72d8-3591-0000-000000000000</id>
+                        <type>PROCESSOR</type>
+                    </destination>
+                    <flowFileExpiration>0 sec</flowFileExpiration>
+                    <labelIndex>1</labelIndex>
+                    <name></name>
+                    <selectedRelationships>matched</selectedRelationships>
+                    <source>
+                        <groupId>6980487d-1f24-382b-0000-000000000000</groupId>
+                        <id>8621ae5f-11e0-3dce-0000-000000000000</id>
+                        <type>PROCESSOR</type>
+                    </source>
+                    <zIndex>0</zIndex>
+                </connections>
+                <connections>
+                    <id>b5800059-700a-3e6b-0000-000000000000</id>
+                    <parentGroupId>6980487d-1f24-382b-0000-000000000000</parentGroupId>
+                    <backPressureDataSizeThreshold>1 GB</backPressureDataSizeThreshold>
+                    <backPressureObjectThreshold>10000</backPressureObjectThreshold>
+                    <destination>
+                        <groupId>6980487d-1f24-382b-0000-000000000000</groupId>
+                        <id>8621ae5f-11e0-3dce-0000-000000000000</id>
                         <type>PROCESSOR</type>
                     </destination>
                     <flowFileExpiration>0 sec</flowFileExpiration>
@@ -30,21 +49,165 @@ One that acquires tweet data and sends it to Kafka HDP and the other consumes ka
                     <name></name>
                     <selectedRelationships>success</selectedRelationships>
                     <source>
-                        <groupId>998b7ac3-8410-3a29-0000-000000000000</groupId>
-                        <id>ede70cd3-e0b1-3cf2-0000-000000000000</id>
+                        <groupId>6980487d-1f24-382b-0000-000000000000</groupId>
+                        <id>9bdabf1c-119f-3941-0000-000000000000</id>
                         <type>PROCESSOR</type>
                     </source>
                     <zIndex>0</zIndex>
                 </connections>
+                <connections>
+                    <id>f9147a46-ab83-374b-0000-000000000000</id>
+                    <parentGroupId>6980487d-1f24-382b-0000-000000000000</parentGroupId>
+                    <backPressureDataSizeThreshold>1 GB</backPressureDataSizeThreshold>
+                    <backPressureObjectThreshold>10000</backPressureObjectThreshold>
+                    <destination>
+                        <groupId>6980487d-1f24-382b-0000-000000000000</groupId>
+                        <id>c0efadc8-6f04-3602-0000-000000000000</id>
+                        <type>PROCESSOR</type>
+                    </destination>
+                    <flowFileExpiration>0 sec</flowFileExpiration>
+                    <labelIndex>1</labelIndex>
+                    <name></name>
+                    <selectedRelationships>success</selectedRelationships>
+                    <source>
+                        <groupId>6980487d-1f24-382b-0000-000000000000</groupId>
+                        <id>e217b220-41a3-37da-0000-000000000000</id>
+                        <type>PROCESSOR</type>
+                    </source>
+                    <zIndex>0</zIndex>
+                </connections>
+                <connections>
+                    <id>ff00b988-cb0d-3c63-0000-000000000000</id>
+                    <parentGroupId>6980487d-1f24-382b-0000-000000000000</parentGroupId>
+                    <backPressureDataSizeThreshold>1 GB</backPressureDataSizeThreshold>
+                    <backPressureObjectThreshold>10000</backPressureObjectThreshold>
+                    <destination>
+                        <groupId>6980487d-1f24-382b-0000-000000000000</groupId>
+                        <id>9bdabf1c-119f-3941-0000-000000000000</id>
+                        <type>PROCESSOR</type>
+                    </destination>
+                    <flowFileExpiration>0 sec</flowFileExpiration>
+                    <labelIndex>1</labelIndex>
+                    <name></name>
+                    <selectedRelationships>matched</selectedRelationships>
+                    <source>
+                        <groupId>6980487d-1f24-382b-0000-000000000000</groupId>
+                        <id>c0efadc8-6f04-3602-0000-000000000000</id>
+                        <type>PROCESSOR</type>
+                    </source>
+                    <zIndex>0</zIndex>
+                </connections>
+                <controllerServices>
+                    <id>5cfe5d2a-179c-36ab-0000-000000000000</id>
+                    <parentGroupId>6980487d-1f24-382b-0000-000000000000</parentGroupId>
+                    <bundle>
+                        <artifact>nifi-hbase_1_1_2-client-service-nar</artifact>
+                        <group>org.apache.nifi</group>
+                        <version>1.7.0.3.2.0.0-520</version>
+                    </bundle>
+                    <comments></comments>
+                    <descriptors>
+                        <entry>
+                            <key>Hadoop Configuration Files</key>
+                            <value>
+<name>Hadoop Configuration Files</name>
+                            </value>
+                        </entry>
+                        <entry>
+                            <key>kerberos-credentials-service</key>
+                            <value>
+<identifiesControllerService>org.apache.nifi.kerberos.KerberosCredentialsService</identifiesControllerService>
+<name>kerberos-credentials-service</name>
+                            </value>
+                        </entry>
+                        <entry>
+                            <key>Kerberos Principal</key>
+                            <value>
+<name>Kerberos Principal</name>
+                            </value>
+                        </entry>
+                        <entry>
+                            <key>Kerberos Keytab</key>
+                            <value>
+<name>Kerberos Keytab</name>
+                            </value>
+                        </entry>
+                        <entry>
+                            <key>ZooKeeper Quorum</key>
+                            <value>
+<name>ZooKeeper Quorum</name>
+                            </value>
+                        </entry>
+                        <entry>
+                            <key>ZooKeeper Client Port</key>
+                            <value>
+<name>ZooKeeper Client Port</name>
+                            </value>
+                        </entry>
+                        <entry>
+                            <key>ZooKeeper ZNode Parent</key>
+                            <value>
+<name>ZooKeeper ZNode Parent</name>
+                            </value>
+                        </entry>
+                        <entry>
+                            <key>HBase Client Retries</key>
+                            <value>
+<name>HBase Client Retries</name>
+                            </value>
+                        </entry>
+                        <entry>
+                            <key>Phoenix Client JAR Location</key>
+                            <value>
+<name>Phoenix Client JAR Location</name>
+                            </value>
+                        </entry>
+                    </descriptors>
+                    <name>HBase_1_1_2_ClientService</name>
+                    <persistsState>false</persistsState>
+                    <properties>
+                        <entry>
+                            <key>Hadoop Configuration Files</key>
+                            <value>/etc/hbase/conf/hbase-site.xml,/etc/hadoop/conf/core-site.xml</value>
+                        </entry>
+                        <entry>
+                            <key>kerberos-credentials-service</key>
+                        </entry>
+                        <entry>
+                            <key>Kerberos Principal</key>
+                        </entry>
+                        <entry>
+                            <key>Kerberos Keytab</key>
+                        </entry>
+                        <entry>
+                            <key>ZooKeeper Quorum</key>
+                        </entry>
+                        <entry>
+                            <key>ZooKeeper Client Port</key>
+                        </entry>
+                        <entry>
+                            <key>ZooKeeper ZNode Parent</key>
+                        </entry>
+                        <entry>
+                            <key>HBase Client Retries</key>
+                            <value>1</value>
+                        </entry>
+                        <entry>
+                            <key>Phoenix Client JAR Location</key>
+                        </entry>
+                    </properties>
+                    <state>ENABLED</state>
+                    <type>org.apache.nifi.hbase.HBase_1_1_2_ClientService</type>
+                </controllerServices>
                 <processors>
-                    <id>3e1d9a2e-f993-31e6-0000-000000000000</id>
-                    <parentGroupId>998b7ac3-8410-3a29-0000-000000000000</parentGroupId>
+                    <id>660e18e7-72d8-3591-0000-000000000000</id>
+                    <parentGroupId>6980487d-1f24-382b-0000-000000000000</parentGroupId>
                     <position>
-                        <x>598.0</x>
-                        <y>354.0</y>
+                        <x>511.5895690917969</x>
+                        <y>-65.48909282684326</y>
                     </position>
                     <bundle>
-                        <artifact>nifi-solr-nar</artifact>
+                        <artifact>nifi-hbase-nar</artifact>
                         <group>org.apache.nifi</group>
                         <version>1.7.0.3.2.0.0-520</version>
                     </bundle>
@@ -54,173 +217,64 @@ One that acquires tweet data and sends it to Kafka HDP and the other consumes ka
                         <concurrentlySchedulableTaskCount>1</concurrentlySchedulableTaskCount>
                         <descriptors>
                             <entry>
-<key>Solr Type</key>
+<key>HBase Client Service</key>
 <value>
-    <name>Solr Type</name>
+    <identifiesControllerService>org.apache.nifi.hbase.HBaseClientService</identifiesControllerService>
+    <name>HBase Client Service</name>
 </value>
                             </entry>
                             <entry>
-<key>Solr Location</key>
+<key>Table Name</key>
 <value>
-    <name>Solr Location</name>
+    <name>Table Name</name>
 </value>
                             </entry>
                             <entry>
-<key>Collection</key>
+<key>Row Identifier</key>
 <value>
-    <name>Collection</name>
+    <name>Row Identifier</name>
 </value>
                             </entry>
                             <entry>
-<key>Content Stream Path</key>
+<key>Row Identifier Field Name</key>
 <value>
-    <name>Content Stream Path</name>
+    <name>Row Identifier Field Name</name>
 </value>
                             </entry>
                             <entry>
-<key>Content-Type</key>
+<key>Row Identifier Encoding Strategy</key>
 <value>
-    <name>Content-Type</name>
+    <name>Row Identifier Encoding Strategy</name>
 </value>
                             </entry>
                             <entry>
-<key>Commit Within</key>
+<key>Column Family</key>
 <value>
-    <name>Commit Within</name>
+    <name>Column Family</name>
 </value>
                             </entry>
                             <entry>
-<key>kerberos-credentials-service</key>
+<key>timestamp</key>
 <value>
-    <identifiesControllerService>org.apache.nifi.kerberos.KerberosCredentialsService</identifiesControllerService>
-    <name>kerberos-credentials-service</name>
+    <name>timestamp</name>
 </value>
                             </entry>
                             <entry>
-<key>Username</key>
+<key>Batch Size</key>
 <value>
-    <name>Username</name>
+    <name>Batch Size</name>
 </value>
                             </entry>
                             <entry>
-<key>Password</key>
+<key>Complex Field Strategy</key>
 <value>
-    <name>Password</name>
+    <name>Complex Field Strategy</name>
 </value>
                             </entry>
                             <entry>
-<key>SSL Context Service</key>
+<key>Field Encoding Strategy</key>
 <value>
-    <identifiesControllerService>org.apache.nifi.ssl.SSLContextService</identifiesControllerService>
-    <name>SSL Context Service</name>
-</value>
-                            </entry>
-                            <entry>
-<key>Solr Socket Timeout</key>
-<value>
-    <name>Solr Socket Timeout</name>
-</value>
-                            </entry>
-                            <entry>
-<key>Solr Connection Timeout</key>
-<value>
-    <name>Solr Connection Timeout</name>
-</value>
-                            </entry>
-                            <entry>
-<key>Solr Maximum Connections</key>
-<value>
-    <name>Solr Maximum Connections</name>
-</value>
-                            </entry>
-                            <entry>
-<key>Solr Maximum Connections Per Host</key>
-<value>
-    <name>Solr Maximum Connections Per Host</name>
-</value>
-                            </entry>
-                            <entry>
-<key>ZooKeeper Client Timeout</key>
-<value>
-    <name>ZooKeeper Client Timeout</name>
-</value>
-                            </entry>
-                            <entry>
-<key>ZooKeeper Connection Timeout</key>
-<value>
-    <name>ZooKeeper Connection Timeout</name>
-</value>
-                            </entry>
-                            <entry>
-<key>f.1</key>
-<value>
-    <name>f.1</name>
-</value>
-                            </entry>
-                            <entry>
-<key>f.10</key>
-<value>
-    <name>f.10</name>
-</value>
-                            </entry>
-                            <entry>
-<key>f.11</key>
-<value>
-    <name>f.11</name>
-</value>
-                            </entry>
-                            <entry>
-<key>f.2</key>
-<value>
-    <name>f.2</name>
-</value>
-                            </entry>
-                            <entry>
-<key>f.3</key>
-<value>
-    <name>f.3</name>
-</value>
-                            </entry>
-                            <entry>
-<key>f.4</key>
-<value>
-    <name>f.4</name>
-</value>
-                            </entry>
-                            <entry>
-<key>f.5</key>
-<value>
-    <name>f.5</name>
-</value>
-                            </entry>
-                            <entry>
-<key>f.6</key>
-<value>
-    <name>f.6</name>
-</value>
-                            </entry>
-                            <entry>
-<key>f.7</key>
-<value>
-    <name>f.7</name>
-</value>
-                            </entry>
-                            <entry>
-<key>f.8</key>
-<value>
-    <name>f.8</name>
-</value>
-                            </entry>
-                            <entry>
-<key>f.9</key>
-<value>
-    <name>f.9</name>
-</value>
-                            </entry>
-                            <entry>
-<key>split</key>
-<value>
-    <name>split</name>
+    <name>Field Encoding Strategy</name>
 </value>
                             </entry>
                         </descriptors>
@@ -229,125 +283,51 @@ One that acquires tweet data and sends it to Kafka HDP and the other consumes ka
                         <penaltyDuration>30 sec</penaltyDuration>
                         <properties>
                             <entry>
-<key>Solr Type</key>
-<value>Cloud</value>
+<key>HBase Client Service</key>
+<value>5cfe5d2a-179c-36ab-0000-000000000000</value>
                             </entry>
                             <entry>
-<key>Solr Location</key>
-<value>sandbox-hdp.hortonworks.com:2181/solr</value>
+<key>Table Name</key>
+<value>tweets_sentiment</value>
                             </entry>
                             <entry>
-<key>Collection</key>
-<value>tweets</value>
+<key>Row Identifier</key>
                             </entry>
                             <entry>
-<key>Content Stream Path</key>
-<value>/update/json/docs</value>
+<key>Row Identifier Field Name</key>
+<value>twitter.unixtime</value>
                             </entry>
                             <entry>
-<key>Content-Type</key>
-<value>application/json</value>
+<key>Row Identifier Encoding Strategy</key>
+<value>String</value>
                             </entry>
                             <entry>
-<key>Commit Within</key>
-<value>1000</value>
+<key>Column Family</key>
+<value>social_media_sentiment</value>
                             </entry>
                             <entry>
-<key>kerberos-credentials-service</key>
+<key>timestamp</key>
                             </entry>
                             <entry>
-<key>Username</key>
+<key>Batch Size</key>
+<value>25</value>
                             </entry>
                             <entry>
-<key>Password</key>
+<key>Complex Field Strategy</key>
+<value>Text</value>
                             </entry>
                             <entry>
-<key>SSL Context Service</key>
-                            </entry>
-                            <entry>
-<key>Solr Socket Timeout</key>
-<value>10 seconds</value>
-                            </entry>
-                            <entry>
-<key>Solr Connection Timeout</key>
-<value>10 seconds</value>
-                            </entry>
-                            <entry>
-<key>Solr Maximum Connections</key>
-<value>10</value>
-                            </entry>
-                            <entry>
-<key>Solr Maximum Connections Per Host</key>
-<value>5</value>
-                            </entry>
-                            <entry>
-<key>ZooKeeper Client Timeout</key>
-<value>10 seconds</value>
-                            </entry>
-                            <entry>
-<key>ZooKeeper Connection Timeout</key>
-<value>10 seconds</value>
-                            </entry>
-                            <entry>
-<key>f.1</key>
-<value>id:/id</value>
-                            </entry>
-                            <entry>
-<key>f.10</key>
-<value>coordinates_s:/coordinates</value>
-                            </entry>
-                            <entry>
-<key>f.11</key>
-<value>place_s:/place</value>
-                            </entry>
-                            <entry>
-<key>f.2</key>
-<value>text_t:/text</value>
-                            </entry>
-                            <entry>
-<key>f.3</key>
-<value>screenName_s:/user/screen_name</value>
-                            </entry>
-                            <entry>
-<key>f.4</key>
-<value>language_s:/lang</value>
-                            </entry>
-                            <entry>
-<key>f.5</key>
-<value>twitter_created_at_dt:/created_at</value>
-                            </entry>
-                            <entry>
-<key>f.6</key>
-<value>tag_ss:/entities/hashtags</value>
-                            </entry>
-                            <entry>
-<key>f.7</key>
-<value>originalposter_s:/retweeted_status/user/screen_name</value>
-                            </entry>
-                            <entry>
-<key>f.8</key>
-<value>source_s:/source</value>
-                            </entry>
-                            <entry>
-<key>f.9</key>
-<value>geo_s:/geo</value>
-                            </entry>
-                            <entry>
-<key>split</key>
-<value>/</value>
+<key>Field Encoding Strategy</key>
+<value>String</value>
                             </entry>
                         </properties>
                         <runDurationMillis>0</runDurationMillis>
-                        <schedulingPeriod>1 sec</schedulingPeriod>
+                        <schedulingPeriod>0 sec</schedulingPeriod>
                         <schedulingStrategy>TIMER_DRIVEN</schedulingStrategy>
                         <yieldDuration>1 sec</yieldDuration>
                     </config>
                     <executionNodeRestricted>false</executionNodeRestricted>
-                    <name>PutSolrContentStream</name>
-                    <relationships>
-                        <autoTerminate>true</autoTerminate>
-                        <name>connection_failure</name>
-                    </relationships>
+                    <name>PutHBaseJSON</name>
                     <relationships>
                         <autoTerminate>true</autoTerminate>
                         <name>failure</name>
@@ -358,14 +338,383 @@ One that acquires tweet data and sends it to Kafka HDP and the other consumes ka
                     </relationships>
                     <state>STOPPED</state>
                     <style/>
-                    <type>org.apache.nifi.processors.solr.PutSolrContentStream</type>
+                    <type>org.apache.nifi.hbase.PutHBaseJSON</type>
                 </processors>
                 <processors>
-                    <id>ede70cd3-e0b1-3cf2-0000-000000000000</id>
-                    <parentGroupId>998b7ac3-8410-3a29-0000-000000000000</parentGroupId>
+                    <id>8621ae5f-11e0-3dce-0000-000000000000</id>
+                    <parentGroupId>6980487d-1f24-382b-0000-000000000000</parentGroupId>
                     <position>
-                        <x>600.0</x>
-                        <y>551.0</y>
+                        <x>68.00323486328125</x>
+                        <y>165.93474578857422</y>
+                    </position>
+                    <bundle>
+                        <artifact>nifi-standard-nar</artifact>
+                        <group>org.apache.nifi</group>
+                        <version>1.7.0.3.2.0.0-520</version>
+                    </bundle>
+                    <config>
+                        <bulletinLevel>WARN</bulletinLevel>
+                        <comments></comments>
+                        <concurrentlySchedulableTaskCount>2</concurrentlySchedulableTaskCount>
+                        <descriptors>
+                            <entry>
+<key>Routing Strategy</key>
+<value>
+    <name>Routing Strategy</name>
+</value>
+                            </entry>
+                            <entry>
+<key>routeIfSentimentAndTimeNonEmpty</key>
+<value>
+    <name>routeIfSentimentAndTimeNonEmpty</name>
+</value>
+                            </entry>
+                        </descriptors>
+                        <executionNode>ALL</executionNode>
+                        <lossTolerant>false</lossTolerant>
+                        <penaltyDuration>30 sec</penaltyDuration>
+                        <properties>
+                            <entry>
+<key>Routing Strategy</key>
+<value>Route to 'match' if all match</value>
+                            </entry>
+                            <entry>
+<key>routeIfSentimentAndTimeNonEmpty</key>
+<value>${twitter.unixtime:isEmpty():not():and(${twitter.sentiment:isEmpty():not()})}</value>
+                            </entry>
+                        </properties>
+                        <runDurationMillis>0</runDurationMillis>
+                        <schedulingPeriod>1 sec</schedulingPeriod>
+                        <schedulingStrategy>TIMER_DRIVEN</schedulingStrategy>
+                        <yieldDuration>1 sec</yieldDuration>
+                    </config>
+                    <executionNodeRestricted>false</executionNodeRestricted>
+                    <name>IfTweetsHaveSentimentAndTime</name>
+                    <relationships>
+                        <autoTerminate>false</autoTerminate>
+                        <name>matched</name>
+                    </relationships>
+                    <relationships>
+                        <autoTerminate>true</autoTerminate>
+                        <name>unmatched</name>
+                    </relationships>
+                    <state>STOPPED</state>
+                    <style/>
+                    <type>org.apache.nifi.processors.standard.RouteOnAttribute</type>
+                </processors>
+                <processors>
+                    <id>9bdabf1c-119f-3941-0000-000000000000</id>
+                    <parentGroupId>6980487d-1f24-382b-0000-000000000000</parentGroupId>
+                    <position>
+                        <x>66.35594940185547</x>
+                        <y>-66.72189699113369</y>
+                    </position>
+                    <bundle>
+                        <artifact>nifi-standard-nar</artifact>
+                        <group>org.apache.nifi</group>
+                        <version>1.7.0.3.2.0.0-520</version>
+                    </bundle>
+                    <config>
+                        <bulletinLevel>WARN</bulletinLevel>
+                        <comments></comments>
+                        <concurrentlySchedulableTaskCount>1</concurrentlySchedulableTaskCount>
+                        <descriptors>
+                            <entry>
+<key>Attributes List</key>
+<value>
+    <name>Attributes List</name>
+</value>
+                            </entry>
+                            <entry>
+<key>attributes-to-json-regex</key>
+<value>
+    <name>attributes-to-json-regex</name>
+</value>
+                            </entry>
+                            <entry>
+<key>Destination</key>
+<value>
+    <name>Destination</name>
+</value>
+                            </entry>
+                            <entry>
+<key>Include Core Attributes</key>
+<value>
+    <name>Include Core Attributes</name>
+</value>
+                            </entry>
+                            <entry>
+<key>Null Value</key>
+<value>
+    <name>Null Value</name>
+</value>
+                            </entry>
+                        </descriptors>
+                        <executionNode>ALL</executionNode>
+                        <lossTolerant>false</lossTolerant>
+                        <penaltyDuration>30 sec</penaltyDuration>
+                        <properties>
+                            <entry>
+<key>Attributes List</key>
+<value>twitter.handle, twitter.language, twitter.location, twitter.tweet_id, twitter.unixtime, twitter.sentiment</value>
+                            </entry>
+                            <entry>
+<key>attributes-to-json-regex</key>
+                            </entry>
+                            <entry>
+<key>Destination</key>
+<value>flowfile-content</value>
+                            </entry>
+                            <entry>
+<key>Include Core Attributes</key>
+<value>true</value>
+                            </entry>
+                            <entry>
+<key>Null Value</key>
+<value>false</value>
+                            </entry>
+                        </properties>
+                        <runDurationMillis>0</runDurationMillis>
+                        <schedulingPeriod>1 sec</schedulingPeriod>
+                        <schedulingStrategy>TIMER_DRIVEN</schedulingStrategy>
+                        <yieldDuration>1 sec</yieldDuration>
+                    </config>
+                    <executionNodeRestricted>false</executionNodeRestricted>
+                    <name>AttributesToJSON</name>
+                    <relationships>
+                        <autoTerminate>true</autoTerminate>
+                        <name>failure</name>
+                    </relationships>
+                    <relationships>
+                        <autoTerminate>false</autoTerminate>
+                        <name>success</name>
+                    </relationships>
+                    <state>STOPPED</state>
+                    <style/>
+                    <type>org.apache.nifi.processors.standard.AttributesToJSON</type>
+                </processors>
+                <processors>
+                    <id>c0efadc8-6f04-3602-0000-000000000000</id>
+                    <parentGroupId>6980487d-1f24-382b-0000-000000000000</parentGroupId>
+                    <position>
+                        <x>-400.0358657836914</x>
+                        <y>159.36569213867188</y>
+                    </position>
+                    <bundle>
+                        <artifact>nifi-standard-nar</artifact>
+                        <group>org.apache.nifi</group>
+                        <version>1.7.0.3.2.0.0-520</version>
+                    </bundle>
+                    <config>
+                        <bulletinLevel>WARN</bulletinLevel>
+                        <comments></comments>
+                        <concurrentlySchedulableTaskCount>4</concurrentlySchedulableTaskCount>
+                        <descriptors>
+                            <entry>
+<key>Destination</key>
+<value>
+    <name>Destination</name>
+</value>
+                            </entry>
+                            <entry>
+<key>Return Type</key>
+<value>
+    <name>Return Type</name>
+</value>
+                            </entry>
+                            <entry>
+<key>Path Not Found Behavior</key>
+<value>
+    <name>Path Not Found Behavior</name>
+</value>
+                            </entry>
+                            <entry>
+<key>Null Value Representation</key>
+<value>
+    <name>Null Value Representation</name>
+</value>
+                            </entry>
+                            <entry>
+<key>twitter.coordinates</key>
+<value>
+    <name>twitter.coordinates</name>
+</value>
+                            </entry>
+                            <entry>
+<key>twitter.geo</key>
+<value>
+    <name>twitter.geo</name>
+</value>
+                            </entry>
+                            <entry>
+<key>twitter.handle</key>
+<value>
+    <name>twitter.handle</name>
+</value>
+                            </entry>
+                            <entry>
+<key>twitter.hashtags</key>
+<value>
+    <name>twitter.hashtags</name>
+</value>
+                            </entry>
+                            <entry>
+<key>twitter.language</key>
+<value>
+    <name>twitter.language</name>
+</value>
+                            </entry>
+                            <entry>
+<key>twitter.location</key>
+<value>
+    <name>twitter.location</name>
+</value>
+                            </entry>
+                            <entry>
+<key>twitter.msg</key>
+<value>
+    <name>twitter.msg</name>
+</value>
+                            </entry>
+                            <entry>
+<key>twitter.place</key>
+<value>
+    <name>twitter.place</name>
+</value>
+                            </entry>
+                            <entry>
+<key>twitter.sentiment</key>
+<value>
+    <name>twitter.sentiment</name>
+</value>
+                            </entry>
+                            <entry>
+<key>twitter.time</key>
+<value>
+    <name>twitter.time</name>
+</value>
+                            </entry>
+                            <entry>
+<key>twitter.tweet_id</key>
+<value>
+    <name>twitter.tweet_id</name>
+</value>
+                            </entry>
+                            <entry>
+<key>twitter.unixtime</key>
+<value>
+    <name>twitter.unixtime</name>
+</value>
+                            </entry>
+                            <entry>
+<key>twitter.user</key>
+<value>
+    <name>twitter.user</name>
+</value>
+                            </entry>
+                        </descriptors>
+                        <executionNode>ALL</executionNode>
+                        <lossTolerant>false</lossTolerant>
+                        <penaltyDuration>30 sec</penaltyDuration>
+                        <properties>
+                            <entry>
+<key>Destination</key>
+<value>flowfile-attribute</value>
+                            </entry>
+                            <entry>
+<key>Return Type</key>
+<value>json</value>
+                            </entry>
+                            <entry>
+<key>Path Not Found Behavior</key>
+<value>ignore</value>
+                            </entry>
+                            <entry>
+<key>Null Value Representation</key>
+<value>empty string</value>
+                            </entry>
+                            <entry>
+<key>twitter.coordinates</key>
+<value>$.coordinates</value>
+                            </entry>
+                            <entry>
+<key>twitter.geo</key>
+<value>$.geo</value>
+                            </entry>
+                            <entry>
+<key>twitter.handle</key>
+<value>$.user.screen_name</value>
+                            </entry>
+                            <entry>
+<key>twitter.hashtags</key>
+<value>$.entities.hashtags[0].text</value>
+                            </entry>
+                            <entry>
+<key>twitter.language</key>
+<value>$.lang</value>
+                            </entry>
+                            <entry>
+<key>twitter.location</key>
+<value>$.user.location</value>
+                            </entry>
+                            <entry>
+<key>twitter.msg</key>
+<value>$.text</value>
+                            </entry>
+                            <entry>
+<key>twitter.place</key>
+<value>$.place</value>
+                            </entry>
+                            <entry>
+<key>twitter.sentiment</key>
+<value>$.sentiment</value>
+                            </entry>
+                            <entry>
+<key>twitter.time</key>
+<value>$.created_at</value>
+                            </entry>
+                            <entry>
+<key>twitter.tweet_id</key>
+<value>$.id</value>
+                            </entry>
+                            <entry>
+<key>twitter.unixtime</key>
+<value>$.timestamp_ms</value>
+                            </entry>
+                            <entry>
+<key>twitter.user</key>
+<value>$.user.name</value>
+                            </entry>
+                        </properties>
+                        <runDurationMillis>0</runDurationMillis>
+                        <schedulingPeriod>1 sec</schedulingPeriod>
+                        <schedulingStrategy>TIMER_DRIVEN</schedulingStrategy>
+                        <yieldDuration>1 sec</yieldDuration>
+                    </config>
+                    <executionNodeRestricted>false</executionNodeRestricted>
+                    <name>PullKeyAttributes</name>
+                    <relationships>
+                        <autoTerminate>true</autoTerminate>
+                        <name>failure</name>
+                    </relationships>
+                    <relationships>
+                        <autoTerminate>false</autoTerminate>
+                        <name>matched</name>
+                    </relationships>
+                    <relationships>
+                        <autoTerminate>true</autoTerminate>
+                        <name>unmatched</name>
+                    </relationships>
+                    <state>STOPPED</state>
+                    <style/>
+                    <type>org.apache.nifi.processors.standard.EvaluateJsonPath</type>
+                </processors>
+                <processors>
+                    <id>e217b220-41a3-37da-0000-000000000000</id>
+                    <parentGroupId>6980487d-1f24-382b-0000-000000000000</parentGroupId>
+                    <position>
+                        <x>-400.77696228027344</x>
+                        <y>-67.36248779296875</y>
                     </position>
                     <bundle>
                         <artifact>nifi-kafka-0-10-nar</artifact>
@@ -545,26 +894,26 @@ One that acquires tweet data and sends it to Kafka HDP and the other consumes ka
                     <type>org.apache.nifi.processors.kafka.pubsub.ConsumeKafka_0_10</type>
                 </processors>
             </contents>
-            <name>StreamTweetsToSolr</name>
+            <name>StreamTweetsToHBase</name>
             <variables/>
         </processGroups>
         <processGroups>
-            <id>cfceb4f5-9104-3cdd-0000-000000000000</id>
-            <parentGroupId>f1a841a7-4659-3d12-0000-000000000000</parentGroupId>
+            <id>d95a65a1-46bd-3249-0000-000000000000</id>
+            <parentGroupId>2128b774-71f2-3c39-0000-000000000000</parentGroupId>
             <position>
-                <x>430.0</x>
+                <x>488.0</x>
                 <y>0.0</y>
             </position>
             <comments></comments>
             <contents>
                 <connections>
-                    <id>1838b10d-e895-3d5b-0000-000000000000</id>
-                    <parentGroupId>cfceb4f5-9104-3cdd-0000-000000000000</parentGroupId>
+                    <id>051ded0d-017b-35b1-0000-000000000000</id>
+                    <parentGroupId>d95a65a1-46bd-3249-0000-000000000000</parentGroupId>
                     <backPressureDataSizeThreshold>1 GB</backPressureDataSizeThreshold>
                     <backPressureObjectThreshold>10000</backPressureObjectThreshold>
                     <destination>
-                        <groupId>cfceb4f5-9104-3cdd-0000-000000000000</groupId>
-                        <id>c5693e63-34a7-3f51-0000-000000000000</id>
+                        <groupId>d95a65a1-46bd-3249-0000-000000000000</groupId>
+                        <id>988f71b9-eca8-3f97-0000-000000000000</id>
                         <type>PROCESSOR</type>
                     </destination>
                     <flowFileExpiration>0 sec</flowFileExpiration>
@@ -572,41 +921,20 @@ One that acquires tweet data and sends it to Kafka HDP and the other consumes ka
                     <name></name>
                     <selectedRelationships>success</selectedRelationships>
                     <source>
-                        <groupId>cfceb4f5-9104-3cdd-0000-000000000000</groupId>
-                        <id>5fa5fa37-9469-3c27-0000-000000000000</id>
+                        <groupId>d95a65a1-46bd-3249-0000-000000000000</groupId>
+                        <id>f198eac2-2fbc-354f-0000-000000000000</id>
                         <type>PROCESSOR</type>
                     </source>
                     <zIndex>0</zIndex>
                 </connections>
                 <connections>
-                    <id>8cd66483-869a-3e19-0000-000000000000</id>
-                    <parentGroupId>cfceb4f5-9104-3cdd-0000-000000000000</parentGroupId>
+                    <id>7b9e2f52-640b-317a-0000-000000000000</id>
+                    <parentGroupId>d95a65a1-46bd-3249-0000-000000000000</parentGroupId>
                     <backPressureDataSizeThreshold>1 GB</backPressureDataSizeThreshold>
                     <backPressureObjectThreshold>10000</backPressureObjectThreshold>
                     <destination>
-                        <groupId>cfceb4f5-9104-3cdd-0000-000000000000</groupId>
-                        <id>5b718959-2290-3505-0000-000000000000</id>
-                        <type>PROCESSOR</type>
-                    </destination>
-                    <flowFileExpiration>0 sec</flowFileExpiration>
-                    <labelIndex>1</labelIndex>
-                    <name></name>
-                    <selectedRelationships>tweet</selectedRelationships>
-                    <source>
-                        <groupId>cfceb4f5-9104-3cdd-0000-000000000000</groupId>
-                        <id>9cf8dfa4-7ec0-3e34-0000-000000000000</id>
-                        <type>PROCESSOR</type>
-                    </source>
-                    <zIndex>0</zIndex>
-                </connections>
-                <connections>
-                    <id>fccd1609-262f-3f38-0000-000000000000</id>
-                    <parentGroupId>cfceb4f5-9104-3cdd-0000-000000000000</parentGroupId>
-                    <backPressureDataSizeThreshold>1 GB</backPressureDataSizeThreshold>
-                    <backPressureObjectThreshold>10000</backPressureObjectThreshold>
-                    <destination>
-                        <groupId>cfceb4f5-9104-3cdd-0000-000000000000</groupId>
-                        <id>9cf8dfa4-7ec0-3e34-0000-000000000000</id>
+                        <groupId>d95a65a1-46bd-3249-0000-000000000000</groupId>
+                        <id>9e68ef31-2247-36f8-0000-000000000000</id>
                         <type>PROCESSOR</type>
                     </destination>
                     <flowFileExpiration>0 sec</flowFileExpiration>
@@ -614,18 +942,39 @@ One that acquires tweet data and sends it to Kafka HDP and the other consumes ka
                     <name></name>
                     <selectedRelationships>matched</selectedRelationships>
                     <source>
-                        <groupId>cfceb4f5-9104-3cdd-0000-000000000000</groupId>
-                        <id>c5693e63-34a7-3f51-0000-000000000000</id>
+                        <groupId>d95a65a1-46bd-3249-0000-000000000000</groupId>
+                        <id>988f71b9-eca8-3f97-0000-000000000000</id>
+                        <type>PROCESSOR</type>
+                    </source>
+                    <zIndex>0</zIndex>
+                </connections>
+                <connections>
+                    <id>ea487597-2284-3490-0000-000000000000</id>
+                    <parentGroupId>d95a65a1-46bd-3249-0000-000000000000</parentGroupId>
+                    <backPressureDataSizeThreshold>1 GB</backPressureDataSizeThreshold>
+                    <backPressureObjectThreshold>10000</backPressureObjectThreshold>
+                    <destination>
+                        <groupId>d95a65a1-46bd-3249-0000-000000000000</groupId>
+                        <id>6e874c55-7167-35de-0000-000000000000</id>
+                        <type>PROCESSOR</type>
+                    </destination>
+                    <flowFileExpiration>0 sec</flowFileExpiration>
+                    <labelIndex>1</labelIndex>
+                    <name></name>
+                    <selectedRelationships>filterTweetAndLocation</selectedRelationships>
+                    <source>
+                        <groupId>d95a65a1-46bd-3249-0000-000000000000</groupId>
+                        <id>9e68ef31-2247-36f8-0000-000000000000</id>
                         <type>PROCESSOR</type>
                     </source>
                     <zIndex>0</zIndex>
                 </connections>
                 <processors>
-                    <id>5b718959-2290-3505-0000-000000000000</id>
-                    <parentGroupId>cfceb4f5-9104-3cdd-0000-000000000000</parentGroupId>
+                    <id>6e874c55-7167-35de-0000-000000000000</id>
+                    <parentGroupId>d95a65a1-46bd-3249-0000-000000000000</parentGroupId>
                     <position>
-                        <x>160.79632913384148</x>
-                        <y>2003.2465468228183</y>
+                        <x>302.0</x>
+                        <y>584.0</y>
                     </position>
                     <bundle>
                         <artifact>nifi-kafka-0-10-nar</artifact>
@@ -828,11 +1177,279 @@ One that acquires tweet data and sends it to Kafka HDP and the other consumes ka
                     <type>org.apache.nifi.processors.kafka.pubsub.PublishKafka_0_10</type>
                 </processors>
                 <processors>
-                    <id>5fa5fa37-9469-3c27-0000-000000000000</id>
-                    <parentGroupId>cfceb4f5-9104-3cdd-0000-000000000000</parentGroupId>
+                    <id>988f71b9-eca8-3f97-0000-000000000000</id>
+                    <parentGroupId>d95a65a1-46bd-3249-0000-000000000000</parentGroupId>
                     <position>
-                        <x>165.35131952883216</x>
-                        <y>1325.9092619740168</y>
+                        <x>296.0</x>
+                        <y>176.0</y>
+                    </position>
+                    <bundle>
+                        <artifact>nifi-standard-nar</artifact>
+                        <group>org.apache.nifi</group>
+                        <version>1.7.0.3.2.0.0-520</version>
+                    </bundle>
+                    <config>
+                        <bulletinLevel>WARN</bulletinLevel>
+                        <comments></comments>
+                        <concurrentlySchedulableTaskCount>4</concurrentlySchedulableTaskCount>
+                        <descriptors>
+                            <entry>
+<key>Destination</key>
+<value>
+    <name>Destination</name>
+</value>
+                            </entry>
+                            <entry>
+<key>Return Type</key>
+<value>
+    <name>Return Type</name>
+</value>
+                            </entry>
+                            <entry>
+<key>Path Not Found Behavior</key>
+<value>
+    <name>Path Not Found Behavior</name>
+</value>
+                            </entry>
+                            <entry>
+<key>Null Value Representation</key>
+<value>
+    <name>Null Value Representation</name>
+</value>
+                            </entry>
+                            <entry>
+<key>twitter.coordinates</key>
+<value>
+    <name>twitter.coordinates</name>
+</value>
+                            </entry>
+                            <entry>
+<key>twitter.geo</key>
+<value>
+    <name>twitter.geo</name>
+</value>
+                            </entry>
+                            <entry>
+<key>twitter.handle</key>
+<value>
+    <name>twitter.handle</name>
+</value>
+                            </entry>
+                            <entry>
+<key>twitter.hashtags</key>
+<value>
+    <name>twitter.hashtags</name>
+</value>
+                            </entry>
+                            <entry>
+<key>twitter.language</key>
+<value>
+    <name>twitter.language</name>
+</value>
+                            </entry>
+                            <entry>
+<key>twitter.location</key>
+<value>
+    <name>twitter.location</name>
+</value>
+                            </entry>
+                            <entry>
+<key>twitter.msg</key>
+<value>
+    <name>twitter.msg</name>
+</value>
+                            </entry>
+                            <entry>
+<key>twitter.place</key>
+<value>
+    <name>twitter.place</name>
+</value>
+                            </entry>
+                            <entry>
+<key>twitter.time</key>
+<value>
+    <name>twitter.time</name>
+</value>
+                            </entry>
+                            <entry>
+<key>twitter.tweet_id</key>
+<value>
+    <name>twitter.tweet_id</name>
+</value>
+                            </entry>
+                            <entry>
+<key>twitter.unixtime</key>
+<value>
+    <name>twitter.unixtime</name>
+</value>
+                            </entry>
+                            <entry>
+<key>twitter.user</key>
+<value>
+    <name>twitter.user</name>
+</value>
+                            </entry>
+                        </descriptors>
+                        <executionNode>ALL</executionNode>
+                        <lossTolerant>false</lossTolerant>
+                        <penaltyDuration>30 sec</penaltyDuration>
+                        <properties>
+                            <entry>
+<key>Destination</key>
+<value>flowfile-attribute</value>
+                            </entry>
+                            <entry>
+<key>Return Type</key>
+<value>json</value>
+                            </entry>
+                            <entry>
+<key>Path Not Found Behavior</key>
+<value>ignore</value>
+                            </entry>
+                            <entry>
+<key>Null Value Representation</key>
+<value>empty string</value>
+                            </entry>
+                            <entry>
+<key>twitter.coordinates</key>
+<value>$.coordinates</value>
+                            </entry>
+                            <entry>
+<key>twitter.geo</key>
+<value>$.geo</value>
+                            </entry>
+                            <entry>
+<key>twitter.handle</key>
+<value>$.user.screen_name</value>
+                            </entry>
+                            <entry>
+<key>twitter.hashtags</key>
+<value>$.entities.hashtags[0].text</value>
+                            </entry>
+                            <entry>
+<key>twitter.language</key>
+<value>$.lang</value>
+                            </entry>
+                            <entry>
+<key>twitter.location</key>
+<value>$.user.location</value>
+                            </entry>
+                            <entry>
+<key>twitter.msg</key>
+<value>$.text</value>
+                            </entry>
+                            <entry>
+<key>twitter.place</key>
+<value>$.place</value>
+                            </entry>
+                            <entry>
+<key>twitter.time</key>
+<value>$.created_at</value>
+                            </entry>
+                            <entry>
+<key>twitter.tweet_id</key>
+<value>$.id</value>
+                            </entry>
+                            <entry>
+<key>twitter.unixtime</key>
+<value>$.timestamp_ms</value>
+                            </entry>
+                            <entry>
+<key>twitter.user</key>
+<value>$.user.name</value>
+                            </entry>
+                        </properties>
+                        <runDurationMillis>0</runDurationMillis>
+                        <schedulingPeriod>1 sec</schedulingPeriod>
+                        <schedulingStrategy>TIMER_DRIVEN</schedulingStrategy>
+                        <yieldDuration>1 sec</yieldDuration>
+                    </config>
+                    <executionNodeRestricted>false</executionNodeRestricted>
+                    <name>PullKeyAttributes</name>
+                    <relationships>
+                        <autoTerminate>true</autoTerminate>
+                        <name>failure</name>
+                    </relationships>
+                    <relationships>
+                        <autoTerminate>false</autoTerminate>
+                        <name>matched</name>
+                    </relationships>
+                    <relationships>
+                        <autoTerminate>true</autoTerminate>
+                        <name>unmatched</name>
+                    </relationships>
+                    <state>STOPPED</state>
+                    <style/>
+                    <type>org.apache.nifi.processors.standard.EvaluateJsonPath</type>
+                </processors>
+                <processors>
+                    <id>9e68ef31-2247-36f8-0000-000000000000</id>
+                    <parentGroupId>d95a65a1-46bd-3249-0000-000000000000</parentGroupId>
+                    <position>
+                        <x>305.0</x>
+                        <y>382.0</y>
+                    </position>
+                    <bundle>
+                        <artifact>nifi-standard-nar</artifact>
+                        <group>org.apache.nifi</group>
+                        <version>1.7.0.3.2.0.0-520</version>
+                    </bundle>
+                    <config>
+                        <bulletinLevel>WARN</bulletinLevel>
+                        <comments></comments>
+                        <concurrentlySchedulableTaskCount>2</concurrentlySchedulableTaskCount>
+                        <descriptors>
+                            <entry>
+<key>Routing Strategy</key>
+<value>
+    <name>Routing Strategy</name>
+</value>
+                            </entry>
+                            <entry>
+<key>filterTweetAndLocation</key>
+<value>
+    <name>filterTweetAndLocation</name>
+</value>
+                            </entry>
+                        </descriptors>
+                        <executionNode>ALL</executionNode>
+                        <lossTolerant>false</lossTolerant>
+                        <penaltyDuration>30 sec</penaltyDuration>
+                        <properties>
+                            <entry>
+<key>Routing Strategy</key>
+<value>Route to Property name</value>
+                            </entry>
+                            <entry>
+<key>filterTweetAndLocation</key>
+<value>${twitter.msg:isEmpty():not():and(${twitter.location:isEmpty():not()})}</value>
+                            </entry>
+                        </properties>
+                        <runDurationMillis>0</runDurationMillis>
+                        <schedulingPeriod>1 sec</schedulingPeriod>
+                        <schedulingStrategy>TIMER_DRIVEN</schedulingStrategy>
+                        <yieldDuration>1 sec</yieldDuration>
+                    </config>
+                    <executionNodeRestricted>false</executionNodeRestricted>
+                    <name>FindOnlyTweets</name>
+                    <relationships>
+                        <autoTerminate>false</autoTerminate>
+                        <name>filterTweetAndLocation</name>
+                    </relationships>
+                    <relationships>
+                        <autoTerminate>true</autoTerminate>
+                        <name>unmatched</name>
+                    </relationships>
+                    <state>STOPPED</state>
+                    <style/>
+                    <type>org.apache.nifi.processors.standard.RouteOnAttribute</type>
+                </processors>
+                <processors>
+                    <id>f198eac2-2fbc-354f-0000-000000000000</id>
+                    <parentGroupId>d95a65a1-46bd-3249-0000-000000000000</parentGroupId>
+                    <position>
+                        <x>297.0</x>
+                        <y>-26.0</y>
                     </position>
                     <bundle>
                         <artifact>nifi-social-media-nar</artifact>
@@ -905,7 +1522,7 @@ One that acquires tweet data and sends it to Kafka HDP and the other consumes ka
                         <properties>
                             <entry>
 <key>Twitter Endpoint</key>
-<value>Filter Endpoint</value>
+<value>Sample Endpoint</value>
                             </entry>
                             <entry>
 <key>Consumer Key</key>
@@ -923,6 +1540,7 @@ One that acquires tweet data and sends it to Kafka HDP and the other consumes ka
                             </entry>
                             <entry>
 <key>Languages</key>
+<value>en</value>
                             </entry>
                             <entry>
 <key>Terms to Filter On</key>
@@ -950,258 +1568,10 @@ One that acquires tweet data and sends it to Kafka HDP and the other consumes ka
                     <style/>
                     <type>org.apache.nifi.processors.twitter.GetTwitter</type>
                 </processors>
-                <processors>
-                    <id>9cf8dfa4-7ec0-3e34-0000-000000000000</id>
-                    <parentGroupId>cfceb4f5-9104-3cdd-0000-000000000000</parentGroupId>
-                    <position>
-                        <x>162.01434377368832</x>
-                        <y>1775.3263060320176</y>
-                    </position>
-                    <bundle>
-                        <artifact>nifi-standard-nar</artifact>
-                        <group>org.apache.nifi</group>
-                        <version>1.7.0.3.2.0.0-520</version>
-                    </bundle>
-                    <config>
-                        <bulletinLevel>WARN</bulletinLevel>
-                        <comments></comments>
-                        <concurrentlySchedulableTaskCount>2</concurrentlySchedulableTaskCount>
-                        <descriptors>
-                            <entry>
-<key>Routing Strategy</key>
-<value>
-    <name>Routing Strategy</name>
-</value>
-                            </entry>
-                            <entry>
-<key>tweet</key>
-<value>
-    <name>tweet</name>
-</value>
-                            </entry>
-                        </descriptors>
-                        <executionNode>ALL</executionNode>
-                        <lossTolerant>false</lossTolerant>
-                        <penaltyDuration>30 sec</penaltyDuration>
-                        <properties>
-                            <entry>
-<key>Routing Strategy</key>
-<value>Route to Property name</value>
-                            </entry>
-                            <entry>
-<key>tweet</key>
-<value>${twitter.msg:isEmpty():not()}</value>
-                            </entry>
-                        </properties>
-                        <runDurationMillis>0</runDurationMillis>
-                        <schedulingPeriod>1 sec</schedulingPeriod>
-                        <schedulingStrategy>TIMER_DRIVEN</schedulingStrategy>
-                        <yieldDuration>1 sec</yieldDuration>
-                    </config>
-                    <executionNodeRestricted>false</executionNodeRestricted>
-                    <name>FindOnlyTweets</name>
-                    <relationships>
-                        <autoTerminate>false</autoTerminate>
-                        <name>tweet</name>
-                    </relationships>
-                    <relationships>
-                        <autoTerminate>true</autoTerminate>
-                        <name>unmatched</name>
-                    </relationships>
-                    <state>STOPPED</state>
-                    <style/>
-                    <type>org.apache.nifi.processors.standard.RouteOnAttribute</type>
-                </processors>
-                <processors>
-                    <id>c5693e63-34a7-3f51-0000-000000000000</id>
-                    <parentGroupId>cfceb4f5-9104-3cdd-0000-000000000000</parentGroupId>
-                    <position>
-                        <x>163.4883036759727</x>
-                        <y>1542.9167547772731</y>
-                    </position>
-                    <bundle>
-                        <artifact>nifi-standard-nar</artifact>
-                        <group>org.apache.nifi</group>
-                        <version>1.7.0.3.2.0.0-520</version>
-                    </bundle>
-                    <config>
-                        <bulletinLevel>ERROR</bulletinLevel>
-                        <comments></comments>
-                        <concurrentlySchedulableTaskCount>4</concurrentlySchedulableTaskCount>
-                        <descriptors>
-                            <entry>
-<key>Destination</key>
-<value>
-    <name>Destination</name>
-</value>
-                            </entry>
-                            <entry>
-<key>Return Type</key>
-<value>
-    <name>Return Type</name>
-</value>
-                            </entry>
-                            <entry>
-<key>Path Not Found Behavior</key>
-<value>
-    <name>Path Not Found Behavior</name>
-</value>
-                            </entry>
-                            <entry>
-<key>Null Value Representation</key>
-<value>
-    <name>Null Value Representation</name>
-</value>
-                            </entry>
-                            <entry>
-<key>twitter.handle</key>
-<value>
-    <name>twitter.handle</name>
-</value>
-                            </entry>
-                            <entry>
-<key>twitter.hashtags</key>
-<value>
-    <name>twitter.hashtags</name>
-</value>
-                            </entry>
-                            <entry>
-<key>twitter.language</key>
-<value>
-    <name>twitter.language</name>
-</value>
-                            </entry>
-                            <entry>
-<key>twitter.location</key>
-<value>
-    <name>twitter.location</name>
-</value>
-                            </entry>
-                            <entry>
-<key>twitter.msg</key>
-<value>
-    <name>twitter.msg</name>
-</value>
-                            </entry>
-                            <entry>
-<key>twitter.time</key>
-<value>
-    <name>twitter.time</name>
-</value>
-                            </entry>
-                            <entry>
-<key>twitter.time_zone</key>
-<value>
-    <name>twitter.time_zone</name>
-</value>
-                            </entry>
-                            <entry>
-<key>twitter.tweet_id</key>
-<value>
-    <name>twitter.tweet_id</name>
-</value>
-                            </entry>
-                            <entry>
-<key>twitter.unixtime</key>
-<value>
-    <name>twitter.unixtime</name>
-</value>
-                            </entry>
-                            <entry>
-<key>twitter.user</key>
-<value>
-    <name>twitter.user</name>
-</value>
-                            </entry>
-                        </descriptors>
-                        <executionNode>ALL</executionNode>
-                        <lossTolerant>false</lossTolerant>
-                        <penaltyDuration>30 sec</penaltyDuration>
-                        <properties>
-                            <entry>
-<key>Destination</key>
-<value>flowfile-attribute</value>
-                            </entry>
-                            <entry>
-<key>Return Type</key>
-<value>auto-detect</value>
-                            </entry>
-                            <entry>
-<key>Path Not Found Behavior</key>
-<value>ignore</value>
-                            </entry>
-                            <entry>
-<key>Null Value Representation</key>
-<value>empty string</value>
-                            </entry>
-                            <entry>
-<key>twitter.handle</key>
-<value>$.user.screen_name</value>
-                            </entry>
-                            <entry>
-<key>twitter.hashtags</key>
-<value>$.entities.hashtags[0].text</value>
-                            </entry>
-                            <entry>
-<key>twitter.language</key>
-<value>$.lang</value>
-                            </entry>
-                            <entry>
-<key>twitter.location</key>
-<value>$.user.location</value>
-                            </entry>
-                            <entry>
-<key>twitter.msg</key>
-<value>$.text</value>
-                            </entry>
-                            <entry>
-<key>twitter.time</key>
-<value>$.created_at</value>
-                            </entry>
-                            <entry>
-<key>twitter.time_zone</key>
-<value>$.user.time_zone</value>
-                            </entry>
-                            <entry>
-<key>twitter.tweet_id</key>
-<value>$.id</value>
-                            </entry>
-                            <entry>
-<key>twitter.unixtime</key>
-<value>$.timestamp_ms</value>
-                            </entry>
-                            <entry>
-<key>twitter.user</key>
-<value>$.user.name</value>
-                            </entry>
-                        </properties>
-                        <runDurationMillis>0</runDurationMillis>
-                        <schedulingPeriod>1 sec</schedulingPeriod>
-                        <schedulingStrategy>TIMER_DRIVEN</schedulingStrategy>
-                        <yieldDuration>1 sec</yieldDuration>
-                    </config>
-                    <executionNodeRestricted>false</executionNodeRestricted>
-                    <name>PullKeyAttributes</name>
-                    <relationships>
-                        <autoTerminate>true</autoTerminate>
-                        <name>failure</name>
-                    </relationships>
-                    <relationships>
-                        <autoTerminate>false</autoTerminate>
-                        <name>matched</name>
-                    </relationships>
-                    <relationships>
-                        <autoTerminate>true</autoTerminate>
-                        <name>unmatched</name>
-                    </relationships>
-                    <state>STOPPED</state>
-                    <style/>
-                    <type>org.apache.nifi.processors.standard.EvaluateJsonPath</type>
-                </processors>
             </contents>
             <name>AcquireTwitterData</name>
             <variables/>
         </processGroups>
     </snippet>
-    <timestamp>09/22/2018 22:44:25 UTC</timestamp>
+    <timestamp>09/27/2018 03:08:43 UTC</timestamp>
 </template>

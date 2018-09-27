@@ -24,12 +24,12 @@ a different Kafka topic, which has a trained sentiment model built with an exter
 
 ## Outline
 
-- [Approach 1: Build a NiFi Flow to Acquire Twitter Data](#approach-1-build-a-nifi-flow-to-acquire-twitter-data)
-- [Approach 2: Import NiFi Flow to Acquire Twitter Data](#approach-2-import-nifi-flow-to-acquire-twitter-data)
+- [Approach 1: Build a NiFi Flow For Acquisition and Storage](#approach-1-build-a-nifi-flow-for-acquisition-and-storage)
+- [Approach 2: Import NiFi Flow For Acquisition and Storage](#approach-2-import-nifi-flow-for-acquisition-and-storage)
 - [Summary](#summary)
 - [Further Reading](#further-reading)
 
-## Approach 1: Build a NiFi Flow to Acquire Twitter Data
+## Approach 1: Build a NiFi Flow For Acquisition and Storage
 
 After starting your sandbox, open HDF **NiFi UI** at `http://sandbox-hdf.hortonworks.com:9090/nifi`.
 
@@ -104,7 +104,7 @@ Configure **EvaluateJsonPath** processor:
 | Setting | Value     |
 | :------------- | :------------- |
 | Name | `PullKeyAttributes` |
-| Bulletin Level | ERROR |
+| Bulletin Level | WARN |
 | Automatically Terminate Relationships | failure (**checked**) |
 | Automatically Terminate Relationships | unmatched (**checked**) |
 
@@ -197,7 +197,7 @@ Configure Create Connection:
 
 | Connection | Value     |
 | :------------- | :------------- |
-| For Relationships     | tweet (**checked**) |
+| For Relationships     | filterTweetAndLocation (**checked**) |
 
 Click **ADD**.
 
@@ -238,7 +238,7 @@ At the breadcrumb, select **NiFi Flow** level. Hold **control + mouse click** on
 
 ![started_acquiretwitterdata_pg](assets/images/acquire-twitter-data/started_acquiretwitterdata_pg.jpg)
 
-Once NiFi writes your sensor data to HDFS, which you can check by viewing data provenance, you can turn off the process group by holding **control + mouse click** on the **AcquireTwitterData** process group, then choose **stop** option.
+Once NiFi writes your twitter data to Kafka, which you can check by viewing data provenance, you can turn off the process group by holding **control + mouse click** on the **AcquireTwitterData** process group, then choose **stop** option.
 
 ### Verify NiFi Stored Data
 
@@ -254,7 +254,7 @@ You will be able to see the data NiFi sent to the external process HDFS. The dat
 
 ![view_event_tweet](assets/images/acquire-twitter-data/view_event_tweet.jpg)
 
-### 2\. Create StreamTweetsToDruid Process Group
+### 2\. Create StreamTweetsToHBase Process Group
 
 Make sure to exit the **AcquireTwitterData** process group and head back to **NiFi Flow** level.
 
@@ -262,11 +262,29 @@ This capture group consumes data from Kafka that was brought in by Spark Structu
 
 Drop the process group icon ![process_group](assets/images/acquire-twitter-data/process_group.jpg) onto the NiFi canvas next to **AcquireTwitterData** process group.
 
-Insert the Process Group Name: `StreamTweetsToDruid` or one of your choice.
+Insert the Process Group Name: `StreamTweetsToHBase` or one of your choice.
 
-![streamtweetstosolr](assets/images/acquire-twitter-data/streamtweetstosolr.jpg)
+![streamtweetstohbase](assets/images/acquire-twitter-data/streamtweetstohbase.jpg)
 
-Double click on the process group to dive into it. At the bottom of the canvas, you will see **NiFi Flow >> StreamTweetsToDruid** breadcrumb. Let's began connecting the processors for data ingestion, preprocessing and storage.
+### Create New Controller Service
+
+We are going to create a new controller service that will be needed later when we are configuring PutHBaseJSON processor.
+
+Right click on the **StreamTweetsToHBase** process group, select configure. Click on the **Controller Services**. Click the **+** button to create a new controller service.
+
+Insert into the **Filter** field,  `HBase_1_1_2_ClientService` and then press **ADD**.
+
+Select the **gear** icon on the far right. Click on the **Properties** tab. Configure the properties for the controller service:
+
+**Table 27: Scheduling Tab**
+
+| Property | Value     |
+| :------------- | :------------- |
+| Hadoop Configuration Files       | `/etc/hbase/conf/hbase-site.xml,/etc/hadoop/conf/core-site.xml`       |
+
+Click **OK**. Now let's exit the controller services.
+
+Double click on the process group to dive into it. At the bottom of the canvas, you will see **NiFi Flow >> StreamTweetsToHBase** breadcrumb. Let's began connecting the processors for data ingestion, preprocessing and storage.
 
 ### Poll Kafka Topic for Data using KafkaConsumer API
 
@@ -295,13 +313,15 @@ table isn't defined, press the plus button **+**.
 
 Click **APPLY**.
 
-### Stream Contents of FlowFile to Druid Data Source
+### Pull Key Attributes from JSON Content of FlowFile
 
-Drop the processor icon onto the NiFi canvas. Add the **PutDruidRecord** processor.
+Jump to the previous process group **AcquireTwitterData**, copy the EvaluateJsonPath processor named **PullKeyAttributes** by right clicking and press **copy**.
 
-Create connection between **ConsumeKafka_0_10** and both **PutDruidRecord** processors. Hover
+Jump back to the **StreamTweetsToHBase** process group and paste the PullKeyAttributes processor near **ConsumeKafka_0_10** by right clicking on the NiFi canvas and pressing **paste**.
+
+Create connection between **ConsumeKafka_0_10** and **PullKeyAttributes** processors. Hover
 over **ConsumeKafka_0_10** to see arrow icon, press on processor and connect it to
-**PutDruidRecord**.
+**PullKeyAttributes**.
 
 Configure Create Connection:
 
@@ -311,66 +331,152 @@ Configure Create Connection:
 
 Click **ADD**.
 
-~~~bash
-#TODO: Add Picture of ConsumeKafka_0_10 connecting to PutDruidRecord
-#TODO: Add information on how to configure the properties for PutDruidRecord
-~~~
-<!--
-![consumekafka_to_putsolr](assets/images/acquire-twitter-data/consumekafka_to_putsolr.jpg)
+![consumekafka_0_10_to_evaluatejsonpath](assets/images/acquire-twitter-data/consumekafka_0_10_to_evaluatejsonpath.jpg)
 
-Configure **PutDruidRecord** processor:
+**PullKeyAttributes** processor is already configured.
 
-**Table 29: Settings Tab**
+### Create JSON From Input FlowFile Attributes and Output JSON FlowFile Content
+
+Drop the processor icon onto the NiFi canvas. Add the **AttributesToJSON**.
+
+Create connection between **PullKeyAttributes** and **AttributesToJSON** processors. Hover
+over **PullKeyAttributes** to see arrow icon, press on processor and connect it to
+**AttributesToJSON**.
+
+Configure Create Connection:
+
+| Connection | Value     |
+| :------------- | :------------- |
+| For Relationships     | matched (**checked**) |
+
+Click **ADD**.
+
+![evaluatejsonpath_to_attributestojson](assets/images/acquire-twitter-data/evaluatejsonpath_to_attributestojson.jpg)
+
+Configure **AttributesToJSON** processor:
+
+**Table 7: Settings Tab**
 
 | Setting | Value     |
 | :------------- | :------------- |
-| Automatically Terminate Relationships | connection_failure (**checked**) |
 | Automatically Terminate Relationships | failure (**checked**) |
-| Automatically Terminate Relationships | success (**checked**) |
 
-**Table 30: Scheduling Tab**
+**Table 8: Scheduling Tab**
 
 | Scheduling | Value     |
 | :------------- | :------------- |
 | Run Schedule       | `1 sec`       |
 
-**Table 31: Properties Tab**
+**Table 9: Properties Tab**
 
 To add a new user defined property in case one the following properties in the
 table isn't defined, press the plus button **+**.
 
 | Property | Value     |
 | :------------- | :------------- |
-| **Solr Type**       | `Cloud` |
-| **Solr Location**       | `sandbox-hdp.hortonworks.com:2181/solr` |
-| Collection       | `tweets` |
-| Commit Within       | `1000` |
-| f.1       | `id:/id` |
-| f.2       | `text_t:/text` |
-| f.3       | `screenName_s:/user/screen_name` |
-| f.4       | `language_s:/lang` |
-| f.5       | `twitter_created_at_dt:/created_at` |
-| f.6       | `tag_ss:/entities/hashtags` |
-| f.7       | `originalposter_s:/retweeted_status/user/screen_name` |
-| f.8       | `source_s:/source` |
-| f.9       | `geo_s:/geo` |
-| f.10       | `coordinates_s:/coordinates` |
-| f.11       | `place_s:/place` |
-| split       | `/` |
- -->
+| **Attributes List**       | `twitter.handle, twitter.language, twitter.location, twitter.tweet_id, twitter.unixtime, twitter.sentiment` |
+| **Destination**       | `flowfile-content` |
 
-Click **APPLY**. The yellow warning sign on **PutDruidRecord** should turn to
+Click **APPLY**.
+
+### Route FlowFiles Attributes Containing Non-Empty Tweets
+
+Drop the processor icon onto the NiFi canvas. Add the **RouteOnAttribute**.
+
+Create connection between **AttributesToJSON** and **RouteOnAttribute** processors. Hover
+over **AttributesToJSON** to see arrow icon, press on processor and connect it to
+**RouteOnAttribute**.
+
+Configure Create Connection:
+
+| Connection | Value     |
+| :------------- | :------------- |
+| For Relationships     | matched (**checked**) |
+
+Click **ADD**.
+
+![attributestojson_to_routeonattribute](assets/images/acquire-twitter-data/attributestojson_to_routeonattribute.jpg)
+
+Configure **RouteOnAttribute** processor:
+
+**Table 7: Settings Tab**
+
+| Setting | Value     |
+| :------------- | :------------- |
+| Name | `IfTweetsHaveSentimentAndTime` |
+| Automatically Terminate Relationships | unmatched (**checked**) |
+
+**Table 8: Scheduling Tab**
+
+| Scheduling | Value     |
+| :------------- | :------------- |
+| Concurrent Tasks       | `2`       |
+| Run Schedule       | `1 sec`       |
+
+**Table 9: Properties Tab**
+
+To add a new user defined property in case one the following properties in the
+table isn't defined, press the plus button **+**.
+
+| Property | Value     |
+| :------------- | :------------- |
+| **Routing Strategy**       | `Route to 'matched' if all match` |
+| filterTweetAndLocation       | `${twitter.unixtime:isEmpty():not():and(${twitter.sentiment:isEmpty():not()})}` |
+
+Click **APPLY**.
+
+### Stream Contents of FlowFile to HBase Data Table
+
+Drop the processor icon onto the NiFi canvas. Add the **PutHBaseJSON** processor.
+
+Create connection between **RouteOnAttribute** and both **PutHBaseJSON** processors. Hover
+over **RouteOnAttribute** to see arrow icon, press on processor and connect it to
+**PutHBaseJSON**.
+
+Configure Create Connection:
+
+| Connection | Value     |
+| :------------- | :------------- |
+| For Relationships     | matched (**checked**) |
+
+Click **ADD**.
+
+![routeonattribute_to_puthbasejson](assets/images/acquire-twitter-data/routeonattribute_to_puthbasejson.jpg)
+
+Configure **RouteOnAttribute** processor:
+
+**Table 7: Settings Tab**
+
+| Setting | Value     |
+| :------------- | :------------- |
+| Automatically Terminate Relationships | failure (**checked**) |
+| Automatically Terminate Relationships | success (**checked**) |
+
+**Table 9: Properties Tab**
+
+To add a new user defined property in case one the following properties in the
+table isn't defined, press the plus button **+**.
+
+| Property | Value     |
+| :------------- | :------------- |
+| **HBase Client Service**       | `HBase_1_1_2_ClientService` |
+| **Table Name**       | `tweets_sentiment` |
+| Row Identifier Field Name       | `twitter.unixtime` |
+| **Column Family**       | `social_media_sentiment` |
+
+Click **APPLY**.
+
+Click **APPLY**. The yellow warning sign on **PutHBaseJSON** should turn to
 a red stop symbol. Now you have a completed NiFi flow with no warnings and ready
-to consume data from Kafka topic `tweetsSentiment` and stream records to Druid Data
-Source.
+to consume data from Kafka topic `tweetsSentiment` and stream records to HBase Data Table.
 
-Exit **StreamTweetsToDruid** process group, we will need to use this process group later to pull in data from Kafka once we use Spark Structured Streaming to store data in Kafka.
+Exit **StreamTweetsToHBase** process group, we will need to use this process group later to pull in data from Kafka on HDF that is coming from Spark Structured Streaming on HDP.
 
 We are done building the NiFi flows, you can head to the summary, then onward to the next area of development for this data pipeline.
 
-## Approach 2: Import NiFi Flow to Acquire Twitter Data
+## Approach 2: Import NiFi Flow For Acquisition and Storage
 
-Download the NiFi template [AcquireTwitterData.xml](application/development/nifi-template/AcquireTwitterData.xml) to your local computer.
+Download the NiFi template [AcquireTweetsStreamTweets.xml](application/development/nifi-template/AcquireTweetsStreamTweets.xml) to your local computer.
 
 After starting your sandbox, open HDF **NiFi UI** at http://sandbox-hdf.hortonworks.com:9090/nifi.
 
@@ -378,13 +484,13 @@ Open the Operate panel if not already open, then press the **Upload Template** i
 
 Press on Select Template icon ![search_template](assets/images/acquire-twitter-data/search_template.jpg).
 
-The file browser on your local computer will appear, find **AcquireTwitterData.xml** template you just downloaded, then press **Open**, then press **UPLOAD**.
+The file browser on your local computer will appear, find **AcquireTweetsStreamTweets.xml** template you just downloaded, then press **Open**, then press **UPLOAD**.
 
 You should receive a notification that the **Template successfully imported.** Press OK to acknowledge.
 
 Drop the **Template** icon ![template](assets/images/acquire-twitter-data/template.jpg) onto the NiFi canvas.
 
-Add Template called **AcquireTwitterData**.
+Add Template called **AcquireTweetsStreamTweets**.
 
 You will notice on the process group called **AcquireTwitterData**, there is one yellow warning. Double click on that process group to enter it. Zoom in if needed. **GrabGardenHose** processor has the warning. The reason is that we need to update the **Consumer API Key and Consumer API Secret Key** and the **Access Token and Access Token Secret** in the processor's **properties table** for the warning to go away.
 
@@ -400,15 +506,17 @@ You will notice on the process group called **AcquireTwitterData**, there is one
 | Languages  | `en` |
 | Terms to Filter On | `AAPL,ORCL,GOOG,MSFT,DELL` |
 
-Start the NiFi flow. Hold **control + mouse click** on the **AcquireTwitterData** process group, then click the **start** option.
+Start the NiFi flow. Hold **control + mouse click** on each process group, then click the **start** option.
 
 ![AcquireTweetsStreamTweets](assets/images/acquire-twitter-data/AcquireTweetsStreamTweets.jpg)
 
-Once NiFi writes tweet data to HDFS and Kafka, you can check the provenance events quickly by looking at the PutHDFS or PublishKafka_0_10 processor inside the **AcquireTwitterData** process group and once enough data has been stored, you can turn off the process group by holding **control + mouse click** on the **AcquireTwitterData** process group, then choose **stop** option.
+Once NiFi writes tweet data to Kafka on HDP, you can check the provenance events quickly by looking at the PublishKafka_0_10 processor inside the **AcquireTwitterData** process group.
+
+To turn off a process group, you can do so by holding **control + mouse click** on for instance the **AcquireTwitterData** process group, then choose **stop** option.
 
 ## Summary
 
-Congratulations! You built one dataflow **AcquireTwitterData** using NiFi to acquire Tweet sentiment data from Twitter's **[Decahose stream](https://developer.twitter.com/en/docs/tweets/sample-realtime/overview/streaming-likes)** API. The data pipeline filters for tweets before publishing messages into **Kafka topic 'tweets'**, which is picked up by the external service Spark. The data pipeline also updates the flowfile content in JSON with key value pairs to represent the sentiment data, merges multiple flowfiles together before storing into **HDFS**. The other dataflow **StreamTweetsToDruid** ingests Kafka messages and streams the content to Druid.
+Congratulations! You built two dataflows in their own separate process groups: **AcquireTwitterData** and **StreamTweetsToHBase**. Now using the **AcquireTwitterData** process group, we can acquire Twitter data from Twitter's **[Decahose stream](https://developer.twitter.com/en/docs/tweets/sample-realtime/overview/streaming-likes)** API. The data pipeline filters for tweets before publishing messages into **Kafka topic 'tweets'**, which is picked up by the external service Spark. The data pipeline also updates the flowfile content in JSON with key value pairs to that will help us do a calculation for sentiment score of each tweet in a later part of the demo. The other dataflow **StreamTweetsToHBase** ingests Kafka messages and streams the content to HBase.
 
 ## Further Reading
 
