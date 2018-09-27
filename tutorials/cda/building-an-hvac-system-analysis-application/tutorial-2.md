@@ -130,6 +130,8 @@ http://$HDF_HOST:8080/api/v1/clusters/$HDF_CLUSTER_NAME/services/NIFI
 wait $HDF NIFI "STARTED"
 ~~~
 
+### Setting up HDP
+
 Open the **HDP web shell client** located at http://sandbox-hdp.hortonworks.com:4200. Copy and paste the following code to HDP web shell line by line.
 
 ~~~bash
