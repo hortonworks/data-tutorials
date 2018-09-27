@@ -20,6 +20,7 @@ setup_hdfs()
   echo "INFO: Creating /sandbox/sensor/hvac_building and /sandbox/sensor/hvac_machine"
   sudo -u hdfs hdfs dfs -mkdir -p /sandbox/sensor/hvac_building/
   sudo -u hdfs hdfs dfs -mkdir /sandbox/sensor/hvac_machine
+  echo "INFO: Setting permissions for hvac_buildnig and hvac_machine to 777"
   sudo -u hdfs hdfs dfs -chmod -R 777 /sandbox/sensor/hvac_building/
   sudo -u hdfs hdfs dfs -chmod -R 777 /sandbox/sensor/hvac_machine
   echo "INFO: Checking both directories were created and permissions were set"
