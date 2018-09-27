@@ -27,11 +27,11 @@ After starting your sandbox, open HDF **NiFi UI** at `http://sandbox-hdf.hortonw
 
 ### Create AcquireHVACData Process Group
 
-Drop the process group icon ![process_group](assets/images/process_group.jpg) onto the NiFi canvas.
+Drop the process group icon ![process_group](assets/images/acquiring-hvac-data/process_group.jpg) onto the NiFi canvas.
 
 Add the Process Group Name: `AcquireHVACData` or one of your choice.
 
-![acquirehvacdata](assets/images/acquirehvacdata.jpg)
+![acquirehvacdata](assets/images/acquiring-hvac-data/acquirehvacdata.jpg)
 
 Double click on the process group to dive into it. At the bottom of the canvas, you will see **NiFi Flow >> AcquireHVACData** breadcrumb. Let's began connecting the processors for data ingestion, preprocessing and storage.
 
@@ -39,7 +39,7 @@ Double click on the process group to dive into it. At the bottom of the canvas, 
 
 Drop the processor icon onto the NiFi canvas. Add the **GetHTTP**.
 
-![gethttp](assets/images/gethttp.jpg)
+![gethttp](assets/images/acquiring-hvac-data/gethttp.jpg)
 
 Hold **control + mouse click** on **GetHTTP** to configure the processor:
 
@@ -55,8 +55,6 @@ Hold **control + mouse click** on **GetHTTP** to configure the processor:
 | :------------| :---------|
 | **URL**  | `http://s3.amazonaws.com/hw-sandbox/tutorial14/SensorFiles.zip` |
 | **Filename**  | `HVACSensorFiles.zip` |
-| **Connection Timeout**  | `30 sec` |
-| **Date Timeout**  | `30 sec` |
 
 Click **APPLY**.
 
@@ -76,7 +74,7 @@ Configure Create Connection:
 
 Click **ADD**.
 
-![gethttp_to_unpackcontent](assets/images/gethttp_to_unpackcontent.jpg)
+![gethttp_to_unpackcontent](assets/images/acquiring-hvac-data/gethttp_to_unpackcontent.jpg)
 
 Configure **UnpackContent** processor:
 
@@ -101,7 +99,7 @@ Configure **UnpackContent** processor:
 
 Click **APPLY**.
 
-### Split the Source Into Two Flows
+### Route the FlowFiles Into Two Flows Based on Their Attributes
 
 Drop the processor icon onto the NiFi canvas. Add the **RouteOnAttribute**.
 
@@ -117,7 +115,7 @@ Configure Create Connection:
 
 Click **ADD**.
 
-![unpackcontent_to_routeonattribute](assets/images/unpackcontent_to_routeonattribute.jpg)
+![unpackcontent_to_routeonattribute](assets/images/acquiring-hvac-data/unpackcontent_to_routeonattribute.jpg)
 
 Configure **RouteOnAttribute** processor:
 
@@ -169,7 +167,7 @@ For the other **PutHDFS** processor, Configure Create Connection:
 
 Click **ADD**.
 
-![routeonattribute_to_2_puthdfs](assets/images/routeonattribute_to_2_puthdfs.jpg)
+![routeonattribute_to_2_puthdfs](assets/images/acquiring-hvac-data/routeonattribute_to_2_puthdfs.jpg)
 
 Configure **PutHDFS** processor for relationship connection **building_csv**:
 
@@ -194,8 +192,7 @@ Press the **+** button to add a user defined property for routing property name 
 | :------------- | :------------- |
 | Hadoop Configuration Resources       | `/etc/hadoop/conf/core-site.xml,/etc/hadoop/conf/hdfs-site.xml` |
 | **Directory**       | `/sandbox/sensor/hvac_building` |
-| **Conflict Resolution Strategy**       | `fail` |
-| **Compression codec**       | `NONE` |
+| **Conflict Resolution Strategy**       | `replace` |
 
 Click **APPLY**.
 
@@ -222,8 +219,7 @@ Press the **+** button to add a user defined property for routing property name 
 | :------------- | :------------- |
 | Hadoop Configuration Resources       | `/etc/hadoop/conf/core-site.xml,/etc/hadoop/conf/hdfs-site.xml` |
 | **Directory**       | `/sandbox/sensor/hvac_machine` |
-| **Conflict Resolution Strategy**       | `fail` |
-| **Compression codec**       | `NONE` |
+| **Conflict Resolution Strategy**       | `replace` |
 
 Click **APPLY**.
 
@@ -231,7 +227,7 @@ Click **APPLY**.
 
 At the breadcrumb, select **NiFi Flow** level. Hold **control + mouse click** on the **AcquireHVACData** process group, then click the **start** option.
 
-![started_acquirehvacdata_pg](assets/images/started_hvac_flow.jpg)
+![started_acquirehvacdata_pg](assets/images/acquiring-hvac-data/started_acquirehvacdata_pg.jpg)
 
 Once NiFi writes your sensor data to HDFS, which you can check by viewing data provenance, you can turn off the process group by holding **control + mouse click** on the **AcquireHVACData** process group, then choose **stop** option.
 
@@ -239,49 +235,49 @@ Once NiFi writes your sensor data to HDFS, which you can check by viewing data p
 
 Enter the **AcquireHVACData** process group, press **control + mouse click** on PutHDFS processor of your choice, then press **View data provenance**.
 
-![nifi_data_provenance](assets/images/nifi_data_provenance.jpg)
+![nifi_data_provenance](assets/images/acquiring-hvac-data/nifi_data_provenance.jpg)
 
 Press on **i** icon on the left row to view details about a provenance event. Choose the event with the type **SEND**. In the Provenance Event window, choose **CONTENT** tab. On **Output Claim**, choose **VIEW**.
 
-![provenance_event](assets/images/provenance_event.jpg)
+![provenance_event](assets/images/acquiring-hvac-data/provenance_event.jpg)
 
 You will be able to see the data NiFi sent to the external process HDFS via NiFi's data provenance. The data below shows hvac dataset.
 
-![view_event_hvac_temperature](assets/images/view_event_hvac_temperature.jpg)
+![view_event_hvac_building](assets/images/acquiring-hvac-data/view_event_hvac_building.jpg)
 
-Let's verify that the data is actually present in **HDFS** from Ambari **Files View**. Login to HDP Ambari at [http://sandbox-hdp.hortonowrks.com:8080](http://sandbox-hdp.hortonowrks.com:8080).
+Let's verify that the data is actually present in **HDFS** from Ambari **Files View**. Login to HDP Ambari at http://sandbox-hdp.hortonowrks.com:8080.
 
 Click the Ambari Views selector at the top right corner, then click **Files View**.
 
 By entering the path: `/sandbox/sensor/hvac_building`, you should be able to view the `.csv` data for **building.csv**. The HVAC.csv is in the hvac_temperature folder.
 
-![hvac_building_in_hdfs](assets/images/hvac_building_in_hdfs.jpg)
+![hvac_building_in_hdfs](assets/images/acquiring-hvac-data/hvac_building_in_hdfs.jpg)
 
 The **building.csv** data does look distorted, but when we clean it further with Apache Hive, it will be formatted appropriately in a table.
 
 ## Approach 2: Import NiFi AcquireHVACData Process Group via UI
 
-Wait for HDP sandbox to start up, once **all services** indicated by **Background Operation Running** in Ambari Dashboard have finished starting at `http://sandbox-hdp.hortonowrks.com:8080` with login `raj_ops/raj_ops`, then enter the NiFi UI and import the NiFi template.
+Head to HDF Ambari at http://sandbox-hdp.hortonowrks.com:8080 with login user `admin` and the password you set, then enter the NiFi UI using Ambari Quick Link and import the NiFi template.
 
 Download the NiFi template [acquire-hvac-data.xml](application/development/nifi-template/acquire-hvac-data.xml) to your local computer.
 
 After starting your sandbox, open HDF **NiFi UI** at `http://sandbox-hdf.hortonworks.com:9090/nifi`.
 
-Open the Operate panel if not already open, then press the **Upload Template** icon ![upload](assets/images/upload.jpg).
+Open the Operate panel if not already open, then press the **Upload Template** icon ![upload](assets/images/acquiring-hvac-data/upload.jpg).
 
-Press on Select Template icon ![search_template](assets/images/search_template.jpg).
+Press on Select Template icon ![search_template](assets/images/acquiring-hvac-data/search_template.jpg).
 
 The file browser on your local computer will appear, find **acquire-hvac-data.xml** template you just downloaded, then press **Open**, then press **UPLOAD**.
 
 You should receive a notification that the **Template successfully imported.** Press OK to acknowledge.
 
-Drop the **Template** icon ![template](assets/images/template.jpg) onto the NiFi canvas.
+Drop the **Template** icon ![template](assets/images/acquiring-hvac-data/template.jpg) onto the NiFi canvas.
 
 Add Template called **acquire-hvac-data**.
 
 Start the NiFi flow. Hold **control + mouse click** on the **AcquireHVACData** process group, then click the **start** option.
 
-![started_acquirehvacdata_pg](assets/images/started_hvac_flow.jpg)
+![started_acquirehvacdata_pg](assets/images/acquiring-hvac-data/started_acquirehvacdata_pg.jpg)
 
 Once NiFi writes your sensor data to HDFS, which you can check quickly by looking at the PutHDFS processors inside the process group, you can turn off the process group by holding **control + mouse click** on the **AcquireHVACData** process group, then choose **stop** option.
 
@@ -300,7 +296,7 @@ Open HDF **NiFi UI** at `http://sandbox-hdf.hortonworks.com:9090/nifi`.
 
 You will see the NiFi template was uploaded, imported and started.
 
-![started_acquirehvacdata_pg](assets/images/started_hvac_flow.jpg)
+![started_acquirehvacdata_pg](assets/images/acquiring-hvac-data/started_acquirehvacdata_pg.jpg)
 
 Once NiFi writes your sensor data to HDFS, which you can check quickly by looking at the PutHDFS processors inside the process group, you can turn off the process group by holding **control + mouse click** on the **AcquireHVACData** process group, then choose **stop** option.
 
