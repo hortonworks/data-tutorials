@@ -1,8 +1,8 @@
 ---
-title: Visualizing Sensor Data From HVAC Machine Systems
+title: Visualizing Sensor Data Related To HVAC Machine Systems
 ---
 
-# Visualizing Sensor Data From HVAC Machine Systems
+# Visualizing Sensor Data Related To HVAC Machine Systems
 
 ## Introduction
 
@@ -65,12 +65,14 @@ Copy and paste the Hive query into the next Zeppelin note:
 ~~~sql
 %jdbc(hive)
 
-select hvacproduct, extremetemp from hvac_building
+select hvacproduct, extremetemp from hvac_sensors.hvac_building;
 ~~~
 
 ![load_hvac_product_temp_in_building](assets/images/visualizing-hvac-machine-sensor-data/load_hvac_product_temp_in_building.jpg)
 
 Arrange the fields according to the following image so we can recreate the chart below.
+
+Now choose bar chart, then arrange the fields for `hvacproduct` and `extremetemp`.
 
 -   Make sure that `hvacproduct` is in the **Keys** box.
 -   Make sure that `extremetemp` is in the **Values** box and that it is set to **COUNT**.
