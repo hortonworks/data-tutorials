@@ -714,7 +714,7 @@ Once NiFi writes your server data to HDFS, which you can check by viewing data p
 
 ## Approach 3: Auto Deploy NiFi Flow via REST Call
 
-Open HDF Sandbox Web Shell Client at [http://sandbox-hdf.hortonworks.com:4200](http://sandbox-hdf.hortonworks.com:4200) with login `root/hadoop`.
+Open HDF Sandbox Web Shell Client at http://sandbox-hdf.hortonworks.com:4200.
 
 ~~~bash
 wget https://github.com/james94/data-tutorials/raw/master/tutorials/cda/building-a-server-log-analysis-application/application/development/shell/nifi-auto-deploy.sh
