@@ -116,6 +116,7 @@ setup_nifi()
   http://$HDF_HOST:8080/api/v1/clusters/$HDF_CLUSTER_NAME/services/NIFI
   echo "$DATE INFO: Waiting on HDF NiFi Service to STOP RUNNING via Ambari REST Call"
   wait $HDF NIFI "INSTALLED"
+  echo "$DATE INFO: HDF NiFi Service STOPPED via Ambari REST Call"
 
   echo "$DATE INFO: Prebuilt HDF NiFi Flow removed from NiFi UI, but backed up"
   mv /var/lib/nifi/conf/flow.xml.gz /var/lib/nifi/conf/flow.xml.gz.bak
@@ -126,7 +127,11 @@ setup_nifi()
   http://$HDF_HOST:8080/api/v1/clusters/$HDF_CLUSTER_NAME/services/NIFI
   echo "$DATE INFO: Waiting on HDF NiFi Service to START RUNNING via Ambari REST Call"
   wait $HDF NIFI "STARTED"
+  echo "$DATE INFO: HDF NiFi Service STARTED via Ambari REST Call"
+
+  # Log everything, but also output to stdout
+  echo "$DATE INFO: Executing setup_nifi bash function, logging to $LOG_DIR_BASE/hdf/setup-nifi.log"
 }
 
 setup_public_dns | tee -a $LOG_DIR_BASE/hdf/setup-public-dns.log
-setup_nifi | tee -a $LOG_DIR_BASE/hdf/setup-nifi.log
+setup_nifi $1 $2 | tee -a $LOG_DIR_BASE/hdf/setup-nifi.log
