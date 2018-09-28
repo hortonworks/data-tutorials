@@ -200,7 +200,7 @@ Click **Import Note**.
 
 Your notebook **Cleaning-Raw-Twitter-Data** should be a part of the list of notebooks now.
 
-![cleaning-raw-twitter-data-added-list](assets/images/cleaning-raw-nasa-log-data/cleaning-raw-nasa-log-data-added-list.jpg)
+![cleaning-raw-twitter-data-added-list](assets/images/cleaning-the-raw-twitter-data/cleaning-raw-twitter-data-added-list.jpg)
 
 Click on notebook **Cleaning-Raw-Twitter-Data**. Then press the **play** button for all paragraphs to be executed. The **play** button is near the title of this notebook at the top of the webpage.
 
