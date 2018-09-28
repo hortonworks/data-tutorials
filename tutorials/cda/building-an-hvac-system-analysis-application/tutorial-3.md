@@ -283,18 +283,15 @@ Once NiFi writes your sensor data to HDFS, which you can check quickly by lookin
 
 ## Approach 3: Auto Deploy NiFi Flow via REST Call
 
-Wait for HDP sandbox to start up, once **all services** indicated by **Background Operation Running** in Ambari Dashboard have finished starting at http://sandbox-hdp.hortonowrks.com:8080 with login `admin` and the password you set.
-
-Open HDF **sandbox web shell client** at http://sandbox-hdf.hortonworks.com:4200.
+Open HDF Sandbox Web Shell Client at http://sandbox-hdf.hortonworks.com:4200. Copy and paste the following shell code:
 
 ~~~bash
+NIFI_TEMPLATE="acquire-hvac-data"
 wget https://raw.githubusercontent.com/james94/data-tutorials/master/tutorials/cda/building-an-hvac-system-analysis-application/application/development/shell/nifi-auto-deploy.sh
-bash nifi-auto-deploy.sh
+bash nifi-auto-deploy.sh $NIFI_TEMPLATE
 ~~~
 
-Open HDF **NiFi UI** at `http://sandbox-hdf.hortonworks.com:9090/nifi`.
-
-You will see the NiFi template was uploaded, imported and started.
+Open HDF **NiFi UI** at http://sandbox-hdf.hortonworks.com:9090/nifi. You will see the NiFi template was uploaded, imported and started.
 
 ![started_acquirehvacdata_pg](assets/images/acquiring-hvac-data/started_acquirehvacdata_pg.jpg)
 
