@@ -15,7 +15,7 @@ from the Twitter feed. Finally at different points in the flow you will store
 the data into a Kafka topic, HDFS and the local file system.
 
 You will build the second NiFi flow in another process group to consume data from
-a different Kafka topic, which has a trained sentiment model built with an external service SparkML.
+a different Kafka topic, which has a trained sentiment model built with an external service SparkML and send the data to be stored into HBase.
 
 ## Prerequisites
 
@@ -278,7 +278,7 @@ Insert into the **Filter** field,  `HBase_1_1_2_ClientService` and then press **
 
 Select the **gear** icon on the far right. Click on the **Properties** tab. Configure the properties for the controller service:
 
-**Table 27: Properties Tab**
+**Table 13: Properties Tab**
 
 | Property | Value     |
 | :------------- | :------------- |
@@ -296,13 +296,13 @@ Drop the processor icon onto the NiFi canvas. Add the **ConsumeKafka_0_10** proc
 
 Configure **ConsumeKafka_0_10** processor:
 
-**Table 27: Scheduling Tab**
+**Table 14: Scheduling Tab**
 
 | Scheduling | Value     |
 | :------------- | :------------- |
 | Run Schedule       | `1 sec`       |
 
-**Table 28: Properties Tab**
+**Table 15: Properties Tab**
 
 To add a new user defined property in case one the following properties in the
 table isn't defined, press the plus button **+**.
@@ -357,19 +357,19 @@ Click **ADD**.
 
 Configure **AttributesToJSON** processor:
 
-**Table 7: Settings Tab**
+**Table 16: Settings Tab**
 
 | Setting | Value     |
 | :------------- | :------------- |
 | Automatically Terminate Relationships | failure (**checked**) |
 
-**Table 8: Scheduling Tab**
+**Table 17: Scheduling Tab**
 
 | Scheduling | Value     |
 | :------------- | :------------- |
 | Run Schedule       | `1 sec`       |
 
-**Table 9: Properties Tab**
+**Table 18: Properties Tab**
 
 To add a new user defined property in case one the following properties in the
 table isn't defined, press the plus button **+**.
@@ -401,21 +401,21 @@ Click **ADD**.
 
 Configure **RouteOnAttribute** processor:
 
-**Table 7: Settings Tab**
+**Table 19: Settings Tab**
 
 | Setting | Value     |
 | :------------- | :------------- |
 | Name | `IfTweetsHaveSentimentAndTime` |
 | Automatically Terminate Relationships | unmatched (**checked**) |
 
-**Table 8: Scheduling Tab**
+**Table 20: Scheduling Tab**
 
 | Scheduling | Value     |
 | :------------- | :------------- |
 | Concurrent Tasks       | `2`       |
 | Run Schedule       | `1 sec`       |
 
-**Table 9: Properties Tab**
+**Table 21: Properties Tab**
 
 To add a new user defined property in case one the following properties in the
 table isn't defined, press the plus button **+**.
@@ -447,14 +447,14 @@ Click **ADD**.
 
 Configure **RouteOnAttribute** processor:
 
-**Table 7: Settings Tab**
+**Table 22: Settings Tab**
 
 | Setting | Value     |
 | :------------- | :------------- |
 | Automatically Terminate Relationships | failure (**checked**) |
 | Automatically Terminate Relationships | success (**checked**) |
 
-**Table 9: Properties Tab**
+**Table 23: Properties Tab**
 
 To add a new user defined property in case one the following properties in the
 table isn't defined, press the plus button **+**.
@@ -496,7 +496,7 @@ Add Template called **AcquireTweetsStreamTweets**.
 
 You will notice on the process group called **AcquireTwitterData**, there is one yellow warning. Double click on that process group to enter it. Zoom in if needed. **GrabGardenHose** processor has the warning. The reason is that we need to update the **Consumer API Key and Consumer API Secret Key** and the **Access Token and Access Token Secret** in the processor's **properties table** for the warning to go away.
 
-**Table 32: Properties Tab**
+**Table 24: Properties Tab**
 
 | Property     | Value     |
 | :------------| :---------|
