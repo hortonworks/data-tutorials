@@ -545,10 +545,13 @@ Hold **control + mouse click** on **ReplaceText** to configure the processor:
 
 **Table 3: Properties Tab**
 
-| Property     | Value     |
-| :------------| :---------|
-| **Search Value**  | `(?s)(^.*$)` |
-| Replacement Value  | `${IP}|${Time}|${Request_Type}|${Response_Code}|${IP.geo.city}|${IP.geo.country}|${IP.geo.country.isocode}|${IP.geo.latitude}|${IP.geo.longitude}` |
+Copy and paste the property values in between the double quotes:
+
+~~~bash
+Property = Value
+Search Value = "(?s)(^.*$)"
+Replacement Value = "${IP}|${Time}|${Request_Type}|${Response_Code}|${IP.geo.city}|${IP.geo.country}|${IP.geo.country.isocode}|${IP.geo.latitude}|${IP.geo.longitude}"
+~~~
 
 Click **APPLY**.
 
@@ -675,6 +678,8 @@ Hold **control + mouse click** on **PutHDFS** to configure the processor:
 
 Click **APPLY**.
 
+The PutHDFS processor's yellow cone sign should change to a red stop sign.
+
 ### Start Process Group Flow to Acquire Data
 
 At the breadcrumb, select **NiFi Flow** level. Hold **control + mouse click** on the **AcquireNASAServerLogs** process group, then click the **start** option.
@@ -687,7 +692,7 @@ Once NiFi writes your server data to HDFS, which you can check by viewing data p
 
 Download the NiFi template [AcquireNASAServerLogs.xml](application/development/nifi-template/AcquireNASAServerLogs.xml) to your local computer.
 
-After starting your sandbox, open HDF **NiFi UI** at `http://sandbox-hdf.hortonworks.com:9090/nifi`.
+After starting your sandbox, open HDF **NiFi UI** at http://sandbox-hdf.hortonworks.com:9090/nifi.
 
 Open the Operate panel if not already open, then press the **Upload Template** icon ![upload](assets/images/acquire-nasa-log-data/upload.jpg).
 
@@ -716,7 +721,7 @@ wget https://github.com/james94/data-tutorials/raw/master/tutorials/cda/building
 bash nifi-auto-deploy.sh
 ~~~
 
-Open HDF **NiFi UI** at [http://sandbox-hdf.hortonworks.com:9090/nifi](http://sandbox-hdf.hortonworks.com:9090/nifi). Your NiFi was just uploaded, imported and started.
+Open HDF **NiFi UI** at http://sandbox-hdf.hortonworks.com:9090/nifi. Your NiFi was just uploaded, imported and started.
 
 ## Summary
 
