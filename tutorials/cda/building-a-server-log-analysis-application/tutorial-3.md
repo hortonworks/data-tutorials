@@ -722,7 +722,7 @@ wget https://github.com/james94/data-tutorials/raw/master/tutorials/cda/building
 bash nifi-auto-deploy.sh $NIFI_TEMPLATE
 ~~~
 
-Open HDF **NiFi UI** at http://sandbox-hdf.hortonworks.com:9090/nifi. Your NiFi was just uploaded, imported and started.
+Open HDF **NiFi UI** at http://sandbox-hdf.hortonworks.com:9090/nifi. Your NiFi was just uploaded, imported and started. You just have to make sure to turn on the PutHDFS processor, so NiFi can store data into HDFS.
 
 ## Summary
 
