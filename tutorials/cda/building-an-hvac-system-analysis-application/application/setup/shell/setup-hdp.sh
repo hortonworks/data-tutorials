@@ -26,7 +26,9 @@ setup_hdfs()
   sudo -u hdfs hdfs dfs -chmod -R 777 /sandbox/sensor/hvac_machine
   echo "$DATE INFO: Checking both directories were created and permissions were set"
   sudo -u hdfs hdfs dfs -ls /sandbox/sensor
+
+  # Log everything, but also output to stdout
+  echo "$DATE INFO: Executing setup_hdfs() bash function, logging to $LOG_DIR_BASE/hdp/setup-hdfs.log"
 }
-# Log everything, but also output to stdout
-echo "$DATE INFO: Executing setup_hdfs bash function, logging to /var/log/cda-sb/310/setup-hdp.log"
-setup_hdfs | tee -a $LOG_DIR_BASE/hdp/setup-hdp.log
+
+setup_hdfs | tee -a $LOG_DIR_BASE/hdp/setup-hdfs.log

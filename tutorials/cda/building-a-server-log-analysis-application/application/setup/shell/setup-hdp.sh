@@ -25,7 +25,7 @@ setup_public_dns()
   cat /etc/resolve.conf
 
   # Log everything, but also output to stdout
-  echo "$DATE INFO: Executing setup_nifi bash function, logging to $LOG_DIR_BASE/hdf/setup-public-dns.log"
+  echo "$DATE INFO: Executing setup_public_dns() bash function, logging to $LOG_DIR_BASE/hdp/setup-public-dns.log"
 }
 
 setup_zeppelin()
@@ -34,6 +34,9 @@ setup_zeppelin()
   mkdir -p /sandbox/tutorial-files/200/zeppelin/notebooks/
   echo "$DATE INFO: Allowing read-write-execute permissions to any user, for zeppelin REST Call"
   chmod -R 777 /sandbox/tutorial-files/200/zeppelin/notebooks/
+
+  # Log everything, but also output to stdout
+  echo "$DATE INFO: Executing setup_zeppelin() bash function, logging to $LOG_DIR_BASE/hdp/setup-zeppelin.log"
 }
 
 setup_hdfs()
@@ -44,6 +47,9 @@ setup_hdfs()
   sudo -u hdfs hdfs dfs -mkdir -p /sandbox/tutorial-files/200/nifi/
   echo "$DATE INFO: Allowing read-write-execute permissions to any user, so NiFi has write access"
   sudo -u hdfs hdfs dfs -chmod -R 777 /sandbox/tutorial-files/200/nifi/
+
+  # Log everything, but also output to stdout
+  echo "$DATE INFO: Executing setup_hdfs() bash function, logging to $LOG_DIR_BASE/hdp/setup-hdfs.log"
 }
 
 setup_public_dns | tee -a $LOG_DIR_BASE/hdp/setup-public-dns.log

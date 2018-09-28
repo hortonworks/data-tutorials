@@ -34,7 +34,7 @@ setup_public_dns()
   cat /etc/resolve.conf
 
   # Log everything, but also output to stdout
-  echo "$DATE INFO: Executing setup_nifi bash function, logging to $LOG_DIR_BASE/hdf/setup-public-dns.log"
+  echo "$DATE INFO: Executing setup_public_dns() bash function, logging to $LOG_DIR_BASE/hdf/setup-public-dns.log"
 }
 
 setup_nifi()
@@ -125,7 +125,7 @@ setup_nifi()
   echo "$DATE INFO: HDF NiFi Service STARTED via Ambari REST Call"
 
   # Log everything, but also output to stdout
-  echo "$DATE INFO: Executing setup_nifi bash function, logging to $LOG_DIR_BASE/hdf/setup-nifi.log"
+  echo "$DATE INFO: Executing setup_nifi() bash function, logging to $LOG_DIR_BASE/hdf/setup-nifi.log"
 }
 
 setup_public_dns | tee -a $LOG_DIR_BASE/hdf/setup-public-dns.log
