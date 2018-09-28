@@ -66,7 +66,7 @@ import scala.util.{Success, Try}
     tweetDF.show()
 ~~~
 
-Heads up sometimes loading the data can take 26 minutes.
+> Note: loading the data sometimes takes 5 to 15 minutes.
 
 ![load_data_into_spark](assets/images/cleaning-the-raw-twitter-data/load_data_into_spark.jpg)
 
@@ -186,7 +186,7 @@ var sample = (labeledTweets.take(1000).map(
 
 ## Approach 2: Import Zeppelin Notebook via Zeppelin UI
 
-Open HDP **Zeppelin UI** at `sandbox-hdp.hortonworks.com:9995`.
+Open HDP **Zeppelin UI** at http://sandbox-hdp.hortonworks.com:9995.
 
 1\. Click **Import note**. Select **Add from URL**.
 
