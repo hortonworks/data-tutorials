@@ -25,11 +25,13 @@ You have been brought onto the project as a Data Engineer with the following res
 
 ## Approach 1: Clean Raw NASA Log Data with Spark Zeppelin Interpreter
 
-Open HDP **Zeppelin UI** at [http://sandbox-hdp.hortonworks.com:9995](http://sandbox-hdp.hortonworks.com:9995).
+Open HDP **Zeppelin UI** at http://sandbox-hdp.hortonworks.com:9995.
 
 1\. Click **Create new note**. Insert **Note Name** `Cleaning-Raw-NASA-Log-Data`, then press **Create Note**.
 
 We are taken to the new Zeppelin Notebook.
+
+![created_notebook](assets/images/cleaning-raw-nasa-log-data/created_notebook.jpg)
 
 ### Loading External Library
 
@@ -42,6 +44,8 @@ z.load("com.databricks:spark-csv_2.11:1.4.0")
 ~~~
 
 Press **{shift + enter}** or the **play** button to compile that note in the notebook.
+
+![loading_external_lib](assets/images/cleaning-raw-nasa-log-data/loading_external_lib.jpg)
 
 ### Loading the DataFrame from HDFS
 
@@ -76,6 +80,8 @@ logs_df.show(truncate=False)
 
 How many rows are displayed from the dataframe, `logs_df`?
 When we tested the demo, there was 20 rows displayed.
+
+![loading_dataframe_from_hdfs](assets/images/cleaning-raw-nasa-log-data/loading_dataframe_from_hdfs.jpg)
 
 ### Parsing the Timestamp
 
@@ -115,6 +121,8 @@ parsed_df.cache()
 parsed_df.show()
 ~~~
 
+![parsing_timestamp](assets/images/cleaning-raw-nasa-log-data/parsing_timestamp.jpg)
+
 ### Cleaning the Request_Type Column
 
 Currently the Request_type has **GET** and **HTTP/1.0** surrounding the actual data being requested,
@@ -132,6 +140,8 @@ path_df.cache()
 path_df.show(truncate=False)
 ~~~
 
+![cleanse_request_type](assets/images/cleaning-raw-nasa-log-data/cleanse_request_type.jpg)
+
 ### Filtering for Most Frequent Hosts Hitting NASA Server
 
 We want to filter on which which hosts are most frequently hitting NASA's server and then store the data into a temporary table.
@@ -148,6 +158,8 @@ most_frequent_hosts.show()
 most_frequent_hosts.registerTempTable("most_frequent_hosts")
 ~~~
 
+![filter_most_freq_hosts_hits](assets/images/cleaning-raw-nasa-log-data/filter_most_freq_hosts_hits.jpg)
+
 ### Filtering for Count of Each Response Code
 
 Our aim is to find the amount of times that each response code has occurred and store the result into a temporary table for later use.
@@ -161,6 +173,8 @@ status_count.show()
 # Registering status_count variable as a temporary table
 status_count.registerTempTable("status_count")
 ~~~
+
+![get_count_per_response_code](assets/images/cleaning-raw-nasa-log-data/get_count_per_response_code.jpg)
 
 ### Filtering Records Where Response Code is 200
 
@@ -176,6 +190,8 @@ success_logs_df.cache()
 success_logs_df.show()
 ~~~
 
+![filter_for_response_code200](assets/images/cleaning-raw-nasa-log-data/filter_for_response_code200.jpg)
+
 Extract the hour, display the results and register the dataframe as a temporary table for the SQL interpreter to use later.
 
 ~~~python
@@ -189,6 +205,8 @@ success_logs_by_hours_df.show()
 success_logs_by_hours_df.registerTempTable("success_logs_by_hours_df")
 ~~~
 
+![extract_hour_display_results](assets/images/cleaning-raw-nasa-log-data/extract_hour_display_results.jpg)
+
 ### Cleaning the Request_Path Column for Type Extensions
 
 The Request_Path column contains the type extension. We will first show the current state of the Request_Path column before cleaning is done.
@@ -200,6 +218,8 @@ from pyspark.sql.functions import split, regexp_extract
 extension_df = path_df.select(regexp_extract('Request_Path', '(\\.[^.]+)$',1).alias('Extension'))
 extension_df.show(truncate=False)
 ~~~
+
+![initial_request_path_col](assets/images/cleaning-raw-nasa-log-data/initial_request_path_col.jpg)
 
 ### How Should We Clean this Request_Path Column?
 
@@ -214,6 +234,8 @@ extension_df = extension_df.select(regexp_replace('Extension', '\.','').alias('E
 # Displays the results
 extension_df.show(truncate=False)
 ~~~
+
+![rm_dot_add_blank_to_request_path](assets/images/cleaning-raw-nasa-log-data/rm_dot_add_blank_to_request_path.jpg)
 
 There may also be some rows in the column that are blank, so we will replace a blank row with the word **None**.
 
@@ -239,7 +261,7 @@ extension_df_count.show()
 extension_df_count.registerTempTable('extension_df_count')
 ~~~
 
-### Convert Spark DataFrame to Hive Table for Later Visualization
+![count](assets/images/cleaning-raw-nasa-log-data/count.jpg)
 
 Create a temporary table for DataFrame `path_df`, then create a `Hive Table` based on that DataFrame,
 which can be used for data visualization with external tools, such as Tableau, Microsoft Excel, etc.
@@ -249,9 +271,11 @@ which can be used for data visualization with external tools, such as Tableau, M
 path_df.registerTempTable("path_df")
 ~~~
 
+![register_path_df_temptable](assets/images/cleaning-raw-nasa-log-data/register_path_df_temptable.jpg)
+
 Now that the dataframe is registered as a temporary table.
 
-shed cleaning the NASA Server Log data. We can head to the summary to review how we cleaned the data and prepared it to be ready for visualization.
+We can head to the summary to review how we cleaned the data and prepared it to be ready for visualization.
 
 ## Approach 2: Import Zeppelin Notebook to Clean NASA Log Data via UI
 
