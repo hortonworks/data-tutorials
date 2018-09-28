@@ -19,6 +19,14 @@ You will use Zeppelin's JDBC Hive Interpreter to perform SQL queries against the
 
 ## Outline
 
+- [Implement a Zeppelin Notebook to Visualize Sentiment Scores](#implement-a-zeppelin-notebook-to-visualize-sentiment-scores)
+- [Summary](#summary)
+- [Further Reading](#further-reading)
+
+## Implement a Zeppelin Notebook to Visualize Sentiment Scores
+
+### Create Hive Table Mapping to HBase Table
+
 To visualize the data stored in HBase, you can use zeppelin's JDBC Hive Interpreter:
 
 ~~~sql
@@ -31,6 +39,8 @@ TBLPROPERTIES("hbase.table.name" = "tweets_sentiment");
 
 ![create_hive_mapped_hbase_table](assets/images/visualizing-sentiment-scores/create_hive_mapped_hbase_table.jpg)
 
+### Load a Sample of the Data
+
 Load data from the Hive table:
 
 ~~~sql
@@ -39,6 +49,8 @@ SELECT * FROM tweets_sentiment;
 ~~~
 
 ![load_hive_tweets_sentiment_table](assets/images/visualizing-sentiment-scores/load_hive_tweets_sentiment_table.jpg)
+
+### Visualize Sentiment Score Per Language in Bar Chart
 
 To see each tweet's sentiment score per language, copy and paste the following query.
 
@@ -49,3 +61,11 @@ SELECT language, sentiment FROM tweets_sentiment;
 ~~~
 
 ![load_language_sentiment_score](assets/images/visualizing-sentiment-scores/load_language_sentiment_score.jpg)
+
+## Summary
+
+Congratulations! You just learned to write Hive code to access an HBase table, query against the table and visualize the data using Zeppelin's JDBC Hive Interpreter.
+
+## Further Reading
+
+- [Hive HBaseIntegration](https://cwiki.apache.org/confluence/display/Hive/HBaseIntegration)
