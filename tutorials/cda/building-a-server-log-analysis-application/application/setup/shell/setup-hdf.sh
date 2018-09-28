@@ -12,7 +12,7 @@
 # 3. Uploads and Imports New NiFi flow onto canvas via NiFi Rest API
 ##
 DATE=`date '+%Y-%m-%d %H:%M:%S'`
-LOG_DIR_BASE="/var/log/cda-sb/200/"
+LOG_DIR_BASE="/var/log/cda-sb/200"
 mkdir -p $LOG_DIR_BASE/hdf
 
 setup_public_dns()

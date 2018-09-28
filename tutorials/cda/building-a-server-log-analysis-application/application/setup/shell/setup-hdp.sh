@@ -11,7 +11,7 @@
 ##
 
 DATE=`date '+%Y-%m-%d %H:%M:%S'`
-LOG_DIR_BASE="/var/log/cda-sb/200/"
+LOG_DIR_BASE="/var/log/cda-sb/200"
 echo "Setting Up HDP Dev Environment for Server Log Analysis App"
 mkdir -p $LOG_DIR_BASE/hdp
 

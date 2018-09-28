@@ -10,7 +10,7 @@
 ##
 
 DATE=`date '+%Y-%m-%d %H:%M:%S'`
-LOG_DIR_BASE="/var/log/cda-sb/310/"
+LOG_DIR_BASE="/var/log/cda-sb/310"
 echo "$DATE INFO: Setting Up HDF Dev Environment for HVAC System Analysis App"
 mkdir -p $LOG_DIR_BASE/hdf
 setup_public_dns()

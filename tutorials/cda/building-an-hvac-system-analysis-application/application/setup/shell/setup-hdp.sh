@@ -10,12 +10,11 @@
 ##
 
 DATE=`date '+%Y-%m-%d %H:%M:%S'`
-LOG_DIR_BASE="/var/log/cda-sb/310/"
+LOG_DIR_BASE="/var/log/cda-sb/310"
 echo "Setting Up HDP Dev Environment for HVAC System Analysis App"
-
+mkdir -p $LOG_DIR_BASE/hdp
 # Creates /sandbox directory in HDFS
 # allow read-write-execute permissions for the owner, group, and any other users
-mkdir -p $LOG_DIR_BASE/hdp
 setup_hdfs()
 {
   echo "$DATE INFO: Creating /sandbox/sensor/hvac_building and /sandbox/sensor/hvac_machine"
