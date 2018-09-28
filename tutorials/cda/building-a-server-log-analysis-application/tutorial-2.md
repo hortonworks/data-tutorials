@@ -156,7 +156,7 @@ wait $HDF NIFI "STARTED"
 
 ### Setup HDP
 
-Open HDF Sandbox Web Shell Client at [http://sandbox-hdp.hortonworks.com:4200](http://sandbox-hdp.hortonworks.com:4200) with login `root/hadoop`. On first login, you will be prompted to reset your password.
+Open HDF Sandbox Web Shell Client at http://sandbox-hdp.hortonworks.com:4200.
 
 Copy and paste the code line by line:
 
@@ -201,8 +201,7 @@ We will download and execute a shell script to automate the setup of our data-in
 
 ### Auto Setup HDF
 
-Open the **HDF web shell client** at [http://sandbox-hdf.hortonworks.com:4200](http://sandbox-hdf.hortonworks.com:4200) with login `root/hadoop`.
-After login, you will be prompted to change the password.
+Open the **HDF web shell client** at http://sandbox-hdf.hortonworks.com:4200.
 
 Prior to executing the shell script, replace the following line of shell code `AMBARI_USER_PASSWORD="<Your-Ambari-Admin-Password>"` with the password you created for Ambari Admin user. For example, if our Ambari Admin password was set to `yellowHadoop`, then the line of code would look as follows: `AMBARI_USER_PASSWORD="yellowHadoop"`
 
@@ -215,7 +214,7 @@ bash setup-hdf.sh $AMBARI_USER $AMBARI_USER_PASSWORD
 
 ### Auto Setup HDP
 
-Open the **HDP web shell client** at [http://sandbox-hdp.hortonworks.com:4200](http://sandbox-hdp.hortonworks.com:4200) with login `root/hadoop`. After login, you will be prompted to change the password.
+Open the **HDP web shell client** at http://sandbox-hdp.hortonworks.com:4200.
 
 ~~~bash
 wget https://github.com/james94/data-tutorials/raw/master/tutorials/cda/building-a-server-log-analysis-application/application/setup/shell/setup-hdp.sh
