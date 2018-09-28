@@ -65,7 +65,7 @@ sort through. **Sentiment analysis is critical in allowing companies to make
 sense of this abundance of unstructured text because they can automate business
 processes, obtain actionable insight, save hours of manual data processing and
 ultimately make teams more efficient.** Sentiment analysis offers
-***scalability***, ***real-time analysis***, ***consistent criteria***. Can you
+_scalability_, _real-time analysis_, _consistent criteria_. Can you
 imagine the daunting task of sorting through thousands of tweets, customer
 support conversations or customer reviews? There's too much data to manually
 process, but with assistance from a sentiment analysis system, people can
@@ -153,12 +153,6 @@ Bayes' theorem to predict category of text
 - Market research and analysis
 
 ## Summary
-
-Your first objective is to gain background in sentiment analysis, so you have
-context when you go into developing the sentiment analysis application. You will
-become familiar with what sentiment analysis, the different types of sentiment
-analysis, the importance of sentiment analysis, how sentiment analysis works and
-the various sentiment analysis use cases.
 
 Congratulations! You now have familiarity with the fundamentals of sentiment
 analysis. You are ready to setup the development environment for the
