@@ -236,7 +236,7 @@ println(model.predict(hashingTF.transform("To this cute little happy sunshine wh
 
 ## Approach 2: Import Zeppelin Notebook via Zeppelin UI
 
-Open HDP **Zeppelin UI** at `sandbox-hdp.hortonworks.com:9995`.
+Open HDP **Zeppelin UI** at http://sandbox-hdp.hortonworks.com:9995.
 
 1\. Click **Import note**. Select **Add from URL**.
 
