@@ -1,5 +1,9 @@
 ---
+<<<<<<< HEAD
 title: Tag Based Policies with Apache Ranger and Apache Atlas
+=======
+title: Assigning Tag Based policies with Atlas
+>>>>>>> hortonworks/master
 ---
 
 # Tag Based Policies with Apache Ranger and Apache Atlas

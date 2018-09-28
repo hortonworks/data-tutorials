@@ -1,0 +1,8 @@
+{"tweet_id":${twitter.tweet_id},
+"created_unixtime":${twitter.unixtime},
+"created_time":"${twitter.time}",
+"lang":"${twitter.language}",
+"displayname":"${twitter.handle}",
+"time_zone":"${twitter.time_zone}",
+"msg":"${twitter.msg:replaceAll('[$&+,:;=?@#|\'<>.^*()%!-]',''):replace('"',''):replace('\n','')}"
+}

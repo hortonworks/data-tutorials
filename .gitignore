@@ -4,4 +4,5 @@ builder/_tutorials
 
 # Common files that contributors' machines may attempt to commit
 *.DS_Store
+*.vscode
 Thumbs.db

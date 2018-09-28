@@ -66,7 +66,7 @@ After you download the file, unzip it and upload train_df.csv and test_df.csv to
 
 Click on /tmp folder and upload these two files. Your screen should look like this:
 
-![Files View 2](assets/fileView2.jpg)
+![Files View 2](assets/fileView2.png)
 
 ## Setup SparkR on RStudio
 
@@ -101,7 +101,7 @@ After it gets loaded, you can view the dataframe by:
 head(train_df)
 ~~~
 
-![R2](assets/R2.jpg)
+![R2](assets/R2.png)
 
 It shows the top 6 records of the dataframe, you can also see the variables and the type of variables to the right side of the screen.
 

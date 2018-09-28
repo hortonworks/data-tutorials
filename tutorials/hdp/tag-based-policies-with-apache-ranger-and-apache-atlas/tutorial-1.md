@@ -1,5 +1,9 @@
 ---
+<<<<<<< HEAD
 title: Tag Based Policies with Apache Ranger and Apache Atlas
+=======
+title: Setting up the environment
+>>>>>>> hortonworks/master
 ---
 
 # Tag Based Policies with Apache Ranger and Apache Atlas
