@@ -46,7 +46,7 @@ auto_deploy_nifi()
 
   echo "$DATE INFO: Getting NiFi TEMPLATE_ID to be able to import NiFi flow"
   # Uses grep to store HVAC Template Process Group ID into Variable
-  TEMPLATE_ID=$(curl -s -X GET http://$HDF_HOST:9090/nifi-api/flow/templates | grep -Po "{\"uri\":\".*\/templates\/\K[0-9a-z_\-]*(?=.*acquire-hvac-data)")
+  TEMPLATE_ID=$(curl -s -X GET http://$HDF_HOST:9090/nifi-api/flow/templates | grep -Po "{\"uri\":\".*\/templates\/\K[0-9a-z_\-]*(?=.*$NIFI_TEMPLATE)")
   echo "$DATE INFO: Importing NiFi flow to NiFi Canvas"
   curl -i -X POST -H 'Content-Type:application/json' -d '{"originX": 2.0,"originY": 3.0,"templateId": "'$TEMPLATE_ID'"}' http://$HDF_HOST:9090/nifi-api/process-groups/$ROOT_PROCESS_GROUP_ID/template-instance
 
