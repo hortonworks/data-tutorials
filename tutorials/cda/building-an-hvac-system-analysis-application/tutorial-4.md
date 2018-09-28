@@ -23,7 +23,7 @@ Your next objective as a Data Engineer is to use Hive Query Language similar to 
 
 ## Upload HVAC Sensor Data into Tables
 
-Open Ambari UI at `http://sandbox-hdp.hortonworks.com:8080` and login with `maria_dev/maria_dev`.
+Open Ambari UI at http://sandbox-hdp.hortonworks.com:8080 and login with `admin` and the password you set.
 
 Before we can get to cleaning the data with Apache Hive, we need to upload the HVAC sensor data into Hive Tables.
 
@@ -230,6 +230,8 @@ IF((targettemp - actualtemp) > 5, '1',
 IF((targettemp - actualtemp) < -5, '1', 0))
 AS extremetemp FROM hvac_sensors.hvac_machine;
 ~~~
+
+> Note: the above query may take 10 to 15 minutes to complete
 
 What's this query does?
 
