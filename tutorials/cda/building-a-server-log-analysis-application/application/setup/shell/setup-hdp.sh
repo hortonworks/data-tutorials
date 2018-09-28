@@ -7,7 +7,9 @@
 
 ##
 # Sets up HDP Dev Environment, so User can focus on Spark Data Analysis
-# 1. Turns off Spark maintenance mode via Ambari
+# 1. Add Google Public DNS to /etc/resolve.conf
+# 2. Created Directory for Zeppelin Notebook, can be referenced later when auto importing Zeppelin Notebooks via Script
+# 3. Created HDFS Directory for NiFi to have permission to write data
 ##
 
 DATE=`date '+%Y-%m-%d %H:%M:%S'`
