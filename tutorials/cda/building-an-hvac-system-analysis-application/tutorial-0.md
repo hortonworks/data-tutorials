@@ -60,4 +60,4 @@ The tutorial series consists of the following tutorial modules:
 
 4\. **Cleaning Raw HVAC Data**: Create the next portion of the data pipeline using Apache Hive to upload the data into Hive tables, so the data can be cleaned and queried to capture valuable insight about the status of HVAC Systems regulating temperature in buildings across various countries.
 
-5\. **Visualizing Sensor Data From HVAC Machine Systems**: Perform data analysis on HVAC sensor data to find the _HVAC Building Temperature Characteristics Per Country_ - keep count of HOT, COLD, NORMAL ranges per country, _Extreme Temperature in Buildings Having HVAC Products_ - building that are experiencing extreme temperature whether it be HOT or COLD even though they have HVAC products.
+5\. **Visualizing Sensor Data Related To HVAC Machine Systems**: Perform data analysis on HVAC sensor data to find the _HVAC Building Temperature Characteristics Per Country_ - keep count of HOT, COLD, NORMAL ranges per country, _Extreme Temperature in Buildings Having HVAC Products_ - building that are experiencing extreme temperature whether it be HOT or COLD even though they have HVAC products.
