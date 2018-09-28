@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="configuration.xsl"?>
+
+<configuration>
+    <property>
+        <name>solr_cloud_enable</name>
+        <value>true</value>
+        <description>Whether Solr should be started in Cloud mode</description>
+        <display-name>Enable SolrCloud mode</display-name>
+        <value-attributes>
+            <type>boolean</type>
+            <overridable>false</overridable>
+        </value-attributes>
+    </property>
+
+    <property>
+        <name>solr_cloud_zk_directory</name>
+        <value>/solr</value>
+        <description>ZooKeeper directory (chroot) for shared Solr files</description>
+        <display-name>ZooKeeper root directory for Solr files</display-name>
+    </property>
+</configuration>

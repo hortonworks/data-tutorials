@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="configuration.xsl"?>
+
+<configuration>
+    <property>
+        <name>solr_hdfs_enable</name>
+        <value>true</value>
+        <description>Enable support for Solr on HDFS</description>
+        <display-name>Enable support for Solr on HDFS</display-name>
+        <value-attributes>
+            <type>boolean</type>
+            <overridable>false</overridable>
+        </value-attributes>
+    </property>
+
+    <property>
+        <name>solr_hdfs_directory</name>
+        <value>/solr</value>
+        <description>HDFS directory for Solr indexes</description>
+        <display-name>HDFS directory for Solr indexes</display-name>
+    </property>
+
+    <property>
+        <name>solr_hdfs_delete_write_lock_files</name>
+        <value>false</value>
+        <description>Delete write.lock files on HDFS</description>
+        <display-name>Delete write.lock files on HDFS</display-name>
+        <value-attributes>
+            <type>boolean</type>
+            <overridable>false</overridable>
+        </value-attributes>
+    </property>
+</configuration>

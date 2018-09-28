@@ -1,0 +1,75 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="configuration.xsl"?>
+
+<configuration>
+    <property>
+        <name>solr_ssl_enable</name>
+        <value>false</value>
+        <description>Enable SSL support</description>
+        <display-name>Enable SSL support</display-name>
+        <value-attributes>
+            <type>boolean</type>
+            <overridable>false</overridable>
+        </value-attributes>
+    </property>
+
+    <property>
+        <name>solr_ssl_key_store</name>
+        <value>etc/solr-ssl.keystore.jks</value>
+        <description>SSL keystore file</description>
+        <display-name>SSL keystore file</display-name>
+    </property>
+
+    <property>
+        <name>solr_ssl_key_store_password</name>
+        <value>secret</value>
+        <property-type>PASSWORD</property-type>
+        <description>SSL keystore password</description>
+        <value-attributes>
+            <type>password</type>
+            <overridable>false</overridable>
+        </value-attributes>
+        <display-name>SSL keystore password</display-name>
+    </property>
+
+    <property>
+        <name>solr_ssl_trust_store</name>
+        <value>etc/solr-ssl.keystore.jks</value>
+        <description>SSL truststore file</description>
+        <display-name>SSL truststore file</display-name>
+    </property>
+
+    <property>
+        <name>solr_ssl_trust_store_password</name>
+        <value>secret</value>
+        <property-type>PASSWORD</property-type>
+        <description>SSL truststore password</description>
+        <value-attributes>
+            <type>password</type>
+            <overridable>false</overridable>
+        </value-attributes>
+        <display-name>SSL truststore password</display-name>
+    </property>
+
+    <property>
+        <name>solr_ssl_need_client_auth</name>
+        <value>false</value>
+        <description>Need client authentication</description>
+        <display-name>Need client authentication</display-name>
+        <value-attributes>
+            <type>boolean</type>
+            <overridable>false</overridable>
+        </value-attributes>
+    </property>
+
+    <property>
+        <name>solr_ssl_want_client_auth</name>
+        <value>false</value>
+        <description>Want client authentication</description>
+        <display-name>Want client authentication</display-name>
+        <value-attributes>
+            <type>boolean</type>
+            <overridable>false</overridable>
+        </value-attributes>
+    </property>
+</configuration>

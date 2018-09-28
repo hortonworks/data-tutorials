@@ -1,0 +1,56 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="configuration.xsl"?>
+
+<configuration>
+    <property>
+        <name>solr_collection_sample_create</name>
+        <value>true</value>
+        <description>True to create a sample collection when Solr is deployed</description>
+        <display-name>Create sample collection</display-name>
+        <value-attributes>
+            <type>boolean</type>
+            <overridable>false</overridable>
+        </value-attributes>
+    </property>
+
+    <property>
+        <name>solr_collection_sample_name</name>
+        <value>collection1</value>
+        <description>Solr sample collection name. Mandatory</description>
+        <display-name>Sample collection name</display-name>
+    </property>
+
+    <property>
+        <name>solr_collection_sample_config_directory</name>
+        <value>data_driven_schema_configs</value>
+        <description>Solr sample collection configurations directory. Mandatory
+            This directory path is relative to /opt/lucidworks-hadoop/solr/server/solr/configset.
+            It must contain at least solrconfig.xml and schema.xml
+        </description>
+        <display-name>Solr configuration directory</display-name>
+    </property>
+
+    <property>
+        <name>solr_collection_sample_shards</name>
+        <value>2</value>
+        <description>Number of Solr shards, for details refer to
+            (https://cwiki.apache.org/confluence/display/solr/Shards+and+Indexing+Data+in+SolrCloud)
+        </description>
+        <value-attributes>
+            <type>int</type>
+        </value-attributes>
+        <display-name>Number of shards</display-name>
+    </property>
+
+    <property>
+        <name>solr_collection_sample_replicas</name>
+        <value>1</value>
+        <description>Number of Solr replicas, for details refer to
+            (https://cwiki.apache.org/confluence/display/solr/NRT%2C+Replication%2C+and+Disaster+Recovery+with+SolrCloud)
+        </description>
+        <value-attributes>
+            <type>int</type>
+        </value-attributes>
+        <display-name>Number of replicas</display-name>
+    </property>
+</configuration>
