@@ -218,10 +218,8 @@ bash setup-hdf.sh $AMBARI_USER $AMBARI_USER_PASSWORD
 Open the **HDP web shell client** at [http://sandbox-hdp.hortonworks.com:4200](http://sandbox-hdp.hortonworks.com:4200) with login `root/hadoop`. After login, you will be prompted to change the password.
 
 ~~~bash
-AMBARI_USER="admin"
-AMBARI_USER_PASSWORD="<Your-Ambari-Admin-Password>"
 wget https://github.com/james94/data-tutorials/raw/master/tutorials/cda/building-a-server-log-analysis-application/application/setup/shell/setup-hdp.sh
-bash setup-hdp.sh $AMBARI_USER $AMBARI_USER_PASSWORD
+bash setup-hdp.sh
 ~~~
 
 ## Summary
