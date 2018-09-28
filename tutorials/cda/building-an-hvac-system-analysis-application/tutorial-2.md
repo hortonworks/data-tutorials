@@ -43,7 +43,7 @@ We will be using shell commands to setup the required services in our data-in-mo
 
 Open the **HDF web shell client** located at http://sandbox-hdf.hortonworks.com:4200.
 
-Prior to copying and pasting all the following shell code line by line, replace the following line of code `HDF_AMBARI_PASS="<Your-Ambari-Admin-Password>"` with the password you created for Ambari Admin user. For example, if our Ambari Admin password was set to `yellowHadoop`, then the line of code would look as follows: `HDF_AMBARI_PASS="yellowHadoop"`
+Prior to executing the shell code, replace the following string `"<Your-Ambari-Admin-Password>"` in the following line of code `setup_nifi "admin" "<Your-Ambari-Admin-Password>"` on the last line with the password you created for ambari admin user.  For example, if our Ambari Admin password was set to `yellowHadoop`, then the line of code would look as follows: `AMBARI_USER_PASSWORD="yellowHadoop"`
 
 Copy and paste the following shell code line by line in HDF web shell:
 
@@ -93,9 +93,9 @@ setup_nifi()
   ##
 
   echo "$DATE INFO: Setting HDF_AMBARI_USER based on user input"
-  HDF_AMBARI_USER="admin"
+  HDF_AMBARI_USER="$1" # $1: Expects user to pass "Ambari User" into the file
   echo "$DATE INFO: Setting HDF_AMBARI_PASS based on user input"
-  HDF_AMBARI_PASS="<Your-Ambari-Admin-Password>"
+  HDF_AMBARI_PASS="$2" # $2: Expects user to pass "Ambari Admin Password" into the file
   HDF_CLUSTER_NAME="Sandbox"
   HDF_HOST="sandbox-hdf.hortonworks.com"
   HDF="hdf-sandbox"
@@ -172,7 +172,7 @@ setup_nifi()
 }
 
 setup_public_dns | tee -a $LOG_DIR_BASE/hdf/setup-public-dns.log
-setup_nifi | tee -a $LOG_DIR_BASE/hdf/setup-nifi.log
+setup_nifi "admin" "<Your-Ambari-Admin-Password>" | tee -a $LOG_DIR_BASE/hdf/setup-nifi.log
 ~~~
 
 ### Setting up HDP
