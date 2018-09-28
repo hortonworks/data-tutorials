@@ -250,7 +250,7 @@ Click **Import Note**.
 
 Your notebook **Building-Sentiment-Classification-Model** should be a part of the list of notebooks now.
 
-![sentiment-classification-model-added-list](assets/images/cleaning-raw-nasa-log-data/sentiment-classification-model-added-list.jpg)
+![sentiment-classification-model-added-list](assets/images/building-sentiment-classification-model/sentiment-classification-model-added-list.jpg)
 
 Click on notebook **Building-Sentiment-Classification-Model**. Then press the **play** button for all paragraphs to be executed. The **play** button is near the title of this notebook at the top of the webpage.
 
