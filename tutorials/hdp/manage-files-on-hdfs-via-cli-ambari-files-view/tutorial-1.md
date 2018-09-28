@@ -198,7 +198,7 @@ The **cp** command is a tool used for large inter/intra-cluster copying.
 
 ~~~bash
 #Syntax for copying a file recursively
-hdfs dfs -cp <src-url> <dest-url>
+hdfs dfs -cp <src-path> <dest-path>
 ~~~
 
 1\. Going back to our example, enter the following command in your terminal to copy the geolocation file into the trucks directory:

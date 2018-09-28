@@ -9,6 +9,7 @@ title: Create a SAM Topology
 We are now familiar with the role stream processing plays in data science/engineering applications. Let's use Streaming Analytics Manager (SAM) to create stream topology.
 
 Skills you will gain:
+
 - Create a Service Pool, an Environment, and a SAM Application
 - Create Schemas in Schema Registry needed for SAM Application
 - Build, deploy and export a SAM topology
@@ -65,7 +66,7 @@ Now we have a data source for SAM to pull in data, we will build the Trucking Io
 
 ### Setup SAM
 
-We need to setup SAM by creating a **service pool** and **environment** for our application. Since we are using the HDF Sandbox, it comes preloaded with an already created service pool and environment, so we will show you how you would create these two components if you had deployed a fresh HDF Platform that had no reference applications.
+We need to setup SAM by creating a **service pool** and **environment** for our application. Since we are using the HDF Sandbox, it comes pre-loaded with an already created service pool and environment, so we will show you how you would create these two components if you had deployed a fresh HDF Platform that had no reference applications.
 
 > Note: this section is less hands on because we already have the required components setup. If you want to skip this part, then you can head to **Add an Application** section.
 
@@ -299,7 +300,7 @@ Select **+Add New Rules** and enter the following properties:
 | New Rule `Description`       | IsViolation       |
 | New Rule `Create Condition`       | `eventType <> 'Normal'`|
 
-~~~
+~~~bash
 Query Preview:
 
 eventType <> 'Normal'
@@ -309,7 +310,11 @@ eventType <> 'Normal'
 
 7\. Once you click OK, the new rule will appear in the table of rules for the RULE processor. Click OK again to save your configuration. Now connect RULE processor to the AGGREGATE processor.
 
+<<<<<<< HEAD
 FilterNormalEvents-AGGREGATE window will appear, select OK. Enter the following properties for the AGGREGATE processor:
+=======
+TimeSeriesAnalysis-AGGREGATE window will appear, select OK. Enter the following properties for the AGGREGATE processor:
+>>>>>>> hortonworks/master
 
 | AGGREGATE    | Properties     |
 | :------------- | :------------- |
@@ -324,6 +329,7 @@ FilterNormalEvents-AGGREGATE window will appear, select OK. Enter the following 
 | TIMESTAMP FIELD | eventTime |
 | LAG IN SECONDS | 1 |
 
+<<<<<<< HEAD
 Continue to enter the following expressions to FilterNormalEvents-AGGREGATE, to add a new expression select the plus sign next to the first aggregate expression. You can scroll down to view the additional expression fields.
 
 | **AGGREGATE EXPRESSION** | **FIELDS NAME** |
@@ -336,6 +342,8 @@ Continue to enter the following expressions to FilterNormalEvents-AGGREGATE, to 
 
 ![aggregate_expressions](assets/images/aggregate_expressions.jpg)
 
+=======
+>>>>>>> hortonworks/master
 Once you click OK, the configuration has been confirmed.
 
 8\. Add 2 KAFKA SINK components onto the canvas.
@@ -397,10 +405,17 @@ Lets check the data in our Kafka Sink topics:
 
 ~~~bash
 # trucking_data_driverstats
+<<<<<<< HEAD
 /usr/hdf/current/kafka-broker/bin/kafka-console-consumer.sh --bootstrap-server sandbox-hdf.hortonworks.com:6667 --topic trucking_data_driverstats --from-beginning
 
 # trucking_data_joined
 /usr/hdf/current/kafka-broker/bin/kafka-console-consumer.sh --bootstrap-server sandbox-hdf.hortonworks.com:6667 --topic trucking_data_joined --from-beginning
+=======
+/usr/hdf/current/kafka-broker/bin/kafka-console-consumer.sh --zookeeper localhost:2181 --topic trucking_data_driverstats --from-beginning
+
+# trucking_data_joined
+/usr/hdf/current/kafka-broker/bin/kafka-console-consumer.sh --zookeeper localhost:2181 --topic trucking_data_joined --from-beginning
+>>>>>>> hortonworks/master
 ~~~
 
 > Note: press control + C to exit from the Kafka view messages.
