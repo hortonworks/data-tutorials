@@ -47,6 +47,8 @@ setup_hdfs()
   sudo -u hdfs hdfs dfs -mkdir -p /sandbox/tutorial-files/200/nifi/
   echo "$DATE INFO: Allowing read-write-execute permissions to any user, so NiFi has write access"
   sudo -u hdfs hdfs dfs -chmod -R 777 /sandbox/tutorial-files/200/nifi/
+  echo "$DATE INFO: Checking directory was created and permissions were set"
+  sudo -u hdfs hdfs dfs -ls /sandbox/tutorial-files/200/
 
   # Log everything, but also output to stdout
   echo "$DATE INFO: Executing setup_hdfs() bash function, logging to $LOG_DIR_BASE/hdp/setup-hdfs.log"
