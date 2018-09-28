@@ -29,7 +29,7 @@ If this configuration hasn't been done, which in the demo we use `sandbox-hdf.ho
 
 **Have all the required services for HDF and HDP sandbox started up?**
 
-If unsure, you can login to HDF Ambari at [http://sandbox-hdf.hortonworks.com:8080](http://sandbox-hdf.hortonworks.com:8080). You can also HDP Ambari at [http://sandbox-hdp.hortonworks.com:8080](http://sandbox-hdp.hortonworks.com:8080). If you haven't setup Ambari `admin` password, refer to the link: [admin-password-reset](https://hortonworks.com/tutorial/learning-the-ropes-of-the-hortonworks-sandbox/#admin-password-reset) cause you will need the password for performing Ambari REST API Calls and operating on services in the Ambari UI. For resetting Ambari Admin password on HDF, open HDF web shell client at [http://sandbox-hdf.hortonworks.com:4200](http://sandbox-hdf.hortonworks.com:4200). For resetting Ambari Admin password on HDP, open HDP web shell client at [http://sandbox-hdp.hortonworks.com:4200](http://sandbox-hdp.hortonworks.com:4200). With both web shell clients, initial login is `root/hadoop`, if it is your first login, then you will be prompted to reset your password, make sure to remember it. The Ambari Dashboard will **Background Operations Running window**, which is accessible by the gear icon at the top right of Ambari. From there, you should see **Start All Services** with a green progress bar near it. On HDF, verify **NiFi** started. On HDP, verify **HDFS**, **Spark2** and **Zeppelin** started. Otherwise, start them.
+If unsure, you can login to HDF Ambari at http://sandbox-hdf.hortonworks.com:8080. You can also HDP Ambari at http://sandbox-hdp.hortonworks.com:8080. If you haven't setup Ambari `admin` password, refer to the link: [admin-password-reset](https://hortonworks.com/tutorial/learning-the-ropes-of-the-hortonworks-sandbox/#admin-password-reset) cause you will need the password for performing Ambari REST API Calls and operating on services in the Ambari UI. For resetting Ambari Admin password on HDF, open HDF web shell client at http://sandbox-hdf.hortonworks.com:4200. For resetting Ambari Admin password on HDP, open HDP web shell client at http://sandbox-hdp.hortonworks.com:4200. With both web shell clients, initial login is `root/hadoop`, if it is your first login, then you will be prompted to reset your password, make sure to remember it. The Ambari Dashboard will **Background Operations Running window**, which is accessible by the gear icon at the top right of Ambari. From there, you should see **Start All Services** with a green progress bar near it. On HDF, verify **NiFi** started. On HDP, verify **HDFS**, **Spark2** and **Zeppelin** started. Otherwise, start them.
 
 ## Overview of Shell Code Used in Both Approaches
 
@@ -56,7 +56,7 @@ If unsure, you can login to HDF Ambari at [http://sandbox-hdf.hortonworks.com:80
 
 We will be using shell commands to setup the required services in our data-in-motion and data-at-rest platforms from the sandbox web shell clients.
 
-Open HDF Sandbox Web Shell Client at [http://sandbox-hdf.hortonworks.com:4200](http://sandbox-hdf.hortonworks.com:4200) with login `root/hadoop`.
+Open HDF Sandbox Web Shell Client at http://sandbox-hdf.hortonworks.com:4200.
 
 Prior to executing the shell script, replace the following line of shell code `AMBARI_USER_PASSWORD="<Your-Ambari-Admin-Password>"` with the password you created for Ambari Admin user. For example, if our Ambari Admin password was set to `yellowHadoop`, then the line of code would look as follows: `AMBARI_USER_PASSWORD="yellowHadoop"`
 
@@ -199,6 +199,8 @@ http://$HDP_HOST:8080/api/v1/clusters/$HDP_CLUSTER_NAME/services/SPARK2
 
 We will download and execute a shell script to automate the setup of our data-in-motion and data-at-rest platforms from the sandbox web shell clients.
 
+### Auto Setup HDF
+
 Open the **HDF web shell client** at [http://sandbox-hdf.hortonworks.com:4200](http://sandbox-hdf.hortonworks.com:4200) with login `root/hadoop`.
 After login, you will be prompted to change the password.
 
@@ -210,6 +212,8 @@ AMBARI_USER_PASSWORD="<Your-Ambari-Admin-Password>"
 wget https://github.com/james94/data-tutorials/raw/master/tutorials/cda/building-a-server-log-analysis-application/application/setup/shell/setup-hdf.sh
 bash setup-hdf.sh $AMBARI_USER $AMBARI_USER_PASSWORD
 ~~~
+
+### Auto Setup HDP
 
 Open the **HDP web shell client** at [http://sandbox-hdp.hortonworks.com:4200](http://sandbox-hdp.hortonworks.com:4200) with login `root/hadoop`. After login, you will be prompted to change the password.
 
