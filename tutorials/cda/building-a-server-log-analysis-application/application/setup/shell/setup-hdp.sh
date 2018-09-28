@@ -41,9 +41,9 @@ setup_hdfs()
   # Creates /sandbox directory in HDFS
   # allow read-write-execute permissions for the owner, group, and any other users
   echo "$DATE INFO: Creating HDFS dir /sandbox/tutorial-files/200/nifi/ for HDF NiFi to write data"
-  hdfs dfs -mkdir -p /sandbox/tutorial-files/200/nifi/
+  sudo -u hdfs hdfs dfs -mkdir -p /sandbox/tutorial-files/200/nifi/
   echo "$DATE INFO: Allowing read-write-execute permissions to any user, so NiFi has write access"
-  hdfs dfs -chmod -R 777 /sandbox/tutorial-files/200/nifi/
+  sudo -u hdfs hdfs dfs -chmod -R 777 /sandbox/tutorial-files/200/nifi/
 }
 
 setup_public_dns | tee -a $LOG_DIR_BASE/hdp/setup-public-dns.log
