@@ -7,7 +7,7 @@ persona: Data Scientist & Analyst
 source: Hortonworks
 use case: Predictive
 technology: Apache Spark
-release: hdp-2.6.5
+release: hdp-3.0.0
 environment: Sandbox
 product: HDP
 series: HDP > Develop with Hadoop > Apache Spark
@@ -122,7 +122,7 @@ To upload to HDFS:
 
 2\. Navigate to sandbox-hdp.hortonworks.com:8080
 
-3\. Login (default username/password is maria_dev/maria_dev)
+3\. Login (default username/password is **maria_dev/maria_dev**)
 
 4\. Log into Amabari Manager
 
@@ -285,7 +285,7 @@ Next, copy the absolute path of your jar and use it to Secure Copy (SCP) it to t
 scp -P 2222 ~/IdeaProjects/HelloScala/target/scala-2.11/helloscala_2.11-1.0.jar root@sandbox-hdp.hortonworks.com:/root
 ~~~
 
-Open your favorite browser and navigate to sandbox-hdp.hortonworks.com:4200 and log on as root.
+Open your favorite browser and navigate to [sandbox-hdp.hortonworks.com:4200](http://sandbox-hdp.hortonworks.com:4200/) and log on as root.
 
 Use spark-submit to run our code. We need to specify the main class, the jar to run, and the run mode (local or cluster):
 
@@ -321,7 +321,9 @@ Additionally, if you open the File View in Ambari you should see results under /
 
 ![wordcount-hdfs](assets/wordcount-hdfs.jpg)
 
-You can open the new directory and open _part-0000_ to view the output of the program.
+You can open the new directory and select _part-00000_ to view the output of the program click on **Open** located at the left side of the page.
+
+![open-part-00000](assets/open-part-00000.jpg)
 
 ![file-preview](assets/file-preview.jpg)
 
@@ -353,7 +355,7 @@ Notice that we specified the parameters **_--master yarn_** instead of **_--mast
 
 The parameter **_--deploy-mode client_** indicates we want to use the current machine as the driver machine for Spark. The driver machine is a single machine that initiates a Spark job, and is also where summary results are collected when the job is finished. Alternatively, we could have specified **_--deploy-mode cluster_**, which would have allowed YARN to choose the driver machine.
 
-It's important to note that a poorly written Spark program can accidentally try to bring back many Terabytes of data to the driver machine, causing it to crash. For this reason you shouldn't use the master node of your cluster as your driver machine. Many organizations submit Spark jobs from what's called an edge node, which is a separate machine that isn't used to store data or perform computation. Since the edge node is separate from the cluster, it can go down without affecting the rest of the cluster. Edge nodes are also used for data science work on aggregate data that has been retrieved from the cluster. For example, a data scientist might submit a Spark job from an edge node to transform a 10 TB dataset into a 1 GB aggregated dataset, and then do analytics on the edge node using tools like R and Python. If you plan on setting up an edge node, make sure that machine doesn't have the DataNode or HostManager components installed, since these are the data storage and compute components of the cluster. You can check this on the host tab in Ambari.
+It's important to note that a poorly written Spark program can accidentally try to bring back many Terabytes of data to the driver machine, causing it to crash. For this reason you shouldn't use the master node of your cluster as your driver machine. Many organizations submit Spark jobs from what's called an edge node, which is a separate machine that isn't used to store data or perform computation. Since the edge node is separate from the cluster, it can go down without affecting the rest of the cluster. Edge nodes are also used for data science work on aggregate data that has been retrieved from the cluster. For example, a data scientist might submit a Spark job from an edge node to transform a 10 TB dataset into a 1 GB aggregated dataset, and then do analytics on the edge node using tools like R and Python. If you plan on setting up an edge node, make sure that machine doesn't have the DataNode or HostManager components installed, since these are the data storage and compute components of the cluster. You can check this on the host tab in Ambari
 
 ## Live Debugging
 

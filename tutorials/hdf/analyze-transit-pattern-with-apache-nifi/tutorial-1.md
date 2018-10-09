@@ -38,7 +38,7 @@ When NiFi is accessed at `sandbox-hdf.hortonworks.com:9090/nifi` by users who ru
 
 Every dataflow requires a set of processors. In the tutorials, you will use the processor icon ![processor_nifi_iot](assets/tutorial-1-nifi-dataflow-automation-concepts/processor_nifi.png) to add processors to the dataflow. Let’s view the add processor window. There are 3 options to find our desired processor. The **processor list** contains almost 190 items with descriptions for each processor. The **tag cloud** reduces the list by category, so if you know what particular use case your desired processor is associated with, select the tag and find the appropriate processor faster. The **filter bar** searches for the processor based on the keyword entered. The image below illustrates where each option is located on the add processor window.
 
-![add_processor_window](assets/tutorial-1-nifi-dataflow-automation-concepts/add_processor_window.png)
+![add_processor_window](assets/tutorial-1-nifi-dataflow-automation-concepts/add_processor_window.jpg)
 
 ### Configure Processor Dialog
 

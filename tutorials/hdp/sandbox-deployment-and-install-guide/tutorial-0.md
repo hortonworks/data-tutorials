@@ -1,18 +1,17 @@
 ---
 title: Sandbox Deployment and Install Guide
-author: Edgar Orendain
+author: sandbox-team
 tutorial-id: 350
 experience: Intermediate
 persona: Administrator
 source: Hortonworks
 use case: Single View
 technology: Sandbox
-release: hdp-2.6.5
+release: hdp-3.0.0
 environment: Sandbox
 product: HDP
 series: HDP > Hadoop Administration > Hortonworks Sandbox
 ---
-
 
 # Sandbox Deployment and Install Guide
 
@@ -38,7 +37,10 @@ The cloud is an alternative environment for deploying Hortonworks Sandbox in cas
 
 The Hortonworks Sandbox can be installed in a myriad of virtualization/containerization platforms. Jump to the tutorial for the platform that you prefer.  This documentation applies to both HDP and HDF sandboxes.
 
-1.  [Deploying Hortonworks Sandbox on VirtualBox](https://hortonworks.com/tutorial/sandbox-deployment-and-install-guide/section/1/)
-2.  [Deploying Hortonworks Sandbox on VMWare](https://hortonworks.com/tutorial/sandbox-deployment-and-install-guide/section/2/)
-3.  [Deploying Hortonworks Sandbox on Docker](https://hortonworks.com/tutorial/sandbox-deployment-and-install-guide/section/3/)
-4.  [Deploying Hortonworks Sandbox on Microsoft Azure](https://hortonworks.com/tutorial/sandbox-deployment-and-install-guide/section/4/)
+1\.[Deploying Hortonworks Sandbox on VirtualBox](https://hortonworks.com/tutorial/sandbox-deployment-and-install-guide/section/1/)
+
+2\.[Deploying Hortonworks Sandbox on VMWare](https://hortonworks.com/tutorial/sandbox-deployment-and-install-guide/section/2/)
+
+3\.[Deploying Hortonworks Sandbox on Docker](https://hortonworks.com/tutorial/sandbox-deployment-and-install-guide/section/3/)
+
+4\.[Deploying Hortonworks Sandbox on Microsoft Azure](https://hortonworks.com/tutorial/sandbox-deployment-and-install-guide/section/4/)

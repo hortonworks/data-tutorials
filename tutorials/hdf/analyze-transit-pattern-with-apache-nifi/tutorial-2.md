@@ -35,15 +35,15 @@ Choose either approach to access NiFi UI.
 
 1\. Select the **LAUNCH DASHBOARD** button
 
-2\. Type `admin/admin` to login to Ambari.
+2\. Type `raj_ops/raj_ops` to login to Ambari.
 
-![login_ambari_ui](assets/tutorial-2-launch-nifi-html-ui/approach-1-ambari/login_ambari_ui.png)
+![login_ambari_ui](assets/tutorial-2-launch-nifi-html-ui/approach-1-ambari/login_ambari_ui.jpg)
 
-3\. Select the **NiFi Service**, click on **Quick Links** dropdown and press the **NiFi UI**:
+3\. Select the **NiFi Service**, and click on **NiFi UI**:
 
 ![open-nifi-ui-via-ambari.png](assets/tutorial-2-launch-nifi-html-ui/approach-1-ambari/open-nifi-ui-via-ambari.jpg)
 
-4\. The NiFi UI comes with a default Trucking-IoT NiFiFlow as seen on the image below. To delete the default NiFiFlow and work with a new canvas select the NiFiFlow (cltr+A for Mac) then right click and select delete.
+4\. The NiFi UI comes with a default Trucking-IoT NiFiFlow as seen on the image below. To delete the default NiFiFlow and work with a new canvas select the NiFiFlow (cltr+A) then right click and select delete.
 
 ![delete_trucking_iot_nififlow](assets/tutorial-2-launch-nifi-html-ui/approach-1-ambari/trucking_iot_delete_flow.jpg)
 

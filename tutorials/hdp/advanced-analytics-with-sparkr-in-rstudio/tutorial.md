@@ -5,9 +5,9 @@ tutorial-id: 759
 experience: Intermediate
 persona: Data Scientist & Analyst
 source: Hortonworks
-use case: Predictive
+use case: Data Discovery
 technology: Apache Spark, Apache SparkR, Machine Learning
-release: hdp-2.6.5
+release: hdp-3.0.0
 environment: Sandbox
 product: HDP
 series: HDP > Develop with Hadoop > Apache Spark
@@ -28,8 +28,8 @@ In this tutorial we’ll show you how to leverage SparkR to gain insights on air
 ## Prerequisites
 
 - Downloaded and deployed the [Hortonworks Data Platform (HDP)](https://hortonworks.com/downloads/#sandbox) Sandbox
-- [Learning the Ropes of the HDP Sandbox](https://hortonworks.com/tutorial/learning-the-ropes-of-the-hortonworks-sandbox/) to get used to Sandbox.
-- Follow this [article](https://community.hortonworks.com/articles/203564/installing-rstudio-on-hdp-sandbox.html) on Hortonworks Community to install RStudio on the Sandbox.
+- [Learning the Ropes of the HDP Sandbox](https://hortonworks.com/tutorial/learning-the-ropes-of-the-hortonworks-sandbox/) to get used to Sandbox
+- Follow this [article](https://community.hortonworks.com/articles/203564/installing-rstudio-on-hdp-sandbox.html) on Hortonworks Community to install RStudio on the Sandbox
 
 ## Outline
 
@@ -66,11 +66,11 @@ After you download the file, unzip it and upload train_df.csv and test_df.csv to
 
 Click on /tmp folder and upload these two files. Your screen should look like this:
 
-![Files View 2](assets/fileView2.png)
+![Files View 2](assets/fileView2.jpg)
 
 ## Setup SparkR on RStudio
 
-Next, let us login to RStudio using credentials amy_ds/amy_ds. We have to create a SparkContext object which connects the R program to the cluster. You can create it using sparkR.init(). We also need a SqlContext object to work with data frames which can be created from SparkContext.
+Next, let us login to RStudio using credentials **amy_ds/amy_ds**. We have to create a SparkContext object which connects the R program to the cluster. You can create it using sparkR.init(). We also need a SqlContext object to work with data frames which can be created from SparkContext.
 
 Let us start with creating an environment variable SPARK_HOME which has the location of Spark Libraries. We will load the SparkR package and we invoke sparkR.init() function to create SparkContext. We are also adding some Spark Driver properties and csv package so that the SparkR data frame can read csv files.
 
@@ -101,7 +101,7 @@ After it gets loaded, you can view the dataframe by:
 head(train_df)
 ~~~
 
-![R2](assets/R2.png)
+![R2](assets/R2.jpg)
 
 It shows the top 6 records of the dataframe, you can also see the variables and the type of variables to the right side of the screen.
 
@@ -159,13 +159,11 @@ train_df$ARR_DELAY <- cast(train_df$ARR_DELAY,"integer")
 train_df$DEP_DELAY <- cast(train_df$DEP_DELAY,"integer")
 ~~~
 
-Type
+Type the command below to view the prepared dataframe:
 
 ~~~r
 head(train_df)
 ~~~
-
- to view the prepared dataframe.
 
 ![R5](assets/R5.png)
 
@@ -322,7 +320,7 @@ DF1
 
 ![R9](assets/R9.png)
 
-We will change this dataframe just to make the plot more clearer.
+We will change this dataframe just to make the plot clearer.
 
 ~~~r
 DF1 <- DF1[-15:-21,]
@@ -447,13 +445,13 @@ As you can see here, smaller city Origin(SNA) has a least delay ratio.
 
 ## Summary
 
-Congratulations, you now know how to install RStudio on your HDP Sandbox and use SparkR to explore, transform, and visualize data to gain valuable insight. In the future we will expand this tutorial with prediction steps leveraging several popular supervised learning models. 
+Congratulations, you now know how to use SparkR to explore, transform, and visualize data to gain valuable insight. In the future we will expand this tutorial with prediction steps leveraging several popular supervised learning models.
 
 ## Further reading
 
 If you want to learn more about using Apache Spark for machine learning and processing large datasets please check out these tutorials and videos:
 
-- [5-Minute tour of Apache Spark](https://hortonworks.com/tutorial/hands-on-tour-of-apache-spark-in-5-minutes/)
+- [Hands-On Tour of Apache Spark in 5 Minutes](https://hortonworks.com/tutorial/hands-on-tour-of-apache-spark-in-5-minutes/)
 - [Intro to Machine Learning with Spark](https://hortonworks.com/tutorial/intro-to-machine-learning-with-apache-spark-and-apache-zeppelin/)
 - [Data Science Starter Kit](https://hortonworks.com/info/data-science-cloud/)
 - [Installing RStudio on HDP Sandbox](https://community.hortonworks.com/articles/203564/installing-rstudio-on-hdp-sandbox.html)

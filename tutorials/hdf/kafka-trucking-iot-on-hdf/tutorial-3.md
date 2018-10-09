@@ -50,19 +50,19 @@ Now that we have an idea of Kafka's capabilities, let's explore its different co
 
 Initially when building this demo, we verified Zookeeper was running because Kafka uses Zookeeper. If Zookeeper was off, we ran the command or turned on it from Ambari:
 
-~~~
+~~~bash
 /usr/hdf/current/kafka-broker/bin/zookeeper-server-start.sh config/zookeeper.properties
 ~~~
 
 We then started the Kafka Broker via Ambari or command:
 
-~~~
+~~~bash
 /usr/hdf/current/kafka-broker/bin/kafka-server-start.sh config/server.properties
 ~~~
 
 If you wanted to see the daemons that were running, type `jps`
 
-~~~
+~~~bash
 Example of Output:
 
 2306 drpc
@@ -129,7 +129,7 @@ Congratulations! You now know about the role Kafka plays in the demo application
 
 If you need to modify a Kafka Topic, then run the following command:
 
-~~~
+~~~bash
 /usr/hdf/current/kafka-broker/bin/kafka-topics.sh --zookeeper localhost:2181 --alter --topic topic-name --partitions X
 ~~~
 
@@ -139,6 +139,6 @@ Account for your topic-name will be different and the amount of partitions you w
 
 If you need to delete a Kafka Topic, run the following command:
 
-~~~
+~~~bash
 /usr/hdf/current/kafka-broker/bin/kafka-topics.sh --zookeeper localhost:2181 --delete --topic topic_name
 ~~~

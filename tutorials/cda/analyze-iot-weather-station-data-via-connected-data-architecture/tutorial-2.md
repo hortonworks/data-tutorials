@@ -10,20 +10,15 @@ You'll make an IoT Weather Station with a Raspberry Pi and Sense HAT. Additional
 
 ## Prerequisites
 
-- Downloaded Latest [HDF Sandbox](https://hortonworks.com/downloads) for VirtualBox, etc
-    - Set **RAM to 12GB** for Guest VM or Native Docker
-- Downloaded and Installed Latest [Raspbian OS](https://www.raspberrypi.org/downloads/raspbian/) onto Raspberry Pi
-    - If you need help installing Raspbian OS onto the Raspberry Pi, refer to **Appendix A**.
-- Enabled Connected Data Architecture: 
-     - [Enable CDA for VirtualBox](https://hortonworks.com/tutorial/sandbox-deployment-and-install-guide/section/1/#enable-connected-data-architecture-cda-advance-topic)
-    - [Enable CDA for VMware](https://hortonworks.com/tutorial/sandbox-deployment-and-install-guide/section/2/#enable-connected-data-architecture-cda-advance-topic)
-    - [Enable CDA for Docker ](https://hortonworks.com/tutorial/sandbox-deployment-and-install-guide/section/3/#enable-connected-data-architecture-cda-advance-topic)
+- Enabled Connected Data Architecture
 
 ## Outline
 
 - [Step 1: Setup Raspberry Pi Weather Station Node](#step-1-setup-raspberry-pi-weather-station-node)
 - [Step 2: Configure Bridged Adapter Network for VirtualBox](#step-2-configure-bridged-adapter-network-for-virtualbox)
-- [Step 3: Start HDF Sandbox and Setup NiFi Site-To-Site](#step-3-start-hdf-setup-site-to-site)
+- [Step 3: Map Bridged IP to Desired Hostname in hosts file](#step-3-map-bridged-ip-to-desired-hostname-in-hosts-file)
+- [Step 4: Verify Prerequisites Have Been Covered](#step-4-verify-prerequisites-have-been-covered)
+- [Step 5: Start HDF Sandbox and Setup NiFi Site-To-Site](#step-5-start-hdf-setup-site-to-site)
 - [Summary](#summary)
 - [Further Reading](#further-reading)
 - [Appendix A: Install Raspbian OS onto Raspberry Pi](#appendix-a-install-raspbian)
@@ -201,9 +196,13 @@ If your Guest VM is running, it will need to be stopped.
 
 1\. Click the Settings gear.
 
-2\. In the window that opens, navigate to the Network tab.
+2\. In the window that opens, navigate to the **Network** tab.
 
 3\. In the **Attached to** field, select from the dropdown menu, **Bridged Adapter**.
+
+4\. Verify in **System** tab that the Base Memory is set to **32GB of RAM**.
+
+<!--
 
 You can keep the default setting for the Name of the Bridged Network.
 
@@ -215,13 +214,92 @@ You can keep the default setting for the Name of the Bridged Network.
 
 ![verify_vm_ram_12gb](assets/tutorial2/verify_vm_ram_12gb.jpg)
 
-**Figure 17:** Verifying RAM allocation is 12GB
+**Figure 17:** Verifying RAM allocation is 32GB
 
-### Step 3: Configure NiFi via HDF's Ambari
+-->
 
-1\. Login to Ambari at `sandbox-hdf.hortonworks.com:8080`:
+### Step 3: Map Bridged IP to Desired Hostname in hosts file
 
-> Note: The user/password is `admin/admin`
+### Windows User
+
+Click your search bar, type **notepad**, right click on it and select **Run as administrator**. When the popup window appears, click **yes**.
+
+In **notepad**, click **file**, **open...**, navigate path **This PC -> WINDOWS(C:) -> Windows -> System32 -> drivers -> etc** and next to **File name**, click on the dropdown with **Text Documents (*.txt)** and choose **All Files**.
+
+Select **hosts** file and **open** it.
+
+![hosts-file-w10](assets/tutorial2/hosts-file-w10.jpg)
+
+Copy the line with the current IP address mapped to the sandbox hostnames. Comment out that line. Now paste the line below the commented out line.
+
+Replace the current IP address with the Guest VM Bridged IP.
+
+![sb-guest-welcome](assets/tutorial2/sb-guest-welcome.jpg)
+
+For example, **10.14.2.47** is the one generated for this current session in an office space, but your IP will be different.
+
+![hosts-file-updates](assets/tutorial2/hosts-file-updates.jpg)
+
+Save the modified file, **ctrl + s**.
+
+### Mac User
+
+Similar to windows, open the **hosts** file at path **/private/etc/hosts**. Modify the file with your Bridged IP mapped to the sandbox hostnames.
+
+For example, **10.14.2.47** is the Guest VM Bridged IP generated for this current session in an office space, but your IP will be different.
+
+~~~bash
+##
+# Host Database
+#         
+# localhost is used to configure the loopback interface
+# when the system is booting.  Do not change this entry.
+##       
+# 127.0.0.1       localhost sandbox-hdp.hortonworks.com sandbox-hdf.hortonworks.com sandbox-host
+10.14.2.47       localhost sandbox.hortonworks.com sandbox-hdp.hortonworks.com sandbox-hdf.hortonworks.com
+255.255.255.255 broadcasthost
+::1             localhost
+~~~
+
+Save the modified file.
+
+### Linux User
+
+Similar to windows, open the **hosts** file at path **/etc/hosts**. Modify the file with your Bridged IP mapped to the sandbox hostnames.
+
+For example, **10.14.2.47** is the Guest VM Bridged IP generated for this current session in an office space, but your IP will be different.
+
+~~~bash
+# File is generated from /sandbox/gen-hosts.sh
+# Do not remove the following line, or various programs
+# that require network functionality will fail.
+127.0.0.1         localhost.localdomain localhost sandbox-hdp.hortonworks.com sandbox-hdf.hortonworks.com sandbox-host
+10.14.2.47       localhost sandbox.hortonworks.com sandbox-hdp.hortonworks.com sandbox-hdf.hortonworks.com
+~~~
+
+Save the modified file.
+
+## Step 4: Verify Prerequisites Have Been Covered
+
+**Setup Ambari admin password for "HDF" and "HDP"**
+
+If you need help setting the Ambari admin password,
+
+- for HDP, reference **Admin Password Reset** in [Learning the Ropes of HDP Sandbox](https://hortonworks.com/tutorial/learning-the-ropes-of-the-hortonworks-sandbox/)
+- for HDF, reference **Admin Password Reset** in [Learning the Ropes of HDF Sandbox](https://hortonworks.com/tutorial/getting-started-with-hdf-sandbox/)
+
+**Started up all required services for "HDF" and "HDP"**
+
+If unsure, login to Ambari **admin** Dashboard
+
+- for HDF at http://sandbox-hdf.hortonworks.com:8080 and verify **NiFi** starts up, else start it.
+- for HDP at http://sandbox-hdp.hortonworks.com:8080 and verify **HDFS**, **Spark2**, **HBase** and **Zeppelin** starts up, else start them.
+
+### Step 5: Configure NiFi via HDF's Ambari
+
+1\. Login to Ambari at http://sandbox-hdf.hortonworks.com:8080:
+
+> Note: The user/password is **admin** and the password you set.
 
 You will configure NiFi Site-To-Site protocol by exposing an IP address and a socket port, so external NiFi nodes or MiNiFi agents can connect to NiFi master node.
 
@@ -235,15 +313,15 @@ Head to `Advanced NiFi-Properties` in Ambari Config Settings for NiFi. Update th
 
 ![advanced_nifi_properties](assets/tutorial2/nifi_properties_sitetosite.jpg)
 
-**Figure 18:** Update NiFi Config for Site-to-Site
+**Figure 16:** Update NiFi Config for Site-to-Site
 
-4\. Insert your `<guest vm ip address>` in **nifi.remote.input.host**. The image above shows "10.11.7.17", which was the IP address assigned by the router in an office network, for a home network, we can see in the image below that the IP address was changed to "192.168.2.10".
+4\. Insert `<your-guest-vm-bridged-ip-address>` in **nifi.remote.input.host**. The image above shows **10.14.2.47**, which was the IP address assigned by the router in an **office network**, for a **home network**, we can see in the image below that the IP address was changed to **192.168.2.10**.
 
-> Note: `<guest vm ip address>` for linux can be found with the terminal command: `hostname -I`. Yet, when you open the sandbox, we present a welcome screen to you that displays the IP address of your guest vm from bridged adapter network. Since we are using VirtualBox, there is a typo "For VMware:", which actually shows the guest vm ip address we want from our VirtualBox VM. VMware Guest VM welcome screen will have the IP address for the VMware Guest VM.
+> Note: `<your-guest-vm-bridged-ip-address>` for linux can be found with the terminal command: `hostname -I`. Yet, when you open the sandbox, we present a welcome screen to you that displays the IP address of your guest vm from bridged adapter network. Since we are using VirtualBox, there is a typo "For VMware:", which actually shows the guest vm ip address we want from our VirtualBox VM. VMware Guest VM welcome screen will have the IP address for the VMware Guest VM.
 
-![sandbox_vm_welcome](assets/tutorial2/sandbox_vm_welcome.jpg)
+![sb-guest-welcome](assets/tutorial2/sb-guest-welcome.jpg)
 
-**Figure 19:** Get Guest VM IP Address from Sandbox Welcome Screen
+**Figure 17:** Get Guest VM IP Address from Sandbox Welcome Screen
 
 5\. Verify **nifi.remote.input.http.enabled** checked
 
@@ -255,11 +333,11 @@ Now NiFi is configured for Socket Site-To-Site protocol. If you encounter issues
 
 > Note: Now that you know where to find the Guest VM Sandbox IP address, set the mapping for it to the hostnames: "[ip-adr] sandbox-hdf.hortonworks.com sandbox-hdp.hortonworks.com". Refer to "[Learning the Ropes of HDP Sandbox](https://hortonworks.com/tutorial/learning-the-ropes-of-the-hortonworks-sandbox/#environment-setup)".
 
-### 3.3: Restart NiFi
+### 5.1: Restart NiFi
 
 Restart NiFi from Ambari with the **orange restart button** for the changes to take effect.
 
-### 3.4: Add GeoLite2 database to HDF Sandbox CentOS
+### 5.2: Add GeoLite2 database to HDF Sandbox CentOS
 
 Add the GeoLite2 to HDF Sandbox CentOS, which is a database filled with Public IP Addresses mapped to geographic insights.
 
@@ -267,7 +345,7 @@ Add the GeoLite2 to HDF Sandbox CentOS, which is a database filled with Public I
 
 ![hdf_web_shell](assets/tutorial2/hdf_web_shell.jpg)
 
-**Figure 20:** HDF Web Shell
+**Figure 18:** HDF Web Shell
 
 > Note: You will be prompted to change the password if this is your first time logging into the Sandbox.
 
@@ -297,7 +375,7 @@ pwd
 
 ![geolite_dbfile_path](assets/tutorial2/geolite_dbfile_path.jpg)
 
-**Figure 21:** Path to Geolite DB Lookup Table "GeoLite2-City.mmdb"
+**Figure 19:** Path to Geolite DB Lookup Table "GeoLite2-City.mmdb"
 
 Note down the folder name that GeoLite2-City.mmdb is located in on your system. According to the image above, the full pathname is: `/sandbox/tutorial-files/820/nifi/input/GeoFile/GeoLite2-City_20180605/GeoLite2-City.mmdb`
 
@@ -330,13 +408,13 @@ Recommended Hardware:
 
 ![microsd_microsd_adapter](assets/tutorial2/microsd_microsd_adapter.png)
 
-**Figure 22:** MicroSD on left and microSD Card Adapter on right
+**Figure 20:** MicroSD on left and microSD Card Adapter on right
 
 2\. Insert the microSD Adapter into the computer.
 
 ![insert_microsdAdater_laptop](assets/tutorial2/insert_microsdAdater_laptop.png)
 
-**Figure 23:** microSD Adapter Inserted into Computer
+**Figure 21:** microSD Adapter Inserted into Computer
 
 ### Download Raspbian OS Image
 
@@ -354,11 +432,11 @@ You will create a Raspbian bootable OS on microSD card using etcher.io graphic i
 
 ![etcher_dashboard](assets/tutorial2/etcher_dashboard.png)
 
-**Figure 24:** Etcher Dashboard to Create a Bootable OS on microSD
+**Figure 22:** Etcher Dashboard to Create a Bootable OS on microSD
 
 ![etcher_created_bootable_os](assets/tutorial2/etcher_created_bootable_os.png)
 
-**Figure 25:** Flash Complete, Bootable OS Now Created
+**Figure 23:** Flash Complete, Bootable OS Now Created
 
 Once the operation completes, Etcher automatically unmounts the SD card and is safe to eject.
 
@@ -376,7 +454,7 @@ df
 
 ![disk_utility_sd_unmount](assets/tutorial2/disk_utility_sd_unmount.png)
 
-**Figure 26:** MAC Disk Utility to Unmount Device for Writing to it
+**Figure 24:** MAC Disk Utility to Unmount Device for Writing to it
 
 4\. Head to terminal, in the Downloads folder where the Raspbian OS is located, run the DD command to write a bootable Raspbian OS onto micro SD card:
 
@@ -390,7 +468,7 @@ The DD operation will take 1 to 5 minutes until completion.
 
 ![dd_opearation_completion_result](assets/tutorial2/dd_opearation_completion_result.png)
 
-**Figure 27:** Progress of Creating Bootable OS on microSD
+**Figure 25:** Progress of Creating Bootable OS on microSD
 
 After the dd operation completes, you should see the Raspbian bootable OS successfully transferred over to the SD card.
 
@@ -407,7 +485,7 @@ bcm2708-rpi-b-plus.dtb  bcm2710-rpi-cm3.dtb   fixup_cd.dat  kernel7.img   start_
 bcm2708-rpi-b.dtb       bootcode.bin          fixup_db.dat  overlays      start_x.elf
 ~~~
 
-**Figure 28:** Create SSH file to Enable SSH Access to Raspberry Pi
+**Figure 26:** Create SSH file to Enable SSH Access to Raspberry Pi
 
 > Note: the path to the SD card is `/Volumes/boot`. `touch ssh` creates a new file. `ls -ltr` verifies new file was created.
 
@@ -415,13 +493,13 @@ bcm2708-rpi-b.dtb       bootcode.bin          fixup_db.dat  overlays      start_
 
 ![microsd_inserted_to_rpi](assets/tutorial2/microsd_inserted_to_rpi.png)
 
-**Figure 29:** MicroSD Inserted into Raspberry Pi
+**Figure 27:** MicroSD Inserted into Raspberry Pi
 
 7\. Connect ethernet cable to the Raspberry Pi to give it internet access, connect the 5V for power and the Pi should start up.
 
 ![power-ethernet_rpi](assets/tutorial2/power-ethernet_rpi.png)
 
-**Figure 30:** Raspberry Pi Ethernet Cable Connected for Internet Access
+**Figure 28:** Raspberry Pi Ethernet Cable Connected for Internet Access
 
 The Pi's default login credentials:
 

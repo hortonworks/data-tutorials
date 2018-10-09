@@ -1,13 +1,13 @@
 ---
 title: DataFrame and Dataset Examples in Spark REPL
-author: sandbox team
+author: sandbox-team
 tutorial-id: 391
 experience: Beginner
 persona: Developer
 source: Hortonworks
 use case: Data Discovery
 technology: Apache Spark
-release: hdp-2.6.5
+release: hdp-3.0.0
 environment: Sandbox
 product: HDP
 series: HDP > Develop with Hadoop > Apache Spark
@@ -73,7 +73,7 @@ Learn more about [Datasets and DataFrames](https://spark.apache.org/docs/latest/
 
 In preparation for this tutorial you need to download two files, people.txt and people.json into your  Sandbox's **tmp** folder. The commands below should be typed into [Shell-in-a-Box](sandbox-hdp.hortonworks.com:4200)
 
-1\. Assuming you start as `root` user:
+1\. Assuming you start as **root** user:
 
 ~~~ bash
 cd /tmp

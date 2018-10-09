@@ -53,7 +53,7 @@ An environment is a named entity which represents a set of services chosen from 
 
 The list of managed environments is located in the **Configuration** tab. For our case, we have one environment pre-loaded into our HDF Sandbox shown in **Figure 2**
 
-![Environments](assets/images/Environments.jpg)
+![existing_sandboxenvironment](assets/images/existing_sandboxenvironment.jpg)
 
 **Figure 2: Sandbox Environment**
 

@@ -10,13 +10,13 @@ To understand the concepts behind **messaging systems** in **distributed systems
 
 ## Outline
 
--   [What is a Messaging System?](#what-is-a-messaging-system?)
--   [Point to Point System](#point-to-point-system)
--   [Publish-Subscribe System](#publish-subscribe-system)
--   [What is Kafka](#what-is-kafka)
--   [Architectural Overview](#architectural-overview)
--   [Benefits of Kafka](#benefits-of-kafka)
--   [Next: Kafka in Action](#next-kafka-in-action)
+- [What is a Messaging System?](#what-is-a-messaging-system?)
+- [Point to Point System](#point-to-point-system)
+- [Publish-Subscribe System](#publish-subscribe-system)
+- [What is Kafka](#what-is-kafka)
+- [Architectural Overview](#architectural-overview)
+- [Benefits of Kafka](#benefits-of-kafka)
+- [Next: Kafka in Action](#next-kafka-in-action)
 
 ## What is a Messaging System?
 

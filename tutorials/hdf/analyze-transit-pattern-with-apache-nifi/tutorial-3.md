@@ -242,7 +242,7 @@ You have now SSH'd into the HDF Sandbox Server.
 4\. Navigate to the output directory in which the transit data is being written to:
 
 ~~~bash
-cd /sandbox/tutorial-files/640/nifi/output/rawtransitevents?
+cd /sandbox/tutorial-files/640/nifi/output/rawtransitevents
 ~~~
 
 5\. Run the `ls` command to list files in the current directory:

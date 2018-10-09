@@ -1,136 +1,138 @@
 ---
-title: Data Reporting With Zeppelin
+title: Data Reporting with Microsoft Excel for Windows
 ---
 
 # Hadoop Tutorial – Getting Started with HDP
 
-## Data Reporting With Zeppelin
+## Data Reporting with Excel
 
 ## Introduction
 
-In this tutorial you will be introduced to Apache Zeppelin and teach you to visualize data using Zeppelin.
+In this tutorial, using Microsoft Excel 2016 for Windows and Power View, we'll visualize data from previous sections of this tutorial. You may use other Business Intelligence (BI) tools of your choice.
 
 ## Prerequisites
 
-The tutorial is a part of series of hands on tutorial to get you started on HDP using the Hortonworks sandbox. Please ensure you complete the prerequisites before proceeding with this tutorial.
+The tutorial is a part of series of hands on tutorial to get you started on HDP using Hortonworks sandbox. Please ensure you complete the prerequisites before proceeding with this tutorial.
 
--   Downloaded and Installed [Hortonworks Sandbox](https://hortonworks.com/downloads/#sandbox)
--   [Learning the Ropes of the HDP Sandbox](https://hortonworks.com/tutorial/learning-the-ropes-of-the-hortonworks-sandbox/)
--   [Loading Sensor Data into HDFS](https://hortonworks.com/tutorial/hadoop-tutorial-getting-started-with-hdp/section/2/)
--   [Hive - Data ETL](https://hortonworks.com/tutorial/hadoop-tutorial-getting-started-with-hdp/section/3/)
--   [Pig - Risk Factor](https://hortonworks.com/tutorial/hadoop-tutorial-getting-started-with-hdp/section/4/)
--   [Spark - Risk Factor](https://hortonworks.com/tutorial/hadoop-tutorial-getting-started-with-hdp/section/5/)
+- [Loading Sensor Data into HDFS](https://hortonworks.com/tutorial/hadoop-tutorial-getting-started-with-hdp/section/2/)
+- [Hive - Data ETL](https://hortonworks.com/tutorial/hadoop-tutorial-getting-started-with-hdp/section/3/)
+- Install [Hortonworks ODBC Driver for Apache Hive (v2.1.10)](http://hortonworks.com/downloads/#addons)
+- [Configure ODBC driver](http://hortonworks.com/wp-content/uploads/2013/05/Installing_Configuring_Hortonworks_ODBC_Driver_with_Sandbox_-Windows7.pdf)
+- Microsoft Excel 2016 for Windows + [Power View](https://support.office.com/en-us/article/Turn-on-Power-View-in-Excel-2016-for-Windows-f8fc21a6-08fc-407a-8a91-643fa848729a)
 
 ## Outline
 
--   [Apache Zeppelin](#apache-zeppelin)
--   [Create a Zeppelin Notebook](#create-a-zeppelin-notebook)
--   [Execute a Hive Query](#execute-a-hive-query)
--   [Build Charts Using Zeppelin](#build-charts-using-zeppelin)
--   [Summary](#summary)
--   [Further Reading](#further-reading)
+- [Access Data in Microsoft Excel](#access-data-in-microsoft-excel)
+- [Visualize Data with Microsoft Excel](#visualize-data-with-microsoft-excel)
+- [Summary](#summary)
+- [Further Reading](#further-reading)
 
-## Apache Zeppelin
+## Access Data in Microsoft Excel
 
-Apache Zeppelin provides a powerful web-based notebook platform for data analysis and discovery.
-Behind the scenes it supports Spark distributed contexts as well as other language bindings on top of Spark.
+Let's bring in data from table **avg_mileage**. We created this table in the [_Hive - Data ETL_](https://hortonworks.com/tutorial/hadoop-tutorial-getting-started-with-hdp/section/3/) section.
 
-In this tutorial we will be using Apache Zeppelin to run SQL queries on our geolocation, trucks, and
-riskfactor data that we've collected earlier and visualize the result through graphs and charts.
+1\. Open a new blank workbook.
 
-## Create a Zeppelin Notebook
+2\. Select **Data** > **From Other Sources** > **From Microsoft Query**
 
-### Navigate to Zeppelin Notebook
+![excel-open-query](assets/excel-open-query.jpg)
 
-Open Zeppelin interface using browser URL:
+3\. On the Choose Data Source pop-up, select the Hortonworks ODBC data source you installed previously, then click **OK**.
 
-~~~
-http://sandbox-hdp.hortonworks.com:9995/
-~~~
+![excel-choose-data-source](assets/excel-choose-data-source.png)
 
-![zeppelin_welcome_page_hello_hdp_lab4](assets/zeppelin_welcome_page_hello_hdp_lab4.png)
+4\. In the Query Wizard, select the **avg_mileage** table and add columns to the query, then click **Next**.
 
-Click on a Notebook tab at the top left and select **Create new note**. Name your notebook `Driver Risk Factor`.
+ ![excel-choose-columns](assets/excel-choose-columns.png)
 
-![zeppelin_create_new_notebook](assets/zeppelin_create_new_notebook.png)
+5\. For the following Query Wizard forms, accept the defaults and click **Next**.
 
-## Execute a Hive Query
+![excel-filter-data](assets/excel-filter-data.png)
 
-### Visualize finalresults Data in Tabular Format
+![excel-sort-order](assets/excel-sort-order.png)
 
-In the previous Spark and Pig tutorials you already created a table `finalresults` or `riskfactor` which gives the risk factor associated with every driver. We will use the data we generated in this table to visualize which drivers have the highest risk factor. We will use the jdbc Hive interpreter to write queries in Zeppelin.
+On this last form, click **Finish**.
 
-1) Copy and paste the code below into your Zeppelin note.
+![excel-finish](assets/excel-finish.png)
 
-~~~
-%jdbc(hive)
-SELECT * FROM riskfactor
-~~~
+6\. Excel will send a data request to Hive. When data is returned, it will ask you where to import the table. Accept the default location to import the table: current workbook, current worksheet, in cell \$A\$1 - click **OK**.
 
-2) Click the play button next to "ready" or "finished" to run the query in the Zeppelin notebook.
-Alternative way to run query is "shift+enter."
+![excel-import-data](assets/excel-import-data.png)
 
-Initially, the query will produce the data in tabular format as shown in the screenshot.
+We have successfully imported table **avg_mileage** into Excel. Now we are ready to do some visualization.
 
-![output_riskfactor_zeppelin_lab6](assets/output_riskfactor_zeppelin_lab6.png)
+![Lab5_7](assets/Lab5_7.jpg)
 
-## Build Charts using Zeppelin
+## Visualize Data with Microsoft Excel
 
-### Visualize finalresults Data in Chart Format
+We will use Power View to visulaize our data.
 
-1\. Iterate through each of the tabs that appear underneath the query.
-Each one will display a different type of chart depending on the data that is returned in the query.
+1\. click on ![excel-power-view-icon](assets/excel-power-view-icon.png). You created this icon as part of the Power View prerequisite. The default is to create Power View sheet, click **OK**.
 
-![charts_tab_under_query_lab6](assets/charts_tab_jdbc_lab6.png)
+2\. We will create a column chart to visually describe the average miles per gallon for each truck. Select **DESIGN** > **Column Chart** > **Stacked Column**. You will need to stretch the chart by dragging the lower right of the chart to the full pane. You can control the amount of data you see by filtering on **avgmpg** and/or **truckid**.
 
-2\. After clicking on a chart, we can view extra advanced settings to tailor the view of the data we want.
+![excel-select-stacked-column](assets/excel-select-stacked-column.png)
 
-![bar_graph_zeppelin_lab6](assets/bar_graph_zeppelin_lab6.png)
+![Lab5_9](assets/Lab5_9.jpg)
 
-3\. Click settings to open the advanced chart features.
+Moving on to our next visual...
 
-4\. To make a chart with `riskfactor.driverid` and `riskfactor.riskfactor SUM`, drag the table relations into the boxes as shown in the image below.
+We'll be using data from table **geolocation**. We created this table in the [_Hive - Data ETL_](https://hortonworks.com/tutorial/hadoop-tutorial-getting-started-with-hdp/section/3/) section. We will create a geographical map describing the location of each truck. We'll use the following query to gather **driverid**, **city**, and **state** from the table.
 
-![fields_set_keys_values_chart_lab6](assets/fields_set_keys_values_chart_lab6.png)
-
-5\. You should now see an image like the one below.
-
-![driverid_riskfactor_chart_lab6](assets/driverid_riskfactor_chart_lab6.png)
-
-6\. If you hover on the peaks, each will give the driverid and riskfactor.
-
-![hover_over_peaks_lab6](assets/hover_over_peaks_lab6.png)
-
-7\. Try experimenting with the different types of charts as well as dragging and
-dropping the different table fields to see what kind of results you can obtain.
-
-8\. Let' try a different query to find which cities and states contain the drivers with the highest risk factors.
-
-~~~
-%jdbc(hive)
-SELECT a.driverid, a.riskfactor, b.city, b.state
-FROM riskfactor a, geolocation b where a.driverid=b.driverid
+~~~sql
+SELECT driverid, city, state FROM geolocation;
 ~~~
 
-![queryFor_cities_states_highest_driver_riskfactor](assets/queryFor_cities_states_highest_driver_riskfactor.png)
+1\. Select **Data** > **New Query** > **From Other Sources** > **From ODBC**
 
-9\. After changing a few of the settings we can figure out which of the cities have the high risk factors.
-Try changing the chart settings by clicking the **scatterplot** icon. Then make sure that the keys a.driverid
-is within the xAxis field, a.riskfactor is in the yAxis field, and b.city is in the group field.
-The chart should look similar to the following.
+![excel-new-query](assets/excel-new-query.png)
 
-![visualize_cities_highest_driver_riskfactor_lab6](assets/visualize_cities_highest_driver_riskfactor_lab6.png)
+2\. Fill out _From ODBC_ form as follows:
+- **Data source name (DSN)**: _\<data source name you created\>_
+- Under _Advanced options_, **SQL statement (optional)**, type: ```SELECT driverid, city, state FROM geolocation;```
+- press **OK**
 
-You can hover over the highest point to determine which driver has the highest risk factor and in which cities.
+![excel-query](assets/excel-query.png)
+
+3\. Excel will display a sample set of the query results. Click **Load** to create a new sheet and import the data.
+
+![excel-query-sample](assets/excel-query-sample.png)
+
+4\. click on ![excel-power-view-icon](assets/excel-power-view-icon.png). You created this icon as part of the Power View prerequisite. The default is to create Power View sheet, click **OK**.
+
+5\. We will create a map to visually describe the location of each truck. Select **DESIGN** > **Map**. You will need to stretch the chart by dragging the lower right of the chart to the full pane.
+
+> Make sure you have network connectivity because Power View uses Bing to do geocoding which translates city and state columns into map coordinates.
+
+![excel-select-map](assets/excel-select-map.png)
+
+- Uncheck **driverid**. We only want to see **city** and **state**.
+
+The finished map looks like this.
+
+![Lab5_15](assets/Lab5_15.jpg)
 
 ## Summary
 
-Now that we know how to use Apache Zeppelin to obtain and visualize our data, we can use the skills
-we've learned from our Hive, Pig, and Spark labs, as well and apply them to new kinds of data to
-try to make better sense and meaning from the numbers!
+Congratulations! You are able to visualize your data using Microsoft Excel.
+
+This tutorial has shown how Hortonworks Data Platform (HDP) can store and visualize geolocation data with Microsoft Excel. There are many other Business Intelligent (BI) tools available you can use.
+
+You can further explorer other visualization, such as plotting risk factor or miles per gallon as bar charts.
 
 ## Further Reading
 
--   [Zeppelin on HDP](https://hortonworks.com/hadoop/zeppelin/)
--   [Apache Zeppelin Docs](https://zeppelin.incubator.apache.org/docs/)
--   [Zeppelin Homepage](https://zeppelin.incubator.apache.org/)
+As a Hadoop practitioner you can choose three basic personas to build upon your skill:
+
+- [Developer](https://hortonworks.com/tutorials/?filters=developer)
+- [Administrator](https://hortonworks.com/tutorials/?filters=administrator)
+- [Data Scientist](https://hortonworks.com/tutorials/?filters=data-scientist-analyst)
+
+**Case Studies**
+
+Learn more about Hadoop through these case studies:
+
+- [Data Warehouse Architecture](https://hortonworks.com/solutions/edw-optimization/)
+- [Industry Solutions](https://hortonworks.com/solutions/)
+- [The Definitive Guide by O`Reilly](http://hadoopbook.com/)
+- [Hadoop for Dummies](http://www.wiley.com/WileyCDA/WileyTitle/productCd-1118607554.html)

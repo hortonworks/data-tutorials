@@ -1,13 +1,13 @@
 ---
 title: Hands-On Tour of Apache Spark in 5 Minutes
-author: sandbox team
+author: sandbox-team
 tutorial-id: 360
 experience: Beginner
 persona: Developer
 source: Hortonworks
 use case: Predictive
 technology: Apache Spark, Apache Zeppelin
-release: hdp-2.6.5
+release: hdp-3.0.0
 environment: Sandbox
 product: HDP
 series: HDP > Develop with Hadoop > Apache Spark
@@ -30,8 +30,9 @@ To make things fun and interesting, we will introduce a film series dataset from
   - You will need **8GB** of memory dedicated for the virtual machine, meaning that you should have at least **12GB** of memory on your system.
 
 - [Learning the Ropes of the HDP Sandbox](https://hortonworks.com/tutorial/learning-the-ropes-of-the-hortonworks-sandbox/)
-- Basic [Scala](http://www.dhgarrette.com/nlpclass/scala/basics.html) syntax
-- Installed [Zeppelin Shell](https://hortonworks.com/tutorial/getting-started-with-apache-zeppelin/#installing-zeppelin-shell)
+- Basic [Scala syntax](http://www.dhgarrette.com/nlpclass/scala/basics.html)
+- [Getting Started With Apache Zeppelin](https://hortonworks.com/tutorial/getting-started-with-apache-zeppelin/)
+  - Binded [Zeppelin's Shell Interpreter](https://hortonworks.com/tutorial/getting-started-with-apache-zeppelin/#installing-zeppelin-shell)
 
 ## Outline
 

@@ -7,7 +7,7 @@ persona: Developer
 source: Hortonworks
 use case: Data Discovery
 technology: Apache Ambari
-release: hdp-2.6.5
+release: hdp-3.0.0
 environment: Sandbox
 product: HDP
 series: HDP > Develop with Hadoop > Hello World
@@ -25,7 +25,7 @@ Let's begin our Hadoop journey...
 
 ## Prerequisites
 
-- Downloaded and deployed the [Hortonworks Data Platform (HDP) Sandbox](https://hortonworks.com/tutorial/sandbox-deployment-and-install-guide/)
+- Downloaded and deployed [Hortonworks Data Platform (HDP)](https://hortonworks.com/tutorial/sandbox-deployment-and-install-guide/) Sandbox
 
 ## Outline
 
@@ -33,48 +33,20 @@ Let's begin our Hadoop journey...
 - [Terminal Access](#terminal-access)
 - [Welcome Page](#welcome-page)
 - [Explore Ambari](#explore-ambari)
+<!-- - [Explore Sandbox in Azure](#explore-sandbox-in-azure)--->
 - [Further Reading](#further-reading)
 - [Appendix A: Reference Sheet](#appendix-a-reference-sheet)
   - [Login Credentials](#login-credentials)
   - [Sandbox Version](#sandbox-version)
   - [Admin Password Reset](#admin-password-reset)
 - [Appendix B: Troubleshoot](#appendix-b-troubleshoot)
+- [Appendix C: Determine Network Adapter of Your VirtualBox Sandbox](#appendix-c-determine-network-adpater-of-your-virtualbox-sandbox)
 
 <!--- Add the following link to the outline once Azure is available - [Explore Sandbox in Azure](#explore-sandbox-in-azure)--->
 
 ## Environment setup
 
 This is the administrative section to get started with the Hortonworks Sandbox environment. Generally, this will only be done once.
-
-### Determine Network Adapter of Your Sandbox
-
-Once the Sandbox VM is installed, it attaches to a virtual network. There are 8 different network modes, but the default network your sandbox will attach to is NAT. We will cover relevant networks for our tutorial use cases: NAT and Bridged Adapter.
-
-**Network Address Translation (NAT)**
-
-By default, the VM attaches to Network Address Translation (NAT) network mode. The guest's IP address by default translates over to the host's IP address. NAT allows for the guest system to connect to external devices on external networks, but external devices cannot access the guest system. Alternatively, VirtualBox can make selected services on the guest reachable to the outside world by port forwarding. VirtualBox listens to certain ports on the host, then re-sends packets that arrive at those ports to the guest on the same port or different port.
-
-How we are forwarding all incoming traffic from a specific host interface to the guest in our sandbox is by specifying an IP of that host like the following:
-
-~~~bash
-VBoxManage modifyvm "Hortonworks Sandbox HDP 2.6.5" --natpf1 "Sandbox Splash Page,tcp,127.0.0.1,1080,,1080"
-.
-.
-.
-VBoxManage modifyvm "Hortonworks Sandbox HDP 2.6.5" --natpf1 "Sandbox Host SSH,tcp,127.0.0.1,2122,,22"
-~~~
-
-You can find the set network by opening the VM **settings** and then select the **network** tab.
-
-**Bridged Networking**
-
-In this mode, the guest receives direct access to the network, which the host has been connected. The router assigns an IP address to the guest. On that network, instead of there being just the host IP address visible, now the guest IP address is visible too. Thus, external devices, such as MiNiFi running on a Raspberry Pi, are able to connect to the guest via it's IP address.
-
-When would you need this mode? It is needed for Connected Data Architecture. To configure this mode, first power down your guest vm, click settings, switch to the network tab and change the **attach to** network to be **Bridged Adapter**.
-
-![Bridged Adapter](assets/bridged_adapter.jpg)
-
-> WARNING: first make sure your computer is connected to a router, else this feature will not work cause there is no router to assign an IP address to the guest vm.
 
 ### Determine IP Address of Your Sandbox
 
@@ -88,15 +60,9 @@ Once the Sandbox VM or container is installed, it settles to the host of your en
 
 If you're using **VirtualBox** or **VMWare**, you can confirm the IP address by waiting for the installation to complete and confirmation screen will tell you the IP address your sandbox resolves to. For example:
 
-![Host Address of Sandbox Environment](assets/guest_vm_NAT_mode_hdp265_83.png)
+![guest-vm-hdp-welcome-screen](assets/guest-vm-hdp-welcome-screen.jpg)
 
-> **Note:** Guest VM Welcome Window for NAT Sandbox
-
-![Host Address of Sandbox Environment](assets/guest_vm_BRIDGED_mode_welcome_screen.jpg)
-
-> **Note:** Guest VM Welcome Window for BRIDGED Sandbox
-
-<!--- > **Note:** If you're using Azure, your IP address is located on the dashboard, refer to [**Set a Static IP**](https://hortonworks.com/tutorial/sandbox-deployment-and-install-guide/section/4/#set-a-static-ip)--->
+> **Note:** If you're using Azure, your IP address is located on the dashboard, refer to [**Set a Static IP**](https://hortonworks.com/tutorial/sandbox-deployment-and-install-guide/section/4/#set-a-static-ip)
 
 ### Map Sandbox IP to Your Desired Hostname in the Hosts File
 
@@ -114,7 +80,7 @@ Mac, Linux and Windows all have a hosts file. This file once configured enables 
 
 - Run Notepad as **administrator**.
 - Open **hosts** file located in: ```c:\Windows\System32\drivers\etc\hosts```
-- Add ```{IP-Address} localhost sandbox.hortonworks.com sandbox-hdp.hortonworks.com sandbox-hdf.hortonworks.com```
+- Add ```{IP-Address}   localhost   sandbox.hortonworks.com   sandbox-hdp.hortonworks.com   sandbox-hdf.hortonworks.com```
 - Save the file
 
 > IMPORTANT: Replace **{IP-Address}** with [Sandbox IP Address](#determine-ip-address-of-your-sandbox)
@@ -123,17 +89,17 @@ Mac, Linux and Windows all have a hosts file. This file once configured enables 
 
  Refer to [Login Credentials](#login-credentials) for list of users and passwords. You can also login using **root**, using password **hadoop**, which may require you to change the password - remember it!
 
- If you login using credentials other than **root**, you may be required to use **sudo** before the command. For example: ```sudo ambari-server status```.
+ If you login using credentials other than **root**, you will be required to use **sudo** before the command. For example: ```sudo ambari-server status```.
 
 #### Secure Shell Method:
 
 Open your terminal (mac/linux) or Git Bash (Windows). Type the following command to access the Sandbox through **ssh user@hostname -p port**. For example: ```ssh root@sandbox-hdp.hortonworks.com -p 2222```
 
-![Mac Terminal SSH](assets/secure_shell_sandbox_learning_the_ropes_sandbox.jpg)
+![secure-shell-sandbox](assets/secure-shell-sandbox.jpg)
 
 #### Shell Web Client Method:
 
-The **shell web client** is also known as **shell-in-a-box**. It's an easy way to issue shell commands without needing to install additional software. It uses **port 4200**, for example:  [sandbox-hdp.hortonworks.com:4200](http://sandbox-hdp.hortonworks.com:4200)
+The **shell web client** is also known as **Shell-in-a-Box**. It's an easy way to issue shell commands without needing to install additional software. It uses **port 4200**, for example:  [sandbox-hdp.hortonworks.com:4200](http://sandbox-hdp.hortonworks.com:4200)
 
 #### Send Data Between Sandbox and Local Machine
 
@@ -151,7 +117,7 @@ To send data from local machine to sandbox, the local machine directory path com
 
 ## Welcome Page
 
-The Sandbox Welcome Page is also known as the **Splash Page**. It runs on port number **:1080**. To open it, use your host address and append the port number. For example: [sandbox-hdp.hortonworks.com:1080/](http://sandbox-hdp.hortonworks.com:1080/)
+The Sandbox Welcome Page is also known as the **Splash Page**. It runs on port number **:1080**. To open it, use your host address and append the port number. For example: [http://sandbox-hdp.hortonworks.com:1080/](http://sandbox-hdp.hortonworks.com:1080/splash.html)
 
 It looks like this:
 
@@ -163,7 +129,7 @@ It looks like this:
 
 ## Explore Ambari
 
-- Ambari Dashboard runs on port **:8080**. For example, [sandbox-hdp.hortonworks.com:8080](http://sandbox-hdp.hortonworks.com:8080)
+- Ambari Dashboard runs on port **:8080**. For example, [http://sandbox-hdp.hortonworks.com:8080](http://sandbox-hdp.hortonworks.com:8080)
 - Login to as **admin**, refer to [Admin Password Reset](#admin-password-reset)
 - Select **Manage Ambari**
 
@@ -171,17 +137,16 @@ It looks like this:
 
 The following screen will be displayed:
 
-![Lab0_3](assets/ambari_welcome_learning_the_ropes_sandbox.jpg)
+![Lab0_3](assets/ambari-welcome-learning-the-ropes-sandbox.jpg)
 
-1. “**Operate Your Cluster**” will take you to the Ambari Dashboard which is the primary UI for Hadoop Operators
-2. “**Manage Users + Groups**” allows you to add & remove Ambari users and groups
-3. “**Clusters**” allows you to grant permission to Ambari users and groups
+1. “**Dashboard**” will take you to the Ambari Dashboard which is the primary UI for Hadoop Operators
+2. “**Administration of Users**” allows you to add & remove Ambari users and groups
+3. “**Cluster Management**” allows you to grant permission to Ambari users and groups
 4. “**Ambari User Views**” list the set of Ambari Users views that are part of the cluster
-5. “**Deploy Views**” provides administration for adding and removing Ambari User Views
 
 - Click on **Go to Dashboard** and you should see a similar screen:
 
-![Lab0_4](assets/Lab0_4.png)
+![Lab0_4](assets/Lab0-4.jpg)
 
 Explorer by click on:
 
@@ -189,7 +154,7 @@ Explorer by click on:
 
 and then on:
 
-2\.  **Dashboard**, **Services**, **Hosts**, **Alerts**, **Admin** and User Views icon (represented by 3×3 matrix ) to become familiar with the Ambari resources available to you.
+2\.  **Background Operations**,**Alerts**, **Admin** and User **Views**, icon (represented by 3×3 matrix ) to become familiar with the Ambari resources available to you.
 
 <!--- ## Explore Sandbox in Azure
 
@@ -203,7 +168,7 @@ Similar to the [Welcome Page](#welcome-page), we will append port number **:8888
 
 Open your terminal (mac and linux) or putty (windows). Here again, `host` is the public IP address provided by Azure. Give the username and password that you provided while deploying the sandbox on Azure. Use the following command to access the Sandbox through SSH:
 
-~~~
+~~~bash
 # Usage:
   ssh <username>@<host> -p 22;
 ~~~
@@ -216,7 +181,7 @@ Open your terminal (mac and linux) or putty (windows). Here again, `host` is the
 
 Open your web browser. Replace the following text by your `host` into your browser to access the Sandbox through the shell. Provide the same username and password that you gave while deploying the sandbox on Azure.
 
-~~~
+~~~bash
 # Usage:
   #  _host_:4200
 ~~~
@@ -250,7 +215,7 @@ ambari-agent restart
 ## Further Reading
 
 - [Hadoop Tutorial - Getting Started with HDP](https://hortonworks.com/tutorial/hadoop-tutorial-getting-started-with-hdp/)
-- [HDP Documentation](https://docs.hortonworks.com/HDPDocuments/HDP2/HDP-2.6.5/index.html)
+- [HDP Documentation](https://docs.hortonworks.com/HDPDocuments/HDP3/HDP-3.0.1/index.html)
 - [Hortonworks Documentation](http://docs.hortonworks.com/)
 
 ## Appendix A: Reference Sheet
@@ -320,7 +285,7 @@ Login using [shell web client](http://sandbox-hdp.hortonworks.com:4200) and exec
 Due to possibility of passwords being vulnerable to being hacked, we recommend
 you change your Ambari admin password to be unique.
 
-1. Open [shell web client](http://sandbox-hdp.hortonworks.com:4200) (aka shell-in-a-box):
+1. Open [Shell Web Client](http://sandbox-hdp.hortonworks.com:4200) (aka Shell-in-a-Box):
 
 2. The login using credentials: **root** / **hadoop**
 
@@ -337,3 +302,43 @@ you change your Ambari admin password to be unique.
 At times you may encounter a job, query or request that just seems to run forever and does not complete. It may be because it's in the **ACCEPTED** state. A good place to begin looking is in the [ResourceManager](http://sandbox-hdp.hortonworks.com:8088/). If you know a job has completed, but the Resource Manager still thinks it's running - kill it!
 
 ![rm-kill](assets/rm-kill.jpg)
+
+## Appendix C: Determine Network Adapter of Your VirtualBox Sandbox
+
+Once the Sandbox VM is installed, it attaches to a virtual network. There are 8 different network modes, but the default network your sandbox will attach to is NAT. We will cover relevant networks for our tutorial use cases: NAT and Bridged Adapter.
+
+**Network Address Translation (NAT)**
+
+By default, the VM attaches to Network Address Translation (NAT) network mode. The guest's IP address by default translates over to the host's IP address. NAT allows for the guest system to connect to external devices on external networks, but external devices cannot access the guest system. Alternatively, VirtualBox can make selected services on the guest reachable to the outside world by port forwarding. VirtualBox listens to certain ports on the host, then re-sends packets that arrive at those ports to the guest on the same port or different port.
+
+How we are forwarding all incoming traffic from a specific host interface to the guest in our sandbox is by specifying an IP of that host like the following:
+
+~~~bash
+VBoxManage modifyvm "Hortonworks Sandbox HDP 3.0.1" --natpf1 "Sandbox Splash Page,tcp,127.0.0.1,1080,,1080"
+.
+.
+.
+VBoxManage modifyvm "Hortonworks Sandbox HDP 3.0.1" --natpf1 "Sandbox Host SSH,tcp,127.0.0.1,2122,,22"
+~~~
+
+You can find the set network by opening the VM **settings** and then select the **network** tab.
+
+**Bridged Networking**
+
+In this mode, the guest receives direct access to the network, which the host has been connected. The router assigns an IP address to the guest. On that network, instead of there being just the host IP address visible, now the guest IP address is visible too. Thus, external devices, such as MiNiFi running on a Raspberry Pi, are able to connect to the guest via it's IP address.
+
+When would you need this mode? It is needed for Connected Data Architecture(CDA). To configure this mode, first power down your guest vm, click settings, switch to the network tab and change the **attach to** network to be **Bridged Adapter**.
+
+![Bridged Adapter](assets/bridged_adapter.jpg)
+
+> WARNING: First make sure your computer is connected to a router, else this feature will not work cause there is no router to assign an IP address to the guest vm.
+
+If you're using **VirtualBox** or **VMWare**, you can confirm the IP address by waiting for the installation to complete and confirmation screen will tell you the IP address your sandbox resolves to. For example:
+
+![Host Address of Sandbox Environment](assets/guest-vm-NAT-mode.jpg)
+
+ >> **Note:** Guest VM Welcome Window for NAT Sandbox --->
+
+![Host Address of Sandbox Environment](assets/guest-vm-bridged-mode-welcome-screen.jpg)
+
+ >> **Note:** Guest VM Welcome Window for BRIDGED Sandbox --->

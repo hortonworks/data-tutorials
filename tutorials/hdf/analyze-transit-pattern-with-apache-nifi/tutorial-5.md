@@ -204,7 +204,9 @@ ${Direction_of_Travel:isEmpty():not():and(
 
 | Property  | Value  |
 |:---|:---|
-| `ValidateGooglePlacesData`  | `${city:isEmpty():not():and(${neighborhoods_nearby:isEmpty():not()})}`  |
+| Routing Strategy  | Route to 'matched' if all match |
+| `IfCityIsNotEmpty`  | `${city:isEmpty():not()}`  |
+| `IfNeighborhoodNotEmpty`  | `${neighborhoods_nearby:isEmpty():not()}`  |
 
 ~~~java
 //Note: If after completing step 2 your processor shows a triangle with an exclamation mark stating that the ValidateGooglePLacesData is invalid, copy and paste into the value section of the property tab.
@@ -221,7 +223,7 @@ ${city:isEmpty():not():and(
 
 1\. Add the **Output Port** ![output_port](assets/tutorial-5-build-a-nifi-process-group-to-validate-the-geoenriched-data/output_port.png) component onto the NiFi canvas. Name it `SendGeoEnrichedTransitEvents`.
 
-2\. Connect **ValidateGooglePlacesData** to **SendGeoEnrichedTransitEvents** output port. When the Create Connection window appears, verify **ValidateGooglePlacesData** checkbox is checked, if not check it. Click Add.
+2\. Connect **ValidateGooglePlacesData** to **SendGeoEnrichedTransitEvents** output port. When the Create Connection window appears ensure that the **For Relationship** field is **Matched**. Finally, click Add.
 
 ![ParseTransitEvents_dataflow_pg](assets/tutorial-5-build-a-nifi-process-group-to-validate-the-geoenriched-data/RouteOnAttribute_to_SendGeoEnrichedTransitEvents.png)
 

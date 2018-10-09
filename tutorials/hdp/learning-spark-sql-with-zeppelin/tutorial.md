@@ -7,7 +7,7 @@ persona: Data Scientist & Analyst
 source: Hortonworks
 use case: Data Discovery
 technology: Apache Spark, Apache Zeppelin
-release: hdp-2.6.5
+release: hdp-3.0.0
 environment: Sandbox
 product: HDP
 series: HDP > Develop with Hadoop > Apache Spark
@@ -27,8 +27,9 @@ The lab is part of our Apache Zeppelin based lab series, providing an intuitive 
 
 - Downloaded and deployed the [Hortonworks Data Platform (HDP)](https://hortonworks.com/downloads/#sandbox) Sandbox
 - [Getting Started with Apache Zeppelin](https://hortonworks.com/tutorial/getting-started-with-apache-zeppelin/)
-- Having basic knowledge of [Scala](http://www.dhgarrette.com/nlpclass/scala/basics.html). The Zeppelin notebook uses basic  syntax
+- Having basic knowledge of [Scala](http://www.dhgarrette.com/nlpclass/scala/basics.html), the Zeppelin notebook uses basic  syntax
 - Review [Learning the Ropes of HDP Sandbox](https://hortonworks.com/tutorial/learning-the-ropes-of-the-hortonworks-sandbox/)
+- [Create Shell Interpreter](https://hortonworks.com/tutorial/getting-started-with-apache-zeppelin/#creating-an-interpreter)
 
 ## Outline
 
@@ -60,7 +61,7 @@ A Dataset is a distributed collection of data. Dataset provides the benefits of 
 
 A DataFrame is a Dataset organized into named columns. It is conceptually equivalent to a table in a relational database or a data frame in R/Python, but with richer optimizations under the hood. DataFrames can be constructed from a wide array of sources such as: structured data files, tables in Hive, external databases, or existing RDDs. The DataFrame API is available in Scala, Java, Python, and R. In Scala and Java, a DataFrame is represented by a Dataset of Rows. In the Scala API, DataFrame is simply a type alias of Dataset[Row]. (Note that in Scala type parameters (generics) are enclosed in square brackets.)
 
-Throughout this document, we will often refer to Scala/Java Datasets of Rows as DataFrames. [Source](http://spark.apache.org/docs/2.0.0/sql-programming-guide.html#datasets-and-dataframes).
+Throughout this document, we will often refer to Scala/Java Datasets of Rows as DataFrames. You can view the reference documentation at [Apache Spark](http://spark.apache.org/docs/2.0.0/sql-programming-guide.html#datasets-and-dataframes).
 
 ### Dataset description
 
@@ -116,7 +117,7 @@ Making use of Zeppelin's visualization tools let's compare the total number of d
 
 ![flightsview-visualization-preview](assets/flightsview-visualization-preview.jpg)
 
-Great! we found what we were looking for. Now that we know the basics we can extrpolate some more useful data; for example, we would like to know when the optimal time to travel is:
+Great! we found what we were looking for. Now that we know the basics we can extrapolate some more useful data; for example, we would like to know when the optimal time to travel is:
 
 ![delay-per-hour](assets/delay-per-hour.jpg)
 
@@ -169,25 +170,25 @@ To import the notebook, go to the Zeppelin home screen.
 3\. Copy and paste the following URL into the **Note URL**
 
 ~~~text
-https://raw.githubusercontent.com/hortonworks/data-tutorials/master/tutorials/hdp/learning-spark-sql-with-zeppelin/assets/Learning%20Spark%20SQL.json
+https://github.com/hortonworks/data-tutorials/raw/dev/tutorials/hdp/learning-spark-sql-with-zeppelin/assets/Learning%20Spark%20SQL.json
 ~~~
 
 4\. Click on **Import Note**
 
 Once your notebook is imported, you can open it from the Zeppelin home screen by:
 
-5\. Clicking **Clicking on the Learning Spark SQL**
+5\. Clicking on **Clicking on the Learning Spark SQL**
 
-Once the **Learning to Spark SQL** notebook is up, follow all the directions within the notebook to complete the tutorial.
+Once the **Learning Spark SQL** notebook is up, [bind the Shell Interpreter](https://hortonworks.com/tutorial/getting-started-with-apache-zeppelin/#binding-an-interpreter) to the **Learning Spark SQL** notebook. Follow all the directions within the notebook to complete the tutorial.
 
 ## Summary
 
-Once you have completed part one and part two of the lab you should have a basic toolset to start exploring new datasets using a high-level  programatic Dataset or DataFrame APIs, or a SQL API. Both APIs provide the same performance while giving you the choice to choose one or both to accomplish a task demanding high performance data exploration, wrangling, munging, and visualization.
+Once you have completed part one and part two of the lab you should have a basic toolset to start exploring new datasets using a high-level programmatic Dataset or DataFrame APIs, or a SQL API. Both APIs provide the same performance while giving you the choice to choose one or both to accomplish a task demanding high performance data exploration, wrangling, munging, and visualization.
 
 ## Further Reading
 
 - You may want to checkout a short introductory tutorial on [Machine Learning with Spark](https://hortonworks.com/tutorial/intro-to-machine-learning-with-apache-spark-and-apache-zeppelin/).
-- [Predictiong Airline Delays using SparkR](https://hortonworks.com/tutorial/predicting-airline-delays-using-sparkr/)
+- [Predicting Airline Delays using SparkR](https://hortonworks.com/tutorial/predicting-airline-delays-using-sparkr/)
 - [Hortonworks Community Connection (HCC)](https://community.hortonworks.com/spaces/85/data-science.html?type=question) is a great resource for questions and answers on Spark, Data Analytics/Science, and many more Big Data topics.
-- [Hortonworks Apache Spark Docs](https://docs.hortonworks.com/HDPDocuments/HDP2/HDP-2.6.5/bk_spark-component-guide/content/ch_developing-spark-apps.html) - official Spark documentation.
-- [Hortonworks Apache Zeppelin Docs](https://docs.hortonworks.com/HDPDocuments/HDP2/HDP-2.6.5/bk_zeppelin-component-guide/content/ch_using_zeppelin.html) - official Zeppelin documentation.
+- [Hortonworks Apache Spark Overview](https://docs.hortonworks.com/HDPDocuments/HDP3/HDP-3.0.1/spark-overview/content/analyzing_data_with_apache_spark.html)
+- [Hortonworks Apache Zeppelin Overview](https://docs.hortonworks.com/HDPDocuments/HDP3/HDP-3.0.1/zeppelin-overview/content/overview.html)

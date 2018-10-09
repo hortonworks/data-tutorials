@@ -10,14 +10,12 @@ title: Schema Registry Architecture
 
 We should now have some understanding of the benefits that Schema Registry provides a modern data architecture.  Let's take a closer look at the main components that make up the registry.
 
-
 ## Outline
 
--   [Main Components](#main-components)
--   [Schema Entities](#schema-entities)
--   [Integration with HDF](#integration-with-hdf)
--   [Next: Using the Web Interface](#next-using-the-web-interface)
-
+- [Main Components](#main-components)
+- [Schema Entities](#schema-entities)
+- [Integration with HDF](#integration-with-hdf)
+- [Next: Using the Web Interface](#next-using-the-web-interface)
 
 ## Main Components
 
@@ -48,7 +46,6 @@ Schema Group | A logical grouping of similar schemas. A Schema Group can be base
 Schema Metadata	| Metadata associated with a named schema. A metadata definition is applied to all the schema versions that are assigned to it. | Key metadata elements include: Schema Name, Schema Type, Description, Compatibility Policy, Serializers/Deserializers
 Schema Version | The versioned schema (the actual schema text) associated with a schema metadata definition. | (Schema text example in following sections)
 
-
 ## Integration with HDF
 
 When Schema Registry is paired with other services available as part of the Hortonworks DataFlow (HDF), integration with Schema Registry is baked in.
@@ -58,7 +55,6 @@ Component | Schema Registry Integration
 NiFi | New processors and controller services in NiFi interact with Schema Registry.  This allows creating flows using drag-and-drop processors that grant the benefits mentioned in the previous section without writing any code.
 Kafka | A Kafka serializer and deserializer that uses Schema Registry is included with Kafka, allowing events to be marshalled and unmarshalled automatically.
 Streaming Analytics Manager (SAM) | Using a drag-and-drop paradigm to create processing jobs, SAM will automatically infer schema from data sources and sinks, ensuring that data expected by connected services are compatible with one another.
-
 
 ## Next: Using the Web Interface
 

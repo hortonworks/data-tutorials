@@ -33,9 +33,13 @@ If you prefer to build the dataflow manually step-by-step, continue on to **Appr
 
 ### 1.1 Create Label for Process Group
 
-1\. Add a Label ![label_icon](assets/tutorial-4-build-nifi-process-group-to-parse-transit-events/label_icon.png) onto the NiFi canvas for the new process group. Right click, **Change color** to **Blue**.
+1\. Return to the NiFi root level by clicking on the Nifi Flow label at the lower left corner:
 
-2\. Right click, select configure and name it `Extract Transit Key Values pairs (Timestamp, Direction, Latitude, Longitude, Vehicle_ID, Vehicle_Speed) From XML FlowFiles using XPath Expression`. Choose Font Size to `18px`.
+![back-root](assets/tutorial-4-build-nifi-process-group-to-parse-transit-events/back-root.jpg)
+
+2\. Add a Label ![label_icon](assets/tutorial-4-build-nifi-process-group-to-parse-transit-events/label_icon.png) onto the NiFi canvas for the new process group. Right click, **Change color** to **Blue**.
+
+3\. Right click, select configure and name it `Extract Transit Key Values pairs (Timestamp, Direction, Latitude, Longitude, Vehicle_ID, Vehicle_Speed) From XML FlowFiles using XPath Expression`. Choose Font Size to `18px`.
 
 ![label_for_simulatexmltransitevents](assets/tutorial-4-build-nifi-process-group-to-parse-transit-events/label_parsetransitevents.png)
 
@@ -157,7 +161,7 @@ If you prefer to build the dataflow manually step-by-step, continue on to **Appr
 
 ![parsetransitevents_pg](assets/tutorial-4-build-nifi-process-group-to-parse-transit-events/started_parsetransitevents_pg.png)
 
-2\. Double click on **ParseTransitEvents** process group. Right click on the **ExtractTransitObservations** processor, select **Data Provenance**.
+2\. Double click on **ParseTransitEvents** process group. Right click on the **ExtractTransitObservations** processor, select **View Data Provenance**.
 
 ![extracttransitobservations_data_provenance](assets/tutorial-4-build-nifi-process-group-to-parse-transit-events/extracttransitobservations_data_provenance.png)
 

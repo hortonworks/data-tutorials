@@ -10,30 +10,30 @@ The Azure cloud infrastructure has become a common place for users to deploy vir
 
 ## Prerequisites
 
--   Must have a [Microsoft Azure](https://azure.microsoft.com) account
+- Must have a [Microsoft Azure](https://azure.microsoft.com) account
 
 ## Outline
 
--   [Create Hortonworks Data Platform Sandbox in Azure](#create-hortonworks-data-platform-sandbox-in-azure)
--   [Creating the Sandbox](#creating-the-sandbox)
--   [Configure SSH Tunneling](#configure-ssh-tunneling)
-    -   [Using SSH](#using-ssh)
-    -   [Using PuTTY](#using-putty)
--   [Splash Screen](#splash-screen)
--   [Summary](#summary)
--   [Further Reading](#further-reading)
+- [Create Hortonworks Data Platform Sandbox in Azure](#create-hortonworks-data-platform-sandbox-in-azure)
+- [Creating the Sandbox](#creating-the-sandbox)
+- [Configure SSH Tunneling](#configure-ssh-tunneling)
+- [Using SSH](#using-ssh)
+  - [Using PuTTY](#using-putty)
+- [Splash Screen](#splash-screen)
+- [Summary](#summary)
+- [Further Reading](#further-reading)
 
 ## Create Hortonworks Data Platform Sandbox in Azure
 
--   Go to [Microsoft Azure Marketplace](https://azuremarketplace.microsoft.com/en-us/marketplace)
--   Enter **Hortonworks** in the search bar and click search icon
--   Locate **Hortonworks Data Platform (HDP) Sandbox** and click **Get it now**
+- Go to [Microsoft Azure Marketplace](https://azuremarketplace.microsoft.com/en-us/marketplace)
+- Enter **Hortonworks** in the search bar and click search icon
+- Locate **Hortonworks Data Platform (HDP) Sandbox** and click **Get it now**
 
 ![azure-marketplace](assets/azure-marketplace.jpg)
 
 >Note: You may be prompted to sign in to Microsoft Azure Marketplace.
 
--   Click **Continue** to confirm you want to create application in Azure
+- Click **Continue** to confirm you want to create application in Azure
 
 ![azure-marketplace-confirm](assets/azure-marketplace-confirm.jpg)
 
@@ -47,13 +47,13 @@ A few forms need to be filled out:
 
 ### Basics Form
 
--   **Name**: This is the name you want to use to reference the machine.  In our example, we use `MySandbox`
--   **VM disk type**: Type if storage you want to use. In our example, we use standard disks (**HDD**)
--   **User name**: The name of the user account that will be used to log into the machine.  Throughout these tutorials, we will use azure as the user name.
--   **Authentication type**: By default, the machine will be deployed and allow you to connect via SSH key or password.  In this example, we opt to use a password.
--   **Subscription**: The subscription to deploy the machine under.  Select one already in your list.
--   **Resource group**: The name of the resource group to create, or use an existing one. In our example, we create a new group.
--   **Location**: Which region in the Azure offering to deploy the machine to.
+- **Name**: This is the name you want to use to reference the machine.  In our example, we use `MySandbox`
+- **VM disk type**: Type if storage you want to use. In our example, we use standard disks (**HDD**)
+- **User name**: The name of the user account that will be used to log into the machine.  Throughout these tutorials, we will use azure as the user name.
+- **Authentication type**: By default, the machine will be deployed and allow you to connect via SSH key or password.  In this example, we opt to use a password.
+- **Subscription**: The subscription to deploy the machine under.  Select one already in your list.
+- **Resource group**: The name of the resource group to create, or use an existing one. In our example, we create a new group.
+- **Location**: Which region in the Azure offering to deploy the machine to.
 
 >Note: Make sure to write down or remember your username and password.  If using SSH, ensure you have the corresponding private key.  Otherwise, you will not be able to log in to the machine.
 
@@ -73,8 +73,8 @@ Choose optional features that you would like. In general, you may use the defaul
 
 In our example, we decided to modify the following features:
 
--   **Storage**: we do not want managed disks
--   **Public IP Address**: use **Static** Assignment
+- **Storage**: we do not want managed disks
+- **Public IP Address**: use **Static** Assignment
 
 ![azure-form3](assets/azure-form3.jpg)
 
@@ -83,7 +83,7 @@ In our example, we decided to modify the following features:
 ### Summary Form
 
 Look over the Offer details (pricing) and virtual machine summary.
--   Click **Create** to begin the deployment process
+- Click **Create** to begin the deployment process
 
 This process will take a few minutes.  After deployment is complete, we can move on to connecting to the sandbox.
 
@@ -121,10 +121,10 @@ Host azureSandbox
 
 >Note: Spacing and capitalization is important.
 
--   Replace **azure-username** with user name used during [sandbox creation](#basics-form)
--   Replace **azure-public-ip** with public IP provided
+- Replace **azure-username** with user name used during [sandbox creation](#basics-form)
+- Replace **azure-public-ip** with public IP provided
  ![azure-public-ip](assets/azure-public-ip.jpg)
--   Save and close file
+- Save and close file
 
 You are now able to SSH into the sandbox on Azure by using the command:
 
@@ -148,7 +148,7 @@ Open PuTTY.  A window titled "**PuTTY Configuration**" will open.  In the left s
 
 We want to add a forwarded port.  In the "**Source port**" field, enter `8080`.  In the "**Destination**" field, enter `127.0.0.1:8080`.  Click on "**Add**" to add this port forward.  Do the same for the following common sandbox ports, plus any custom ones you would like.
 
-```
+```bash
 8080 -> 127.0.0.1:8080
 8088 -> 127.0.0.1:8088
 8888 -> 127.0.0.1:8888

@@ -8,12 +8,11 @@ title: Trucking IoT Use Case
 
 ## Outline
 
--   [The IoT Use Case](#the-iot-use-case)
--   [Architectural Overview](#architectural-overview)
--   [What is Storm?](#what-is-storm)
--   [Benefits of Storm](#benefits-of-storm)
--   [Next: Storm in Action](#next-storm-in-action)
-
+- [The IoT Use Case](#the-iot-use-case)
+- [Architectural Overview](#architectural-overview)
+- [What is Storm?](#what-is-storm)
+- [Benefits of Storm](#benefits-of-storm)
+- [Next: Storm in Action](#next-storm-in-action)
 
 ## The IoT Use Case
 
@@ -42,7 +41,6 @@ For these critical tasks we use Apache Storm.
 
 The third section represents this case's post-processing step: visualizing the processed data by a web application.
 
-
 ## What is Storm?
 
 [Apache Storm](https://hortonworks.com/apache/storm) is a free and open source data processing engine.  It can process and act on massive volumes of data in real-time, performing virtually any type of operation or computation as data flows through its components.
@@ -51,16 +49,14 @@ Storm exposes a set of components for doing real-time computation. Like how MapR
 
 Storm can be used for processing messages and updating databases (stream processing), doing a continuous query on data streams and streaming the results into clients (continuous computation), parallelizing an intense query like a search query on the fly (distributed RPC), and more.
 
-
 ## Benefits of Storm
 
--   **Broad set of use cases**:  Storm's small set of primitives satisfy a stunning number of use cases.  From processing messages and updating databases to doing continuous query and computation on datastreams to parallelizing a traditionally resource-intensive job like search queries.
--   **Scalable**: Storm scales to handle massive numbers of messages per second.  To scale a topology, one can add machines to the cluster or increase the number of parallel threads spawned by Storm.
--   **Guarantee no data loss**: Real-time systems must have strong guarantees about data being processed successfully and not allow data to be lost.  Storm guarantees processing of every message.
--   **Robust**: It is an explicit goal of the Storm project to make the user experience of managing Storm clusters as painless as possible.  This is in contract to other systems that are difficult to manage and deploy, especially in secured environments.
--   **Fault-tolerant**: Storm makes sure that a computation can run forever, reassigning tasks as necessary if something in the system fails.
--   **Development language agnostic**: Storm jobs and components can be defined in any language, making Storm accessible to nearly any developer.
-
+- **Broad set of use cases**:  Storm's small set of primitives satisfy a stunning number of use cases.  From processing messages and updating databases to doing continuous query and computation on datastreams to parallelizing a traditionally resource-intensive job like search queries.
+- **Scalable**: Storm scales to handle massive numbers of messages per second.  To scale a topology, one can add machines to the cluster or increase the number of parallel threads spawned by Storm.
+- **Guarantee no data loss**: Real-time systems must have strong guarantees about data being processed successfully and not allow data to be lost.  Storm guarantees processing of every message.
+- **Robust**: It is an explicit goal of the Storm project to make the user experience of managing Storm clusters as painless as possible.  This is in contract to other systems that are difficult to manage and deploy, especially in secured environments.
+- **Fault-tolerant**: Storm makes sure that a computation can run forever, reassigning tasks as necessary if something in the system fails.
+- **Development language agnostic**: Storm jobs and components can be defined in any language, making Storm accessible to nearly any developer.
 
 ## Next: Storm in Action
 

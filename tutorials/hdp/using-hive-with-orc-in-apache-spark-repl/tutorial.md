@@ -7,7 +7,7 @@ persona: Data Scientist & Analyst
 source: Hortonworks
 use case: Predictive
 technology: Apache Hive, Apache Spark, Apache ORC
-release: hdp-2.6.5
+release: hdp-3.0.0
 environment: Sandbox
 product: HDP
 series: HDP > Develop with Hadoop > Apache Spark
@@ -32,7 +32,7 @@ Spark SQL uses the Spark engine to execute SQL queries either on data sets persi
 
 This tutorial is a part of series of hands-on tutorials to get you started with HDP using Hortonworks sandbox. Please ensure you complete the prerequisites before proceeding with this tutorial.
 
-- Downloaded and Installed the Latest [Hortonworks DataPlatform](https://hortonworks.com/products/sandbox/) Sandbox
+- Downloaded and deployed the [Hortonworks Data Platform (HDP)](https://hortonworks.com/downloads/#sandbox) Sandbox
 - [Learning the Ropes of the HDP Sandbox](https://hortonworks.com/tutorial/learning-the-ropes-of-the-hortonworks-sandbox/)
 
 This tutorial will be using Spark 2.x API syntax for all the examples.
@@ -78,11 +78,11 @@ Normally, we would have directly loaded the data in the ORC table we created abo
 
 ### Download the Dataset
 
-In preparation for this tutorial you need to download two files, people.txt and people.json into your  Sandbox's **tmp** folder. The commands below should be typed into [Shell-in-a-Box](sandbox-hdp.hortonworks.com:4200)
+In preparation for this tutorial you need to download two files, people.txt and people.json into your  Sandbox's **tmp** folder. The commands below should be typed into [Shell-in-a-Box](http://sandbox-hdp.hortonworks.com:4200/)
 
 1\. Assuming you start as `root` user:
 
-~~~ bash
+~~~bash
 cd /tmp
 ~~~
 
@@ -114,12 +114,12 @@ hdfs dfs -put /tmp/yahoo_stocks.csv /tmp/yahoo_stocks.csv
 
 ~~~bash
 #Verify that files were move to HDF
-hdfs dfs -ls /tmp
+hdfs dfs -ls /tmp | grep yahoo_stocks.csv
 ~~~
 
 6\. Launch the Spark Shell:
 
-~~~ bash
+~~~bash
 spark-shell
 ~~~
 
@@ -140,20 +140,15 @@ Now we are ready to start the examples.
 
 Instantiating a SparkSession with Hive support:
 
-~~~ scala
-val spark = SparkSession
-   .builder()
-   .enableHiveSupport()
-   .getOrCreate()
+~~~scala
+val spark = SparkSession.builder().enableHiveSupport().getOrCreate()
 ~~~
 
 ## Creating ORC Tables
 
 Specifying `as orc` at the end of the SQL statement below ensures that the Hive table is stored in the ORC format.
 
-~~~ scala
-spark.sql("DROP TABLE yahoo_orc_table")
-
+~~~scala
 spark.sql("CREATE TABLE yahoo_orc_table (date STRING, open_price FLOAT, high_price FLOAT, low_price FLOAT, close_price FLOAT, volume INT, adj_price FLOAT) stored as orc")
 ~~~
 
@@ -161,13 +156,13 @@ spark.sql("CREATE TABLE yahoo_orc_table (date STRING, open_price FLOAT, high_pri
 
 With the command below we instantiate an RDD:
 
-~~~ scala
+~~~scala
 val yahoo_stocks = sc.textFile("/tmp/yahoo_stocks.csv")
 ~~~
 
 To preview data in `yahoo_stocks` type:
 
-~~~ scala
+~~~scala
 yahoo_stocks.take(10)
 ~~~
 
@@ -186,25 +181,25 @@ res4: Array[String] = Array(Date,Open,High,Low,Close,Volume,Adj Close, 2015-04-2
 
 Let’s assign the first row of the RDD above to a new variable:
 
-~~~ scala
+~~~scala
 val header = yahoo_stocks.first
 ~~~
 
 Let’s dump this new RDD in the console to see what we have here:
 
-~~~ scala
+~~~scala
 header
 ~~~
 
 Now we need to separate the data into a new RDD where we do not have the header above and
 
-~~~ scala
+~~~scala
 val data = yahoo_stocks.mapPartitionsWithIndex { (idx, iter) => if (idx == 0) iter.drop(1) else iter }
 ~~~
 
 the first row to be seen is indeed only the data in the RDD
 
-~~~ scala
+~~~scala
 data.first
 ~~~
 
@@ -212,7 +207,7 @@ data.first
 
 Let's create the schema, copy and paste the command below:
 
-~~~ scala
+~~~scala
 case class YahooStockPrice(date: String, open: Float, high: Float, low: Float, close: Float, volume: Integer, adjClose: Float)
 ~~~
 
@@ -220,19 +215,19 @@ case class YahooStockPrice(date: String, open: Float, high: Float, low: Float, c
 
 Create an RDD of Yahoo Stock Price objects and register it as a table.
 
-~~~ scala
+~~~scala
 val stockprice = data.map(_.split(",")).map(row => YahooStockPrice(row(0), row(1).trim.toFloat, row(2).trim.toFloat, row(3).trim.toFloat, row(4).trim.toFloat, row(5).trim.toInt, row(6).trim.toFloat)).toDF()
 ~~~
 
 Let’s verify that the data has been correctly parsed by the statement above by dumping the first row of the RDD containing the parsed data:
 
-~~~ scala
+~~~scala
 stockprice.first
 ~~~
 
 If we want to dump more all the rows, we can use:
 
-~~~ scala
+~~~scala
 stockprice.show
 ~~~
 
@@ -264,13 +259,12 @@ scala> stockprice.show
 |2015-04-01|44.45| 44.6|43.95|44.13|14722300|   44.13|
 |2015-03-31|44.82| 45.2|44.42|44.44|10415500|   44.44|
 +----------+-----+-----+-----+-----+--------+--------+
-only showing top 20 rows  
-
+only showing top 20 rows
 ~~~~
 
 To verify the schema, let’s dump the schema:
 
-~~~ scala
+~~~scala
 stockprice.printSchema
 ~~~
 
@@ -293,20 +287,20 @@ root
 Now let’s give this RDD a name, so that we can use it in Spark SQL statements:
 
 ~~~scala
-stockprice.createOrReplaceTempView("yahoo_stocks_temp") 
+stockprice.createOrReplaceTempView("yahoo_stocks_temp")
 ~~~
 
 ### Querying Against the Table
 
 Now that our schema’s RDD with data has a name, we can use Spark SQL commands to query it. Remember the table below is not a Hive table, it is just a RDD we are querying with SQL.
 
-~~~ scala
+~~~scala
 val results = spark.sql("SELECT * FROM yahoo_stocks_temp")
 ~~~
 
 The result set returned from the Spark SQL query is now loaded in the `results` RDD. Let’s pretty print it out on the command line.
 
-~~~ scala
+~~~scala
 results.map(t => "Stock Entry: " + t.toString).collect().foreach(println)
 ~~~
 
@@ -328,13 +322,13 @@ Stock Entry: [1996-04-12,25.24992,43.00008,24.49992,33.0,408720000,1.375]
 
 Now let’s persist back the RDD into the Hive ORC table we created before.
 
-~~~ scala
+~~~scala
 results.write.format("orc").save("yahoo_stocks_orc")
 ~~~
 
 To store results in a hive directory rather than user directory, use this path instead:
 
-~~~ bash
+~~~bash
 results.write.format("orc").save("/apps/hive/warehouse/yahoo_stocks_orc")
 ~~~
 
@@ -344,19 +338,19 @@ Let’s now try to read back the ORC file, we just created back into an RDD
 
 Now we can try to read the ORC file with:
 
-~~~ scala
+~~~scala
 val yahoo_stocks_orc = spark.read.format("orc").load("yahoo_stocks_orc")
 ~~~
 
 Let’s register it as a temporary in-memory table mapped to the ORC table:
 
-~~~ scala
+~~~scala
 yahoo_stocks_orc.createOrReplaceTempView("orcTest")
 ~~~
 
 Now we can verify whether we can query it back:
 
-~~~ scala
+~~~scala
 spark.sql("SELECT * from orcTest").collect.foreach(println)
 ~~~
 

@@ -1,13 +1,13 @@
 ---
 title: Schema Registry in Trucking IoT on HDF
-author: Edgar Orendain
+author: sandbox-team
 tutorial-id: 808
 experience: Beginner
 persona: Developer
 source: Hortonworks
 use case: Streaming
 technology: Schema Registry
-release: hdf-3.1.1
+release: hdf-3.2.0
 environment: Sandbox
 product: HDF
 series: HDF > Develop Data Flow & Streaming Applications > Hello World
@@ -22,8 +22,7 @@ Schema Registry is a centralized repository for schemas and metadata.  In this t
 
 ## Prerequisites
 
--   [Hortonworks DataFlow (HDF) Sandbox Installed](https://hortonworks.com/downloads/#sandbox)
-
+- [Hortonworks DataFlow (HDF) Sandbox Installed](https://hortonworks.com/downloads/#sandbox)
 
 ## Outline
 

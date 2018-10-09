@@ -1,16 +1,16 @@
 ---
 title: Analyze IoT Weather Station Data via Connected Data Architecture
-author: James Medel
+author: sandbox-team
 tutorial-id: 820
 experience: Advanced
-persona: Data Scientist & Analyst
+persona: Data Engineer & Data Scientist
 source: Hortonworks
 use case: Internet of Things
-technology: Apache NiFi, MiNiFi, Raspberry Pi, Apache Zookeeper, Apache HBase, Apache Phoenix
-release: hdp-2.6.5, hdf-3.1.1
+technology: Apache NiFi, Apache MiNiFi, Raspberry Pi, Apache Zookeeper, Apache HBase, Apache Phoenix
+release: hdp-3.0.0, hdf-3.2.0
 environment: Sandbox
-product: HDF
-series: HDF > Develop Data Flow & Streaming Applications > Real World Examples
+product: HDP, HDF
+series: HDP > Hadoop for Data Engineers & Data Scientists > Real World Examples, HDF > Develop Data Flow & Streaming Applications > Real World Examples
 ---
 
 # Analyze IoT Weather Station Data via Connected Data Architecture
@@ -26,6 +26,21 @@ In the tutorial series, you will build an Internet of Things (IoT) Weather Stati
 ![cda-minifi-hdf-hdp-architecture](assets/tutorial1/cda-minifi-hdf-hdp-architecture.png)
 
 **Figure 1:** IoT Weather Station and Connected Data Architecture Integration
+
+### Big Data Technologies used to develop the Application:
+
+- [Raspberry Pi Sense Hat](https://projects.raspberrypi.org/en/projects/getting-started-with-the-sense-hat)
+- [HDF Sandbox](https://hortonworks.com/products/data-platforms/hdf/)
+    - [Apache Ambari](https://ambari.apache.org/)
+    - [Apache NiFi](https://nifi.apache.org/)
+    - [Apache Kafka](http://kafka.apache.org/)
+- [HDP Sandbox](https://hortonworks.com/products/data-platforms/hdp/)
+    - [Apache Ambari](https://ambari.apache.org/)
+    - [Apache Hadoop - HDFS](https://hadoop.apache.org/docs/r3.1.1/)
+    - [Apache HBase](https://hbase.apache.org/)
+    - [Apache Spark](https://spark.apache.org/)
+    - [Apache Kafka](http://kafka.apache.org/)
+    - [Apache Zeppelin](https://zeppelin.apache.org/)
 
 ## Goals And Objectives
 
@@ -47,17 +62,15 @@ By the end of this tutorial series, you will acquire the fundamental knowledge t
 - Raspberry Pi 3 Essentials Kit - On-board WiFi and Bluetooth Connectivity
 - Raspberry Pi Sense Hat
 
-## Hardware Requirements
-
-- At least 12 GB of RAM to run both HDF and HDP Sandboxes on one laptop
-
 ## Prerequisites
 
-- Downloaded and Installed [Docker Engine](https://docs.docker.com/engine/installation/) on Local Machine
-    - Set [Docker Memory to 12GB](https://docs.docker.com/docker-for-mac/#preferences) to run both HDF and HDP Sandboxes on one laptop.
-        - Link above will take you to Docker preferences for Mac. In the Docker documentation, choose your OS.
-- Downloaded Latest [HDF Sandbox](https://hortonworks.com/downloads) for Docker Engine
-- Installed Latest [HDF Sandbox](https://hortonworks.com/tutorial/sandbox-deployment-and-install-guide/section/3/) onto your computer
+- Downloaded and deployed the [Hortonworks Data Platform (HDP)](https://hortonworks.com/downloads/#sandbox)
+- Read through [Learning the Ropes of the HDP Sandbox](https://hortonworks.com/tutorial/learning-the-ropes-of-the-hortonworks-sandbox/) to setup hostname mapping to IP address
+- If you don't have 32GB of dedicated RAM for HDP Sandbox, then refer to [Deploying Hortonworks Sandbox on Microsoft Azure](https://hortonworks.com/tutorial/sandbox-deployment-and-install-guide/section/4/)
+- Enabled Connected Data Architecture:
+  - [Enable CDA for VirtualBox](https://hortonworks.com/tutorial/sandbox-deployment-and-install-guide/section/1/#enable-connected-data-architecture-cda---advanced-topic)
+  - [Enable CDA for VMware](https://hortonworks.com/tutorial/sandbox-deployment-and-install-guide/section/2/#enable-connected-data-architecture-cda---advanced-topic)
+  - [Enable CDA for Docker](https://hortonworks.com/tutorial/sandbox-deployment-and-install-guide/section/3/#enable-connected-data-architecture-cda---advanced-topic)
 
 ## Tutorial Series Overview
 

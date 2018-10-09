@@ -102,7 +102,7 @@ hdfs dfs -mkdir <paths>
 
 ~~~bash
 #Creates a directory called hadoop under users
-hdfs dfs -mkdir /user/hadoop 
+hdfs dfs -mkdir /user/hadoop
 
 #Creates two directories geolocation.csv and trucks.csv under the directory hadoop
 hdfs dfs -mkdir /user/hadoop/geolocation /user/hadoop/trucks

@@ -40,7 +40,7 @@ ssh root@sandbox-hdp.hortonworks.com -p 2222
 > Note: If you're on VMware or Docker, ensure that you map the sandbox IP to the correct hostname in the hosts file.
 [Map your Sandbox IP](https://hortonworks.com/tutorial/learning-the-ropes-of-the-hortonworks-sandbox/#environment-setup)
 
-2\. Copy and paste the commands to download the **geolocation.csv** and **trucks.csv** files. We will use them while we learn file management operations.
+2\. Open another terminal, change your current directory to Downloads then copy and paste the commands to download the **geolocation.csv** and **trucks.csv** files. We will use them while we learn file management operations.
 
 ~~~bash
 #Change your current directory to Downloads
@@ -80,17 +80,17 @@ View web-interface.
 
 The Files View Interface will appear with the following default folders.
 
-![files_view_web_interface](assets/tutorial2/files_view_web_interface.jpg)
+![files_view_web_interface](assets/tutorial2/files-view-web-interface.jpg)
 
-3\. We will create 3 folders using the Files View web-interface. All _three folders_: **geolocations and trucks** will reside in the **hadoop** folder, which resides in **user**. 
+3\. We will create 3 folders using the Files View web-interface. All _three folders_: **hadoop**, **geolocations and trucks** the last two which will reside in the **hadoop** folder, which resides in **user**.
 
-Navigate into the **user** folder. Click the **new folder** button ![new_folder_button](assets/tutorial2/new_folder_button.png), an add new folder window appears and name the folder `hadoop`. Press **enter** or **Add**
+Navigate into the **user** folder. Click the **new folder** button ![new_folder_button](assets/tutorial2/new_folder_button.png), an add new folder window appears and name the folder `hadoop`. Press **enter** or **+Add**
 
 ![folder_name](assets/tutorial2/folder_name.png)
 
-4\. Navigate into the **hadoop** folder. Create the _three folders_: **geolocation and trucks** following the process stated in the previous instruction.
+4\. Navigate into the **hadoop** folder. Create the _two folders_: **geolocation and trucks** following the process stated in the previous instruction.
 
-![hadoop_internal_folders](assets/tutorial2/hadoop_internal_folders.jpg)
+![hadoop_internal_folders](assets/tutorial2/hadoop-internal-folders.jpg)
 
 ### Upload Local Machine Files to HDFS
 
@@ -104,11 +104,11 @@ An Upload file window appears:
 
 2\. Click on the cloud with an arrow. A window with files from your local machine appears, find **geolocation.csv** in the **Downloads/drivers_datasets** folder, select it and then press **open** button.
 
-![geolocation_csv](assets/tutorial2/geolocation_csv.jpg)
+![geolocation_csv](assets/tutorial2/geolocation-csv.jpg)
 
 3\. In Files View, navigate to the **hadoop** folder and enter the **trucks** folder. Repeat the upload file process to upload **trucks.csv**.
 
-![trucks_csv](assets/tutorial2/trucks_csv.jpg)
+![trucks_csv](assets/tutorial2/trucks-csv.jpg)
 
 ### View and Examine Directory Contents
 
@@ -125,7 +125,7 @@ Directory Contents Overview of Columns
 - **Group** is who can make changes to the files/folders
 - **Permissions** establishes who can read, write and execute data
 
-![files_view_web_interface](assets/tutorial2/files_view_web_interface.jpg)
+![files_view_web_interface](assets/tutorial2/files-view-web-interface.jpg)
 
 ## Find Out Space Utilization in a HDFS Directory
 
@@ -133,7 +133,7 @@ In the command line when the directories and files are listed with the `hadoop f
 
 Let's view the size of **geolocation.csv** file. Navigate through `/user/hadoop/geolocation`. How much space has the file utilized? Files View shows **514.3 KB** for **geolocation.csv**.
 
-![geolocation_csv](assets/tutorial2/geolocation_csv.jpg)
+![geolocation_csv](assets/tutorial2/geolocation-csv.jpg)
 
 ## Download File From HDFS to Local Machine
 
@@ -141,7 +141,7 @@ Files View enables users to download files and folders to their local machine wi
 
 Let's download the **geolocation.csv** file to our computer. Click on the file's row, the row's color becomes blue, a group of file operations will appear, select the Download button. The default directory the file downloads to is our **Download** folder on our local machine.
 
-![download_file_hdfs_local_machine](assets/tutorial2/download_file_hdfs_local_machine.jpg)
+![download_file_hdfs_local_machine](assets/tutorial2/download-file-hdfs-local-machine.jpg)
 
 ## Explore Two Advanced Features
 
@@ -151,13 +151,13 @@ File Concatenation merges two files together. If we concatenate **trucks.csv** w
 
 1\. Before we merge the csv files, we must place them in the same folder. Click on **geolocation.csv** row, it will highlight in blue, then press copy and in the copy window appears, select the **trucks** folder and press **Copy** to copy the csv file to it.
 
-![copy_to_trucks](assets/tutorial2/copy_to_trucks.jpg)
+![copy_to_trucks](assets/tutorial2/copy-to-trucks.jpg)
 
 2\. We will merge two large files together by selecting them both and performing concatenate operation. Navigate to the **trucks** folder. Select **geolocation.csv**, hold shift and click on **trucks.csv**. Click the concatenate button. The files will be downloaded into the **Download** folder on your local machine.
 
-![concatenate_csv_files](assets/tutorial2/concatenate_csv_files.jpg)
+![concatenate_csv_files](assets/tutorial2/concatenate-csv-files.jpg)
 
-3\. By default, Files View saves the merged files as a txt file, we can open the file and save it as a csv file. Then open the csv file and you will notice that all the salaries from geolocation are appended to the trucks file.
+3\. By default, Files View saves the merged files as a txt file, we can open the file and save it as a csv file. Then open the csv file and you will notice that all the content from geolocation is appended to the trucks file.
 
 ### Copy Files or Directories recursively
 
@@ -167,11 +167,11 @@ Copy file or directories recursively means all the directory's files and subdire
 
 2\. The **Copy to** window will appear. Select the **tmp** folder, the row will turn blue. If you select the folder icon, the contents of **tmp** become visible. Make sure the row is highlighted blue to do the copy. Click the blue **Copy** button to copy the **hadoop** folder recursively to this new location.
 
-![copy_hadoop_to_tmp](assets/tutorial2/copy_hadoop_to_tmp.jpg)
+![copy_hadoop_to_tmp](assets/tutorial2/copy-hadoop-to-tmp.jpg)
 
 3\. A new copy of the **hadoop** folder and all of its contents can be found in the **tmp** folder. Navigate to **tmp** for verification. Check that all of the **hadoop** folder's contents copied successfully.
 
-![hadoop_copied_to_tmp](assets/tutorial2/hadoop_copied_to_tmp.jpg)
+![hadoop_copied_to_tmp](assets/tutorial2/hadoop-copied-to-tmp.jpg)
 
 ## Summary
 

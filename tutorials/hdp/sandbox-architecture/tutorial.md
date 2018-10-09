@@ -7,7 +7,7 @@ persona: Administrator
 source: Hortonworks
 use case: Single View
 technology: Sandbox
-release: hdp-2.6.5
+release: hdp-3.0.0
 environment: Sandbox
 product: HDP
 series: HDP > Hadoop Administration > Hortonworks Sandbox
@@ -27,8 +27,8 @@ At a high level the Sandbox is a Linux (CentOS 7) Virtual Machine leveraging doc
 
 - Downloaded and deployed the [Hortonworks Data Platform (HDP or HDF)](https://hortonworks.com/downloads/#sandbox) Sandbox
 - Sandbox [Deployment and Install Guide](https://hortonworks.com/tutorial/sandbox-deployment-and-install-guide/)
-- Learning the Ropes of the [HDP Sandbox](https://hortonworks.com/tutorial/learning-the-ropes-of-the-hortonworks-sandbox/)
-- Learning the Ropes of the [HDF Sandbox](https://hortonworks.com/tutorial/getting-started-with-hdf-sandbox/)
+- [Learning the Ropes of the HDP Sandbox](https://hortonworks.com/tutorial/learning-the-ropes-of-the-hortonworks-sandbox/)
+- [Learning the Ropes of the HDF Sandbox](https://hortonworks.com/tutorial/getting-started-with-hdf-sandbox/)
 - Basic understanding of [Docker Containers](https://docs.docker.com/engine/docker-overview/)
 
 ## Outline
@@ -82,7 +82,7 @@ sandbox-hdf.hortonworks.com:8080
 
 In this example Ambari UI is reachable for different Sandboxes at the same time by specifying the domain name of the Sandbox we are trying to reach:
 
-![both-running](assets/both-running.png)
+![both-running](assets/both-running.jpg)
 
 Cool stuff right? Now let's take a look at where out containers are in relation to our virtual environment.
 

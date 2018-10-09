@@ -7,7 +7,7 @@ persona: Data Scientist & Analyst
 source: Hortonworks
 use case: Streaming
 technology: Apache NiFi, Apache Storm, Apache Kafka, Streaming Analytics Manager, Schema Registry, Apache SuperSet, Druid
-release: hdf-3.1.1
+release: hdf-3.2.0
 environment: Sandbox
 product: HDF
 series: HDF > Develop Data Flow & Streaming Applications > Hello World
@@ -21,20 +21,20 @@ In this tutorial, you will learn how to deploy a modern real-time streaming appl
 
 ## Prerequisites
 
--   [Installed Hortonworks DataFlow (HDF) Sandbox](https://hortonworks.com/downloads/#sandbox)
+- [Installed Hortonworks DataFlow (HDF) Sandbox](https://hortonworks.com/downloads/#sandbox)
 
 ## Outline
 
--   [Concepts](#concepts)
--   [Overview of Trucking IoT Ref App](#overview-of-trucking-iot-ref-app)
--   [Step 1: Explore Dataflow Application](#step-1-explore-dataflow-application)
--   [Step 2: View Schema Registry](#step-2-view-schema-registry)
--   [Step 3: Analyze Stream Analytics Application](#step-3-analyze-stream-analytics-application)
--   [Step 4: View the Storm Engine that Powers SAM](#step-4-view-the-storm-engine-that-powers-sam)
--   [Summary](#summary)
--   [Further Reading](#further-reading)
--   [Appendix A: Visualize Trucking Data with Superset Via CDA](#appendix-a-visualize-trucking-data-with-superset-via-cda)
--   [Appendix B: Trucking IoT GitHub Repo](https://github.com/orendain/trucking-iot/tree/master)
+- [Concepts](#concepts)
+- [Overview of Trucking IoT Ref App](#overview-of-trucking-iot-ref-app)
+- [Step 1: Explore Dataflow Application](#step-1-explore-dataflow-application)
+- [Step 2: View Schema Registry](#step-2-view-schema-registry)
+- [Step 3: Analyze Stream Analytics Application](#step-3-analyze-stream-analytics-application)
+- [Step 4: View the Storm Engine that Powers SAM](#step-4-view-the-storm-engine-that-powers-sam)
+- [Summary](#summary)
+- [Further Reading](#further-reading)
+- [Appendix A: Visualize Trucking Data with Superset Via CDA](#appendix-a-visualize-trucking-data-with-superset-via-cda)
+- [Appendix B: Trucking IoT GitHub Repo](https://github.com/orendain/trucking-iot/tree/master)
 
 ## Concepts
 
@@ -92,10 +92,9 @@ All controller services referencing **HortonworksSchemaRegistry** will also be e
 
 Overview of the **7 processors** in the NiFi Flow:
 
--   **GetTruckingData** - Simulator generates TruckData and TrafficData in bar-delimited CSV
+- **GetTruckingData** - Simulator generates TruckData and TrafficData in bar-delimited CSV
 
--   **RouteOnAttribute** - filters the _TrafficData_ and _TruckData_ into separate
-data feeds
+- **RouteOnAttribute** - filters the _TrafficData_ and _TruckData_ into separate data feeds
 
 | Data Name | Data Fields    |
 | :------------- | :------------- |
@@ -104,34 +103,27 @@ data feeds
 
 _TruckData side of Flow_
 
--   **EnrichTruckData** - tags on three fields to the end of _TruckData_: "foggy",
-"rainy", "windy"
+- **EnrichTruckData** - tags on three fields to the end of _TruckData_: "foggy","rainy", "windy"
 
--   **ConvertRecord** - reads incoming data with "CSVReader" and writes out Avro data with "AvroRecordSetWriter" embedding a "trucking_data_truck_enriched" schema onto each flowfile.
+- **ConvertRecord** - reads incoming data with "CSVReader" and writes out Avro data with "AvroRecordSetWriter" embedding a "trucking_data_truck_enriched" schema onto each flowfile.
 
--   **PublishKafka_1_0** - stores Avro data into Kafka Topic "trucking_data_truck_enriched"
+- **PublishKafka_1_0** - stores Avro data into Kafka Topic "trucking_data_truck_enriched" _TrafficData side of Flow_
 
-_TrafficData side of Flow_
+- **ConvertRecord** - converts CSV data into Avro data embedding a "trucking_data_traffic" schema onto each flowfile
 
--   **ConvertRecord** - converts CSV data into Avro data embedding a "trucking_data_traffic" schema onto each flowfile
-
--   **PublishKafka_1_0** - stores Avro data into Kafka Topic "trucking_data_traffic"
+- **PublishKafka_1_0** - stores Avro data into Kafka Topic "trucking_data_traffic"
 
 Overview of **5 controller services** used in the NiFi Flow:
 
--   **AvroRecordSetWriter - Enriched Truck Data** - writes contents of RecordSet in Binary
-Avro Format (trucking_data_truck_enriched schema)
+- **AvroRecordSetWriter - Enriched Truck Data** - writes contents of RecordSet in Binary Avro Format (trucking_data_truck_enriched schema)
 
--   **AvroRecordSetWriter - Traffic Data** - writes contents of RecordSet in Binary
-Avro Format (trucking_data_traffic schema)
+- **AvroRecordSetWriter - Traffic Data** - writes contents of RecordSet in Binary Avro Format (trucking_data_traffic schema)
 
--   **CSVReader - Enriched Truck Data** - returns each row in CSV file as a separate record (trucking_data_truck_enriched schema)
+- **CSVReader - Enriched Truck Data** - returns each row in CSV file as a separate record (trucking_data_truck_enriched schema)
 
--   **CSVReader - Traffic Data** - returns each row in CSV file as a separate record
-(trucking_data_traffic schema)
+- **CSVReader - Traffic Data** - returns each row in CSV file as a separate record (trucking_data_traffic schema)
 
--   **HortonworksSchemaRegistry** - provides schema registry service for
-interaction with Hortonworks Schema Registry
+- **HortonworksSchemaRegistry** - provides schema registry service for interaction with Hortonworks Schema Registry
 
 7\. Press `command+A` or `control+A` to select all the processors in the NiFi Dataflow and click on the start button ![nifi_start](assets/images/nifi_start.jpg).
 
@@ -149,11 +141,11 @@ interaction with Hortonworks Schema Registry
 
 Overview of the essential **schemas** in the Schema Registry:
 
--   **trucking_data_joined** - model for truck event originating from a truck's onboard computer (EnrichedTruckAndTrafficData)
+- **trucking_data_joined** - model for truck event originating from a truck's onboard computer (EnrichedTruckAndTrafficData)
 
--   **trucking_data_truck_enriched** - model for truck event originating from a truck's onboard computer (EnrichedTruckData)
+- **trucking_data_truck_enriched** - model for truck event originating from a truck's onboard computer (EnrichedTruckData)
 
--   **trucking_data_traffic** model for eventTime, routeId, congestionLevel (TrafficData)
+- **trucking_data_traffic** model for eventTime, routeId, congestionLevel (TrafficData)
 
 ### Step 3: Analyze Stream Analytics Application
 
@@ -171,52 +163,48 @@ A window will appear asking if you want to continue deployment, click **Ok**.
 
 **Overview of the SAM Canvas:**
 
--   My Applications: Different Topology Projects
--   1st Left Sidebar: My Applications, Dashboard, Schema Registry, Model Registry, Configuration
--   2nd Left Sidebar: Different stream components (source, processor, sink)
--   Gear Icon: Configure topology settings
--   Status Icon: Start or Stop Topology
+- My Applications: Different Topology Projects
+- 1st Left Sidebar: My Applications, Dashboard, Schema Registry, Model Registry, Configuration
+- 2nd Left Sidebar: Different stream components (source, processor, sink)
+- Gear Icon: Configure topology settings
+- Status Icon: Start or Stop Topology
 
 **Overview of SAM topology:**
 
--   **TrafficData** is the source component name, which pulls in data from the Kafka topic "trucking_data_traffic".
+- **TrafficData** is the source component name, which pulls in data from the Kafka topic "trucking_data_traffic".
 
--   **EnrichedTruckData** is the source component name, which pull is data from the Kafka topic "trucking_data_truck_enriched"
+- **EnrichedTruckData** is the source component name, which pull is data from the Kafka topic "trucking_data_truck_enriched"
 
--   **JoinStreams** joins streams "TrafficData" and "EnrichedTruckData" by "routeId".
+- **JoinStreams** joins streams "TrafficData" and "EnrichedTruckData" by "routeId".
 
--   **FilterNormalEvents** checks if non "Normal" eventType's occur, then it  will emit them.
+- **FilterNormalEvents** checks if non "Normal" eventType's occur, then it  will emit them.
 
--   **TimeSeriesAnalysis** computes the average of 10 samples of speed across a 10 second window period, calculates the sum across the same window period as before for foggy, rainy, windy and eventTime individually.
+- **TimeSeriesAnalysis** computes the average of 10 samples of speed across a 10 second window period, calculates the sum across the same window period as before for foggy, rainy, windy and eventTime individually.
 
--   **ToDriverStats** stores the input from "TimeSeriesAnalysis": driveId, routeId, averageSpeed, totalFog, totalRain, totalWind, and totalViolations into Kafka topic "trucking_data_driverstats".
+- **ToDriverStats** stores the input from "TimeSeriesAnalysis": driveId, routeId, averageSpeed, totalFog, totalRain, totalWind, and totalViolations into Kafka topic "trucking_data_driverstats".
 
--   **ToDataJoined** stores the input from "FilterNormalEvents": eventTime, congestionLevel, truckId, driverId, driverName, routeId, routeName, latitude, longitude, speed, eventType, foggy, rainy, and windy into Kafka topic "trucking_data_joined".
+- **ToDataJoined** stores the input from "FilterNormalEvents": eventTime, congestionLevel, truckId, driverId, driverName, routeId, routeName, latitude, longitude, speed, eventType, foggy, rainy, and windy into Kafka topic "trucking_data_joined".
 
 ### Step 4: View the Storm Engine that Powers SAM
 
-1\. From Ambari, click on **Storm View**:
+1\. From Ambari, click on **Storm** > **Storm UI**
 
-![storm-view](assets/images/storm_view.jpg)
+2\. Click on Topology Name: **streamline-1-Trucking-IoT-Demo** under **Topology Summary**
 
 ![storm_view_dashboard](assets/images/storm_view_dashboard.jpg)
 
-2\. Click on Topology Name: **streamline-1-Trucking-IoT-Demo**
+3\.  **Overview of the Storm Topology**
 
 ![storm_topology](assets/images/storm_topology.jpg)
 
-**Overview of the Storm View**
+You can see the total number of **Emitted** `(1360)` and **Transferred** `(1440)` tuples after `10m 0s` under **TOPOLOGY STATS** for the entire topology. You can also see individual emitted and transferred tuples for each individual Spout and Bolt in the topology increase. If we hover over one of the spouts or bolts on the graph, we can see how much data they process and their latency.
 
-You can see the total number of **Emitted** `(16116)` and **Transferred** `(17436)` tuples after `10m 0s` under **TOPOLOGY STATS** for the entire topology. You can also see individual emitted and transferred tuples for each individual Spout and Bolt in the topology increase. If we hover over one of the spouts or bolts on the graph, we can see how much data they process and their latency.
-
--   Topology Summary
--   Topology Stats
--   Topology Static Visualization
--   Spout
--   Bolts
--   Topology Configuration
-
-
+- Topology Summary
+- Topology Stats
+- Topology Static Visualization
+- Spout
+- Bolts
+- Topology Configuration
 
 ## Summary
 
@@ -224,11 +212,11 @@ Congratulations! You deployed the Trucking IoT demo that processes truck event d
 
 ## Further Reading
 
--   [Apache NiFi User Guide](https://nifi.apache.org/docs.html)
--   [Kafka Documentation](https://kafka.apache.org/documentation/)
--   [Schema Registry](https://docs.confluent.io/current/schema-registry/docs/index.html)
--   [Stream Analytics Manager User Guide](https://docs.hortonworks.com/HDPDocuments/HDF3/HDF-3.0.2/bk_streaming-analytics-manager-user-guide/content/ch_sam-manage.html)
--   [Superset](https://superset.incubator.apache.org/)
+- [Apache NiFi User Guide](https://nifi.apache.org/docs.html)
+- [Kafka Documentation](https://kafka.apache.org/documentation/)
+- [Schema Registry](https://docs.confluent.io/current/schema-registry/docs/index.html)
+- [Stream Analytics Manager User Guide](https://docs.hortonworks.com/HDPDocuments/HDF3/HDF-3.0.2/bk_streaming-analytics-manager-user-guide/content/ch_sam-manage.html)
+- [Superset](https://superset.incubator.apache.org/)
 
 
 ### Appendix A: Visualize Trucking Data with Superset Via CDA

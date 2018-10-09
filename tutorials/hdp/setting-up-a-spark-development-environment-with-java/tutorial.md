@@ -7,7 +7,7 @@ persona: Data Scientist & Analyst
 source: Hortonworks
 use case: Predictive
 technology: Apache Spark
-release: hdp-2.6.5
+release: hdp-3.0.0
 environment: Sandbox
 product: HDP
 series: HDP > Develop with Hadoop > Apache Spark
@@ -23,7 +23,7 @@ This tutorial will teach you how to set up a full development environment for de
 
 ## Prerequisites
 
-- Installed and deployed [Hortonworks Data Platform (HDP) Sandbox](https://hortonworks.com/downloads/#sandbox)
+- Installed and deployed the [Hortonworks Data Platform (HDP)](https://hortonworks.com/downloads/#sandbox) Sandbox
 - [Learning the Ropes of HDP Sandbox](https://hortonworks.com/tutorial/learning-the-ropes-of-the-hortonworks-sandbox/)
 - Installed [IntelliJ IDEA](https://www.jetbrains.com/idea/)
 - Installed [Maven](https://maven.apache.org/install.html) dependency manager
@@ -149,7 +149,7 @@ To upload to HDFS, first make sure the sandbox is up and running.
 - Once you've logged into Ambari Manager, mouse over the drop-down menu on the upper-right hand corner and click on **Files View**.
 - Open the **tmp** folder and click the **upload** button in the upper-right corner to upload the file. Make sure it's named **shakespeare.txt**.
 
-![select-files-view](assets/265-files-view.jpg)
+![select-files-view](assets/files-view.jpg)
 
 Now we're ready to create our application. In your IDE open the folder **src/main/resources**, which should have been generated automatically for you. Place **shakespeare.txt** there.
 

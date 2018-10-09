@@ -1,13 +1,13 @@
 ---
 title: Getting Started with Apache Zeppelin
-author: sandbox team
+author: sandbox-team
 tutorial-id: 368
 experience: Beginner
 persona: Data Scientist & Analyst
 source: Hortonworks
 use case: Data Discovery
 technology: Apache Spark, Apache Zeppelin
-release: hdp-2.6.5
+release: hdp-3.0.0
 environment: Sandbox
 product: HDP
 series: HDP > Develop with Hadoop > Apache Spark
@@ -31,7 +31,7 @@ The purpose of this tutorial is to guide you through basic functionalities of Ze
 
 ## Prerequisites
 
-- Installed and deployed the [Latest HDP Sandbox](https://hortonworks.com/downloads/#sandbox)
+- Downloaded and deployed the [Hortonworks Data Platform (HDP)](https://hortonworks.com/downloads/#sandbox) Sandbox
 - Ensure Spark version 2.x or later is installed
 
 ## Outline
@@ -66,7 +66,7 @@ Login to Ambari (operations console) using **amy_ds/amy_ds** as a username/passw
 
 ![scr1-login](assets/scr1-login.jpg)
 
-Once you are in Ambari click on Zeppelin Notebook then click on Quick Links and finally on Zeppelin UI.
+Once you are in Ambari click on Zeppelin Notebook select Zeppelin UI under Quick Links.
 
 ![getting-to-zepp](assets/getting-to-zepp.jpg)
 
@@ -92,7 +92,7 @@ To create a notebook:
 
 ![click-create-new-note](assets/click-create-new-note.jpg)
 
-2\. You will see the following window. Type a name for the new note (In this case we will call it _Spark on HDP_), for now let's leave the interpreter option on the default setting, you will learn about interpreters in subsequent sections. Finally, click on create.
+2\. You will see the following window. Type a name for the new note (In this case we will call it _Spark on HDP_), for now let's leave the interpreter option on the default setting. You will learn about interpreters in subsequent sections; Finally, click on create.
 
 ![create-new-note-zepp](assets/create-new-note-zepp.jpg)
 
@@ -108,7 +108,7 @@ Instead of creating a new notebook, you may want to import an existing one.
 
 There are two ways to import Zeppelin notebooks, either by pointing to json notebook file local to your environment or by providing a url to raw file hosted elsewhere, e.g. on github. We'll cover both ways of importing those files.
 
-1\. Importing a JSON file
+**1\. Importing a JSON file**
 
 On the Zeppelin UI click Import.
 
@@ -124,7 +124,7 @@ Finally, select the notebook you want to import and click **Open**.
 
 Now you should see your imported notebook among other notebooks on the main Zeppelin screen.
 
-2\. Importing a Notebook with a URL
+**2\. Importing a Notebook with a URL**
 
 Click Import note.
 
@@ -160,7 +160,7 @@ The notebook has now been moved to the Zeppelin's trash folder. You can always r
 
 ## Adding a Paragraph
 
-By now you must be eager to begin coding or expanding on the notebook you imported. Adding a paragraph in Zeppelin is very simple. Begin by opening the notebook that you want to work on.
+By now you must be eager to begin coding or expanding on the notebook you imported. Adding a paragraph in Zeppelin is very simple. Begin by opening the notebook that you want to work on, for this part of the tutorial we will use the _Spark On HDP_ Notebook we created earlier.
 
 Next, hover over either the lower or upper edge of an existent paragraph and you will see the option to add a paragraph appear.
 

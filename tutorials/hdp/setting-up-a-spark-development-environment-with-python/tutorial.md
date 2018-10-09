@@ -7,7 +7,7 @@ persona: Data Scientist & Analyst
 source: Hortonworks
 use case: Predictive
 technology: Apache Spark
-release: hdp-2.6.5
+release: hdp-3.0.0
 environment: Sandbox
 product: HDP
 series: HDP > Develop with Hadoop > Apache Spark
@@ -23,8 +23,8 @@ We'll be using PyCharm Community Edition as our IDE. PyCharm Professional editio
 
 ## Prerequisites
 
+- Installed and deployed the [Hortonworks Data Platform (HDP)](https://hortonworks.com/downloads/#sandbox) Sandbox
 - [Learning the Ropes of HDP Sandbox](https://hortonworks.com/tutorial/learning-the-ropes-of-the-hortonworks-sandbox/)
-- Installed and deployed the latest [Hortonworks Data Platform (HDP) Sandbox](https://hortonworks.com/downloads/#sandbox)
 - Installed [Python](https://www.python.org/)
 - Installed [PyCharm](https://www.jetbrains.com/pycharm/)
 
@@ -62,7 +62,7 @@ We need to save two copies of this dataset. One, inside PyCharm project for test
 - Login using username/password as **maria_dev** / **maria_dev**
 - Once you've logged into Ambari Manager, mouse over the drop-down menu on the upper-right hand corner and click on **Files View**.
 
-![select_files_view](assets/265-files-view.jpg)
+![select_files_view](assets/files-view.jpg)
 
 - Open the **tmp** folder and click the **upload** button in the upper-right corner to upload the file. Make sure it's named **shakespeare.txt**.
 
@@ -138,7 +138,7 @@ Copy **Main.py** to HDP sandbox using **_Secure Copy Protocol (SCP)_**:
 scp -P 2222 ./Main.py root@sandbox-hdp.hortonworks.com:/root
 ~~~
 
-Next, open sandbox shell using [shell-in-a-box](http://sandbox-hdp.hortonworks.com:4200) or **ssh**:
+Next, open sandbox shell using [Shell-in-a-Box](http://sandbox-hdp.hortonworks.com:4200) or **ssh**:
 
 ~~~bash
 ssh -p 2222 root@sandbox-hdp.hortonworks.com

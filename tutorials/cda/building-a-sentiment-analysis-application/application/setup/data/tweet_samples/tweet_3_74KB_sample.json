@@ -1,0 +1,129 @@
+{
+  "created_at" : "Mon Sep 24 17:40:56 +0000 2018",
+  "id" : 1044280537156743168,
+  "id_str" : "1044280537156743168",
+  "text" : "#FuturaItalia tocca i piedi della Valle del Brenta, sotto l’ombra dell’Altopiano di Asiago e del Monte Grappa.\n\nmiu… https://t.co/sIIgDG215M",
+  "source" : "<a href=\"http://instagram.com\" rel=\"nofollow\">Instagram</a>",
+  "truncated" : true,
+  "in_reply_to_status_id" : null,
+  "in_reply_to_status_id_str" : null,
+  "in_reply_to_user_id" : null,
+  "in_reply_to_user_id_str" : null,
+  "in_reply_to_screen_name" : null,
+  "user" : {
+    "id" : 1035405216,
+    "id_str" : "1035405216",
+    "name" : "Lorenzo Micheli",
+    "screen_name" : "Lorenzo_Micheli",
+    "location" : "Rieti 🚊 Rome 🚊 Italy",
+    "url" : null,
+    "description" : "Thinking European • Planning nationally for Education in Italy • Acting locally for @NextRieti",
+    "translator_type" : "none",
+    "protected" : false,
+    "verified" : false,
+    "followers_count" : 663,
+    "friends_count" : 943,
+    "listed_count" : 23,
+    "favourites_count" : 233,
+    "statuses_count" : 1200,
+    "created_at" : "Tue Dec 25 19:10:10 +0000 2012",
+    "utc_offset" : null,
+    "time_zone" : null,
+    "geo_enabled" : true,
+    "lang" : "en-gb",
+    "contributors_enabled" : false,
+    "is_translator" : false,
+    "profile_background_color" : "2C660F",
+    "profile_background_image_url" : "http://abs.twimg.com/images/themes/theme1/bg.png",
+    "profile_background_image_url_https" : "https://abs.twimg.com/images/themes/theme1/bg.png",
+    "profile_background_tile" : false,
+    "profile_link_color" : "3B94D9",
+    "profile_sidebar_border_color" : "000000",
+    "profile_sidebar_fill_color" : "DDEEF6",
+    "profile_text_color" : "333333",
+    "profile_use_background_image" : false,
+    "profile_image_url" : "http://pbs.twimg.com/profile_images/1038920960525705216/rbTWVHUT_normal.jpg",
+    "profile_image_url_https" : "https://pbs.twimg.com/profile_images/1038920960525705216/rbTWVHUT_normal.jpg",
+    "profile_banner_url" : "https://pbs.twimg.com/profile_banners/1035405216/1536532967",
+    "default_profile" : false,
+    "default_profile_image" : false,
+    "following" : null,
+    "follow_request_sent" : null,
+    "notifications" : null
+  },
+  "geo" : {
+    "type" : "Point",
+    "coordinates" : [ 45.76861111, 11.73666667 ]
+  },
+  "coordinates" : {
+    "type" : "Point",
+    "coordinates" : [ 11.73666667, 45.76861111 ]
+  },
+  "place" : {
+    "id" : "72d1197764d7605c",
+    "url" : "https://api.twitter.com/1.1/geo/id/72d1197764d7605c.json",
+    "place_type" : "city",
+    "name" : "Bassano del Grappa",
+    "full_name" : "Bassano del Grappa, Veneto",
+    "country_code" : "IT",
+    "country" : "Italia",
+    "bounding_box" : {
+      "type" : "Polygon",
+      "coordinates" : [ [ [ 11.644473, 45.72323 ], [ 11.644473, 45.822045 ], [ 11.763046, 45.822045 ], [ 11.763046, 45.72323 ] ] ]
+    },
+    "attributes" : { }
+  },
+  "contributors" : null,
+  "is_quote_status" : false,
+  "extended_tweet" : {
+    "full_text" : "#FuturaItalia tocca i piedi della Valle del Brenta, sotto l’ombra dell’Altopiano di Asiago e del Monte Grappa.\n\nmiursocial itet_einaudi @wayouth_wy \n#futurabassano… https://t.co/mx6ERJ7uXM",
+    "display_text_range" : [ 0, 188 ],
+    "entities" : {
+      "hashtags" : [ {
+        "text" : "FuturaItalia",
+        "indices" : [ 0, 13 ]
+      }, {
+        "text" : "futurabassano",
+        "indices" : [ 149, 163 ]
+      } ],
+      "urls" : [ {
+        "url" : "https://t.co/mx6ERJ7uXM",
+        "expanded_url" : "https://www.instagram.com/p/BoHhkA9B1LV/?utm_source=ig_twitter_share&igshid=1p3thke19q036",
+        "display_url" : "instagram.com/p/BoHhkA9B1LV/…",
+        "indices" : [ 165, 188 ]
+      } ],
+      "user_mentions" : [ {
+        "screen_name" : "WAYouth_wy",
+        "name" : "WAYouth",
+        "id" : 888766234631733249,
+        "id_str" : "888766234631733249",
+        "indices" : [ 136, 147 ]
+      } ],
+      "symbols" : [ ]
+    }
+  },
+  "quote_count" : 0,
+  "reply_count" : 0,
+  "retweet_count" : 0,
+  "favorite_count" : 0,
+  "entities" : {
+    "hashtags" : [ {
+      "text" : "FuturaItalia",
+      "indices" : [ 0, 13 ]
+    } ],
+    "urls" : [ {
+      "url" : "https://t.co/sIIgDG215M",
+      "expanded_url" : "https://twitter.com/i/web/status/1044280537156743168",
+      "display_url" : "twitter.com/i/web/status/1…",
+      "indices" : [ 117, 140 ]
+    } ],
+    "user_mentions" : [ ],
+    "symbols" : [ ]
+  },
+  "favorited" : false,
+  "retweeted" : false,
+  "possibly_sensitive" : false,
+  "filter_level" : "low",
+  "lang" : "it",
+  "timestamp_ms" : "1537810856509"
+}

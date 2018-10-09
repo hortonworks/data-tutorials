@@ -10,7 +10,7 @@ In the concepts tutorial, the goal is to provide you with enough background info
 
 ## Prerequisites
 
--   None
+-   Read "Analyze IoT Weather Station Data via Connected Data Architecture" Overview
 
 ## Outline
 

@@ -7,7 +7,7 @@ persona: Developer
 source: Hortonworks
 use case: Data Discovery
 technology: Apache Ambari
-release: hdp-2.6.5
+release: hdp-3.0.0
 environment: Sandbox
 product: HDP
 series: HDP > Hadoop Administration > Hortonworks Sandbox
@@ -17,11 +17,11 @@ series: HDP > Hadoop Administration > Hortonworks Sandbox
 
 ## Introduction
 
-In this tutorial we are going to explore how we can configure YARN Capacity Scheduler from Ambari.
+In this tutorial we will explore how we can configure YARN Capacity Scheduler from Ambari.
 
 YARN's Capacity Scheduler is designed to run Hadoop applications in a shared, multi-tenant cluster while maximizing the throughput and the utilization of the cluster.
 
-Traditionally each organization has it own private set of compute resources that have sufficient capacity to meet the organization's SLA. This generally leads to poor average utilization. Also there is heavy overhead of managing multiple independent clusters.
+Traditionally each organization has it own private set of compute resources that have sufficient capacity to meet the organization's SLA. This generally leads to poor average utilization. Additionally, there is heavy overhead of managing multiple independent clusters.
 
 Sharing clusters between organizations allows economies of scale. However, organizations are concerned about sharing a cluster in the fear of not getting enough available resources that are critical to meet their SLAs.
 
@@ -40,7 +40,7 @@ To provide further control and predictability on sharing of resources, the Capac
 
 ## Outline
 
-- [Configuring the Capacity Scheduler](#configure-scheduler)
+- [Configuring the Capacity Scheduler](#configuring-the-capacity-scheduler)
 - [Rollback the Configuration Version](#rollback-version)
 - [Summary](#summary)
 - [Further Reading](#further-reading)
@@ -49,34 +49,40 @@ To provide further control and predictability on sharing of resources, the Capac
 
 After you spin up the Hortonworks Sandbox, login to Ambari. The Username/Password credentials are **raj_ops/raj_ops**.
 
-![ambari_login](assets/ambari_login.png)
+![ambari_login](assets/ambari-login.jpg)
 
 After you Login, you will see the Dashboard. This is an unified view of the state of your Sandbox.
 
-![ambari_dashboard_rajops](assets/ambari_dashboard_rajops.png)
+![ambari_dashboard_rajops](assets/ambari-dashboard-rajops.jpg)
 
 You can drill into specific service dashboard and configuration.
 Let’s dive into YARN dashboard by selecting **Yarn** from the left-side bar or the drop down menu.
 
-![select_yarn](assets/select_yarn.png)
+![select_yarn](assets/select-yarn.jpg)
 
-We will start updating the configuration for Yarn Capacity Scheduling policies. Click on **Configs** tab.
+We will start updating the configuration for Yarn Capacity Scheduling policies. Click on **Configs** tab and click on **Advanced**.
 
-![select_configs_tab](assets/select_configs_tab.png)
+![select_configs_tab](assets/select-configs-tab.jpg)
 
-Next, click on **Advanced** and scroll down to the **Scheduler** section of the page. The default capacity scheduling policy just has one queue which is **default**.
+Next, scroll down to the **Scheduler** section of the page. The default capacity scheduling policy just has one queue which is **default**.
 
-![capacity_scheduler_section](assets/capacity_scheduler_section.png)
+![capacity_scheduler_section](assets/capacity-scheduler-section.jpg)
 
-Let's check out the scheduling policy visually. Scroll up to the top of the page and click on **Quick Links**. Then select **ResourceManager UI** from the dropdown.
+Let's check out the scheduling policy visually. Scroll up to the top of the page click on **SUMMARY** and then select **ResourceManager UI** from the Quick Links section.
 
-![select_resourcemanagerui](assets/select_resourcemanagerui.png)
+![quicklinks](assets/quicklinks.jpg)
 
-Click on **Scheduler** and you can see below we just have the **default** policy.
+Once in ResourceManager UI select **Queues**, you will see a visual representation of the Scheduler Queue and resources allocated to it.
 
-![resource_manager_ui](assets/resource_manager_ui.png)
+![resource_manager_ui](assets/resource-manager-ui.jpg)
 
-Let’s change the capacity scheduling policy to where we have separate queues and policies for Engineering, Marketing and Support departments:
+## Adjust the scheduling policy for different departments
+
+Let’s change the capacity scheduling policy to where we have separate queues and policies for Engineering, Marketing and Support.
+
+Return to YARN Advanced Configs to adjust the Scheduler by nagivating to Ambari Dashboard>YARN>Configs>Advanced>Scheduler.
+
+Replace the content for the configurations shown below in the **Capacity Scheduler** textbox:
 
 ~~~java
 yarn.scheduler.capacity.maximum-am-resource-percent=0.2
@@ -155,45 +161,49 @@ yarn.scheduler.capacity.root.queues=Support,Marketing,Engineering
 yarn.scheduler.capacity.root.unfunded.capacity=50
 ~~~
 
-Replace the content, above, in the **Capacity Scheduler** textbox from Ambari:
-
-![copy_paste_policy](assets/copy_paste_policy.png)
+![copy_paste_policy](assets/copy-paste-policy.jpg)
 
 Click **Save** and confirm on the dialog box:
 
-![popup](assets/popup.png)
+![popup](assets/popup.jpg)
 
 ~~~text
 Changed Capacity Scheduler Config.
 ~~~
 
+In the next two windows that appear click **Ok** and **Proceed Anyway**, next you will find a confirmation window select **REFRESH YARN QUEUES**
+
+![refresh-queues](assets/refresh-queues.jpg)
+
 At this point, the configuration is saved but we still need to restart the affected components by the configuration change as indicated in the orange band below:
 
-![restart_needed](assets/restart_needed.png)
+![restart_needed](assets/restart-needed.jpg)
 
-Also note that there is now a new version of the configuration as indicated by the green **Current** label. Let’s restart the daemons by clicking **Restart All**.
+Also note that there is now a new version of the configuration as indicated by the green **Current** label. 
 
-![new_version](assets/new_version.png)
+Let’s restart the daemons by clicking on the three dots `...` next to **Services** under the Ambari Stack. Select **Restart All Affected** and wait for the restart to complete.
 
-Wait for the restart to complete:
-
-![restart_yarn_progress](assets/restart_yarn_progress.png)
+![restart_yarn_progress](assets/restart-all.jpg)
 
 and then go back to the Resource Manager UI  and refresh the page. Voila! There’s our new policy:
 
-![resource_manager_ui_new_policy](assets/resource_manager_ui_new_policy.png)
+![resource_manager_ui_new_policy](assets/ui-new-policy.jpg)
 
-Now restart other services from Ambari which need a restart.
+## Rolling back configuration setting
 
-## Rollback the Configuration Version
+You can also rollback to the previous set of configurations.
 
-You can also rollback to the previous set of configurations.  Just hover on the previous version and click **Make Current**.
+Return to Ambari Dashboard then select Config History and select YARN:
 
-![make_current](assets/make_current.png)
+![yarnhistory](assets/yarn-history.jpg)
+
+Finally, select **Make Current** and re-start services one last time.
+
+![returnconfig](assets/return-config.jpg)
 
 ## Summary
 
-So in this tutorial, you learned how to configure different queues and allotment of resources to those queues. Hope this brief tour of using YARN's Capacity Scheduler gave you some ideas on how to achieve better utilization of Hadoop clusters.
+In this tutorial, you learned how to configure different queues and allotment of resources to those queues. Hope this brief tour of using YARN's Capacity Scheduler gave you some ideas on how to achieve better utilization of Hadoop clusters.
 
 ## Further Reading
 

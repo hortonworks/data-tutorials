@@ -1,13 +1,13 @@
 ---
 title: NiFi in Trucking IoT on HDF
-author: James Medel
+author: sandbox-team
 tutorial-id: 807
 experience: Beginner
 persona: Developer
 source: Hortonworks
 use case: Streaming
 technology: Apache NiFi
-release: hdf-3.1.1
+release: hdf-3.2.0
 environment: Sandbox
 product: HDF
 series: HDF > Develop Data Flow & Streaming Applications > Hello World
@@ -23,10 +23,10 @@ We will create a NiFi DataFlow for transferring data from Internet of Things (Io
 
 ## Prerequisites
 
--   [Installed Hortonworks DataFlow (HDF) Sandbox](https://hortonworks.com/downloads/#sandbox)
+- [Installed Hortonworks DataFlow (HDF) Sandbox](https://hortonworks.com/downloads/#sandbox)
 
 ## Outline
 
--   [NiFi in Trucking IoT Use Case](https://hortonworks.com/tutorial/nifi-in-trucking-iot-on-hdf/section/1/) - Discuss a real-world use and understand the role NiFi plays within it
--   [Run NiFi in the Demo](https://hortonworks.com/tutorial/nifi-in-trucking-iot-on-hdf/section/2/)- Walk through the DataFlow Management portion of the demo and gain an understanding of it in the data pipeline
--   [Creating a NiFi DataFlow](https://hortonworks.com/tutorial/nifi-in-trucking-iot-on-hdf/section/3/) - Dive into NiFi internals and build a dataflow from scratch
+- [NiFi in Trucking IoT Use Case](https://hortonworks.com/tutorial/nifi-in-trucking-iot-on-hdf/section/1/) - Discuss a real-world use and understand the role NiFi plays within it
+- [Run NiFi in the Demo](https://hortonworks.com/tutorial/nifi-in-trucking-iot-on-hdf/section/2/)- Walk through the DataFlow Management portion of the demo and gain an understanding of it in the data pipeline
+- [Creating a NiFi DataFlow](https://hortonworks.com/tutorial/nifi-in-trucking-iot-on-hdf/section/3/) - Dive into NiFi internals and build a dataflow from scratch

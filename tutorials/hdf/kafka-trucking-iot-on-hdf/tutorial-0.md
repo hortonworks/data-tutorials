@@ -1,13 +1,13 @@
 ---
 title: Kafka in Trucking IoT on HDF
-author: James Medel
+author: sandbox-team
 tutorial-id: 806
 experience: Beginner
 persona: Developer
 source: Hortonworks
 use case: Streaming
 technology: Apache Kafka
-release: hdf-3.1.1
+release: hdf-3.2.0
 environment: Sandbox
 product: HDF
 series: HDF > Develop Data Flow & Streaming Applications > Hello World
