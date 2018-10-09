@@ -224,6 +224,18 @@ The **Data Preview** for **webloganalytics** should look like the table below:
 
 ![das-webloganalytics-data-preview](assets/das-webloganalytics-data-preview.jpg)
 
+You can download the **webloganalytics.csv** file by entering the following query in **Compose**:
+
+~~~SQL
+SELECT * FROM webloganalytics;
+~~~
+
+This query will show the content of table webloganalytics. You can then click on **EXPORT DATA** > **DOWNLOAD AS CSV**. This will download the csv file in your local machine.
+
+![das-webloganalytics-download-as-csv](assets/das-webloganalytics-download-as-csv.jpg)
+
+>NOTE: The webloganalytics.csv file will be used for the tutorial Visualizing Website Clickstream Data which is located in the section of Further Reading.
+
 ## Summary
 
 Excellent!  We've learned how to upload data into HDFS, create tables and load data into them, and run queries for data refinement and enrichment by using Ambari's convenient and robust Data Analytics Studio.
