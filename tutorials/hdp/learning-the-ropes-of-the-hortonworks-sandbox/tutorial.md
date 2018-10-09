@@ -42,6 +42,8 @@ Let's begin our Hadoop journey...
 - [Appendix B: Troubleshoot](#appendix-b-troubleshoot)
 - [Appendix C: Determine Network Adapter of Your VirtualBox Sandbox](#appendix-c-determine-network-adpater-of-your-virtualbox-sandbox)
 
+<!--- Add the following link to the outline once Azure is available - [Explore Sandbox in Azure](#explore-sandbox-in-azure)--->
+
 ## Environment setup
 
 This is the administrative section to get started with the Hortonworks Sandbox environment. Generally, this will only be done once.
@@ -81,7 +83,7 @@ Mac, Linux and Windows all have a hosts file. This file once configured enables 
 - Add ```{IP-Address}   localhost   sandbox.hortonworks.com   sandbox-hdp.hortonworks.com   sandbox-hdf.hortonworks.com```
 - Save the file
 
-> IMPORTANT: Replace **{IP-Address}** with [Sandbox IP Address](#learn-the-ip-address-of-your-sandbox)
+> IMPORTANT: Replace **{IP-Address}** with [Sandbox IP Address](#determine-ip-address-of-your-sandbox)
 
 ## Terminal Access
 
@@ -168,7 +170,7 @@ Open your terminal (mac and linux) or putty (windows). Here again, `host` is the
 
 ~~~bash
 # Usage:
-      ssh <username>@<host> -p 22;
+  ssh <username>@<host> -p 22;
 ~~~
 
 ![Mac Terminal SSH Azure 1](assets/azure_secure_shell_learning_ropes_sandbox_1.png)
@@ -181,7 +183,7 @@ Open your web browser. Replace the following text by your `host` into your brows
 
 ~~~bash
 # Usage:
-    #  _host_:4200
+  #  _host_:4200
 ~~~
 
 ![Shell in the Browser Sandbox Azure](assets/azure_browser_shell_learning_ropes_sandbox.png)
@@ -194,7 +196,7 @@ Open your web browser. Replace the following text by your `host` into your brows
 
 ~~~
 # Usage:
-      ssh <username>@<host> -p 22;
+  ssh <username>@<host> -p 22;
 ~~~
 
 3\. Type the following commands:

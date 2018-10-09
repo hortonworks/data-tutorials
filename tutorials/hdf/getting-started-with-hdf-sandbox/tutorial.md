@@ -7,7 +7,7 @@ persona: Administrator
 source: Hortonworks
 use case: Single View
 technology: Apache Ambari, Apache Storm, Apache Superset, Apache NiFi, Schema Registry, Streaming Analytics Manager
-release: hdf-3.2.0
+release: hdf-3.1.1
 environment: Sandbox
 product: HDF
 series: HDF > Develop Data Flow & Streaming Applications > Hello World
@@ -23,7 +23,7 @@ By the end of this tutorial, you will be familiar with the data-in-motion tools 
 
 ## Prerequisites
 
-- Downloaded and deployed the [Hortonworks Data Flow (HDF)](https://hortonworks.com/downloads/#sandbox) Sandbox
+- Downloaded and deployed the [Hortonworks Data Platform (HDF)](https://hortonworks.com/downloads/#sandbox) Sandbox
 
 ## Outline
 
@@ -33,7 +33,7 @@ By the end of this tutorial, you will be familiar with the data-in-motion tools 
 - [Welcome Page](#welcome-page)
 - [Explore Ambari](#explore-ambari)
 - [Further Reading](#further-reading)
-- [Appendix A: Reference Sheet](#appendix-a-reference-sheet)
+- [Appendix A: Reference Sheet](#appendix-a-sandbox-reference-sheet)
   - [Login Credentials](#login-credentials)
   - [Sandbox Version](#sandbox-version)
   - [Admin Password Reset](#admin-password-reset)
@@ -48,7 +48,7 @@ The Sandbox is a straightforward, pre-configured, learning environment that cont
 ### HDF Standalone Sandbox
 
 The HDF Standalone Sandbox Architecture comes with the following Big Data Tools:
-Zookeeper, Storm, Kafka, NiFi, NiFi Registry, Schema Registry, Streams Messaging Manager (SMM), and Stream Analytics Manager (SAM).
+Zookeeper, Storm, Kafka, NiFi, NiFi Registry, Schema Registry and Stream Analytics Manager (SAM).
 
 ## Environment setup
 
@@ -58,23 +58,23 @@ This is the administrative section to get started with the Hortonworks Sandbox e
 
 Once the Sandbox VirtualBox VM is installed, it attaches to a virtual network. There are 8 different network modes, but the default network your sandbox will attach to is NAT. We will cover relevant networks for our tutorial use cases: NAT and Bridged Adapter.
 
-### Network Address Translation (NAT)
+#### Network Address Translation (NAT)
 
-By default, the VirtualBox VM attaches to Network Address Translation (NAT) network mode. The guest's IP address by default translates over to the host's IP address. NAT allows for the guest system to connect to external devices on external networks, but external devices cannot access the guest system. Alternatively, VirtualBox can make selected services on the guest reachable to the outside world by port forwarding. VirtualBox listens to certain ports on the host, then re-sends packets that arrive at those ports to the guest on the same port or different port.
+By default, the VirtualBox VM attaches to Network Address Translation (NAT) network mode. The guest's IP address by default translates over to the host's IP address. NAT allows for the guest system to connect to external devices on external networks, but external devices cannot access the guest system. Alternatively, VirtualBox can make selected services on the guest reachable to the outside world by port forwarding. VirtualBox listens to certain ports on the host, then resends packets that arrive at those ports to the guest on the same port or different port.
 
 We are forwarding all incoming traffic from a specific host interface to the guest in our sandbox is by specifying an IP of that host like the following:
 
 ~~~bash
-VBoxManage modifyvm "Hortonworks Sandbox HDF 3.2.0 Standalone" --natpf1 "Sandbox Splash Page,tcp,127.0.0.1,1080,,1080"
+VBoxManage modifyvm "Hortonworks Sandbox HDF 3.1 Standalone" --natpf1 "Sandbox Splash Page,tcp,127.0.0.1,1080,,1080"
 .
 .
 .
-VBoxManage modifyvm "Hortonworks Sandbox HDF 3.2.0 Standalone" --natpf1 "Sandbox Host SSH,tcp,127.0.0.1,2122,,22"
+VBoxManage modifyvm "Hortonworks Sandbox HDF 3.1 Standalone" --natpf1 "Sandbox Host SSH,tcp,127.0.0.1,2122,,22"
 ~~~
 
 You can find the set network by opening the VM **settings** and then select the **network** tab.
 
-### Bridged Networking
+#### Bridged Networking
 
 In this mode, the guest receives direct access to the network, which the host has been connected. The router assigns an IP address to the guest. On that network, instead of there being just the host IP address visible, now the guest IP address is visible too. Thus, external devices, such as MiNiFi running on a Raspberry Pi, are able to connect to the guest via it's IP address.
 
@@ -96,15 +96,15 @@ Once the Sandbox VM or container is installed, it settles to the host of your en
 
 If you're using **VirtualBox** or **VMWare**, you can confirm the IP address by waiting for the installation to complete and confirmation screen will tell you the IP address your sandbox resolves to. For example:
 
-Guest VM Welcome Window for NAT Sandbox
-
 ![Host Address of Sandbox Environment](assets/images/guest_vm_NAT_mode_hdp265_83.jpg)
 
-Guest VM Welcome Window for BRIDGED Sandbox
+> **Note:** Guest VM Welcome Window for NAT Sandbox
 
 ![Host Address of Sandbox Environment](assets/images/guest_vm_BRIDGED_mode_welcome_screen.jpg)
 
-> **Note:** If you're using Azure, your IP address is located on the dashboard, refer to [**Set a Static IP**](https://hortonworks.com/tutorial/sandbox-deployment-and-install-guide/section/4/#set-a-static-ip)
+> **Note:** Guest VM Welcome Window for BRIDGED Sandbox
+
+If you're using Azure, your IP address is located on the dashboard, refer to [**Set a Static IP**](https://hortonworks.com/tutorial/sandbox-deployment-and-install-guide/section/4/#settings-form)
 
 ### Map Sandbox IP to Your Desired Hostname in the Hosts File
 
@@ -126,33 +126,32 @@ echo '{IP-Address} sandbox.hortonworks.com sandbox-hdp.hortonworks.com sandbox-h
 
 - Run Notepad as **administrator**.
 - Open **hosts** file located in: ```c:\Windows\System32\drivers\etc\hosts```
-- Add:
-
- ```bash
- {IP-Address}   localhost   sandbox.hortonworks.com   sandbox-hdp.hortonworks.com   sandbox-hdf.hortonworks.com
- ```
-
+- Add `{IP-Address}   localhost   sandbox.hortonworks.com   sandbox-hdp.hortonworks.com   sandbox-hdf.hortonworks.com`
 - Save the file
 
 > IMPORTANT: Replace **{IP-Address}** with [Sandbox IP Address](#determine-ip-address-of-your-sandbox)
 
 ## Terminal Access
 
- Refer to [Login Credentials](#login-credentials) for list of users and passwords. You can also login using **root**, using password **hadoop**, which may require you to change the password - remember the password you set!
+ Refer to [Login Credentials](#login-credentials) for list of users and passwords. You can also login using **root**, using password **hadoop**, which may require you to change the password - remember it!
 
- If you login using credentials other than **root**, you may be required to use **sudo** before the command. For example: ```sudo ambari-server status```.
+ If you login using credentials other than **root**, you may be required to use **sudo** before the command. For example:
 
-**Secure Shell Method:**
+```bash
+ sudo ambari-server status
+ ```
+
+#### Secure Shell Method:
 
 Open your terminal (mac/linux) or Git Bash (Windows). Type the following command to access the Sandbox through **ssh user@hostname -p port**. For example: ```ssh root@sandbox-hdf.hortonworks.com -p 2202```
 
 ![Mac Terminal SSH](assets/images/secure_shell_sandbox_hdf.jpg)
 
-**Shell Web Client Method:**
+#### Shell Web Client Method:
 
-The **_shell web client_** is also known as **_shell-in-a-box_**. It's an easy way to issue shell commands without needing to install additional software. It uses **port 4200**, for example:  [sandbox-hdf.hortonworks.com:4200](http://sandbox-hdf.hortonworks.com:4200)
+The **shell web client** is also known as **shell-in-a-box**. It's an easy way to issue shell commands without needing to install additional software. It uses **port 4200**, for example:  [sandbox-hdf.hortonworks.com:4200](http://sandbox-hdf.hortonworks.com:4200)
 
-**Send Data Between Sandbox and Local Machine**
+#### Send Data Between Sandbox and Local Machine
 
 Using the terminal of your choice, you can transfer files to/from sandbox and local machine.
 
@@ -178,7 +177,7 @@ The Sandbox Welcome Page is also known as the **Splash Page**. It runs on port n
 
 It looks like this:
 
-![hdf_splash_screen_step1](assets/images/hdf-splash.jpg)
+![hdf_splash_screen_step1](assets/images/hdf_splash_screen_step1.jpg)
 
 **Launch Dashboard** opens two browser windows - Ambari interface and beginner tutorial. You should login to Ambari using the username and password based on the tutorial requirements. Most of the tutorials use **admin**. Refer to [Login Credentials](#login-credentials) for list of users and passwords.
 
@@ -186,27 +185,25 @@ It looks like this:
 
 ## Explore Ambari
 
--   Ambari Dashboard runs on port **:8080**. For example, [http://sandbox-hdf.hortonworks.com:8080](http://sandbox-hdf.hortonworks.com:8080)
--   Login to as **admin**, refer to [Admin Password Reset](#admin-password-reset)
--   Select **Manage Ambari**
+- Ambari Dashboard runs on port **:8080**. For example, [http://sandbox-hdf.hortonworks.com:8080](http://sandbox-hdf.hortonworks.com:8080)
+- Login to as **admin**, refer to [Admin Password Reset](#admin-password-reset)
+- Select **Manage Ambari**
 
 ![manage-ambari](assets/images/manage-ambari.jpg)
 
 The following screen will be displayed:
 
-![manage-ambari-ui](assets/images/manage-ambari-ui.jpg)
+![Lab0_3](assets/images/ambari_welcome_learning_the_ropes_sandbox.jpg)
 
-1. “**Ambari Dashboard**” will take you to the Ambari Dashboard which is the primary UI for Hadoop Operators
-2. “**Cluster Management**” is where you will find _Cluster Information_, _Versions_, and _Remote Clusters_
-   - **Cluster Information** allows you to review your cluster name as well as inspect and export the cluster blueprint
-   - **Versions** shows the version of HDF you are using as well as the version of every component available in the cluster
-   - **Remote Clusters** allows you to connect to remote clusters given that you have the appropriate URL and username, password
-3. “**Users**” is where you can add, remove or modify users
-4. “**Views**” list the set of Ambari Users views that are part of the cluster
+1. “**Operate Your Cluster**” will take you to the Ambari Dashboard which is the primary UI for Hadoop Operators
+2. “**Manage Users + Groups**” allows you to add & remove Ambari users and groups
+3. “**Clusters**” allows you to grant permission to Ambari users and groups
+4. “**Ambari User Views**” list the set of Ambari Users views that are part of the cluster
+5. “**Deploy Views**” provides administration for adding and removing Ambari User Views
 
-- Click on **Dashboard** and you should see a similar screen:
+- Click on **Go to Dashboard** and you should see a similar screen:
 
-![ambari-dash](assets/images/ambari-dash.jpg)
+![Lab0_4](assets/images/Lab0_4.png)
 
 Explorer by click on:
 
@@ -214,14 +211,15 @@ Explorer by click on:
 
 and then on:
 
-2\.  **Hosts**, **Alerts**, **Admin**
+2\.  **Dashboard**, **Services**, **Hosts**, **Alerts**, **Admin** and User Views icon (represented by 3×3 matrix ) to become familiar with the Ambari resources available to you.
+
 ## Summary
 
 Congratulations! Now you know about the different features available in the HDF sandbox. You can use these HDF components to begin building your own applications to solve data-in-motion problems. If you want to learn more about HDF, check out the documentation in the Further Reading section below. If you want to explore more in depth how you can use the HDF tools to build applications, visit the Hortonworks HDF Sandbox tutorials.
 
 ## Further Reading
 
-- [HDF Documentation](https://docs.hortonworks.com/HDPDocuments/HDF3/HDF-3.2.0/index.html)
+- [HDF Documentation](https://docs.hortonworks.com/HDPDocuments/HDF3/HDF-3.1.1/index.html)
 - [HDF Tutorial Track](https://hortonworks.com/tutorials/?tab=product-hdf)
 
 ## Appendix A: Sandbox Reference Sheet
@@ -232,14 +230,25 @@ The HDF sandbox cheat sheet is a reference of common knowledge and tasks often d
 
 | User | Password |
 |:------:|----------:|
-| admin | refer to [Admin Password Reset](#admin-password-reset) |
-| raj_ops | raj_ops |
+| admin | Refer to [Admin Password Reset](#admin-password-reset) |
+
+**OS Level Authorization**
+
+| Name id(s) | HDFS Authorization | Ambari Authorization | Ranger Authorization |
+|:----------:|:------------------:|:--------------------:|:--------------------:|
+| Sam Admin | Max Ops | Ambari Admin | Admin access |
+
+**Other Differences**
+
+| Name id(s) | Sandbox Role | View Configurations | Start/Stop/Restart Service | Modify Configurations | Add/delete services | Install Components | Manage Users/Groups | Manage Ambari Views | Atlas UI Access | [Sample Ranger Policy Access](https://hortonworks.com/tutorial/tag-based-policies-with-apache-ranger-and-apache-atlas/#sample-ranger-policy) |
+|:----------:|:------------:|:-------------------:|:--------------------------:|:---------------------:|:-------------------:|:------------------:|:-------------------:|:-------------------:|:---------------:|:--------------------:|
+| Sam Admin | Ambari Admin | Yes | Yes | Yes | Yes | Yes | Yes | Yes | Yes | NA |
 
 ### Sandbox Version
 
 When you run into an issue, one of the first things someone will ask is "_what sandbox version are you using_"? To get this information:
 
-Login using [Web-Shell-Client](http://sandbox-hdf.hortonworks.com:4200) and execute: ```sandbox-version```. The output should look something like:
+Login using [Shell-In-A-Box](http://sandbox-hdf.hortonworks.com:4200) and execute: `sandbox-version`. The output should look something like:
 
 ![sandbox-version](assets/images/sandbox-version.jpg)
 
@@ -250,11 +259,11 @@ Login using [Web-Shell-Client](http://sandbox-hdf.hortonworks.com:4200) and exec
 Due to possibility of passwords being vulnerable to being hacked, we recommend
 you change your Ambari admin password to be unique.
 
-1. Open [Web-Shell-Client](http://sandbox-hdf.hortonworks.com:4200) (aka shell-in-a-box):
+1. Open [Shell-In-A-Box](http://sandbox-hdf.hortonworks.com:4200):
 
 2. The login using credentials: **root** / **hadoop**
 
-3. Type the following commands: 
+3. Type the following commands:
 
 ```bash
 ambari-admin-password-reset

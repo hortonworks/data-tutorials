@@ -196,5 +196,6 @@ SSH tunneling allows us a way to port forward securely, without actually opening
 
 Now that you've got HDP up and running, check out our other tutorials to learn how to leverage its power.
 
-- [Learning the Ropes of the HDP Sandbox](https://hortonworks.com/tutorial/learning-the-ropes-of-the-hortonworks-sandbox)
-- [SSH Tunneling Explained](https://chamibuddhika.wordpress.com/2012/03/21/ssh-tunnelling-explained)
+-   [Sandbox Architecture](https://hortonworks.com/tutorial/sandbox-architecture/)
+-   [Learning the Ropes of the HDP Sandbox](https://hortonworks.com/tutorial/learning-the-ropes-of-the-hortonworks-sandbox)
+-   [SSH Tunneling Explained](https://chamibuddhika.wordpress.com/2012/03/21/ssh-tunnelling-explained)
