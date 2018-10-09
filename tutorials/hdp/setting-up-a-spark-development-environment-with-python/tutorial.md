@@ -23,8 +23,8 @@ We'll be using PyCharm Community Edition as our IDE. PyCharm Professional editio
 
 ## Prerequisites
 
+- Installed and deployed the [Hortonworks Data Platform (HDP)](https://hortonworks.com/downloads/#sandbox) Sandbox
 - [Learning the Ropes of HDP Sandbox](https://hortonworks.com/tutorial/learning-the-ropes-of-the-hortonworks-sandbox/)
-- Installed and deployed the latest [Hortonworks Data Platform (HDP) Sandbox](https://hortonworks.com/downloads/#sandbox)
 - Installed [Python](https://www.python.org/)
 - Installed [PyCharm](https://www.jetbrains.com/pycharm/)
 

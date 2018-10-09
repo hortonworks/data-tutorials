@@ -23,7 +23,7 @@ This tutorial will teach you how to set up a full development environment for de
 
 ## Prerequisites
 
-- Installed and deployed [Hortonworks Data Platform (HDP) Sandbox](https://hortonworks.com/downloads/#sandbox)
+- Installed and deployed the [Hortonworks Data Platform (HDP)](https://hortonworks.com/downloads/#sandbox) Sandbox
 - [Learning the Ropes of HDP Sandbox](https://hortonworks.com/tutorial/learning-the-ropes-of-the-hortonworks-sandbox/)
 - Installed [IntelliJ IDEA](https://www.jetbrains.com/idea/)
 - Installed [Maven](https://maven.apache.org/install.html) dependency manager
@@ -39,7 +39,6 @@ This tutorial will teach you how to set up a full development environment for de
 - [Live Debugging](#live-debugging)
 - [Summary](#summary)
 - [Further Reading](#further-reading)
-
 
 ## Creating a new IntelliJ Project
 

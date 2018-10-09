@@ -87,27 +87,6 @@ For improved Hive integration, [ORC file](https://hortonworks.com/blog/orcfile-i
 
 If you already have a `riskfactor` table on your sandbox you must remove it so that you can populate it again using Spark. Copy and paste the following code into your Zeppelin notebook, then click the play button. Alternatively, press `shift+enter` to run the code.
 
-~~~sql
-%jdbc(hive)
-SHOW TABLES
-~~~
-
-If you see a table named `riskfactor`, let us drop it:
-
-~~~sql
-%jdbc(hive)
-DROP TABLE IF EXISTS riskfactor
-~~~
-
-To verify table has been dropped, let us do show tables again:
-
-~~~sql
-%jdbc(hive)
-SHOW TABLES
-~~~
-
-![drop_table_lab4](assets/drop_table_lab4.jpg)
-
 ### Instantiate SparkSession
 
 ~~~scala
@@ -139,18 +118,92 @@ Once a RDD is instantiated, you can apply a [series of operations](https://spark
 - **Transformation** operations, as the name suggests, create new datasets from an existing RDD and build out the processing DAG that can then be applied on the partitioned dataset across the YARN cluster. Transformations do not return a value. In fact, nothing is evaluated during the definition of these transformation statements. Spark just creates these Direct Acyclic Graphs or DAG, which will only be evaluated at runtime. We call this *lazy* evaluation.
 - An **Action** operation, on the other hand, executes a DAG and returns a value.
 
-### View List of Tables in Hive Warehouse
+## Read CSV Files into Apache Spark
 
-Use a simple show command to see the list of tables in Hive warehouse.
+In this tutorial we will use the CSV files we stored in HDFS in previous sections. Additionally, we will leverage Global Temporary Views on SparkSessions to programmatically query DataFrames using SQL.
+
+### Import CSV data into a data frame without a user defined schema
 
 ~~~scala
 %spark2
-hiveContext.sql("SHOW TABLES").show()
+/**
+ * Let us first see what temporary views are already existent on our Sandbox
+ */
+hiceContext.sql("SHOW TABLES").show()
 ~~~
 
-![view_list_tables_hive_hello_hdp_lab4](assets/view_list_tables_hive_hello_hdp_lab4.png)
+If you have not created any temporary views in this Spark instance there should not be any tables:
 
-You will notice that the `geolocation` table and the `drivermileage` table that we created earlier in an tutorial are already listed in **Hive metastore** and can be directly queried upon.
+![empty-set](assets/empty-set.jpg)
+
+First we must read data from HDFS, in this case we are reading from a csv file without having defined the schema first:
+
+~~~scala
+val geoLocationDataFrame = spark.read.format("csv").option("header", "true").load("hdfs:///user/maria_dev/data/geolocation.csv")
+
+/**
+ * Now that we have the data loaded into a DataFrame, we can register a temporary view.
+ */
+geoLocationDataFrame.createOrReplaceTempView("geolocation")
+~~~
+
+Let's verify that the data in our CSV file was properly loaded into our data frame:
+
+~~~scala
+%spark2
+hiveContext.sql("SELECT * FROM geolocation LIMIT 15").show()
+~~~
+
+![select-geo-from-csv](assets/select-geo-from-csv.jpg)
+
+Note that our data is casted onto the appropriate type when we register it as a temporary view:
+
+~~~scala
+hiveContext.sql("DESCRIBE geolocation").show()
+~~~
+
+![describe-geo](assets/describe-geo.jpg)
+
+Alternatively, we can define our schema with specific types, we will explore this option on the next paragraph.
+
+### Import CSV data into a data frame with a user defined schema
+
+~~~scala
+%spark2
+/**
+ * The SQL Types library allows us to define the data types of our schema
+ */
+import org.apache.spark.sql.types._
+
+/**
+ * Recall from the previous tutorial section that the driverid schema only has two relations: 
+ * driverid (a String), and totmiles (a Double).
+ */
+val drivermileageSchema = new StructType().add("driverid",StringType,true).add("totmiles",DoubleType,true)
+~~~
+
+Now we can populate `drivermileageSchema` with our CSV files residing in HDFS
+
+~~~scala
+%spark2
+val drivermileageDataFrame = spark.read.format("csv").option("header", "true").schema(drivermileageSchema)load("hdfs:///user/maria_dev/data/drivermileage.csv")
+~~~
+
+Finally, let's create a temporary view
+
+~~~scala
+%spark2
+drivermileageDataFrame.createOrReplaceTempView("drivermileage")
+~~~
+
+We can use SparkSession and SQL to query `drivermileage`
+
+~~~scala
+%spark2
+hiveContext.sql("SELECT * FROM drivermileage LIMIT 15").show()
+~~~
+
+![select-csv-from-driverm](assets/select-csv-from-driverm.jpg)
 
 ### Query Tables To Build Spark RDD
 
@@ -158,41 +211,35 @@ We will do a simple select query to fetch data from `geolocation` and `drivermil
 
 ~~~scala
 %spark2
-val geolocation_temp1 = hiveContext.sql("SELECT * FROM geolocation")
+val geolocation_temp0 = hiveContext.sql("SELECT * FROM geolocation")
+val drivermileage_temp0 = hiveContext.sql("SELECT * FROM drivermileage")
 ~~~
 
-![query_tables_build_spark_rdd_hello_hdp_lab4](assets/query_tables_build_spark_rdd_hello_hdp_lab4.png)
+Now let's register temporary global tables from our dataFrames and use SQL syntax to query against that table.
 
 ~~~scala
-%spark2
-val drivermileage_temp1 = hiveContext.sql("SELECT * FROM drivermileage")
+geolocation_temp0.createOrReplaceTempView("geolocation_temp0")
+drivermileage_temp0.createOrReplaceTempView("drivermileage_temp0")
+
+hiveContext.sql("SHOW TABLES").show()
 ~~~
 
-![drivermileage_spark_rdd_hello_hdp_lab4](assets/drivermileage_spark_rdd_hello_hdp_lab4.png)
+![another-way-to-make-rdd](assets/another-way-to-make-rdd.jpg)
 
-## Querying Against a Table
-
-### Registering a Temporary Table
-
-Now let’s register temporary tables and use SQL syntax to query against that table.
-
-~~~scala
-%spark2
-geolocation_temp1.createOrReplaceTempView("geolocation_temp1")
-drivermileage_temp1.createOrReplaceTempView("drivermileage_temp1")
-hiveContext.sql("SHOW tables").show()
-~~~
-
-![name_rdd_hello_hdp_lab4](assets/name_rdd_hello_hdp_lab4.png)
+## Querying Against Registered Temporary Tables
 
 Next, we will perform an iteration and a filter operation. First, we need to filter drivers that have non-normal events associated with them and then count the number for non-normal events for each driver.
 
 ~~~scala
 %spark2
-val geolocation_temp2 = hiveContext.sql("SELECT driverid, COUNT(driverid) occurance from geolocation_temp1 WHERE event!='normal' GROUP BY driverid")
+val geolocation_temp1 = hiveContext.sql("SELECT driverid, COUNT(driverid) occurance from geolocation_temp0 WHERE event!='normal' GROUP BY driverid")
+/**
+ * Show RDD
+ */
+geolocation_temp1.show(10)
 ~~~
 
-![filter_drivers_nonnormal_events_hello_hdp_lab4](assets/filter_drivers_nonnormal_events_hello_hdp_lab4.png)
+![filter-abnormal-events](assets/filter-abnormal-events.jpg)
 
 - As stated earlier about RDD transformations, select operation is a RDD transformation and therefore does not return anything.
 
@@ -200,30 +247,30 @@ val geolocation_temp2 = hiveContext.sql("SELECT driverid, COUNT(driverid) occura
 
 ~~~scala
 %spark2
-geolocation_temp2.createOrReplaceTempView("geolocation_temp2")
+geolocation_temp1.createOrReplaceTempView("geolocation_temp1")
 hiveContext.sql("SHOW TABLES").show()
 ~~~
 
-![register_filtered_table_hello_hdp_lab4](assets/register_filtered_table_hello_hdp_lab4.png)
+![filtered-table](assets/filtered-table.jpg)
 
-- You can view the result by executing an action operation on the RDD.
+- You can view the result by executing an action operation on the temporary view.
 
 ~~~scala
 %spark2
-geolocation_temp2.show(10)
+hiveContext.sql("SELECT * FROM geolocation_temp1 LIMIT 15").show()
 ~~~
 
-![view_results_op_on_rdd_hello_hdp_lab4](assets/view_results_op_on_rdd_hello_hdp_lab4.png)
+![view-operation](assets/view-operation.jpg)
 
 ### Perform join Operation
 
-In this section we will perform a join operation geolocation_temp2 table has details of drivers and count of their respective non-normal events. drivermileage_temp1 table has details of total miles travelled by each driver.
+In this section we will perform a join operation geolocation_temp1 table has details of drivers and count of their respective non-normal events. drivermileage_temp0 table has details of total miles travelled by each driver.
 
 - We will join two tables on common column, which in our case is `driverid`.
 
 ~~~scala
 %spark2
-val joined = hiveContext.sql("SELECT a.driverid,a.occurance,b.totmiles FROM geolocation_temp2 a,drivermileage_temp1 b WHERE a.driverid=b.driverid")
+val joined = hiveContext.sql("select a.driverid,a.occurance,b.totmiles from geolocation_temp1 a,drivermileage_temp0 b where a.driverid=b.driverid")
 ~~~
 
 ![join_op_column_hello_hdp_lab4](assets/join_op_column_hello_hdp_lab4.png)
@@ -236,20 +283,23 @@ joined.createOrReplaceTempView("joined")
 hiveContext.sql("SHOW TABLES").show()
 ~~~
 
-![register_joined_table_hello_hdp_lab4](assets/register_joined_table_hello_hdp_lab4.png)
+![created-joined](assets/created-joined.jpg)
 
-- You can view the result by executing action operation on RDD.
+- You can view the result by executing action operation on our temporary view.
 
 ~~~scala
 %spark2
-joined.show(10)
+/**
+ * We can view the result from our query with a select statement
+ */
+hiveContext.sql("SELECT * FROM joined LIMIT 10").show()
 ~~~
 
-![show_results_joined_table_hello_hdp_lab4](assets/show_results_joined_table_hello_hdp_lab4.png)
+![show-results-joined](assets/show-results-joined.jpg)
 
 ### Compute Driver Risk Factor
 
-In this section we will associate a driver risk factor with every driver. Driver risk factor will be calculated by dividing total miles travelled by non-normal event occurrences.
+In this section we will associate a driver risk factor with every driver. The risk factor for each driver is the number of abnormal occurrences over the total number of miles driver. Simply put, a high number of abnormal occurrences over a short amount of miles driven is an indicator of high risk. Let's translate this intuition into an SQL query:
 
 ~~~scala
 %spark2
@@ -263,7 +313,7 @@ val risk_factor_spark = hiveContext.sql("SELECT driverid, occurance, totmiles, t
 ~~~scala
 %spark2
 risk_factor_spark.createOrReplaceTempView("risk_factor_spark")
-hiveContext.sql("SHOW tables").show()
+hiveContext.sql("SHOW TABLES").show()
 ~~~
 
 - View the results
@@ -273,62 +323,19 @@ hiveContext.sql("SHOW tables").show()
 risk_factor_spark.show(10)
 ~~~
 
-![view_results_filtertable_hello_hdp_lab4](assets/view_results_filtertable_hello_hdp_lab4.png)
+![results-from-risk](assets/results-from-risk.jpg)
 
-## Load and Save Data into Hive as ORC
+## Save Table as CSV
 
-In this section we store data in a smart ORC (Optimized Row Columnar) format using Spark. ORC is a self-describing type-aware columnar file format designed for Hadoop workloads. It is optimized for large streaming reads and with integrated support for finding required rows fast. Storing data in a columnar format lets the reader read, decompress, and process only the values required for the current query. Because ORC files are type aware, the writer chooses the most appropriate encoding for the type and builds an internal index as the file is persisted.
-
-Predicate pushdown uses those indexes to determine which stripes in a file need to be read for a particular query and the row indexes can narrow the search to a particular set of 10,000 rows. ORC supports the complete set of types in Hive, including the complex types: structs, lists, maps, and unions.
-
-### Create an ORC table
-
-Create a table and store it as ORC. Specifying as *orc* at the end of the SQL statement below ensures that the Hive table is stored in the ORC format.
+After finding the risk factor for each driver we might want to store our results as a CSV on HDFS:
 
 ~~~scala
-%spark2
-hiveContext.sql("CREATE TABLE finalresults( driverid String, occurance bigint, totmiles bigint, riskfactor double) stored AS orc").toDF()
-hiveContext.sql("SHOW TABLES").show()
+risk_factor_spark.coalesce(1).write.csv("hdfs:///user/maria_dev/data/riskfactor")
 ~~~
 
-> Note: toDF() creates a DataFrame with columns driverid String, occurance bigint, etc.
+There will be a directory structure with our data under `user/maria_dev/data/` named `riskfactor` there we can find our csv file with a auto generated name given to it by Spark.
 
-![create_orc_table_hello_hdp_lab4](assets/create_orc_table_hello_hdp_lab4.png)
-
-### Convert data into ORC table
-
-Before we load the data into Hive table that we created above, we will have to convert our data file into ORC format too.
-
-~~~scala
-%spark2
-risk_factor_spark.write.format("orc").save("risk_factor_spark")
-~~~
-
-![convert_orc_table_hello_hdp_lab4](assets/convert_orc_table_hello_hdp_lab4.png)
-
-### Load the data into Hive table using load data command
-
-~~~scala
-%spark2
-hiveContext.sql("LOAD DATA INPATH 'risk_factor_spark' INTO TABLE finalresults")
-~~~
-
-![load_data_to_finalresults_hello_hdp_lab4](assets/load_data_to_finalresults_hello_hdp_lab4.png)
-
-### Create the final table Riskfactor using CTAS
-
-~~~scala
-%spark
-hiveContext.sql("CREATE TABLE riskfactor AS SELECT * FROM finalresults").toDF()
-~~~
-
-![create_table_riskfactor_spark](assets/create_table_riskfactor_spark.png)
-
-### Verify Data Successfully Populated Hive Table in Hive
-
-Execute a select query to verify your table has been successfully stored. You can go to Ambari Hive user view to check whether the Hive table you created has the data populated in it.
-
-![riskfactor_table_populated](assets/riskfactor_table_populated.jpg)
+![csv-saved](assets/csv-saved.jpg)
 
 ## Full Spark Code Review
 
@@ -349,30 +356,30 @@ hiveContext.sql("SHOW TABLES").show()
 and registers variables as RDD**
 
 ~~~scala
-val geolocation_temp1 = hiveContext.sql("SELECT * from geolocation")
+val geolocation_temp0 = hiveContext.sql("SELECT * FROM geolocation")
 
-val drivermileage_temp1 = hiveContext.sql("SELECT * from drivermileage")
+val drivermileage_temp0 = hiveContext.sql("SELECT * FROM drivermileage")
+
+geolocation_temp0.createOrReplaceTempView("geolocation_temp0")
+drivermileage_temp0.createOrReplaceTempView("drivermileage_temp0")
+
+val geolocation_temp1 = hiveContext.sql("SELECT driverid, count(driverid) occurance FROM geolocation_temp0 WHERE event!='normal' GROUP BY driverid")
 
 geolocation_temp1.createOrReplaceTempView("geolocation_temp1")
-drivermileage_temp1.createOrReplaceTempView("drivermileage_temp1")
-
-val geolocation_temp2 = hiveContext.sql("SELECT driverid, count(driverid) occurance from geolocation_temp1 where event!='normal' group by driverid")
-
-geolocation_temp2.createOrReplaceTempView("geolocation_temp2")
 ~~~
 
-**Load first 10 rows from geolocation_temp2, which is the data from
+**Load first 15 rows from geolocation_temp2, which is the data from
 drivermileage table**
 
 ~~~scala
-geolocation_temp2.show(10)
+hiveContext.sql("SELECT * FROM geolocation_temp1 LIMIT 15").show()
 ~~~
 
 **Create joined to join 2 tables by the same driverid and register joined
 as a RDD**
 
 ~~~scala
-val joined = hiveContext.sql("SELECT a.driverid,a.occurance,b.totmiles from geolocation_temp2 a,drivermileage_temp1 b where a.driverid=b.driverid")
+val joined = hiveContext.sql("SELECT a.driverid,a.occurance,b.totmiles FROM geolocation_temp1 a,drivermileage_temp0 b WHERE a.driverid=b.driverid")
 
 joined.createOrReplaceTempView("joined")
 ~~~
@@ -380,7 +387,7 @@ joined.createOrReplaceTempView("joined")
 **Load first 10 rows and columns in joined**
 
 ~~~scala
-joined.show(10)
+hiveContext.sql("SELECT * FROM joined LIMIT 10").show()
 ~~~
 
 **Initialize risk_factor_spark and register as an RDD**
@@ -391,23 +398,10 @@ val risk_factor_spark = hiveContext.sql("SELECT driverid, occurance, totmiles, t
 risk_factor_spark.createOrReplaceTempView("risk_factor_spark")
 ~~~
 
-**Print the first 10 lines from the risk_factor_spark table**
+**Print the first 15 lines from the risk_factor_spark table**
 
 ~~~scala
-risk_factor_spark.show(10)
-~~~
-
-**Create table finalresults in Hive, save it as ORC, load data into it,
-and then create the final table called riskfactor using CTAS**
-
-~~~scala
-hiveContext.sql("create table finalresults( driverid String, occurance bigint, totmiles bigint, riskfactor double) stored AS orc").toDF()
-
-risk_factor_spark.write.format("orc").save("risk_factor_spark")
-
-hiveContext.sql("LOAD DATA INPATH 'risk_factor_spark' INTO TABLE finalresults")
-
-hiveContext.sql("CREATE TABLE riskfactor AS SELECT * FROM finalresults").toDF()
+hiveContext.sql("SELECT * FROM risk_factor_spark LIMIT 15").show()
 ~~~
 
 ## Summary
@@ -430,7 +424,7 @@ To learn more about Spark, checkout these resources:
 1\.  Using the [built-in SSH Web Client](https://hortonworks.com/tutorial/learning-the-ropes-of-the-hortonworks-sandbox/#shell-web-client-method) (aka shell-in-a-box), logon using **maria_dev**/**maria_dev**
 
 2\.  Let's enter the Spark interactive shell by typing the command:
-- ```spark-shell```
+- `spark-shell`
 
 This will load the default Spark Scala API. Issue the command `:help` for help and `:quit` to exit.
 
@@ -438,31 +432,96 @@ This will load the default Spark Scala API. Issue the command `:help` for help a
 
 - Execute the commands:
 
-  - ```val hiveContext = new org.apache.spark.sql.SparkSession.Builder().getOrCreate()```
-  - ```hiveContext.sql("SHOW TABLES").show()```
-  - ```val geolocation_temp1 = hiveContext.sql("SELECT * FROM geolocation")```
-  - ```val drivermileage_temp1 = hiveContext.sql("SELECT * FROM drivermileage")```
-  - ```geolocation_temp1.createOrReplaceTempView("geolocation_temp1")```
-  - ```drivermileage_temp1.createOrReplaceTempView("drivermileage_temp1")```
-  - ```hiveContext.sql("SHOW TABLES").show()```
-  - ```val geolocation_temp2 = hiveContext.sql("SELECT driverid, count(driverid) occurance FROM geolocation_temp1 WHERE event!='normal' GROUP BY driverid")```
-  - ```geolocation_temp2.createOrReplaceTempView("geolocation_temp2")```
-  - ```hiveContext.sql("SHOW TABLES").show()```
-  - ```geolocation_temp2.show(10)```
-  - ```val joined = hiveContext.sql("SELECT a.driverid,a.occurance,b.totmiles FROM geolocation_temp2 a,drivermileage_temp1 b WHERE a.driverid=b.driverid")```
-  - ```joined.createOrReplaceTempView("joined")```
-  - ```hiveContext.sql("SHOW TABLES").show()```
-  - ```joined.show(10)```
-  - ```val risk_factor_spark = hiveContext.sql("SELECT driverid, occurance, totmiles, totmiles/occurance riskfactor FROM joined")```
-  - ```risk_factor_spark.createOrReplaceTempView("risk_factor_spark")```
-  - ```hiveContext.sql("SHOW TABLES").show()```
-  - ```risk_factor_spark.show(10)```
-  - ```hiveContext.sql("DROP TABLE IF EXISTS finalresults")```
-  - ```hiveContext.sql("create table finalresults( driverid String, occurance bigint, totmiles bigint, riskfactor double) stored AS orc").toDF()```
-  - ```hiveContext.sql("SHOW TABLES").show()```
-  - ```risk_factor_spark.write.format("orc").mode("overwrite").save("risk_factor_spark")```
-  - ```hiveContext.sql("LOAD DATA INPATH 'risk_factor_spark' into table finalresults")```
-  - ```hiveContext.sql("DROP TABLE IF EXISTS riskfactor")```
-  - ```hiveContext.sql("create table riskfactor AS SELECT * FROM finalresults").toDF()```
-  - ```val riskfactor_temp = hiveContext.sql("SELECT * FROM riskfactor")```
-  - ```riskfactor_temp.show(10)```
+~~~scala
+val hiveContext = new org.apache.spark.sql.SparkSession.Builder().getOrCreate()
+/**
+ * Let us first see what temporary views are already existent on our Sandbox
+ */
+hiveContext.sql("SHOW TABLES").show()
+/**First we must read data from HDFS, in this case we are reading from a csv file without having defined the schema first.
+ */
+val geoLocationDataFrame = spark.read.format("csv").option("header", "true").load("hdfs:///user/maria_dev/data/geolocation.csv")
+/**
+ * Now that we have the data loaded into a DataFrame, we can register a temporary view.
+ */
+geoLocationDataFrame.createOrReplaceTempView("geolocation")
+hiveContext.sql("SELECT * FROM geolocation LIMIT 15").show()
+~~~
+
+~~~scala
+hiveContext.sql("DESCRIBE geolocation").show()
+~~~
+
+~~~scala
+/**The SQL Types library allows us to define the data types of our schema
+ */
+import org.apache.spark.sql.types._
+/**Recall from the previous tutorial section that the driverid schema only has two relations: 
+ * driverid (a String), and totmiles (a Double).
+ */
+val drivermileageSchema = new StructType().add("driverid",StringType,true).add("totmiles",DoubleType,true)
+val drivermileageDataFrame = spark.read.format("csv").option("header", "true").schema(drivermileageSchema)load("hdfs:///user/maria_dev/data/drivermileage.csv")
+drivermileageDataFrame.createOrReplaceTempView("drivermileage")
+~~~
+
+~~~scala
+hiveContext.sql("SELECT * FROM drivermileage LIMIT 15").show()
+~~~
+
+~~~scala
+val geolocation_temp0 = hiveContext.sql("SELECT * FROM geolocation")
+val drivermileage_temp0 = hiveContext.sql("SELECT * FROM drivermileage")
+
+geolocation_temp0.createOrReplaceTempView("geolocation_temp0")
+drivermileage_temp0.createOrReplaceTempView("drivermileage_temp0")
+
+hiveContext.sql("SHOW TABLES").show()
+~~~
+
+~~~scala
+val geolocation_temp1 = hiveContext.sql("SELECT driverid, count(driverid) occurance FROM geolocation_temp0 WHERE event!='normal' GROUP BY driverid")
+
+geolocation_temp1.show(10)
+~~~
+
+~~~scala
+geolocation_temp1.createOrReplaceTempView("geolocation_temp1")
+hiveContext.sql("SHOW TABLES").show()
+~~~
+
+~~~scala
+hiveContext.sql("SELECT * FROM geolocation_temp1 LIMIT 15").show()
+~~~
+
+~~~scala
+val joined = hiveContext.sql("select a.driverid,a.occurance,b.totmiles from geolocation_temp1 a,drivermileage_temp0 b where a.driverid=b.driverid")
+
+/**Register temporary view
+ */
+joined.createOrReplaceTempView("joined")
+/**We can view the result from our query with a select statement
+ */
+hiveContext.sql("SELECT * FROM joined LIMIT 10").show()
+~~~
+
+~~~scala
+val risk_factor_spark = hiveContext.sql("select driverid, occurance, totmiles, (totmiles/occurance) riskfactor from joined")
+risk_factor_spark.createOrReplaceTempView("risk_factor_spark")
+/**Ensure our table is created as a temporary view
+ */
+hiveContext.sql("SHOW TABLES").show()
+~~~
+
+~~~scala
+val joined = hiveContext.sql("SELECT a.driverid,a.occurance,b.totmiles FROM geolocation_temp2 a,drivermileage_temp1 b WHERE a.driverid=b.driverid")
+~~~
+
+~~~scala
+/**View results
+ */
+hiveContext.sql("SELECT * FROM risk_factor_spark LIMIT 15").show()
+~~~
+
+~~~scala
+risk_factor_spark.coalesce(1).write.csv("hdfs:///user/maria_dev/data/riskfactor")
+~~~

@@ -25,8 +25,8 @@ We will describe how to ingest data into HDFS, to create tables and perform quer
 
 ## Prerequisites
 
-- Downloaded and Installed latest [Hortonworks Data Platform (HDP) Sandbox](https://hortonworks.com/downloads/#sandbox)
-- Completed [Learning the Ropes of the HDP Sandbox](https://hortonworks.com/tutorial/learning-the-ropes-of-the-hortonworks-sandbox/) tutorial
+- Downloaded and deployed the [Hortonworks Data Platform (HDP)](https://hortonworks.com/downloads/#sandbox) Sandbox
+- [Learning the Ropes of the HDP Sandbox](https://hortonworks.com/tutorial/learning-the-ropes-of-the-hortonworks-sandbox/) tutorial
 
 ## Outline
 
@@ -52,13 +52,13 @@ users.tsv
 
 ## Create Hive Tables with Data Analytics Studio
 
-Logon to Ambari user/password: maria_dev/maria_dev.
+Logon to Ambari user/password: **maria_dev/maria_dev**.
 
 1\. Select the **Data Analytics Studio** (DAS) service.
 
 2\. Navigate to the **Data Analytics Studio UI** located on the right hand side of the Ambari page.
 
-- Alternatively, you can access the DAS UI directly by using port 38000:[sandbox.hdp.hortonworks.com:30800](http://sandbox-hdp.hortonworks.com:30800/)
+- Alternatively, you can access the DAS UI directly by using port 30800:[sandbox.hdp.hortonworks.com:30800](http://sandbox-hdp.hortonworks.com:30800/)
 
 ![das-ui-navigate](assets/das-ui-navigate.jpg)
 
@@ -223,6 +223,18 @@ ON o.swid = concat('{', u.swid , '}');
 The **Data Preview** for **webloganalytics** should look like the table below:
 
 ![das-webloganalytics-data-preview](assets/das-webloganalytics-data-preview.jpg)
+
+You can download the **webloganalytics.csv** file by entering the following query in **Compose**:
+
+~~~SQL
+SELECT * FROM webloganalytics;
+~~~
+
+This query will show the content of table webloganalytics. You can then click on **EXPORT DATA** > **DOWNLOAD AS CSV**. This will download the csv file in your local machine.
+
+![das-webloganalytics-download-as-csv](assets/das-webloganalytics-download-as-csv.jpg)
+
+>NOTE: The webloganalytics.csv file will be used for the tutorial Visualizing Website Clickstream Data which is located in the section of Further Reading.
 
 ## Summary
 

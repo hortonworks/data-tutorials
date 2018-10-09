@@ -10,19 +10,19 @@ This tutorial walks through the general approach for installing the Hortonworks 
 
 ## Prerequisites
 
--   [Download the Hortonworks Sandbox](https://hortonworks.com/downloads/#sandbox)
--   VMWare Installed, version 14 or newer
-    -   [VMWare Workstation For Linux/Windows](https://www.vmware.com/products/workstation-pro.html)
-    -   [VMWare Fusion For macOS](http://www.vmware.com/products/fusion.html)
--   A computer with minimum **8 GB RAM** to spare
+- [Download the Hortonworks Sandbox](https://hortonworks.com/downloads/#sandbox)
+- VMWare Installed, version 14 or newer
+  - [VMWare Workstation For Linux/Windows](https://www.vmware.com/products/workstation-pro.html)
+  - [VMWare Fusion For macOS](http://www.vmware.com/products/fusion.html)
+- A computer with minimum **10 GB RAM** dedicated to the virtual machine
 
 ## Outline
 
--   [Import Hortonworks Sandbox](#import-hortonworks-sandbox)
-    -   [VMWare Workstation](#vmware-workstation)
-    -   [VMWare Fusion](#vmware-fusion)
--   [Enable Connected Data Architecture (CDA) - Advanced Topic](#enable-connected-data-architecture-cda---advanced-topic)
--   [Further Reading](#further-reading)
+- [Import Hortonworks Sandbox](#import-hortonworks-sandbox)
+  - [VMWare Workstation](#vmware-workstation)
+  - [VMWare Fusion](#vmware-fusion)
+- [Enable Connected Data Architecture (CDA) - Advanced Topic](#enable-connected-data-architecture-cda---advanced-topic)
+- [Further Reading](#further-reading)
 
 ## Import Hortonworks Sandbox
 
@@ -62,11 +62,11 @@ Select the sandbox image you downloaded and click **Open**, then **Continue**.
 
 You are given the opportunity to save the virtual machine under a different name/location. If you have no preference in renaming, you can just leave the default name and click Save. You should then see the importing progress dialog:
 
-![vmware_import_progress](assets/vmware-importing.jpg)
+![vmware-import-progress](assets/vmware-importing.jpg)
 
 Once finished, the following screen is displayed:
 
-![vmware_finish](assets/vmware-finish.jpg)
+![vmware-finish](assets/vmware-finish.jpg)
 
 Click **Finish** to start your new virtual machine.
 
@@ -81,9 +81,9 @@ Welcome to the Hortonworks Sandbox!
 ## Enable Connected Data Architecture (CDA) - Advanced Topic
 
 **Prerequisite**:
--   A computer with minimum **12 GB of RAM** to spare
--   Have already deployed the latest HDP/HDF sandbox
--   Update virtual machine settings to minimum 12 GB (12288 MB)
+- A computer with minimum **22 GB of RAM** dedicated to the virtual machine
+- Have already deployed the latest HDP/HDF sandbox
+- Update virtual machine settings to minimum 22 GB (22528 MB)
 
 Hortonworks Connected Data Architecture (CDA) allows you to play with both data-in-motion (HDF) and data-at-rest (HDP) sandboxes simultaneously.
 
@@ -109,13 +109,13 @@ Select **Processors & Memory** and modify memory accordingly. Restart virtual ma
 
 The sandbox comes prepackaged with the script needed to enable CDA. Assuming you have already deployed the **HDP sandbox**, you need to **SSH** into Sandbox VM using password `hadoop`:
 
--   Issue command: `ssh root@sandbox-hdp.hortonworks.com -p 22`
+- Issue command: `ssh root@sandbox-hdp.hortonworks.com -p 22`
 
 > Note: if you originally deployed HDF sandbox, replace **`sandbox-hdp`** with **`sandbox-hdf`** in the ssh command above.
 
--   Run bash script:
+- Run bash script:
 
-```
+```bash
 cd /sandbox/deploy-scripts/
 sh enable-vm-cda.sh
 ```
@@ -126,5 +126,5 @@ The script output will be similar to:
 
 ## Further Reading
 
--   Follow-up with the tutorial: [Learning the Ropes of the HDP Sandbox](https://hortonworks.com/tutorial/learning-the-ropes-of-the-hortonworks-sandbox)
--   [Browse available tutorials](https://hortonworks.com/tutorials/)
+- Follow-up with the tutorial: [Learning the Ropes of the HDP Sandbox](https://hortonworks.com/tutorial/learning-the-ropes-of-the-hortonworks-sandbox)
+- [Browse available tutorials](https://hortonworks.com/tutorials/)

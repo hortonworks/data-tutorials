@@ -14,18 +14,18 @@ In this tutorial, using Microsoft Excel 2016 for Windows and Power View, we'll v
 
 The tutorial is a part of series of hands on tutorial to get you started on HDP using Hortonworks sandbox. Please ensure you complete the prerequisites before proceeding with this tutorial.
 
--   [Loading Sensor Data into HDFS](https://hortonworks.com/tutorial/hadoop-tutorial-getting-started-with-hdp/section/2/)
--   [Hive - Data ETL](https://hortonworks.com/tutorial/hadoop-tutorial-getting-started-with-hdp/section/3/)
--   Install [Hortonworks ODBC Driver for Apache Hive (v2.1.10)](http://hortonworks.com/downloads/#addons)
--   [Configure ODBC driver](http://hortonworks.com/wp-content/uploads/2013/05/Installing_Configuring_Hortonworks_ODBC_Driver_with_Sandbox_-Windows7.pdf)
--   Microsoft Excel 2016 for Windows + [Power View](https://support.office.com/en-us/article/Turn-on-Power-View-in-Excel-2016-for-Windows-f8fc21a6-08fc-407a-8a91-643fa848729a)
+- [Loading Sensor Data into HDFS](https://hortonworks.com/tutorial/hadoop-tutorial-getting-started-with-hdp/section/2/)
+- [Hive - Data ETL](https://hortonworks.com/tutorial/hadoop-tutorial-getting-started-with-hdp/section/3/)
+- Install [Hortonworks ODBC Driver for Apache Hive (v2.1.10)](http://hortonworks.com/downloads/#addons)
+- [Configure ODBC driver](http://hortonworks.com/wp-content/uploads/2013/05/Installing_Configuring_Hortonworks_ODBC_Driver_with_Sandbox_-Windows7.pdf)
+- Microsoft Excel 2016 for Windows + [Power View](https://support.office.com/en-us/article/Turn-on-Power-View-in-Excel-2016-for-Windows-f8fc21a6-08fc-407a-8a91-643fa848729a)
 
 ## Outline
 
--   [Access Data in Microsoft Excel](#access-data-in-microsoft-excel)
--   [Visualize Data with Microsoft Excel](#visualize-data-with-microsoft-excel)
--   [Summary](#summary)
--   [Further Reading](#further-reading)
+- [Access Data in Microsoft Excel](#access-data-in-microsoft-excel)
+- [Visualize Data with Microsoft Excel](#visualize-data-with-microsoft-excel)
+- [Summary](#summary)
+- [Further Reading](#further-reading)
 
 ## Access Data in Microsoft Excel
 
@@ -88,9 +88,9 @@ SELECT driverid, city, state FROM geolocation;
 ![excel-new-query](assets/excel-new-query.png)
 
 2\. Fill out _From ODBC_ form as follows:
--   **Data source name (DSN)**: _\<data source name you created\>_
--   Under _Advanced options_, **SQL statement (optional)**, type: ```SELECT driverid, city, state FROM geolocation;```
--   press **OK**
+- **Data source name (DSN)**: _\<data source name you created\>_
+- Under _Advanced options_, **SQL statement (optional)**, type: ```SELECT driverid, city, state FROM geolocation;```
+- press **OK**
 
 ![excel-query](assets/excel-query.png)
 
@@ -106,7 +106,7 @@ SELECT driverid, city, state FROM geolocation;
 
 ![excel-select-map](assets/excel-select-map.png)
 
--   Uncheck **driverid**. We only want to see **city** and **state**.
+- Uncheck **driverid**. We only want to see **city** and **state**.
 
 The finished map looks like this.
 
@@ -121,17 +121,18 @@ This tutorial has shown how Hortonworks Data Platform (HDP) can store and visual
 You can further explorer other visualization, such as plotting risk factor or miles per gallon as bar charts.
 
 ## Further Reading
+
 As a Hadoop practitioner you can choose three basic personas to build upon your skill:
 
--   [Developer](https://hortonworks.com/tutorials/?filters=developer)
--   [Administrator](https://hortonworks.com/tutorials/?filters=administrator)
--   [Data Scientist](https://hortonworks.com/tutorials/?filters=data-scientist-analyst)
+- [Developer](https://hortonworks.com/tutorials/?filters=developer)
+- [Administrator](https://hortonworks.com/tutorials/?filters=administrator)
+- [Data Scientist](https://hortonworks.com/tutorials/?filters=data-scientist-analyst)
 
 **Case Studies**
 
 Learn more about Hadoop through these case studies:
 
--   [Data Warehouse Architecture](https://hortonworks.com/solutions/edw-optimization/)
--   [Industry Solutions](https://hortonworks.com/solutions/)
--   [The Definitive Guide by O`Reilly](http://hadoopbook.com/)
--   [Hadoop for Dummies](http://www.wiley.com/WileyCDA/WileyTitle/productCd-1118607554.html)
+- [Data Warehouse Architecture](https://hortonworks.com/solutions/edw-optimization/)
+- [Industry Solutions](https://hortonworks.com/solutions/)
+- [The Definitive Guide by O`Reilly](http://hadoopbook.com/)
+- [Hadoop for Dummies](http://www.wiley.com/WileyCDA/WileyTitle/productCd-1118607554.html)

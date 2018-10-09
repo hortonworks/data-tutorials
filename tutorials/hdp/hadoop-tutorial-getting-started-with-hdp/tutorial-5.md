@@ -25,6 +25,7 @@ The tutorial is a part of series of hands on tutorial to get you started on HDP 
 
 - [Apache Zeppelin](#apache-zeppelin)
 - [Create a Zeppelin Notebook](#create-a-zeppelin-notebook)
+- [Download the Data](#download-the-data)
 - [Execute a Hive Query](#execute-a-hive-query)
 - [Build Charts Using Zeppelin](#build-charts-using-zeppelin)
 - [Summary](#summary)
@@ -54,6 +55,12 @@ Click on a Notebook tab at the top left and select **Create new note**. Name you
 
 ![create-new-notebook](assets/create-new-notebook.jpg)
 
+## Download the Data
+
+Click [here to download the risk factor data](tbd) and upload it to HDFS under `user/maria_dev/data/`
+
+![save-risk-factor](assets/save-risk-factor.jpg)
+
 ## Execute a Hive Query
 
 ### Visualize finalresults Data in Tabular Format
@@ -62,9 +69,12 @@ In the previous Spark tutorial you already created a table `finalresults` or `ri
 
 1\. Copy and paste the code below into your Zeppelin note.
 
-~~~sql
-%jdbc(hive)
-SELECT * FROM riskfactor
+~~~scala
+%spark2
+val hiveContext = new org.apache.spark.sql.SparkSession.Builder().getOrCreate()
+val riskFactorDataFrame = spark.read.format("csv").option("header", "true").load("hdfs:///user/maria_dev/data/riskfactor.csv")
+riskFactorDataFrame.createOrReplaceTempView("riskfactor")
+hiveContext.sql("SELECT * FROM riskfactor LIMIT 15").show()
 ~~~
 
 2\. Click the play button next to "ready" or "finished" to run the query in the Zeppelin notebook.

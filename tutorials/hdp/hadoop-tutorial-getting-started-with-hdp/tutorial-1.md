@@ -23,7 +23,7 @@ In this tutorial, we will explore important concepts that will strengthen your f
 - [Hive and Pig](#concept-hive-and-pig)
 - [Further Reading](#further-reading)
 
-## Concept: Hadoop & HDP 
+## Concept: Hadoop & HDP
 
 In this module you will learn about Apache Hadoop and what makes it scale to large data sets. We will also talk about various components of the Hadoop ecosystem that make Apache Hadoop enterprise ready in the form of Hortonworks Data Platform (HDP) distribution. This module discusses Apache Hadoop and its capabilities as a data platform. The core of Hadoop and its surrounding ecosystem solution vendors provide enterprise requirements to integrate alongside Data Warehouses and other enterprise data systems. These are steps towards the implementation of a modern data architecture, and towards delivering an enterprise ‘Data Lake’.
 

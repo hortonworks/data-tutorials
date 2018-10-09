@@ -122,7 +122,7 @@ To upload to HDFS:
 
 2\. Navigate to sandbox-hdp.hortonworks.com:8080
 
-3\. Login (default username/password is maria_dev/maria_dev)
+3\. Login (default username/password is **maria_dev/maria_dev**)
 
 4\. Log into Amabari Manager
 
