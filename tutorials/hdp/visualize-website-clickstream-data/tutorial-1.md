@@ -36,7 +36,7 @@ To import the notebook, go to the Zeppelin home screen.
 3\. Copy and paste the following URL into the **Note URL**
 
 ~~~text
-https://raw.githubusercontent.com/hortonworks/data-tutorials/master/tutorials/hdp/visualize-website-clickstream-data/assets/ClickstreamAnalytics.json
+https://raw.githubusercontent.com/hortonworks/data-tutorials/master/tutorials/templates/tutorial-template-spark/assets/Learning%20Spark%20Tutorials.json
 ~~~
 
 4\. Click on **Import Note**
