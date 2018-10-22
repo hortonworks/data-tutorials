@@ -7,7 +7,7 @@ persona: Developer
 source: Hortonworks
 use case: Data Discovery
 technology: Apache Spark
-release: hdp-3.0.0
+release: hdp-3.0.1
 environment: Sandbox
 product: HDP
 series: HDP > Develop with Hadoop > Apache Spark

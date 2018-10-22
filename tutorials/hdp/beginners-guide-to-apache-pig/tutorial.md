@@ -7,7 +7,7 @@ persona: Developer
 source: Hortonworks
 use case: Data Discovery
 technology: Apache Ambari, Apache Pig
-release: hdp-3.0.0
+release: hdp-3.0.1
 environment: Sandbox
 product: HDP
 series: HDP > Hadoop for Data Scientists & Analysts > Introduction to Data Analysis with Hadoop

@@ -7,7 +7,7 @@ persona: Administrator
 source: Hortonworks
 use case: Single View
 technology: Sandbox
-release: hdp-3.0.0
+release: hdp-3.0.1
 environment: Sandbox
 product: HDP
 series: HDP > Hadoop Administration > Hortonworks Sandbox
@@ -44,7 +44,7 @@ At a high level the Sandbox is a Linux (CentOS 7) Virtual Machine leveraging doc
 
 [![cda-architecture](assets/docker-architecture.jpg)](https://docs.docker.com/engine/docker-overview/)
 
-In the Docker architecture above, Docker registry are services used for storing Docker images, such as Docker Hub. Docker Host is the computer Docker runs on. Diving deeper into the host, you can see the Docker Daemon, which is used to create and manage Docker objects, such as images, containers, networks and volumes. The user or client is able to interact with Docker daemon via Client Docker CLI. The Docker daemon is a long-running program also known as a server. The CLI utilizes Docker’s REST API to interact with the Docker daemon. As you can observe, the Docker Engine is a client-server application comprised of Client Docker CLI, REST API and Docker daemon.
+In the Docker architecture above, Docker registry are services used for storing Docker images, such as Docker Hub. Docker Host is the computer Docker runs on. Diving deeper into the host, you can see the Docker Daemon, which is used to create and manage Docker objects, such as images, containers, networks and volumes. The user or client is able to interact with Docker daemon via Client Docker's Command Line Interface (CLI). The Docker daemon is a long-running program also known as a server, and the CLI utilizes Docker’s REST API to interact with the Docker daemon. As you can observe, the Docker Engine is a client-server application comprised of Client Docker CLI, REST API and Docker daemon.
 
 ## Sandbox Proxy
 

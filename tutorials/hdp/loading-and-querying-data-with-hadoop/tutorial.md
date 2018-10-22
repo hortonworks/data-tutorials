@@ -7,7 +7,7 @@ persona: Data Scientist & Analyst
 source: Hortonworks
 use case: EDW Optimization
 technology: Apache Ambari, Apache Hive, HDFS
-release: hdp-3.0.0
+release: hdp-3.0.1
 environment: Sandbox
 product: HDP
 series: HDP > Develop with Hadoop > Hello World, HDP > Develop with Hadoop > Apache Hive
@@ -227,7 +227,8 @@ The **Data Preview** for **webloganalytics** should look like the table below:
 You can download the **webloganalytics.csv** file by entering the following query in **Compose**:
 
 ~~~SQL
-SELECT * FROM webloganalytics;
+SELECT logdate, url, ip, city, state, country, category, age, gender_cd
+FROM webloganalytics;
 ~~~
 
 This query will show the content of table webloganalytics. You can then click on **EXPORT DATA** > **DOWNLOAD AS CSV**. This will download the csv file in your local machine.

@@ -7,7 +7,7 @@ persona: Developer, Administrator, Data Scientist & Analyst
 source: Hortonworks
 use case: EDW Optimization
 technology: Apache Ambari, Apache Hive, Apache Tez, DAS
-release: hdp-3.0.0
+release: hdp-3.0.1
 environment: Sandbox
 product: HDP
 series: HDP > Develop with Hadoop > Hello World, HDP > Hadoop for Data Scientists & Analysts > Introduction to Data Analysis with Hadoop, HDP > Develop with Hadoop > Apache Hive

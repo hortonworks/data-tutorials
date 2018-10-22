@@ -1,5 +1,5 @@
 ---
-title: Real-Time Event Processing In NiFi, SAM, Schema Registry and SuperSet
+title: Real-Time Event Processing in NiFi, SAM, Schema Registry and SuperSet
 author: sandbox-team
 tutorial-id: 830
 experience: Advanced
@@ -218,15 +218,15 @@ Congratulations! You deployed the Trucking IoT demo that processes truck event d
 - [Stream Analytics Manager User Guide](https://docs.hortonworks.com/HDPDocuments/HDF3/HDF-3.0.2/bk_streaming-analytics-manager-user-guide/content/ch_sam-manage.html)
 - [Superset](https://superset.incubator.apache.org/)
 
-
 ### Appendix A: Visualize Trucking Data with Superset Via CDA
 
-### Prerequisites
+### Pre-requisites
+
 - [Installed Hortonworks DataFlow (HDF) Sandbox](https://hortonworks.com/downloads/#sandbox)
 - Enabled Connected Data Architecture:
-     - [Enable CDA for VirtualBox](https://hortonworks.com/tutorial/sandbox-deployment-and-install-guide/section/1/#enable-connected-data-architecture-cda---advanced-topic)
-    - [Enable CDA for VMware](https://hortonworks.com/tutorial/sandbox-deployment-and-install-guide/section/2/#enable-connected-data-architecture-cda---advanced-topic)
-    - [Enable CDA for Docker ](https://hortonworks.com/tutorial/sandbox-deployment-and-install-guide/section/3/#enable-connected-data-architecture-cda---advanced-topic)
+  - [Enable CDA for VirtualBox](https://hortonworks.com/tutorial/sandbox-deployment-and-install-guide/section/1/#enable-connected-data-architecture-cda---advanced-topic)
+  - [Enable CDA for VMware](https://hortonworks.com/tutorial/sandbox-deployment-and-install-guide/section/2/#enable-connected-data-architecture-cda---advanced-topic)
+  - [Enable CDA for Docker](https://hortonworks.com/tutorial/sandbox-deployment-and-install-guide/section/3/#enable-connected-data-architecture-cda---advanced-topic)
 
 ### Step 1: Configure SAM for CDA
 
@@ -250,7 +250,7 @@ and then click AUTO ADD.
 
 ![service_pool_credentials](assets/images/service_pool_credentials.jpg)
 
-Use your **admin** credentials to sign in.
+Use your HDP **admin** credentials to sign in.
 
 **Table 1**: Ambari Login credentials
 
@@ -294,7 +294,25 @@ The configurations should look like this:
 
 Now that these configurations are complete, we are ready to import and run our SAM topology for CDA.
 
-### Step 2: Deploy SAM Topology CDA Version
+### Step 2: Configure HDFS for CDA
+
+1\. Open the HDP [**Shell-in-a-Box**](http://sandbox-hdp.hortonworks.com:4200)
+
+2\. Login as **user/password: root/hadoop**
+
+>Note: If this is not your first time login into Shell-in-a-Box then use the previous password you set up for root.
+
+3\. Enter the following commands:
+
+~~~~bash
+su hdfs
+
+hdfs dfs -chmod 777 /apps
+~~~~
+
+The commands above will allow the service Storm in HDF to write to HDFS which resides in HDP.
+
+### Step 3: Deploy SAM Topology CDA Version
 
 1\. Open Stream Analytics Manager (SAM) at [http://sandbox-hdf.hortonworks.com:7777/](http://sandbox-hdf.hortonworks.com:7777/)
 
@@ -323,37 +341,37 @@ A window will appear asking if you want to continue deployment, click **Ok**.
 
 **Overview of the SAM Canvas:**
 
--   My Applications: Different Topology Projects
--   1st Left Sidebar: My Applications, Dashboard, Schema Registry, Model Registry, Configuration
--   2nd Left Sidebar: Different stream components (source, processor, sink)
--   Gear Icon: configure topology settings
--   Status Icon: Start or Stop Topology
+- My Applications: Different Topology Projects
+- 1st Left Sidebar: My Applications, Dashboard, Schema Registry, Model Registry, Configuration
+- 2nd Left Sidebar: Different stream components (source, processor, sink)
+- Gear Icon: configure topology settings
+- Status Icon: Start or Stop Topology
 
 **Overview of SAM topology:**
 
--   **TrafficData** source data of "trucking_data_traffic" Kafka topic
+- **TrafficData** source data of "trucking_data_traffic" Kafka topic
 
--   **TruckEnrichData** source data of "trucking_data_truck_enriched" Kafka topic
+- **TruckEnrichedData** source data of "trucking_data_truck_enriched" Kafka topic
 
--   **JoinStreams** stream TruckEnrichData and TrafficData by "routeId"
+- **JoinStreams** stream TruckEnrichData and TrafficData by "routeId"
 
--   **FilterEvents** checks if not "Normal" eventType, then will emit them
+- **FilterEvents** checks if not "Normal" eventType, then will emit them
 
--   **AverageSpeed** computes average speed for driverId along routeId
+- **AverageSpeed** computes average speed for driverId along routeId
 
--   **ToDruidStore1** stores violation events from FilterEvents processor into Druid
+- **ToDruidStore1** stores violation events from FilterEvents processor into Druid
 
--   **ToDataLake1** store violation events from FilterEvents processor into HDFS
+- **ToDataLake1** store violation events from FilterEvents processor into HDFS
 
--   **ToDruidStore2** stores average speed events into Druid
+- **ToDruidStore2** stores average speed events into Druid
 
--   **ToDataLake2** store average speed events into HDFS
+- **ToDataLake2** store average speed events into HDFS
 
 ### Step 3: Visualize Trucking Data Via Superset
 
 1\. Open Ambari at `http://sandbox-hdp.hortonworks.com:8080/`. User credentials are `username/password = raj_ops/raj_ops`
 
-2\. Turn on the HDFS, YARN, Druid and Superset services and make sure to turn off maintenance mode.
+2\. Ensure that the services HDFS, YARN, Druid and Superset are on and to turn off maintenance mode.
 
 For example, to turn on **HDFS**, click on the service name in Ambari, click on the **Service Actions** dropdown and click **Start**. In the window, you will be asked if you want to start, confirm and also click on the checkbox to turn off maintenance mode.
 
@@ -363,17 +381,17 @@ For example, to turn on **HDFS**, click on the service name in Ambari, click on 
 
 4\. Wait about 25 - 30 minutes for Kafka data to be consumed, then periodically, select the **Sources** dropdown and click on **Refresh Druid Metadata**. Eventually, the two Druid data sources will appear.
 
-![refresh_metadata](assets/images/refresh_metadata.jpg)
+![refresh-metadata](assets/images/refresh-metadata.jpg)
 
 5\. Select **average-speed-cube-01** druid data source.
 
 6\. You will be taken to the Superset visualization slice where you can visualize that druid data source.
 
-![superset_visual_slice](assets/images/superset_visual_slice.jpg)
+![superset-visual-slice](assets/images/superset-visual-slice.jpg)
 
 7\. Under **Datasource & Chart Type**, select Visualization Type: **Sunburst**.
 
-![visual_type](assets/images/visual_type.jpg)
+![visual-type](assets/images/visual-type.jpg)
 
 8\. Under Hierarchy, add **driverId**, **speed_AVG**.
 
@@ -381,25 +399,24 @@ For example, to turn on **HDFS**, click on the service name in Ambari, click on 
 
 ![press-on-query](assets/images/press-on-query.jpg)
 
-10\. Select **Save as** and name the slice: `AvgSpeedSunburst`. Create a new dashboard and call it: `Trucking-IoT-Demo`. Click **Save**.
+10\. Select **Save** and name the slice: `AvgSpeedSunburst`. Create a new dashboard and call it: `Trucking-IoT-Demo`. Click **Save**.
 
-![save_slice](assets/images/save_slice.jpg)
+![save-slice](assets/images/save-slice.jpg)
 
 The following visualization slice is a "Sunburst" of **average-speed-cube-01** data source.
 
-![sunburst_visual_slice](assets/images/sunburst_avgspeed.jpg)
+![sunburst-visual-slice](assets/images/sunburst-avgspeed.jpg)
 
 The following visualization slice is a "Sunburst" of **violation-events-cube-01** data source:
 
-![sunburst_driverviolation](assets/images/sunburst_driverviolation.jpg)
+![sunburst-avgspeed-routeid](assets/images/sunburst-avgspeed-routeid.jpg)
 
 All created visualization slices will be sent to the dashboard you assign them to, in the two above examples, both slices are apart of the `Trucking-IoT-Demo` dashboard.
 
-![superset_dashboard](assets/images/superset_dashboard.jpg)
-
+![superset-dashboard](assets/images/superset-dashboard.jpg)
 
 ### Appendix B: Trucking IoT GitHub Repo
 
-~~~
+~~~URL
 https://github.com/orendain/trucking-iot/tree/master
 ~~~

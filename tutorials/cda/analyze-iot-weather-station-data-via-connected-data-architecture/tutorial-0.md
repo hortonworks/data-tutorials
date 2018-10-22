@@ -7,7 +7,7 @@ persona: Data Engineer & Data Scientist
 source: Hortonworks
 use case: Internet of Things
 technology: Apache NiFi, Apache MiNiFi, Raspberry Pi, Apache Zookeeper, Apache HBase, Apache Phoenix
-release: hdp-3.0.0, hdf-3.2.0
+release: hdp-3.0.1, hdf-3.2.0
 environment: Sandbox
 product: HDP, HDF
 series: HDP > Hadoop for Data Engineers & Data Scientists > Real World Examples, HDF > Develop Data Flow & Streaming Applications > Real World Examples

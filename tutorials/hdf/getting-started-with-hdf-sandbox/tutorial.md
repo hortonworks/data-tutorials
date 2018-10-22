@@ -38,6 +38,7 @@ By the end of this tutorial, you will be familiar with the data-in-motion tools 
   - [Sandbox Version](#sandbox-version)
   - [Admin Password Reset](#admin-password-reset)
 - [Appendix B: Troubleshoot](#appendix-b-troubleshoot)
+- [Appendix C: Determine Network Adapter of Your VirtualBox Sandbox](#appendix-c-determine-network-adpater-of-your-virtualbox-sandbox)
 
 ## Concepts
 
@@ -58,32 +59,6 @@ This is the administrative section to get started with the Hortonworks Sandbox e
 
 Once the Sandbox VirtualBox VM is installed, it attaches to a virtual network. There are 8 different network modes, but the default network your sandbox will attach to is NAT. We will cover relevant networks for our tutorial use cases: NAT and Bridged Adapter.
 
-### Network Address Translation (NAT)
-
-By default, the VirtualBox VM attaches to Network Address Translation (NAT) network mode. The guest's IP address by default translates over to the host's IP address. NAT allows for the guest system to connect to external devices on external networks, but external devices cannot access the guest system. Alternatively, VirtualBox can make selected services on the guest reachable to the outside world by port forwarding. VirtualBox listens to certain ports on the host, then re-sends packets that arrive at those ports to the guest on the same port or different port.
-
-We are forwarding all incoming traffic from a specific host interface to the guest in our sandbox is by specifying an IP of that host like the following:
-
-~~~bash
-VBoxManage modifyvm "Hortonworks Sandbox HDF 3.2.0 Standalone" --natpf1 "Sandbox Splash Page,tcp,127.0.0.1,1080,,1080"
-.
-.
-.
-VBoxManage modifyvm "Hortonworks Sandbox HDF 3.2.0 Standalone" --natpf1 "Sandbox Host SSH,tcp,127.0.0.1,2122,,22"
-~~~
-
-You can find the set network by opening the VM **settings** and then select the **network** tab.
-
-### Bridged Networking
-
-In this mode, the guest receives direct access to the network, which the host has been connected. The router assigns an IP address to the guest. On that network, instead of there being just the host IP address visible, now the guest IP address is visible too. Thus, external devices, such as MiNiFi running on a Raspberry Pi, are able to connect to the guest via it's IP address.
-
-When would you need this mode? It is needed for Connected Data Architecture. To configure this mode, first power down your guest vm, click settings, switch to the network tab and change the **attach to** network to be **Bridged Adapter**.
-
-![Bridged Adapter](assets/images/bridged_adapter.jpg)
-
-> WARNING: first make sure your computer is connected to a router, else this feature will not work cause there is no router to assign an IP address to the guest vm.
-
 ### Determine IP Address of Your Sandbox
 
 Once the Sandbox VM or container is installed, it settles to the host of your environment, the IP address varies depending on your Virtual Machine (VMware, VirtualBox) or container (Docker). Once the sandbox is running, it will tell you the IP address. An example of typical IP addresses for each supported environment:
@@ -94,17 +69,7 @@ Once the Sandbox VM or container is installed, it settles to the host of your en
 
 **VMWare**: IP Address = **192.168.x.x**
 
-If you're using **VirtualBox** or **VMWare**, you can confirm the IP address by waiting for the installation to complete and confirmation screen will tell you the IP address your sandbox resolves to. For example:
-
-Guest VM Welcome Window for NAT Sandbox
-
-![Host Address of Sandbox Environment](assets/images/guest_vm_NAT_mode_hdp265_83.jpg)
-
-Guest VM Welcome Window for BRIDGED Sandbox
-
-![Host Address of Sandbox Environment](assets/images/guest_vm_BRIDGED_mode_welcome_screen.jpg)
-
-> **Note:** If you're using Azure, your IP address is located on the dashboard, refer to [**Set a Static IP**](https://hortonworks.com/tutorial/sandbox-deployment-and-install-guide/section/4/#set-a-static-ip)
+![guest-vm-hdf-welcome-screen](assets/images/guest-vm-hdf-welcome-screen.jpg)
 
 ### Map Sandbox IP to Your Desired Hostname in the Hosts File
 
@@ -113,13 +78,13 @@ Mac, Linux and Windows all have a hosts file. This file once configured enables 
 **Mac users**:
 
 ```bash
-echo '{IP-Address} sandbox.hortonworks.com sandbox-hdp.hortonworks.com sandbox-hdf.hortonworks.com' | sudo tee -a /private/etc/hosts
+echo '{IP-Address} sandbox-hdp.hortonworks.com sandbox-hdf.hortonworks.com' | sudo tee -a /private/etc/hosts
 ```
 
 **Linux users**:
 
 ```bash
-echo '{IP-Address} sandbox.hortonworks.com sandbox-hdp.hortonworks.com sandbox-hdf.hortonworks.com' | sudo tee -a /etc/hosts
+echo '{IP-Address} sandbox-hdp.hortonworks.com sandbox-hdf.hortonworks.com' | sudo tee -a /etc/hosts
 ```
 
 **Windows users**:
@@ -129,7 +94,7 @@ echo '{IP-Address} sandbox.hortonworks.com sandbox-hdp.hortonworks.com sandbox-h
 - Add:
 
  ```bash
- {IP-Address}   localhost   sandbox.hortonworks.com   sandbox-hdp.hortonworks.com   sandbox-hdf.hortonworks.com
+ {IP-Address}   localhost sandbox-hdp.hortonworks.com   sandbox-hdf.hortonworks.com
  ```
 
 - Save the file
@@ -265,3 +230,41 @@ ambari-admin-password-reset
 ## Appendix B: Troubleshoot
 
 - [Hortonworks Community Connection](https://hortonworks.com/community/forums/) (HCC) is a good resource to find answers to problems you may encounter during your Hadoop journey.
+
+## Appendix C: Determine Network Adapter of Your VirtualBox Sandbox
+
+By default, the VirtualBox VM attaches to Network Address Translation (NAT) network mode. The guest's IP address by default translates over to the host's IP address. NAT allows for the guest system to connect to external devices on external networks, but external devices cannot access the guest system. Alternatively, VirtualBox can make selected services on the guest reachable to the outside world by port forwarding. VirtualBox listens to certain ports on the host, then re-sends packets that arrive at those ports to the guest on the same port or different port.
+
+We are forwarding all incoming traffic from a specific host interface to the guest in our sandbox is by specifying an IP of that host like the following:
+
+~~~bash
+VBoxManage modifyvm "Hortonworks Sandbox HDF 3.2.0 Standalone" --natpf1 "Sandbox Splash Page,tcp,127.0.0.1,1080,,1080"
+.
+.
+.
+VBoxManage modifyvm "Hortonworks Sandbox HDF 3.2.0 Standalone" --natpf1 "Sandbox Host SSH,tcp,127.0.0.1,2122,,22"
+~~~
+
+You can find the set network by opening the VM **settings** and then select the **network** tab.
+
+**Bridged Networking**
+
+In this mode, the guest receives direct access to the network, which the host has been connected. The router assigns an IP address to the guest. On that network, instead of there being just the host IP address visible, now the guest IP address is visible too. Thus, external devices, such as MiNiFi running on a Raspberry Pi, are able to connect to the guest via it's IP address.
+
+When would you need this mode? It is needed for Connected Data Architecture. To configure this mode, first power down your guest vm, click settings, switch to the network tab and change the **attach to** network to be **Bridged Adapter**.
+
+![Bridged Adapter](assets/images/bridged_adapter.jpg)
+
+> WARNING: first make sure your computer is connected to a router, else this feature will not work cause there is no router to assign an IP address to the guest vm.
+
+If you're using **VirtualBox** or **VMWare**, you can confirm the IP address by waiting for the installation to complete and confirmation screen will tell you the IP address your sandbox resolves to. For example:
+
+Guest VM Welcome Window for NAT Sandbox
+
+![Host Address of Sandbox Environment](assets/images/guest_vm_NAT_mode_hdp265_83.jpg)
+
+Guest VM Welcome Window for BRIDGED Sandbox
+
+![Host Address of Sandbox Environment](assets/images/guest_vm_BRIDGED_mode_welcome_screen.jpg)
+
+> **Note:** If you're using Azure, your IP address is located on the dashboard, refer to [**Set a Static IP**](https://hortonworks.com/tutorial/sandbox-deployment-and-install-guide/section/4/#set-a-static-ip)
