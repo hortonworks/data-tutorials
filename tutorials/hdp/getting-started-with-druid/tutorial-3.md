@@ -10,6 +10,8 @@ You will learn to write a Hadoop-based Ingestion Spec and run the Ingestion Task
 
 ## Prerequisites
 
+- Setup the Development Environment
+
 ## Outline
 
 - Step 1: Analyzing the Dataset
@@ -181,7 +183,7 @@ The Druid ingestion **[spec](http://druid.io/docs/latest/ingestion/index.html)**
     "type" : "index_hadoop",
     "spec" : {
       "dataSchema" : {
-        "dataSource" : "wikiticker",
+        "dataSource" : "wikipedia",
         "parser" : {
           ...
         },
@@ -219,7 +221,7 @@ The Druid **dataSchema** includes 4 fields:
     "type" : "index_hadoop",
     "spec" : {
       "dataSchema" : {
-        "dataSource" : "wikiticker",
+        "dataSource" : "wikipedia",
         "parser" : {
           "type" : "hadoopyString",
           "parseSpec" : {
@@ -256,7 +258,7 @@ The Druid **parser** includes 2 fields:
     "type" : "index_hadoop",
     "spec" : {
       "dataSchema" : {
-        "dataSource" : "wikiticker",
+        "dataSource" : "wikipedia",
         "parser" : {
           "type" : "hadoopyString",
           "parseSpec" : {
@@ -305,7 +307,7 @@ For the Druid **parseSpec**, we use 3 fields:
     "type" : "index_hadoop",
     "spec" : {
       "dataSchema" : {
-        "dataSource" : "wikiticker",
+        "dataSource" : "wikipedia",
         "parser" : {
           "type" : "hadoopyString",
           "parseSpec" : {
@@ -349,7 +351,7 @@ For the Druid **timestampSpec** field, we use 2 fields:
     "type" : "index_hadoop",
     "spec" : {
       "dataSchema" : {
-        "dataSource" : "wikiticker",
+        "dataSource" : "wikipedia",
         "parser" : {
           "type" : "hadoopyString",
           "parseSpec" : {
@@ -437,7 +439,7 @@ into the dimensions field because these objects are denoted as String-typed in o
     "type" : "index_hadoop",
     "spec" : {
       "dataSchema" : {
-        "dataSource" : "wikiticker",
+        "dataSource" : "wikipedia",
         "parser" : {
           "type" : "hadoopyString",
           "parseSpec" : {
@@ -575,7 +577,7 @@ In our case, we are estimating the number of unique `users` within the wikiticke
     "type" : "index_hadoop",
     "spec" : {
       "dataSchema" : {
-        "dataSource" : "wikiticker",
+        "dataSource" : "wikipedia",
         "parser" : {
           "type" : "hadoopyString",
           "parseSpec" : {
@@ -678,7 +680,7 @@ For the **granularitySpec**, we have 4 fields:
     "type" : "index_hadoop",
     "spec" : {
       "dataSchema" : {
-        "dataSource" : "wikiticker",
+        "dataSource" : "wikipedia",
         "parser" : {
           "type" : "hadoopyString",
           "parseSpec" : {
@@ -768,7 +770,7 @@ For the **ioConfig**, we have 2 fields:
     "type" : "index_hadoop",
     "spec" : {
       "dataSchema" : {
-        "dataSource" : "wikiticker",
+        "dataSource" : "wikipedia",
         "parser" : {
           "type" : "hadoopyString",
           "parseSpec" : {
@@ -869,7 +871,7 @@ If the path specified to the raw data does not exist in HDFS, then we will get a
     "type" : "index_hadoop",
     "spec" : {
       "dataSchema" : {
-        "dataSource" : "wikiticker",
+        "dataSource" : "wikipedia",
         "parser" : {
           "type" : "hadoopyString",
           "parseSpec" : {
@@ -1104,7 +1106,17 @@ exit
 curl -X 'POST' -H 'Content-Type:application/json' -d @/tmp/wikiticker-index.json http://sandbox-hdp.hortonworks.com:8090/druid/indexer/v1/task
 ~~~
 
+Open Druid Overload at http://sandbox-hdp.hortonworks.com:8090/console.html. Task will appear under running tasks:
+
+![wikiticker-running-tasks](assets/images/wikiticker-running-task.jpg)
+
 If all goes well with this task, then it should finish with the **status SUCCEEDED** in Druid Overlord UI. Visit "Task log" to troubleshoot problems if anything goes wrong.
+
+![wikiticker-completed-task](assets/images/wikiticker-completed-task.jpg)
+
+Head to the Druid Coordinator UI at http://sandbox-hdp.hortonworks.com:8081/#/ and you should see the **wikipedia** datasource.
+
+![wikipedia-datasource](assets/images/wikipedia-datasource.jpg)
 
 ## Summary
 
