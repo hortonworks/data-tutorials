@@ -1,0 +1,16 @@
+{
+    "queryType": "timeseries",
+    "dataSource": "wikiticker",
+    "descending": "true",
+    "granularity": "hour",
+    "aggregations": [
+      { 
+        "type": "longSum", 
+        "name": "edits", 
+        "fieldName": "count" 
+      }
+    ],
+    "intervals": [ 
+      "2015-09-12/2015-09-13" 
+    ]
+  }
