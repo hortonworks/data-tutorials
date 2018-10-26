@@ -6,11 +6,14 @@ title: Querying Data from Druid
 
 ## Introduction
 
+You will learn to write Druid JSON-based queries. We will use Zeppelin to write
+the Druid queries and run them against our **wikipedia** datasource.
+
 ## Outline
 
 - Query Data with JSON-based Queries
-- Step 1: Write a TopN Query for the Most-edited Articles
-- Step 2: Save the Query into a file
+- Step 1: Run TopN Query to find Most-edited Articles
+- Step 2: Analyze TopN Query
 - Summary
 - Further Reading
 - Appendix A: Use Druid's other Query Types
@@ -26,23 +29,51 @@ The process of querying the Druid database for information you want is done in a
 - Construct your JSON-based Query
 - Send a POST Request to Druid Coordinator to execute your Query Request
 
-## Step 1: Write a TopN Query for the Most-edited Articles
+## Step 1: Run TopN Query to find Most-edited Articles
 
-1\. We will construct a JSON-based TopN Query. Open your favorite text editor (atom, ms visual studio code, sublime, etc). For instance, we will use vi.
+1\. Open Zeppelin UI at http://sandbox-hdp.hortonworks.com:9995.
 
-2\. Open Sandbox Web Shell Client at `http://sandbox-hdp.hortonworks.com:4200/`.
+2\. Create a new notebook, call it `Druid-JSON-based-Queries`
 
-~~~bash
-mkdir -p /tmp/sandbox/tutorial-files/900/druid/query
+Select **sh** for **Default Interpreter**. Then click **Create**.
 
-vi /tmp/sandbox/tutorial-files/900/druid/query/wikiticker-top-pages.json
+3\. We will create the directory in which our Druid queries will be stored.
+
+~~~md
+%md
+## Create Directory to Store Druid Queries
 ~~~
 
-### Complete JSON-based Query
+Press **shift + enter** to execute the code:
 
-3\. Inside vi, press **i** to insert text, then copy/paste the following query.
+![create-dirs-to-store-queries.jpg](assets/images/create-dirs-to-store-queries.jpg)
 
-~~~json
+Copy and paste the following shell code:
+
+~~~bash
+%sh
+mkdir -p /tmp/sandbox/tutorial-files/900/druid/query
+~~~
+
+Output from executed code:
+
+![create-dirs-for-queries.jpg](assets/images/create-dirs-for-queries.jpg)
+
+4\. We will construct a JSON-based TopN Query to find the most-edited articles.
+
+~~~md
+%md
+## Create TopN Query to find Most-edited Articles
+~~~
+
+![query-to-find-most-edited-articles-md.jpg](assets/images/query-to-find-most-edited-articles-md.jpg)
+
+Copy and paste the following shell code to create the JSON-based query:
+
+~~~bash
+%sh
+PATH_TO_FILE="/tmp/sandbox/tutorial-files/900/druid/query/wiki-top-pages.json"
+tee -a $PATH_TO_FILE << EOF
 {
   "queryType" : "topN",
   "dataSource" : "wikipedia",
@@ -59,15 +90,47 @@ vi /tmp/sandbox/tutorial-files/900/druid/query/wikiticker-top-pages.json
     }
   ]
 }
+EOF
 ~~~
 
-4\. Press **esc**, then **:wq** when you are ready to save and quit the file.
+![wiki-top-pages.jpg](assets/images/wiki-top-pages.jpg)
 
-### Analysis of the JSON Query
+3\. We will submit query to Druid Coordinator to be executed against wikipedia
+datasource:
+
+~~~md
+%md
+## Submit Query to Druid Coordinator for Execution on DataSource
+~~~
+
+![submit-query-to-coordinator-md.jpg](assets/images/submit-query-to-coordinator-md.jpg)
+
+Copy and paste the following shell code to submit query to Druid Coordinator:
+
+~~~bash
+%sh
+# Submit JSON Query to Druid Coordinator
+PATH_TO_FILE="/tmp/sandbox/tutorial-files/900/druid/query/wiki-top-pages.json"
+curl -L -H 'Content-Type: application/json' -X POST --data-binary @$PATH_TO_FILE http://sandbox-hdp.hortonworks.com:8082/druid/v2/?pretty
+~~~
+
+![most-edited-articles-output.jpg](assets/images/most-edited-articles-output.jpg)
+
+In the above query results at **timestamp** `2015-09-12T00:46:58.771Z`: we can see various Wikipedia pages in ascending order for their number of page edits.
+
+If we look at the first entry returned,
+we see that Wikipedia page **Wikipedia:Vandalismusmeldung** has 33 edits.
+
+Similarly if we move to the 25th entry, we can see that **User:Valmir144/sandbox** has 10 edits.
+
+Let's reflect and analyze the query we just ran against the wikipedia
+datasource.
+
+### Step 2: Analyze TopN Query
 
 Let's breakdown this JSON query to understand what is happening.
 
-### queryType: TopN
+### queryType: topN
 
 The "query type" we selected to query Druid is the aggregation query:
 
@@ -196,106 +259,7 @@ In the next part of the query, we will see what metric we are querying the "page
 
 - **longSum Aggregator** - specified we want to compute the longSum or the sum of all page "edits" and store the result into output JSON Object "count".
 
-Thus, for every page, there will be a result for the number of edits for that page. The query will return the top 25 pages with the most page edits from the "wikiticker" dataSource.
-
-## Step 2: Submit JSON Query to Druid Coordinator
-
-1\. Submit JSON Query to Druid Coordinator over HTTP POST request for that query to be issued to the Druid-broker node to search the dataSource for the most-edited articles
-
-~~~bash
-curl -L -H 'Content-Type: application/json' -X POST --data-binary @/tmp/sandbox/tutorial-files/900/druid/query/wikiticker-top-pages.json http://sandbox-hdp.hortonworks.com:8082/druid/v2/?pretty
-~~~
-
-The output you should see from the POST request by the Druid Coordinator is:
-
-~~~bash
-[ {
-  "timestamp" : "2015-09-12T00:46:58.771Z",
-  "result" : [ {
-    "edits" : 33,
-    "page" : "Wikipedia:Vandalismusmeldung"
-  }, {
-    "edits" : 28,
-    "page" : "User:Cyde/List of candidates for speedy deletion/Subpage"
-  }, {
-    "edits" : 27,
-    "page" : "Jeremy Corbyn"
-  }, {
-    "edits" : 21,
-    "page" : "Wikipedia:Administrators' noticeboard/Incidents"
-  }, {
-    "edits" : 20,
-    "page" : "Flavia Pennetta"
-  }, {
-    "edits" : 18,
-    "page" : "Total Drama Presents: The Ridonculous Race"
-  }, {
-    "edits" : 18,
-    "page" : "User talk:Dudeperson176123"
-  }, {
-    "edits" : 18,
-    "page" : "Wikipédia:Le Bistro/12 septembre 2015"
-  }, {
-    "edits" : 17,
-    "page" : "Wikipedia:In the news/Candidates"
-  }, {
-    "edits" : 17,
-    "page" : "Wikipedia:Requests for page protection"
-  }, {
-    "edits" : 16,
-    "page" : "Utente:Giulio Mainardi/Sandbox"
-  }, {
-    "edits" : 16,
-    "page" : "Wikipedia:Administrator intervention against vandalism"
-  }, {
-    "edits" : 15,
-    "page" : "Anthony Martial"
-  }, {
-    "edits" : 13,
-    "page" : "Template talk:Connected contributor"
-  }, {
-    "edits" : 12,
-    "page" : "Chronologie de la Lorraine"
-  }, {
-    "edits" : 12,
-    "page" : "Wikipedia:Files for deletion/2015 September 12"
-  }, {
-    "edits" : 12,
-    "page" : "Гомосексуальный образ жизни"
-  }, {
-    "edits" : 11,
-    "page" : "Constructive vote of no confidence"
-  }, {
-    "edits" : 11,
-    "page" : "Homo naledi"
-  }, {
-    "edits" : 11,
-    "page" : "Kim Davis (county clerk)"
-  }, {
-    "edits" : 11,
-    "page" : "Vorlage:Revert-Statistik"
-  }, {
-    "edits" : 11,
-    "page" : "Конституция Японской империи"
-  }, {
-    "edits" : 10,
-    "page" : "The Naked Brothers Band (TV series)"
-  }, {
-    "edits" : 10,
-    "page" : "User talk:Buster40004"
-  }, {
-    "edits" : 10,
-    "page" : "User:Valmir144/sandbox"
-  } ]
-} ][root@sandbox-hdp ~]#
-~~~
-
-In the above query results at **timestamp** `2015-09-12T00:46:58.771Z`: we can see various Wikipedia pages in ascending order for their number of page edits.
-
-If we look at the first entry returned,
-we see that Wikipedia page **Wikipedia:Vandalismusmeldung** has 33 edits.
-
-Similarily if we move to the 25th entry, we can see that **User:Valmir144/sandbox** has 10 edits.
+Thus, for every page, there will be a result for the number of edits for that page. The query will return the top 25 pages with the most page edits from the "wikipedia" dataSource.
 
 ## Summary
 
@@ -313,6 +277,18 @@ Feel free to check out the appendix for more examples on how to query the dataSo
 ## Appendix A: Use Druid's other Query Types
 
 Earlier, we learned how to write a JSON-based **TopN** aggregation query to retrieve most edited Wikipedia pages from our `wikipedia` dataSource.
+
+In case you may need to use Druid's other query types: Select, Aggregation, Metadata and Search, we put together a summarization of what the query does, an example that can query the `wikipedia` dataSource and the results from after the query is executed.
+
+In the Zeppelin note, add the following title for the extra druid queries we
+will run:
+
+~~~md
+%md
+## Appendix: Use Druid's Other Query Options
+~~~
+
+![use-druids-other-query-options-md.jpg](assets/images/use-druids-other-query-options-md.jpg)
 
 ### Wikiticker JSON Dataset
 
@@ -341,21 +317,26 @@ Earlier, we learned how to write a JSON-based **TopN** aggregation query to retr
 }
 ~~~
 
-In case you may need to use Druid's other query types: Select, Aggregation, Metadata and Search, we put together a summarization of what the query does, an example that can query the `wikipedia` dataSource and the results from after the query is executed.
-
 ### Select Query
+
+In the Zeppelin note, add the following title for the extra druid queries we
+will run:
+
+~~~md
+%md
+## Select Query
+~~~
+
+![select-query-md.jpg](assets/images/select-query-md.jpg)
 
 ### Select
 
-1\. Open your favorite text editor in the Sandbox Web Shell client: `http://sandbox-hdp.hortonworks.com:4200/`. Login Credentials are root and the password you chose.
-
-2\. We will use the vi editor to copy/paste the JSON query into a file called `wiki-select.json`.
+1\. Create the wiki-select query to select 2 rows of data from the dataSource.
 
 ~~~bash
-vi /tmp/sandbox/tutorial-files/900/druid/query/wiki-select.json
-~~~
-
-~~~json
+%sh
+PATH_TO_FILE="/tmp/sandbox/tutorial-files/900/druid/query/wiki-select.json"
+tee -a $PATH_TO_FILE << EOF
 {
   "queryType": "select",
   "dataSource": "wikipedia",
@@ -370,24 +351,33 @@ vi /tmp/sandbox/tutorial-files/900/druid/query/wiki-select.json
     "threshold": 2
   }
 }
+EOF
 ~~~
 
-Returns the "5" rows of data from the Druid dataSource "wikipedia".
+Execute the above shell code in the Zeppelin note.
 
-3\. Save and the quit the file, if using vi, then enter the command:
-
-~~~bash
-:wq
-~~~
-
-4\. Send the JSON-based Query to the Druid Coordinator over HTTP POST request:
+2\. Send the JSON-based Query to the Druid Coordinator over HTTP POST request:
 
 ~~~bash
+%sh
 curl -L -H 'Content-Type: application/json' -X POST --data-binary @/tmp/sandbox/tutorial-files/900/druid/query/wiki-select.json http://sandbox-hdp.hortonworks.com:8082/druid/v2/?pretty
 ~~~
 
+Output from the select query:
+
+![select-output.jpg](assets/images/select-output.jpg)
 
 ### Aggregation Queries
+
+In the Zeppelin note, add the following title for the extra druid queries we
+will run:
+
+~~~md
+%md
+## Aggregation Queries: Timeseries, GroupBy
+~~~
+
+![aggregation-queries-md.jpg](assets/images/aggregation-queries-md.jpg)
 
 ### Timeseries
 
@@ -401,7 +391,12 @@ It tracks changes to the JSON Object or String as inserts. So if we use time-ser
 
 - What is the total number of Wikipedia page edits per hour?
 
+1\. Create the wiki-timeseries query, which in the span of 24 hour interval will count the total page edits per hour and store the result into variable "edits."
+
 ~~~json
+%sh
+PATH_TO_FILE="/tmp/sandbox/tutorial-files/900/druid/query/wiki-timeseries.json"
+tee -a $PATH_TO_FILE << EOF
 {
   "queryType": "timeseries",
   "dataSource": "wikipedia",
@@ -418,155 +413,19 @@ It tracks changes to the JSON Object or String as inserts. So if we use time-ser
     "2015-09-12/2015-09-13"
   ]
 }
+EOF
 ~~~
 
-In the span of 24 hour interval, this query will count the total page edits per hour and store the result into variable "edits."
-
-1\. Open your favorite text editor in the Sandbox Web Shell client: `http://sandbox-hdp.hortonworks.com:4200/`. Login Credentials are root and the password you chose.
-
-2\. We will use the vi editor to copy/paste the JSON query into a file called `wiki-timeseries.json`.
+2\. Send the JSON-based Query to the Druid Coordinator over HTTP POST request:
 
 ~~~bash
-vi wiki-timeseries.json
-~~~
-
-3\. Save and the quit the file, if using vi, then enter the command:
-
-~~~bash
-:wq
-~~~
-
-4\. Send the JSON-based Query to the Druid Coordinator over HTTP POST request:
-
-~~~bash
+%sh
 curl -L -H 'Content-Type: application/json' -X POST --data-binary @/tmp/sandbox/tutorial-files/900/druid/query/wiki-timeseries.json http://sandbox-hdp.hortonworks.com:8082/druid/v2/?pretty
 ~~~
 
-The result shows the total page edits for each hour:
+Output from the timeseries query:
 
-~~~json
-[ {
-  "timestamp" : "2015-09-12T23:00:00.000Z",
-  "result" : {
-    "edits" : 1482
-  }
-}, {
-  "timestamp" : "2015-09-12T22:00:00.000Z",
-  "result" : {
-    "edits" : 1590
-  }
-}, {
-  "timestamp" : "2015-09-12T21:00:00.000Z",
-  "result" : {
-    "edits" : 1766
-  }
-}, {
-  "timestamp" : "2015-09-12T20:00:00.000Z",
-  "result" : {
-    "edits" : 1832
-  }
-}, {
-  "timestamp" : "2015-09-12T19:00:00.000Z",
-  "result" : {
-    "edits" : 2013
-  }
-}, {
-  "timestamp" : "2015-09-12T18:00:00.000Z",
-  "result" : {
-    "edits" : 2170
-  }
-}, {
-  "timestamp" : "2015-09-12T17:00:00.000Z",
-  "result" : {
-    "edits" : 2300
-  }
-}, {
-  "timestamp" : "2015-09-12T16:00:00.000Z",
-  "result" : {
-    "edits" : 1959
-  }
-}, {
-  "timestamp" : "2015-09-12T15:00:00.000Z",
-  "result" : {
-    "edits" : 1965
-  }
-}, {
-  "timestamp" : "2015-09-12T14:00:00.000Z",
-  "result" : {
-    "edits" : 1873
-  }
-}, {
-  "timestamp" : "2015-09-12T13:00:00.000Z",
-  "result" : {
-    "edits" : 2073
-  }
-}, {
-  "timestamp" : "2015-09-12T12:00:00.000Z",
-  "result" : {
-    "edits" : 1709
-  }
-}, {
-  "timestamp" : "2015-09-12T11:00:00.000Z",
-  "result" : {
-    "edits" : 1624
-  }
-}, {
-  "timestamp" : "2015-09-12T10:00:00.000Z",
-  "result" : {
-    "edits" : 1792
-  }
-}, {
-  "timestamp" : "2015-09-12T09:00:00.000Z",
-  "result" : {
-    "edits" : 1704
-  }
-}, {
-  "timestamp" : "2015-09-12T08:00:00.000Z",
-  "result" : {
-    "edits" : 1622
-  }
-}, {
-  "timestamp" : "2015-09-12T07:00:00.000Z",
-  "result" : {
-    "edits" : 2237
-  }
-}, {
-  "timestamp" : "2015-09-12T06:00:00.000Z",
-  "result" : {
-    "edits" : 2120
-  }
-}, {
-  "timestamp" : "2015-09-12T05:00:00.000Z",
-  "result" : {
-    "edits" : 1260
-  }
-}, {
-  "timestamp" : "2015-09-12T04:00:00.000Z",
-  "result" : {
-    "edits" : 824
-  }
-}, {
-  "timestamp" : "2015-09-12T03:00:00.000Z",
-  "result" : {
-    "edits" : 815
-  }
-}, {
-  "timestamp" : "2015-09-12T02:00:00.000Z",
-  "result" : {
-    "edits" : 1102
-  }
-}, {
-  "timestamp" : "2015-09-12T01:00:00.000Z",
-  "result" : {
-    "edits" : 1144
-  }
-}, {
-  "timestamp" : "2015-09-12T00:00:00.000Z",
-  "result" : {
-    "edits" : 268
-  }
-} ]
-~~~
+![timeseries-output.jpg](assets/images/timeseries-output.jpg)
 
 From the result, we see for every hour within the interval specified in our query, a count for all page edits is taken and the sum is stored into the field name "edits" for each hour.
 
@@ -574,9 +433,27 @@ In a relational database scenario, the database would need to scan over all rows
 
 ### Enrich Query with Selector Filter
 
-Now coming back to the previous result, what if we wanted to get insight about how page edits happened for Wiki pages in Australia, we would write the following query `wiki-enrich-timeseries.json`:
+In the Zeppelin note, add the following title for the timeseries query
+enrichment:
 
-~~~json
+~~~
+%md
+## Enrich Timeseries with Selector Filter
+
+Retrieve information on how page edits happened for Wiki pages in Australia
+~~~
+
+![enrich-timeseries-w-selector-md.jpg](assets/images/enrich-timeseries-w-selector-md.jpg)
+
+Now coming back to the previous result, what if we wanted to get insight about how page edits happened for Wiki pages in Australia?
+
+1\. We would create the wiki-enrich-timeseries.json query to retrieve the
+answer in our question:
+
+~~~bash
+%sh
+PATH_TO_FILE="/tmp/sandbox/tutorial-files/900/druid/query/wiki-enrich-timeseries.json"
+tee -a $PATH_TO_FILE << EOF
 {
   "queryType": "timeseries",
   "dataSource": "wikipedia",
@@ -598,13 +475,21 @@ Now coming back to the previous result, what if we wanted to get insight about h
     "2015-09-12/2015-09-13"
   ]
 }
+EOF
 ~~~
 
-Feel free to test it in your Sandbox web shell client. You will probably notice some page edits per hour show up as null, which occurs since Wiki page edits related to Australia were not edited.
+2\. Send the JSON-based Query to the Druid Coordinator over HTTP POST request:
 
 ~~~bash
+%sh
 curl -L -H 'Content-Type: application/json' -X POST --data-binary @/tmp/sandbox/tutorial-files/900/druid/query/wiki-enrich-timeseries.json http://sandbox-hdp.hortonworks.com:8082/druid/v2/?pretty
 ~~~
+
+Output from the enriched timeseries query:
+
+![enriched-timeseries-output.jpg](assets/images/enriched-timeseries-output.jpg)
+
+You will probably notice some page edits per hour show up as null, which occurs since Wiki page edits related to Australia were not edited.
 
 ### GroupBy
 
@@ -612,12 +497,16 @@ curl -L -H 'Content-Type: application/json' -X POST --data-binary @/tmp/sandbox/
 
 **GroupBy Query Question to be Answered**
 
-- In Australia, who were the "users", which "pages" did they edit and how many "edits" did they make?
+In Australia, who were the "users", which "pages" did they edit and how many "edits" did they make?
 
-Name of the GroupBy query: `wiki-groupby.json`.
+1\. We would create the wiki-grouby.json query to retrieve the
+answer in our question:
 
-~~~json
-{
+~~~python
+%spark2.pyspark
+import json
+
+data="""{
   "queryType": "groupBy",
   "dataSource": "wikipedia",
   "granularity": "hour",
@@ -639,7 +528,15 @@ Name of the GroupBy query: `wiki-groupby.json`.
   "intervals": [
     "2015-09-12/2015-09-13"
   ]
-}
+}"""
+
+with open('/tmp/sandbox/tutorial-files/900/druid/query/wiki-grouby.json', 'w') as outfile:
+  outfile.write(data)
+
+with open('/tmp/sandbox/tutorial-files/900/druid/query/wiki-grouby.json', 'r') as infile:
+  data = infile.read()
+
+print(data)
 ~~~
 
 - **"queryType": "groupBy"** - specifies you want Druid to run the groupBy query type
@@ -657,67 +554,115 @@ Name of the GroupBy query: `wiki-groupby.json`.
 - **"intervals"** - defines the time ranges to run the query over
     - **"2015-09-12/2015-09-13"** - a JSON Object represented across a 1 day time period (ISO-8601)
 
+2\. Send the JSON-based Query to the Druid Coordinator over HTTP POST request
+either use approach 1 Python or approach 2 Shell:
+
+Approach 1 Python:
+
+~~~python
+%spark2.pyspark
+import urllib2
+
+coordinator_url = "http://sandbox-hdp.hortonworks.com:8082/druid/v2/?pretty"
+file_in_path = "/tmp/sandbox/tutorial-files/900/druid/query/wiki-grouby.json"
+
+with open(file_in_path, 'r') as infile:
+  json_query_data = infile.read()
+
+# Send the JSON query via HTTP POST Request to Druid Coordinator URL
+req = urllib2.Request(coordinator_url, json_query_data)
+# Specify in the request, the incoming data is JSON
+req.add_header('Content-Type', 'application/json')
+
+# Store the file object returned from HTTP POST Response
+response = urllib2.urlopen(req)
+# Read the data in the file object to see the response's output
+print(response.read())
+~~~
+
+Approach 2 Shell:
+
 ~~~bash
 curl -L -H 'Content-Type: application/json' -X POST --data-binary @/tmp/sandbox/tutorial-files/900/druid/query/wiki-groupby.json http://sandbox-hdp.hortonworks.com:8082/druid/v2/?pretty
 ~~~
 
-Feel free to run the query in the sandbox web shell client. Heres an example of output you would see:
+Output from the enriched timeseries query:
 
-~~~json
-[ {
-  "version" : "v1",
-  "timestamp" : "2015-09-12T00:00:00.000Z",
-  "event" : {
-    "page" : "Peremptory norm",
-    "user" : "60.225.66.142",
-    "edits" : 1
-  }
-}, {
-  "version" : "v1",
-  "timestamp" : "2015-09-12T01:00:00.000Z",
-  "event" : {
-    "page" : "2015 Roger Federer tennis season",
-    "user" : "14.201.22.221",
-    "edits" : 1
-  }
-},
-...
-~~~
+![groupby-output.jpg](assets/images/groupby-output.jpg)
 
 Notice how we extracted `page` and `user` into our JSON output using the GroupBy query. We just brought more insight to which page was edited, who did it and how many times they changed something.
 
 ### Metadata Queries
 
+In the Zeppelin note, add the following title for the metadata queries:
+
+~~~
+%md
+## Metadata Queries
+~~~
+
+![metadata-queries-md.jpg](assets/images/metadata-queries-md.jpg)
+
 ### Time Boundary
 
 - **time boundary query** - used when you want to return the earliest and latest data points of a data source
 
-~~~json
+1\. Create the wiki-timeboundary:
+
+~~~python
+%spark2.pyspark
+druid_timeboundary_query = """
 {
   "queryType": "timeBoundary",
   "dataSource": "wikipedia"
 }
+"""
+with open('/tmp/sandbox/tutorial-files/900/druid/query/wiki-timeboundary.json', 'w') as outfile:
+  outfile.write(druid_timeboundary_query)
+
+with open('/tmp/sandbox/tutorial-files/900/druid/query/wiki-timeboundary.json', 'r') as infile:
+  verify_query = infile.read()
+
+print(verify_query)
 ~~~
 
 - **"queryType": "timeBoundary"** - specifies you want Druid to run the timeBoundary query type
 
-Run the query `wiki-timeboundary-query.json` in sandbox web shell client:
+2\. Send the JSON-based Query to the Druid Coordinator over HTTP POST request
+either use approach 1 Python or approach 2 Shell to execute the query:
+
+Approach 1 Python:
+
+~~~python
+%spark2.pyspark
+import urllib2
+
+coordinator_url = "http://sandbox-hdp.hortonworks.com:8082/druid/v2/?pretty"
+file_in_path = "/tmp/sandbox/tutorial-files/900/druid/query/wiki-timeboundary.json"
+
+with open(file_in_path, 'r') as infile:
+  json_query_data = infile.read()
+
+# Send the JSON query via HTTP POST Request to Druid Coordinator URL
+req = urllib2.Request(coordinator_url, json_query_data)
+# Specify in the request, the incoming data is JSON
+req.add_header('Content-Type', 'application/json')
+
+# Store the file object returned from HTTP POST Response
+response = urllib2.urlopen(req)
+# Read the data in the file object to see the response's output
+print(response.read())
+~~~
+
+Approach 2 Shell:
 
 ~~~bash
-curl -L -H 'Content-Type: application/json' -X POST --data-binary @/tmp/sandbox/tutorial-files/900/druid/query/wiki-timeboundary-query.json http://sandbox-hdp.hortonworks.com:8082/druid/v2/?pretty
+curl -L -H 'Content-Type: application/json' -X POST --data-binary @/tmp/sandbox/tutorial-files/900/druid/query/wiki-timeboundary.json http://sandbox-hdp.hortonworks.com:8082/druid/v2/?pretty
 ~~~
 
-You should see similar output:
+Output from the timeboundary query:
 
-~~~json
-[ {
-  "timestamp" : "2015-09-12T00:46:58.771Z",
-  "result" : {
-    "maxTime" : "2015-09-12T23:59:59.200Z",
-    "minTime" : "2015-09-12T00:46:58.771Z"
-  }
-} ]
-~~~
+![timeboundary-output.jpg](assets/images/timeboundary-output.jpg)
 
 As you can see the query returns the earliest and latest changes that were made in the data set.
 
@@ -725,12 +670,25 @@ As you can see the query returns the earliest and latest changes that were made 
 
 - **segment metadata queries** - returns per-segment information. Some data one may find is the uniqueness of data values in all columns in the segment, min/max values of string type columns, number of rows stored in the segment, segment id, etc.
 
-~~~json
+1\. Create the wiki-segment:
+
+~~~python
+%spark2.pyspark
+file_in_path = "/tmp/sandbox/tutorial-files/900/druid/query/wiki-segment.json"
+druid_segment_query = """
 {
   "queryType": "segmentMetadata",
   "dataSource": "wikipedia",
   "intervals": [ "2015-09-12/2015-09-13" ]
 }
+"""
+with open(file_in_path, 'w') as outfile:
+  outfile.write(druid_segment_query)
+
+with open(file_in_path, 'r') as infile:
+  verify_query = infile.read()
+
+print(verify_query)
 ~~~
 
 Analysis of the above query:
@@ -739,65 +697,41 @@ Analysis of the above query:
 - **"dataSource": "wikipedia"** - specifies the `wikiticker` set of data will be queried
 - **"intervals": [ "2015-09-12/2015-09-13" ]** - defines a 1 day time range to run the query over
 
-Run the query `wiki-segment-query.json` in sandbox web shell client:
+2\. Send the JSON-based Query to the Druid Coordinator over HTTP POST request
+either use approach 1 Python or approach 2 Shell to execute the query:
+
+Approach 1 Python:
+
+~~~python
+%spark2.pyspark
+import urllib2
+
+coordinator_url = "http://sandbox-hdp.hortonworks.com:8082/druid/v2/?pretty"
+file_in_path = "/tmp/sandbox/tutorial-files/900/druid/query/wiki-segment.json"
+
+with open(file_in_path, 'r') as infile:
+  json_query_data = infile.read()
+
+# Send the JSON query via HTTP POST Request to Druid Coordinator URL
+req = urllib2.Request(coordinator_url, json_query_data)
+# Specify in the request, the incoming data is JSON
+req.add_header('Content-Type', 'application/json')
+
+# Store the file object returned from HTTP POST Response
+response = urllib2.urlopen(req)
+# Read the data in the file object to see the response's output
+print(response.read())
+~~~
+
+Approach 2 Shell:
 
 ~~~bash
-curl -L -H 'Content-Type: application/json' -X POST --data-binary @/tmp/sandbox/tutorial-files/900/druid/query/wiki-segment-query.json http://sandbox-hdp.hortonworks.com:8082/druid/v2/?pretty
+curl -L -H 'Content-Type: application/json' -X POST --data-binary @/tmp/sandbox/tutorial-files/900/druid/query/wiki-segment.json http://sandbox-hdp.hortonworks.com:8082/druid/v2/?pretty
 ~~~
 
 You should see similar output:
 
-~~~json
-[ {
-  "id" : "wikiticker_2015-09-12T00:00:00.000Z_2015-09-13T00:00:00.000Z_2018-03-30T04:35:10.367Z",
-  "intervals" : [ "2015-09-12T00:00:00.000Z/2015-09-13T00:00:00.000Z" ],
-  "columns" : {
-    "__time" : {
-      "type" : "LONG",
-      "hasMultipleValues" : false,
-      "size" : 0,
-      "cardinality" : null,
-      "minValue" : null,
-      "maxValue" : null,
-      "errorMessage" : null
-    },
-    "added" : {
-      "type" : "LONG",
-      "hasMultipleValues" : false,
-      "size" : 0,
-      "cardinality" : null,
-      "minValue" : null,
-      "maxValue" : null,
-      "errorMessage" : null
-    },
-    "channel" : {
-      "type" : "STRING",
-      "hasMultipleValues" : false,
-      "size" : 0,
-      "cardinality" : 51,
-      "minValue" : "#ar.wikipedia",
-      "maxValue" : "#zh.wikipedia",
-      "errorMessage" : null
-    },
-    "cityName" : {
-      "type" : "STRING",
-      "hasMultipleValues" : false,
-      "size" : 0,
-      "cardinality" : 1006,
-      "minValue" : "",
-      "maxValue" : "Ōita",
-      "errorMessage" : null
-    },
-    ...
-  },
-  "size" : 0,
-  "numRows" : 39244,
-  "aggregators" : null,
-  "timestampSpec" : null,
-  "queryGranularity" : null,
-  "rollup" : null
-}
-~~~
+![segment-output.jpg](assets/images/segment-output)
 
 In your console output, notice how all the metadata regarding each column is output onto the screen.
 
@@ -805,29 +739,61 @@ In your console output, notice how all the metadata regarding each column is out
 
 - **datasource metadata query** - returns metadata of the data source
 
-~~~json
+1\. Create the wiki-ds-metadata.json query:
+
+~~~python
+%spark2.pyspark
+file_in_path = "/tmp/sandbox/tutorial-files/900/druid/query/wiki-ds-metadata.json"
+druid_ds_metadata_query = """
 {
   "queryType": "dataSourceMetadata",
   "dataSource": "wikipedia"
 }
+"""
+with open(file_in_path, 'w') as outfile:
+  outfile.write(druid_ds_metadata_query)
+
+with open(file_in_path, 'r') as infile:
+  verify_query = infile.read()
+
+print(verify_query)
 ~~~
 
-Run the query `wiki-datasource-query.json` in sandbox web shell client:
+2\. Send the JSON-based Query to the Druid Coordinator over HTTP POST request
+either use approach 1 Python or approach 2 Shell to execute the query:
+
+Approach 1 Python:
+
+~~~python
+%spark2.pyspark
+import urllib2
+
+coordinator_url = "http://sandbox-hdp.hortonworks.com:8082/druid/v2/?pretty"
+file_in_path = "/tmp/sandbox/tutorial-files/900/druid/query/wiki-ds-metadata.json"
+
+with open(file_in_path, 'r') as infile:
+  json_query_data = infile.read()
+
+# Send the JSON query via HTTP POST Request to Druid Coordinator URL
+req = urllib2.Request(coordinator_url, json_query_data)
+# Specify in the request, the incoming data is JSON
+req.add_header('Content-Type', 'application/json')
+
+# Store the file object returned from HTTP POST Response
+response = urllib2.urlopen(req)
+# Read the data in the file object to see the response's output
+print(response.read())
+~~~
+
+Approach 2 Shell:
 
 ~~~bash
-curl -L -H 'Content-Type: application/json' -X POST --data-binary @/tmp/sandbox/tutorial-files/900/druid/query/wiki-datasource-query.json http://sandbox-hdp.hortonworks.com:8082/druid/v2/?pretty
+curl -L -H 'Content-Type: application/json' -X POST --data-binary @/tmp/sandbox/tutorial-files/900/druid/query/wiki-ds-metadata.json http://sandbox-hdp.hortonworks.com:8082/druid/v2/?pretty
 ~~~
 
-You should see output similar to the following data:
+Output from dataSource metadata:
 
-~~~json
-[ {
-  "timestamp" : "2015-09-12T23:59:59.200Z",
-  "result" : {
-    "maxIngestedEventTime" : "2015-09-12T23:59:59.200Z"
-  }
-} ]
-~~~
+![ds-metadata-output.jpg](assets/images/ds-metadata-output.jpg)
 
 **What kind of information does this query return?**
 
@@ -837,11 +803,25 @@ NOTE: this ingested event does not take consideration of roll-up.
 
 ### Search Queries
 
+In the Zeppelin note, add the following title for the search query:
+
+~~~
+%md
+## Search Query
+~~~
+
+![search-query-md.jpg](assets/images/search-query-md.jpg)
+
 ### Search
 
 - **search** - returns the dimension values that match the search parameters
 
-~~~json
+1\. Create the wiki-search.json query:
+
+~~~python
+%spark2.pyspark
+file_in_path = "/tmp/sandbox/tutorial-files/900/druid/query/wiki-search.json"
+druid_search_query = """
 {
   "queryType": "search",
   "dataSource": "wikipedia",
@@ -861,38 +841,55 @@ NOTE: this ingested event does not take consideration of roll-up.
     "2015-09-12/2015-09-13"
   ]
 }
+"""
+with open(file_in_path, 'w') as outfile:
+  outfile.write(druid_search_query)
+
+with open(file_in_path, 'r') as infile:
+  verify_query = infile.read()
+
+print(verify_query)
 ~~~
 
 **"query" -> "type": "insensitive_contains"** - a "match" will occur if any part of the dimension value contains the value noted in the query specification.
 
 **"sort" -> "type": "lexicographic"** - sorts values by converting their Strings to UTF-8 byte array equivalents and comparing byte by byte.
 
-Run the query `wiki-search-query.json` in sandbox web shell client:
+2\. Send the JSON-based Query to the Druid Coordinator over HTTP POST request
+either use approach 1 Python or approach 2 Shell to execute the query:
+
+Approach 1 Python:
+
+~~~python
+%spark2.pyspark
+import urllib2
+
+coordinator_url = "http://sandbox-hdp.hortonworks.com:8082/druid/v2/?pretty"
+file_in_path = "/tmp/sandbox/tutorial-files/900/druid/query/wiki-search.json"
+
+with open(file_in_path, 'r') as infile:
+  json_query_data = infile.read()
+
+# Send the JSON query via HTTP POST Request to Druid Coordinator URL
+req = urllib2.Request(coordinator_url, json_query_data)
+# Specify in the request, the incoming data is JSON
+req.add_header('Content-Type', 'application/json')
+
+# Store the file object returned from HTTP POST Response
+response = urllib2.urlopen(req)
+# Read the data in the file object to see the response's output
+print(response.read())
+~~~
+
+Approach 2 Shell:
 
 ~~~bash
-curl -L -H 'Content-Type: application/json' -X POST --data-binary @/tmp/sandbox/tutorial-files/900/druid/query/wiki-search-query.json http://sandbox-hdp.hortonworks.com:8082/druid/v2/?pretty
+curl -L -H 'Content-Type: application/json' -X POST --data-binary @/tmp/sandbox/tutorial-files/900/druid/query/wiki-search.json http://sandbox-hdp.hortonworks.com:8082/druid/v2/?pretty
 ~~~
 
-A sample of the output:
+Output from dataSource metadata:
 
-~~~json
-[ {
-  "timestamp" : "2015-09-12T00:00:00.000Z",
-  "result" : [ {
-    "dimension" : "page",
-    "value" : "StarStruck (season 6)",
-    "count" : 1
-  }, {
-    "dimension" : "page",
-    "value" : "Wikipedia:Articles for deletion/Truck and Trailer South Africa",
-    "count" : 1
-  }, {
-    "dimension" : "page",
-    "value" : "ファイル:Truck SAGA station (opening day) Kyoto,JAPAN.jpg",
-    "count" : 1
-  } ]
-} ]
-~~~
+![search-output.jpg](assets/images/search-output.jpg)
 
 As you can see we searched for "user" or "page" dimensions which contain the value "truck". You will see "truck" is not case sensitive "StarStruck", "Truck", etc.
 
