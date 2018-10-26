@@ -41,6 +41,4 @@ In this tutorial, we will install Druid onto HDP Sandbox using the Ambari Instal
 
 3\. **Loading Batch Data into Druid**: Learn to load batch data into Druid by submitting an _ingestion task_ that points to your desired data file via POST request.
 
-4\. **Loading Streaming Data into Druid via HTTP**: Learn to use Tranquility Server to send data into Druid using an HTTP client.
-
-5\. **Querying Data from Druid**: Learn to write JSON-based queries to answer questions about the dataset.
+4\. **Querying Data from Druid**: Learn to write JSON-based queries to answer questions about the dataset.
