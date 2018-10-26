@@ -10,7 +10,7 @@ You will learn how to load your own streams into Druid using the HTTP **stream p
 
 ## Prerequisites
 
-- Installed Druid on HDP Sandbox
+- Setup the Development Environment
 
 ## Outline
 
@@ -52,10 +52,10 @@ Press `i` and then copy and paste the following json spec content into vi:
 ~~~json
 {
   "dataSources" : {
-    "wikipedia" : {
+    "wikipedia2" : {
       "spec" : {
         "dataSchema" : {
-          "dataSource" : "wikipedia",
+          "dataSource" : "wikipedia2",
           "parser" : {
             "type" : "string",
             "parseSpec" : {
@@ -105,7 +105,7 @@ Press `i` and then copy and paste the following json spec content into vi:
           ],
           "granularitySpec" : {
             "type" : "uniform",
-            "segmentGranularity" : "hour",
+            "segmentGranularity" : "day",
             "queryGranularity" : "none",
             "intervals" : ["2015-09-12/2015-09-13"],
             "rollup" : false
@@ -117,7 +117,7 @@ Press `i` and then copy and paste the following json spec content into vi:
         "tuningConfig" : {
           "type" : "realtime",
           "intermediatePersistPeriod" : "PT10M",
-          "windowPeriod" : "PT10M"
+          "windowPeriod" : "P3650D"
         }
       },
       "properties" : {
@@ -167,7 +167,7 @@ Notice for
   "type" : "realtime",
   "maxRowsInMemory" : "100000",
   "intermediatePersistPeriod" : "PT10M",
-  "windowPeriod" : "PT10M"
+  "windowPeriod" : "P3650D"
 }
 ~~~
 
@@ -220,7 +220,7 @@ gunzip wikiticker-2015-09-12-sampled.json.gz
 ~~~
 
 ~~~bash
-curl -XPOST -H'Content-Type: application/json' --data-binary @/usr/hdp/3.0.1.0-187/druid/quickstart/wikiticker-2015-09-12-sampled.json http://sandbox-hdp.hortonworks.com:8200/v1/post/wikipedia
+curl -XPOST -H'Content-Type: application/json' --data-binary @/usr/hdp/3.0.1.0-187/druid/quickstart/wikiticker-2015-09-12-sampled.json http://sandbox-hdp.hortonworks.com:8200/v1/post/wikipedia2
 ~~~
 
 If you see a sent count of 0, retry the send command until the sent count also shows 39244:
@@ -232,19 +232,27 @@ If you see a sent count of 0, retry the send command until the sent count also s
 You should receive following output in your terminal indicating HTTP server received X amount of events from you and sent X amount of events to Druid:
 
 ~~~bash
-{"result":{"received":39244,"sent":39239}}
+{"result":{"received":39244,"sent":39244}}
 ~~~
+
+Open Druid Overload at http://sandbox-hdp.hortonworks.com:8090/console.html. Task will appear under running tasks:
+
+![wikipedia2-running-task](assets/images/wikipedia2-running-task.jpg)
+
+> Note: It will take around 5 - 15 minutes for the task to complete.
+
+
 
 Now that the data is sent, let's verify it with Druid queries.
 
 ## Step 5: Running a Query on the Data Source
 
-Copy and paste the following Druid JSON based query in file `wiki-select.json` using your favorite editor:
+Copy and paste the following Druid JSON based query in file `wiki2-select.json` using your favorite editor:
 
 ~~~json
 {
   "queryType": "select",
-  "dataSource": "wikipedia",
+  "dataSource": "wikipedia2",
   "dimensions": [],
   "metrics": [],
   "intervals": [
@@ -260,10 +268,10 @@ Copy and paste the following Druid JSON based query in file `wiki-select.json` u
 
 Save it.
 
-To verify data is being pushed into Druid, let's run a **select** query on the `wikipedia` data source.
+To verify data is being pushed into Druid, let's run a **select** query on the `wikipedia2` data source.
 
 ~~~bash
-curl -L -H 'Content-Type: application/json' -XPOST --data-binary @/root/wiki-select.json http://sandbox-hdp.hortonworks.com:8082/druid/vpretty
+curl -L -H 'Content-Type: application/json' -XPOST --data-binary @/root/wiki2-select.json http://sandbox-hdp.hortonworks.com:8082/druid/vpretty
 ~~~
 
 ## Summary

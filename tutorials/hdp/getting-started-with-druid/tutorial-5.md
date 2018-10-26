@@ -28,14 +28,24 @@ The process of querying the Druid database for information you want is done in a
 
 ## Step 1: Write a TopN Query for the Most-edited Articles
 
-1\. We will construct a JSON-based TopN Query. Open your favorite text editor (atom, ms visual studio code, sublime, etc)
+1\. We will construct a JSON-based TopN Query. Open your favorite text editor (atom, ms visual studio code, sublime, etc). For instance, we will use vi.
+
+2\. Open Sandbox Web Shell Client at `http://sandbox-hdp.hortonworks.com:4200/`.
+
+~~~bash
+mkdir -p /tmp/sandbox/tutorial-files/900/druid/query
+
+vi /tmp/sandbox/tutorial-files/900/druid/query/wikiticker-top-pages.json
+~~~
 
 ### Complete JSON-based Query
+
+3\. Inside vi, press **i** to insert text, then copy/paste the following query.
 
 ~~~json
 {
   "queryType" : "topN",
-  "dataSource" : "wikiticker",
+  "dataSource" : "wikipedia",
   "intervals" : ["2015-09-12/2015-09-13"],
   "granularity" : "all",
   "dimension" : "page",
@@ -50,6 +60,8 @@ The process of querying the Druid database for information you want is done in a
   ]
 }
 ~~~
+
+4\. Press **esc**, then **:wq** when you are ready to save and quit the file.
 
 ### Analysis of the JSON Query
 
@@ -70,12 +82,12 @@ The "query type" we selected to query Druid is the aggregation query:
 
 - **topN** - each node will rank their top K result and return only the top K results to the [Druid-broker component](http://sandbox-hdp.hortonworks.com:8080/#/main/services/DRUID/summary) (you can see it from Ambari Druid Service). We will see more of what this means as we construct more of the query.
 
-### dataSource: wikiticker
+### dataSource: wikipedia
 
 ~~~json
 {
   "queryType" : "topN",
-  "dataSource" : "wikiticker",
+  "dataSource" : "wikipedia",
   ...
 }
 ~~~
@@ -87,7 +99,7 @@ The "query type" we selected to query Druid is the aggregation query:
 ~~~json
 {
   "queryType" : "topN",
-  "dataSource" : "wikiticker",
+  "dataSource" : "wikipedia",
   "intervals" : ["2015-09-12/2015-09-13"],
   ...
 }
@@ -100,7 +112,7 @@ The "query type" we selected to query Druid is the aggregation query:
 ~~~json
 {
   "queryType" : "topN",
-  "dataSource" : "wikiticker",
+  "dataSource" : "wikipedia",
   "intervals" : ["2015-09-12/2015-09-13"],
   "granularity" : "all",
   ...
@@ -114,7 +126,7 @@ The "query type" we selected to query Druid is the aggregation query:
 ~~~json
 {
   "queryType" : "topN",
-  "dataSource" : "wikiticker",
+  "dataSource" : "wikipedia",
   "intervals" : ["2015-09-12/2015-09-13"],
   "granularity" : "all",
   "dimension" : "page",
@@ -131,7 +143,7 @@ In the next part of the query, we will see what metric we are querying the "page
 ~~~json
 {
   "queryType" : "topN",
-  "dataSource" : "wikiticker",
+  "dataSource" : "wikipedia",
   "intervals" : ["2015-09-12/2015-09-13"],
   "granularity" : "all",
   "dimension" : "page",
@@ -147,7 +159,7 @@ In the next part of the query, we will see what metric we are querying the "page
 ~~~json
 {
   "queryType" : "topN",
-  "dataSource" : "wikiticker",
+  "dataSource" : "wikipedia",
   "intervals" : ["2015-09-12/2015-09-13"],
   "granularity" : "all",
   "dimension" : "page",
@@ -164,7 +176,7 @@ In the next part of the query, we will see what metric we are querying the "page
 ~~~json
 {
   "queryType" : "topN",
-  "dataSource" : "wikiticker",
+  "dataSource" : "wikipedia",
   "intervals" : ["2015-09-12/2015-09-13"],
   "granularity" : "all",
   "dimension" : "page",
@@ -186,23 +198,9 @@ In the next part of the query, we will see what metric we are querying the "page
 
 Thus, for every page, there will be a result for the number of edits for that page. The query will return the top 25 pages with the most page edits from the "wikiticker" dataSource.
 
-## Step 2: Save the Query into a file
+## Step 2: Submit JSON Query to Druid Coordinator
 
-2\. Open Sandbox Web Shell Client at `http://sandbox-hdf.hortonworks.com:4200/`. Login credentials are root and the password you set for ssh access.
-
-3\. Open your favorite text editor in the sandbox web shell and copy/paste the complete JSON-based query into it. We will use vi editor:
-
-~~~bash
-mkdir -p /tmp/sandbox/tutorial-files/900/druid/query
-
-vi /tmp/sandbox/tutorial-files/900/druid/query/wikiticker-top-pages.json
-~~~
-
-4\. Inside vi, press **i** to insert text, then copy/paste the query.
-
-5\. Press **esc**, then **:wq** to save and quit the file.
-
-6\. Submit JSON Query to Druid Coordinator over HTTP POST request for that query to be issued to the Druid-broker node to search the dataSource for the most-edited articles
+1\. Submit JSON Query to Druid Coordinator over HTTP POST request for that query to be issued to the Druid-broker node to search the dataSource for the most-edited articles
 
 ~~~bash
 curl -L -H 'Content-Type: application/json' -X POST --data-binary @/tmp/sandbox/tutorial-files/900/druid/query/wikiticker-top-pages.json http://sandbox-hdp.hortonworks.com:8082/druid/v2/?pretty
@@ -301,7 +299,7 @@ Similarily if we move to the 25th entry, we can see that **User:Valmir144/sandbo
 
 ## Summary
 
-Congratulations! You just learned to write a JSON-based TopN query to search for the top Wikipedia page edits in our `wikiticker` dataSource.
+Congratulations! You just learned to write a JSON-based TopN query to search for the top Wikipedia page edits in our `wikipedia` dataSource.
 
 Feel free to check out the appendix for more examples on how to query the dataSource using other Aggregation Queries, Metadata Queries and Search Queries.
 
@@ -314,7 +312,7 @@ Feel free to check out the appendix for more examples on how to query the dataSo
 
 ## Appendix A: Use Druid's other Query Types
 
-Earlier, we learned how to write a JSON-based **TopN** aggregation query to retrieve most edited Wikipedia pages from our `wikiticker` dataSource.
+Earlier, we learned how to write a JSON-based **TopN** aggregation query to retrieve most edited Wikipedia pages from our `wikipedia` dataSource.
 
 ### Wikiticker JSON Dataset
 
@@ -343,16 +341,24 @@ Earlier, we learned how to write a JSON-based **TopN** aggregation query to retr
 }
 ~~~
 
-In case you may need to use Druid's other query types: Select, Aggregation, Metadata and Search, we put together a summarization of what the query does, an example that can query the `wikiticker` dataSource and the results from after the query is executed.
+In case you may need to use Druid's other query types: Select, Aggregation, Metadata and Search, we put together a summarization of what the query does, an example that can query the `wikipedia` dataSource and the results from after the query is executed.
 
 ### Select Query
 
 ### Select
 
+1\. Open your favorite text editor in the Sandbox Web Shell client: `http://sandbox-hdp.hortonworks.com:4200/`. Login Credentials are root and the password you chose.
+
+2\. We will use the vi editor to copy/paste the JSON query into a file called `wiki-select.json`.
+
+~~~bash
+vi /tmp/sandbox/tutorial-files/900/druid/query/wiki-select.json
+~~~
+
 ~~~json
 {
   "queryType": "select",
-  "dataSource": "wikiticker",
+  "dataSource": "wikipedia",
   "dimensions": [],
   "metrics": [],
   "intervals": [
@@ -361,20 +367,12 @@ In case you may need to use Druid's other query types: Select, Aggregation, Meta
   "granularity": "all",
   "pagingSpec": {
     "pagingIdentifiers": {},
-    "threshold": 5
+    "threshold": 2
   }
 }
 ~~~
 
-Returns the "5" rows of data from the Druid dataSource "wikiticker".
-
-1\. Open your favorite text editor in the Sandbox Web Shell client: `http://sandbox-hdf.hortonworks.com:4200/`. Login Credentials are root and the password you chose.
-
-2\. We will use the vi editor to copy/paste the JSON query into a file called `wiki-select.json`.
-
-~~~bash
-vi wiki-select.json
-~~~
+Returns the "5" rows of data from the Druid dataSource "wikipedia".
 
 3\. Save and the quit the file, if using vi, then enter the command:
 
@@ -385,158 +383,9 @@ vi wiki-select.json
 4\. Send the JSON-based Query to the Druid Coordinator over HTTP POST request:
 
 ~~~bash
-curl -L -H 'Content-Type: application/json' -X POST --data-binary @/root/wiki-select.json http://sandbox-hdp.hortonworks.com:8082/druid/v2/?pretty
+curl -L -H 'Content-Type: application/json' -X POST --data-binary @/tmp/sandbox/tutorial-files/900/druid/query/wiki-select.json http://sandbox-hdp.hortonworks.com:8082/druid/v2/?pretty
 ~~~
 
-Output result after Select query should be similar as below:
-
-~~~
-[ {
-  "timestamp" : "2015-09-12T00:46:58.771Z",
-  "result" : {
-    "pagingIdentifiers" : {
-      "wikiticker_2015-09-12T00:00:00.000Z_2015-09-13T00:00:00.000Z_2018-03-30T04:35:10.367Z" : 4
-    },
-    "dimensions" : [ "isRobot", "countryIsoCode", "regionName", "channel", "isUnpatrolled", "isNew", "isMinor", "isAnonymous", "cityName", "metroCode", "namespace", "comment", "countryName", "page", "user", "regionIsoCode" ],
-    "metrics" : [ "deleted", "added", "count", "delta", "user_unique" ],
-    "events" : [ {
-      "segmentId" : "wikiticker_2015-09-12T00:00:00.000Z_2015-09-13T00:00:00.000Z_2018-03-30T04:35:10.367Z",
-      "offset" : 0,
-      "event" : {
-        "timestamp" : "2015-09-12T00:46:58.771Z",
-        "channel" : "#en.wikipedia",
-        "cityName" : null,
-        "comment" : "added project",
-        "countryIsoCode" : null,
-        "countryName" : null,
-        "isAnonymous" : "false",
-        "isMinor" : "false",
-        "isNew" : "false",
-        "isRobot" : "false",
-        "isUnpatrolled" : "false",
-        "metroCode" : null,
-        "namespace" : "Talk",
-        "page" : "Talk:Oswald Tilghman",
-        "regionIsoCode" : null,
-        "regionName" : null,
-        "user" : "GELongstreet",
-        "deleted" : 0,
-        "added" : 36,
-        "count" : 1,
-        "delta" : 36,
-        "user_unique" : "AQAAAQAAAAOmEA=="
-      }
-    }, {
-      "segmentId" : "wikiticker_2015-09-12T00:00:00.000Z_2015-09-13T00:00:00.000Z_2018-03-30T04:35:10.367Z",
-      "offset" : 1,
-      "event" : {
-        "timestamp" : "2015-09-12T00:47:00.496Z",
-        "channel" : "#ca.wikipedia",
-        "cityName" : null,
-        "comment" : "Robot inserta {{Commonscat}} que enllaça amb [[commons:category:Rallicula]]",
-        "countryIsoCode" : null,
-        "countryName" : null,
-        "isAnonymous" : "false",
-        "isMinor" : "true",
-        "isNew" : "false",
-        "isRobot" : "true",
-        "isUnpatrolled" : "false",
-        "metroCode" : null,
-        "namespace" : "Main",
-        "page" : "Rallicula",
-        "regionIsoCode" : null,
-        "regionName" : null,
-        "user" : "PereBot",
-        "deleted" : 0,
-        "added" : 17,
-        "count" : 1,
-        "delta" : 17,
-        "user_unique" : "AQAAAQAAAADsAQ=="
-      }
-    }, {
-      "segmentId" : "wikiticker_2015-09-12T00:00:00.000Z_2015-09-13T00:00:00.000Z_2018-03-30T04:35:10.367Z",
-      "offset" : 2,
-      "event" : {
-        "timestamp" : "2015-09-12T00:47:05.474Z",
-        "channel" : "#en.wikipedia",
-        "cityName" : "Auburn",
-        "comment" : "/* Status of peremptory norms under international law */ fixed spelling of 'Wimbledon'",
-        "countryIsoCode" : "AU",
-        "countryName" : "Australia",
-        "isAnonymous" : "true",
-        "isMinor" : "false",
-        "isNew" : "false",
-        "isRobot" : "false",
-        "isUnpatrolled" : "false",
-        "metroCode" : null,
-        "namespace" : "Main",
-        "page" : "Peremptory norm",
-        "regionIsoCode" : "NSW",
-        "regionName" : "New South Wales",
-        "user" : "60.225.66.142",
-        "deleted" : 0,
-        "added" : 0,
-        "count" : 1,
-        "delta" : 0,
-        "user_unique" : "AQAAAQAAAAEhAQ=="
-      }
-    }, {
-      "segmentId" : "wikiticker_2015-09-12T00:00:00.000Z_2015-09-13T00:00:00.000Z_2018-03-30T04:35:10.367Z",
-      "offset" : 3,
-      "event" : {
-        "timestamp" : "2015-09-12T00:47:08.770Z",
-        "channel" : "#vi.wikipedia",
-        "cityName" : null,
-        "comment" : "fix Lỗi CS1: ngày tháng",
-        "countryIsoCode" : null,
-        "countryName" : null,
-        "isAnonymous" : "false",
-        "isMinor" : "true",
-        "isNew" : "false",
-        "isRobot" : "true",
-        "isUnpatrolled" : "false",
-        "metroCode" : null,
-        "namespace" : "Main",
-        "page" : "Apamea abruzzorum",
-        "regionIsoCode" : null,
-        "regionName" : null,
-        "user" : "Cheers!-bot",
-        "deleted" : 0,
-        "added" : 18,
-        "count" : 1,
-        "delta" : 18,
-        "user_unique" : "AQAAAQAAAAK8Aw=="
-      }
-    }, {
-      "segmentId" : "wikiticker_2015-09-12T00:00:00.000Z_2015-09-13T00:00:00.000Z_2018-03-30T04:35:10.367Z",
-      "offset" : 4,
-      "event" : {
-        "timestamp" : "2015-09-12T00:47:11.862Z",
-        "channel" : "#vi.wikipedia",
-        "cityName" : null,
-        "comment" : "clean up using [[Project:AWB|AWB]]",
-        "countryIsoCode" : null,
-        "countryName" : null,
-        "isAnonymous" : "false",
-        "isMinor" : "false",
-        "isNew" : "false",
-        "isRobot" : "true",
-        "isUnpatrolled" : "false",
-        "metroCode" : null,
-        "namespace" : "Main",
-        "page" : "Atractus flammigerus",
-        "regionIsoCode" : null,
-        "regionName" : null,
-        "user" : "ThitxongkhoiAWB",
-        "deleted" : 0,
-        "added" : 18,
-        "count" : 1,
-        "delta" : 18,
-        "user_unique" : "AQAAAQAAAABSEA=="
-      }
-    } ]
-  }
-~~~
 
 ### Aggregation Queries
 
@@ -555,7 +404,7 @@ It tracks changes to the JSON Object or String as inserts. So if we use time-ser
 ~~~json
 {
   "queryType": "timeseries",
-  "dataSource": "wikiticker",
+  "dataSource": "wikipedia",
   "descending": "true",
   "granularity": "hour",
   "aggregations": [
@@ -573,7 +422,7 @@ It tracks changes to the JSON Object or String as inserts. So if we use time-ser
 
 In the span of 24 hour interval, this query will count the total page edits per hour and store the result into variable "edits."
 
-1\. Open your favorite text editor in the Sandbox Web Shell client: `http://sandbox-hdf.hortonworks.com:4200/`. Login Credentials are root and the password you chose.
+1\. Open your favorite text editor in the Sandbox Web Shell client: `http://sandbox-hdp.hortonworks.com:4200/`. Login Credentials are root and the password you chose.
 
 2\. We will use the vi editor to copy/paste the JSON query into a file called `wiki-timeseries.json`.
 
@@ -590,7 +439,7 @@ vi wiki-timeseries.json
 4\. Send the JSON-based Query to the Druid Coordinator over HTTP POST request:
 
 ~~~bash
-curl -L -H 'Content-Type: application/json' -X POST --data-binary @/root/wiki-timeseries.json http://sandbox-hdp.hortonworks.com:8082/druid/v2/?pretty
+curl -L -H 'Content-Type: application/json' -X POST --data-binary @/tmp/sandbox/tutorial-files/900/druid/query/wiki-timeseries.json http://sandbox-hdp.hortonworks.com:8082/druid/v2/?pretty
 ~~~
 
 The result shows the total page edits for each hour:
@@ -730,7 +579,7 @@ Now coming back to the previous result, what if we wanted to get insight about h
 ~~~json
 {
   "queryType": "timeseries",
-  "dataSource": "wikiticker",
+  "dataSource": "wikipedia",
   "descending": "true",
   "filter": {
     "type": "selector",
@@ -754,7 +603,7 @@ Now coming back to the previous result, what if we wanted to get insight about h
 Feel free to test it in your Sandbox web shell client. You will probably notice some page edits per hour show up as null, which occurs since Wiki page edits related to Australia were not edited.
 
 ~~~bash
-curl -L -H 'Content-Type: application/json' -X POST --data-binary @/root/wiki-enrich-timeseries.json http://sandbox-hdp.hortonworks.com:8082/druid/v2/?pretty
+curl -L -H 'Content-Type: application/json' -X POST --data-binary @/tmp/sandbox/tutorial-files/900/druid/query/wiki-enrich-timeseries.json http://sandbox-hdp.hortonworks.com:8082/druid/v2/?pretty
 ~~~
 
 ### GroupBy
@@ -770,7 +619,7 @@ Name of the GroupBy query: `wiki-groupby.json`.
 ~~~json
 {
   "queryType": "groupBy",
-  "dataSource": "wikiticker",
+  "dataSource": "wikipedia",
   "granularity": "hour",
   "dimensions": [
     "page", "user"
@@ -794,7 +643,7 @@ Name of the GroupBy query: `wiki-groupby.json`.
 ~~~
 
 - **"queryType": "groupBy"** - specifies you want Druid to run the groupBy query type
-- **"dataSource": "wikiticker"** - specifies the `wikiticker` set of data will be queried (like a table in relational database)
+- **"dataSource": "wikipedia"** - specifies the `wikiticker` set of data will be queried (like a table in relational database)
 - **"granularity": "hour"** - specifies the data will be queried in hour intervals
 - **"dimensions": [ "page", "user" ]** - specifies the groupBy action will be performed on `page and user` dimensions
 - **filter** - specifies a filter to use only certain fields in the query
@@ -809,7 +658,7 @@ Name of the GroupBy query: `wiki-groupby.json`.
     - **"2015-09-12/2015-09-13"** - a JSON Object represented across a 1 day time period (ISO-8601)
 
 ~~~bash
-curl -L -H 'Content-Type: application/json' -X POST --data-binary @/root/wiki-groupby.json http://sandbox-hdp.hortonworks.com:8082/druid/v2/?pretty
+curl -L -H 'Content-Type: application/json' -X POST --data-binary @/tmp/sandbox/tutorial-files/900/druid/query/wiki-groupby.json http://sandbox-hdp.hortonworks.com:8082/druid/v2/?pretty
 ~~~
 
 Feel free to run the query in the sandbox web shell client. Heres an example of output you would see:
@@ -846,7 +695,7 @@ Notice how we extracted `page` and `user` into our JSON output using the GroupBy
 ~~~json
 {
   "queryType": "timeBoundary",
-  "dataSource": "wikiticker"
+  "dataSource": "wikipedia"
 }
 ~~~
 
@@ -855,7 +704,7 @@ Notice how we extracted `page` and `user` into our JSON output using the GroupBy
 Run the query `wiki-timeboundary-query.json` in sandbox web shell client:
 
 ~~~bash
-curl -L -H 'Content-Type: application/json' -X POST --data-binary @/root/wiki-timeboundary-query.json http://sandbox-hdp.hortonworks.com:8082/druid/v2/?pretty
+curl -L -H 'Content-Type: application/json' -X POST --data-binary @/tmp/sandbox/tutorial-files/900/druid/query/wiki-timeboundary-query.json http://sandbox-hdp.hortonworks.com:8082/druid/v2/?pretty
 ~~~
 
 You should see similar output:
@@ -879,7 +728,7 @@ As you can see the query returns the earliest and latest changes that were made 
 ~~~json
 {
   "queryType": "segmentMetadata",
-  "dataSource": "wikiticker",
+  "dataSource": "wikipedia",
   "intervals": [ "2015-09-12/2015-09-13" ]
 }
 ~~~
@@ -887,13 +736,13 @@ As you can see the query returns the earliest and latest changes that were made 
 Analysis of the above query:
 
 - **"queryType": "segmentMetadata"** - specifies you want Druid to run the segmentMetadata query type
-- **"dataSource": "wikiticker"** - specifies the `wikiticker` set of data will be queried
+- **"dataSource": "wikipedia"** - specifies the `wikiticker` set of data will be queried
 - **"intervals": [ "2015-09-12/2015-09-13" ]** - defines a 1 day time range to run the query over
 
 Run the query `wiki-segment-query.json` in sandbox web shell client:
 
 ~~~bash
-curl -L -H 'Content-Type: application/json' -X POST --data-binary @/root/wiki-segment-query.json http://sandbox-hdp.hortonworks.com:8082/druid/v2/?pretty
+curl -L -H 'Content-Type: application/json' -X POST --data-binary @/tmp/sandbox/tutorial-files/900/druid/query/wiki-segment-query.json http://sandbox-hdp.hortonworks.com:8082/druid/v2/?pretty
 ~~~
 
 You should see similar output:
@@ -959,14 +808,14 @@ In your console output, notice how all the metadata regarding each column is out
 ~~~json
 {
   "queryType": "dataSourceMetadata",
-  "dataSource": "wikiticker"
+  "dataSource": "wikipedia"
 }
 ~~~
 
 Run the query `wiki-datasource-query.json` in sandbox web shell client:
 
 ~~~bash
-curl -L -H 'Content-Type: application/json' -X POST --data-binary @/root/wiki-datasource-query.json http://sandbox-hdp.hortonworks.com:8082/druid/v2/?pretty
+curl -L -H 'Content-Type: application/json' -X POST --data-binary @/tmp/sandbox/tutorial-files/900/druid/query/wiki-datasource-query.json http://sandbox-hdp.hortonworks.com:8082/druid/v2/?pretty
 ~~~
 
 You should see output similar to the following data:
@@ -995,7 +844,7 @@ NOTE: this ingested event does not take consideration of roll-up.
 ~~~json
 {
   "queryType": "search",
-  "dataSource": "wikiticker",
+  "dataSource": "wikipedia",
   "granularity": "hour",
   "searchDimensions": [
     "page",
@@ -1021,7 +870,7 @@ NOTE: this ingested event does not take consideration of roll-up.
 Run the query `wiki-search-query.json` in sandbox web shell client:
 
 ~~~bash
-curl -L -H 'Content-Type: application/json' -X POST --data-binary @/root/wiki-search-query.json http://sandbox-hdp.hortonworks.com:8082/druid/v2/?pretty
+curl -L -H 'Content-Type: application/json' -X POST --data-binary @/tmp/sandbox/tutorial-files/900/druid/query/wiki-search-query.json http://sandbox-hdp.hortonworks.com:8082/druid/v2/?pretty
 ~~~
 
 A sample of the output:

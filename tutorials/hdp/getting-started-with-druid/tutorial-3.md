@@ -1110,6 +1110,8 @@ Open Druid Overload at http://sandbox-hdp.hortonworks.com:8090/console.html. Tas
 
 ![wikiticker-running-tasks](assets/images/wikiticker-running-task.jpg)
 
+> Note: It will take around 5 - 15 minutes for the task to complete.
+
 If all goes well with this task, then it should finish with the **status SUCCEEDED** in Druid Overlord UI. Visit "Task log" to troubleshoot problems if anything goes wrong.
 
 ![wikiticker-completed-task](assets/images/wikiticker-completed-task.jpg)
