@@ -2,7 +2,7 @@
     "type" : "index_hadoop",
     "spec" : {
       "dataSchema" : {
-        "dataSource" : "wikiticker",
+        "dataSource" : "wikipedia",
         "parser" : {
           "type" : "hadoopyString",
           "parseSpec" : {
@@ -10,7 +10,7 @@
             "timestampSpec" : {
               "format" : "auto",
               "column" : "time"
-            },            
+            },
             "dimensionsSpec" : {
               "dimensions" : [
                 "channel",
@@ -64,7 +64,7 @@
           "segmentGranularity" : "day",
           "queryGranularity" : "none",
           "intervals" : ["2015-09-12/2015-09-13"]
-        }        
+        }
       },
       "ioConfig" : {
         "type" : "hadoop",
@@ -72,7 +72,7 @@
           "type" : "static",
           "paths" : "quickstart/wikiticker-2015-09-12-sampled.json.gz"
         }
-      },      
+      },
       "tuningConfig" : {
         "type" : "hadoop",
         "partitionsSpec" : {
