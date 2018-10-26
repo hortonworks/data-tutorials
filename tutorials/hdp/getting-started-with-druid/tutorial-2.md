@@ -34,6 +34,30 @@ If unsure, login to Ambari **admin** Dashboard for HDP at http://sandbox-hdp.hor
 
 ![start-needed-services](assets/images/started-needed-services.jpg)
 
+### Install Zeppelin Shell Interpreter
+
+Open Web Shell Client at http://sandbox-hdp.hortonworks.com:4200
+
+~~~bash
+/usr/hdp/3.0.1.0-187/zeppelin/bin/install-interpreter.sh --name shell
+~~~
+
+Output you should see:
+
+![install-interpreter-shell](assets/images/install-interpreter-shell.jpg)
+
+1\. Restart Zeppelin from Ambari UI.
+
+2\. Create interpreter setting in 'Interpreter' menu on Zeppelin GUI.
+
+From Zeppelin UI, click **anyonymous**, then **interpreter**.
+
+From Interpreter, click **+Create**.
+
+![create-shell-interpreter-setting](assets/images/create-shell-interpreter-setting.jpg)
+
+Then you can bind the interpreter on your note if needed.
+
 ## Summary
 
 Congratulations. You have now have setup the development environment for Druid on the HDP Sandbox. You are ready to do data ingestion with Druid.
