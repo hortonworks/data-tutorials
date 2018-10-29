@@ -4,6 +4,11 @@ title: Druid Concepts
 
 # Druid Concepts
 
+## Introduction
+
+In this tutorial, you will learn about the history and motivation on why Druid
+was developed. You will become familiar with what Druid is, Druid's architecture,
+data storage format, indexing data and querying data. 
 ## Outline
 
 - History
