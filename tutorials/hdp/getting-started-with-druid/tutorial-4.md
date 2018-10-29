@@ -11,13 +11,13 @@ the Druid queries and run them against our **wikipedia** datasource.
 
 ## Outline
 
-- Query Data with JSON-based Queries
-- Step 1: Run TopN Query to find Most-edited Articles
-- Step 2: Analyze TopN Query
-- Summary
-- Further Reading
-- Appendix A: Use Druid's other Query Types
-- Appendix A: Further Reading
+- [Query Data with JSON-based Queries](#query-data-with-json-based-queries)
+- [Step 1: Run TopN Query to find Most-edited Articles](#step-1-run-topn-query-to-find-most-edited-articles)
+- [Step 2: Analyze TopN Query](#step-2-analyze-topn-query)
+- [Summary](#summary)
+- [Further Reading](#further-reading)
+- [Appendix A: Use Druid's other Query Types](#appendix-a-use-druids-other-query-types)
+- [Appendix B: Further Reading](#appendix-b-further-reading)
 
 ## Query Data with JSON-based Queries
 
@@ -893,7 +893,7 @@ Output from dataSource metadata:
 
 As you can see we searched for "user" or "page" dimensions which contain the value "truck". You will see "truck" is not case sensitive "StarStruck", "Truck", etc.
 
-## Appendix A: Further Reading
+## Appendix B: Further Reading
 
 **Aggregation Query Reference**
 

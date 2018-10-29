@@ -14,12 +14,12 @@ You will learn to write a Hadoop-based Ingestion Spec and run the Ingestion Task
 
 ## Outline
 
-- Step 1: Analyzing the Dataset
-- Step 2: Writing an Ingestion Spec
-- Step 3: Saving the Ingestion Spec
-- Step 4: Running the Task
-- Summary
-- Further Reading
+- [Step 1: Analyzing the Dataset](#step-1-analyzing-the-dataset)
+- [Step 2: Writing an Ingestion Spec](#step-2-writing-an-ingestion-spec)
+- [Step 3: Saving the Ingestion Spec](#step-3-saving-the-ingestion-spec)
+- [Step 4: Running the Task](#step-4-running-the-task)
+- [Summary](#summary)
+- [Further Reading](#Further-reading)
 
 ## Step 1: Analyzing the Dataset
 

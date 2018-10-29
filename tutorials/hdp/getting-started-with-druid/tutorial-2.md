@@ -10,12 +10,12 @@ In this tutorial, you will verify your sandbox IP is mapped to your desired host
 
 ## Outline
 
-- Map sandbox IP to desired hostname in hosts file
-- Setup Ambari admin password
-- Start up all required services
-- Setup Druid
-- Summary
-- Further Reading
+- [Map sandbox IP to desired hostname in hosts file](#map-sandbox-ip-to-desired-hostname-in-hosts-file)
+- [Setup Ambari admin password](#setup-ambari-admin-password)
+- [Start up all required services](#start-up-all-required-services)
+- [Setup Druid](#setup-druid)
+- [Summary](#summary)
+- [Further Reading](#further-reading)
 
 ### Map sandbox IP to desired hostname in hosts file
 
