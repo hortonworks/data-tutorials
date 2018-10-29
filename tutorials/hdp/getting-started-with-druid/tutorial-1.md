@@ -12,15 +12,15 @@ data storage format, indexing data and querying data.
 
 ## Outline
 
-- History
-- What is Druid?
-- Architecture
-- Data Storage Format
-- Indexing Data
-- Querying Data
-- Druid in Production
-- What are Suitable Use Cases?
-- Further Reading
+- [History](#history)
+- [What is Druid?](#what-is-druid)
+- [Architecture](#architecture)
+- [Data Storage Format](#data-storage-format)
+- [Indexing Data](#indexing-data)
+- [Querying Data](#querying-data)
+- [Druid in Production](#druid-in-production)
+- [What are Suitable Use Cases?](#what-are-suitable-use-cases)
+- [Further Reading](#further-reading)
 
 ## History
 
