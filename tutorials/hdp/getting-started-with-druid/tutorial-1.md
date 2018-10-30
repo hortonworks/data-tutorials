@@ -144,7 +144,7 @@ are two shards.
 ### Dataset Example
 
 We will look at how the different columns look like in Druid. Druid is an event
-store and it is mandatory to have timestamp, dimensions and metrics in your
+store and it is mandatory to have timestamp in your
 data.
 
 ~~~json
