@@ -28,30 +28,41 @@ If you need help setting the Ambari admin password, for HDP, reference **Admin P
 
 ### Start up all required services
 
-If unsure, login to Ambari **admin** Dashboard for HDP at http://sandbox-hdp.hortonworks.com:8080. Verify **Druid** and **Superset** are turned on and are off maintenance mode.
+If unsure, login to Ambari **admin** Dashboard for HDP at http://sandbox-hdp.hortonworks.com:8080. Verify on HDP, **Druid** and **Superset** are turned on and are off maintenance mode.
 
 ![start-needed-services](assets/images/started-needed-services.jpg)
 
 ### Setup Druid for Superset
 
-To query data against a Druid datasource and visualize it, first we will need
-to load data into Druid. We will use Spark Structured Streaming with Tranquility
-API to load data into Druid using realtime ingestion.
+Before we can visualize data from Druid using Superset, first we need to have
+data present in Druid. We will leverage the content from another tutorial to
+setup the SAM data pipeline to store data into Druid. Refer to [Appendix A](https://hortonworks.com/tutorial/real-time-event-processing-in-nifi-sam-schema-registry-and-superset/#appendix-a-visualize-trucking-data-with-superset-via-cda) in
+Real-Time Event Processing In NiFi, SAM, Schema Registry and SuperSet tutorial.
+
+All you need to do is step 1 and step 2 in Appendix A. We will include reference
+images of what will need to be started in the data pipeline to get the data into
+Druid.
+
+1\. In the NiFi canvas http://sandbox-hdf.hortonworks.com:9090/nifi, start the
+NiFi DataFlow by pressing the green start button in the operate panel.
 
 
 
-4\. Open Superset at http://sandbox-hdf.hortonworks.com:9089/
+2\. In the SAM canvas http://sandbox-hdf.hortonworks.com:7777/, start the SAM
+topology by pressing the green start button at the bottom right of the canvas.
 
-5\. Wait about **5 – 10 minutes** for Kafka data to be consumed, then periodically, select the **Sources** dropdown and click on **Refresh Druid Metadata**. Eventually, the two Druid data sources will appear.
+
+
+3\. In the Superset UI http://sandbox-hdp.hortonworks.com:9089, wait about
+**5 – 10 minutes** for Kafka data to be consumed, then periodically, select the
+**Sources** dropdown and click on **Refresh Druid Metadata**. Eventually, the
+two Druid data sources will appear.
 
 ![druid_metadata](assets/druid_metadata.jpg)
 
-## Create Visualization Slices
-
-Superset is being used to visualize the Druid data sources. From the characteristics of an effective visual display from the concepts section, we will apply them now to effectively visualize the **average-speed-cube-01** and **violation-events-cube-01** datasets.
-
-
-
 ## Summary
+
+Congratulations! Data is now in Druid. We can see the datasources in Superset.
+We are ready to start creating visualization representations of the data.
 
 ## Further Reading
