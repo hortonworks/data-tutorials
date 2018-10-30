@@ -28,7 +28,11 @@ Superset is a Business Intelligence tool packaged with many features for designi
 ## Prerequisites
 
 - Installed [Hortonworks Data Platform (HDP) Sandbox](https://hortonworks.com/downloads/#sandbox)
-- 16GB of RAM dedicated for the Sandbox
+- If you don't have 32GB of dedicated RAM for HDP Sandbox, then refer to [Deploying Hortonworks Sandbox on Microsoft Azure]
+- Enabled Connected Data Architecture:
+  - [Enable CDA for VirtualBox](https://hortonworks.com/tutorial/sandbox-deployment-and-install-guide/section/1/#enable-connected-data-architecture-cda---advanced-topic)
+  - [Enable CDA for VMware](https://hortonworks.com/tutorial/sandbox-deployment-and-install-guide/section/2/#enable-connected-data-architecture-cda---advanced-topic)
+  - [Enable CDA for Docker](https://hortonworks.com/tutorial/sandbox-deployment-and-install-guide/section/3/#enable-connected-data-architecture-cda---advanced-topic)
 
 ## Outline
 
@@ -38,4 +42,4 @@ Superset is a Business Intelligence tool packaged with many features for designi
 
 ## Tutorial Reference Application
 
-This tutorial series uses our **[Trucking IoT Application](https://github.com/orendain/trucking-iot/tree/hadoop-summit-2017)** comprised of multiple subprojects. You will build the Superset visualization subproject.
+This tutorial series uses our **[Trucking IoT Application](https://github.com/orendain/trucking-iot/tree/hadoop-summit-2017)** comprised of multiple sub-projects. You will build the Superset visualization subproject.
