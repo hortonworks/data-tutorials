@@ -83,57 +83,45 @@ These nodes help in coordination of your data across the different cluster.
 
 ![visual-diagram.jpg](assets/images/visual-diagram.jpg)
 
-Typically you have streaming data coming in from any source. You can use
-any data pipeline tool to massage, transform and enrich the data. Once the
-processing is done, you send the data to your realtime indexing task. The task
-will keep the data in a row oriented fashion in memory and if there is any query
-that comes, you can serve that query from the realtime nodes.
+Let's examine the flow of data when a streaming event takes place:
 
-Let's look at the case where a streaming event just happened:
+1\. Typically you have streaming data coming in from any source. You can use
+any data pipeline tool to massage, transform and enrich the data.
 
-- the event will be massaged and sent to the indexing task. The event will also
-be in memory at that indexing task.
+2\. Once the processing is done, you send the data to your realtime indexing
+task. The task will keep the data in a row oriented fashion in memory and if
+there is any query that comes, you can serve that query from the realtime nodes.
 
-Let's look at the case where a query comes from the user:
-
-- the query will first hit the broker node, the broker node will see that it has
+3\. The query will first hit the broker node, the broker node will see that it has
 some data in the realtime index task and the broker node will send that query
 to the realtime index task. In response, the indexing task will send back the
 result to the broker node and the event will be visible on the dashboard.
 
-What happens when the data has been sitting at the indexing tasks for a while?
+4\. If the data has been sitting in the indexing tasks for a while, the indexing
+tasks will create a column oriented format, which is known as a Druid segment.
+Segments will be handed off to deep storage.
 
-- the indexing tasks will create a column oriented format, which is known as a
-Druid segment. Segments will be handed off to deep storage.
-
-What could Deep Storage be?
-
-- deep storage could be any distributed file system, which is used as a
+5\. Deep storage could be any distributed file system, which is used as a
 permanent backup of your data segments.
 
-Once the data is present in deep storage, it is then loaded onto the historical
+6\. Once the data is present in deep storage, it is then loaded onto the historical
 nodes. After the data is loaded onto the historical nodes, the indexing tasks
 will see the segments have been loaded onto the historical nodes, so the
 indexing tasks drops the segments from its memory.
 
-Thus, if a query comes, it will be served from the historical nodes.
+7\. Thus, if a query comes, it will be served from the historical nodes.
 
-How does Druid manage where the segment needs to be loaded?
-
-- Coordinator nodes are responsible for coordinating your data across different
+8\. Druid leverages Coordinator nodes to manage where the segments needs to be loaded.
+They are responsible for coordinating your data across different
 historical nodes. Coordinator nodes are also responsible for handling data
 replication. You can have configurable rules for loading your data. For
 instance, I could set a rule that makes sure only 1 month old data is loaded on
 the historical nodes with the Coordinator nodes.
 
-What is Zookeeper used for?
+9\. Zookeeper is used for doing internal communication and leader elections and
+fail overs.
 
-- Zookeeper is used for doing internal communication and leader elections and
-failovers.
-
-What is the significance of the Metadata Store?
-
-- There is an external dependency on a metadata store. It can be MySQL or
+10\. There is an external dependency on a metadata store. It can be MySQL or
 Postgres datastore. It stores metadata about Druid segments, such as how to load
 those segments, where is the location of the files present for those segments.
 
