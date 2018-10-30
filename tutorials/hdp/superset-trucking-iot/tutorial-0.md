@@ -1,0 +1,41 @@
+---
+title: Superset in Trucking IoT
+author: sandbox-team
+tutorial-id: 809
+experience: Beginner
+persona: Data Analyst
+source: Hortonworks
+use case: Data Visualization
+technology: Apache Superset
+release: hdp-3.0.0
+environment: Sandbox
+product: HDP
+series: HDP > Develop with Hadoop > Hello World
+---
+
+# Superset in Trucking IoT
+
+## Introduction
+
+Superset is a Business Intelligence tool packaged with many features for designing, maintaining and enabling the storytelling of data through meaningful data visualizations. The trucking company you work at has a Trucking IoT Application that processes the truck and traffic data it receives from sensors, but the businesses leaders are not able to make sense of the data. They hired you as a Data Visualization Analyst to tell a story through visualizing this application's data, such as how the traffic congestion levels impact truck driver performance, which ultimately affect the company. Therefore, your communication of your insights to business leaders will influence them to take action based on your recommendations.
+
+## Objective
+
+- Learn Data Visualization Concepts
+- Become familiar with Apache Superset
+- Learn to Design Visualizations with Superset
+
+## Prerequisites
+
+- Installed [Hortonworks Data Platform (HDP) Sandbox](https://hortonworks.com/downloads/#sandbox)
+- 16GB of RAM dedicated for the Sandbox
+
+## Outline
+
+- **Superset Concepts** - Covers the fundamental concepts of Data Visualization and Superset.
+- **Setting up the Development Environment** - Setup hostname mapping to IP address, setup Ambari admin password, turn on services needed for Superset and turn on Superset.
+- **Visualizing Trucking Data** - Shows how to visualize data using Superset.
+
+## Tutorial Reference Application
+
+This tutorial series uses our **[Trucking IoT Application](https://github.com/orendain/trucking-iot/tree/hadoop-summit-2017)** comprised of multiple subprojects. You will build the Superset visualization subproject.
