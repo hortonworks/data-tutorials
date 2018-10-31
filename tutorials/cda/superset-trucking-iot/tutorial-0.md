@@ -9,8 +9,8 @@ use case: Data Visualization
 technology: Apache Superset
 release: hdp-3.0.0
 environment: Sandbox
-product: HDP
-series: HDP > Develop with Hadoop > Hello World
+product: HDP, HDF
+series: HDP > Develop with Hadoop > Hello World, HDF > Develop Data Flow & Streaming Applications > Hello World
 ---
 
 # Superset in Trucking IoT
