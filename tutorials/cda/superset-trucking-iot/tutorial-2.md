@@ -11,7 +11,7 @@ In this tutorial, you will verify your sandbox IP is mapped to your desired host
 ## Outline
 
 - [Map sandbox IP to desired hostname in hosts file](#map-sandbox-ip-to-desired-hostname-in-hosts-file)
-- [Setup Ambari admin password](#setup-ambari-admin-password)
+- [Setup Ambari admin password for HDF and HDP](#setup-ambari-admin-password-for-hdf-and-hdp)
 - [Start up all required services](#start-up-all-required-services)
 - [Setup Druid for Superset](#setup-druid-for-superset)
 - [Summary](#summary)
@@ -22,15 +22,27 @@ In this tutorial, you will verify your sandbox IP is mapped to your desired host
 If you need help mapping Sandbox IP to hostname, reference **Environment
 Setup -> Map Sandbox IP To Your Desired Hostname In The Hosts File** in [Learning the Ropes of HDP Sandbox](https://hortonworks.com/tutorial/learning-the-ropes-of-the-hortonworks-sandbox/)
 
-### Setup Ambari admin password
+### Setup Ambari admin password for HDF and HDP
 
-If you need help setting the Ambari admin password, for HDP, reference **Admin Password Reset** in [Learning the Ropes of HDP Sandbox](https://hortonworks.com/tutorial/learning-the-ropes-of-the-hortonworks-sandbox/)
+If you need help setting the Ambari admin password,
 
-### Start up all required services
+- for HDP, reference **Admin Password Reset** in [Learning the Ropes of HDP Sandbox](https://hortonworks.com/tutorial/learning-the-ropes-of-the-hortonworks-sandbox/)
+- for HDF, reference **Admin Password Reset** in [Learning the Ropes of HDF Sandbox](https://hortonworks.com/tutorial/getting-started-with-hdf-sandbox/)
 
-If unsure, login to Ambari **admin** Dashboard for HDP at http://sandbox-hdp.hortonworks.com:8080. Verify on HDP, **Druid** and **Superset** are turned on and are off maintenance mode.
+### Started up all required services for HDF and HDP
 
-![start-needed-services](assets/images/started-needed-services.jpg)
+If unsure, login to Ambari **admin** Dashboard
+
+- for HDF at http://sandbox-hdf.hortonworks.com:8080 and verify **Zookeeper**, **Storm**, **Kafka**,  **NiFi**, **Schema Registry**, **Streaming Analytics Manager** starts up, else start them with Maintenance Mode turned off.
+- for HDP at http://sandbox-hdp.hortonworks.com:8080 and verify **HDFS**, **YARN**, **Druid** and **Superset** starts up, else start them with Maintenance Mode turned off.
+
+For example, to start Druid, you would do the following.
+
+![druid-service-start.jpg](assets/images/druid-service-start.jpg)
+
+After starting Druid and Superset, your Background Operations would look similar:
+
+![druid-superset-started.jpg](assets/images/druid-superset-started.jpg)
 
 ### Setup Druid for Superset
 
@@ -46,19 +58,19 @@ Druid.
 1\. In the NiFi canvas http://sandbox-hdf.hortonworks.com:9090/nifi, start the
 NiFi DataFlow by pressing the green start button in the operate panel.
 
-
+![nifi-trucking-iot-flow.jpg](assets/images/nifi-trucking-iot-flow.jpg)
 
 2\. In the SAM canvas http://sandbox-hdf.hortonworks.com:7777/, start the SAM
 topology by pressing the green start button at the bottom right of the canvas.
 
+![sam-trucking-iot-topology](assets/images/sam-trucking-iot-topology.jpg)
 
+3\. In the Superset UI http://sandbox-hdp.hortonworks.com:9089, login
+with credentials **admin/admin**, wait about **5 – 10 minutes** for Kafka data
+to be consumed, then periodically, select the **Sources** dropdown and click on
+**Refresh Druid Metadata**. Eventually, the two Druid data sources will appear.
 
-3\. In the Superset UI http://sandbox-hdp.hortonworks.com:9089, wait about
-**5 – 10 minutes** for Kafka data to be consumed, then periodically, select the
-**Sources** dropdown and click on **Refresh Druid Metadata**. Eventually, the
-two Druid data sources will appear.
-
-![druid_metadata](assets/druid_metadata.jpg)
+![druid_metadata](assets/images/druid_metadata.jpg)
 
 ## Summary
 
@@ -66,3 +78,6 @@ Congratulations! Data is now in Druid. We can see the datasources in Superset.
 We are ready to start creating visualization representations of the data.
 
 ## Further Reading
+
+- [An introduction to Druid](https://www.youtube.com/watch?v=JEhmHsN8jZI)
+- [How Superset and Druid Power Real-Time Analytics at Airbnb | DataEngConf SF '17](https://www.youtube.com/watch?v=W_Sp4jo1ACg)
