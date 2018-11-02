@@ -1,8 +1,8 @@
 ---
-title: Sandbox Port Forwards - HDP 2.6.5
+title: Sandbox Port Forwards - HDP 3.0.1
 ---
 
-# Sandbox Port Forwards - HDP 2.6.5
+# Sandbox Port Forwards - HDP 3.0.1
 
 ## Introduction
 
@@ -67,6 +67,7 @@ In this release we began to use NGINX as a reverse proxy server. In general, we 
 18081 -> 18081 -- Spark2 History Server
 19888 -> 19888 -- JobHistory
 21000 -> 21000 -- Atlas
+30800 -> 30800 -- Data Analytics Studio
 33553 -> 33553 -- Hive LLAP
 39419 -> 39419 -- Hive LLAP
 42111 -> 42111 -- NFS
