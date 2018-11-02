@@ -188,11 +188,16 @@ SSH into the Raspberry Pi using Adafruit's Pi Finder **Terminal** button.
 
 **Figure 15:** Time Zone Calibrated
 
-### Step 2: Configure Bridged Adapter Network for VirtualBox
+### Step 2: Configure Bridged Adapter Network
 
-VirtualBox will be shown as an example in the tutorial flow, but if you are
-a VMware user, the settings will be similar. Open VirtualBox Manager.
-If your Guest VM is running, it will need to be stopped.
+To configure the virtual machine network, it depends on if you are using
+VirtualBox or VMware. If you are using VirtualBox, then you will need to
+perform some steps to generate a unique IP address that can appear on the
+network. However, for VMware users, this feature is enabled by default.
+
+### VirtualBox User
+
+Open VirtualBox Manager. If your Guest VM is running, it will need to be stopped.
 
 1\. Click the Settings gear.
 
@@ -200,23 +205,32 @@ If your Guest VM is running, it will need to be stopped.
 
 3\. In the **Attached to** field, select from the dropdown menu, **Bridged Adapter**.
 
-4\. Verify in **System** tab that the Base Memory is set to **32GB of RAM**.
-
-<!--
-
-You can keep the default setting for the Name of the Bridged Network.
-
 ![set_vm_bridged_network](assets/tutorial2/set_vm_bridged_network.jpg)
 
 **Figure 16:** Setting VirtualBox Guest VM to Bridged Adapter
 
-> Note: Verify your System RAM (Base Memory) is at least 12288 MB (12GB)
+> Note: You can keep the default setting for the Name of the Bridged Network.
 
-![verify_vm_ram_12gb](assets/tutorial2/verify_vm_ram_12gb.jpg)
+4\. Make sure in **System** tab that the Base Memory is set to **32GB of RAM**.
 
-**Figure 17:** Verifying RAM allocation is 32GB
+When you turn on the virtual machine, the IP address can be found under
+**For VMware**. Since we are using VirtualBox, both the welcome screen and ssh
+that are under both header sections are for VirtualBox. You will see you can
+access the web applications from the hostname, ex: **localhost**, or the
+explicit **IP address**.
 
--->
+![sb-guest-welcome](assets/tutorial2/sb-guest-welcome.jpg)
+
+### VMware User
+
+Alternatively, all you need to do to get the **IP address** for VMware is turn
+on the virtual machine and get it from the window that appears:
+
+![vmware-window](assets/tutorial2/vmware-window.jpg)
+
+Note: you can ignore the **For VirtualBox:** and **For VMware:** on the sandbox
+vmware window. They are irrelevant. Both hostname and IP address relate to
+**VMware**.
 
 ### Step 3: Map Bridged IP to Desired Hostname in hosts file
 
@@ -232,11 +246,10 @@ Select **hosts** file and **open** it.
 
 Copy the line with the current IP address mapped to the sandbox hostnames. Comment out that line. Now paste the line below the commented out line.
 
-Replace the current IP address with the Guest VM Bridged IP.
+Earlier when we turn on the sandbox, we were able to get the IP address from the
+virtual machine window.
 
-![sb-guest-welcome](assets/tutorial2/sb-guest-welcome.jpg)
-
-For example, **10.14.2.47** is the one generated for this current session in an office space, but your IP will be different.
+For example on VMware, the IP address **192.168.163.138** is the one generated for this current session in an office space, but your IP will probably be different.
 
 ![hosts-file-updates](assets/tutorial2/hosts-file-updates.jpg)
 
@@ -246,7 +259,7 @@ Save the modified file, **ctrl + s**.
 
 Similar to windows, open the **hosts** file at path **/private/etc/hosts**. Modify the file with your Bridged IP mapped to the sandbox hostnames.
 
-For example, **10.14.2.47** is the Guest VM Bridged IP generated for this current session in an office space, but your IP will be different.
+For example, **192.168.163.138** is the VMware IP generated for this current session in an office space, but your IP will be different.
 
 ~~~bash
 ##
@@ -256,7 +269,7 @@ For example, **10.14.2.47** is the Guest VM Bridged IP generated for this curren
 # when the system is booting.  Do not change this entry.
 ##       
 # 127.0.0.1       localhost sandbox-hdp.hortonworks.com sandbox-hdf.hortonworks.com sandbox-host
-10.14.2.47       localhost sandbox.hortonworks.com sandbox-hdp.hortonworks.com sandbox-hdf.hortonworks.com
+192.168.163.138       localhost sandbox.hortonworks.com sandbox-hdp.hortonworks.com sandbox-hdf.hortonworks.com
 255.255.255.255 broadcasthost
 ::1             localhost
 ~~~
@@ -267,14 +280,14 @@ Save the modified file.
 
 Similar to windows, open the **hosts** file at path **/etc/hosts**. Modify the file with your Bridged IP mapped to the sandbox hostnames.
 
-For example, **10.14.2.47** is the Guest VM Bridged IP generated for this current session in an office space, but your IP will be different.
+For example, **192.168.163.138** is the VMware Guest VM IP generated for this current session in an office space, but your IP will be different.
 
 ~~~bash
 # File is generated from /sandbox/gen-hosts.sh
 # Do not remove the following line, or various programs
 # that require network functionality will fail.
 127.0.0.1         localhost.localdomain localhost sandbox-hdp.hortonworks.com sandbox-hdf.hortonworks.com sandbox-host
-10.14.2.47       localhost sandbox.hortonworks.com sandbox-hdp.hortonworks.com sandbox-hdf.hortonworks.com
+192.168.163.138       localhost sandbox.hortonworks.com sandbox-hdp.hortonworks.com sandbox-hdf.hortonworks.com
 ~~~
 
 Save the modified file.
@@ -311,23 +324,17 @@ Head to `Advanced NiFi-Properties` in Ambari Config Settings for NiFi. Update th
 
 3\. Filter search for **nifi.remote**
 
-![advanced_nifi_properties](assets/tutorial2/nifi_properties_sitetosite.jpg)
-
-**Figure 16:** Update NiFi Config for Site-to-Site
-
-4\. Insert `<your-guest-vm-bridged-ip-address>` in **nifi.remote.input.host**. The image above shows **10.14.2.47**, which was the IP address assigned by the router in an **office network**, for a **home network**, we can see in the image below that the IP address was changed to **192.168.2.10**.
-
-> Note: `<your-guest-vm-bridged-ip-address>` for linux can be found with the terminal command: `hostname -I`. Yet, when you open the sandbox, we present a welcome screen to you that displays the IP address of your guest vm from bridged adapter network. Since we are using VirtualBox, there is a typo "For VMware:", which actually shows the guest vm ip address we want from our VirtualBox VM. VMware Guest VM welcome screen will have the IP address for the VMware Guest VM.
-
-![sb-guest-welcome](assets/tutorial2/sb-guest-welcome.jpg)
-
-**Figure 17:** Get Guest VM IP Address from Sandbox Welcome Screen
+4\. Insert `<your-guest-vm-bridged-ip-address>` in **nifi.remote.input.host**. For example, we inserted **192.168.163.138**.
 
 5\. Verify **nifi.remote.input.http.enabled** checked
 
 6\. Insert `15500` in **nifi.remote.input.socket.port**.
 
 7\. Save the configuration. Write in Notes `Configured NiFi for Socket Site-To-Site`
+
+![advanced_nifi_properties](assets/tutorial2/nifi_properties_sitetosite.jpg)
+
+**Figure 16:** Update NiFi Config for Site-to-Site
 
 Now NiFi is configured for Socket Site-To-Site protocol. If you encounter issues deploying MiNiFi to NiFi flow, it could be because the value **nifi.remote.iput.host** changed or **nifi.remote.input.socket.port** you chose is already being used. Of course there are other reasons for issues, but these two are ones to be mindful of.
 
@@ -341,7 +348,7 @@ Restart NiFi from Ambari with the **orange restart button** for the changes to t
 
 Add the GeoLite2 to HDF Sandbox CentOS, which is a database filled with Public IP Addresses mapped to geographic insights.
 
-1\. Access HDF Web Shell Client at `sandbox-hdf.hortonworks.com:4200`. User/Password is `root/hadoop`.
+1\. Access HDF Web Shell Client at http://sandbox-hdf.hortonworks.com:4200. User/Password is `root/hadoop`.
 
 ![hdf_web_shell](assets/tutorial2/hdf_web_shell.jpg)
 
