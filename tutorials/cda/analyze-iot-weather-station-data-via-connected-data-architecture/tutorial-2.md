@@ -221,12 +221,16 @@ explicit **IP address**.
 
 ![sb-guest-welcome](assets/tutorial2/sb-guest-welcome.jpg)
 
+**Figure 17:** VirtualBox Sandbox Welcome
+
 ### VMware User
 
 Alternatively, all you need to do to get the **IP address** for VMware is turn
 on the virtual machine and get it from the window that appears:
 
 ![vmware-window](assets/tutorial2/vmware-window.jpg)
+
+**Figure 18:** VMware Sandbox Welcome
 
 Note: you can ignore the **For VirtualBox:** and **For VMware:** on the sandbox
 vmware window. They are irrelevant. Both hostname and IP address relate to
@@ -244,6 +248,8 @@ Select **hosts** file and **open** it.
 
 ![hosts-file-w10](assets/tutorial2/hosts-file-w10.jpg)
 
+**Figure 19:** hosts file
+
 Copy the line with the current IP address mapped to the sandbox hostnames. Comment out that line. Now paste the line below the commented out line.
 
 Earlier when we turn on the sandbox, we were able to get the IP address from the
@@ -252,6 +258,8 @@ virtual machine window.
 For example on VMware, the IP address **192.168.163.138** is the one generated for this current session in an office space, but your IP will probably be different.
 
 ![hosts-file-updates](assets/tutorial2/hosts-file-updates.jpg)
+
+**Figure 20:** modify hosts file
 
 Save the modified file, **ctrl + s**.
 
@@ -332,9 +340,9 @@ Head to `Advanced NiFi-Properties` in Ambari Config Settings for NiFi. Update th
 
 7\. Save the configuration. Write in Notes `Configured NiFi for Socket Site-To-Site`
 
-![advanced_nifi_properties](assets/tutorial2/nifi_properties_sitetosite.jpg)
+![advanced_nifi_properties](assets/tutorial2/advanced_nifi_properties.jpg)
 
-**Figure 16:** Update NiFi Config for Site-to-Site
+**Figure 21:** Update NiFi Config for Site-to-Site
 
 Now NiFi is configured for Socket Site-To-Site protocol. If you encounter issues deploying MiNiFi to NiFi flow, it could be because the value **nifi.remote.iput.host** changed or **nifi.remote.input.socket.port** you chose is already being used. Of course there are other reasons for issues, but these two are ones to be mindful of.
 
@@ -352,7 +360,7 @@ Add the GeoLite2 to HDF Sandbox CentOS, which is a database filled with Public I
 
 ![hdf_web_shell](assets/tutorial2/hdf_web_shell.jpg)
 
-**Figure 18:** HDF Web Shell
+**Figure 22:** HDF Web Shell
 
 > Note: You will be prompted to change the password if this is your first time logging into the Sandbox.
 
@@ -382,7 +390,7 @@ pwd
 
 ![geolite_dbfile_path](assets/tutorial2/geolite_dbfile_path.jpg)
 
-**Figure 19:** Path to Geolite DB Lookup Table "GeoLite2-City.mmdb"
+**Figure 23:** Path to Geolite DB Lookup Table "GeoLite2-City.mmdb"
 
 Note down the folder name that GeoLite2-City.mmdb is located in on your system. According to the image above, the full pathname is: `/sandbox/tutorial-files/820/nifi/input/GeoFile/GeoLite2-City_20180605/GeoLite2-City.mmdb`
 
@@ -415,13 +423,13 @@ Recommended Hardware:
 
 ![microsd_microsd_adapter](assets/tutorial2/microsd_microsd_adapter.png)
 
-**Figure 20:** MicroSD on left and microSD Card Adapter on right
+**Figure 24:** MicroSD on left and microSD Card Adapter on right
 
 2\. Insert the microSD Adapter into the computer.
 
 ![insert_microsdAdater_laptop](assets/tutorial2/insert_microsdAdater_laptop.png)
 
-**Figure 21:** microSD Adapter Inserted into Computer
+**Figure 25:** microSD Adapter Inserted into Computer
 
 ### Download Raspbian OS Image
 
@@ -439,11 +447,11 @@ You will create a Raspbian bootable OS on microSD card using etcher.io graphic i
 
 ![etcher_dashboard](assets/tutorial2/etcher_dashboard.png)
 
-**Figure 22:** Etcher Dashboard to Create a Bootable OS on microSD
+**Figure 26:** Etcher Dashboard to Create a Bootable OS on microSD
 
 ![etcher_created_bootable_os](assets/tutorial2/etcher_created_bootable_os.png)
 
-**Figure 23:** Flash Complete, Bootable OS Now Created
+**Figure 27:** Flash Complete, Bootable OS Now Created
 
 Once the operation completes, Etcher automatically unmounts the SD card and is safe to eject.
 
@@ -461,7 +469,7 @@ df
 
 ![disk_utility_sd_unmount](assets/tutorial2/disk_utility_sd_unmount.png)
 
-**Figure 24:** MAC Disk Utility to Unmount Device for Writing to it
+**Figure 28:** MAC Disk Utility to Unmount Device for Writing to it
 
 4\. Head to terminal, in the Downloads folder where the Raspbian OS is located, run the DD command to write a bootable Raspbian OS onto micro SD card:
 
@@ -475,7 +483,7 @@ The DD operation will take 1 to 5 minutes until completion.
 
 ![dd_opearation_completion_result](assets/tutorial2/dd_opearation_completion_result.png)
 
-**Figure 25:** Progress of Creating Bootable OS on microSD
+**Figure 29:** Progress of Creating Bootable OS on microSD
 
 After the dd operation completes, you should see the Raspbian bootable OS successfully transferred over to the SD card.
 
@@ -492,7 +500,7 @@ bcm2708-rpi-b-plus.dtb  bcm2710-rpi-cm3.dtb   fixup_cd.dat  kernel7.img   start_
 bcm2708-rpi-b.dtb       bootcode.bin          fixup_db.dat  overlays      start_x.elf
 ~~~
 
-**Figure 26:** Create SSH file to Enable SSH Access to Raspberry Pi
+**Figure 30:** Create SSH file to Enable SSH Access to Raspberry Pi
 
 > Note: the path to the SD card is `/Volumes/boot`. `touch ssh` creates a new file. `ls -ltr` verifies new file was created.
 
@@ -500,13 +508,13 @@ bcm2708-rpi-b.dtb       bootcode.bin          fixup_db.dat  overlays      start_
 
 ![microsd_inserted_to_rpi](assets/tutorial2/microsd_inserted_to_rpi.png)
 
-**Figure 27:** MicroSD Inserted into Raspberry Pi
+**Figure 31:** MicroSD Inserted into Raspberry Pi
 
 7\. Connect ethernet cable to the Raspberry Pi to give it internet access, connect the 5V for power and the Pi should start up.
 
 ![power-ethernet_rpi](assets/tutorial2/power-ethernet_rpi.png)
 
-**Figure 28:** Raspberry Pi Ethernet Cable Connected for Internet Access
+**Figure 32:** Raspberry Pi Ethernet Cable Connected for Internet Access
 
 The Pi's default login credentials:
 
