@@ -190,11 +190,6 @@ SSH into the Raspberry Pi using Adafruit's Pi Finder **Terminal** button.
 
 ### Step 2: Configure Bridged Adapter Network
 
-To configure the virtual machine network, it depends on if you are using
-VirtualBox or VMware. If you are using VirtualBox, then you will need to
-perform some steps to generate a unique IP address that can appear on the
-network. However, for VMware users, this feature is enabled by default.
-
 ### VirtualBox User
 
 Open VirtualBox Manager. If your Guest VM is running, it will need to be stopped.
@@ -213,8 +208,7 @@ Open VirtualBox Manager. If your Guest VM is running, it will need to be stopped
 
 4\. Make sure in **System** tab that the Base Memory is set to **32GB of RAM**.
 
-When you turn on the virtual machine, the IP address can be found under
-**For VMware**. Since we are using VirtualBox, both the welcome screen and ssh
+Since we are using VirtualBox, both the welcome screen and ssh
 that are under both header sections are for VirtualBox. You will see you can
 access the web applications from the hostname, ex: **localhost**, or the
 explicit **IP address**.
@@ -222,19 +216,6 @@ explicit **IP address**.
 ![sb-guest-welcome](assets/tutorial2/sb-guest-welcome.jpg)
 
 **Figure 17:** VirtualBox Sandbox Welcome
-
-### VMware User
-
-Alternatively, all you need to do to get the **IP address** for VMware is turn
-on the virtual machine and get it from the window that appears:
-
-![vmware-window](assets/tutorial2/vmware-window.jpg)
-
-**Figure 18:** VMware Sandbox Welcome
-
-Note: you can ignore the **For VirtualBox:** and **For VMware:** on the sandbox
-vmware window. They are irrelevant. Both hostname and IP address relate to
-**VMware**.
 
 ### Step 3: Map Bridged IP to Desired Hostname in hosts file
 
@@ -248,18 +229,18 @@ Select **hosts** file and **open** it.
 
 ![hosts-file-w10](assets/tutorial2/hosts-file-w10.jpg)
 
-**Figure 19:** hosts file
+**Figure 18:** hosts file
 
 Copy the line with the current IP address mapped to the sandbox hostnames. Comment out that line. Now paste the line below the commented out line.
 
 Earlier when we turn on the sandbox, we were able to get the IP address from the
 virtual machine window.
 
-For example on VMware, the IP address **192.168.163.138** is the one generated for this current session in an office space, but your IP will probably be different.
+For example on VirtualBox, the IP address **10.14.2.223** is the one generated for this current session in an office space, but your IP will probably be different.
 
 ![hosts-file-updates](assets/tutorial2/hosts-file-updates.jpg)
 
-**Figure 20:** modify hosts file
+**Figure 19:** modify hosts file
 
 Save the modified file, **ctrl + s**.
 
@@ -267,7 +248,7 @@ Save the modified file, **ctrl + s**.
 
 Similar to windows, open the **hosts** file at path **/private/etc/hosts**. Modify the file with your Bridged IP mapped to the sandbox hostnames.
 
-For example, **192.168.163.138** is the VMware IP generated for this current session in an office space, but your IP will be different.
+For example, **10.14.2.223** is the VirtualBox IP generated for this current session in an office space, but your IP will be different.
 
 ~~~bash
 ##
@@ -277,7 +258,7 @@ For example, **192.168.163.138** is the VMware IP generated for this current ses
 # when the system is booting.  Do not change this entry.
 ##       
 # 127.0.0.1       localhost sandbox-hdp.hortonworks.com sandbox-hdf.hortonworks.com sandbox-host
-192.168.163.138       localhost sandbox.hortonworks.com sandbox-hdp.hortonworks.com sandbox-hdf.hortonworks.com
+10.14.2.223       localhost sandbox.hortonworks.com sandbox-hdp.hortonworks.com sandbox-hdf.hortonworks.com
 255.255.255.255 broadcasthost
 ::1             localhost
 ~~~
@@ -288,14 +269,14 @@ Save the modified file.
 
 Similar to windows, open the **hosts** file at path **/etc/hosts**. Modify the file with your Bridged IP mapped to the sandbox hostnames.
 
-For example, **192.168.163.138** is the VMware Guest VM IP generated for this current session in an office space, but your IP will be different.
+For example, **10.14.2.223** is the VirtualBox Guest VM IP generated for this current session in an office space, but your IP will be different.
 
 ~~~bash
 # File is generated from /sandbox/gen-hosts.sh
 # Do not remove the following line, or various programs
 # that require network functionality will fail.
 127.0.0.1         localhost.localdomain localhost sandbox-hdp.hortonworks.com sandbox-hdf.hortonworks.com sandbox-host
-192.168.163.138       localhost sandbox.hortonworks.com sandbox-hdp.hortonworks.com sandbox-hdf.hortonworks.com
+10.14.2.223       localhost sandbox.hortonworks.com sandbox-hdp.hortonworks.com sandbox-hdf.hortonworks.com
 ~~~
 
 Save the modified file.
@@ -332,7 +313,7 @@ Head to `Advanced NiFi-Properties` in Ambari Config Settings for NiFi. Update th
 
 3\. Filter search for **nifi.remote**
 
-4\. Insert `<your-guest-vm-bridged-ip-address>` in **nifi.remote.input.host**. For example, we inserted **192.168.163.138**.
+4\. Insert `<your-guest-vm-bridged-ip-address>` in **nifi.remote.input.host**. For example, we inserted **10.14.2.223**.
 
 5\. Verify **nifi.remote.input.http.enabled** checked
 
@@ -342,7 +323,7 @@ Head to `Advanced NiFi-Properties` in Ambari Config Settings for NiFi. Update th
 
 ![advanced_nifi_properties](assets/tutorial2/advanced_nifi_properties.jpg)
 
-**Figure 21:** Update NiFi Config for Site-to-Site
+**Figure 20:** Update NiFi Config for Site-to-Site
 
 Now NiFi is configured for Socket Site-To-Site protocol. If you encounter issues deploying MiNiFi to NiFi flow, it could be because the value **nifi.remote.iput.host** changed or **nifi.remote.input.socket.port** you chose is already being used. Of course there are other reasons for issues, but these two are ones to be mindful of.
 
@@ -360,7 +341,7 @@ Add the GeoLite2 to HDF Sandbox CentOS, which is a database filled with Public I
 
 ![hdf_web_shell](assets/tutorial2/hdf_web_shell.jpg)
 
-**Figure 22:** HDF Web Shell
+**Figure 21:** HDF Web Shell
 
 > Note: You will be prompted to change the password if this is your first time logging into the Sandbox.
 
@@ -390,7 +371,7 @@ pwd
 
 ![geolite_dbfile_path](assets/tutorial2/geolite_dbfile_path.jpg)
 
-**Figure 23:** Path to Geolite DB Lookup Table "GeoLite2-City.mmdb"
+**Figure 22:** Path to Geolite DB Lookup Table "GeoLite2-City.mmdb"
 
 Note down the folder name that GeoLite2-City.mmdb is located in on your system. According to the image above, the full pathname is: `/sandbox/tutorial-files/820/nifi/input/GeoFile/GeoLite2-City_20180605/GeoLite2-City.mmdb`
 
@@ -423,13 +404,13 @@ Recommended Hardware:
 
 ![microsd_microsd_adapter](assets/tutorial2/microsd_microsd_adapter.png)
 
-**Figure 24:** MicroSD on left and microSD Card Adapter on right
+**Figure 23:** MicroSD on left and microSD Card Adapter on right
 
 2\. Insert the microSD Adapter into the computer.
 
 ![insert_microsdAdater_laptop](assets/tutorial2/insert_microsdAdater_laptop.png)
 
-**Figure 25:** microSD Adapter Inserted into Computer
+**Figure 24:** microSD Adapter Inserted into Computer
 
 ### Download Raspbian OS Image
 
@@ -447,11 +428,11 @@ You will create a Raspbian bootable OS on microSD card using etcher.io graphic i
 
 ![etcher_dashboard](assets/tutorial2/etcher_dashboard.png)
 
-**Figure 26:** Etcher Dashboard to Create a Bootable OS on microSD
+**Figure 25:** Etcher Dashboard to Create a Bootable OS on microSD
 
 ![etcher_created_bootable_os](assets/tutorial2/etcher_created_bootable_os.png)
 
-**Figure 27:** Flash Complete, Bootable OS Now Created
+**Figure 26:** Flash Complete, Bootable OS Now Created
 
 Once the operation completes, Etcher automatically unmounts the SD card and is safe to eject.
 
@@ -469,7 +450,7 @@ df
 
 ![disk_utility_sd_unmount](assets/tutorial2/disk_utility_sd_unmount.png)
 
-**Figure 28:** MAC Disk Utility to Unmount Device for Writing to it
+**Figure 27:** MAC Disk Utility to Unmount Device for Writing to it
 
 4\. Head to terminal, in the Downloads folder where the Raspbian OS is located, run the DD command to write a bootable Raspbian OS onto micro SD card:
 
@@ -483,7 +464,7 @@ The DD operation will take 1 to 5 minutes until completion.
 
 ![dd_opearation_completion_result](assets/tutorial2/dd_opearation_completion_result.png)
 
-**Figure 29:** Progress of Creating Bootable OS on microSD
+**Figure 28:** Progress of Creating Bootable OS on microSD
 
 After the dd operation completes, you should see the Raspbian bootable OS successfully transferred over to the SD card.
 
@@ -500,7 +481,7 @@ bcm2708-rpi-b-plus.dtb  bcm2710-rpi-cm3.dtb   fixup_cd.dat  kernel7.img   start_
 bcm2708-rpi-b.dtb       bootcode.bin          fixup_db.dat  overlays      start_x.elf
 ~~~
 
-**Figure 30:** Create SSH file to Enable SSH Access to Raspberry Pi
+**Figure 29:** Create SSH file to Enable SSH Access to Raspberry Pi
 
 > Note: the path to the SD card is `/Volumes/boot`. `touch ssh` creates a new file. `ls -ltr` verifies new file was created.
 
@@ -508,13 +489,13 @@ bcm2708-rpi-b.dtb       bootcode.bin          fixup_db.dat  overlays      start_
 
 ![microsd_inserted_to_rpi](assets/tutorial2/microsd_inserted_to_rpi.png)
 
-**Figure 31:** MicroSD Inserted into Raspberry Pi
+**Figure 30:** MicroSD Inserted into Raspberry Pi
 
 7\. Connect ethernet cable to the Raspberry Pi to give it internet access, connect the 5V for power and the Pi should start up.
 
 ![power-ethernet_rpi](assets/tutorial2/power-ethernet_rpi.png)
 
-**Figure 32:** Raspberry Pi Ethernet Cable Connected for Internet Access
+**Figure 31:** Raspberry Pi Ethernet Cable Connected for Internet Access
 
 The Pi's default login credentials:
 
