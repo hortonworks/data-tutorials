@@ -22,7 +22,7 @@ In the previous tutorial, you transported raw sensor data from MiNiFi to HDF NiF
 
 ### Step 1: Create HBase Table "sense_hat_logs"
 
-1\. Access HDP Sandbox shell using Web Shell Client at `sandbox-hdp.hortonworks.com:4200`.
+1\. Access HDP Sandbox shell using Web Shell Client at http://sandbox-hdp.hortonworks.com:4200.
 
 > Note: user/password is root and whatever string you set your password to.
 
