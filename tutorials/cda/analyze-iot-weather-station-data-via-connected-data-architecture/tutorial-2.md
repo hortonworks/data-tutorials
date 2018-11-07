@@ -295,7 +295,7 @@ If you need help setting the Ambari admin password,
 If unsure, login to Ambari **admin** Dashboard
 
 - for HDF at http://sandbox-hdf.hortonworks.com:8080 and verify **NiFi** starts up, else start it.
-- for HDP at http://sandbox-hdp.hortonworks.com:8080 and verify **HDFS**, **Spark2**, **HBase** and **Zeppelin** starts up, else start them.
+- for HDP at http://sandbox-hdp.hortonworks.com:8080 and verify **HDFS**, **HBase** and **Zeppelin** starts up, else start them.
 
 ### Step 5: Configure NiFi via HDF's Ambari
 
