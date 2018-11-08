@@ -9,6 +9,11 @@ title: Querying Data from Druid
 You will learn to write Druid JSON-based queries. We will use Zeppelin to write
 the Druid queries and run them against our **wikipedia** datasource.
 
+## Prerequisites
+
+- Setup the Development Environment
+- Loading Batch Data into Druid
+
 ## Outline
 
 - [Query Data with JSON-based Queries](#query-data-with-json-based-queries)
