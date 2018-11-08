@@ -8,22 +8,17 @@ title: Setting Up Development Environment
 
 In this tutorial, you will verify your sandbox IP is mapped to your desired hostname, your admin password is setup, all services not needed are turned off and Druid is turned on.
 
+## Prerequisites
+
+- Map Sandbox IP to hostname, if you need help, reference **Environment
+Setup -> Map Sandbox IP To Your Desired Hostname In The Hosts File** in [Learning the Ropes of HDP Sandbox](https://hortonworks.com/tutorial/learning-the-ropes-of-the-hortonworks-sandbox/)
+- Set the Ambari admin password for HDP, if you need help, reference **Admin Password Reset** in [Learning the Ropes of HDP Sandbox](https://hortonworks.com/tutorial/learning-the-ropes-of-the-hortonworks-sandbox/)
+
 ## Outline
 
-- [Map sandbox IP to desired hostname in hosts file](#map-sandbox-ip-to-desired-hostname-in-hosts-file)
-- [Setup Ambari admin password](#setup-ambari-admin-password)
 - [Start up all required services](#start-up-all-required-services)
 - [Summary](#summary)
 - [Further Reading](#further-reading)
-
-### Map sandbox IP to desired hostname in hosts file
-
-If you need help mapping Sandbox IP to hostname, reference **Environment
-Setup -> Map Sandbox IP To Your Desired Hostname In The Hosts File** in [Learning the Ropes of HDP Sandbox](https://hortonworks.com/tutorial/learning-the-ropes-of-the-hortonworks-sandbox/)
-
-### Setup Ambari admin password
-
-If you need help setting the Ambari admin password, for HDP, reference **Admin Password Reset** in [Learning the Ropes of HDP Sandbox](https://hortonworks.com/tutorial/learning-the-ropes-of-the-hortonworks-sandbox/)
 
 ### Start up all required services
 

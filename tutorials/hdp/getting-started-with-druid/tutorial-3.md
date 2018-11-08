@@ -6,7 +6,7 @@ title: Loading Batch Data into Druid
 
 ## Introduction
 
-You will learn to write a Hadoop-based Ingestion Spec and run the Ingestion Task with that specification to load the `wikiticker` data into Druid on HDP.
+You will learn to write a Hadoop-based Ingestion Spec and run the Ingestion Task with that specification to load the **wikiticker** data into Druid on HDP.
 
 ## Prerequisites
 
@@ -16,10 +16,10 @@ You will learn to write a Hadoop-based Ingestion Spec and run the Ingestion Task
 
 - [Step 1: Analyzing the Dataset](#step-1-analyzing-the-dataset)
 - [Step 2: Writing an Ingestion Spec](#step-2-writing-an-ingestion-spec)
-- [Step 3: Saving the Ingestion Spec](#step-3-saving-the-ingestion-spec)
-- [Step 4: Running the Task](#step-4-running-the-task)
+- [Step 3: Running the Task](#step-3-running-the-task)
 - [Summary](#summary)
 - [Further Reading](#Further-reading)
+- [Appendix A: Breakdown of Ingestion Spec](#appendix-a-breakdown-of-ingestion-spec)
 
 ## Step 1: Analyzing the Dataset
 
@@ -120,7 +120,23 @@ Now that we analyzed our dataset and separated into **timestamp**, **dimensions*
 
 ## Step 2: Writing an Ingestion Spec
 
-Open your HDP Web Shell Client at http://sandbox-hdp.hortonworks.com:4200 Create `/tmp/wikiticker-index.json` using the following command:
+Open your HDP Web Shell Client at http://sandbox-hdp.hortonworks.com:4200
+
+There are two approaches, you could go with **approach 1** and use wget to download the ingestion spec directly into sandbox or you could go with **approach 2** to copy the ingestion spec into the text editor.
+
+### Approach 1: Download Ingestion Spec
+
+~~~bash
+wget https://raw.githubusercontent.com/hortonworks/data-tutorials/73dfff5c49d732c692d135cb6b572f6ec2783f73/tutorials/hdp/getting-started-with-druid/assets/druid-spec/wikiticker-index.json
+
+mv wikiticker-index.json /tmp
+~~~
+
+Now you have the ingestion spec, jump to step 3.
+
+### Approach 2: Manually Create Ingestion Spec
+
+Create `/tmp/wikiticker-index.json` using the following command:
 
 ~~~bash
 touch /tmp/wikiticker-index.json
@@ -133,6 +149,166 @@ For example, if using vi editor:
 ~~~bash
 vi /tmp/wikiticker-index.json
 ~~~
+
+Copy and paste the following ingestion spec:
+
+~~~json
+{
+    "type" : "index_hadoop",
+    "spec" : {
+      "dataSchema" : {
+        "dataSource" : "wikipedia",
+        "parser" : {
+          "type" : "hadoopyString",
+          "parseSpec" : {
+            "format" : "json",
+            "timestampSpec" : {
+              "format" : "auto",
+              "column" : "time"
+            },            
+            "dimensionsSpec" : {
+              "dimensions" : [
+                "channel",
+                "cityName",
+                "comment",
+                "countryIsoCode",
+                "countryName",
+                "isAnonymous",
+                "isMinor",
+                "isNew",
+                "isRobot",
+                "isUnpatrolled",
+                "metroCode",
+                "namespace",
+                "page",
+                "regionIsoCode",
+                "regionName",
+                "user"
+              ]
+            }
+          }
+        },
+        "metricsSpec" : [
+          {
+            "name" : "count",
+            "type" : "count"
+          },
+          {
+            "name" : "added",
+            "type" : "longSum",
+            "fieldName" : "added"
+          },
+          {
+            "name" : "deleted",
+            "type" : "longSum",
+            "fieldName" : "deleted"
+          },
+          {
+            "name" : "delta",
+            "type" : "longSum",
+            "fieldName" : "delta"
+          },
+          {
+            "name" : "user_unique",
+            "type" : "hyperUnique",
+            "fieldName" : "user"
+          }
+        ],
+        "granularitySpec" : {
+          "type" : "uniform",
+          "segmentGranularity" : "day",
+          "queryGranularity" : "none",
+          "intervals" : ["2015-09-12/2015-09-13"]
+        }        
+      },
+      "ioConfig" : {
+        "type" : "hadoop",
+        "inputSpec" : {
+          "type" : "static",
+          "paths" : "quickstart/wikiticker-2015-09-12-sampled.json.gz"
+        }
+      },      
+      "tuningConfig" : {
+        "type" : "hadoop",
+        "partitionsSpec" : {
+          "type" : "hashed",
+          "targetPartitionSize" : 5000000
+        },
+        "jobProperties" : {}
+      }
+    }
+}
+~~~
+
+You just finished writing the Druid Ingestion Spec.
+
+### Saving the Ingestion Spec
+
+1\. Save the ingestion spec file.
+
+For example, with the file open in vi editor:
+
+~~~bash
+press "esc" to escape, then type ":wq" and press enter to quit and save the file.
+~~~
+
+We just wrote up our Hadoop-based Ingestion Spec, now we are ready to run it as a task.
+
+## Step 3: Running the Task
+
+We must make sure that our indexing task can read our **wikiticker-2015-09-12-sampled.json.gz** data on HDFS.
+
+Since we installed Druid on HDP, it is connected to Hadoop, so we can upload wikiticker-2015-09-12-sampled.json.gz to HDFS.
+
+1\. Let's create the following HDFS directory:
+
+~~~bash
+su druid
+hdfs dfs -mkdir -p /user/druid/quickstart
+~~~
+
+2\. Let's upload the json data file to HDFS:
+
+~~~bash
+hdfs dfs -put /usr/hdp/3.0.1.0-187/druid/quickstart/wikiticker-2015-09-12-sampled.json.gz /user/druid/quickstart/
+hdfs dfs -chmod -R 777 /user/druid
+exit
+~~~
+
+3\. Let's kickoff the indexing process by sending a POST request to Druid Overlord:
+
+~~~bash
+curl -X 'POST' -H 'Content-Type:application/json' -d @/tmp/wikiticker-index.json http://sandbox-hdp.hortonworks.com:8090/druid/indexer/v1/task
+~~~
+
+Open Druid Overload at http://sandbox-hdp.hortonworks.com:8090/console.html. Task will appear under running tasks:
+
+![wikiticker-running-tasks](assets/images/wikiticker-running-task.jpg)
+
+> Note: It will take around 5 - 15 minutes for the task to complete.
+
+If all goes well with this task, then it should finish with the **status SUCCEEDED** in Druid Overlord UI. Visit "Task log" to troubleshoot problems if anything goes wrong.
+
+![wikiticker-completed-task](assets/images/wikiticker-completed-task.jpg)
+
+Head to the Druid Coordinator UI at http://sandbox-hdp.hortonworks.com:8081/#/ and you should see the **wikipedia** datasource.
+
+![wikipedia-datasource](assets/images/wikipedia-datasource.jpg)
+
+## Summary
+
+Congratulations! You learned to analyze your dataset to separate out the **timestamp**, **dimensions** and **metrics**, wrote a **Druid Ingestion Spec** utilizing the data found in the analysis of the dataset, submitted the spec to Druid Overlord to specify how you want the Hadoop-based index task to be configured when it is run and **ingested batch data into the Druid datastore**. In the next tutorial, you will learn to create json files to query the data in Druid.
+
+## Further Reading
+
+- [Loading Data into Druid](http://druid.io/docs/latest/tutorials/ingestion.html)
+- [Load Your Own Batch Data into Druid](http://druid.io/docs/latest/tutorials/tutorial-batch.html)
+- [Hadoop-Based Batch Ingestion Spec](http://druid.io/docs/latest/ingestion/batch-ingestion.html)
+- [Druid Ingestion Spec](http://druid.io/docs/latest/ingestion/index.html)
+- [Data Formats for Druid Data Ingestion](http://druid.io/docs/latest/ingestion/data-formats.html)
+- [Introduction to Indexing, Aggregation and Querying in Druid](https://zcox.wordpress.com/2015/04/05/introduction-to-indexing-aggregation-and-querying-in-druid/)
+
+## Appendix A: Breakdown of Ingestion Spec
 
 ### Hadoop-based Batch Ingestion
 
@@ -206,7 +382,7 @@ The Druid ingestion **[spec](http://druid.io/docs/latest/ingestion/index.html)**
 
 The Druid **dataSchema** includes 4 fields:
 
-- **dataSource(String)** - the name of the ingested data file and can be interpreted as a table. In our case, we are calling our dataSource by `wikiticker` cause that is the name of our dataset.
+- **dataSource(String)** - the name of the ingested data file and can be interpreted as a table. In our case, we are calling our dataSource by **wikiticker** cause that is the name of our dataset.
 
 - **parser(JSON Object)** - identifies how ingested data can be analyzed into logical syntactic components (ex: string parser would analyze each row in the data file and find a list of strings separated by spaces, commas, etc).
 
@@ -247,7 +423,7 @@ The Druid **dataSchema** includes 4 fields:
 
 The Druid **parser** includes 2 fields:
 
-- **type** - the type of parser to use, in the above code, we use `hadoopyString` Parser for our Hadoop indexing job.
+- **type** - the type of parser to use, in the above code, we use **hadoopyString** Parser for our Hadoop indexing job.
 
 - **parseSpec** - indentifies the format, timestamp and dimensions of the data.
 
@@ -292,7 +468,7 @@ The purpose of the **parseSpec** is to determine the format of incoming rows fro
 
 For the Druid **parseSpec**, we use 3 fields:
 
-- **format** - specifies the data format type of our file, we select json for our format due to `wikiticker-2015-09-12-sampled.json.gz` being a json file. If format is not specified, by default it will set to tsv. **NOTE:** if your data file is in CSV or TSV and your file's first row doesn't have headers, then you will need to include a **columns** field in **parseSpec**.
+- **format** - specifies the data format type of our file, we select json for our format due to **wikiticker-2015-09-12-sampled.json.gz** being a json file. If format is not specified, by default it will set to tsv. **NOTE:** if your data file is in CSV or TSV and your file's first row doesn't have headers, then you will need to include a **columns** field in **parseSpec**.
 
 - **timestampSpec** - identifies the column and format of the timestamp.
 
@@ -340,7 +516,7 @@ For the Druid **parseSpec**, we use 3 fields:
 
 For the Druid **timestampSpec** field, we use 2 fields:
 
-- **format** - specifies the format our timestamp is in. We chose `auto` format to automatically identify the timestamp.
+- **format** - specifies the format our timestamp is in. We chose **auto** format to automatically identify the timestamp.
 
 - **column** - specifies the column the timestamp can be found in. In our case, we tell the parser to look at the **time** column to get the timestamp.
 
@@ -401,7 +577,7 @@ For the Druid **timestampSpec** field, we use 2 fields:
 
 For the Druid **dimensionSpec**, we use 1 field:
 
-- **dimensions** - a list of String-typed `dimension schema` objects denoted by their particular name. If this is an empty array, Druid will treat all columns as String-typed dimension columns except for ones that were marked under timestamp and metrics.
+- **dimensions** - a list of String-typed **dimension schema** objects denoted by their particular name. If this is an empty array, Druid will treat all columns as String-typed dimension columns except for ones that were marked under timestamp and metrics.
 
 In our case, we added
 
@@ -426,11 +602,11 @@ In our case, we added
 ]
 ~~~
 
-into the dimensions field because these objects are denoted as String-typed in our `wikiticker-2015-09-12-sampled.json` dataset.
+into the dimensions field because these objects are denoted as String-typed in our **wikiticker-2015-09-12-sampled.json** dataset.
 
 **Dimension Schema**
 
-- the `dimensionSpec` from the dataSchema ingests all columns as Strings under the `dimensions` field.
+- the **dimensionSpec** from the dataSchema ingests all columns as Strings under the **dimensions** field.
 
 ### Add "dataSchema" -> "metricsSpec"
 
@@ -524,7 +700,7 @@ For the Druid **metricsSpec**, we use 3 **[aggregators](http://druid.io/docs/lat
 }
 ~~~
 
-- **longSum Aggregator** - calculates the sum of values as a 64 bit signed integer. `name` is the output name for the summed result and `fieldName` is the name of the metric column to sum over
+- **longSum Aggregator** - calculates the sum of values as a 64 bit signed integer. **name** is the output name for the summed result and **fieldName** is the name of the metric column to sum over
 
 ~~~json
     "_comment" : "definition of longSum aggregator"
@@ -535,7 +711,7 @@ For the Druid **metricsSpec**, we use 3 **[aggregators](http://druid.io/docs/lat
     }
 ~~~
 
-In our case we want to compute the sum of all our metric column `added` values from our `wikiticker-2015-09-12-sampled.json` dataset and then store the result into the output name `added`.
+In our case we want to compute the sum of all our metric column **added** values from our **wikiticker-2015-09-12-sampled.json** dataset and then store the result into the output name **added**.
 
 ~~~json
     "_comment" : "from our json file, longSum aggregator"
@@ -546,7 +722,7 @@ In our case we want to compute the sum of all our metric column `added` values f
     }
 ~~~
 
-The same idea can be applied to the `deleted` and `delta` metric column in which all deleted key values in our dataset are computed for the sum, then stored into the output name `deleted` and `delta`.
+The same idea can be applied to the **deleted** and **delta** metric column in which all deleted key values in our dataset are computed for the sum, then stored into the output name **deleted** and **delta**.
 
 - **HyperUnique Aggregator** - computes the estimated number of elements that were added to a set gathered at "hyperUnique" metric at indexing time.
 
@@ -559,7 +735,7 @@ The same idea can be applied to the `deleted` and `delta` metric column in which
     }
 ~~~
 
-In our case, we are estimating the number of unique `users` within the wikiticker dataset in each day period, then storing it into output name `user_unique`.
+In our case, we are estimating the number of unique **users** within the wikiticker dataset in each day period, then storing it into output name **user_unique**.
 
 ~~~json
     "_comment" : "from our json file, hyperUnique aggregator"
@@ -653,7 +829,7 @@ In our case, we are estimating the number of unique `users` within the wikiticke
 
 For the **granularitySpec**, we have 4 fields:
 
-- **type** - specifies what type of interval segments will be generated. In our case, we set it to be `uniform`.
+- **type** - specifies what type of interval segments will be generated. In our case, we set it to be **uniform**.
 
 - **segmentGranularity** - specifies the granularity to create segments at. In our case, we specify segments will be created per day.
 
@@ -667,7 +843,7 @@ For the **granularitySpec**, we have 4 fields:
 "queryGranularity" : "none"
 ~~~
 
-- **intervals** - specifies the intervals for raw data to be ingested. In our case, `"2015-09-12/2015-09-13"`, we specify data will be ingested just for 1 day period. If we change the interval, we can ingest data over the span of a 30 day period, etc.
+- **intervals** - specifies the intervals for raw data to be ingested. In our case, **"2015-09-12/2015-09-13"**, we specify data will be ingested just for 1 day period. If we change the interval, we can ingest data over the span of a 30 day period, etc.
 
 ~~~json
 "intervals" : ["2015-09-12/2015-09-13"]
@@ -1061,74 +1237,6 @@ We use hash partitioning. An advantage by using this approach is that it improve
 
 For **partitionsSpec**, we use 2 fields:
 
-- **type** - partitionSpec type that will be used. We used `hashed` partitioning. Hash Partitioning means first the number of segments will be selected, then rows will be partitioned across those segments based on the hash of all dimensions in each row.
+- **type** - partitionSpec type that will be used. We used **hashed** partitioning. Hash Partitioning means first the number of segments will be selected, then rows will be partitioned across those segments based on the hash of all dimensions in each row.
 
 - **targetPartitionSize** - is the number of rows to include in a partition. We used 5000000 bytes, which is 5MB.
-
-You just finished writing the Druid Ingestion Spec.
-
-### Step 3: Saving the Ingestion Spec
-
-1\. Save the ingestion spec file.
-
-For example, with the file open in vi editor:
-
-~~~bash
-press "esc" to escape, then type ":wq" and press enter to quit and save the file.
-~~~
-
-We just wrote up our Hadoop-based Ingestion Spec, now we are ready to run it as a task.
-
-## Step 4: Running the Task
-
-We must make sure that our indexing task can read our `wikiticker-2015-09-12-sampled.json.gz` data on HDFS.
-
-Since we installed Druid on HDP, it is connected to Hadoop, so we can upload wikiticker-2015-09-12-sampled.json.gz to HDFS.
-
-1\. Let's create the following HDFS directory:
-
-~~~bash
-su druid
-hdfs dfs -mkdir -p /user/druid/quickstart
-~~~
-
-2\. Let's upload the json data file to HDFS:
-
-~~~bash
-hdfs dfs -put /usr/hdp/3.0.1.0-187/druid/quickstart/wikiticker-2015-09-12-sampled.json.gz /user/druid/quickstart/
-hdfs dfs -chmod -R 777 /user/druid
-exit
-~~~
-
-3\. Let's kickoff the indexing process by sending a POST request to Druid Overlord:
-
-~~~bash
-curl -X 'POST' -H 'Content-Type:application/json' -d @/tmp/wikiticker-index.json http://sandbox-hdp.hortonworks.com:8090/druid/indexer/v1/task
-~~~
-
-Open Druid Overload at http://sandbox-hdp.hortonworks.com:8090/console.html. Task will appear under running tasks:
-
-![wikiticker-running-tasks](assets/images/wikiticker-running-task.jpg)
-
-> Note: It will take around 5 - 15 minutes for the task to complete.
-
-If all goes well with this task, then it should finish with the **status SUCCEEDED** in Druid Overlord UI. Visit "Task log" to troubleshoot problems if anything goes wrong.
-
-![wikiticker-completed-task](assets/images/wikiticker-completed-task.jpg)
-
-Head to the Druid Coordinator UI at http://sandbox-hdp.hortonworks.com:8081/#/ and you should see the **wikipedia** datasource.
-
-![wikipedia-datasource](assets/images/wikipedia-datasource.jpg)
-
-## Summary
-
-Congratulations! You learned to analyze your dataset to separate out the **timestamp**, **dimensions** and **metrics**, wrote a **Druid Ingestion Spec** utilizing the data found in the analysis of the dataset, submitted the spec to Druid Overlord to specify how you want the Hadoop-based index task to be configured when it is run and **ingested batch data into the Druid datastore**. In the next tutorial, you will learn to create json files to query the data in Druid.
-
-## Further Reading
-
-- [Loading Data into Druid](http://druid.io/docs/latest/tutorials/ingestion.html)
-- [Load Your Own Batch Data into Druid](http://druid.io/docs/latest/tutorials/tutorial-batch.html)
-- [Hadoop-Based Batch Ingestion Spec](http://druid.io/docs/latest/ingestion/batch-ingestion.html)
-- [Druid Ingestion Spec](http://druid.io/docs/latest/ingestion/index.html)
-- [Data Formats for Druid Data Ingestion](http://druid.io/docs/latest/ingestion/data-formats.html)
-- [Introduction to Indexing, Aggregation and Querying in Druid](https://zcox.wordpress.com/2015/04/05/introduction-to-indexing-aggregation-and-querying-in-druid/)

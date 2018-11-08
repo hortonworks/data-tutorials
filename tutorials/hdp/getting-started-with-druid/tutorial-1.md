@@ -101,24 +101,24 @@ result to the broker node and the event will be visible on the dashboard.
 tasks will create a column oriented format, which is known as a Druid segment.
 Segments will be handed off to deep storage.
 
-5\. Deep storage could be any distributed file system, which is used as a
+> Note: Deep storage could be any distributed file system, which is used as a
 permanent backup of your data segments.
 
-6\. Once the data is present in deep storage, it is then loaded onto the historical
+5\. Once the data is present in deep storage, it is then loaded onto the historical
 nodes. After the data is loaded onto the historical nodes, the indexing tasks
 will see the segments have been loaded onto the historical nodes, so the
 indexing tasks drops the segments from its memory.
 
-7\. Thus, if a query comes, it will be served from the historical nodes.
+> Note: Thus, if a query comes, it will be served from the historical nodes.
 
-8\. Druid leverages Coordinator nodes to manage where the segments needs to be loaded.
+6\. Druid leverages Coordinator nodes to manage where the segments needs to be loaded.
 They are responsible for coordinating your data across different
 historical nodes. Coordinator nodes are also responsible for handling data
 replication. You can have configurable rules for loading your data. For
 instance, I could set a rule that makes sure only 1 month old data is loaded on
 the historical nodes with the Coordinator nodes.
 
-9\. Zookeeper is used for doing internal communication and leader elections and
+7\. Zookeeper is used for doing internal communication and leader elections and
 fail overs.
 
 10\. There is an external dependency on a metadata store. It can be MySQL or
@@ -233,7 +233,7 @@ ingestion.
 
 Realtime index tasks have the ability to ingest streaming data. These tasks
 store the data in row format, auto converts the data into Druid segments and
-hands it over to the Historical nodes. The event is query-able once it reaches
+hands it over to the Historical nodes. The event is queryable once it reaches
 the realtime index task. These tasks support pull based and push based
 ingestion (firehose).
 

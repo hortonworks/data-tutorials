@@ -17,11 +17,11 @@ series: HDP > Develop with Hadoop > Druid
 
 ## Introduction
 
-In this tutorial, we will install Druid onto HDP Sandbox using the Ambari Install Wizard, then use the Wikipedia sample dataset of 2015 that comes with Druid after installation to store data into Druid and then query the data to answer questions.
+In this tutorial, we will use the Wikipedia sample dataset of 2015 that comes with Druid after installation to store data into Druid and then query the data to answer questions.
 
 ## Prerequisites
 
-- Installed [Hortonworks Data Platform (HDP) Sandbox](https://hortonworks.com/downloads/#sandbox)
+- Downloaded and deployed the [Hortonworks Data Platform (HDP)](https://hortonworks.com/downloads/#sandbox) Sandbox
 - 16GB of RAM dedicated for the Sandbox
 
 ## Goals and Objectives
