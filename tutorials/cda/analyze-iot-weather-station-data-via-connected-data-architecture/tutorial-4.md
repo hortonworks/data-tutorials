@@ -10,7 +10,8 @@ In the previous tutorial, you transported raw sensor data from MiNiFi to HDF NiF
 
 ## Prerequisites
 
-- Completed previous tutorials in the series
+- Deploy IoT Weather Station and Connected Data Architecture
+- Collect Sense HAT Weather Data via CDA
 
 ## Outline
 
@@ -51,7 +52,7 @@ step-by-step each component within the NiFi flow to see how the flow was built.
 
 1\. Download the [WeatherDataMiNiFiToHbase.xml](assets/tutorial4/WeatherDataMiNiFiToHbase.xml) template file onto your computer.
 
-2\. Head to NiFi UI at `sandbox-hdf.hortonworks.com:9090/nifi`.
+2\. Head to NiFi UI at http://sandbox-hdf.hortonworks.com:9090/nifi.
 
 3\. Use the template icon ![nifi_template_icon](assets/tutorial4/nifi_template_icon.png) located in the Operate Palette.
 
@@ -59,21 +60,21 @@ step-by-step each component within the NiFi flow to see how the flow was built.
 
 4\. From the **Components Toolbar**, drag the template icon ![nifi_template_icon](assets/tutorial4/add_nifi_template.png) onto the graph and select the **WeatherDataMiNiFiToHBase** template file.
 
-5\. Remove the queue between `Copy of From_MiNiFi` and `PreProcessDataForHBaseAndHadoop` by right clicking on the queue, then select **Delete**.
+5\. Remove the queue between **Copy of From_MiNiFi** and **PreProcessDataForHBaseAndHadoop** by right clicking on the queue, then select **Delete**.
 
 ![remove_queue_ingestrawdata](assets/tutorial4/remove_queue_ingestrawdata.png)
 
 **Figure 1:** Removing Queue and then Input Port
 
-6\. Remove `Copy of From_MiNiFi` input port by right clicking on it, select **Delete**.
+6\. Remove **Copy of From_MiNiFi** input port by right clicking on it, select **Delete**.
 
-7\. Connect `From_MiNiFi` input port to `PreProcessDataForHBaseAndHadoop` Process Group. When the **Create Connection** window appears, select **ADD**.
+7\. Connect **From_MiNiFi** input port to **PreProcessDataForHBaseAndHadoop** Process Group. When the **Create Connection** window appears, select **ADD**.
 
 ![connect_inputport_to_new_flow](assets/tutorial4/connect_inputport_to_new_flow.png)
 
 **Figure 2:** Connected From_MiNiFi input port to Process Group
 
-8\. Enter into `PreProcessDataForHBaseAndHadoop` Process Group by double clicking on it.
+8\. Enter into **PreProcessDataForHBaseAndHadoop** Process Group by double clicking on it.
 
 ![PreProcessDataForHBaseAndHadoop_dataflow](assets/tutorial4/PreProcessDataForHBaseAndHadoop_dataflow.png)
 
@@ -125,9 +126,9 @@ Click on the **X** button in the top right corner. We will walkthrough the GeoEn
 
 13\. Analyze the enhanced GeoEnriched NiFi flow:
 
-- **Input Port**: `From_MiNiFi` ingests sensor data from MiNiFi agent running on the Raspberry Pi. This port name must match the name specified by the input port relationship attribute on the MiNiFi remote process group, else NiFi won’t receive data from MiNiFi. `From_MiNiFi` sends raw weather data to an HDFS folder and to `PreProcessDataForHBaseAndHadoop` Process Group.
+- **Input Port**: **From_MiNiFi** ingests sensor data from MiNiFi agent running on the Raspberry Pi. This port name must match the name specified by the input port relationship attribute on the MiNiFi remote process group, else NiFi won’t receive data from MiNiFi. **From_MiNiFi** sends raw weather data to an HDFS folder and to **PreProcessDataForHBaseAndHadoop** Process Group.
 
-- **PutHDFS**: the first PutHDFS processor directory connected to `From_MiNiFi` stores raw weather data into HDP HDFS folder `/sandbox/tutorial-files/820/nifi/output/raw-data`.
+- **PutHDFS**: the first PutHDFS processor directory connected to **From_MiNiFi** stores raw weather data into HDP HDFS folder `/sandbox/tutorial-files/820/nifi/output/raw-data`.
 
 | Property | Value    |
 | :-------------: | :-------------: |
@@ -146,7 +147,7 @@ Click on the **X** button in the top right corner. We will walkthrough the GeoEn
 | UpdateAttribute | Updates every data filename with a unique name |
 | Output Port | sendProcessedData outputs data back out to external NiFi level (NiFi Flow) |
 
-- **ExtractText**: Extracts values from text using java regex expression and stores those values into attributes. Sends the data to the rest of the flow only when the regex expressions have matches. `Include Capture Group 0` set to false ensures each regular expression only has a single group to avoid duplicate values with `<attribute-name>.0`.
+- **ExtractText**: Extracts values from text using java regex expression and stores those values into attributes. Sends the data to the rest of the flow only when the regex expressions have matches. **Include Capture Group 0** set to false ensures each regular expression only has a single group to avoid duplicate values with **<attribute-name>.0**.
 
 | Property | Value    |
 | :-------------: | :-------------: |
@@ -230,7 +231,7 @@ Here is the NiFi Expressions used to establish the conditions for each FlowFile 
 
 ### Step 3: Verify HBase Table Populated
 
-1\. Navigate back to HDP Web Shell Client at `sandbox-hdp.hortonworks.com:4200`
+1\. Navigate back to HDP Web Shell Client at http://sandbox-hdp.hortonworks.com:4200
 
 > Note: user/password is root and whatever string you set your password to.
 
