@@ -8,26 +8,24 @@ title: Setting up the Development Environment
 
 In this tutorial, you will verify your sandbox IP is mapped to your desired hostname, your admin password is setup and the services that need to be on are activated.
 
+## Prerequisites
+
+- **Map HDP Sandbox IP to hostname**, if you need help, reference **Learning the Ropes of the HDP Sandbox** tutorial section [ENVIRONMENT SETUP](https://hortonworks.com/tutorial/learning-the-ropes-of-the-hortonworks-sandbox/#environment-setup), go to Map Sandbox IP To Your Desired Hostname In The Hosts File in that tutorial
+
+- **Map HDF Sandbox IP to hostname**, if you need help, reference **Learning the Ropes of the HDF Sandbox** tutorial section [ENVIRONMENT SETUP](https://hortonworks.com/tutorial/getting-started-with-hdf-sandbox/#environment-setup), go to Map Sandbox IP To Your Desired Hostname In The Hosts File in that tutorial
+
+- **Set the Ambari admin password for HDP**, if you need help, reference **Learning the Ropes of the HDP Sandbox** tutorial section [Admin Password Reset](https://hortonworks.com/tutorial/learning-the-ropes-of-the-hortonworks-sandbox/#admin-password-reset)
+
+- **Set the Ambari admin password for HDF**, if you need help, reference **Learning the Ropes of the HDF Sandbox** tutorial section [Learning the Ropes of HDF Sandbox](https://hortonworks.com/tutorial/getting-started-with-hdf-sandbox/#admin-password-reset)
+
+- **Need to have data present in Druid**. You will need to leverage **Real-Time Event Processing In NiFi, SAM, Schema Registry and SuperSet** tutorial to setup the SAM data pipeline to store data into Druid, refer to [Appendix A](https://hortonworks.com/tutorial/real-time-event-processing-in-nifi-sam-schema-registry-and-superset/#appendix-a-visualize-trucking-data-with-superset-via-cda). All you need to do is step 1 and step 2 in **Appendix A**.
+
 ## Outline
 
-- [Map sandbox IP to desired hostname in hosts file](#map-sandbox-ip-to-desired-hostname-in-hosts-file)
-- [Setup Ambari admin password for HDF and HDP](#setup-ambari-admin-password-for-hdf-and-hdp)
 - [Start up all required services](#start-up-all-required-services)
 - [Setup Druid for Superset](#setup-druid-for-superset)
 - [Summary](#summary)
 - [Further Reading](#further-reading)
-
-### Map sandbox IP to desired hostname in hosts file
-
-If you need help mapping Sandbox IP to hostname, reference **Environment
-Setup -> Map Sandbox IP To Your Desired Hostname In The Hosts File** in [Learning the Ropes of HDP Sandbox](https://hortonworks.com/tutorial/learning-the-ropes-of-the-hortonworks-sandbox/)
-
-### Setup Ambari admin password for HDF and HDP
-
-If you need help setting the Ambari admin password,
-
-- for HDP, reference **Admin Password Reset** in [Learning the Ropes of HDP Sandbox](https://hortonworks.com/tutorial/learning-the-ropes-of-the-hortonworks-sandbox/)
-- for HDF, reference **Admin Password Reset** in [Learning the Ropes of HDF Sandbox](https://hortonworks.com/tutorial/getting-started-with-hdf-sandbox/)
 
 ### Started up all required services for HDF and HDP
 
@@ -46,14 +44,9 @@ After starting Druid and Superset, your Background Operations would look similar
 
 ### Setup Druid for Superset
 
-Before we can visualize data from Druid using Superset, first we need to have
-data present in Druid. We will leverage the content from another tutorial to
-setup the SAM data pipeline to store data into Druid. Refer to [Appendix A](https://hortonworks.com/tutorial/real-time-event-processing-in-nifi-sam-schema-registry-and-superset/#appendix-a-visualize-trucking-data-with-superset-via-cda) in
-Real-Time Event Processing In NiFi, SAM, Schema Registry and SuperSet tutorial.
-
-All you need to do is step 1 and step 2 in Appendix A. We will include reference
-images of what will need to be started in the data pipeline to get the data into
-Druid.
+We include reference images of what needs to be started in the data
+pipeline to get the data into Druid. You should have already done this step,
+which was pointed out in the **prerequisites**.
 
 1\. In the NiFi canvas http://sandbox-hdf.hortonworks.com:9090/nifi, start the
 NiFi DataFlow by pressing the green start button in the operate panel.
