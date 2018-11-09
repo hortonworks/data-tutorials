@@ -104,14 +104,14 @@ sudo apt-get update && sudo apt-get install oracle-java8-jdk
 
 1\. Download MiNiFi Java Agent from [Apache nifi minifi Downloads](http://nifi.apache.org/minifi/download.html) under section **Releases -> MiNiFi (Java) -> Binaries**.
 
-2\. Click on `minifi-[latest-version]-bin.zip`, then download MiNiFi from any of the links provided onto your computer.
+2\. Click on **minifi-[latest-version]-bin.zip**, then download MiNiFi from any of the links provided onto your computer.
 
 ![download_links_minifi](assets/tutorial2/download_links_minifi.jpg)
 
 **Figure 8:** Downloading MiNiFi
 
 3\. Use Pi Finder's **Upload** button to transport MiNiFi application onto your
-Raspberry Pi. Select `minifi-[latest-version]-bin.zip` and click **Open**.
+Raspberry Pi. Select **minifi-[latest-version]-bin.zip** and click **Open**.
 
 ![upload_minifi_to_rpi](assets/tutorial2/upload_minifi_to_rpi.jpg)
 
@@ -131,7 +131,7 @@ In this section, you download MiNiFi toolkit onto your computer because it is ne
 
 1\. Download MiNiFi Toolkit from [Apache nifi minifi Downloads](http://nifi.apache.org/minifi/download.html) under section **Releases -> MiNiFi Toolkit Binaries -> [latest-version] - Compatible with MiNiFi Java [latest-version]**.
 
-2\. Click on `minifi-toolkit-[latest-version]-bin.zip` then download MiNiFi Toolkit from any of the links provided onto your computer.
+2\. Click on **minifi-toolkit-[latest-version]-bin.zip** then download MiNiFi Toolkit from any of the links provided onto your computer.
 
 3\. Go to the location where MiNiFi was downloaded and Unzip MiNiFi Toolkit
 using your favorite decompression software:
@@ -158,15 +158,15 @@ SSH into the Raspberry Pi using Adafruit's Pi Finder **Terminal** button.
 
 **Figure 11:** raspi-config main menu
 
-2\. Select `4. Internationalisation Options`. Press "Enter" on keyboard.
+2\. Select **4. Internationalisation Options**. Press "Enter" on keyboard.
 
-3\. Select `I2 Change Timezone`.
+3\. Select **I2 Change Timezone**.
 
 ![change_timezone](assets/tutorial2/change_timezone.png)
 
 **Figure 12:** Internationalisation Options Menu
 
-4\. Select your appropriate `Geographic area`.
+4\. Select your appropriate **Geographic area**.
 
 - Ex: US
 
@@ -174,7 +174,7 @@ SSH into the Raspberry Pi using Adafruit's Pi Finder **Terminal** button.
 
 **Figure 13:** Geographic area Selection Items
 
-5\. Select your appropriate `Time zone`.
+5\. Select your appropriate **Time zone**.
 
 - Ex: Pacific Ocean
 
@@ -182,7 +182,7 @@ SSH into the Raspberry Pi using Adafruit's Pi Finder **Terminal** button.
 
 **Figure 14:** Time Zone Selection Items
 
-6\. You are brought back to the menu. Select `<Finish>`. Your new calibrated time should display:
+6\. You are brought back to the menu. Select **<Finish>**. Your new calibrated time should display:
 
 ![output_calibrated_time](assets/tutorial2/output_calibrated_time.png)
 
@@ -305,15 +305,15 @@ If unsure, login to Ambari **admin** Dashboard
 
 You will configure NiFi Site-To-Site protocol by exposing an IP address and a socket port, so external NiFi nodes or MiNiFi agents can connect to NiFi master node.
 
-Head to `Advanced NiFi-Properties` in Ambari Config Settings for NiFi. Update the following configurations similar to the image below:
+Head to **Advanced NiFi-Properties** in Ambari Config Settings for NiFi. Update the following configurations similar to the image below:
 
 1\. Enter **NiFi Service** in Ambari Stack
 
 2\. Enter **NiFi Configs**
 
-3\. Filter search for **nifi.remote**
+3\. Filter search for `nifi.remote`
 
-4\. Insert `<your-guest-vm-bridged-ip-address>` in **nifi.remote.input.host**. For example, we inserted **10.14.2.223**.
+4\. Insert `<your-guest-vm-bridged-ip-address>` in **nifi.remote.input.host**. For example, we inserted `10.14.2.223`.
 
 5\. Verify **nifi.remote.input.http.enabled** checked
 
