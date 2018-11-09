@@ -737,7 +737,7 @@ curl -L -H 'Content-Type: application/json' -X POST --data-binary @/tmp/sandbox/
 
 You should see similar output:
 
-![segment-output.jpg](assets/images/segment-output)
+![segment-output.jpg](assets/images/segment-output.jpg)
 
 In your console output, notice how all the metadata regarding each column is output onto the screen.
 
