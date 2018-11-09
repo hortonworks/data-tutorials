@@ -193,5 +193,5 @@ We're now familiar with how Apache Superset ties into our Trucking IoT Applicati
 - [Udacity - Data Visualization with Tableau](https://www.udacity.com/course/data-visualization-in-tableau--ud1006)
 - [Udacity - Data Visualization and D3.js](https://www.udacity.com/course/data-visualization-and-d3js--ud507)
 - [Udacity - Intro to Data Science](https://www.udacity.com/course/intro-to-data-science--ud359)
-- [Wikipedia](https://en.wikipedia.org/wiki/Data_visualization)
+- [Data Visualization - Wikipedia](https://en.wikipedia.org/wiki/Data_visualization)
 - [Apache Superset](https://superset.incubator.apache.org/)
