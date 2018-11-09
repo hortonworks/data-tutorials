@@ -14,13 +14,13 @@ In the concepts tutorial, the goal is to provide you with enough background info
 
 ## Outline
 
--   1\. Raspberry Pi
--   2\. HDP + HDF Services
--   3\. IoT Weather Station powered by Connected Data Architecture
+-   Raspberry Pi
+-   HDP + HDF Services
+-   IoT Weather Station powered by Connected Data Architecture
 -   Summary
 -   Further Reading
 
-## 1\. Raspberry Pi
+## Raspberry Pi
 
 ### What is a Raspberry Pi?
 
@@ -54,7 +54,7 @@ The Sense HAT sensor uses I2C, a communication protocol, to transfer data to the
 
 I2C makes it possible to have multiple devices in connection with the Raspberry Pi, each having a unique address and can be set by updating the settings on the Pi. It will be easier to verify everything is working because one can see all the devices connected to the Pi.
 
-## 2\. HDP + HDF Services
+## HDP + HDF Services
 
 ### Apache MiNiFi
 
@@ -98,7 +98,7 @@ Apache Phoenix provides the flexibility of late-bound, schema-on-read capabiliti
 
 Apache Zeppelin is a data science notebook that allows users to use interpreters to visualize their data with line, bar, pie, scatter charts and various other visualizations. The interpreter Phoenix will be used to visualized our weather data.
 
-## 3\. IoT Weather Station powered by Connected Data Architecture
+## IoT Weather Station powered by Connected Data Architecture
 
 We have talked about each component within the project individually, now let's discuss at high level how each component connects to each other.
 
