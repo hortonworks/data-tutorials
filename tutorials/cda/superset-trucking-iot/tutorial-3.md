@@ -8,6 +8,10 @@ title: Visualizing Trucking Data
 
 We know the role data visualization plays in data science applications. Let's use Superset to create some visual representations of the data from the Trucking IoT dataset.
 
+## Prerequisites
+
+- Setting up the Development Environment
+
 ## Outline
 
 - [Create Visualization Slices](#create-visualization-slices)
