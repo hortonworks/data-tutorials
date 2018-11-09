@@ -12,7 +12,7 @@ NiFi on HDF sandbox via Site-to-Site protocol. Finally, you'll verify that NiFi 
 
 ## Prerequisites
 
-- Completed previous tutorials in the series
+- Deploy IoT Weather Station and Connected Data Architecture
 
 ## Outline
 
@@ -111,7 +111,7 @@ as a string.
 ### 1.3: Gather Weather Readings from Sense HAT
 
 Temperature, humidity and barometric pressure are retrieved from the Sense HAT.
-`sense.get_temperature` grabs a temperature reading and stores it into the **temp_c** variable.
+**sense.get_temperature** grabs a temperature reading and stores it into the **temp_c** variable.
 
 ~~~python
 # Attempt to get sensor reading.
@@ -198,7 +198,7 @@ The Public IP address of the Raspberry Pi can be used to determine geographic
 insights, such as the city and state in which that node is logging weather data.
 
 The code extracts the Public IP address via rest call to IPIFY and then parses
-the JSON for `ip` value.
+the JSON for **ip** value.
 
 ~~~python
 # Attempt to get Public IP
@@ -578,7 +578,7 @@ Transport the **config.yml** file from your host machine to your Raspberry Pi.
 
 4\. Press the **Terminal** button on **Pi Finder**:
 
-5\. Write the following command to move `config.yml` to MiNiFi conf folder and
+5\. Write the following command to move **config.yml** to MiNiFi conf folder and
 replace the default config.yml.
 
 ~~~bash
@@ -588,7 +588,7 @@ mv config.yml /home/pi/minifi-[version num]/conf/config.yml
 
 > Ex command: mv config.yml /home/pi/minifi-0.2.0/conf/config.yml
 
-6\. In MiNiFi `bin` directory on Raspberry Pi, start MiNiFi program with the command:
+6\. In MiNiFi **bin** directory on Raspberry Pi, start MiNiFi program with the command:
 
 ~~~bash
 cd minifi-[version num]
@@ -635,7 +635,7 @@ List of all actions occurring on the FlowFiles. As you can see there are FlowFil
 
 ### 3.5: Check Data is Stored into HDFS via HDP Files View
 
-1\. Login to Ambari UI at `sandbox-hdp.hortonworks.com:8080`
+1\. Login to Ambari UI at http://sandbox-hdp.hortonworks.com:8080
 
 > Note: user/password is maria_dev/maria_dev
 
@@ -669,7 +669,7 @@ Congratulations! You just learned how to build dataflows for MiNiFi through usin
 
 If you do not see data flowing into NiFi, the first place to check is the MiNiFi logs.
 
-1\. From your Raspberry Pi, navigate to the MiNiFi `logs` directory and open the `minifi-app.log`:
+1\. From your Raspberry Pi, navigate to the MiNiFi **logs** directory and open the **minifi-app.log**:
 
 ~~~bash
 cd minifi-0.4.0/logs
