@@ -26,13 +26,14 @@ the Druid queries and run them against our **wikipedia** datasource.
 
 ## Query Data with JSON-based Queries
 
-The process of querying the Druid database for information you want is done in a few steps:
+In general, the steps you would take for querying data within Druid include:
 
-- Choose one of [Druid's available queries](http://druid.io/docs/latest/querying/querying.html) for your use case:
+1\. Choose one of [Druid's available queries](http://druid.io/docs/latest/querying/querying.html) for your use case:
     - Aggregation Queries, Metadata Queries, Search Queries
 
-- Construct your JSON-based Query
-- Send a POST Request to Druid Coordinator to execute your Query Request
+2\. Construct your JSON-based Query
+
+3\. Send a POST Request to Druid Coordinator to execute your Query Request
 
 ## Step 1: Run TopN Query to find Most-edited Articles
 
@@ -121,7 +122,7 @@ curl -L -H 'Content-Type: application/json' -X POST --data-binary @$PATH_TO_FILE
 
 ![most-edited-articles-output.jpg](assets/images/most-edited-articles-output.jpg)
 
-In the above query results at **timestamp** `2015-09-12T00:46:58.771Z`: we can see various Wikipedia pages in ascending order for their number of page edits.
+In the above query results at **timestamp** **2015-09-12T00:46:58.771Z**: we can see various Wikipedia pages in ascending order for their number of page edits.
 
 If we look at the first entry returned,
 we see that Wikipedia page **Wikipedia:Vandalismusmeldung** has 33 edits.
@@ -187,7 +188,7 @@ The "query type" we selected to query Druid is the aggregation query:
 }
 ~~~
 
-- **granularity** - defines the how data gets bucked across the time dimension. In our case, we selected `all`, so we will get all the results combined into one bucket.
+- **granularity** - defines the how data gets bucked across the time dimension. In our case, we selected **all**, so we will get all the results combined into one bucket.
 
 ### dimension: "page"
 
@@ -237,7 +238,7 @@ In the next part of the query, we will see what metric we are querying the "page
 }
 ~~~
 
-- **threshold** - an integer that defines the maximum number of items `N` to return after topN list is computed.
+- **threshold** - an integer that defines the maximum number of items **N** to return after topN list is computed.
 
 ### aggregations
 
@@ -268,7 +269,7 @@ Thus, for every page, there will be a result for the number of edits for that pa
 
 ## Summary
 
-Congratulations! You just learned to write a JSON-based TopN query to search for the top Wikipedia page edits in our `wikipedia` dataSource.
+Congratulations! You just learned to write a JSON-based TopN query to search for the top Wikipedia page edits in our **wikipedia** dataSource.
 
 Feel free to check out the appendix for more examples on how to query the dataSource using other Aggregation Queries, Metadata Queries and Search Queries.
 
@@ -281,9 +282,9 @@ Feel free to check out the appendix for more examples on how to query the dataSo
 
 ## Appendix A: Use Druid's other Query Types
 
-Earlier, we learned how to write a JSON-based **TopN** aggregation query to retrieve most edited Wikipedia pages from our `wikipedia` dataSource.
+Earlier, we learned how to write a JSON-based **TopN** aggregation query to retrieve most edited Wikipedia pages from our **wikipedia** dataSource.
 
-In case you may need to use Druid's other query types: Select, Aggregation, Metadata and Search, we put together a summarization of what the query does, an example that can query the `wikipedia` dataSource and the results from after the query is executed.
+In case you may need to use Druid's other query types: Select, Aggregation, Metadata and Search, we put together a summarization of what the query does, an example that can query the **wikipedia** dataSource and the results from after the query is executed.
 
 In the Zeppelin note, add the following title for the extra druid queries we
 will run:
@@ -545,9 +546,9 @@ print(data)
 ~~~
 
 - **"queryType": "groupBy"** - specifies you want Druid to run the groupBy query type
-- **"dataSource": "wikipedia"** - specifies the `wikiticker` set of data will be queried (like a table in relational database)
+- **"dataSource": "wikipedia"** - specifies the **wikiticker** set of data will be queried (like a table in relational database)
 - **"granularity": "hour"** - specifies the data will be queried in hour intervals
-- **"dimensions": [ "page", "user" ]** - specifies the groupBy action will be performed on `page and user` dimensions
+- **"dimensions": [ "page", "user" ]** - specifies the groupBy action will be performed on **page and user** dimensions
 - **filter** - specifies a filter to use only certain fields in the query
   - **"type": "selector"** - matches a specific dimension with a expected value, Equivalent Ex: `WHERE <dimension_string> = '<expected_dimension_value>`
   - **"dimension": "countryName"** - specifies the JSON Object or String from the dataSource you want to select
@@ -595,7 +596,7 @@ Output from the enriched timeseries query:
 
 ![groupby-output.jpg](assets/images/groupby-output.jpg)
 
-Notice how we extracted `page` and `user` into our JSON output using the GroupBy query. We just brought more insight to which page was edited, who did it and how many times they changed something.
+Notice how we extracted **page** and **user** into our JSON output using the GroupBy query. We just brought more insight to which page was edited, who did it and how many times they changed something.
 
 ### Metadata Queries
 
@@ -699,7 +700,7 @@ print(verify_query)
 Analysis of the above query:
 
 - **"queryType": "segmentMetadata"** - specifies you want Druid to run the segmentMetadata query type
-- **"dataSource": "wikipedia"** - specifies the `wikiticker` set of data will be queried
+- **"dataSource": "wikipedia"** - specifies the **wikiticker** set of data will be queried
 - **"intervals": [ "2015-09-12/2015-09-13" ]** - defines a 1 day time range to run the query over
 
 2\. Send the JSON-based Query to the Druid Coordinator over HTTP POST request
