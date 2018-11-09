@@ -10,7 +10,9 @@ You'll use Phoenix to perform SQL queries against the HBase table by mapping a P
 
 ## Prerequisites
 
-- Completed previous tutorials in the series
+- Deploy IoT Weather Station and Connected Data Architecture
+- Collect Sense HAT Weather Data via CDA
+- Populate HDP HBase with HDF NiFi Flow
 
 ## Outline
 
@@ -24,7 +26,7 @@ You'll use Phoenix to perform SQL queries against the HBase table by mapping a P
 
 ### Step 1: Create Zeppelin Notebook
 
-Select notebook next to the Zeppelin icon, and hit “Create new note” to create the Zeppelin Notebook. Name it `Visualize Weather Data with Phoenix SQL`. Choose "Default Interpreter" as `jdbc`.
+Select notebook next to the Zeppelin icon, and hit “Create new note” to create the Zeppelin Notebook. Name it `Visualize Weather Data with Phoenix SQL`. Choose "Default Interpreter" as **jdbc**.
 
 ### Step 2: Create Phoenix Table Mapping to HBase Table
 
