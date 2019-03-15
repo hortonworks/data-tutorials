@@ -7,7 +7,7 @@ persona: Administrator
 source: Hortonworks
 use case: Security
 technology: Apache Atlas, Apache Ranger
-release: hdp-3.0.0
+release: hdp-3.0.1
 environment: Sandbox
 product: HDP
 series: HDP > Hadoop Administration > Security

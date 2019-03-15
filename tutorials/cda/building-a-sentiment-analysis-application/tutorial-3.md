@@ -465,7 +465,7 @@ We are done building the NiFi flows, you can head to the summary, then onward to
 
 ## Approach 2: Import NiFi Flow For Acquisition and Storage
 
-Download the NiFi template [AcquireTweetsStreamTweets.xml](application/development/nifi-template/AcquireTweetsStreamTweets.xml) to your local computer.
+Download the NiFi template [AcquireTweetsStreamTweets.xml](https://raw.githubusercontent.com/hortonworks/data-tutorials/master/tutorials/cda/building-a-sentiment-analysis-application/application/development/nifi-template/AcquireTweetsStreamTweets.xml) to your local computer.
 
 After starting your sandbox, open HDF **NiFi UI** at http://sandbox-hdf.hortonworks.com:9090/nifi.
 

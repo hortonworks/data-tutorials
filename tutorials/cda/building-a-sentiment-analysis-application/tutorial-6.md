@@ -19,7 +19,7 @@ Our next objective as a Data Engineer is to implement a Spark Structured Streami
 
 ## Outline
 
-- [Implement a Spark Streaming App to Deploy the Model](#implement-a-spark-streaming-app-to-deploy-the-model)
+- [Implement a Spark Streaming App to Deploy the Model](#approach-1-implement-a-spark-streaming-app-to-deploy-the-model)
 - [Summary](#summary)
 - [Further Reading](#further-reading)
 

@@ -268,7 +268,7 @@ sudo -u hdfs hdfs dfs -chown -R maria_dev $HDFS_TWEET_STAGING
 sudo -u hdfs hdfs dfs -chmod -R 777 $HDFS_TWEET_STAGING
 # give anyone rwe permissions to /sandbox/tutorial-files/770
 sudo -u hdfs hdfs dfs -chmod -R 777 /sandbox/tutorial-files/770
-sudo -u hdfs wget https://github.com/james94/data-tutorials/raw/master/tutorials/cda/building-a-sentiment-analysis-application/application/setup/data/tweets.zip -O $LFS_TWEETS_PACKAGED_PATH/tweets.zip
+sudo -u hdfs wget https://github.com/hortonworks/data-tutorials/raw/master/tutorials/cda/building-a-sentiment-analysis-application/application/setup/data/tweets.zip -O $LFS_TWEETS_PACKAGED_PATH/tweets.zip
 sudo -u hdfs unzip $LFS_TWEETS_PACKAGED_PATH/tweets.zip -d $LFS_TWEETS_PACKAGED_PATH
 sudo -u hdfs rm -rf $LFS_TWEETS_PACKAGED_PATH/tweets.zip
 # Remove existing (if any) copy of data from HDFS. You could do this with Ambari file view.

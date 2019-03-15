@@ -15,13 +15,15 @@ In the previous tutorial, you transported raw sensor data from MiNiFi to HDF NiF
 
 ## Outline
 
-- [Step 1: Create HBase Table "sense_hat_logs"](#create-hbase-table-sense-hat-logs-4)
-- [Step 2: Enhance NiFi Flow to Store Geo Data to HBase](#import-enhance-nifi-flow-to-store-geo-data-to-hbase-4)
-- [Step 3: Verify HBase Table Populated](#verify-hbase-table-populated-4)
-- [Summary](#summary-4)
+- [Step 1: Create HBase Table](#step-1-create-hbase-table)
+- [Step 2: Enhance NiFi Flow to Store Geo Data to HBase](#step-2-enhance-nifi-flow-to-store-geo-data-to-hbase)
+- [Step 3: Verify HBase Table Populated](#step-3-verify-hbase-table-populated)
+- [Summary](#summary)
 - [Further Readings](#further-reading-4)
 
-### Step 1: Create HBase Table "sense_hat_logs"
+### Step 1: Create HBase Table
+
+Create the "sense_hat_logs" table
 
 1\. Access HDP Sandbox shell using Web Shell Client at http://sandbox-hdp.hortonworks.com:4200.
 

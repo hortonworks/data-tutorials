@@ -17,7 +17,7 @@ Our next objective is to **load the tweet data** that is currently in HDFS into 
 ## Outline
 
 - [Approach 1: Write Spark Code to Clean Raw Twitter Data](#approach-1-write-spark-code-to-clean-raw-twitter-data)
-- [Approach 2: Import Zeppelin Notebook via Zeppelin UI](#approach-2-import-zeppelin-notebook-via-ui)
+- [Approach 2: Import Zeppelin Notebook via Zeppelin UI](#approach-2-import-zeppelin-notebook-via-zeppelin-ui)
 - [Summary](#summary)
 - [Further Reading](#further-reading)
 
@@ -193,7 +193,7 @@ Open HDP **Zeppelin UI** at http://sandbox-hdp.hortonworks.com:9995.
 Insert the following URL cause we are going to import **Cleaning-Raw-Twitter-Data** notebook:
 
 ~~~bash
-https://raw.githubusercontent.com/james94/data-tutorials/master/tutorials/cda/building-a-sentiment-analysis-application/application/development/zeppelin-notebook/Cleaning-Raw-Twitter-Data.json
+https://raw.githubusercontent.com/hortonworks/data-tutorials/master/tutorials/cda/building-a-sentiment-analysis-application/application/development/zeppelin-notebook/Cleaning-Raw-Twitter-Data.json
 ~~~
 
 Click **Import Note**.

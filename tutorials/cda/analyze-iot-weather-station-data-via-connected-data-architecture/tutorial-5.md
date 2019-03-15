@@ -16,13 +16,13 @@ You'll use Phoenix to perform SQL queries against the HBase table by mapping a P
 
 ## Outline
 
-- [Step 1: Create Zeppelin Notebook](#create-zeppelin-notebook-5)
-- [Step 2: Create Phoenix Table Mapping to HBase Table](#create-phoenix-table-mapping-to-hbase-table-5)
-- [Step 3: Monitor Temperature Over Time](#monitor-temperature-over-time-5)
-- [Step 4: Monitor Humidity Over Time](#monitor-humidity-over-time-5)
-- [Step 5: Monitor Pressure Over Time](#monitor-pressure-over-time-5)
-- [Summary](#summary-5)
-- [Further Readings](#further-readings-5)
+- [Step 1: Create Zeppelin Notebook](#step-1-create-zeppelin-notebook)
+- [Step 2: Create Phoenix Table Mapping to HBase Table](#step-2-create-phoenix-table-mapping-to-hbase-table)
+- [Step 3: Monitor Temperature Over Time](#step-3-monitor-temperature-over-time)
+- [Step 4: Monitor Humidity Over Time](#step-4-monitor-humidity-over-time)
+- [Step 5: Monitor Pressure Over Time](#step-5-monitor-pressure-over-time)
+- [Summary](#summary)
+- [Further Readings](#further-readings)
 
 ### Step 1: Create Zeppelin Notebook
 

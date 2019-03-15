@@ -148,7 +148,7 @@ Open HDP **Zeppelin UI** at [http://sandbox-hdp.hortonworks.com:9995](http://san
 Insert the following URL cause we are going to import **Visualizing-NASA-Log-Data** notebook:
 
 ~~~bash
-https://raw.githubusercontent.com/james94/data-tutorials/master/tutorials/cda/building-a-server-log-analysis-application/application/development/zeppelin-notebook/Visualizing-NASA-Log-Data.json
+https://raw.githubusercontent.com/hortonworks/data-tutorials/master/tutorials/cda/building-a-server-log-analysis-application/application/development/zeppelin-notebook/Visualizing-NASA-Log-Data.json
 ~~~
 
 Click **Import Note**.

@@ -24,10 +24,10 @@ You will build a new process group called **StoreTransitEventsAsJSONToDisk** to 
 - [Step 7: Connect ValidateGeoEnrichedTransitData to StoreDataAsJSONToDisk](#step-7-connect-validategeoenrichedtransitdata-to-storedataasjsontodisk)
 - [Step 8: Run the NiFi DataFlow](#step-8-run-the-nifi-dataflow)
 - [Step 9: Check Data By NiFi's Data Provenance](#step-9-check-data-by-nifis-data-provenance)
-- [Approach 2: Import StoreTransitEventsAsJSONToDisk Process Group](#approach-2-import-storetransiteventasjsontodisk-process-group)
+- [Approach 2: Import StoreDataAsJSONToDisk Process Group](#approach-2-import-storedataasjsontodisk-process-group)
 - [Summary](#summary)
 
-If you prefer to build the dataflow manually step-by-step, continue on to [Approach 1](#approach-1-manually-build-storetransiteventsasjsontodisk-process-group-pg). Else if you want to see the NiFi flow in action within minutes, refer to [Approach 2](#approach-2-storetransiteventasjsontodisk-process-group).
+If you prefer to build the dataflow manually step-by-step, continue on to [Approach 1](#approach-1-manually-build-storetransiteventsasjsontodisk-process-group-pg). Else if you want to see the NiFi flow in action within minutes, refer to [Approach 2](#approach-2-import-storedataasjsontodisk-process-group).
 
 ### Approach 1: Manually Build StoreTransitEventsAsJSONToDisk Process Group (PG)
 

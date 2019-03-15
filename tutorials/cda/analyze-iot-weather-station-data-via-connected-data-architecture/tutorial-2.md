@@ -188,7 +188,7 @@ SSH into the Raspberry Pi using Adafruit's Pi Finder **Terminal** button.
 
 **Figure 15:** Time Zone Calibrated
 
-### Step 2: Configure Bridged Adapter Network
+### Step 2: Configure Bridged Adapter Network For VirtuaBox
 
 ### VirtualBox User
 

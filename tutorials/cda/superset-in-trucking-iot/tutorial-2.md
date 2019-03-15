@@ -14,15 +14,15 @@ In this tutorial, you will verify your sandbox IP is mapped to your desired host
 
 - **Map HDF Sandbox IP to hostname**, if you need help, reference **Learning the Ropes of the HDF Sandbox** tutorial section [ENVIRONMENT SETUP](https://hortonworks.com/tutorial/getting-started-with-hdf-sandbox/#environment-setup), go to Map Sandbox IP To Your Desired Hostname In The Hosts File in that tutorial
 
-- **Set the Ambari admin password for HDP**, if you need help, reference **Learning the Ropes of the HDP Sandbox** tutorial section [Admin Password Reset](https://hortonworks.com/tutorial/learning-the-ropes-of-the-hortonworks-sandbox/#admin-password-reset)
+- **Set the Ambari admin password for HDP**, if you need help, reference **Learning the Ropes of the HDP Sandbox** tutorial section [Admin Password Reset](https://hortonworks.com/tutorial/learning-the-ropes-of-the-hdf-sandbox/#admin-password-reset)
 
 - **Set the Ambari admin password for HDF**, if you need help, reference **Learning the Ropes of the HDF Sandbox** tutorial section [Learning the Ropes of HDF Sandbox](https://hortonworks.com/tutorial/getting-started-with-hdf-sandbox/#admin-password-reset)
 
-- **Need to have data present in Druid**. You will need to leverage **Real-Time Event Processing In NiFi, SAM, Schema Registry and SuperSet** tutorial to setup the SAM data pipeline to store data into Druid, refer to [Appendix A](https://hortonworks.com/tutorial/real-time-event-processing-in-nifi-sam-schema-registry-and-superset/#appendix-a-visualize-trucking-data-with-superset-via-cda). All you need to do is step 1 and step 2 in **Appendix A**.
+- **Need to have data present in Druid**, refer to **[Real-Time Event Processing In NiFi, SAM, Schema Registry and SuperSet](https://hortonworks.com/tutorial/real-time-event-processing-in-nifi-sam-schema-registry-and-superset/)** tutorial to setup the SAM data pipeline to store data into Druid. All you need to do is step 1 through 3.
 
 ## Outline
 
-- [Start up all required services](#start-up-all-required-services)
+- [Started up all required services for HDF and HDP](#started-up-all-required-services-for-hdf-and-hdp)
 - [Setup Druid for Superset](#setup-druid-for-superset)
 - [Summary](#summary)
 - [Further Reading](#further-reading)

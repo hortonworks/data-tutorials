@@ -233,14 +233,14 @@ Copy and paste the following code to HDF web shell with your updated change:
 ~~~bash
 AMBARI_USER="admin"
 AMBARI_USER_PASSWORD="<Your-Ambari-Admin-Password>"
-wget https://raw.githubusercontent.com/james94/data-tutorials/master/tutorials/cda/building-an-hvac-system-analysis-application/application/setup/shell/setup-hdf.sh
+wget https://raw.githubusercontent.com/hortonworks/data-tutorials/master/tutorials/cda/building-an-hvac-system-analysis-application/application/setup/shell/setup-hdf.sh
 bash setup-hdf.sh $AMBARI_USER $AMBARI_USER_PASSWORD
 ~~~
 
 Open **HDP web shell client** located at [http://sandbox-hdp.hortonworks.com:4200](http://sandbox-hdp.hortonworks.com:4200). Copy and paste the following code to HDP web shell:
 
 ~~~bash
-wget https://raw.githubusercontent.com/james94/data-tutorials/master/tutorials/cda/building-an-hvac-system-analysis-application/application/setup/shell/setup-hdp.sh
+wget https://raw.githubusercontent.com/hortonworks/data-tutorials/master/tutorials/cda/building-an-hvac-system-analysis-application/application/setup/shell/setup-hdp.sh
 bash setup-hdp.sh
 ~~~
 

@@ -18,7 +18,7 @@ Our next objective is to build the sentiment classification model using our clea
 ## Outline
 
 - [Approach 1: Implement a Sentiment Classification Model](#approach-1-implement-a-sentiment-classification-model)
-- [Approach 2: Import Zeppelin Notebook via Zeppelin UI](#approach-2-import-zeppelin-notebook-via-ui)
+- [Approach 2: Import Zeppelin Notebook via Zeppelin UI](#approach-2-import-zeppelin-notebook-via-zeppelin-ui)
 - [Summary](#summary)
 - [Further Reading](#further-reading)
 
@@ -241,7 +241,7 @@ Open HDP **Zeppelin UI** at http://sandbox-hdp.hortonworks.com:9995.
 Insert the following URL cause we are going to import **Building-Sentiment-Classification-Model** notebook:
 
 ~~~bash
-https://raw.githubusercontent.com/james94/data-tutorials/master/tutorials/cda/building-a-sentiment-analysis-application/application/development/zeppelin-notebook/Building-Sentiment-Classification-Model.json
+https://raw.githubusercontent.com/hortonworks/data-tutorials/master/tutorials/cda/building-a-sentiment-analysis-application/application/development/zeppelin-notebook/Building-Sentiment-Classification-Model.json
 ~~~
 
 Click **Import Note**.

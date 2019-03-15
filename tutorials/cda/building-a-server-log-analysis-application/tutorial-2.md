@@ -19,7 +19,7 @@ For this portion of the project as a Data Engineer, you have the following respo
 - [Approach 1: Manually Setup Development Environment](#approach-1-manually-setup-development-environment)
 - [Approach 2: Auto Setup Development Environment](#approach-2-auto-setup-development-environment)
 - [Summary](#summary)
-- [Further Reading](#further-readings)
+- [Further Reading](#further-reading)
 
 ## Verify Prerequisites Have Been Covered
 
@@ -282,7 +282,7 @@ Prior to executing the shell script, replace the following line of shell code `A
 ~~~bash
 AMBARI_USER="admin"
 AMBARI_USER_PASSWORD="<Your-Ambari-Admin-Password>"
-wget https://github.com/james94/data-tutorials/raw/master/tutorials/cda/building-a-server-log-analysis-application/application/setup/shell/setup-hdf.sh
+wget https://github.com/hortonworks/data-tutorials/raw/master/tutorials/cda/building-a-server-log-analysis-application/application/setup/shell/setup-hdf.sh
 bash setup-hdf.sh $AMBARI_USER $AMBARI_USER_PASSWORD
 ~~~
 
@@ -291,7 +291,7 @@ bash setup-hdf.sh $AMBARI_USER $AMBARI_USER_PASSWORD
 Open the **HDP web shell client** at http://sandbox-hdp.hortonworks.com:4200.
 
 ~~~bash
-wget https://github.com/james94/data-tutorials/raw/master/tutorials/cda/building-a-server-log-analysis-application/application/setup/shell/setup-hdp.sh
+wget https://github.com/hortonworks/data-tutorials/raw/master/tutorials/cda/building-a-server-log-analysis-application/application/setup/shell/setup-hdp.sh
 bash setup-hdp.sh
 ~~~
 

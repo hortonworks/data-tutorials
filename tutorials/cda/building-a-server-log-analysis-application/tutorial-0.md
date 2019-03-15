@@ -10,7 +10,7 @@ technology: Apache Ambari, Apache NiFi, HDFS, Apache Spark, Apache Zeppelin
 release: hdp-3.0.1, hdf-3.2.0
 environment: Sandbox
 product: CDA
-series: CDA > Data Science Applications
+series: CDA > Data Engineers & Scientists > Data Science Applications
 ---
 
 # Building a Server Log Analysis Application
@@ -67,12 +67,12 @@ visualization
 
 The tutorial series consists of the following tutorial modules:
 
-1\. **Application Development Concepts**: Covers what is server log data, log data analysis, how log data analysis works, various use cases and some best practices that can be used in server log analysis.
+1\. **[Application Development Concepts](https://hortonworks.com/tutorial/building-a-server-log-analysis-application/section/1/)**: Covers what is server log data, log data analysis, how log data analysis works, various use cases and some best practices that can be used in server log analysis.
 
-2\. **Setting up the Development Environment**: You will perform any configurations on software services and/or install dependencies for software services that are needed to develop the application.
+2\. **[Setting up the Development Environment](https://hortonworks.com/tutorial/building-a-server-log-analysis-application/section/2/)**: You will perform any configurations on software services and/or install dependencies for software services that are needed to develop the application.
 
-3\. **Acquiring NASA Server Log Data**: You will learn to build a NiFi dataflow that acquires 2 months worth of NASA log data, preprocesses the data and stores it into HDFS
+3\. **[Acquiring NASA Server Log Data](https://hortonworks.com/tutorial/building-a-server-log-analysis-application/section/3/)**: You will learn to build a NiFi dataflow that acquires 2 months worth of NASA log data, preprocesses the data and stores it into HDFS
 
-4\. **Cleaning the Raw NASA Log Data**: You will learn to create a Zeppelin Notebook for cleaning the NASA log data and use Zeppelin's Spark Interpreter to clean the data and gather any valuable insight about the activities going on with the server.
+4\. **[Cleaning the Raw NASA Log Data](https://hortonworks.com/tutorial/building-a-server-log-analysis-application/section/4/)**: You will learn to create a Zeppelin Notebook for cleaning the NASA log data and use Zeppelin's Spark Interpreter to clean the data and gather any valuable insight about the activities going on with the server.
 
-5\. **Visualizing NASA Log Data**: You will create another Zeppelin Notebook whose purpose will be to visualize the key points you found when cleaning the data with Spark. Your data visualization will illustrate from the NASA log data, the _Most Frequent Hosts_ - count per IP address of hosts hitting the server, _Response Codes_ - count per response code in association with the server, _Type of Extensions_ - count of the type of file formats being transferred between devices interacting with the server, _Network Traffic per Location_ - location on where the server hits are coming from.
+5\. **[Visualizing NASA Log Data](https://hortonworks.com/tutorial/building-a-server-log-analysis-application/section/5/)**: You will create another Zeppelin Notebook whose purpose will be to visualize the key points you found when cleaning the data with Spark. Your data visualization will illustrate from the NASA log data, the _Most Frequent Hosts_ - count per IP address of hosts hitting the server, _Response Codes_ - count per response code in association with the server, _Type of Extensions_ - count of the type of file formats being transferred between devices interacting with the server, _Network Traffic per Location_ - location on where the server hits are coming from.

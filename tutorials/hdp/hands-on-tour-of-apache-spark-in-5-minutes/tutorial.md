@@ -125,7 +125,7 @@ You will be able to explore those tables via SQL queries likes the ones below.
 
 By the end of this tutorial, you should have a basic understanding of Spark and an appreciation for its powerful and expressive APIs with the added bonus of a developer friendly Zeppelin notebook environment.
 
-## Import the Notebook
+## Import the Apache Spark in 5 Minutes Notebook
 
  Import the *Apache Spark in 5 Minutes* notebook into your Zeppelin environment. (If at any point you have any issues, make sure to checkout the [Getting Started with Apache Zeppelin](https://hortonworks.com/tutorial/getting-started-with-apache-zeppelin/) tutorial).
 

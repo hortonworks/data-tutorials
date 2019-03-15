@@ -184,7 +184,7 @@ LOAD DATA INPATH '/user/maria_dev/timesheet.csv' OVERWRITE INTO TABLE temp_times
 You should see the data like this:
 
 ~~~sql
-SELECT * FROM timesheet LIMIT 10
+SELECT * FROM temp_timesheet LIMIT 10
 ~~~
 
 ![select-data-temp-timesheet](assets/select-data-temp-timesheet.jpg)

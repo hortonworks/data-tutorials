@@ -10,7 +10,7 @@ technology: Apache NiFi, Apache MiNiFi, Raspberry Pi, Apache Zookeeper, Apache H
 release: hdp-3.0.1, hdf-3.2.0
 environment: Sandbox
 product: CDA
-series: CDA > Data Science Applications
+series: CDA > Data Engineers & Scientists > Data Science Applications
 ---
 
 # Analyze IoT Weather Station Data via Connected Data Architecture
@@ -90,21 +90,21 @@ This tutorial consists of two tracks, one track in which users have the IoT Weat
 
 -->
 
-**IoT and Connected Data Architecture Concepts** - Familiarize yourself with Raspberry Pi, Sense HAT Sensor Functionality, HDF and HDP Docker Sandbox Container Communication, NiFi, MiNiFi, Zookeeper, HBase, Phoenix and Zeppelin.
+1\. **[IoT and Connected Data Architecture Concepts](https://hortonworks.com/tutorial/analyze-iot-weather-station-data-via-connected-data-architecture/section/1/)** - Familiarize yourself with Raspberry Pi, Sense HAT Sensor Functionality, HDF and HDP Docker Sandbox Container Communication, NiFi, MiNiFi, Zookeeper, HBase, Phoenix and Zeppelin.
 
-**Deploy IoT Weather Station and Connected Data Architecture** - Set up the IoT Weather Station for processing the sensor data. You will install Raspbian OS and MiNiFi on the Raspberry Pi, HDF Sandbox and HDP Sandbox on your local machine.
+2\. **[Deploy IoT Weather Station and Connected Data Architecture](https://hortonworks.com/tutorial/analyze-iot-weather-station-data-via-connected-data-architecture/section/2/)** - Set up the IoT Weather Station for processing the sensor data. You will install Raspbian OS and MiNiFi on the Raspberry Pi, HDF Sandbox and HDP Sandbox on your local machine.
 
-**Collect Sense HAT Weather Data on CDA** - Program the Raspberry Pi to retrieve the sensor data from the Sense HAT Sensor. Embed a MiNiFi Agent onto the Raspberry Pi to collect sensor data and transport it to NiFi on HDF via Site-to-Site. Store the Raw sensor readings into HDFS on HDP using NiFi.
+3\. **[Collect Sense HAT Weather Data on CDA](https://hortonworks.com/tutorial/analyze-iot-weather-station-data-via-connected-data-architecture/section/3/)** - Program the Raspberry Pi to retrieve the sensor data from the Sense HAT Sensor. Embed a MiNiFi Agent onto the Raspberry Pi to collect sensor data and transport it to NiFi on HDF via Site-to-Site. Store the Raw sensor readings into HDFS on HDP using NiFi.
 
-**Populate HDP HBase with HDF NiFi Flow** - Enhance the NiFi flow by adding on geographic location attributes to the sensor data and converting it to JSON format for easy storage into HBase.
+4\. **[Populate HDP HBase with HDF NiFi Flow](https://hortonworks.com/tutorial/analyze-iot-weather-station-data-via-connected-data-architecture/section/4/)** - Enhance the NiFi flow by adding on geographic location attributes to the sensor data and converting it to JSON format for easy storage into HBase.
 
-**Visualize Weather Data with Zeppelin's Phoenix Interpreter** - Monitor the weather data with Phoenix and create visualizations of those readings using Zeppelin's Phoenix Interpreter.
+5\. **[Visualize Weather Data with Zeppelin's Phoenix Interpreter](https://hortonworks.com/tutorial/analyze-iot-weather-station-data-via-connected-data-architecture/section/5/)** - Monitor the weather data with Phoenix and create visualizations of those readings using Zeppelin's Phoenix Interpreter.
 
 <!--
 
 ### Track 2: Tutorial using Simulated Data
 
-**Visualize IoT Weather Data from Multiple Stations** - Deploy multiple Docker MiNiFi containers in your Guest VM Docker Network, which pull their own data seeds, simulating the sensor data that would be pulled in from the Sense HAT and route the data from those edge node containers to the remote HDF container where NiFi is running. You will import a NiFi flow, this template has multiple input ports it listens in on incoming data coming from the MiNiFi Weather Station agents and then preprocesses the data, adding geographic location insights, converting the data to JSON and storing it into HBase. You will create a Phoenix table in Zeppelin and visualize the data.
+**Visualize IoT Weather Data from Multiple Stations]**(https://hortonworks.com/tutorial/analyze-iot-weather-station-data-via-connected-data-architecture/section/1/) - Deploy multiple Docker MiNiFi containers in your Guest VM Docker Network, which pull their own data seeds, simulating the sensor data that would be pulled in from the Sense HAT and route the data from those edge node containers to the remote HDF container where NiFi is running. You will import a NiFi flow, this template has multiple input ports it listens in on incoming data coming from the MiNiFi Weather Station agents and then preprocesses the data, adding geographic location insights, converting the data to JSON and storing it into HBase. You will create a Phoenix table in Zeppelin and visualize the data.
 
 -->
 

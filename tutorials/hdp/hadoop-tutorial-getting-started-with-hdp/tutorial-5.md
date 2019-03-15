@@ -57,7 +57,7 @@ Click on a Notebook tab at the top left and select **Create new note**. Name you
 
 ## Download the Data
 
-If you had trouble completing the previous tutorial or lost the **risk factor** data click [here to download it](tbd) and upload it to HDFS under `/tmp/data/`
+If you had trouble completing the previous tutorial or lost the **risk factor** data click [here to download it](https://raw.githubusercontent.com/hortonworks/data-tutorials/master/tutorials/hdp/hadoop-tutorial-getting-started-with-hdp/assets/datasets/riskfactor.csv) and upload it to HDFS under `/tmp/data/`
 
 ![save-risk-factor](assets/save-risk-factor.jpg)
 

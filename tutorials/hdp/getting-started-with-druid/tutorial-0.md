@@ -10,7 +10,7 @@ technology: Apache Druid
 release: hdp-3.0.1
 environment: Sandbox
 product: HDP
-series: HDP > Develop with Hadoop > Druid
+series: HDP > Develop with Hadoop > Hello World
 ---
 
 # Getting Started with Druid

@@ -718,7 +718,7 @@ Open HDF Sandbox Web Shell Client at http://sandbox-hdf.hortonworks.com:4200. Co
 
 ~~~bash
 NIFI_TEMPLATE="AcquireNASAServerLogs"
-wget https://github.com/james94/data-tutorials/raw/master/tutorials/cda/building-a-server-log-analysis-application/application/development/shell/nifi-auto-deploy.sh
+wget https://github.com/hortonworks/data-tutorials/raw/master/tutorials/cda/building-a-server-log-analysis-application/application/development/shell/nifi-auto-deploy.sh
 bash nifi-auto-deploy.sh $NIFI_TEMPLATE
 ~~~
 

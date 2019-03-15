@@ -241,19 +241,19 @@ beeline -u jdbc:hive2://sandbox-hdp.hortonworks.com:10000 -n hive
 Ouptut should look like:
 
 ~~~
-+---------------------------------------------+
-|                   row__id                   |
-+---------------------------------------------+
-| {"transactionid":1,"bucketid":1,"rowid":0}  |
-| {"transactionid":3,"bucketid":0,"rowid":0}  |
-+---------------------------------------------+
++-----------------------------------------------+
+|                    row__id                    |
++-----------------------------------------------+
+| {"writeid":1,"bucketid":536936448,"rowid":0}  |
+| {"writeid":5,"bucketid":537001984,"rowid":0}  |
++-----------------------------------------------+
 ~~~
 
 A common need is to confirm that all records were ingested. Let’s say your upstream provider insists data is missing in Hive. Your provider (e.g. Storm Bolt) can tell you the transaction ID used to insert data. You can count the actual records using the transactionid. Replace X with your transactionid:
 
 ~~~
 set hive.optimize.ppd=false;
-select count(*) from hello_acid where row__id.transactionid = X;
+select count(*) from hello_acid where row__id.writeid = {writeid};
 ~~~
 
 Keep in mind that data from this transaction may have been deleted by a subsequent UPDATE or DELETE statement, so if the counts don’t match, consider if records may be altered some other way.

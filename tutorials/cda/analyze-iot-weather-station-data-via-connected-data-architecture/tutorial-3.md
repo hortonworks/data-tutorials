@@ -16,12 +16,12 @@ NiFi on HDF sandbox via Site-to-Site protocol. Finally, you'll verify that NiFi 
 
 ## Outline
 
-- [Step 1: Create a Python Script to Record Sense HAT Weather Data](#create-python-script-record-weather-data-3)
-- [Step 2: Build NiFi Flow to Store MiNiFi Data to HDFS](#build-nifi-flow-store-minifi-data-to-hdfs-3)
-- [Step 3: Build MiNiFi Flow to Push Data to NiFi](#build-minifi-flow-to-push-data-to-nifi-3)
-- [Summary](#summary-3)
-- [Further Reading](#further-reading-3)
-- [Appendix A: Troubleshoot MiNiFi to NiFi Site-to-Site](#troubleshoot-minifi-to-nifi-site-to-site-3)
+- [Step 1: Create a Python Script to Record Sense HAT Weather Data](#step-1-create-a-python-script-to-record-sense-hat-weather-data)
+- [Step 2: Build NiFi Flow to Store MiNiFi Data to HDFS](#step-2-build-nifi-flow-to-store-minifi-data-to-hdfs)
+- [Step 3: Build MiNiFi Flow to Push Data to NiFi](#step-3-build-minifi-flow-to-push-data-to-nifi)
+- [Summary](#summary)
+- [Further Reading](#further-reading)
+- [Appendix A: Troubleshoot MiNiFi to NiFi Site-to-Site](#appendix-a-troubleshoot-minifi-to-nifi-site-to-site)
 
 ### Step 1: Create a Python Script to Record Sense HAT Weather Data
 

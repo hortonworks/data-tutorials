@@ -10,7 +10,7 @@ technology: Apache NiFi, Apache Storm, Apache Kafka, Streaming Analytics Manager
 release: hdp-3.0.1, hdf-3.2.0
 environment: Sandbox
 product: CDA
-series: CDA > Data Science Applications
+series: CDA > Data Engineers & Scientists > Data Science Applications
 ---
 
 # Real-Time Event Processing In NiFi, SAM, Schema Registry and Superset

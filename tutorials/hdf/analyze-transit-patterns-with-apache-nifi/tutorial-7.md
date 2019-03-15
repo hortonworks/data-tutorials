@@ -24,7 +24,7 @@ You will learn to perform **rest calls** against the **NextBus API** to retrieve
 - [Summary](#summary)
 - [Further Reading](#further-reading)
 
-If you prefer to build the dataflow manually step-by-step, continue on to [Approach 1]((#approach-1-manually-integrate-nextbus-api-into-nifi-flow)). Else if you want to see the NiFi flow in action within minutes, refer to [Approach 2](##approach-2-import-nextbusapiintegration-nifi-flow).
+If you prefer to build the dataflow manually step-by-step, continue on to [Approach 1]((#approach-1-manually-integrate-nextbus-api-into-nifi-flow)). Else if you want to see the NiFi flow in action within minutes, refer to [Approach 2](#approach-2-import-nextbusapiintegration-nifi-flow).
 
 You will need to understand NextBus API, so that it will be easier to incorporate this API's data into the NiFi flow, which will be built in **Approach 1**.
 

@@ -32,7 +32,7 @@ auto_deploy_nifi()
 
   # Download NiFi Flow Template
   echo "$DATE INFO: Downloading the NIFI_TEMPLATE to location $NIFI_TEMPLATE_PATH"
-  wget https://raw.githubusercontent.com/james94/data-tutorials/master/tutorials/cda/building-an-hvac-system-analysis-application/application/development/nifi-template/$NIFI_TEMPLATE.xml \
+  wget https://raw.githubusercontent.com/hortonworks/data-tutorials/master/tutorials/cda/building-an-hvac-system-analysis-application/application/development/nifi-template/$NIFI_TEMPLATE.xml \
   -O $NIFI_TEMPLATE_PATH
   # Upload and Import NiFi Template
   # Ref: https://community.hortonworks.com/questions/154138/in-apache-nifi-rest-api-what-is-difference-between.html
