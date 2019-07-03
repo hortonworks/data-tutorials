@@ -111,4 +111,4 @@ Congratulations! You are now familiar with the concept of stream processing and 
 - [Stream Analytics Manager](https://docs.hortonworks.com/HDPDocuments/HDF3/HDF-3.1.1/bk_streaming-analytics-manager-user-guide/content/ch_sam-manage.html)
 - [Apache Storm](https://docs.hortonworks.com/HDPDocuments/HDP2/HDP-2.6.4/bk_storm-component-guide/content/ch_storm-overview.html)
 - [Apache Kafka](https://docs.hortonworks.com/HDPDocuments/HDP2/HDP-2.6.4/bk_kafka-component-guide/content/ch_introduction_kafka.html)
-- [Kafka in Trucking IoT on HDF](https://hortonworks.com/tutorial/kafka-in-trucking-iot-on-hdf/)
+- [Kafka in Trucking IoT on HDF](https://hortonworks.com/tutorial/kafka-in-trucking-iot/)

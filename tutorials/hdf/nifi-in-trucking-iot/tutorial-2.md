@@ -16,11 +16,11 @@ Let's walk through NiFi's place in the demo.
 
 ## Environment Setup
 
-We will be working on the **trucking-IoT** project. If you have the latest Hortonworks DataFlow (HDF) Sandbox installed, then the demo comes pre-installed.
+We will be working on the **trucking-IoT** project. If you have the latest Cloudera DataFlow (CDF) Sandbox installed, then the demo comes pre-installed.
 
 ## Deploy the NiFi DataFlow
 
-Let's activate the NiFi data flow, so it will process the simulated data and push the data into Kafka Topics. Open NiFi at [http://sandbox-hdf.hortonworks.com:9090/nifi/](http://sandbox-hdf.hortonworks.com:9090/nifi/). If not, or you do not already have it setup, then refer to [Setup Demo on existing HDF Sandbox](https://github.com/orendain/trucking-iot/tree/master).
+Let's activate the NiFi data flow, so it will process the simulated data and push the data into Kafka Topics. Open NiFi at [http://sandbox-hdf.hortonworks.com:9090/nifi/](http://sandbox-hdf.hortonworks.com:9090/nifi/). If not, or you do not already have it setup, then refer to [Setup Demo on existing CDF Sandbox](https://github.com/orendain/trucking-iot/tree/master).
 
 The **Trucking IoT** component template should appear on the NiFi canvas by default as seen below.
 
