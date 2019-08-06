@@ -27,7 +27,7 @@ auto_deploy_nifi()
 
   # Download NiFi Flow Template
   echo "$DATE INFO: Downloading the NIFI_TEMPLATE to location $NIFI_TEMPLATE_PATH"
-  wget https://github.com/james94/data-tutorials/raw/master/tutorials/cda/building-a-server-log-analysis-application/application/development/nifi-template/$NIFI_TEMPLATE.xml \
+  wget https://github.com/hortonworks/data-tutorials/blob/master/tutorials/cda/building-a-server-log-analysis-application/application/development/nifi-template/$NIFI_TEMPLATE.xml \
   -O $NIFI_TEMPLATE_PATH
 
   # Searches for OLD GeoLite2-City.mmdb file path in NiFi template file, then replaces OLD path with NEW path
