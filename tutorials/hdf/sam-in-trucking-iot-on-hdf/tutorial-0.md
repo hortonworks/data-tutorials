@@ -23,7 +23,7 @@ We will create a SAM topology to ingest streams of data from Apache Kafka into o
 
 ## Prerequisites
 
-- [Hortonworks DataFlow (HDF) Sandbox Installed](https://hortonworks.com/downloads/#sandbox)
+- Downloaded and deployed the [Hortonworks DataFlow (HDF)](https://www.cloudera.com/downloads/hortonworks-sandbox/hdf.html?utm_source=mktg-tutorial) Sandbox
 
 ## Outline
 

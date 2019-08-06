@@ -27,7 +27,7 @@ In this tutorial we’ll show you how to leverage SparkR to gain insights on air
 
 ## Prerequisites
 
-- Downloaded and deployed the [Hortonworks Data Platform (HDP)](https://hortonworks.com/downloads/#sandbox) Sandbox
+- Downloaded and deployed the [Hortonworks Data Platform (HDP)](https://www.cloudera.com/downloads/hortonworks-sandbox/hdp.html?utm_source=mktg-tutorial) Sandbox
 - [Learning the Ropes of the HDP Sandbox](https://hortonworks.com/tutorial/learning-the-ropes-of-the-hortonworks-sandbox/) to get used to Sandbox
 - Follow this [article](https://community.hortonworks.com/articles/203564/installing-rstudio-on-hdp-sandbox.html) on Hortonworks Community to install RStudio on the Sandbox
 

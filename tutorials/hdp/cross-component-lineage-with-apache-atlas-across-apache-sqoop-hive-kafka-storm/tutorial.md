@@ -23,7 +23,7 @@ This tutorial walks through the steps for creating data in Apache Hive through A
 
 ## Prerequisites
 
-- Downloaded and deployed the [Hortonworks Data Platform (HDP)](https://hortonworks.com/downloads/#sandbox) Sandbox
+- Downloaded and deployed the [Hortonworks Data Platform (HDP)](https://www.cloudera.com/downloads/hortonworks-sandbox/hdp.html?utm_source=mktg-tutorial) Sandbox
 - [Learning the Ropes of the HDP Sandbox tutorial](https://hortonworks.com/hadoop-tutorial/learning-the-ropes-of-the-hortonworks-sandbox/)
 - 12 GB of RAM
 
@@ -170,7 +170,7 @@ These are the contents of **002-run-sqoop-import.sh**
 
 ~~~bash
 #!/bin/bash
-sqoop import --connect jdbc:mysql://sandbox-hdp.hortonworks.com/test --table test_table_sqoop1 --hive-import --hive-table test_hive_table1 --username root -P -m 1 --fetch-size 1 
+sqoop import --connect jdbc:mysql://sandbox-hdp.hortonworks.com/test --table test_table_sqoop1 --hive-import --hive-table test_hive_table1 --username root -P -m 1 --fetch-size 1
 ~~~
 
 > NOTE: default password for mysql root user is **hortonworks1**. Enter it then press enter when prompted for password

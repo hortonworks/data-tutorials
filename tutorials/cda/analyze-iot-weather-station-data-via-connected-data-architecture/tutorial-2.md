@@ -414,7 +414,7 @@ Recommended Hardware:
 
 ### Download Raspbian OS Image
 
-3\. Download [Rasbpian Jessie Lite OS Image](https://www.raspberrypi.org/downloads/raspbian/) onto your host machine.
+3\. Download [Raspbian Jessie Lite OS Image](https://www.raspberrypi.org/downloads/raspbian/) onto your host machine.
 
 4\. Unzip the OS Image.
 

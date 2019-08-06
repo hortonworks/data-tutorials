@@ -12,7 +12,7 @@ In this tutorial, we will walk through many of the common of the basic Hadoop Di
 
 ## Prerequisites
 
-- Downloaded and Installed latest [Hortonworks Data Platform (HDP) Sandbox](https://hortonworks.com/downloads/#sandbox)
+- Downloaded and deployed the [Hortonworks Data Platform (HDP)](https://www.cloudera.com/downloads/hortonworks-sandbox/hdp.html?utm_source=mktg-tutorial) Sandbox
 - [Learning the Ropes of the HDP Sandbox](https://hortonworks.com/hadoop-tutorial/learning-the-ropes-of-the-hortonworks-sandbox/)
 
 ## Outline
@@ -226,15 +226,15 @@ The **getmerge** command takes a source directory file or files as input and con
 <!--- Let's concatenate the geolocation and trucks directories from two separate directories and output them to our local filesystem. Our result will be a combination of the trucks and the geolocation of the trucks which will be appended below the last row of the trucks file. --->
 
 ~~~bash
-# Syntax for concatenating two files 
-hdfs dfs [-nl] -getmerge <src> <localdst> 
-hdfs dfs -getmerge <src1> <src2> <localdst> 
+# Syntax for concatenating two files
+hdfs dfs [-nl] -getmerge <src> <localdst>
+hdfs dfs -getmerge <src1> <src2> <localdst>
 
 # Option:
 #nl: can be set to enable adding a newline on end of each file
 ~~~
 
-<!--- 
+<!---
 - Enter the following command in your terminal to concatenate the trucks and geolocation files:
 
 ~~~bash
@@ -245,7 +245,7 @@ hdfs dfs -getmerge /user/hadoop/geolocation/geolocation.csv/ /user/hadoop/trucks
 > Merges the files in trucks and geolocation to output.csv in the root directory of the local filesystem. The first file contained about 101 rows and the second file contained almost 8,001 rows. This file operation is important because it will save you time from having to manually concatenate them.
 --->
 
-## Use Help Command to access Hadoop Command Manual 
+## Use Help Command to access Hadoop Command Manual
 
 The **help** command opens the list of commands supported by Hadoop Data File System (HDFS):
 

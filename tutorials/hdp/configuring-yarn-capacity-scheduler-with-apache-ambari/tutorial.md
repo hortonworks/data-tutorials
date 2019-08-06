@@ -35,7 +35,7 @@ To provide further control and predictability on sharing of resources, the Capac
 
 ## Prerequisites
 
-- Downloaded and deployed the [Hortonworks Data Platform (HDP)](https://hortonworks.com/downloads/#sandbox) Sandbox
+- Downloaded and deployed the [Hortonworks Data Platform (HDP)](https://www.cloudera.com/downloads/hortonworks-sandbox/hdp.html?utm_source=mktg-tutorial) Sandbox
 - [Learning the Ropes of the HDP Sandbox](https://hortonworks.com/hadoop-tutorial/learning-the-ropes-of-the-hortonworks-sandbox/)
 
 ## Outline
@@ -179,7 +179,7 @@ At this point, the configuration is saved but we still need to restart the affec
 
 ![restart_needed](assets/restart-needed.jpg)
 
-Also note that there is now a new version of the configuration as indicated by the green **Current** label. 
+Also note that there is now a new version of the configuration as indicated by the green **Current** label.
 
 Let’s restart the daemons by clicking on the three dots `...` next to **Services** under the Ambari Stack. Select **Restart All Affected** and wait for the restart to complete.
 

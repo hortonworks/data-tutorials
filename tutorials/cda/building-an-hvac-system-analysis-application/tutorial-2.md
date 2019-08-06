@@ -61,8 +61,6 @@ Copy and paste the following shell code line by line in HDF web shell:
 ~~~bash
 ##
 # Script sets up HDF services used in Building an HVAC System Analysis Application
-# Author: James Medel
-# Email: jamesmedel94@gmail.com
 ##
 
 DATE=`date '+%Y-%m-%d %H:%M:%S'`

@@ -18,15 +18,15 @@ series: This important as it will determine where the tutorial is posted example
 ## Introduction
 
 This is the introductory paragraph for the tutorial. This section will typically introduce the topic and the overall goals and objectives of the tutorial. A paragraph that introduces what technologies the user will learn to use in the tutorial to solve the problem for some use case. This template is made for Spark specifically because many of these tutorials will include a Zeppelin Notebook, because we are in the business of tutorials and increasing traffic to the Hortonworks website we want to keep all relevant content and important information in the tutorial and not in the Notebook.
-<!-- If you need to add comments HTML commenting is recsmmended  -->
+<!-- If you need to add comments HTML commenting is recommended  -->
 
 ## Prerequisites
 
 <!--
-Ine thing that all of these tutorials will have in common are these two prerequisites, add more requirements as needed 
+One thing that all of these tutorials will have in common are these two prerequisites, add more requirements as needed
 -->
 
-- Downloaded and deployed the [Hortonworks Data Platform (HDP)](https://hortonworks.com/downloads/#sandbox) Sandbox
+- Downloaded and deployed the [Hortonworks Data Platform (HDP)](https://www.cloudera.com/downloads/hortonworks-sandbox/hdp.html) Sandbox
 - [Getting Started with Apache Zeppelin](https://hortonworks.com/tutorial/getting-started-with-apache-zeppelin/)
 - [Title of a required tutorial to have been completed](http://example.com/link/to/required/tutorial)
 - [Another prerequisite](http://example.com/link/to/required/tutorial)
@@ -100,8 +100,8 @@ The image name is simply the name of screenshot without the folder path or the i
 
 > Note: In the above image link, we link to an image in the included assets folder.  Put all of your assets (images, files, etc.) in that folder for easy linking to.  When your markdown gets built by the system, it will automatically link to the correct place on the web to find your images, downloadable files, etc.
 
-<!-- 
-This is the language used for tutorials which include a Zeppelin Notebook as of HDP 3.0 
+<!--
+This is the language used for tutorials which include a Zeppelin Notebook as of HDP 3.0
 Keep your language as close as possible to this for consistency's sake
 -->
 

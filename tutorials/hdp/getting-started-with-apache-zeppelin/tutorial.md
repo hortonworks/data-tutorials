@@ -31,7 +31,7 @@ The purpose of this tutorial is to guide you through basic functionalities of Ze
 
 ## Prerequisites
 
-- Downloaded and deployed the [Hortonworks Data Platform (HDP)](https://hortonworks.com/downloads/#sandbox) Sandbox
+- Downloaded and deployed the [Hortonworks Data Platform (HDP)](https://www.cloudera.com/downloads/hortonworks-sandbox/hdp.html?utm_source=mktg-tutorial) Sandbox
 - Ensure Spark version 2.x or later is installed
 
 ## Outline
@@ -209,6 +209,13 @@ To clear the output of the whole Zeppelin Notebook go to the top of the Notebook
 
 In this section we will review how to install a Zeppelin interpreter for use in the Zeppelin UI. Please note the [supported interpreters](https://zeppelin.apache.org/supported_interpreters.html) to ensure that the interpreter you want to install.
 
+To successfully install an interpreter you must follow the instrtuctions in this order:
+
+1. Install the interpreter.
+2. Restart Zeppelin Server via Amabari UI
+3. [Creating an interpreter](#creating-an-interpreter) via Zeppein UI
+4. [Bind the Interpreter](#binding-an-interpreter) to the notes you wish to use them on
+
 Open **Web Shell** by navigating to http://sandbox-hdp.hortonworks.com:4200
 
 To display a list of the available interpreters issue the following command:
@@ -217,7 +224,7 @@ To display a list of the available interpreters issue the following command:
 /usr/hdp/current/zeppelin-server/bin/install-interpreter.sh --list
 ~~~
 
-next, issue the following command:
+If the interpreter you wish to install is present in the list of installed interpreters but is not available as a bindable interpreter in the Zeppelin UI then proceed to the [Creating an interpreter](#creating-an-interpreter) section. However, if the interpreter you need is not already installed then issue the following command:
 
 ~~~bash
 /usr/hdp/current/zeppelin-server/bin/install-interpreter.sh --name shell,jdbc,python...
@@ -229,7 +236,7 @@ next, issue the following command:
 
  ![install-interpreter-shell](assets/install-interpreter-shell.jpg)
 
- Restart Zeppelin from Ambari UI.
+Restart Zeppelin from Ambari UI.
 
 Refer to [creating an interpreter section](#creating-an-interpreter) to enable usage on the Zeppelin Web Application.
 

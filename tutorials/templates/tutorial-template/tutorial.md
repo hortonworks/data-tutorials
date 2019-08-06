@@ -21,7 +21,7 @@ This is the introductory paragraph for the tutorial.  This section will typicall
 
 ## Prerequisites
 
-- Downloaded and deployed the [Hortonworks Data Platform (HDP)](https://hortonworks.com/downloads/#sandbox) Sandbox
+- Downloaded and deployed the [Hortonworks Data Platform (HDP)](https://www.cloudera.com/downloads/hortonworks-sandbox/hdp.html) Sandbox
 - [Title of a required tutorial to have been completed](http://example.com/link/to/required/tutorial)
 - [Another prerequisite](http://example.com/link/to/required/tutorial)
 

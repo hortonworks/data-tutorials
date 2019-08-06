@@ -1,11 +1,6 @@
 #!/bin/bash
 
 ##
-# Author: James Medel
-# Email: jamesmedel94@gmail.com
-##
-
-##
 # Sets up HDF Dev Environment, so User can focus on NiFi Flow Dev
 # 1. Creates GeoFile directory and download in GeoFile DB
 # 2. Backup existing NiFi flow on canvas

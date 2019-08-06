@@ -124,7 +124,7 @@ Congratulations, you've finished the concepts tutorial! Now you are familiar wit
 - [Docker Engine Documentation](https://docs.docker.com/engine/)
 - [Hortonworks DataFlow](https://hortonworks.com/products/data-center/hdf/)
 - [Hortonworks Data Platform](https://hortonworks.com/products/data-center/hdp/)
-- [Rasbperry Pi Overview](https://www.raspberrypi.org/documentation/)
+- [Raspberry Pi Overview](https://www.raspberrypi.org/documentation/)
 - [Internet of Things 101: Getting Started w/ Raspberry Pi](https://www.pubnub.com/blog/2015-05-27-internet-of-things-101-getting-started-w-raspberry-pi/)
 - [Sense HAT Documentation](https://www.raspberrypi.org/documentation/hardware/sense-hat/)
 - [Apache NiFi Overview](https://hortonworks.com/apache/nifi/)

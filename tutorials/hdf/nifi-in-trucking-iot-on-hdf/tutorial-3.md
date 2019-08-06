@@ -140,7 +140,7 @@ _Properties Tab of this Controller Service_
 | Time Format | No value set |
 | Timestamp Format | No value set |
 | CSV Format | Custom Format |
-| Value Separator | `|` |
+| Value Separator | `\|` |
 | Treat First Line as Header | false |
 | Quote Character | " |
 | Escape Character | `\` |
@@ -199,7 +199,7 @@ _Properties Tab of this Controller Service_
 | Time Format | No value set |
 | Timestamp Format | No value set |
 | CSV Format | Custom Format |
-| Value Separator | `|` |
+| Value Separator | `\|` |
 |Treat First Line as Header | false |
 | Quote Character | " |
 | Escape Character | `\` |
@@ -209,7 +209,7 @@ _Properties Tab of this Controller Service_
 
 **AvroRecordWriter - Traffic Data**
 
-| Property | Value     |
+| Property | Value |
 | :------------- | :------------- |
 | Schema Write Strategy | HWX Content-Encoded Schema Reference |
 | Schema Access Strategy | Use 'Schema Name' Property |

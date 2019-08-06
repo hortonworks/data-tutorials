@@ -25,7 +25,7 @@ We will describe how to ingest data into HDFS, to create tables and perform quer
 
 ## Prerequisites
 
-- Downloaded and deployed the [Hortonworks Data Platform (HDP)](https://hortonworks.com/downloads/#sandbox) Sandbox
+- Downloaded and deployed the [Hortonworks Data Platform (HDP)](https://www.cloudera.com/downloads/hortonworks-sandbox/hdp.html?utm_source=mktg-tutorial) Sandbox
 - [Learning the Ropes of the HDP Sandbox](https://hortonworks.com/tutorial/learning-the-ropes-of-the-hortonworks-sandbox/) tutorial
 
 ## Outline
@@ -90,7 +90,7 @@ Once there, we are going to create the first table for the **product.tsv** file 
 
 ![das-products-table-data-preview](assets/das-products-table-data-preview.jpg)
 
-12\. Following steps 4 to 11 create and verify the table for **users**. You will be asked to enter the **Precision** for the column titled **GENDER_CD**, enter 1. 
+12\. Following steps 4 to 11 create and verify the table for **users**. You will be asked to enter the **Precision** for the column titled **GENDER_CD**, enter 1.
 
 The **DATA PREVIEW** for **users** should look like the table below:
 
@@ -169,13 +169,13 @@ LOAD DATA INPATH '/tmp/maria_dev/omniture-logs.tsv' OVERWRITE INTO TABLE omnitur
 
 ## Save and Execute a Query
 
-Suppose we want to write a query, but not necessarily execute it immediately or perhaps we want to save it for future multiple uses. 
+Suppose we want to write a query, but not necessarily execute it immediately or perhaps we want to save it for future multiple uses.
 
 1\. Go to **Compose**
 
 2\. Add a new worksheet by clicking on **+** next to **Worksheet2**
 
-3\. Copy/paste the following query 
+3\. Copy/paste the following query
 
 ```SQL
 CREATE VIEW omniture AS
@@ -203,7 +203,7 @@ The "**SavedQuery1**" tab should automatically open up, with your saved query pr
 
 Let's play with our data further, taking specific fields from different tables and creating a custom table from them.
 
-Copy/paste the query below in a new **Worksheet4** and **Execute**. 
+Copy/paste the query below in a new **Worksheet4** and **Execute**.
 
 Use the steps in  [Create a Hive Table via a Query](https://hortonworks.com/tutorial/loading-and-querying-data-with-hadoop/#create-a-hive-table-via-a-query) for reference.
 

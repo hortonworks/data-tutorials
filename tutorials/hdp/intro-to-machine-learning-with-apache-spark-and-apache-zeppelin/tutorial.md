@@ -23,7 +23,7 @@ In this tutorial, we will introduce you to Machine Learning with Apache Spark. T
 
 ## Prerequisites
 
-- Downloaded and deployed the [Hortonworks Data Platform (HDP)](https://hortonworks.com/downloads/#sandbox) Sandbox
+- Downloaded and deployed the [Hortonworks Data Platform (HDP)](https://www.cloudera.com/downloads/hortonworks-sandbox/hdp.html?utm_source=mktg-tutorial) Sandbox
 - [Getting Started with Apache Zeppelin](https://hortonworks.com/tutorial/getting-started-with-apache-zeppelin/)
 - Having basic knowledge of [Scala](http://www.dhgarrette.com/nlpclass/scala/basics.html)
 

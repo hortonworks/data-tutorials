@@ -10,7 +10,7 @@ This tutorial walks through the general approach for installing the Hortonworks 
 
 ## Prerequisites
 
-- [Download the Hortonworks Sandbox](https://hortonworks.com/downloads/#sandbox)
+- [Download the Hortonworks Sandbox](https://www.cloudera.com/downloads/hortonworks-sandbox.html?utm_source=mktg-tutorial)
 - [VirtualBox Installed](https://www.virtualbox.org/wiki/Downloads), version 5.1 or newer
 - A computer with minimum **10 GB RAM** dedicated to the virtual machine
 
@@ -24,7 +24,7 @@ This tutorial walks through the general approach for installing the Hortonworks 
 ## Import the Hortonworks Sandbox
 
 Start by importing the Hortonworks Sandbox into VirtualBox:
-
+https://www.cloudera.com/downloads/hortonworks-sandbox.html?utm_source=mktg-tutorial
 - Open VirtualBox and navigate to **File -> Import Appliance**. Select the sandbox image you downloaded and click **Open**.
 
 You should end up with a screen like this:

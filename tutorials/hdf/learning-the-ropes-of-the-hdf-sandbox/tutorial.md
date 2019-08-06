@@ -23,7 +23,7 @@ By the end of this tutorial, you will be familiar with the data-in-motion tools 
 
 ## Prerequisites
 
-- Downloaded and deployed the [Hortonworks Data Flow (HDF)](https://hortonworks.com/downloads/#sandbox) Sandbox
+- Downloaded and deployed the [Hortonworks DataFlow (HDF)](https://www.cloudera.com/downloads/hortonworks-sandbox/hdf.html?utm_source=mktg-tutorial) Sandbox
 
 ## Outline
 
@@ -219,7 +219,7 @@ you change your Ambari admin password to be unique.
 
 2. The login using credentials: **root** / **hadoop**
 
-3. Type the following commands: 
+3. Type the following commands:
 
 ```bash
 ambari-admin-password-reset

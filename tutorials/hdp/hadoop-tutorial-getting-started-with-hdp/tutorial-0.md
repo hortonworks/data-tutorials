@@ -27,7 +27,7 @@ Here is the video of [Analyzing Geolocation Data](http://youtu.be/n8fdYHoEEAM) t
 
 ## Prerequisites
 
-- Downloaded and deployed the [Hortonworks Data Platform (HDP)](https://hortonworks.com/downloads/#sandbox) Sandbox
+- Downloaded and deployed the [Hortonworks Data Platform (HDP)](https://www.cloudera.com/downloads/hortonworks-sandbox/hdp.html?utm_source=mktg-tutorial) Sandbox
 - Go through [Learning the Ropes of the HDP Sandbox](https://hortonworks.com/tutorial/learning-the-ropes-of-the-hortonworks-sandbox/) to become familiar with the Sandbox.
 - **_Optional_** Install [Hortonworks ODBC Driver](http://hortonworks.com/downloads/#addons). This will be needed for [Data Reporting with Microsoft Excel for Windows](https://hortonworks.com/tutorial/hadoop-tutorial-getting-started-with-hdp/section/7/) tutorial.
 

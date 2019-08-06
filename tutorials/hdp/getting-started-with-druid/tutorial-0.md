@@ -21,7 +21,7 @@ In this tutorial, we will use the Wikipedia sample dataset of 2015 that comes wi
 
 ## Prerequisites
 
-- Downloaded and deployed the [Hortonworks Data Platform (HDP)](https://hortonworks.com/downloads/#sandbox) Sandbox
+- Downloaded and deployed the [Hortonworks Data Platform (HDP)](https://www.cloudera.com/downloads/hortonworks-sandbox/hdp.html?utm_source=mktg-tutorial) Sandbox
 - 16GB of RAM dedicated for the Sandbox
 
 ## Goals and Objectives

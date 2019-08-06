@@ -24,7 +24,7 @@ This tutorial will get you started with Apache Spark and will cover:
 
 ## Prerequisites
 
-- [Downloaded and Installed latest Hortonworks Data Platform (HDP) Sandbox](https://hortonworks.com/downloads/#sandbox)
+- Downloaded and deployed the [Hortonworks Data Platform (HDP)](https://www.cloudera.com/downloads/hortonworks-sandbox/hdp.html?utm_source=mktg-tutorial) Sandbox
 - [Learning the Ropes of the HDP Sandbox](https://hortonworks.com/tutorial/learning-the-ropes-of-the-hortonworks-sandbox/)
 - Basic [Scala](http://www.dhgarrette.com/nlpclass/scala/basics.html) syntax
 - [Getting Started with Apache Zeppelin](https://hortonworks.com/tutorial/getting-started-with-apache-zeppelin/)
@@ -48,7 +48,7 @@ Things you can do with Spark SQL:
 
 - Execute SQL queries
 - Read data from an existing Hive installation
-  
+
 ### Datasets and DataFrames
 
 A Dataset is a type of interface that provides the benefits of RDD (strongly typed) and Spark SQL's optimization. It is important to note that a Dataset can be constructed from JVM objects and then manipulated using complex functional transformations, however, they are beyond this quick guide.

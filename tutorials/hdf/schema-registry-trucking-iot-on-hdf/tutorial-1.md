@@ -12,7 +12,7 @@ So what is Schema Registry and what benefits does it provide?  Would using it ma
 
 ## Prerequisites
 
-- [Hortonworks DataFlow (HDF) Sandbox Installed](https://hortonworks.com/downloads/#sandbox)
+- Downloaded and deployed the [Hortonworks DataFlow (HDF)](https://www.cloudera.com/downloads/hortonworks-sandbox/hdf.html?utm_source=mktg-tutorial) Sandbox
 - Some understanding of schemas and serialization
 
 ## Outline

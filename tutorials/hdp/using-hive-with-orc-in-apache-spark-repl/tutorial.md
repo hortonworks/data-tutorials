@@ -32,7 +32,7 @@ Spark SQL uses the Spark engine to execute SQL queries either on data sets persi
 
 This tutorial is a part of series of hands-on tutorials to get you started with HDP using Hortonworks sandbox. Please ensure you complete the prerequisites before proceeding with this tutorial.
 
-- Downloaded and deployed the [Hortonworks Data Platform (HDP)](https://hortonworks.com/downloads/#sandbox) Sandbox
+- Downloaded and deployed the [Hortonworks Data Platform (HDP)](https://www.cloudera.com/downloads/hortonworks-sandbox/hdp.html?utm_source=mktg-tutorial) Sandbox
 - [Learning the Ropes of the HDP Sandbox](https://hortonworks.com/tutorial/learning-the-ropes-of-the-hortonworks-sandbox/)
 
 This tutorial will be using Spark 2.x API syntax for all the examples.
@@ -234,7 +234,7 @@ stockprice.show
 Sample results of **stockprice.show**
 
 ~~~scala
-scala> stockprice.show 
+scala> stockprice.show
 +----------+-----+-----+-----+-----+--------+--------+
 |      date| open| high|  low|close|  volume|adjClose|
 +----------+-----+-----+-----+-----+--------+--------+

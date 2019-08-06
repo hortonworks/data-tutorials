@@ -21,7 +21,7 @@ In this tutorial, we will use the [Ambari](https://hortonworks.com/hadoop/ambari
 
 ## Prerequisites
 
-- Downloaded and deployed the [Hortonworks Data Platform (HDP)](https://hortonworks.com/downloads/#sandbox) Sandbox
+- Downloaded and deployed the [Hortonworks Data Platform (HDP)](https://www.cloudera.com/downloads/hortonworks-sandbox/hdp.html?utm_source=mktg-tutorial) Sandbox
 - [Learning the Ropes of the HDP Sandbox](https://hortonworks.com/tutorial/learning-the-ropes-of-the-hortonworks-sandbox/)
 
 ## Outline
@@ -134,7 +134,7 @@ SELECT * FROM temp_drivers
 Now that we have read the data in we can start working with it. The next thing we want to do extract the data. So first we will type in a query to create a new table called `drivers` to hold the data. That table will have six columns for `driverId, name, ssn, location, certified and the wage-plan` of drivers.
 
 ~~~sql
-CREATE TABLE drivers (driverId INT, name STRING, ssn BIGINT, 
+CREATE TABLE drivers (driverId INT, name STRING, ssn BIGINT,
                       location STRING, certified STRING, wageplan STRING)
 ~~~
 

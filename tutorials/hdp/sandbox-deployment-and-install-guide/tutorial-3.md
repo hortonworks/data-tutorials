@@ -74,9 +74,9 @@ Select the **Advanced** tab and adjust the dedicated memory to **at least 12GB o
 
 **Install/Deploy/Start HDP Sandbox**
 
-- Download latest scripts [Hortonworks Data Platform (HDP) for Docker](https://hortonworks.com/downloads/#sandbox) and decompress **zip** file.
+- Download latest scripts [Hortonworks Data Platform (HDP) for Docker](https://www.cloudera.com/downloads/hortonworks-sandbox/hdp.html?utm_source=mktg-tutorial) and decompress **zip** file.
 
-[![docker-download-hdp](assets/docker-download-hdp.jpg)](https://hortonworks.com/downloads/#sandbox)
+[![docker-download-hdp](assets/docker-download-hdp.jpg)](https://www.cloudera.com/downloads/hortonworks-sandbox/hdp.html?utm_source=mktg-tutorial)
 
 In the decompressed folder, you will find shell script **docker-deploy-{version}.sh**. From the command line, Linux / Mac / Windows(Git Bash), run the script:
 
@@ -146,9 +146,9 @@ docker rmi hortonworks/sandbox-hdp:{release}
 
 **Install/Deploy/Start HDF Sandbox**
 
-- Download latest scripts [Hortonworks DataFlow (HDF) for Docker](https://hortonworks.com/downloads/#sandbox) and decompress **zip** file.
+- Download latest scripts [Hortonworks DataFlow (HDF) for Docker](https://www.cloudera.com/downloads/hortonworks-sandbox/hdf.html?utm_source=mktg-tutorial) and decompress **zip** file.
 
-[![docker-download-hdf](assets/docker-download-hdfdcoc.jpg)](https://hortonworks.com/downloads/#sandbox)
+[![docker-download-hdf](assets/docker-download-hdf.jpg)](https://www.cloudera.com/downloads/hortonworks-sandbox/hdf.html?utm_source=mktg-tutorial)
 
 In the decompressed folder, you will find shell script **docker-deploy-{version}.sh**. From the command line, Linux / Mac / Windows(Git Bash), run the script:
 
