@@ -27,8 +27,8 @@ We will create a SAM topology to ingest streams of data from Apache Kafka into o
 
 ## Outline
 
-- [Stream Processing & SAM](https://hortonworks.com/tutorial/sam-in-trucking-iot-on-hdf/section/1/)- You will learn the fundamental concepts of Stream Processing and SAM.
-- [Create a SAM Topology](https://hortonworks.com/tutorial/sam-in-trucking-iot-on-hdf/section/2/)- You will learn to build a stream processing application
+- [Stream Processing & SAM](https://hortonworks.com/tutorial/sam-in-trucking-iot/section/1/)- You will learn the fundamental concepts of Stream Processing and SAM.
+- [Create a SAM Topology](https://hortonworks.com/tutorial/sam-in-trucking-iot/section/2/)- You will learn to build a stream processing application
 
 ## Tutorial Reference Application
 
