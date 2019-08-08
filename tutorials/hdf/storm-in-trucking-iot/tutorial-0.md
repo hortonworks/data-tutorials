@@ -27,7 +27,7 @@ We will build a Storm topology from the ground up and demonstrate a full data pi
 
 ## Outline
 
-- [Trucking IoT Use Case](https://hortonworks.com/tutorial/storm-in-trucking-iot-on-hdf/section/1/) - Discuss a real-world use case and understand the role Storm plays within in.
-- [Running the Demo](https://hortonworks.com/tutorial/storm-in-trucking-iot-on-hdf/section/2/) - Walk through the demo and first gain an understanding of the data pipeline.
-- [Building a Storm Topology](https://hortonworks.com/tutorial/storm-in-trucking-iot-on-hdf/section/3/) - Dive into Storm internals and build a topology from scratch.
-- [Deploying the Topology](https://hortonworks.com/tutorial/storm-in-trucking-iot-on-hdf/section/4/) - Package the Storm code and deploy onto your cluster.
+- [Trucking IoT Use Case](https://hortonworks.com/tutorial/storm-in-trucking-iot/section/1/) - Discuss a real-world use case and understand the role Storm plays within in.
+- [Running the Demo](https://hortonworks.com/tutorial/storm-in-trucking-iot/section/2/) - Walk through the demo and first gain an understanding of the data pipeline.
+- [Building a Storm Topology](https://hortonworks.com/tutorial/storm-in-trucking-iot/section/3/) - Dive into Storm internals and build a topology from scratch.
+- [Deploying the Topology](https://hortonworks.com/tutorial/storm-in-trucking-iot/section/4/) - Package the Storm code and deploy onto your cluster.

@@ -14,7 +14,7 @@ title: NiFi in Trucking IoT Use Case
 
 ## The IoT Use Case
 
-Visit the Storm tutorial to learn about the [Trucking IoT Use Case](https://hortonworks.com/tutorial/storm-in-trucking-iot-on-hdf/section/1/#the-iot-use-case).
+Visit the Storm tutorial to learn about the [Trucking IoT Use Case](https://hortonworks.com/tutorial/storm-in-trucking-iot/section/1/#the-iot-use-case).
 
 ## What is NiFi?
 
