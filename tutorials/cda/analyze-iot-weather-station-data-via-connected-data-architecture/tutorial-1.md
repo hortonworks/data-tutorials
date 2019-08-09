@@ -112,7 +112,7 @@ The IoT Weather Station is based at the Raspberry Pi and Sense HAT. At this loca
 
 **Connected Data Architecture at HDF + HDP Sandbox Nodes**
 
-The combination of HDF and HDP create Connected Data Architecture. For prototyping purposes, you will be running a single node HDF sandbox container and a single node HDP sandbox container inside a docker containerized network that is running in the Guest VM or natively on your host machine. The way that sensor data gets into the Connected Data Architecture is through MiNiFi's connection to HDF NiFi via Site-To-Site. This protocol allows external agents to connect to NiFi by exposing IP address of its host and opening a socket port. NiFi will be used to preprocess the sensor data and add geographic enrichment. NiFi is located in the HDF Sandbox Container, which then makes connection to HBase via NiFi's HBase Client Service Controller. This Controller Service enables NiFi to connect to a remote HBase located on the HDP Sandbox Container by way of an "hbase-site.xml" configuration file that tells NiFi where HBase lives. Zookeeper handles the requests NiFi makes when it tries to connect and transfer data to HBase, if Zookeeper sends NiFi a response that it can connect to HBase, then data is stored in an HBase table. Once the data is stored in HBase, Phoenix is used to map to the HBase table. Visualization is performed using Zeppelin's Phoenix interpreter.
+The combination of HDF and HDP create Connected Data Architecture. For prototyping purposes, you will be running a single node HDF sandbox container and a single node HDP sandbox container inside a docker containerized network that is running in the Guest VM or natively on your host machine. The way that sensor data gets into the Connected Data Architecture is through MiNiFi's connection to HDF NiFi via Site-To-Site. This protocol allows external agents to connect to NiFi by exposing IP address of its host and opening a socket port. NiFi will be used to preprocess the sensor data and add geographic enrichment. NiFi is located in the CDF Sandbox Container, which then makes connection to HBase via NiFi's HBase Client Service Controller. This Controller Service enables NiFi to connect to a remote HBase located on the HDP Sandbox Container by way of an "hbase-site.xml" configuration file that tells NiFi where HBase lives. Zookeeper handles the requests NiFi makes when it tries to connect and transfer data to HBase, if Zookeeper sends NiFi a response that it can connect to HBase, then data is stored in an HBase table. Once the data is stored in HBase, Phoenix is used to map to the HBase table. Visualization is performed using Zeppelin's Phoenix interpreter.
 
 ## Summary
 
@@ -122,7 +122,7 @@ Congratulations, you've finished the concepts tutorial! Now you are familiar wit
 
 - [Docker Overview](https://docs.docker.com/engine/docker-overview/)
 - [Docker Engine Documentation](https://docs.docker.com/engine/)
-- [Hortonworks DataFlow](https://hortonworks.com/products/data-center/hdf/)
+- [Cloudera DataFlow](https://hortonworks.com/products/data-center/hdf/)
 - [Hortonworks Data Platform](https://hortonworks.com/products/data-center/hdp/)
 - [Raspberry Pi Overview](https://www.raspberrypi.org/documentation/)
 - [Internet of Things 101: Getting Started w/ Raspberry Pi](https://www.pubnub.com/blog/2015-05-27-internet-of-things-101-getting-started-w-raspberry-pi/)

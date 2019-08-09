@@ -229,7 +229,7 @@ If you prefer to build the dataflow manually step-by-step, continue on to **Appr
 
 2\. Let the flow run for about 1 minute, then stop the flow by hitting the **stop** button.
 
-3\. Launch Sandbox Web Shell Client via Hortonworks DataFlow (HDF) Splash Screen from **[Advanced HDF SB Quick Links](http://sandbox-hdf.hortonworks.com:1080)** Link.
+3\. Launch Sandbox Web Shell Client via Cloudera DataFlow (CDF) Splash Screen from **[Advanced HDF SB Quick Links](http://sandbox-hdf.hortonworks.com:1080)** Link.
 
 **Figure 11:** SB Quick Link for Web Shell Client
 
@@ -237,7 +237,7 @@ If you prefer to build the dataflow manually step-by-step, continue on to **Appr
 
 ![web_shell_client](assets/tutorial-3-build-a-nifi-process-group-to-simulate-nextbus-api/web_shell_client.jpg)
 
-You have now SSH'd into the HDF Sandbox Server.
+You have now SSH'd into the CDF Sandbox Server.
 
 4\. Navigate to the output directory in which the transit data is being written to:
 

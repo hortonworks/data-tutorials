@@ -41,7 +41,7 @@ setup_nifi()
 {
   ##
   # Purpose of the following section of Code:
-  # HDF Sandbox comes with a prebuilt NiFi flow, which causes user to be
+  # CDF Sandbox comes with a prebuilt NiFi flow, which causes user to be
   # pulled away from building the HVAC System Analysis Application.
   #
   # Potential Solution: Backup prebuilt NiFi flow and call it a different name.

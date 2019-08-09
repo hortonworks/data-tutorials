@@ -283,7 +283,7 @@ Once NiFi writes your sensor data to HDFS, which you can check quickly by lookin
 
 ## Approach 3: Auto Deploy NiFi Flow via REST Call
 
-Open HDF Sandbox Web Shell Client at http://sandbox-hdf.hortonworks.com:4200. Copy and paste the following shell code:
+Open CDF Sandbox Web Shell Client at http://sandbox-hdf.hortonworks.com:4200. Copy and paste the following shell code:
 
 ~~~bash
 NIFI_TEMPLATE="acquire-hvac-data"

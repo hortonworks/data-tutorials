@@ -51,7 +51,7 @@ Image File Sizes:
 
 ### Databases Used
 
-These are a list of databases used within the HDF Sandbox along with the HDF components that use them.
+These are a list of databases used within the CDF Sandbox along with the HDF components that use them.
 
 - PostgreSQL: Ambari
 - MySQL: Registry, Streaming Analytics Manager

@@ -7,7 +7,7 @@ persona: Data Engineer, Data Analyst
 source: Cloudera
 use case: Data Discovery
 technology: Apache Ambari, Apache NiFi, HDFS, Apache Spark, Apache Zeppelin
-release: hdp-3.0.1, hdf-3.2.0
+release: hdp-3.0.1, cdf-3.2.0
 environment: Sandbox
 product: CDA
 series: CDA > Data Engineers & Scientists > Data Science Applications
@@ -34,7 +34,7 @@ team should be cautious about.
 ## Big Data Technologies used to develop the Application:
 
 - [NASA Server Logs Dataset](http://ita.ee.lbl.gov/html/contrib/NASA-HTTP.html)
-- [HDF Sandbox](https://hortonworks.com/products/data-platforms/hdf/)
+- [CDF Sandbox](https://hortonworks.com/products/data-platforms/hdf/)
     - [Apache Ambari](https://ambari.apache.org/)
     - [Apache NiFi](https://nifi.apache.org/)
 - [HDP Sandbox](https://hortonworks.com/products/data-platforms/hdp/)

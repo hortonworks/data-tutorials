@@ -17,7 +17,7 @@ series: HDP > Hadoop Administration > Hortonworks Sandbox
 
 ## Introduction
 
-Hortonworks Sandbox Deployment is available in three isolated environments: virtual machine, container or cloud. There are two sandboxes available: Hortonworks Data Platform (HDP) and Hortonworks DataFlow (HDF).
+Hortonworks Sandbox Deployment is available in three isolated environments: virtual machine, container or cloud. There are two sandboxes available: Hortonworks Data Platform (HDP) and Cloudera DataFlow (CDF).
 
 ## Environments for Sandbox Deployment
 

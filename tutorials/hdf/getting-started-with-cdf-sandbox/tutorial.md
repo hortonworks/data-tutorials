@@ -1,5 +1,5 @@
 ---
-title: Getting Started with the HDF Sandbox
+title: Getting Started with the CDF Sandbox
 author: sandbox-team
 tutorial-id: 761
 experience: Beginner
@@ -7,13 +7,13 @@ persona: Administrator
 source: Cloudera
 use case: Single View
 technology:  Apache NiFi, Apache Storm, Apache Kafka, Streaming Analytics Manager, Schema Registry
-release: hdf-3.2.0
+release: cdf-3.2.0
 environment: Sandbox
 product: CDF
 series: CDF > Develop Data Flow & Streaming Applications > Hello World
 ---
 
-# Getting Started with the HDF Sandbox
+# Getting Started with the CDF Sandbox
 
 ## Introduction
 
@@ -21,7 +21,7 @@ In this tutorial, you will learn how to deploy a modern real-time streaming appl
 
 ## Prerequisites
 
-- Downloaded and deployed the [Hortonworks DataFlow (HDF)](https://www.cloudera.com/downloads/hortonworks-sandbox/hdf.html?utm_source=mktg-tutorial) Sandbox
+- Downloaded and deployed the [Cloudera DataFlow (CDF)](https://www.cloudera.com/downloads/hortonworks-sandbox/hdf.html?utm_source=mktg-tutorial) Sandbox
 
 ## Outline
 
@@ -59,7 +59,7 @@ Apache Kafka is an open source publish-subscribe based messaging system responsi
 
 ### Overview of Trucking IoT Ref App
 
-The Trucking IoT Reference Application is built using Hortonworks DataFlow Platform.
+The Trucking IoT Reference Application is built using Cloudera DataFlow Platform.
 
 The Trucking IoT data comes from a truck events simulator that is ingested by Apache NiFi, NiFi sends the data to Kafka topics which are then ingested by Stream Analytics Manager (SAM). A more in depth explanation of the pipeline will be explained as you explore the NiFi Dataflow application, Schema Registry and SAM.
 
@@ -114,7 +114,7 @@ Overview of **5 controller services** used in the NiFi Flow:
 
 - **CSVReader - Traffic Data** - returns each row in CSV file as a separate record (trucking_data_traffic schema)
 
-- **HortonworksSchemaRegistry** - provides schema registry service for interaction with Hortonworks Schema Registry
+- **HortonworksSchemaRegistry** - provides schema registry service for interaction with Cloudera Schema Registry
 
 7\. Press `command+A` or `control+A` to select all the processors in the NiFi Dataflow and click on the start button ![nifi_start](assets/images/nifi_start.jpg).
 

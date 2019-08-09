@@ -14,8 +14,8 @@ In this tutorial, using Microsoft Excel 2016 for Windows and Power View, we'll v
 
 The tutorial is a part of series of hands on tutorial to get you started on HDP using Hortonworks sandbox. Please ensure you complete the prerequisites before proceeding with this tutorial.
 
-- [Loading Sensor Data into HDFS](https://hortonworks.com/tutorial/hadoop-tutorial-getting-started-with-hdp/section/2/)
-- [Hive - Data ETL](https://hortonworks.com/tutorial/hadoop-tutorial-getting-started-with-hdp/section/3/)
+- [Loading Sensor Data into HDFS](https://hortonworks.com/tutorial/getting-started-with-hdp/section/2/)
+- [Hive - Data ETL](https://hortonworks.com/tutorial/getting-started-with-hdp/section/3/)
 - Install [Hortonworks ODBC Driver for Apache Hive (v2.1.10)](http://hortonworks.com/downloads/#addons)
 - [Configure ODBC driver](http://hortonworks.com/wp-content/uploads/2013/05/Installing_Configuring_Hortonworks_ODBC_Driver_with_Sandbox_-Windows7.pdf)
 - Microsoft Excel 2016 for Windows + [Power View](https://support.office.com/en-us/article/Turn-on-Power-View-in-Excel-2016-for-Windows-f8fc21a6-08fc-407a-8a91-643fa848729a)
@@ -29,7 +29,7 @@ The tutorial is a part of series of hands on tutorial to get you started on HDP 
 
 ## Access Data in Microsoft Excel
 
-Let's bring in data from table **avg_mileage**. We created this table in the [_Hive - Data ETL_](https://hortonworks.com/tutorial/hadoop-tutorial-getting-started-with-hdp/section/3/) section.
+Let's bring in data from table **avg_mileage**. We created this table in the [_Hive - Data ETL_](https://hortonworks.com/tutorial/getting-started-with-hdp/section/3/) section.
 
 1\. Open a new blank workbook.
 
@@ -77,7 +77,7 @@ We will use Power View to visulaize our data.
 
 Moving on to our next visual...
 
-We'll be using data from table **geolocation**. We created this table in the [_Hive - Data ETL_](https://hortonworks.com/tutorial/hadoop-tutorial-getting-started-with-hdp/section/3/) section. We will create a geographical map describing the location of each truck. We'll use the following query to gather **driverid**, **city**, and **state** from the table.
+We'll be using data from table **geolocation**. We created this table in the [_Hive - Data ETL_](https://hortonworks.com/tutorial/getting-started-with-hdp/section/3/) section. We will create a geographical map describing the location of each truck. We'll use the following query to gather **driverid**, **city**, and **state** from the table.
 
 ~~~sql
 SELECT driverid, city, state FROM geolocation;

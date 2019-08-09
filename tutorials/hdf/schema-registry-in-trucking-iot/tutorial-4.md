@@ -150,7 +150,7 @@ log.info(s"Schema version was registered with ID: $schemaVersionId")
 
 ## Running The Application
 
-Run this SBT application using your preferred method.  If you download this project onto the HDF Sandbox or if your host machine is using a distribution with the Yum package manager, there is a helper script included to run the application for you.
+Run this SBT application using your preferred method.  If you download this project onto the CDF Sandbox or if your host machine is using a distribution with the Yum package manager, there is a helper script included to run the application for you.
 
 ``` scala
 ./run.sh

@@ -30,11 +30,11 @@ This tutorial walks through the general approach for installing the Hortonworks 
   - [Restart HDP Sandbox](#restart-hdp-sandbox)
   - [Remove HDP Sandbox](#remove-hdp-sandbox)
 - [HDF Deployment](#hdf-deployment)
-  - [Deploy HDF Sandbox](#deploy-hdf-sandbox)
-  - [Verify HDF Sandbox](#verify-hdf-sandbox)
-  - [Stop HDF Sandbox](#stop-hdf-sandbox)
-  - [Restart HDF Sandbox](#restart-hdf-sandbox)
-  - [Remove HDF Sandbox](#remove-hdf-sandbox)
+  - [Deploy CDF Sandbox](#deploy-cdf-sandbox)
+  - [Verify CDF Sandbox](#verify-cdf-sandbox)
+  - [Stop CDF Sandbox](#stop-cdf-sandbox)
+  - [Restart CDF Sandbox](#restart-cdf-sandbox)
+  - [Remove CDF Sandbox](#remove-cdf-sandbox)
 - [Enable Connected Data Architecture (CDA) - Advanced Topic](#enable-connected-data-architecture-cda---advanced-topic)
 - [Further Reading](#further-reading)
 - [Appendix A: Troubleshooting](#appendix-a-troubleshooting)
@@ -142,11 +142,11 @@ docker rmi hortonworks/sandbox-hdp:{release}
 
 ## HDF Deployment
 
-### Deploy HDF Sandbox
+### Deploy CDF Sandbox
 
-**Install/Deploy/Start HDF Sandbox**
+**Install/Deploy/Start CDF Sandbox**
 
-- Download latest scripts [Hortonworks DataFlow (HDF) for Docker](https://www.cloudera.com/downloads/hortonworks-sandbox/hdf.html?utm_source=mktg-tutorial) and decompress **zip** file.
+- Download latest scripts [Cloudera DataFlow (CDF) for Docker](https://www.cloudera.com/downloads/hortonworks-sandbox/hdf.html?utm_source=mktg-tutorial) and decompress **zip** file.
 
 [![docker-download-hdf](assets/docker-download-hdf.jpg)](https://www.cloudera.com/downloads/hortonworks-sandbox/hdf.html?utm_source=mktg-tutorial)
 
@@ -165,7 +165,7 @@ The script output will be similar to:
 
 ![docker-start-hdf-output](assets/docker-start-hdf-output.jpg)
 
-### Verify HDF Sandbox
+### Verify CDF Sandbox
 
 Verify HDF sandbox was deployed successfully by issuing the command:
 
@@ -177,7 +177,7 @@ You should see something like:
 
 ![docker-ps-hdf-output](assets/docker-ps-hdf-output.jpg)
 
-### Stop HDF Sandbox
+### Stop CDF Sandbox
 
 When you want to stop/shutdown your HDF sandbox, run the following commands:
 
@@ -186,7 +186,7 @@ docker stop sandbox-hdf
 docker stop sandbox-proxy
 ```
 
-### Restart HDF Sandbox
+### Restart CDF Sandbox
 
 When you want to re-start your HDF sandbox, run the following commands:
 
@@ -195,7 +195,7 @@ docker start sandbox-hdf
 docker start sandbox-proxy
 ```
 
-### Remove HDF Sandbox
+### Remove CDF Sandbox
 
 A container is an instance of the Sandbox image. You must **stop** container dependencies before removing it. Issue the following commands:
 
@@ -206,7 +206,7 @@ docker rm sandbox-hdf
 docker rm sandbox-proxy
 ```
 
-If you want to remove the HDF Sandbox image, issue the following command after stopping and removing the containers:
+If you want to remove the CDF Sandbox image, issue the following command after stopping and removing the containers:
 
 ```bash
 docker rmi hortonworks/sandbox-hdf:{release}
@@ -219,7 +219,7 @@ docker rmi hortonworks/sandbox-hdf:{release}
 - Have already deployed the latest HDP/HDF sandbox
 - Update Docker settings to use minimum 16 GB (16384 MB)
 
-Hortonworks Connected Data Architecture (CDA) allows you to play with both data-in-motion (HDF) and data-at-rest (HDP) sandboxes simultaneously.
+Hortonworks Connected Data Architecture (CDA) allows you to play with both data-in-motion  (CDF) and data-at-rest (HDP) sandboxes simultaneously.
 
 **HDF (Data-In-Motion)**
 

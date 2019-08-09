@@ -1,5 +1,5 @@
 ---
-title: Learning the Ropes of the HDF Sandbox
+title: Learning the Ropes of the CDF Sandbox
 author: sandbox-team
 tutorial-id: 161
 experience: Beginner
@@ -7,23 +7,23 @@ persona: Administrator
 source: Cloudera
 use case: Single View
 technology: Apache Ambari
-release: hdf-3.2.0
+release: cdf-3.2.0
 environment: Sandbox
 product: CDF
 series: CDF > Develop Data Flow & Streaming Applications > Hello World
 ---
 
-# Learning the Ropes of the HDF Sandbox
+# Learning the Ropes of the CDF Sandbox
 
 ## Introduction
 
-Building Internet of Things (IOT) related applications is faster and simpler by using the open source data-in-motion framework known as Hortonworks DataFlow (HDF). Learn how to build IOT applications in a virtual test environment that keeps your home computing environment safe. HDF can be learned through an HDF sandbox. Tutorials have been developed and tested against the sandbox to make getting started with Big Data and IOT a smoother process.
+Building Internet of Things (IOT) related applications is faster and simpler by using the open source data-in-motion framework known as Cloudera DataFlow (CDF). Learn how to build IOT applications in a virtual test environment that keeps your home computing environment safe. HDF can be learned through an HDF sandbox. Tutorials have been developed and tested against the sandbox to make getting started with Big Data and IOT a smoother process.
 
 By the end of this tutorial, you will be familiar with the data-in-motion tools from the HDF platform that can be used to build your applications.
 
 ## Prerequisites
 
-- Downloaded and deployed the [Hortonworks DataFlow (HDF)](https://www.cloudera.com/downloads/hortonworks-sandbox/hdf.html?utm_source=mktg-tutorial) Sandbox
+- Downloaded and deployed the [Cloudera DataFlow (CDF)](https://www.cloudera.com/downloads/hortonworks-sandbox/hdf.html?utm_source=mktg-tutorial) Sandbox
 
 ## Outline
 
@@ -44,7 +44,7 @@ By the end of this tutorial, you will be familiar with the data-in-motion tools 
 
 ### What is a Sandbox?
 
-The Sandbox is a straightforward, pre-configured, learning environment that contains the latest developments from Apache Big Data related tools, specifically these tools were assembled together into Hortonworks DataFlow (HDF). The Sandbox comes packaged in a virtual environment that can run in the cloud or on your personal machine. The sandbox allows you to learn to build streaming applications. Supplemental tutorials tested against the latest sandbox environment are provided at [HDF Tutorial Track](https://hortonworks.com/tutorials/?tab=product-hdf).
+The Sandbox is a straightforward, pre-configured, learning environment that contains the latest developments from Apache Big Data related tools, specifically these tools were assembled together into Cloudera DataFlow (CDF). The Sandbox comes packaged in a virtual environment that can run in the cloud or on your personal machine. The sandbox allows you to learn to build streaming applications. Supplemental tutorials tested against the latest sandbox environment are provided at [HDF Tutorial Track](https://hortonworks.com/tutorials/?tab=product-hdf).
 
 ### HDF Standalone Sandbox
 
@@ -53,7 +53,7 @@ Zookeeper, Storm, Kafka, NiFi, NiFi Registry, Schema Registry, Streams Messaging
 
 ## Environment setup
 
-This is the administrative section to get started with the Hortonworks Sandbox environment. Generally, this will only be done once.
+This is the administrative section to get started with the Cloudera Sandbox environment. Generally, this will only be done once.
 
 ### Determine Network Adapter of Your Sandbox
 
@@ -182,7 +182,7 @@ and then on:
 2\.  **Hosts**, **Alerts**, **Admin**
 ## Summary
 
-Congratulations! Now you know about the different features available in the HDF sandbox. You can use these HDF components to begin building your own applications to solve data-in-motion problems. If you want to learn more about HDF, check out the documentation in the Further Reading section below. If you want to explore more in depth how you can use the HDF tools to build applications, visit the Hortonworks HDF Sandbox tutorials.
+Congratulations! Now you know about the different features available in the HDF sandbox. You can use these HDF components to begin building your own applications to solve data-in-motion problems. If you want to learn more about HDF, check out the documentation in the Further Reading section below. If you want to explore more in depth how you can use the HDF tools to build applications, visit the Cloudera CDF Sandbox tutorials.
 
 ## Further Reading
 

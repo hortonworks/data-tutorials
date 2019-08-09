@@ -41,7 +41,7 @@ A service pool is the set of services related to your Ambari Managed Cluster on 
 - a Kafka Cluster in which the stream application uses to create streams
 - a Druid Data Store to which the stream application writes
 
-The list of managed service pools is located in **Configuration** ![configuration](assets/images/configuration.jpg) tab. For our case, we have one service pool pre-loaded into our HDF Sandbox shown in **Figure 1**, but in larger projects, you will probably have more.
+The list of managed service pools is located in **Configuration** ![configuration](assets/images/configuration.jpg) tab. For our case, we have one service pool pre-loaded into our CDF Sandbox shown in **Figure 1**, but in larger projects, you will probably have more.
 
 ![Service_Pool](assets/images/Service_Pool.jpg)
 
@@ -51,7 +51,7 @@ The list of managed service pools is located in **Configuration** ![configuratio
 
 An environment is a named entity which represents a set of services chosen from different service pools. When a new stream application is created, they are assigned an environment by the developer. Thus, the stream application can only use services associated with your chosen environment
 
-The list of managed environments is located in the **Configuration** tab. For our case, we have one environment pre-loaded into our HDF Sandbox shown in **Figure 2**
+The list of managed environments is located in the **Configuration** tab. For our case, we have one environment pre-loaded into our CDF Sandbox shown in **Figure 2**
 
 ![existing_sandboxenvironment](assets/images/existing_sandboxenvironment.jpg)
 

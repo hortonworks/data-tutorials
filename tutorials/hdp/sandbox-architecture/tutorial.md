@@ -25,10 +25,10 @@ At a high level the Sandbox is a Linux (CentOS 7) Virtual Machine leveraging doc
 
 ## Prerequisites
 
-- Downloaded and deployed the [Hortonworks Data Platform (HDP) or Hortonworks DataFlow (HDF)](https://www.cloudera.com/downloads/hortonworks-sandbox.html?utm_source=mktg-tutorial) Sandbox
+- Downloaded and deployed the [Hortonworks Data Platform (HDP) or Cloudera DataFlow (CDF)](https://www.cloudera.com/downloads/hortonworks-sandbox.html?utm_source=mktg-tutorial) Sandbox
 - Sandbox [Deployment and Install Guide](https://hortonworks.com/tutorial/sandbox-deployment-and-install-guide/)
 - [Learning the Ropes of the HDP Sandbox](https://hortonworks.com/tutorial/learning-the-ropes-of-the-hortonworks-sandbox/)
-- [Learning the Ropes of the HDF Sandbox](https://hortonworks.com/tutorial/getting-started-with-cdf-sandbox/)
+- [Learning the Ropes of the CDF Sandbox](https://hortonworks.com/tutorial/getting-started-with-cdf-sandbox/)
 - Basic understanding of [Docker Containers](https://docs.docker.com/engine/docker-overview/)
 
 ## Outline
@@ -161,7 +161,7 @@ Data-At-Rest is the idea where data is not moving and is stored in a database or
 
 ## What is CDA?
 
-Hortonworks Connected Data Architecture (CDA) is composed of both Hortonworks DataFlow (HDF) and Hortonworks DataPlatform (HDP) sandboxes and allows you to play with both data-in-motion and data-at-rest frameworks simultaneously.
+Hortonworks Connected Data Architecture (CDA) is composed of both Cloudera DataFlow (CDF) and Hortonworks DataPlatform (HDP) sandboxes and allows you to play with both data-in-motion and data-at-rest frameworks simultaneously.
 
 ![HDF_secure_data_collection](assets/HDF_secure_data_collection.png)
 

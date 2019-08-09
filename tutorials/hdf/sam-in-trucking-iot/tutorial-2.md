@@ -28,7 +28,7 @@ Skills you will gain:
 
 ## Environment Setup
 
-Start your HDF Sandbox via Docker, VMware or VirtualBox.
+Start your CDF Sandbox via Docker, VMware or VirtualBox.
 
 1\. Head to Ambari at `sandbox-hdf.hortonworks.com:8080`.
 
@@ -56,7 +56,7 @@ Before we can create the SAM topology, we need to start the producer to store da
 
 ## Trucking Iot SAM Topology
 
-If you have the latest HDF Sandbox you will will have the Trucking-IoT-Demo under My Applications. Go through the process of creating a New Application where you will recreate the SAM topology and use the existing Trucking-IoT-Demo SAM topology as a reference.
+If you have the latest CDF Sandbox you will will have the Trucking-IoT-Demo under My Applications. Go through the process of creating a New Application where you will recreate the SAM topology and use the existing Trucking-IoT-Demo SAM topology as a reference.
 
 ## Add a New SAM topology
 
@@ -66,7 +66,7 @@ Now we have a data source for SAM to pull in data, we will build the Trucking Io
 
 ### Setup SAM
 
-We need to setup SAM by creating a **service pool** and **environment** for our application. Since we are using the HDF Sandbox, it comes pre-loaded with an already created service pool and environment, so we will show you how you would create these two components if you had deployed a fresh HDF Platform that had no reference applications.
+We need to setup SAM by creating a **service pool** and **environment** for our application. Since we are using the CDF Sandbox, it comes pre-loaded with an already created service pool and environment, so we will show you how you would create these two components if you had deployed a fresh HDF Platform that had no reference applications.
 
 > Note: this section is less hands on because we already have the required components setup. If you want to skip this part, then you can head to **Add an Application** section.
 

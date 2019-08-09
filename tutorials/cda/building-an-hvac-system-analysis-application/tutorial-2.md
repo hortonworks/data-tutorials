@@ -33,7 +33,7 @@ Setup -> Map Sandbox IP To Your Desired Hostname In The Hosts File** in [Learnin
 If you need help setting the Ambari admin password,
 
 - for HDP, reference **Admin Password Reset** in [Learning the Ropes of HDP Sandbox](https://hortonworks.com/tutorial/learning-the-ropes-of-the-hortonworks-sandbox/)
-- for HDF, reference **Admin Password Reset** in [Learning the Ropes of HDF Sandbox](https://hortonworks.com/tutorial/getting-started-with-cdf-sandbox/)
+- for HDF, reference **Admin Password Reset** in [Learning the Ropes of CDF Sandbox](https://hortonworks.com/tutorial/getting-started-with-cdf-sandbox/)
 
 **Started up all required services for "HDF" and "HDP"**
 
@@ -95,7 +95,7 @@ setup_nifi()
 {
   ##
   # Purpose of the following section of Code:
-  # HDF Sandbox comes with a prebuilt NiFi flow, which causes user to be
+  # CDF Sandbox comes with a prebuilt NiFi flow, which causes user to be
   # pulled away from building the HVAC System Analysis Application.
   #
   # Potential Solution: Backup prebuilt NiFi flow and call it a different name.

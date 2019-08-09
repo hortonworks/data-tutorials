@@ -310,7 +310,7 @@ function setup_nifi()
   service ntpd start
 }
 
-# Setup NiFi Service to ingest twitter data wout auth error on HDF Sandbox
+# Setup NiFi Service to ingest twitter data wout auth error on CDF Sandbox
 sshpass -p "$HDF_SHELL_PASS" ssh "-o StrictHostKeyChecking=no" root@$HDF_HOST << EOF
 $(typeset -f setup_nifi)
 setup_nifi

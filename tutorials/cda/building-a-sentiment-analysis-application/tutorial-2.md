@@ -154,7 +154,7 @@ Setup -> Map Sandbox IP To Your Desired Hostname In The Hosts File** in [Learnin
 If you need help setting the Ambari admin password,
 
 - for HDP, reference **Admin Password Reset** in [Learning the Ropes of HDP Sandbox](https://hortonworks.com/tutorial/learning-the-ropes-of-the-hortonworks-sandbox/)
-- for HDF, reference **Admin Password Reset** in [Learning the Ropes of HDF Sandbox](https://hortonworks.com/tutorial/getting-started-with-cdf-sandbox/)
+- for HDF, reference **Admin Password Reset** in [Learning the Ropes of CDF Sandbox](https://hortonworks.com/tutorial/getting-started-with-cdf-sandbox/)
 
 **Started up all required services for "HDF" and "HDP"**
 
@@ -167,18 +167,18 @@ If unsure, login to Ambari **admin** Dashboard
 
 ### Overview of HDF and HDP Sandbox Environment Setup
 
-The first task will be to setup NiFi service on HDF Sandbox since we will need to use it to build a dataflow for acquiring Twitter data. The second task will be to setup Hive, HDFS, Spark and HBase on HDP Sandbox, so we can focus on cleaning, preprocessing and building a machine learning for delivering visual insight to the user on their Twitter data.
+The first task will be to setup NiFi service on CDF Sandbox since we will need to use it to build a dataflow for acquiring Twitter data. The second task will be to setup Hive, HDFS, Spark and HBase on HDP Sandbox, so we can focus on cleaning, preprocessing and building a machine learning for delivering visual insight to the user on their Twitter data.
 
-### Setting Up HDF Sandbox for Application Development
+### Setting Up CDF Sandbox for Application Development
 
-Open HDF Sandbox Web Shell Client at [http://sandbox-hdf.hortonworks.com:4200](http://sandbox-hdf.hortonworks.com:4200) with login `root/hadoop`. If this login is the first one, then you will be prompted to set a new password, remember it.
+Open CDF Sandbox Web Shell Client at [http://sandbox-hdf.hortonworks.com:4200](http://sandbox-hdf.hortonworks.com:4200) with login `root/hadoop`. If this login is the first one, then you will be prompted to set a new password, remember it.
 
 ### Setup NiFi Service
 
-The following shell code synchronizes CentOS7 System Clock with UTC, which HDF Sandbox runs on and is needed for NiFi's GetTwitter processor. By updating the CentOS7 System Clock, we will avoid running into
+The following shell code synchronizes CentOS7 System Clock with UTC, which CDF Sandbox runs on and is needed for NiFi's GetTwitter processor. By updating the CentOS7 System Clock, we will avoid running into
 authorization errors when connecting to the Twitter API Feed through GetTwitter processor.
 
-The second part of the code cleans up the NiFi flow that is already prebuilt into HDF Sandbox by backing up the flow and removing it. Copy and paste the code line by line into the web shell.
+The second part of the code cleans up the NiFi flow that is already prebuilt into CDF Sandbox by backing up the flow and removing it. Copy and paste the code line by line into the web shell.
 
 ~~~bash
 echo "Synchronizing CentOS7 System Clock with UTC for GetTwitter Processor"
