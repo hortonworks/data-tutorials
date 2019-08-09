@@ -4,13 +4,13 @@ author: sandbox-team
 tutorial-id: 640
 experience: Intermediate
 persona: Data Scientist & Analyst
-source: Hortonworks
+source: Cloudera
 use case: Flow Management
 technology: Apache NiFi
 release: hdf-3.2.0
 environment: Sandbox
-product: HDF
-series: HDF > Develop Data Flow & Streaming Applications > Real World Examples
+product: CDF
+series: CDF > Develop Data Flow & Streaming Applications > Real World Examples
 ---
 
 # Analyze Transit Patterns with Apache NiFi

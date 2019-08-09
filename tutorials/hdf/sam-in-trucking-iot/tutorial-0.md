@@ -4,13 +4,13 @@ author: sandbox-team
 tutorial-id: 810
 experience: Beginner
 persona: Developer
-source: Hortonworks
+source: Cloudera
 use case: Streaming
 technology: Streaming Analytics Manager
 release: hdf-3.2.0
 environment: Sandbox
-product: HDF
-series: HDF > Develop Data Flow & Streaming Applications > Hello World
+product: CDF
+series: CDF > Develop Data Flow & Streaming Applications > Hello World
 ---
 
 # SAM in Trucking IoT on HDF

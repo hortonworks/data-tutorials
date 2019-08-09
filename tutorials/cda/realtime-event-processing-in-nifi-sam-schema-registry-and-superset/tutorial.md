@@ -4,7 +4,7 @@ author: sandbox-team
 tutorial-id: 830
 experience: Advanced
 persona: Data Scientist & Analyst
-source: Hortonworks
+source: Cloudera
 use case: Streaming
 technology: Apache NiFi, Apache Storm, Apache Kafka, Streaming Analytics Manager, Schema Registry, Apache SuperSet, Druid
 release: hdp-3.0.1, hdf-3.2.0

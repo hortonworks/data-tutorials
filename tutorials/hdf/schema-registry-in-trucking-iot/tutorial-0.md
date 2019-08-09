@@ -4,13 +4,13 @@ author: sandbox-team
 tutorial-id: 808
 experience: Beginner
 persona: Developer
-source: Hortonworks
+source: Cloudera
 use case: Streaming
 technology: Schema Registry
 release: hdf-3.2.0
 environment: Sandbox
-product: HDF
-series: HDF > Develop Data Flow & Streaming Applications > Hello World
+product: CDF
+series: CDF > Develop Data Flow & Streaming Applications > Hello World
 ---
 
 # Schema Registry in Trucking IoT on HDF

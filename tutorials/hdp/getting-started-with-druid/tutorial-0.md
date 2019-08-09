@@ -4,7 +4,7 @@ author: sandbox-team
 tutorial-id: 900
 experience: Beginner
 persona: Basic Development
-source: Hortonworks
+source: Cloudera
 use case: OLAP
 technology: Apache Druid
 release: hdp-3.0.1

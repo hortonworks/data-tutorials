@@ -4,7 +4,7 @@ author: sandbox-team
 tutorial-id: 230
 experience: Beginner
 persona: Data Scientist & Analyst
-source: Hortonworks
+source: Cloudera
 use case: EDW Optimization
 technology: Apache Ambari, Apache Hive, HDFS
 release: hdp-3.0.1

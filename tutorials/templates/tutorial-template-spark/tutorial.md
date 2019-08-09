@@ -4,12 +4,12 @@ author: sandbox-team
 tutorial-id: Ask for tutorial ID assignment policy.
 experience: Beginner, Intermediate, Advanced
 persona: Example (Data Scientist & Analyst)
-source: Hortonworks
+source: Cloudera
 use case: Example (Data Discovery)
 technology: Be as detailed as you can while still being accurate, for example (Apache Spark, Apache Ozone, Apache Hive with LLAP)
 release: Latest updated version for example (hdp-2.6.5)
 environment: Sandbox
-product: HDP, HDF, CDA (Ask a team member before using CDA here, website might not be ready yet)
+product: HDP, CDF, CDA (Ask a team member before using CDA here, website might not be ready yet)
 series: This important as it will determine where the tutorial is posted example (HDP > Develop with Hadoop > Apache Spark)
 ---
 

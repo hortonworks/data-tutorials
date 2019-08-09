@@ -4,7 +4,7 @@ author: sandbox-team
 tutorial-id: 350
 experience: Intermediate
 persona: Administrator
-source: Hortonworks
+source: Cloudera
 use case: Single View
 technology: Sandbox
 release: hdp-3.0.1

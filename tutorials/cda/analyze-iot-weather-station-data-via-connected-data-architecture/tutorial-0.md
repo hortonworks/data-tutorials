@@ -4,7 +4,7 @@ author: sandbox-team
 tutorial-id: 820
 experience: Advanced
 persona: Data Engineer & Data Scientist
-source: Hortonworks
+source: Cloudera
 use case: Internet of Things
 technology: Apache NiFi, Apache MiNiFi, Raspberry Pi, Apache Zookeeper, Apache HBase, Apache Phoenix
 release: hdp-3.0.1, hdf-3.2.0

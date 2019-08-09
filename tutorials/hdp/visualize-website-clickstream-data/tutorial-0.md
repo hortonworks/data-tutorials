@@ -4,7 +4,7 @@ author: sandbox-team
 tutorial-id: 250
 experience: Intermediate
 persona: Data Scientist & Analyst
-source: Hortonworks
+source: Cloudera
 use case: Data Discovery
 technology: Apache Ambari, Apache Hive, Apache Zeppelin, HDFS
 release: hdp-3.0.1

@@ -4,13 +4,13 @@ author: sandbox-team
 tutorial-id: 761
 experience: Beginner
 persona: Administrator
-source: Hortonworks
+source: Cloudera
 use case: Single View
 technology:  Apache NiFi, Apache Storm, Apache Kafka, Streaming Analytics Manager, Schema Registry
 release: hdf-3.2.0
 environment: Sandbox
-product: HDF
-series: HDF > Develop Data Flow & Streaming Applications > Hello World
+product: CDF
+series: CDF > Develop Data Flow & Streaming Applications > Hello World
 ---
 
 # Getting Started with the HDF Sandbox

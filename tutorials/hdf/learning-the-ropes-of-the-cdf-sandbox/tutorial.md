@@ -4,13 +4,13 @@ author: sandbox-team
 tutorial-id: 161
 experience: Beginner
 persona: Administrator
-source: Hortonworks
+source: Cloudera
 use case: Single View
 technology: Apache Ambari
 release: hdf-3.2.0
 environment: Sandbox
-product: HDF
-series: HDF > Develop Data Flow & Streaming Applications > Hello World
+product: CDF
+series: CDF > Develop Data Flow & Streaming Applications > Hello World
 ---
 
 # Learning the Ropes of the HDF Sandbox

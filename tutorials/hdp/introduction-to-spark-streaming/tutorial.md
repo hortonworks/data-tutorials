@@ -4,7 +4,7 @@ author: sandbox-team
 tutorial-id: 366
 experience: Beginner
 persona: Data Scientist & Analyst
-source: Hortonworks
+source: Cloudera
 use case: Streaming
 technology: Apache Spark
 release: hdp-3.0.1
