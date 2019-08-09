@@ -154,7 +154,7 @@ Setup -> Map Sandbox IP To Your Desired Hostname In The Hosts File** in [Learnin
 If you need help setting the Ambari admin password,
 
 - for HDP, reference **Admin Password Reset** in [Learning the Ropes of HDP Sandbox](https://hortonworks.com/tutorial/learning-the-ropes-of-the-hortonworks-sandbox/)
-- for HDF, reference **Admin Password Reset** in [Learning the Ropes of HDF Sandbox](https://hortonworks.com/tutorial/getting-started-with-hdf-sandbox/)
+- for HDF, reference **Admin Password Reset** in [Learning the Ropes of HDF Sandbox](https://hortonworks.com/tutorial/getting-started-with-cdf-sandbox/)
 
 **Started up all required services for "HDF" and "HDP"**
 
