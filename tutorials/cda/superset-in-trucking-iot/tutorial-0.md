@@ -4,7 +4,7 @@ author: sandbox-team
 tutorial-id: 821
 experience: Beginner
 persona: Data Analyst
-source: Hortonworks
+source: Cloudera
 use case: Data Visualization
 technology: Apache Superset
 release: hdp-3.0.1, hdf 3.2

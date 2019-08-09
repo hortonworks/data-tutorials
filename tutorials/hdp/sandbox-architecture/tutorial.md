@@ -4,7 +4,7 @@ author: sandbox-team
 tutorial-id: 624
 experience: Beginner
 persona: Administrator
-source: Hortonworks
+source: Cloudera
 use case: Single View
 technology: Sandbox
 release: hdp-3.0.1
@@ -28,7 +28,7 @@ At a high level the Sandbox is a Linux (CentOS 7) Virtual Machine leveraging doc
 - Downloaded and deployed the [Hortonworks Data Platform (HDP) or Hortonworks DataFlow (HDF)](https://www.cloudera.com/downloads/hortonworks-sandbox.html?utm_source=mktg-tutorial) Sandbox
 - Sandbox [Deployment and Install Guide](https://hortonworks.com/tutorial/sandbox-deployment-and-install-guide/)
 - [Learning the Ropes of the HDP Sandbox](https://hortonworks.com/tutorial/learning-the-ropes-of-the-hortonworks-sandbox/)
-- [Learning the Ropes of the HDF Sandbox](https://hortonworks.com/tutorial/getting-started-with-hdf-sandbox/)
+- [Learning the Ropes of the HDF Sandbox](https://hortonworks.com/tutorial/getting-started-with-cdf-sandbox/)
 - Basic understanding of [Docker Containers](https://docs.docker.com/engine/docker-overview/)
 
 ## Outline

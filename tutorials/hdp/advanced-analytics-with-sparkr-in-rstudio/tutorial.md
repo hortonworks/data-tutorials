@@ -4,7 +4,7 @@ author: sandbox-team
 tutorial-id: 759
 experience: Intermediate
 persona: Data Scientist & Analyst
-source: Hortonworks
+source: Cloudera
 use case: Data Discovery
 technology: Apache Spark, Apache SparkR, Machine Learning
 release: hdp-3.0.1

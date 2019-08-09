@@ -4,7 +4,7 @@ author: sandbox-team
 tutorial-id: 120
 experience: Beginner
 persona: Developer
-source: Hortonworks
+source: Cloudera
 use case: Data Discovery
 technology: HDFS
 release: hdp-3.0.1

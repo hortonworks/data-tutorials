@@ -12,7 +12,7 @@ With the Hortonworks DataFlow (HDF) Sandbox, Apache NiFi comes pre-installed in 
 
 - Completed the prior tutorials within this tutorial series
 - Downloaded and deployed the [Hortonworks DataFlow (HDF)](https://www.cloudera.com/downloads/hortonworks-sandbox/hdf.html?utm_source=mktg-tutorial) Sandbox
-- Added HDF Sandbox Hostname to Your Hosts File, refer to [Learning the Ropes of the HDF sandbox](https://hortonworks.com/tutorial/getting-started-with-hdf-sandbox/)
+- Added HDF Sandbox Hostname to Your Hosts File, refer to [Learning the Ropes of the HDF sandbox](https://hortonworks.com/tutorial/getting-started-with-cdf-sandbox/)
 
 ## Outline
 
