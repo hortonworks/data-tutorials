@@ -10,7 +10,7 @@ In this section, we will use Microsoft Excel to access refined clickstream data.
 
 ## Prerequisites
 
-- Have installed the [Hortonworks ODBC driver for Apache Hive](https://hortonworks.com/downloads/#addons) (check [Getting Started with HDP Tutorial](https://hortonworks.com/tutorial/hadoop-tutorial-getting-started-with-hdp/section/7/) for help with installation)
+- Have installed the [Hortonworks ODBC driver for Apache Hive](https://hortonworks.com/downloads/#addons) (check [Getting Started with HDP Tutorial](https://hortonworks.com/tutorial/getting-started-with-hdp/section/7/) for help with installation)
 - Have sample retail data already loaded [by completing this tutorial](https://hortonworks.com/tutorial/loading-data-into-the-hortonworks-sandbox)
 - Have a version of Excel with Power View (i.e. Excel 2013), which is currently only offered for Windows computers.
 

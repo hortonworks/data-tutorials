@@ -29,13 +29,13 @@ Here is the video of [Analyzing Geolocation Data](http://youtu.be/n8fdYHoEEAM) t
 
 - Downloaded and deployed the [Hortonworks Data Platform (HDP)](https://www.cloudera.com/downloads/hortonworks-sandbox/hdp.html?utm_source=mktg-tutorial) Sandbox
 - Go through [Learning the Ropes of the HDP Sandbox](https://hortonworks.com/tutorial/learning-the-ropes-of-the-hortonworks-sandbox/) to become familiar with the Sandbox.
-- **_Optional_** Install [Hortonworks ODBC Driver](http://hortonworks.com/downloads/#addons). This will be needed for [Data Reporting with Microsoft Excel for Windows](https://hortonworks.com/tutorial/hadoop-tutorial-getting-started-with-hdp/section/7/) tutorial.
+- **_Optional_** Install [Hortonworks ODBC Driver](http://hortonworks.com/downloads/#addons). This will be needed for [Data Reporting with Microsoft Excel for Windows](https://hortonworks.com/tutorial/getting-started-with-hdp/section/7/) tutorial.
 
 ## Outline
 
-- [Concepts to strengthen your foundation in the Hortonworks Data Platform (HDP)](https://hortonworks.com/tutorial/hadoop-tutorial-getting-started-with-hdp/section/1/)
-- [Loading Sensor Data into HDFS](https://hortonworks.com/tutorial/hadoop-tutorial-getting-started-with-hdp/section/2/)
-- [Hive - Data ETL](https://hortonworks.com/tutorial/hadoop-tutorial-getting-started-with-hdp/section/3/)
-- [Spark - Risk Factor](https://hortonworks.com/tutorial/hadoop-tutorial-getting-started-with-hdp/section/5/)
-- [Data Reporting with Zeppelin](https://hortonworks.com/tutorial/hadoop-tutorial-getting-started-with-hdp/section/6/)
-- [Data Reporting with Microsoft Excel for Windows](https://hortonworks.com/tutorial/hadoop-tutorial-getting-started-with-hdp/section/7/)
+- [Concepts to strengthen your foundation in the Hortonworks Data Platform (HDP)](https://hortonworks.com/tutorial/getting-started-with-hdp/section/1/)
+- [Loading Sensor Data into HDFS](https://hortonworks.com/tutorial/getting-started-with-hdp/section/2/)
+- [Hive - Data ETL](https://hortonworks.com/tutorial/getting-started-with-hdp/section/3/)
+- [Spark - Risk Factor](https://hortonworks.com/tutorial/getting-started-with-hdp/section/5/)
+- [Data Reporting with Zeppelin](https://hortonworks.com/tutorial/getting-started-with-hdp/section/6/)
+- [Data Reporting with Microsoft Excel for Windows](https://hortonworks.com/tutorial/getting-started-with-hdp/section/7/)

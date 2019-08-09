@@ -16,10 +16,10 @@ The tutorial is a part of series of hands on tutorial to get you started on HDP 
 
 - Downloaded and deployed the [Hortonworks Data Platform (HDP)](https://www.cloudera.com/downloads/hortonworks-sandbox/hdp.html?utm_source=mktg-tutorial) Sandbox
 - [Learning the Ropes of the HDP Sandbox](https://hortonworks.com/tutorial/learning-the-ropes-of-the-hortonworks-sandbox/)
-- [Loading Sensor Data into HDFS](https://hortonworks.com/tutorial/hadoop-tutorial-getting-started-with-hdp/section/2/)
-- [Hive - Data ETL](https://hortonworks.com/tutorial/hadoop-tutorial-getting-started-with-hdp/section/3/)
-- [Pig - Risk Factor](https://hortonworks.com/tutorial/hadoop-tutorial-getting-started-with-hdp/section/4/)
-- [Spark - Risk Factor](https://hortonworks.com/tutorial/hadoop-tutorial-getting-started-with-hdp/section/5/)
+- [Loading Sensor Data into HDFS](https://hortonworks.com/tutorial/getting-started-with-hdp/section/2/)
+- [Hive - Data ETL](https://hortonworks.com/tutorial/getting-started-with-hdp/section/3/)
+- [Pig - Risk Factor](https://hortonworks.com/tutorial/getting-started-with-hdp/section/4/)
+- [Spark - Risk Factor](https://hortonworks.com/tutorial/getting-started-with-hdp/section/5/)
 
 ## Outline
 
@@ -57,7 +57,7 @@ Click on a Notebook tab at the top left and select **Create new note**. Name you
 
 ## Download the Data
 
-If you had trouble completing the previous tutorial or lost the **risk factor** data click [here to download it](https://raw.githubusercontent.com/hortonworks/data-tutorials/master/tutorials/hdp/hadoop-tutorial-getting-started-with-hdp/assets/datasets/riskfactor.csv) and upload it to HDFS under `/tmp/data/`
+If you had trouble completing the previous tutorial or lost the **risk factor** data click [here to download it](https://raw.githubusercontent.com/hortonworks/data-tutorials/master/tutorials/hdp/getting-started-with-hdp/assets/datasets/riskfactor.csv) and upload it to HDFS under `/tmp/data/`
 
 >Note: if you completed the **Spark - Risk Factor** section successfully advance to [Execute a Hive Query](#execute-a-hive-query)
 
