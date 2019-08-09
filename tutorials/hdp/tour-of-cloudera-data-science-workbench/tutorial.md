@@ -1,3 +1,18 @@
+---
+title: Tour of Cloudera Data Science Workbench
+author: sandbox-team
+tutorial-id: 
+experience: Begginer
+persona: Data Scientist & Analyst 
+source: Cloudera
+use case: Predictive
+technology: CDSW
+release: cdp-3.0.1
+environment: N/A
+product: CDP
+series: CDP > Hadoop for Data Scientists & Analysts > Introduction to Data Analysis with Hadoop
+---
+
 # Tour of Cloudera Data Science Workbench
 
 ## Introduction
@@ -61,11 +76,19 @@ You may set environment variables in the following scopes:
 
 - **Project Scope**: If you created a project and you are it's administrator you may set environmental variables for the entire project, these settings will take precedence over global variables
 
+First choose the project for which you want to set the environemnt variables for:
+
+![choose-pro](assets/images/choose-pro.jpg)
+
+Then enter your variables in the appropriate section
+
 ![env-var.jpg](assets/images/env-var.jpg)
 
-- **Job Scope**: Environment variables can also be set for models that are scheduled to be built. Job environment variables take precedence over project variables
+- **Job Scope**: Environment variables can also be set for models that are scheduled to be built if there are existing jobs. Job environment variables take precedence over project variables
 
-![job-env-var.jpg](assets/images/job-env-var.jpg)
+![job-var-1](assets/images/job-var-1.jpg)
+
+![job-env-var.jpg](assets/images/job-var-2.jpg)
 
 - **Experiments**: Experiment level variables are isolated from the project and will inherit values from environmental variables set at the project-level and/or global level.
 
@@ -76,6 +99,10 @@ You may set environment variables in the following scopes:
 CDSW allows you to automate the process of launching an engine, running a training script, and tracking the results of the training via automated email alerts. [Further documentation on creating a job can be found here.](https://www.cloudera.com/documentation/data-science-workbench/latest/topics/cdsw_jobs_pipelines.html#create_job)
 
 ![new-job](assets/images/new-job.jpg)
+
+next name your new job and select a script to run
+
+![name-job](assets/images/name-job.jpg)
 
 jobs can be run manually or be automated by running them as a recurring build
 
@@ -92,6 +119,8 @@ The following exercise will show you how to create your first CDSW project and r
 [click here](www.google.com)
 
 Now we are ready to create a new project on our CDSW instance. Click on the ![plus](assets/images/plus.jpg) sign at the upper right hand side of your screen and select **New Project** you will find a screen like the one shown below
+
+![choose-new-proj](assets/images/choose-new-proj.jpg)
 
 ![new-proj-git](assets/images/new-proj-git.jpg)
 
@@ -117,7 +146,9 @@ In order for us to use the python script needed for this tutorial select a **Pyt
 
 - 1 vCPU
 - 2 GiB Memory
-- 1 GPU (It's okay if you don't have any, but it's great to know you can have them)
+- 0 GPU (It's okay if you don't have any, but it's great to know you can have them)
+
+We can use either a Jupyter Notebook as our editor or a Workbench, feel free to choose your favorite
 
 to finalize set-up select the **Launch Session** option.
 
