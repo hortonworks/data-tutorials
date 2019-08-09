@@ -4,13 +4,13 @@ author: sandbox-team
 tutorial-id: 
 experience: Advanced
 persona: Data Engineer & Data Scientist 
-source: Hortonworks
+source: Cloudera
 use case: Streaming
 technology: Apache NiFi, Apache MiNiFi, Apache HDFS, CDSW
 release: CDF 3.2
 environment: N/A
-product: HDF
-series: HDF > Develop Data Flow & Streaming Applications > Real World Examples
+product: CDF
+series: CDF > Develop Data Flow & Streaming Applications > Real World Examples
 ---
 
 # Autonomous Car Tutorial
