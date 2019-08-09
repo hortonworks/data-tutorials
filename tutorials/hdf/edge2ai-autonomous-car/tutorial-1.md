@@ -1,3 +1,18 @@
+---
+title: Autonomous Car Tutorial
+author: sandbox-team
+tutorial-id: 
+experience: Advanced
+persona: Data Engineer & Data Scientist 
+source: Hortonworks
+use case: Streaming
+technology: Apache NiFi, Apache MiNiFi, Apache HDFS, CDSW
+release: CDF 3.2
+environment: N/A
+product: HDF
+series: HDF > Develop Data Flow & Streaming Applications > Real World Examples
+---
+
 # Autonomous Car Tutorial
 
 ![mini-car.jpg](documentation/assets/images/tutorial0/mini-car.jpg)

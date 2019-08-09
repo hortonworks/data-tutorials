@@ -1,3 +1,7 @@
+---
+title: Autonomous Car Tutorial
+---
+
 # Autonomous Car Tutorial
 
 ## AI to the edge
