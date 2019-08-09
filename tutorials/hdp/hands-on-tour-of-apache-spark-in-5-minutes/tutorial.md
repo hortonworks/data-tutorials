@@ -4,7 +4,7 @@ author: sandbox-team
 tutorial-id: 360
 experience: Beginner
 persona: Developer
-source: Hortonworks
+source: Cloudera
 use case: Predictive
 technology: Apache Spark, Apache Zeppelin
 release: hdp-3.0.1

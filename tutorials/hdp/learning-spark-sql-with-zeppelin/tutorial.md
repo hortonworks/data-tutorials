@@ -4,7 +4,7 @@ author: sandbox-team
 tutorial-id: 365
 experience: Beginner
 persona: Data Scientist & Analyst
-source: Hortonworks
+source: Cloudera
 use case: Data Discovery
 technology: Apache Spark, Apache Zeppelin
 release: hdp-3.0.1

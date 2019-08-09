@@ -4,7 +4,7 @@ author: George Rueda de Leon
 tutorial-id: 750
 experience: Intermediate
 persona: Data Scientist & Analyst
-source: Hortonworks
+source: Cloudera
 use case: EDW Optimization
 technology: Apache Hive
 release: hdp-3.0.1

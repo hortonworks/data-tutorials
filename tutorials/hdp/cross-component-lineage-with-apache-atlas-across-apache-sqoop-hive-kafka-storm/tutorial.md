@@ -4,7 +4,7 @@ author: sandbox-team
 tutorial-id: 610
 experience: Beginner
 persona: Developer
-source: Hortonworks
+source: Cloudera
 use case: Data Discovery
 technology: Apache Atlas, Apache Sqoop, Apache Hive, Apache Kafka, Apache Storm
 release: hdp-3.0.1

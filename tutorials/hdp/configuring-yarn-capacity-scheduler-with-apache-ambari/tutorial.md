@@ -4,7 +4,7 @@ author: sandbox-team
 tutorial-id: 440
 experience: Intermediate
 persona: Developer
-source: Hortonworks
+source: Cloudera
 use case: Data Discovery
 technology: Apache Ambari
 release: hdp-3.0.1

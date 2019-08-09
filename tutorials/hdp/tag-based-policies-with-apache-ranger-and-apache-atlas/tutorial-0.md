@@ -4,7 +4,7 @@ author: sandbox-team
 tutorial-id: 660
 experience: Intermediate
 persona: Administrator
-source: Hortonworks
+source: Cloudera
 use case: Security
 technology: Apache Atlas, Apache Ranger
 release: hdp-3.0.1

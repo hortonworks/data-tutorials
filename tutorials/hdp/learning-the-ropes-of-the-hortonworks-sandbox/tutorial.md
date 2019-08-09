@@ -4,7 +4,7 @@ author: sandbox-team
 tutorial-id: 160
 experience: Beginner
 persona: Developer
-source: Hortonworks
+source: Cloudera
 use case: Data Discovery
 technology: Apache Ambari
 release: hdp-3.0.1
@@ -41,7 +41,7 @@ Let's begin our Hadoop journey...
 - [Appendix B: Troubleshoot](#appendix-b-troubleshoot)
 - [Appendix C: Determine Network Adapter of Your VirtualBox Sandbox](#appendix-c-determine-network-adpater-of-your-virtualbox-sandbox)
 
-<!--- [Explore Sandbox in Azure](#explore-sandbox-in-azure) 
+<!--- [Explore Sandbox in Azure](#explore-sandbox-in-azure)
 Add the following link to the outline once Azure is available - [Explore Sandbox in Azure](#explore-sandbox-in-azure)--->
 
 ## Environment setup

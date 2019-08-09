@@ -4,7 +4,7 @@ author: sandbox-team
 tutorial-id: 400
 experience: Intermediate
 persona: Data Scientist & Analyst
-source: Hortonworks
+source: Cloudera
 use case: Predictive
 technology: Apache Hive, Apache Spark, Apache ORC
 release: hdp-3.0.1

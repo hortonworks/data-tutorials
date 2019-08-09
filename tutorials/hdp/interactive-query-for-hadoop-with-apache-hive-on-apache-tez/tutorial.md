@@ -4,7 +4,7 @@ author: sandbox-team
 tutorial-id: 290
 experience: Intermediate
 persona: Developer, Administrator, Data Scientist & Analyst
-source: Hortonworks
+source: Cloudera
 use case: EDW Optimization
 technology: Apache Ambari, Apache Hive, Apache Tez, DAS
 release: hdp-3.0.1
