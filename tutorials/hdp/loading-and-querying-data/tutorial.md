@@ -205,7 +205,7 @@ Let's play with our data further, taking specific fields from different tables a
 
 Copy/paste the query below in a new **Worksheet4** and **Execute**.
 
-Use the steps in  [Create a Hive Table via a Query](https://hortonworks.com/tutorial/loading-and-querying-data-with-hadoop/#create-a-hive-table-via-a-query) for reference.
+Use the steps in  [Create a Hive Table via a Query](https://hortonworks.com/tutorial/loading-and-querying-data/#create-a-hive-table-via-a-query) for reference.
 
 ```SQL
 CREATE TABLE webloganalytics as
