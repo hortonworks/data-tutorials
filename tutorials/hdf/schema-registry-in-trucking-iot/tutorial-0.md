@@ -28,7 +28,7 @@ Schema Registry is a centralized repository for schemas and metadata.  In this t
 
 Outline the different individual tutorials of the series and what the reader will learn in each one.
 
-- [Benefits of a Schema Registry](https://hortonworks.com/tutorial/schema-registry-in-trucking-iot-on-hdf/section/1/)- Go over what Schema Registry is and what benefits it provides a modern data architecture.
-- [Schema Registry Architecture](https://hortonworks.com/tutorial/schema-registry-in-trucking-iot-on-hdf/section/2/) - Take a closer look at what components make up this service and what makes up a schema.
-- [Using the Schema Registry Web Interface](https://hortonworks.com/tutorial/schema-registry-in-trucking-iot-on-hdf/section/3/)- Go through the task of creating a new, evolving, schema using Schema Registry's web interface.
-- [Using the Java API with Scala](https://hortonworks.com/tutorial/schema-registry-in-trucking-iot-on-hdf/section/4/)- Optional: For developers interested in leveraging the service's Java API to program tasks.
+- [Benefits of a Schema Registry](https://hortonworks.com/tutorial/schema-registry-in-trucking-iot/section/1/)- Go over what Schema Registry is and what benefits it provides a modern data architecture.
+- [Schema Registry Architecture](https://hortonworks.com/tutorial/schema-registry-in-trucking-iot/section/2/) - Take a closer look at what components make up this service and what makes up a schema.
+- [Using the Schema Registry Web Interface](https://hortonworks.com/tutorial/schema-registry-in-trucking-iot/section/3/)- Go through the task of creating a new, evolving, schema using Schema Registry's web interface.
+- [Using the Java API with Scala](https://hortonworks.com/tutorial/schema-registry-in-trucking-iot/section/4/)- Optional: For developers interested in leveraging the service's Java API to program tasks.
