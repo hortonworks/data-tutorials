@@ -6,7 +6,7 @@ title: Deploy IoT Weather Station and Connected Data Architecture
 
 ## Introduction
 
-You'll make an IoT Weather Station with a Raspberry Pi and Sense HAT. Additionally, you'll add on data analytics to this IoT Weather Station Platform with Connected Data Architecture communication between the MiNiFi, HDF Sandbox and HDP Sandbox.
+You'll make an IoT Weather Station with a Raspberry Pi and Sense HAT. Additionally, you'll add on data analytics to this IoT Weather Station Platform with Connected Data Architecture communication between the MiNiFi, CDF Sandbox and HDP Sandbox.
 
 ## Prerequisites
 
@@ -18,7 +18,7 @@ You'll make an IoT Weather Station with a Raspberry Pi and Sense HAT. Additional
 - [Step 2: Configure Bridged Adapter Network for VirtualBox](#step-2-configure-bridged-adapter-network-for-virtualbox)
 - [Step 3: Map Bridged IP to Desired Hostname in hosts file](#step-3-map-bridged-ip-to-desired-hostname-in-hosts-file)
 - [Step 4: Verify Prerequisites Have Been Covered](#step-4-verify-prerequisites-have-been-covered)
-- [Step 5: Start HDF Sandbox and Setup NiFi Site-To-Site](#step-5-start-hdf-setup-site-to-site)
+- [Step 5: Start CDF Sandbox and Setup NiFi Site-To-Site](#step-5-start-cdf-setup-site-to-site)
 - [Summary](#summary)
 - [Further Reading](#further-reading)
 - [Appendix A: Install Raspbian OS onto Raspberry Pi](#appendix-a-install-raspbian)
@@ -288,7 +288,7 @@ Save the modified file.
 If you need help setting the Ambari admin password,
 
 - for HDP, reference **Admin Password Reset** in [Learning the Ropes of HDP Sandbox](https://hortonworks.com/tutorial/learning-the-ropes-of-the-hortonworks-sandbox/)
-- for HDF, reference **Admin Password Reset** in [Learning the Ropes of HDF Sandbox](https://hortonworks.com/tutorial/getting-started-with-cdf-sandbox/)
+- for HDF, reference **Admin Password Reset** in [Learning the Ropes of CDF Sandbox](https://hortonworks.com/tutorial/getting-started-with-cdf-sandbox/)
 
 **Started up all required services for "HDF" and "HDP"**
 
@@ -333,9 +333,9 @@ Now NiFi is configured for Socket Site-To-Site protocol. If you encounter issues
 
 Restart NiFi from Ambari with the **orange restart button** for the changes to take effect.
 
-### 5.2: Add GeoLite2 database to HDF Sandbox CentOS
+### 5.2: Add GeoLite2 database to CDF Sandbox CentOS
 
-Add the GeoLite2 to HDF Sandbox CentOS, which is a database filled with Public IP Addresses mapped to geographic insights.
+Add the GeoLite2 to CDF Sandbox CentOS, which is a database filled with Public IP Addresses mapped to geographic insights.
 
 1\. Access HDF Web Shell Client at http://sandbox-hdf.hortonworks.com:4200. User/Password is `root/hadoop`.
 
@@ -381,7 +381,7 @@ This full pathname will be used in a later tutorial when you extend the NiFi Flo
 
 ## Summary
 
-Congratulations! You know how to setup your own IoT Weather Station using the Raspberry Pi, Sense HAT, MiNiFi, HDF Sandbox and HDP Sandbox. You are also familiar with how to install MiNiFi onto the Raspberry Pi. You also have begun setting up Connected Data Architecture between HDF and HDP SB nodes in a Docker Network. In the next tutorials, you'll focus on data preprocessing, data storing into a noSQL datastore and analyzing the data in real-time as it saves to the datastore.
+Congratulations! You know how to setup your own IoT Weather Station using the Raspberry Pi, Sense HAT, MiNiFi, CDF Sandbox and HDP Sandbox. You are also familiar with how to install MiNiFi onto the Raspberry Pi. You also have begun setting up Connected Data Architecture between HDF and HDP SB nodes in a Docker Network. In the next tutorials, you'll focus on data preprocessing, data storing into a noSQL datastore and analyzing the data in real-time as it saves to the datastore.
 
 
 ## Further Reading

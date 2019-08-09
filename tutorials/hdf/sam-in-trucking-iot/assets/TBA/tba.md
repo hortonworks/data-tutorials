@@ -4,7 +4,7 @@ Pending: Adding new piece to SAM tutorial with CDA Integration
 
 **Slow SINK Approach:** HDF to HDP SINK: For this section, it requires we have two separate laptops running, two separate virtual machines running or two separate Docker containers running with one having HDF and the other having HDP, then we configure each machine to be able to communicat and then we will be able to push data from SAM to Druid or HDFS. The following configuration tables hold the information you would add for Druid and HDFS sink components.
 
-If you go with the Slow SINK Approach route, visit the Appendix to learn how to make the appropriate configurations so HDF Sandbox instance can communicate with an HDP Sandbox instance.
+If you go with the Slow SINK Approach route, visit the Appendix to learn how to make the appropriate configurations so CDF Sandbox instance can communicate with an HDP Sandbox instance.
 
 **Fast SINK Approach:** Kafka SINK: since HDF already comes with Kafka, we can use it to push data from one cluster to another Kafka cluster. We just need to create two extra Kafka topics.
 

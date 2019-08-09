@@ -7,7 +7,7 @@ persona: Data Analyst
 source: Cloudera
 use case: Data Visualization
 technology: Apache Superset
-release: hdp-3.0.1, hdf 3.2
+release: hdp-3.0.1, cdf-3.2.0
 environment: Sandbox
 product: CDA
 series: CDA > Data Engineers & Scientists > Data Science Applications

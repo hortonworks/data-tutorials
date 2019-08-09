@@ -7,7 +7,7 @@ persona: Data Scientist & Analyst
 source: Cloudera
 use case: Streaming
 technology: Apache NiFi, Apache Storm, Apache Kafka, Streaming Analytics Manager, Schema Registry, Apache SuperSet, Druid
-release: hdp-3.0.1, hdf-3.2.0
+release: hdp-3.0.1, cdf-3.2.0
 environment: Sandbox
 product: CDA
 series: CDA > Data Engineers & Scientists > Data Science Applications
@@ -21,7 +21,7 @@ In this tutorial, you will learn how to deploy a modern real-time streaming appl
 
 ### Prerequisites
 
-- Downloaded and deployed the [Hortonworks DataFlow (HDF)](https://www.cloudera.com/downloads/hortonworks-sandbox/hdf.html?utm_source=mktg-tutorial) Sandbox
+- Downloaded and deployed the [Cloudera DataFlow (CDF)](https://www.cloudera.com/downloads/hortonworks-sandbox/hdf.html?utm_source=mktg-tutorial) Sandbox
 - [Getting Started with HDF](https://hortonworks.com/tutorial/getting-started-with-cdf-sandbox/)
 - Enabled Connected Data Architecture:
   - [Enable CDA for VirtualBox](https://hortonworks.com/tutorial/sandbox-deployment-and-install-guide/section/1/#enable-connected-data-architecture-cda---advanced-topic)
@@ -52,7 +52,7 @@ Druid is an open source analytics database developed for business intelligence q
 
 ### Overview of Trucking IoT Ref App
 
-The Trucking IoT Reference Application is built using Hortonworks DataFlow Platform.
+The Trucking IoT Reference Application is built using Cloudera DataFlow Platform.
 
 The Trucking IoT data comes from a truck events simulator that is ingested by Apache NiFi, NiFi sends the data to Kafka topics which are then ingested by Stream Analytics Manager (SAM) to be stored into Druid. Superset is used to create a visual representation of the Druid data sources. A more in depth explanation of the pipeline will be explained as you explore the NiFi Dataflow application, Schema Registry, SAM, Druid and Superset.
 
@@ -88,7 +88,7 @@ Use your HDP **admin** credentials to sign in.
 
 > [Setup Ambari Admin Password Manually](https://hortonworks.com/tutorial/learning-the-ropes-of-the-hortonworks-sandbox/#admin-password-reset)
 
-You should now see services from the HDP Sandbox on the  SAM Service Pool Dashboard to the right of the HDF Sandbox Service Pool. We have now shared the web address of where SAM can find the services for the HDP Ambari Stack as seen on the image below:
+You should now see services from the HDP Sandbox on the  SAM Service Pool Dashboard to the right of the CDF Sandbox Service Pool. We have now shared the web address of where SAM can find the services for the HDP Ambari Stack as seen on the image below:
 
 ![hdp_sandbox_service_pool](assets/images/hdp_sandbox_service_pool.jpg)
 

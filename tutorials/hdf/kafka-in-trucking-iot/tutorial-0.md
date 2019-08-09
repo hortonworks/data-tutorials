@@ -7,7 +7,7 @@ persona: Developer
 source: Cloudera
 use case: Streaming
 technology: Apache Kafka
-release: hdf-3.2.0
+release: cdf-3.2.0
 environment: Sandbox
 product: CDF
 series: CDF > Develop Data Flow & Streaming Applications > Hello World

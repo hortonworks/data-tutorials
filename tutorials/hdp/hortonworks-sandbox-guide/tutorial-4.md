@@ -6,7 +6,7 @@ title: Sandbox Port Forwards - HDF 3.1.1
 
 ## Introduction
 
-Listed below are the ports that the HDF Sandbox forwards by default, and what software or purpose each port corresponds to.
+Listed below are the ports that the CDF Sandbox forwards by default, and what software or purpose each port corresponds to.
 
 In this release we began to use NGINX as a reverse proxy server. In general, we open all necessary ports for HDP and HDF to communicate with each other, hence, Connected Data Architecture (CDA).
 

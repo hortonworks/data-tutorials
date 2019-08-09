@@ -7,7 +7,7 @@ persona: Developer
 source: Cloudera
 use case: Streaming
 technology: Apache Storm, Apache Kafka
-release: hdf-3.2.0
+release: cdf-3.2.0
 environment: Sandbox
 product: CDF
 series: CDF > Develop Data Flow & Streaming Applications > Hello World
@@ -23,7 +23,7 @@ We will build a Storm topology from the ground up and demonstrate a full data pi
 
 ## Prerequisites
 
-- Downloaded and deployed the [Hortonworks DataFlow (HDF)](https://www.cloudera.com/downloads/hortonworks-sandbox/hdf.html?utm_source=mktg-tutorial) Sandbox
+- Downloaded and deployed the [Cloudera DataFlow (CDF)](https://www.cloudera.com/downloads/hortonworks-sandbox/hdf.html?utm_source=mktg-tutorial) Sandbox
 
 ## Outline
 

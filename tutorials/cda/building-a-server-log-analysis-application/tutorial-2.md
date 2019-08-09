@@ -33,7 +33,7 @@ Setup -> Map Sandbox IP To Your Desired Hostname In The Hosts File** in [Learnin
 If you need help setting the Ambari admin password,
 
 - for HDP, reference **Admin Password Reset** in [Learning the Ropes of HDP Sandbox](https://hortonworks.com/tutorial/learning-the-ropes-of-the-hortonworks-sandbox/)
-- for HDF, reference **Admin Password Reset** in [Learning the Ropes of HDF Sandbox](https://hortonworks.com/tutorial/getting-started-with-cdf-sandbox/)
+- for HDF, reference **Admin Password Reset** in [Learning the Ropes of CDF Sandbox](https://hortonworks.com/tutorial/getting-started-with-cdf-sandbox/)
 
 **Started up all required services for "HDF" and "HDP"**
 
@@ -67,7 +67,7 @@ If unsure, login to Ambari **admin** Dashboard
 
 We will be using shell commands to setup the required services in our data-in-motion and data-at-rest platforms from the sandbox web shell clients.
 
-Open HDF Sandbox Web Shell Client at http://sandbox-hdf.hortonworks.com:4200.
+Open CDF Sandbox Web Shell Client at http://sandbox-hdf.hortonworks.com:4200.
 
 Prior to executing the shell code, replace the following string `"<Your-Ambari-Admin-Password>"` in the following line of code `setup_nifi "admin" "<Your-Ambari-Admin-Password>"` on the last line with the password you created for Ambari admin user.  For example, if our Ambari Admin password was set to `yellowHadoop`, then the line of code would look as follows: `AMBARI_USER_PASSWORD="yellowHadoop"`
 
@@ -208,7 +208,7 @@ setup_nifi "admin" "<Your-Ambari-Admin-Password>" | tee -a $LOG_DIR_BASE/hdf/set
 
 ### Setup HDP
 
-Open HDF Sandbox Web Shell Client at http://sandbox-hdp.hortonworks.com:4200.
+Open CDF Sandbox Web Shell Client at http://sandbox-hdp.hortonworks.com:4200.
 
 Copy and paste the code line by line:
 

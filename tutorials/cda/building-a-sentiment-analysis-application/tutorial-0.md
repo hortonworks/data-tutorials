@@ -7,7 +7,7 @@ persona: Data Engineer, Data Scientist
 source: Cloudera
 use case: Data Discovery
 technology: Apache Ambari, Apache NiFi, Apache Kafka, HDFS, Apache Hive, Apache HBase, Apache Spark, Apache Zeppelin
-release: hdp-3.0.1, hdf-3.2.0
+release: hdp-3.0.1, cdf-3.2.0
 environment: Sandbox
 product: CDA
 series: CDA > Data Engineers & Scientists > Data Science Applications
@@ -17,12 +17,12 @@ series: CDA > Data Engineers & Scientists > Data Science Applications
 
 ## Introduction
 
-For this project, you will play the part of a Big Data Application Developer who leverages their skills as a Data Engineer and Data Scientist by using multiple Big Data Technologies provided by Hortonworks Data Flow (HDF) and Hortonworks Data Platform (HDP) to build a Real-Time Sentiment Analysis Application. For the application, you will learn to acquire tweet data from Twitter's Decahose API and send the tweets to the Kafka Topic "tweets" using NiFi. Next you will learn to build Spark Machine Learning Model that classifies the data as happy or sad and export the model to HDFS. However, before building the model, Spark requires the data that builds and trains the model to be in feature array, so you will have to do some data cleansing with SparkSQL. Once the model is built, you will use Spark Structured Streaming to load the model from HDFS, pull in tweets from Kafka topic "tweets", add a sentiment score to the tweet, then stream the data to Kafka topic "tweetsSentiment". Earlier after finishing the NiFi flow, you will build another NiFi flow that ingests data from Kafka topic "tweetsSentiment" and stores the data into HBase. With Hive and HBase integration, you will perform queries to visualize that the data was stored successfully and also show the sentiment score for tweets.
+For this project, you will play the part of a Big Data Application Developer who leverages their skills as a Data Engineer and Data Scientist by using multiple Big Data Technologies provided by Cloudera DataFlow (CDF) and Hortonworks Data Platform (HDP) to build a Real-Time Sentiment Analysis Application. For the application, you will learn to acquire tweet data from Twitter's Decahose API and send the tweets to the Kafka Topic "tweets" using NiFi. Next you will learn to build Spark Machine Learning Model that classifies the data as happy or sad and export the model to HDFS. However, before building the model, Spark requires the data that builds and trains the model to be in feature array, so you will have to do some data cleansing with SparkSQL. Once the model is built, you will use Spark Structured Streaming to load the model from HDFS, pull in tweets from Kafka topic "tweets", add a sentiment score to the tweet, then stream the data to Kafka topic "tweetsSentiment". Earlier after finishing the NiFi flow, you will build another NiFi flow that ingests data from Kafka topic "tweetsSentiment" and stores the data into HBase. With Hive and HBase integration, you will perform queries to visualize that the data was stored successfully and also show the sentiment score for tweets.
 
 ### Big Data Technologies used to develop the Application:
 
 - [Twitter API](https://dev.twitter.com/)
-- [HDF Sandbox](https://hortonworks.com/products/data-platforms/hdf/)
+- [CDF Sandbox](https://hortonworks.com/products/data-platforms/hdf/)
     - [Apache Ambari](https://ambari.apache.org/)
     - [Apache NiFi](https://nifi.apache.org/)
     - [Apache Kafka](http://kafka.apache.org/)

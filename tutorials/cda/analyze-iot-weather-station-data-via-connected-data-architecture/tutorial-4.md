@@ -84,7 +84,7 @@ step-by-step each component within the NiFi flow to see how the flow was built.
 
 9\. We will need to re-configure the GeoEnrichIP processor. It currently has the **wrong folder path** to the GeoLite Database File.
 
-Get the full pathname to GeoLite DB acquired in **Deploy IoT Weather Station via Connected Data Architecture tutorial** section **3.4: Add GeoLite2 database to HDF Sandbox CentOS**. Update **MaxMind Database File** with `/sandbox/tutorial-files/820/nifi/input/GeoFile/GeoLite2-City_[date-updated]/GeoLite2-City.mmdb` where [date-updated] is the latest date when the GeoLite database file was updated.
+Get the full pathname to GeoLite DB acquired in **Deploy IoT Weather Station via Connected Data Architecture tutorial** section **3.4: Add GeoLite2 database to CDF Sandbox CentOS**. Update **MaxMind Database File** with `/sandbox/tutorial-files/820/nifi/input/GeoFile/GeoLite2-City_[date-updated]/GeoLite2-City.mmdb` where [date-updated] is the latest date when the GeoLite database file was updated.
 
 ![updated_configuration_geoenrichip](assets/tutorial4/updated_configuration_geoenrichip.jpg)
 
@@ -264,4 +264,4 @@ Congratulations! You just enhanced the previous NiFi flow to pull in geographic 
 - Read more about HBase NoSQL Datastore at [Apache HBase Docs](https://hbase.apache.org/)
 - Read more about NiFi at [Apache NiFi Docs](https://nifi.apache.org/)
 - Read more about Hortonworks Data Platform - Data At Rest at [HDP Overview](https://hortonworks.com/products/data-center/hdp/)
-- Read more about Hortonworks Data Flow - Data In Motion at [HDF Overview](https://hortonworks.com/products/data-center/hdf/)
+- Read more about Cloudera DataFlow - Data In Motion at [HDF Overview](https://hortonworks.com/products/data-center/hdf/)

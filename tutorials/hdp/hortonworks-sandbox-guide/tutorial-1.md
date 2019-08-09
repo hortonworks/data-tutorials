@@ -198,7 +198,7 @@ Because of the limited resources available in the sandbox virtual machine enviro
 
 ## Further Reading
 
-- [Hortonworks DataFlow 3.0 Simplifies Development of Streaming Analytics Applications](https://hortonworks.com/press-releases/hortonworks-dataflow-3-0/)
+- [Cloudera DataFlow 3.0 Simplifies Development of Streaming Analytics Applications](https://hortonworks.com/press-releases/hortonworks-dataflow-3-0/)
 - [Hortonworks Hybrid Data Platforms](https://hortonworks.com/products/data-platforms/)
 - [Ambari 2.7.1](https://docs.hortonworks.com/HDPDocuments/Ambari-2.7.1.0/bk_ambari-release-notes/content/ch_relnotes-ambari-2.7.1.0.html)
 - [HDP Documentation](https://docs.hortonworks.com/HDPDocuments/HDP3/HDP-3.0.1/index.html)

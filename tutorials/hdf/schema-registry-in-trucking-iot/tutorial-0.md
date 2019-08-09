@@ -7,7 +7,7 @@ persona: Developer
 source: Cloudera
 use case: Streaming
 technology: Schema Registry
-release: hdf-3.2.0
+release: cdf-3.2.0
 environment: Sandbox
 product: CDF
 series: CDF > Develop Data Flow & Streaming Applications > Hello World
@@ -22,7 +22,7 @@ Schema Registry is a centralized repository for schemas and metadata.  In this t
 
 ## Prerequisites
 
-- Downloaded and deployed the [Hortonworks DataFlow (HDF)](https://www.cloudera.com/downloads/hortonworks-sandbox/hdf.html?utm_source=mktg-tutorial) Sandbox
+- Downloaded and deployed the [Cloudera DataFlow (CDF)](https://www.cloudera.com/downloads/hortonworks-sandbox/hdf.html?utm_source=mktg-tutorial) Sandbox
 
 ## Outline
 

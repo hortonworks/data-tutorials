@@ -7,7 +7,7 @@ persona: Data Engineer, Data Analyst
 source: Cloudera
 use case: Data Discovery
 technology: Apache Ambari, Apache NiFi, Apache Hive, Apache Zeppelin
-release: hdp-3.0.1, hdf-3.2.0
+release: hdp-3.0.1, cdf-3.2.0
 environment: Sandbox
 product: CDA
 series: CDA > Data Engineers & Scientists > Data Science Applications
@@ -22,7 +22,7 @@ Hortonworks Connected Data Platform can be used to acquire, clean and visualize 
 ## Big Data Technologies used to develop the Application:
 
 - Historical HVAC Sensor Data
-- [HDF Sandbox](https://hortonworks.com/products/data-platforms/hdf/)
+- [CDF Sandbox](https://hortonworks.com/products/data-platforms/hdf/)
     - [Apache Ambari](https://ambari.apache.org/)
     - [Apache NiFi](https://nifi.apache.org/)
 - [HDP Sandbox](https://hortonworks.com/products/data-platforms/hdp/)

@@ -35,7 +35,7 @@ download the Python script onto the Raspberry Pi.
 We will explain sections of the code and their significance to the
 project in 1.1 - 1.6. In 1.7, the full code for the WeatherStation is provided.
 
-Open the HDF Sandbox Web Shell:
+Open the CDF Sandbox Web Shell:
 
 http://sandbox-hdf.hortonworks.com:4200
 
@@ -385,7 +385,7 @@ We provide a download link to the WeatherStation.py.
 
 ### 2.1: Build NiFi to HDFS
 
-In this section, you will build a NiFi flow on HDF Sandbox node to transport data ingested from MiNiFi node to HDFS on HDP Sandbox node.
+In this section, you will build a NiFi flow on CDF Sandbox node to transport data ingested from MiNiFi node to HDFS on HDP Sandbox node.
 
 1\. Navigate to NiFi UI at http://sandbox-hdf.hortonworks.com:9090/nifi/
 
@@ -486,7 +486,7 @@ Click **Apply**.
 
 4\. Add the **Remote Process Group (RPG)** onto the canvas.
 
-- Remote Process Group (RPG): sends sensor data from one computer (Raspberry Pi) to a remote NiFi instance running on a different computer (HDF Sandbox node)
+- Remote Process Group (RPG): sends sensor data from one computer (Raspberry Pi) to a remote NiFi instance running on a different computer (CDF Sandbox node)
 
 5\. Configure the properties in RPG's Property Tab by adding the properties listed in **Table 3**:
 

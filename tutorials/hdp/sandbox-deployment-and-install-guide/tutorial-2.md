@@ -106,7 +106,7 @@ Finally restart the virtual machine for changes to take place.
 - Have already deployed the latest HDP/HDF sandbox
 - Update virtual machine settings to minimum 22 GB (22528 MB)
 
-Hortonworks Connected Data Architecture (CDA) allows you to play with both data-in-motion (HDF) and data-at-rest (HDP) sandboxes simultaneously.
+Hortonworks Connected Data Architecture (CDA) allows you to play with both data-in-motion  (CDF) and data-at-rest (HDP) sandboxes simultaneously.
 
 **HDF (Data-In-Motion)**
 

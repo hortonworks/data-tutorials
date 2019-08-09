@@ -7,7 +7,7 @@ persona: Data Scientist & Analyst
 source: Cloudera
 use case: Flow Management
 technology: Apache NiFi
-release: hdf-3.2.0
+release: cdf-3.2.0
 environment: Sandbox
 product: CDF
 series: CDF > Develop Data Flow & Streaming Applications > Real World Examples
@@ -37,7 +37,7 @@ The learning objectives of this tutorial are to:
 
 ## Prerequisites
 
-- Downloaded and deployed the [Hortonworks DataFlow (HDF)](https://www.cloudera.com/downloads/hortonworks-sandbox/hdf.html?utm_source=mktg-tutorial) Sandbox
+- Downloaded and deployed the [Cloudera DataFlow (CDF)](https://www.cloudera.com/downloads/hortonworks-sandbox/hdf.html?utm_source=mktg-tutorial) Sandbox
 - For Windows 10 users, use [Ubuntu bash shell](https://www.windowscentral.com/how-install-bash-shell-command-line-windows-10) or Sandbox Web Shell Client
 
 ## Outline
@@ -47,7 +47,7 @@ In this tutorial, we work with San Francisco MUNI Transit agency data, gathered 
 The tutorial consists of seven sections:
 
 1. [NiFi DataFlow Automation Concepts](https://hortonworks.com/tutorial/analyze-transit-patterns-with-apache-nifi/section/1/) - Explore the fundamentals of Data Flow Management with NiFi: Core Concepts, Architecture, etc
-2. [Launch NiFi HTML UI](https://hortonworks.com/tutorial/analyze-transit-patterns-with-apache-nifi/section/2/) - Launch your NiFi HTML User Interface (UI). Get NiFi up and running on the HDF Sandbox.
+2. [Launch NiFi HTML UI](https://hortonworks.com/tutorial/analyze-transit-patterns-with-apache-nifi/section/2/) - Launch your NiFi HTML User Interface (UI). Get NiFi up and running on the CDF Sandbox.
 3. [Build a NiFi Process Group to Simulate NextBus API](https://hortonworks.com/tutorial/analyze-transit-patterns-with-apache-nifi/section/3/) - Simulate the NextBus API live feed with a data seed and check the data generating from the simulator.
 4. [Build a NiFi Process Group to Parse Transit Events](https://hortonworks.com/tutorial/analyze-transit-patterns-with-apache-nifi/section/4/) - Parse the XML file for transit observations(vehicle location, speed, vehicle ID, etc).
 5. [Build a NiFi Process Group to Validate the GeoEnriched Data](https://hortonworks.com/tutorial/analyze-transit-patterns-with-apache-nifi/section/5/) - Integrate Google Places API to bring more meaningful geographic insights and validate them.

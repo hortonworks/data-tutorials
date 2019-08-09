@@ -6,7 +6,7 @@
 ##
 
 ##
-# Run script in HDF Sandbox CentOS7
+# Run script in CDF Sandbox CentOS7
 # Sets up HDF Dev Environment, so User can focus on NiFi Flow Dev
 ##
 
@@ -110,7 +110,7 @@ function wait_for_service_to_stop()
   fi
 }
 
-echo "Setting up HDF Sandbox Environment for NiFi flow development..."
+echo "Setting up CDF Sandbox Environment for NiFi flow development..."
 echo "Synchronizing CentOS7 System Clock with UTC for GetTwitter Processor"
 # Install Network Time Protocol
 yum install -y ntp

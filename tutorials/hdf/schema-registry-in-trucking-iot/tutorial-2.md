@@ -48,7 +48,7 @@ Schema Version | The versioned schema (the actual schema text) associated with a
 
 ## Integration with HDF
 
-When Schema Registry is paired with other services available as part of the Hortonworks DataFlow (HDF), integration with Schema Registry is baked in.
+When Schema Registry is paired with other services available as part of the Cloudera DataFlow (CDF), integration with Schema Registry is baked in.
 
 Component | Schema Registry Integration
 --- | ---

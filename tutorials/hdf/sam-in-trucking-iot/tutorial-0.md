@@ -7,7 +7,7 @@ persona: Developer
 source: Cloudera
 use case: Streaming
 technology: Streaming Analytics Manager
-release: hdf-3.2.0
+release: cdf-3.2.0
 environment: Sandbox
 product: CDF
 series: CDF > Develop Data Flow & Streaming Applications > Hello World
@@ -23,7 +23,7 @@ We will create a SAM topology to ingest streams of data from Apache Kafka into o
 
 ## Prerequisites
 
-- Downloaded and deployed the [Hortonworks DataFlow (HDF)](https://www.cloudera.com/downloads/hortonworks-sandbox/hdf.html?utm_source=mktg-tutorial) Sandbox
+- Downloaded and deployed the [Cloudera DataFlow (CDF)](https://www.cloudera.com/downloads/hortonworks-sandbox/hdf.html?utm_source=mktg-tutorial) Sandbox
 
 ## Outline
 
