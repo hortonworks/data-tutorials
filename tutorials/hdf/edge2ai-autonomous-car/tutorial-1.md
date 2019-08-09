@@ -7,7 +7,7 @@ persona: Data Engineer & Data Scientist
 source: Cloudera
 use case: Streaming
 technology: Apache NiFi, Apache MiNiFi, Apache HDFS, CDSW
-release: CDF 3.2
+release: cdf-3.2.0
 environment: N/A
 product: CDF
 series: CDF > Develop Data Flow & Streaming Applications > Real World Examples
