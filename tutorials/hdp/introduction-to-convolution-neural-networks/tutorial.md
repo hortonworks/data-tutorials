@@ -45,7 +45,7 @@ When a convolution layer receives the input, a filter is applied on to the image
 
 The same operation is performed on Red, Green, Blue channels which gives rise to three convolution outputs. Hence the input to the next layers will be this volume of data.
 
-![RGBchannels](./assets/RGBchannels.jpg)
+![RGBchannels](./assets/RGBchannels.gif)
 
 Each of the per channel outputs are then summed together to overall output channel and then a bias term is added to it at the output layer again. 
 
