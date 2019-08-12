@@ -7,10 +7,10 @@ persona: Data Scientist & Analyst
 source: Cloudera
 use case: Predictive
 technology: CDSW
-release: cdp-3.0.1
+release: hdp-3.0.1
 environment: N/A
-product: CDP
-series: CDP > Hadoop for Data Scientists & Analysts > Introduction to Convolution Neural Networks
+product: HDP
+series: HDP > Hadoop for Data Scientists & Analysts > Introduction to Convolution Neural Networks
 ---
 # Introduction to Convolution Neural Networks
 ### Introduction
@@ -30,12 +30,12 @@ Convolution Neural Networks are a class of Deep Neural Networks which were prove
 
 **How Convolution Neural Networks are different from regular Neural Networks?**
 
-In regular Deep Neural Networks you can observe a single vector input which is passed through a series of hidden layers. Each hidden layer is made up of set of neurons which are connected to the previous layers and is then connected to the output layer which results in determining the class scores. It is always a challenge to deal with image data due to its complexity. A model should have the capability to scale well. 
+In regular Deep Neural Networks you can observe a single vector input which is passed through a series of hidden layers. Each hidden layer is made up of set of neurons which are connected to the previous layers and is then connected to the output layer which results in determining the class scores. It is always a challenge to deal with image data due to its complexity. A model should have the capability to scale well.
 For example if you consider an image with size 64x64x3 (height, width, color channels) then the total number of input features is 12288, and if your first hidden layer contains 100 units it results in a  12288x100 = 122880 weight matrix, which is a regular neural network can still handle. However,  for high resolution images, for example 1000x1000x3, the number of input features will be 3 million and with 1000 neurons in your hidden layer you will have a 3 billion weight matrix which is huge and expensive to compute. To deal with this kind of scenario convolution operation is introduced.
 
 **How Convolution operation works?**
 
-Images are seen by a machine as a matrix of pixel values. One of the important tasks of Convolution layer is to detect edges in an image. For example, look at the image below where a kernel is applied to an image to detect horizontal edges. In order to detect the edges convolution operation helps. Instead of hand picking the kernel values , the convolution layer tries to find out the parameter values which best suit and helps in detecting the vertical and horizontal edges. 
+Images are seen by a machine as a matrix of pixel values. One of the important tasks of Convolution layer is to detect edges in an image. For example, look at the image below where a kernel is applied to an image to detect horizontal edges. In order to detect the edges convolution operation helps. Instead of hand picking the kernel values , the convolution layer tries to find out the parameter values which best suit and helps in detecting the vertical and horizontal edges.
 
 ![horizontalegde](./assets/horizontaledge.jpg)
 
@@ -47,7 +47,7 @@ The same operation is performed on Red, Green, Blue channels which gives rise to
 
 ![RGBchannels](./assets/RGBchannels.gif)
 
-Each of the per channel outputs are then summed together to overall output channel and then a bias term is added to it at the output layer again. 
+Each of the per channel outputs are then summed together to overall output channel and then a bias term is added to it at the output layer again.
 
 **Techniques used in performing Convolutions:**
 
@@ -65,7 +65,7 @@ Two of the common techniques used when applying convolution to the image is padd
 
 ![layersCNN](./assets/layersCNN.jpg)
 
-In this section we will cover basic layers used to build a CNN model.We will build and train a full CNN model in the next section. We will also visualize and analyze the results. 
+In this section we will cover basic layers used to build a CNN model.We will build and train a full CNN model in the next section. We will also visualize and analyze the results.
 
 Observe pseudo code below to look into how layers can be added to a sequential model using keras. Conventionally many of the algorithms follow the order **Convolution Layer- Max Pooling Layer- Dense Layer.**
 
@@ -104,7 +104,7 @@ model.add(Activation('softmax'))
 
 **Convolution Layer:** This layer contains neurons to perform convolution operations on the input, each performing a dot product between the input volume connected and their weights. Two important things to understand about the importance of this layer compared to a regular neural network is that it allows parameter sharing and sparse connection. Consider the example of the edge detector where you can use the same kernel parameters which are learned once can be applied to the entire image, this decreases the overhead in calculating parameters everytime. Also in each layer the output value depends only on a small number of inputs. Convolution layer is also good at translation invariance which means even though the image is shifted or position of the object changes it can still recognize objects identity.
 
-**Pooling Layer:** The objective of this layer is  to down-sample an input representation reducing its dimensionality. Purpose of this is to help prevent overfitting as well as reducing the computation cost. Pooling layer has no parameters to learn. Backpropagation algorithm doesn't use any parameters of max pooling layer to learn hence it is a static function which is used which will not cause overhead in your deep neural network. Commonly used hyperparameters for this layer are a number of filters, strides, number of channels and type of pooling (Max or Average), padding is not mostly used when performing pooling. Max pooling is done by applying a max filter to non-overlapping subregions of the initial representation. 
+**Pooling Layer:** The objective of this layer is  to down-sample an input representation reducing its dimensionality. Purpose of this is to help prevent overfitting as well as reducing the computation cost. Pooling layer has no parameters to learn. Backpropagation algorithm doesn't use any parameters of max pooling layer to learn hence it is a static function which is used which will not cause overhead in your deep neural network. Commonly used hyperparameters for this layer are a number of filters, strides, number of channels and type of pooling (Max or Average), padding is not mostly used when performing pooling. Max pooling is done by applying a max filter to non-overlapping subregions of the initial representation.
 
 Consider an input with 32x32x1 (NhxNwxNc) is passed into the maxpool layer with filters as 2  (f), strides as 2 (s) then the output of this layer would be ((Nh-f)/s+1, (Nw-f)/s+1, Nc) = (16,16,1).  Below figure shows the application of max pool layer applied to 4x4x1 input with 2x2 filter and stride as 2 to get 2x2 output each filter applied on the input returning the max of the pool. You can also apply average pooling for the same example which gives the result as the average of the pool , which is not so used in real life compared to max pool. The significance of using max pool is that it captures the strong intuition for what you are looking for. For example if you want to identify a cat in your image the max pooling will try to capture the region where mostly the cat can reside in the image rather than focusing on the other parts of the image which makes no sense.
 You can also use the same for more than one channel input and it would create outputs for all the three channels independently.
@@ -127,7 +127,7 @@ You can also use the same for more than one channel input and it would create ou
 
 **Activation Functions:**
 
-The main purpose of the activation functions is to deal with non linearity. Without this a neural network would be just a linear regression model. For CNN to learn from higher dimension data such as images, audio, video it requires to deal with non linearity. Activation function should also be differentiable as to perform back propagation in learning the weights. 
+The main purpose of the activation functions is to deal with non linearity. Without this a neural network would be just a linear regression model. For CNN to learn from higher dimension data such as images, audio, video it requires to deal with non linearity. Activation function should also be differentiable as to perform back propagation in learning the weights.
 
 ![activationfunction](./assets/activationfunction.jpg)
 
@@ -149,20 +149,20 @@ These are three of the most commonly used activation functions:
 
 ![relu](./assets/relu.jpg)
 
-For output layers softmax function is used to calculate the probabilities of the class to which an object belongs in object classification use case. For a regression problem you can use regression at your output. 
+For output layers softmax function is used to calculate the probabilities of the class to which an object belongs in object classification use case. For a regression problem you can use regression at your output.
 
 Though RELU performs really well, these days concept of LeakyRelu was introduced to fix the drawback of RELU where sometimes when some nodes become fragile and die and a gradient update on the node is never activated which results in causing dead neurons. Leaky Relu introduces a slope to keep updations live.
 
 ![leakyrelu](./assets/leakyrelu.jpg)
 
-**Data Augmentation:** This is a technique which is used to reduce overfitting. Thanks to CNN which has capability of translation invariance studied earlier. 
+**Data Augmentation:** This is a technique which is used to reduce overfitting. Thanks to CNN which has capability of translation invariance studied earlier.
 
 ###Use Cases
 
 Some of the exciting use cases:
 
 - Using CNN to build your own autonomous vehicle. To know more about this check here.
-- Identify pedestrians on roads way ahead to avoid accidents. 
+- Identify pedestrians on roads way ahead to avoid accidents.
 - Build a system where you can let your camera capture all your crops and find out which is in danger
 - Design a system where it can guide you to repair your own car based on the pictures provided to your model.
 - Build a system to perform face recognition system in your office for safety measures.
@@ -173,16 +173,4 @@ Some of the exciting use cases:
 
 - **Convnet Playground**- a tool for the interactive exploration of Convolutional Neural Networks (Convnets or CNNs) - is a research prototype by Cloudera Fast Forward Labs, built to accompany our report on Deep Learning for Image Analysis. This prototype allows you to perform sematic image search using CNN. Click [here](https://convnetplayground.fastforwardlabs.com/#/) to take a look.
 
-- For more information about Machine Learning and Deep learning and latest advances in technology check out [Cloudera Fast Forward labs blogs](https://blog.fastforwardlabs.com/) for interesting technical blogs 
-
-
-
-
-
-
-
-
-
-
-
-
+- For more information about Machine Learning and Deep learning and latest advances in technology check out [Cloudera Fast Forward labs blogs](https://blog.fastforwardlabs.com/) for interesting technical blogs

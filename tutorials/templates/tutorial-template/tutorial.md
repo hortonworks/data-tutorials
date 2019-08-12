@@ -2,7 +2,7 @@
 title: New tutorial name
 author: You, because you are writing it!
 tutorial-id: Ask for tutorial ID assignment policy.
-experience: Beginer, Intermediate, Advanced
+experience: Beginner, Intermediate, Advanced
 persona: Example (Data Scientist & Analyst)
 source: Cloudera
 use case: Example (Data Discovery)

@@ -1,16 +1,16 @@
 ---
 title: Tour of Cloudera Data Science Workbench
 author: sandbox-team
-tutorial-id: 
-experience: Begginer
-persona: Data Scientist & Analyst 
+tutorial-id:
+experience: Beginner
+persona: Data Scientist & Analyst
 source: Cloudera
 use case: Predictive
 technology: CDSW
-release: cdp-3.0.1
+release: hdp-3.0.1
 environment: N/A
-product: CDP
-series: CDP > Hadoop for Data Scientists & Analysts > Introduction to Data Analysis with Hadoop
+product: HDP
+series: HDP > Hadoop for Data Scientists & Analysts > Introduction to Data Analysis with Hadoop
 ---
 
 # Tour of Cloudera Data Science Workbench
