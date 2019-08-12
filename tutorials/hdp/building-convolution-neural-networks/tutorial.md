@@ -7,10 +7,10 @@ persona: Data Scientist & Analyst
 source: Cloudera
 use case: Predictive
 technology: CDSW
-release: cdp-3.0.1
+release: hdp-3.0.1
 environment: N/A
-product: CDP
-series: CDP > Hadoop for Data Scientists & Analysts > Building Convolution Neural Network Model
+product: HDP
+series: HDP > Hadoop for Data Scientists & Analysts > Building Convolution Neural Network Model
 ---
 # Building Convolution Neural Network Model
 ### Introduction
@@ -54,7 +54,7 @@ import numpy as np
 ~~~
 **Note:** If you find any errors importing above packages, try to make sure all modules are installed properly before importing them.
 
-**Step 2:** Import data using keras datasets. 
+**Step 2:** Import data using keras datasets.
 
 **Dataset :** CIFAR10 (multi class classification)
 
@@ -67,7 +67,7 @@ You can check the shape of your data using the below commands.
 print(x_train.shape[0], 'training examples')
 print(x_test.shape[0], 'testing examples’')
 ~~~
-Using one hot encoding to convert the data into a feature vector to pass to machine learning models.Convert array of labeled data(from 0 to num_classes-1) to one-hot vector. 
+Using one hot encoding to convert the data into a feature vector to pass to machine learning models.Convert array of labeled data(from 0 to num_classes-1) to one-hot vector.
 ~~~
 y_train = keras.utils.to_categorical(y_train, num_classes)
 y_test = keras.utils.to_categorical(y_test, num_classes)
@@ -81,7 +81,7 @@ data_augmentation = True
 ~~~
 Data Augmentation is used to provide better training, you can also turn it off by initializing it to False.
 
-**Step 4:** Building your model. The below model is a Sequential model. 
+**Step 4:** Building your model. The below model is a Sequential model.
 
 **Note:** This is an example to understand how to add your layers to a model. You can use different hyper parameters and play around with it to get more understanding on how they work. model.add() function enables you to add your own layers. You can look at keras to view on more models and hyper-parameters.
 
@@ -186,7 +186,7 @@ seed(1)
 ~~~
  history=  model.fit_generator(datagen.flow(x_train, y_train,
                                      batch_size=batch_size),
-                        
+
                         epochs=10,
                         steps_per_epoch=x_train.shape[0] // batch_size,
                         validation_data=(x_test, y_test),
@@ -213,7 +213,7 @@ def plotLosses(history):
     plt.xlabel('epoch')
     plt.legend(['train', 'validation'], loc='upper left')
     plt.show()
-    
+
 plotLosses(history)
 ~~~
 ![buildcnnloss](./assets/buildcnnloss.jpg)
@@ -428,7 +428,7 @@ x_test /= 255
 ~~~
 **Step 3:** Build the model
 
-Convolution_base layer holds the Resnet50 model with weights as imagenet. Include_top parameter is set to false because we are defining our own output layer to this model with 10 classes. You can also add more layers on top of the base layer. Here we are using batch size as 128. 
+Convolution_base layer holds the Resnet50 model with weights as imagenet. Include_top parameter is set to false because we are defining our own output layer to this model with 10 classes. You can also add more layers on top of the base layer. Here we are using batch size as 128.
 ~~~
 convolution_base = ResNet50(weights= 'imagenet', include_top=False, input_shape=(32, 32, 3))
 res_model= models.Sequential()
@@ -488,7 +488,7 @@ def plotLosses(history):
     plt.xlabel('epoch')
     plt.legend(['train', 'validation'], loc='upper left')
     plt.show()
-    
+
 plotLosses(history)
 ~~~
 ![transferlearninglossgraph](./assets/transferlearninglossgraph.jpg)
@@ -565,7 +565,7 @@ The below figure shows the output of the first  activation layer with channel 3.
 ![tysonactivation](./assets/tysonactivation.jpg)
 Below code helps to visualize the filters applied on image on first activation layer.
 ~~~
-def display_outputs(activations, col_size, row_size, act_index): 
+def display_outputs(activations, col_size, row_size, act_index):
     activation = activations[act_index]
     activation_index=0
     fig, ax = plt.subplots(row_size, col_size, figsize=(row_size*2.5,col_size*1.5))
@@ -588,7 +588,7 @@ As you can observe in the initial activation the visual interpretations are litt
 
 **3.3 Using Gradient Based visualization methods**
 **3.3.1 Saliency Maps**
-The idea behind saliency is pretty simple in hindsight. We compute the gradient of output category with respect to input image.This should tell us how the output value changes with respect to a small change in inputs. We can use these gradients to highlight input regions that cause the most change in the output. Intuitively this should highlight salient image regions that most contribute towards the output. 
+The idea behind saliency is pretty simple in hindsight. We compute the gradient of output category with respect to input image.This should tell us how the output value changes with respect to a small change in inputs. We can use these gradients to highlight input regions that cause the most change in the output. Intuitively this should highlight salient image regions that most contribute towards the output.
 
 You can use the below code on CDSW to visualize the interpretations.
 ~~~
@@ -614,9 +614,9 @@ plt.imshow(grads, cmap='jet')
 for modifier in ['guided', 'relu']:
     plt.figure()
     plt.suptitle(modifier)
-      
- 
-    grads = visualize_saliency(model, layer_idx, filter_indices=2, 
+
+
+    grads = visualize_saliency(model, layer_idx, filter_indices=2,
                                    seed_input=img1, backprop_modifier=modifier)  
     plt.imshow(grads, cmap='jet')
 ~~~
@@ -631,7 +631,7 @@ You can observe that guided is better in visually presenting and highlighting on
 
 Class activation maps or grad-CAM is another way of visualizing attention over input. Instead of using gradients with respect to output, grad-CAM uses penultimate (pre Dense layer) Conv layer output. The intuition is to use the nearest Conv layer to utilize spatial information that gets completely lost in Dense layers.
 
-Gradient-weighted Class Activation Mapping (Grad-CAM) uses the class-specific gradient information flowing into the final convolutional layer of a CNN to produce a coarse localization map of the important regions in the image. Grad-CAM is a strict generalization of the Class Activation Mapping (CAM) There typically exists a trade-off between accuracy and simplicity/interpretability. Grad-CAM is highly class-discriminative. (i.e. the ‘tiger’ explanation exclusively highlights the ‘tiger’ regions, and not the ‘dog’ regions and vice versa). Guided Grad-CAM visualizations that are both high-resolution and class-discriminative. As a result, important regions of the image which correspond to a class of interest are visualized in high-resolution detail even if the image contains multiple classes, When visualized for ‘tiger cat’, Guided GradCAM not only highlights the cat regions, but also highlights the stripes on the cat which is important for predicting that particular variety of cat. 
+Gradient-weighted Class Activation Mapping (Grad-CAM) uses the class-specific gradient information flowing into the final convolutional layer of a CNN to produce a coarse localization map of the important regions in the image. Grad-CAM is a strict generalization of the Class Activation Mapping (CAM) There typically exists a trade-off between accuracy and simplicity/interpretability. Grad-CAM is highly class-discriminative. (i.e. the ‘tiger’ explanation exclusively highlights the ‘tiger’ regions, and not the ‘dog’ regions and vice versa). Guided Grad-CAM visualizations that are both high-resolution and class-discriminative. As a result, important regions of the image which correspond to a class of interest are visualized in high-resolution detail even if the image contains multiple classes, When visualized for ‘tiger cat’, Guided GradCAM not only highlights the cat regions, but also highlights the stripes on the cat which is important for predicting that particular variety of cat.
 Below is the code which can be used to test this kind of approach. Past the below code on CDSW to view the results.
 ~~~
 import numpy as np
@@ -643,9 +643,9 @@ penultimate_layer = utils.find_layer_idx(model, 'res5c_branch2c')
 for modifier in [None, 'guided', 'relu']:
     plt.figure()
     plt.suptitle("vanilla" if modifier is None else modifier)
-   
+
         # 20 is the imagenet index corresponding to `ouzel`
-    grads = visualize_cam(model, layer_idx, filter_indices=2, 
+    grads = visualize_cam(model, layer_idx, filter_indices=2,
                               seed_input=img1, penultimate_layer_idx=penultimate_layer,
                               backprop_modifier=modifier)        
         # Lets overlay the heatmap onto original image.    
@@ -666,23 +666,3 @@ This tutorial gives you a general idea of building the models but the architectu
 - [Deep Learning made easier with Transfer Learning](https://blog.fastforwardlabs.com/2018/09/17deep-learning-is-easy-an-introduction-to-transfer-learning.html) : Interesting blog by Cloudera Fast Forward Labs which gives good understanding about Transfer Learning
 - [Deep Learning Image Analysis](https://blog.fastforwardlabs.com/2019/07/22/new-research-deep-learning-for-image-analysis.html) : New research by Cloudera Fast Forward Labs on Deep learning Image analysis
 - [Keras-Viz](https://raghakot.github.io/keras-vis/vis.visualization/)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
