@@ -12,7 +12,7 @@ The point of the exercise is to demonstrate the Edge to AI life cycle for fast m
 
 The clip below is an example of CSDV driving autonomously around it's racetrack
 
-![autonomous](./documentation/assets/images/tutorial1/autonomous.gif)
+![autonomous](assets/images/tutorial1/autonomous.gif)
 
 ## Introduction
 
@@ -20,7 +20,7 @@ The variety of edge devices--whether it be IoT devices, Cloud VMs, or even conta
 
 CEM also allows you to granularly deploy models to every different type of device in your enterprise
 
-![pub-flow](./documentation/assets/images/tutorial1/pub-flow.png)
+![pub-flow](assets/images/tutorial1/pub-flow.png)
 
 ## Prerequisites
 
@@ -55,14 +55,14 @@ To build out this pipeline we used three Virtual Machines in AWS
 |Cloudera DataFlow|CEM|m5.2xlarge|Centos 7|
 |Cloudera Data Platform|HDFS + CDSW|m5.4xlarge|Centos 7|
 
-![overview](./documentation/assets/images/tutorial1/overview.jpg)
+![overview](assets/images/tutorial1/overview.jpg)
 
 ## Build Data Flow for MiNiFi via CEM UI
 
 To begin you will need the training data on the MiNiFi agent instance, ssh onto that instance as download the data
 
 ~~~bash
-mkdir -p /tmp/csdv/data/input/racetrack/image/ && wget -O /tmp/csdv/data/input/racetrack/image/image.tar.gz https://github.com/gdeleon5/Autonomous-Car/blob/master/documentation/assets/data/image.tar.gz
+mkdir -p /tmp/csdv/data/input/racetrack/image/ && wget -O /tmp/csdv/data/input/racetrack/image/image.tar.gz https://github.com/hortonworks/data-tutorials/blob/dev/tutorials/cdf/edge2ai-autonomous-car/assets/data/image.tar.gz
 
 tar -xvzf /tmp/csdv/data/input/racetrack/image/image.tar.gz
 ~~~
@@ -70,13 +70,13 @@ tar -xvzf /tmp/csdv/data/input/racetrack/image/image.tar.gz
 to change your MiNiFi configurations, if you are working with a new MiNiFi Agent copy these configuration by downloading them directly to the machine running MiNiFi
 
 ~~~bash
-wget -O /home/ubuntu/nifi-minifi-cpp-0.6.0/conf/minifi.properties https://raw.githubusercontent.com/gdeleon5/Autonomous-Car/master/documentation/assets/services/minifi_cpp/minifi.properties
+wget -O /home/ubuntu/nifi-minifi-cpp-0.6.0/conf/minifi.properties https://raw.githubusercontent.com/hortonworks/data-tutorials/dev/tutorials/cdf/edge2ai-autonomous-car/assets/services/minifi_cpp/minifi.properties
 ~~~
 
 or by downloading them onto your local computer and sending them to the agent
 
 ~~~bash
-wget -O ~/Downloads/minifi.properties https://raw.githubusercontent.com/gdeleon5/Autonomous-Car/master/documentation/assets/services/minifi_cpp/minifi.properties
+wget -O ~/Downloads/minifi.properties https://raw.githubusercontent.com/hortonworks/data-tutorials/dev/tutorials/cdf/edge2ai-autonomous-car/assets/services/minifi_cpp/minifi.properties
 
 scp -i /path/tp/pem ~/Downloads/minifi.properties <os-name>@<ec2-public-dns>:/home/ubuntu/nifi-minifi-cpp-0.6.0/conf
 ~~~
@@ -96,23 +96,23 @@ Edit the following properties of the minifi.properties file:
 
 Open your CEM UI at `<cem-public-DNS:10080/efm>`, if your `minifi.properties` configuration file is setup correctly you will find that your agent is sending heartbeats to the monitor events section of CEM UI
 
-![cem-ui-events](./documentation/assets/images/tutorial1/cem-ui-events.jpg)
+![cem-ui-events](assets/images/tutorial1/cem-ui-events.jpg)
 
 Now we know that our Agent can communicate with CEM, that is great news. In order to connect MiNiFi to NiFi we need to know where we are going so let's create a path for our data to slowly build a flow. Open NiFi UI on your CDF cluster and create a new input source named `AWS_MiNiFi_CSV` leave it alone for now, we will need the input id to set our connection from MiNiFi processor to NiFi Remote Process Group (RPG)
 
-![input-port-csv](./documentation/assets/images/tutorial2/input-port-csv.jpg)
+![input-port-csv](assets/images/tutorial2/input-port-csv.jpg)
 
-![input-port-id](./documentation/assets/images/tutorial2/input-port-id.jpg)
+![input-port-id](assets/images/tutorial2/input-port-id.jpg)
 
 That is all we need to do on NiFi for now. Navigate to the Flow Designer on CEM UI, you can click on the class associated with MiNiFi agent you want to build the dataflow for, note that we named our agent `AWS_AGENT_001` and our class `AWS_AGENT`
 
 > Note: Later when MiNiFi C++ agent deployed on separate the Jetson TX2, the class called **"CSDV_agent"** will appear.
 
-![cem-ui-open-flow](./documentation/assets/images/tutorial1/cem-ui-open-flow.jpg)
+![cem-ui-open-flow](assets/images/tutorial1/cem-ui-open-flow.jpg)
 
 For now click class **AWS_agent**. Press open to start building. The canvas opens for building flow for class **AWS_agent**:
 
-![cem-ui-canvas](./documentation/assets/images/tutorial1/cem-ui-canvas.jpg)
+![cem-ui-canvas](assets/images/tutorial1/cem-ui-canvas.jpg)
 
 We will build a MiNiFi ETL pipeline to ingest csv and image data.
 
@@ -124,7 +124,7 @@ Add a **GetFile** processor onto canvas to get csv data:
 
 Update processor name to **GetCSVFile**.
 
-![getfile-csv-data-p1](./documentation/assets/images/tutorial1/getfile-csv-data-p1.jpg)
+![getfile-csv-data-p1](assets/images/tutorial1/getfile-csv-data-p1.jpg)
 
 Double click on GetFile to configure. Scroll to **Properties**, add the properties in Table 1 to update GetFile's properties.
 
@@ -154,7 +154,7 @@ Connect **GetCSVFile** to Remote Process Group, then add the NiFi destination in
 
 > Note: you can find the input port ID by clicking on your input port in the NiFi flow. Make sure you connect to the input port that sends csv data to HDFS.
 
-![push-csv-to-nifi](./documentation/assets/images/tutorial1/push-csv-to-nifi.jpg)
+![push-csv-to-nifi](assets/images/tutorial1/push-csv-to-nifi.jpg)
 
 ### Add a GetFile for Image Data Ingest
 
@@ -163,7 +163,7 @@ Now change to your CEM UI and add a **GetFile** processor onto canvas to get ima
 
 Update processor name to **GetImageFiles**.
 
-![getfile-image-data-p2](./documentation/assets/images/tutorial1/getfile-image-data-p2.jpg)
+![getfile-image-data-p2](assets/images/tutorial1/getfile-image-data-p2.jpg)
 
 Double click on GetFile to configure. Scroll to **Properties**, add the properties in Table 2 to update GetFile's properties.
 
@@ -191,23 +191,23 @@ Double click on GetFile to configure. Scroll to **Properties**, add the properti
 
 > Note: you can find the input port ID by clicking on your input port in the NiFi flow. Make sure you connect to the input port that sends image data to HDFS.
 
-![push-imgs-to-nifi](./documentation/assets/images/tutorial1/push-imgs-to-nifi.jpg)
+![push-imgs-to-nifi](assets/images/tutorial1/push-imgs-to-nifi.jpg)
 
 ## Publish Data Flow to MiNiFi Agent
 
 Click on publish in actions dropdown:
 
-![cem-actions-publish](./documentation/assets/images/tutorial1/cem-actions-publish.jpg)
+![cem-actions-publish](assets/images/tutorial1/cem-actions-publish.jpg)
 
 Make this flow available to all agents associated with **AWS_agent** class, press publish:
 
-![publish-flow](./documentation/assets/images/tutorial1/publish-flow.jpg)
+![publish-flow](assets/images/tutorial1/publish-flow.jpg)
 
 > Note: you can add comment `Sending driving log csv and image data to NiFi`
 
 Result of published successful:
 
-![published-success](./documentation/assets/images/tutorial1/published-success.jpg)
+![published-success](assets/images/tutorial1/published-success.jpg)
 
 ## Summary
 

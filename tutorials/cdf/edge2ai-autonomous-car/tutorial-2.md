@@ -55,7 +55,7 @@ ssh -i /path/to/pem_file <os-name>@<public-dns-ipv4>
 # download hdfs core-site.xml
 mkdir -p /tmp/service/hdfs/
 cd /tmp/service/hdfs/
-wget https://raw.githubusercontent.com/gdeleon5/Autonomous-Car/master/documentation/assets/services/hadoop_hdfs/core-site.xml
+wget https://raw.githubusercontent.com/hortonworks/data-tutorials/dev/tutorials/cdf/edge2ai-autonomous-car/assets/services/hadoop_hdfs/core-site.xml
 ~~~
 
 Enter your CDH public host name in these field of core-site.xml:
