@@ -37,6 +37,6 @@ Autonomous Car is the Open Source version of Cloudera Self Driving Vehicle. This
 
 ## Outline
 
-- [Tutorial 1: Ingest Car Sensor Data on Edge](https://github.com/hortonworks/data-tutorials/blob/dev/tutorials/cdf/edge2ai-autonomous-car/tutorial-2.md)
-- [Tutorial 2: Collect Car Edge Data into Cloud](https://github.com/hortonworks/data-tutorials/blob/dev/tutorials/cdf/edge2ai-autonomous-car/tutorial-3.md)
+- [Tutorial 1: Ingest Car Sensor Data on Edge](https://github.com/hortonworks/data-tutorials/blob/dev/tutorials/cdf/edge2ai-autonomous-car/tutorial-1.md)
+- [Tutorial 2: Collect Car Edge Data into Cloud](https://github.com/hortonworks/data-tutorials/blob/dev/tutorials/cdf/edge2ai-autonomous-car/tutorial-2.md)
 - [Tutorial 3: AI to Edge](https://github.com/hortonworks/data-tutorials/blob/dev/tutorials/cdf/edge2ai-autonomous-car/tutorial-3.md)
