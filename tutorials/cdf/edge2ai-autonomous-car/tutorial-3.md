@@ -51,7 +51,7 @@ We will use Cloudera Data Platform to have access car data in Hadoop - HDFS for 
 Download the source code to train the model to your local computer
 
 ~~~bash
-wget -O $HOME/hdfs-train.zip https://raw.githubusercontent.com/hortonworks/data-tutorials/dev/assets/src/hdfs-train.zip && unzip $HOME/hdfs-train.zip -d $HOME
+wget -O $HOME/hdfs-train.zip https://github.com/hortonworks/data-tutorials/blob/dev/tutorials/cdf/edge2ai-autonomous-car/assets/src/hdfs-train.zip && unzip $HOME/hdfs-train.zip -d $HOME
 ~~~
 
 now open an instance of Cloudera Data Science Workbench
